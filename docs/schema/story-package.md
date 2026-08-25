@@ -203,8 +203,11 @@ the World Model tables' state at the close of a compiled run, same table shapes.
 
 ## What this schema deliberately does not settle
 
-- **How a tier is enforced** — validation against `entry_state`/`exit_state`, unattended
-  resolution of volitional proposals, diagnostics and severities. Issue #9.
+- ~~**How a tier is enforced**~~ — resolved in
+  [State-update authority: what the engine may commit](https://github.com/tschomay/axiom-weaver/issues/9) /
+  [ADR 0005](../adr/0005-state-update-authority.md): a pre-generation `entry_state` check, a
+  post-generation per-column accept/reject test for P/E updates (including the `unentailed_reversion`
+  amnesia guard), and an apply-or-drop test for volitional proposals.
 - **The exact writer-facing obligation instruction and verification/retry policy** for
   `pays_off` — settled in [ADR 0004](../adr/0004-plant-obligation-walk.md); this schema only
   fixes the field's shape.

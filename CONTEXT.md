@@ -102,9 +102,18 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   **physical** (location, possessions, time, injury) and **epistemic** (who now knows
   what) are engine-writable and auto-committed; **volitional/relational** (goals,
   allegiances, feelings) may only be *proposed*. A property's tier is a column attribute.
+  A P/E update is accepted only if it satisfies or merely extends the Scene Card's
+  `exit_state` — never contradicts it, and never reverts a previously committed value the
+  card gave no grounds to touch (the **amnesia guard**). A volitional proposal is applied
+  if compatible with the card's invariants, otherwise dropped; silence is always inaction,
+  never invention, so cross-run divergence on a volitional column is accepted variance,
+  identical in kind to dialogue and imagery. See ADR 0005.
 - **Diagnostics** — the writer reports unsatisfiable beats and contradictions rather than
   silently papering over them. Author-time they surface as compile warnings; read-time the
-  engine resolves autonomously within the invariants and logs to a **run report**.
+  engine resolves autonomously within the invariants and logs to a **run report**. A
+  read-time `error` gets one bounded retry, then falls back to the World Model's pre-scene
+  value and logs — the World Model is never committed a contradiction outright. No
+  diagnostic severity aborts a read-time run (ADR 0005).
 - **Stale** — a scene whose upstream digest changed on facts-revealed, plants, or closing
   situation. Flagged, never auto-recompiled. Stale-but-standing is a legitimate state.
 
@@ -117,7 +126,7 @@ failures, ordered here worst to least severe.
 
 | Mode | Reader notices via | Digest-detectable? | Mechanism owner |
 | --- | --- | --- | --- |
-| **Amnesia** | Narration contradicts a fact they already hold true | No — it's a World Model contradiction, not a digest-continuity one | State-update validator |
+| **Amnesia** | Narration contradicts a fact they already hold true | No — it's a World Model contradiction, not a digest-continuity one | State-update validator (`unentailed_reversion`, ADR 0005) |
 | **Character-voice homogenization** | Dialogue/interiority reads interchangeable across characters | No — no digest field captures it | Generation-time only (Voice Card), unverified |
 | **Voice drift** | The *narrator's* register, distance, or rhythm shifts scene to scene | No | Generation-time only (Voice Card), unverified |
 | **Cold opens / hard resets** | A scene ignores the prior scene's closing situation | Yes — `closing situation` | Continuity pass |
