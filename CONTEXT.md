@@ -76,10 +76,12 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   part, **Part Digests** for the whole book, plus the verbatim tail of the immediately
   preceding scene. Context grows logarithmically with book length. The original scopes
   (characters present, this location) survive as the *filter* applied within each level.
-- **Plant obligations** — derived, not authored: Scene Cards declare what they pay off,
-  and the compiler walks the sequence backwards to compute, per scene, what it must plant.
-  A scene that knows it owes a plant three scenes ahead writes differently from one that
-  does not.
+- **Plant obligations** — derived, not authored: a Scene Card's `pays_off` names, per fact,
+  which earlier scene must plant it (or marks it grounded in the World Model seed), and the
+  compiler walks the sequence backwards to turn those links into per-scene obligations. A
+  scene that knows it owes a plant three scenes ahead writes differently from one that does
+  not. The compiler never invents *where* a plant lands — an undeclared plant is a hard
+  authoring error, not a guess. See ADR 0004.
 
 ## Compilation
 
