@@ -52,13 +52,22 @@ dramatic irony. Collapsing them is why story engines read flat.
 Every fact therefore has two states: true-in-world and known-to-reader. The World Model
 stops the engine contradicting itself; the Discourse Record stops it repeating itself.
 
-- **Scene Digest** — the compressed record emitted alongside each scene's prose, and the
-  only thing that circulates in long-range context. Carries: event summary, entities on
-  stage, facts revealed, plants opened, payoffs closed, emotional register at open and
-  close, **imagery signature** (the concrete images actually used), and **closing
-  situation** (where everyone stands physically and emotionally at the end).
-- **Told-ledger** — per-fact and per-entity record of when the reader learned something,
-  driving introduce / assume / re-anchor decisions.
+- **Scene Digest** — the compressed record emitted by the writer in the *same* structured
+  call as the scene's prose (no separate extraction call), and the only thing that
+  circulates in long-range context. Carries: event summary, entities on stage, facts
+  revealed, plants opened, payoffs closed, **imagery signature** (the concrete images
+  actually used, capped at 3), and **closing situation** (where everyone stands physically
+  *and emotionally* at the end — the sole home for emotional state; there is no separate
+  "emotional register" field). Target ~150–220 tokens. A **rollup** (Chapter/Part Digest)
+  shares this schema but aggregates over its window rather than concatenating: event
+  summary is freshly synthesized, list fields union, imagery signature re-caps to 3 by
+  recency, closing situation inherits the window's last scene. See ADR 0003.
+- **Told-ledger** — a single table of `{fact_ref, first_learned_scene, last_touched_scene,
+  centrality}`, driving introduce / assume / re-anchor decisions. A **fact** is an
+  author-declared or auto-generated slug — not required to correspond to a World Model
+  row/column — so it can name things the schema has no column for ("the will was forged").
+  Entity introduction ("has the reader met Marcus?") rides the same mechanism via an
+  auto-generated `met:<entity_id>` fact, not a parallel structure.
 
 ## Context assembly
 
@@ -96,3 +105,37 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   engine resolves autonomously within the invariants and logs to a **run report**.
 - **Stale** — a scene whose upstream digest changed on facts-revealed, plants, or closing
   situation. Flagged, never auto-recompiled. Stale-but-standing is a legitimate state.
+
+## The seam-failure rubric
+
+The map's acceptance test: every failure mode below pairs with a mechanism, or is
+consciously accepted as unaddressed. Since the author fixes the whole scene sequence up
+front, none of these are plot failures — they are all **surface** (Performance-layer)
+failures, ordered here worst to least severe.
+
+| Mode | Reader notices via | Digest-detectable? | Mechanism owner |
+| --- | --- | --- | --- |
+| **Amnesia** | Narration contradicts a fact they already hold true | No — it's a World Model contradiction, not a digest-continuity one | State-update validator |
+| **Character-voice homogenization** | Dialogue/interiority reads interchangeable across characters | No — no digest field captures it | Generation-time only (Voice Card), unverified |
+| **Voice drift** | The *narrator's* register, distance, or rhythm shifts scene to scene | No | Generation-time only (Voice Card), unverified |
+| **Cold opens / hard resets** | A scene ignores the prior scene's closing situation | Yes — `closing situation` | Continuity pass |
+| **Told-ledger miscalibration** | "Didn't I already know that?" (under-told) or a redundant re-explanation (over-told) | Yes — the told-ledger | Continuity pass |
+| **Dropped setup** | An unpaid plant, or a payoff with no plant | Yes — `plants opened` / `payoffs closed` | Plant-obligation walk |
+| **Stale imagery** | The same concrete image/metaphor/verb recycled | Yes — `imagery signature` | Continuity pass |
+| **Uniform beat shape** | Cumulative monotony; rarely visible scene-to-scene | Partially, only in aggregate | Consciously accepted, unaddressed for v1 |
+
+**Told-ledger miscalibration** replaces the earlier separate notions of "re-introduction"
+and "over-recap" — they are the same root cause (a told-ledger read error) in opposite
+directions, not two independent failure modes.
+
+**Character-voice homogenization** is distinct from voice drift: voice drift is the
+*narrator's* register sliding; this is characters' dialogue and interiority becoming
+indistinguishable from each other (or from the narrator). Both are undetectable from
+digests alone, since digests abstract content, not prose style — so neither can be caught
+by the continuity pass. A future per-character dialogue signature (mirroring imagery
+signature) could make character-voice homogenization digest-detectable, but that's
+speculative until generation-time Voice Card constraint is proven insufficient.
+
+> **Avoid**: assuming the continuity pass can catch every seam failure. It is
+> constitutionally digest-only (see Continuity pass, above), so amnesia and the two
+> voice-level modes are structurally outside its reach.
