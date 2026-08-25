@@ -1,0 +1,507 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "a-christmas-carol",
+  "_authoring_conventions": {
+    "note": "Not part of the schema; documents the JSON shape this package chose where docs/schema/story-package.md leaves entry_state/exit_state as opaque JSON. See fixtures/authoring-notes.md for why.",
+    "entry_state_and_exit_state": "{ <entity_id>: { <column>: <value>, ... }, ... } — one object per touched entity, naming only the core columns this scene asserts. Untouched entities are omitted, not restated.",
+    "new_rows_in_exit_state": "A scene that creates a new relationship or character_knowledge row (not just updates an existing entity's column) lists it under reserved keys _new_relationships / _new_character_knowledge inside exit_state, using the same row shape as world_model_seed.relationships / character_knowledge.",
+    "merge_policy": "20 Scene Cards via merging the ~26-28 finest-grain beats identified in docs/research/fixture-stories.md, NOT the 17-scene Staves I-III fallback. See fixtures/authoring-notes.md for why the fallback was never actually viable for this ticket."
+  },
+  "world_model_seed": {
+    "characters": [
+      { "id": "char_scrooge", "name": "Ebenezer Scrooge", "location_id": "loc_counting_house", "status": "alive", "goal": "increase his fortune and be troubled by no one", "bag": { "epithet": "a squeezing, wrenching, grasping, scraping, clutching, covetous old sinner" } },
+      { "id": "char_marley", "name": "Jacob Marley", "location_id": null, "status": "dead", "goal": null, "bag": { "died": "seven years ago, this very night" } },
+      { "id": "char_fred", "name": "Fred", "location_id": "loc_freds_house", "status": "alive", "goal": null, "bag": { "relation": "Scrooge's nephew, his sister's son" } },
+      { "id": "char_bob_cratchit", "name": "Bob Cratchit", "location_id": "loc_counting_house", "status": "alive", "goal": null, "bag": { "role": "Scrooge's clerk" } },
+      { "id": "char_mrs_cratchit", "name": "Mrs. Cratchit", "location_id": "loc_cratchit_flat", "status": "alive", "goal": null, "bag": {} },
+      { "id": "char_tiny_tim", "name": "Tiny Tim", "location_id": "loc_cratchit_flat", "status": "alive", "goal": null, "bag": { "uses": "a little crutch", "note": "carried on his father's shoulder" } },
+      { "id": "char_peter_cratchit", "name": "Peter Cratchit", "location_id": "loc_cratchit_flat", "status": "alive", "goal": null, "bag": {} },
+      { "id": "char_martha_cratchit", "name": "Martha Cratchit", "location_id": "loc_cratchit_flat", "status": "alive", "goal": null, "bag": { "role": "works at a milliner's" } },
+      { "id": "char_ghost_past", "name": "the Ghost of Christmas Past", "location_id": null, "status": null, "goal": null, "bag": {} },
+      { "id": "char_ghost_present", "name": "the Ghost of Christmas Present", "location_id": null, "status": null, "goal": null, "bag": {} },
+      { "id": "char_ghost_future", "name": "the Ghost of Christmas Yet to Come", "location_id": null, "status": null, "goal": null, "bag": { "manner": "silent, gestures rather than speaks" } },
+      { "id": "char_fan", "name": "Fan", "location_id": null, "status": "dead", "goal": null, "bag": { "relation": "Scrooge's younger sister, Fred's mother; long dead by the story's present" } },
+      { "id": "char_fezziwig", "name": "old Fezziwig", "location_id": null, "status": null, "goal": null, "bag": { "role": "Scrooge's master during his apprenticeship, in memory" } },
+      { "id": "char_belle", "name": "Belle", "location_id": null, "status": "alive", "goal": null, "bag": { "role": "once engaged to young Scrooge" } },
+      { "id": "char_dead_man", "name": "an unnamed dead man", "location_id": "loc_the_death_room", "status": "dead", "goal": null, "bag": {} },
+      { "id": "char_old_joe", "name": "Old Joe", "location_id": "loc_old_joes_shop", "status": "alive", "goal": null, "bag": { "role": "keeps a rag-and-bottle and general marine-store shop" } },
+      { "id": "char_mrs_dilber", "name": "Mrs. Dilber", "location_id": "loc_old_joes_shop", "status": "alive", "goal": null, "bag": { "role": "a laundress" } },
+      { "id": "char_caroline", "name": "Caroline", "location_id": "loc_caroline_home", "status": "alive", "goal": null, "bag": { "role": "wife of one of the dead man's debtors" } },
+      { "id": "char_portly_gentleman", "name": "a portly gentleman", "location_id": "loc_counting_house", "status": "alive", "goal": null, "bag": { "role": "collects for the poor at Christmas" } },
+      { "id": "char_errand_boy", "name": "the boy in the next street", "location_id": "loc_london_streets", "status": "alive", "goal": null, "bag": {} }
+    ],
+    "locations": [
+      { "id": "loc_counting_house", "name": "Scrooge and Marley's counting-house", "bag": {} },
+      { "id": "loc_scrooges_chambers", "name": "Scrooge's chambers", "bag": { "description": "gloomy suite of rooms, once Marley's" } },
+      { "id": "loc_school", "name": "the boarding school", "bag": { "description": "where the boy Scrooge was left alone at Christmas" } },
+      { "id": "loc_fezziwigs_warehouse", "name": "Fezziwig's warehouse", "bag": {} },
+      { "id": "loc_belle_household", "name": "a modest parlour, in memory", "bag": { "description": "stands in for both the room where Belle releases young Scrooge and the warm home she has years later" } },
+      { "id": "loc_cratchit_flat", "name": "the Cratchits' four rooms", "bag": {} },
+      { "id": "loc_london_streets", "name": "the Christmas streets of London", "bag": {} },
+      { "id": "loc_freds_house", "name": "Fred's drawing-room", "bag": {} },
+      { "id": "loc_world_tour", "name": "far and lonely places", "bag": { "description": "abstracts a mine, a lighthouse, and a ship at sea into one vignette location" } },
+      { "id": "loc_the_exchange", "name": "the Royal Exchange", "bag": {} },
+      { "id": "loc_old_joes_shop", "name": "Old Joe's rag-and-bottle shop", "bag": {} },
+      { "id": "loc_the_death_room", "name": "the room where the dead man lies", "bag": { "description": "bare, plundered, unwatched" } },
+      { "id": "loc_caroline_home", "name": "the home of a poor debtor couple", "bag": {} },
+      { "id": "loc_churchyard", "name": "the churchyard", "bag": { "description": "overrun with grass, walled in by houses, choked with too much burying" } }
+    ],
+    "objects": [
+      { "id": "obj_marleys_chain", "name": "Marley's chain", "location_id": null, "status": "worn", "bag": { "made_of": "cash-boxes, keys, padlocks, ledgers, deeds, and heavy purses wrought in steel" } },
+      { "id": "obj_doorknocker", "name": "Scrooge's door-knocker", "location_id": "loc_scrooges_chambers", "status": "ordinary", "bag": {} },
+      { "id": "obj_tiny_tims_crutch", "name": "Tiny Tim's little crutch", "location_id": "loc_cratchit_flat", "status": "in_use", "bag": {} },
+      { "id": "obj_prize_turkey", "name": "the prize turkey", "location_id": null, "status": "not_yet_created", "bag": { "size": "twice the size of Tiny Tim" } },
+      { "id": "obj_stolen_goods", "name": "the dead man's bed-curtains, shirt, and blankets", "location_id": "loc_the_death_room", "status": "intact", "bag": {} },
+      { "id": "obj_gravestone", "name": "a neglected grave, with a stone", "location_id": "loc_churchyard", "status": "unread", "bag": {} }
+    ],
+    "relationships": [
+      { "id": "rel_001", "from_id": "char_marley", "to_id": "char_scrooge", "kind": "former_business_partner_of", "sentiment": null, "bag": {} },
+      { "id": "rel_002", "from_id": "char_scrooge", "to_id": "char_fred", "kind": "uncle_of", "sentiment": "dismisses", "bag": {} },
+      { "id": "rel_003", "from_id": "char_scrooge", "to_id": "char_bob_cratchit", "kind": "employer_of", "sentiment": "indifferent_to", "bag": {} },
+      { "id": "rel_004", "from_id": "char_bob_cratchit", "to_id": "char_tiny_tim", "kind": "father_of", "sentiment": "loves", "bag": {} },
+      { "id": "rel_005", "from_id": "char_bob_cratchit", "to_id": "char_peter_cratchit", "kind": "father_of", "sentiment": "loves", "bag": {} },
+      { "id": "rel_006", "from_id": "char_bob_cratchit", "to_id": "char_martha_cratchit", "kind": "father_of", "sentiment": "loves", "bag": {} },
+      { "id": "rel_007", "from_id": "char_mrs_cratchit", "to_id": "char_bob_cratchit", "kind": "wife_of", "sentiment": "loves", "bag": {} },
+      { "id": "rel_008", "from_id": "char_fezziwig", "to_id": "char_scrooge", "kind": "former_employer_of", "sentiment": null, "bag": {} },
+      { "id": "rel_009", "from_id": "char_scrooge", "to_id": "char_belle", "kind": "formerly_engaged_to", "sentiment": null, "bag": {} },
+      { "id": "rel_010", "from_id": "char_scrooge", "to_id": "char_caroline", "kind": "creditor_of", "sentiment": "indifferent_to", "bag": {} },
+      { "id": "rel_011", "from_id": "char_dead_man", "to_id": "char_scrooge", "kind": "foretells_the_fate_of", "sentiment": null, "bag": { "note": "the load-bearing seed link behind the Stave IV withholding — true in the World Model from the start, never told to the reader before scene_17_the_name_on_the_stone; see fixtures/authoring-notes.md" } }
+    ],
+    "character_knowledge": [
+      { "id": "ck_seed_001", "character_id": "char_ghost_future", "fact_ref": "corpse_is_scrooge", "learned_at_scene": null, "bag": { "note": "the Spirit shows Scrooge a grave whose name it already knows; grounds scene_17's plant:null payoff" } }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_counting_house",
+      "order": 1,
+      "pov": "char_scrooge",
+      "location_id": "loc_counting_house",
+      "characters_present": ["char_scrooge", "char_bob_cratchit", "char_fred", "char_portly_gentleman"],
+      "dramatic_function": "Establish Scrooge's character through three back-to-back refusals of warmth: to his nephew, to charity, to his clerk's comfort. Plants the long-range payoff.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_counting_house", "status": "alive" } },
+      "exit_state": { "char_bob_cratchit": { "location_id": "loc_cratchit_flat" }, "char_scrooge": { "location_id": "loc_scrooges_chambers" } },
+      "required_beats": [
+        "Fred visits, wishes his uncle a merry Christmas, and invites him to dinner; Scrooge answers 'Bah! Humbug!' and refuses",
+        "two portly gentlemen ask Scrooge for a subscription for the poor; he asks whether there are no prisons, no workhouses",
+        "told that many would rather die than go there, Scrooge answers that they had better do it, and decrease the surplus population",
+        "Scrooge grudgingly allows Bob Cratchit the whole of Christmas Day off, calling it a poor excuse for picking a man's pocket every twenty-fifth of December",
+        "Scrooge walks home alone through the fog to his gloomy chambers"
+      ],
+      "reader_must_learn": ["surplus_population_remark"],
+      "tone": "brisk, cold, comic in its own severity",
+      "length_budget": 500,
+      "invariants": ["Scrooge is courteous to no one this scene"]
+    },
+    {
+      "id": "scene_02_the_haunting_begins",
+      "order": 2,
+      "pov": "char_scrooge",
+      "location_id": "loc_scrooges_chambers",
+      "characters_present": ["char_scrooge", "char_marley"],
+      "dramatic_function": "The supernatural machinery starts: the world announces itself wrong before the first Spirit ever appears.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_scrooges_chambers" } },
+      "exit_state": {
+        "obj_doorknocker": { "status": "briefly_marleys_face" },
+        "char_scrooge": { "location_id": "loc_scrooges_chambers" }
+      },
+      "required_beats": [
+        "the door-knocker briefly becomes Marley's face as Scrooge lets himself in",
+        "that night, Marley's ghost appears, bound in a chain of cash-boxes, keys, ledgers, and purses",
+        "Marley declares he wears the chain he forged in life, link by link and yard by yard, and warns Scrooge his own chain is longer still",
+        "Marley shows Scrooge the air outside the window crowded with other chained, wailing phantoms, doomed to see misery they no longer have the power to help",
+        "Marley tells Scrooge he will be haunted by Three Spirits, and that this is his one chance and hope"
+      ],
+      "tone": "gothic, mournful, genuinely frightening",
+      "length_budget": 600,
+      "invariants": ["Marley's warning is explicit: three Spirits, on three successive nights"]
+    },
+    {
+      "id": "scene_03_the_first_spirit",
+      "order": 3,
+      "pov": "char_scrooge",
+      "location_id": "loc_scrooges_chambers",
+      "characters_present": ["char_scrooge", "char_ghost_past"],
+      "dramatic_function": "Cross the threshold from the frame story into the vision-journeys.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_scrooges_chambers" } },
+      "exit_state": { "char_scrooge": { "location_id": "loc_school" } },
+      "required_beats": [
+        "the bell tolls one, and a strange childlike figure — the Ghost of Christmas Past — draws back Scrooge's bed-curtains",
+        "the Spirit takes Scrooge by the hand and they pass through the wall together, out into the country of his own boyhood"
+      ],
+      "tone": "dreamlike, disorienting",
+      "length_budget": 250,
+      "invariants": []
+    },
+    {
+      "id": "scene_04_the_lonely_school",
+      "order": 4,
+      "pov": "char_scrooge",
+      "location_id": "loc_school",
+      "characters_present": ["char_scrooge", "char_ghost_past", "char_fan"],
+      "dramatic_function": "Show the loneliness at the root of Scrooge's character, then its one warm counterweight — and its loss.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_school" } },
+      "exit_state": { "char_scrooge": { "location_id": "loc_fezziwigs_warehouse" } },
+      "required_beats": [
+        "young Scrooge sits alone in the empty schoolroom at Christmas, forgotten while other boys go home",
+        "his sister Fan arrives, radiant, to fetch him home at last, saying their father is much kinder now and the two of them are to be together always",
+        "present-day Scrooge is moved almost to tears, and the Spirit reminds him Fan died young, but left a son — Fred"
+      ],
+      "tone": "tender, aching",
+      "length_budget": 400,
+      "invariants": ["present-day Scrooge visibly softens watching this, though he says little"]
+    },
+    {
+      "id": "scene_05_fezziwigs_ball",
+      "order": 5,
+      "pov": "char_scrooge",
+      "location_id": "loc_fezziwigs_warehouse",
+      "characters_present": ["char_scrooge", "char_ghost_past", "char_fezziwig"],
+      "dramatic_function": "Show Scrooge the model of generous, ungrudging Christmas-keeping he once had and later abandoned.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_fezziwigs_warehouse" } },
+      "exit_state": { "char_scrooge": { "location_id": "loc_belle_household" } },
+      "required_beats": [
+        "old Fezziwig throws open his warehouse for a joyous Christmas Eve party for his apprentices, young Scrooge among them",
+        "the Spirit remarks it is a small thing to be so grateful for; Scrooge, unsettled, defends Fezziwig — the power to make people happy or unhappy costs so little",
+        "Scrooge wishes, watching, that he could say a word or two to his own clerk just now"
+      ],
+      "tone": "warm, nostalgic, a little rueful",
+      "length_budget": 400,
+      "invariants": ["Scrooge's discomfort at his own past generosity is played straight, not comic"]
+    },
+    {
+      "id": "scene_06_belle_then_and_now",
+      "order": 6,
+      "pov": "char_scrooge",
+      "location_id": "loc_belle_household",
+      "characters_present": ["char_scrooge", "char_ghost_past", "char_belle"],
+      "dramatic_function": "The clearest cause of Scrooge's hardening: he chose gain over love, and is shown both the choosing and its cost.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_belle_household" } },
+      "exit_state": {
+        "char_scrooge": { "location_id": "loc_scrooges_chambers" }
+      },
+      "required_beats": [
+        "young Scrooge, older now, hears Belle release him from their engagement, telling him another idol — gain — has displaced her",
+        "the Spirit shows Belle years afterward, married to another man, in a warm home crowded with cheerful children",
+        "Belle's husband mentions passing Scrooge's office that day: a lone light, his partner Marley dying, and Scrooge himself sitting quite alone, as he always is",
+        "Scrooge, unable to bear it, seizes the extinguisher-cap and begs the Spirit to remove him and show him no more"
+      ],
+      "tone": "grief-stricken, unsparing",
+      "length_budget": 550,
+      "invariants": ["the Spirit does not relent until Scrooge physically fights free"]
+    },
+    {
+      "id": "scene_07_the_second_spirit",
+      "order": 7,
+      "pov": "char_scrooge",
+      "location_id": "loc_scrooges_chambers",
+      "characters_present": ["char_scrooge", "char_ghost_present"],
+      "dramatic_function": "Cross into the second vision-journey; establish the new Spirit's abundant, generous character in contrast to Scrooge's.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_scrooges_chambers" } },
+      "exit_state": { "char_scrooge": { "location_id": "loc_london_streets" } },
+      "required_beats": [
+        "Scrooge wakes in his own room, transformed by a mound of Christmas food and greenery, presided over by a jovial giant of a Spirit",
+        "the Ghost of Christmas Present takes Scrooge out into the Christmas morning streets"
+      ],
+      "tone": "abundant, hearty, bright",
+      "length_budget": 300,
+      "invariants": []
+    },
+    {
+      "id": "scene_08_the_cratchits",
+      "order": 8,
+      "pov": "char_scrooge",
+      "location_id": "loc_cratchit_flat",
+      "characters_present": ["char_scrooge", "char_ghost_present", "char_bob_cratchit", "char_mrs_cratchit", "char_tiny_tim", "char_peter_cratchit", "char_martha_cratchit"],
+      "dramatic_function": "Make the abstract 'surplus population' line concrete and personal by attaching it to a specific, beloved, endangered child. Pays off scene 1; plants Tim's fate for Stave IV.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_london_streets" } },
+      "exit_state": {},
+      "required_beats": [
+        "the Cratchits sit down to a small, poor, entirely happy Christmas dinner — one goose, a pudding everyone privately feared and no one says aloud might fail",
+        "Tiny Tim, who has been to church and hopes people saw his crutch, since it might do them good to remember who made lame beggars walk and blind men see",
+        "Scrooge, anxious for the first time, asks the Spirit if Tiny Tim will live",
+        "the Spirit answers that if these shadows remain unaltered by the future, the child will die — then quotes Scrooge's own words back to him: that he had better do it, and decrease the surplus population",
+        "Scrooge is overcome with penitence and grief and casts his eyes down, ashamed"
+      ],
+      "reader_must_learn": ["tiny_tims_fate_uncertain"],
+      "pays_off": [{ "fact_ref": "surplus_population_remark", "plant": "scene_01_counting_house" }],
+      "tone": "warm, precarious, quietly devastating at the turn",
+      "length_budget": 550,
+      "invariants": ["the family's happiness is played as genuine, not merely pitiable"]
+    },
+    {
+      "id": "scene_09_the_spirits_tour",
+      "order": 9,
+      "pov": "char_scrooge",
+      "location_id": "loc_world_tour",
+      "characters_present": ["char_scrooge", "char_ghost_present"],
+      "dramatic_function": "Widen the frame: Christmas is kept everywhere, even where Scrooge would never think to look.",
+      "entry_state": {},
+      "exit_state": { "char_scrooge": { "location_id": "loc_freds_house" } },
+      "required_beats": [
+        "the Spirit shows Scrooge a bleak mine, where the miners keep Christmas underground with an old song",
+        "a solitary lighthouse, where the keepers grip hands and wish each other merry Christmas over the roar of the sea",
+        "a ship at sea, where every man aboard hums a Christmas tune to himself, thinking of those at home"
+      ],
+      "tone": "expansive, elemental",
+      "length_budget": 350,
+      "invariants": []
+    },
+    {
+      "id": "scene_10_freds_party",
+      "order": 10,
+      "pov": "char_scrooge",
+      "location_id": "loc_freds_house",
+      "characters_present": ["char_scrooge", "char_ghost_present", "char_fred"],
+      "dramatic_function": "Let Scrooge taste, unseen, the family warmth he refused in scene 1 — and enjoy it in spite of himself.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_freds_house" } },
+      "exit_state": {},
+      "required_beats": [
+        "Fred's party plays games, including Yes and No, guessing at 'a most disagreeable animal' that turns out to be Uncle Scrooge himself, to general laughter",
+        "Fred toasts his uncle anyway, wishing him a merry Christmas and a happy new year, whatever he thinks of the toast",
+        "Scrooge, invisible to the party, is in such a mood that he begs the Spirit to let them stay a little longer, and joins in the games in spirit"
+      ],
+      "tone": "playful, affectionate, bittersweet",
+      "length_budget": 400,
+      "invariants": ["Scrooge's enjoyment here is never seen by anyone at the party"]
+    },
+    {
+      "id": "scene_11_ignorance_and_want",
+      "order": 11,
+      "pov": "char_scrooge",
+      "location_id": "loc_london_streets",
+      "characters_present": ["char_scrooge", "char_ghost_present"],
+      "dramatic_function": "The moral center of the book: a direct, unmediated warning, delivered just before the Spirit that gave it disappears.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_freds_house" } },
+      "exit_state": { "char_scrooge": { "location_id": "loc_the_exchange" } },
+      "required_beats": [
+        "the Ghost of Christmas Present visibly ages through the night, and at the last shows Scrooge two wretched, wolfish children hidden in its robes: a boy and a girl",
+        "the Spirit names them Ignorance and Want, and warns Scrooge to beware them both, but most of all beware Ignorance",
+        "Scrooge asks if they have no refuge; the Spirit throws his own words back at him once more — are there no prisons, no workhouses",
+        "the bell strikes twelve; the Ghost of Christmas Present vanishes, and a solemn, hooded phantom approaches"
+      ],
+      "tone": "stark, moralizing, ominous",
+      "length_budget": 400,
+      "invariants": ["Ignorance and Want are shown, not merely described"]
+    },
+    {
+      "id": "scene_12_the_exchange",
+      "order": 12,
+      "pov": "char_scrooge",
+      "location_id": "loc_the_exchange",
+      "characters_present": ["char_scrooge", "char_ghost_future"],
+      "dramatic_function": "Opens the six-scene Stave IV withholding. The reader watches businessmen discuss a death with total indifference and is not told whose.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_the_exchange" } },
+      "exit_state": { "char_scrooge": { "location_id": "loc_old_joes_shop" } },
+      "required_beats": [
+        "the Ghost of Christmas Yet to Come, silent and shrouded, leads Scrooge among businessmen on the Exchange",
+        "the men discuss an unnamed man's death with complete indifference — one will only attend the funeral if lunch is provided",
+        "Scrooge does not recognize anyone they describe, and does not think to ask whose death it is"
+      ],
+      "must_stay_hidden": ["corpse_is_scrooge"],
+      "tone": "cold, businesslike, quietly dreadful",
+      "length_budget": 350,
+      "invariants": ["the dead man is never named in dialogue or narration this scene"]
+    },
+    {
+      "id": "scene_13_old_joes_shop",
+      "order": 13,
+      "pov": "char_scrooge",
+      "location_id": "loc_old_joes_shop",
+      "characters_present": ["char_scrooge", "char_ghost_future", "char_old_joe", "char_mrs_dilber"],
+      "dramatic_function": "Deepen the withholding through grim comedy: the dead man's own goods are sold off by people who feel nothing for him.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_old_joes_shop" } },
+      "exit_state": {
+        "obj_stolen_goods": { "location_id": "loc_old_joes_shop", "status": "sold" },
+        "char_scrooge": { "location_id": "loc_the_death_room" }
+      },
+      "required_beats": [
+        "a charwoman, a laundress (Mrs. Dilber), and an undertaker's man sell Old Joe the dead man's bed-curtains, shirt off his back, and blankets",
+        "Old Joe pays them out, remarking the man frightened everyone away from him alive and so has made them all the richer now he's dead",
+        "Scrooge is horrified by the scene but still does not connect it to himself"
+      ],
+      "must_stay_hidden": ["corpse_is_scrooge"],
+      "tone": "grotesque, mercantile, darkly comic",
+      "length_budget": 400,
+      "invariants": ["the dead man is never named"]
+    },
+    {
+      "id": "scene_14_the_unwatched_corpse",
+      "order": 14,
+      "pov": "char_scrooge",
+      "location_id": "loc_the_death_room",
+      "characters_present": ["char_scrooge", "char_ghost_future", "char_dead_man"],
+      "dramatic_function": "The withholding's tightest turn: the reader stands over the body itself and is still not told its name.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_the_death_room" } },
+      "exit_state": {},
+      "required_beats": [
+        "the Spirit brings Scrooge to a bare, dark room where a covered body lies, plundered and bereft, unwatched, unwept, uncared for",
+        "Scrooge, trembling, is invited to lift the covering and see the dead man's face, and cannot bring himself to do it",
+        "he asks the Spirit to show him some tenderness connected with a death, anywhere, if only one"
+      ],
+      "must_stay_hidden": ["corpse_is_scrooge"],
+      "tone": "hushed, dreadful, pleading",
+      "length_budget": 400,
+      "invariants": ["the face under the sheet is never shown to the reader this scene"]
+    },
+    {
+      "id": "scene_15_the_relieved_debtors",
+      "order": 15,
+      "pov": "char_scrooge",
+      "location_id": "loc_caroline_home",
+      "characters_present": ["char_scrooge", "char_ghost_future", "char_caroline"],
+      "dramatic_function": "The one 'tenderness' the Spirit grants is relief at the death, not grief — the withholding's cruelest irony.",
+      "entry_state": {},
+      "exit_state": { "char_scrooge": { "location_id": "loc_cratchit_flat" } },
+      "required_beats": [
+        "Caroline and her husband, deep in debt to the dead man, learn of his death",
+        "their first feeling is relief: whoever inherits the debt may show them mercy the dead man never would",
+        "Scrooge understands, without being told, that no one anywhere has shed one genuine tear for this man"
+      ],
+      "must_stay_hidden": ["corpse_is_scrooge"],
+      "tone": "quietly bitter",
+      "length_budget": 300,
+      "invariants": []
+    },
+    {
+      "id": "scene_16_the_cratchits_after_tim",
+      "order": 16,
+      "pov": "char_scrooge",
+      "location_id": "loc_cratchit_flat",
+      "characters_present": ["char_scrooge", "char_ghost_future", "char_bob_cratchit", "char_mrs_cratchit", "char_peter_cratchit", "char_martha_cratchit"],
+      "dramatic_function": "Pays off scene 8's plant with the cruelest possible answer, and holds the withholding one scene longer by contrast — this grief is genuine, but still not connected by Scrooge to the dead man on the Exchange.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_cratchit_flat" } },
+      "exit_state": {
+        "char_tiny_tim": { "status": "dead" },
+        "obj_tiny_tims_crutch": { "status": "kept", "location_id": "loc_cratchit_flat" }
+      },
+      "required_beats": [
+        "the Cratchit household is quiet and subdued; Tiny Tim has died",
+        "Tiny Tim's little crutch is kept, without its owner, in a corner",
+        "Bob Cratchit returns from arranging a burial-place, breaks down, then composes himself for the other children's sake",
+        "Bob recalls how gentle and patient Tim always was, and says he will never forget it, nor his first words after the day he died"
+      ],
+      "reader_must_learn": [],
+      "pays_off": [{ "fact_ref": "tiny_tims_fate_uncertain", "plant": "scene_08_the_cratchits" }],
+      "must_stay_hidden": ["corpse_is_scrooge"],
+      "tone": "grief-stricken, tender",
+      "length_budget": 450,
+      "invariants": ["this grief is never connected, in dialogue or narration, to the dead man of scenes 12-15"]
+    },
+    {
+      "id": "scene_17_the_name_on_the_stone",
+      "order": 17,
+      "pov": "char_scrooge",
+      "location_id": "loc_churchyard",
+      "characters_present": ["char_scrooge", "char_ghost_future"],
+      "dramatic_function": "The withholding lifts. The reveal is a single name read on a stone — mechanically, a name-column update on the entity introduced back in scene 12.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_cratchit_flat" } },
+      "exit_state": {
+        "char_dead_man": { "name": "Ebenezer Scrooge" },
+        "obj_gravestone": { "status": "read" }
+      },
+      "required_beats": [
+        "the Spirit brings Scrooge to a neglected, grass-choked grave and points down at the stone",
+        "Scrooge begs to know first whether these are the shadows of things that Will be, or only of things that May be",
+        "he reads the name on the stone: EBENEZER SCROOGE",
+        "he clutches at the Spirit's robe and swears he is not the man he was, and will honor Christmas in his heart and try to keep it all the year",
+        "he vows to sponge out the writing on the stone, if it is still possible"
+      ],
+      "reader_must_learn": ["corpse_is_scrooge"],
+      "pays_off": [{ "fact_ref": "corpse_is_scrooge", "plant": null }],
+      "tone": "terrified, then desperate, then resolved",
+      "length_budget": 450,
+      "invariants": ["the name is read, not narrated around — the reveal lands as text on the stone"]
+    },
+    {
+      "id": "scene_18_the_waking",
+      "order": 18,
+      "pov": "char_scrooge",
+      "location_id": "loc_scrooges_chambers",
+      "characters_present": ["char_scrooge", "char_errand_boy"],
+      "dramatic_function": "The redemption made concrete through action, not declaration — the stress case for the volitional/relational tier. See fixtures/authoring-notes.md.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_churchyard" } },
+      "exit_state": {
+        "char_scrooge": { "location_id": "loc_london_streets" },
+        "obj_prize_turkey": { "status": "intact", "location_id": "loc_cratchit_flat" }
+      },
+      "required_beats": [
+        "Scrooge wakes in his own bed, in his own room, and finds it is still Christmas morning — he has all three Spirits' time to do good in",
+        "he laughs, cries, and talks to himself in delight, hardly able to believe it",
+        "he leans out the window and asks a boy in his Sunday clothes what day it is, then sends him to buy the prize turkey hanging in the poulterer's, twice the size of Tiny Tim, and have it sent to Bob Cratchit's, anonymously",
+        "he dresses in his best and goes out into the street, unable to stop smiling at everyone he passes"
+      ],
+      "tone": "ecstatic, almost giddy",
+      "length_budget": 500,
+      "invariants": [
+        "Scrooge's change is enacted through action (the turkey, the laughter, the walking out) rather than only declared in narration",
+        "no Scene Card in this package names char_scrooge.goal or any relationship sentiment column in an exit_state — the redemption is written to make the engine's volitional proposal overwhelmingly likely to be accepted, never to force it structurally"
+      ]
+    },
+    {
+      "id": "scene_19_the_street_and_freds_dinner",
+      "order": 19,
+      "pov": "char_scrooge",
+      "location_id": "loc_london_streets",
+      "characters_present": ["char_scrooge", "char_portly_gentleman", "char_fred"],
+      "dramatic_function": "The redemption tested against the two people Scrooge wronged in scene 1 — charity and family — and found to hold.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_london_streets" } },
+      "exit_state": {
+        "char_scrooge": { "location_id": "loc_freds_house" },
+        "_new_relationships": [
+          { "id": "rel_012", "from_id": "char_scrooge", "to_id": "char_caroline", "kind": "creditor_of", "sentiment": "merciful_toward", "bag": {} }
+        ]
+      },
+      "required_beats": [
+        "Scrooge meets the portly gentleman who solicited him in scene 1, apologizes, and whispers a subscription sum large enough to make the gentleman gasp",
+        "Scrooge goes to church, then walks the streets, patting children's heads and delighting in everything he sees",
+        "he arrives, trembling, at Fred's door, and asks if he may come in to dinner",
+        "Fred welcomes him with open arms, and the party is a wonderful one"
+      ],
+      "tone": "warm, redemptive, a little disbelieving of its own good luck",
+      "length_budget": 450,
+      "invariants": ["the relationship update this scene is a proposal the card makes likely, not a forced exit_state — see scene 18's invariants"]
+    },
+    {
+      "id": "scene_20_the_office_next_morning",
+      "order": 20,
+      "pov": "char_scrooge",
+      "location_id": "loc_counting_house",
+      "characters_present": ["char_scrooge", "char_bob_cratchit"],
+      "dramatic_function": "The closing proof: redemption confirmed not in a single ecstatic day but in ordinary conduct the next working morning, and in the narrator's final, direct verdict.",
+      "entry_state": { "char_scrooge": { "location_id": "loc_freds_house" }, "char_bob_cratchit": { "location_id": "loc_counting_house" } },
+      "exit_state": {
+        "char_scrooge": { "location_id": "loc_counting_house" }
+      },
+      "required_beats": [
+        "Bob Cratchit arrives eighteen and a half minutes late; Scrooge growls in mock severity that this will not do, and that he is about to raise his salary",
+        "Bob, terrified for a moment, is then astonished into delight",
+        "Scrooge promises to assist Bob's struggling family and to discuss his affairs over a bowl of smoking bishop that very afternoon",
+        "the narrator states plainly that Scrooge was better than his word: he did it all, and infinitely more, and to Tiny Tim, who did not die, he was a second father",
+        "the narrator closes: Scrooge became as good a friend, as good a master, and as good a man as the good old city knew; and it was always said of him that he knew how to keep Christmas well, if any man alive possessed the knowledge"
+      ],
+      "tone": "warm, settled, quietly triumphant",
+      "length_budget": 500,
+      "invariants": [
+        "Bob's raise and Scrooge's ongoing generosity are narrated as having already happened by the time the narrator delivers the closing verdict — the volitional change is confirmed by its lasting consequences, not merely by this one morning's mood"
+      ]
+    }
+  ],
+  "voice_card": {
+    "style_preset": "Dickensian comic-gothic",
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "intrusive, omniscient narrator who addresses the reader directly and editorializes ('Marley was dead: to begin with. There is no doubt whatever about that.')",
+    "register": "formal but warm, moralizing, wryly humorous even at its darkest",
+    "sentence_rhythm": "long cumulative sentences built from parenthetical asides and triple/quadruple lists, broken by short emphatic declaratives for emphasis",
+    "imagery_palette": ["cold and firelight", "chains, ledgers, and cash-boxes", "fog thinning into bells and daylight", "feast and want side by side"],
+    "dialogue_density": "moderate, sharply character-marking — Scrooge's clipped 'Bah! Humbug!' against Fred's warmth, the Ghosts' formal cadences, Bob Cratchit's diffidence",
+    "style_exemplar": "The city had not yet shaken hands with the day; the fog stood about the doors like an unpaid caller, and Scrooge, at his desk, was colder than either."
+  },
+  "metadata": {
+    "title": "A Christmas Carol, in Prose: Being a Ghost Story of Christmas",
+    "source": "Charles Dickens, 1843 (Project Gutenberg #46). Merge policy: 20 Scene Cards from the ~26-28 finest-grain beats in docs/research/fixture-stories.md — see fixtures/authoring-notes.md for why the 17-scene Staves I-III fallback could not satisfy this ticket's requirements",
+    "created_at": "2026-08-25T00:00:00Z"
+  }
+}

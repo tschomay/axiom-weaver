@@ -1,0 +1,397 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "cinderella",
+  "_authoring_conventions": {
+    "note": "Not part of the schema; documents the JSON shape this package chose where docs/schema/story-package.md leaves entry_state/exit_state as opaque JSON. See fixtures/authoring-notes.md for why.",
+    "entry_state_and_exit_state": "{ <entity_id>: { <column>: <value>, ... }, ... } — one object per touched entity, naming only the core columns this scene asserts. Untouched entities are omitted, not restated.",
+    "new_rows_in_exit_state": "A scene that creates a new relationship or character_knowledge row (not just updates an existing entity's column) lists it under reserved keys _new_relationships / _new_character_knowledge inside exit_state, using the same row shape as world_model_seed.relationships / character_knowledge."
+  },
+  "world_model_seed": {
+    "characters": [
+      { "id": "char_cinderella", "name": "Cinderella", "location_id": "loc_house", "status": "alive", "goal": null, "bag": { "epithet": "Cinderwench" } },
+      { "id": "char_father", "name": "Cinderella's father", "location_id": "loc_house", "status": "alive", "goal": null, "bag": {} },
+      { "id": "char_stepmother", "name": "the Stepmother", "location_id": "loc_house", "status": "alive", "goal": null, "bag": { "temperament": "proud and haughty" } },
+      { "id": "char_stepsister_elder", "name": "the elder stepsister", "location_id": "loc_house", "status": "alive", "goal": null, "bag": {} },
+      { "id": "char_stepsister_charlotte", "name": "Miss Charlotte", "location_id": "loc_house", "status": "alive", "goal": null, "bag": {} },
+      { "id": "char_godmother", "name": "Cinderella's godmother", "location_id": null, "status": null, "goal": null, "bag": { "nature": "fairy" } },
+      { "id": "char_prince", "name": "the King's son", "location_id": "loc_ball_hall", "status": "alive", "goal": null, "bag": {} },
+      { "id": "char_gentleman_usher", "name": "the gentleman-in-waiting", "location_id": "loc_ball_hall", "status": "alive", "goal": null, "bag": { "role": "carries the glass slipper on the Prince's order" } }
+    ],
+    "locations": [
+      { "id": "loc_house", "name": "her father's house", "bag": { "description": "the family's rooms, where the sisters dress and hold court" } },
+      { "id": "loc_chimney_corner", "name": "the chimney-corner", "bag": { "description": "the cinder-heap by the kitchen hearth where Cinderella is sent to sleep" } },
+      { "id": "loc_garden", "name": "the garden", "bag": { "description": "holds the pumpkin bed, the mouse-trap, the rat-trap, and the watering-pot behind which the lizards live" } },
+      { "id": "loc_ball_hall", "name": "the King's ballroom", "bag": {} },
+      { "id": "loc_palace_steps", "name": "the palace steps", "bag": {} },
+      { "id": "loc_kingdom_houses", "name": "the houses of the kingdom", "bag": { "description": "abstracts the gentleman-in-waiting's circuit from house to house with the slipper" } }
+    ],
+    "objects": [
+      { "id": "obj_pumpkin", "name": "a pumpkin", "location_id": "loc_garden", "status": "whole", "bag": {} },
+      { "id": "obj_mice", "name": "six mice", "location_id": "loc_garden", "status": "alive", "bag": { "count": 6, "source": "the mouse-trap" } },
+      { "id": "obj_rat", "name": "a rat", "location_id": "loc_garden", "status": "alive", "bag": { "source": "the rat-trap" } },
+      { "id": "obj_lizards", "name": "six lizards", "location_id": "loc_garden", "status": "alive", "bag": { "count": 6, "source": "behind the watering-pot" } },
+      { "id": "obj_gown", "name": "a gown of gold and silver cloth, all beset with jewels", "location_id": null, "status": "not_yet_created", "bag": {} },
+      { "id": "obj_glass_slipper_1", "name": "a glass slipper", "location_id": null, "status": "not_yet_created", "bag": { "side": "one of the pair" } },
+      { "id": "obj_glass_slipper_2", "name": "a glass slipper", "location_id": null, "status": "not_yet_created", "bag": { "side": "the fellow of the pair" } }
+    ],
+    "relationships": [
+      { "id": "rel_001", "from_id": "char_stepmother", "to_id": "char_cinderella", "kind": "stepmother_of", "sentiment": "resents", "bag": {} },
+      { "id": "rel_002", "from_id": "char_father", "to_id": "char_cinderella", "kind": "father_of", "sentiment": null, "bag": {} },
+      { "id": "rel_003", "from_id": "char_stepmother", "to_id": "char_stepsister_elder", "kind": "mother_of", "sentiment": "dotes_on", "bag": {} },
+      { "id": "rel_004", "from_id": "char_stepmother", "to_id": "char_stepsister_charlotte", "kind": "mother_of", "sentiment": "dotes_on", "bag": {} },
+      { "id": "rel_005", "from_id": "char_stepsister_elder", "to_id": "char_cinderella", "kind": "stepsister_of", "sentiment": "disdains", "bag": {} },
+      { "id": "rel_006", "from_id": "char_stepsister_charlotte", "to_id": "char_cinderella", "kind": "stepsister_of", "sentiment": "disdains", "bag": {} },
+      { "id": "rel_007", "from_id": "char_godmother", "to_id": "char_cinderella", "kind": "godmother_of", "sentiment": "loves", "bag": {} }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_remarriage",
+      "order": 1,
+      "pov": "char_cinderella",
+      "location_id": "loc_house",
+      "characters_present": ["char_cinderella", "char_father", "char_stepmother", "char_stepsister_elder", "char_stepsister_charlotte"],
+      "dramatic_function": "Establish the household inversion: a remarriage brings in a proud stepmother and two vain stepdaughters who demote Cinderella to servant status.",
+      "entry_state": { "char_cinderella": { "location_id": "loc_house", "status": "alive" } },
+      "exit_state": { "char_cinderella": { "location_id": "loc_chimney_corner", "status": "alive" } },
+      "required_beats": [
+        "the father has remarried a proud and haughty woman",
+        "her two daughters prove as haughty as their mother",
+        "the stepmother turns all the housework over to Cinderella and sends her to sleep in the chimney-corner"
+      ],
+      "tone": "wistful, quietly bleak",
+      "length_budget": 350,
+      "invariants": [
+        "Cinderella performs all the housework without complaint",
+        "the father is established as unable or unwilling to intervene"
+      ]
+    },
+    {
+      "id": "scene_02_the_ball_proclaimed",
+      "order": 2,
+      "pov": "char_cinderella",
+      "location_id": "loc_house",
+      "characters_present": ["char_cinderella", "char_stepmother", "char_stepsister_elder", "char_stepsister_charlotte"],
+      "dramatic_function": "Introduce the external engine of the plot — the King's son gives a ball — and establish that Cinderella is not considered a possible guest.",
+      "entry_state": { "char_cinderella": { "location_id": "loc_chimney_corner" } },
+      "exit_state": {},
+      "required_beats": [
+        "word arrives that the King's son is giving a ball, and all persons of fashion are invited",
+        "the two sisters are overjoyed and think of nothing but what to wear",
+        "Cinderella is expected to help them dress but is not imagined as a guest herself"
+      ],
+      "tone": "brittle excitement, comic vanity",
+      "length_budget": 300,
+      "invariants": ["Cinderella is not invited and does not protest"]
+    },
+    {
+      "id": "scene_03_dressing_the_sisters",
+      "order": 3,
+      "pov": "char_cinderella",
+      "location_id": "loc_house",
+      "characters_present": ["char_cinderella", "char_stepsister_elder", "char_stepsister_charlotte"],
+      "dramatic_function": "A humiliation beat that sets the emotional stakes for the wish that follows.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Cinderella dresses her sisters' hair with skill and good nature, since she has excellent taste",
+        "the sisters jeer that it would make people laugh to see a Cinderwench at a ball",
+        "Cinderella does not ask to go"
+      ],
+      "tone": "sardonic, needling",
+      "length_budget": 300,
+      "invariants": ["Cinderella shows no resentment toward her sisters in front of them"]
+    },
+    {
+      "id": "scene_04_sisters_depart",
+      "order": 4,
+      "pov": "char_cinderella",
+      "location_id": "loc_house",
+      "characters_present": ["char_cinderella", "char_stepmother", "char_stepsister_elder", "char_stepsister_charlotte"],
+      "dramatic_function": "Isolate Cinderella and motivate the wish that the godmother answers.",
+      "entry_state": {},
+      "exit_state": {
+        "char_stepmother": { "location_id": "loc_ball_hall" },
+        "char_stepsister_elder": { "location_id": "loc_ball_hall" },
+        "char_stepsister_charlotte": { "location_id": "loc_ball_hall" },
+        "char_cinderella": { "location_id": "loc_chimney_corner" }
+      },
+      "required_beats": [
+        "the stepmother and sisters depart for the ball",
+        "left alone, Cinderella weeps"
+      ],
+      "tone": "lonely",
+      "length_budget": 200,
+      "invariants": []
+    },
+    {
+      "id": "scene_05_godmother",
+      "order": 5,
+      "pov": "char_cinderella",
+      "location_id": "loc_garden",
+      "characters_present": ["char_cinderella", "char_godmother"],
+      "dramatic_function": "The turn: magical enablement bound by an explicit, load-bearing condition. Plants the midnight rule.",
+      "entry_state": { "char_cinderella": { "location_id": "loc_chimney_corner", "status": "alive" } },
+      "exit_state": {
+        "obj_pumpkin": { "name": "a golden coach", "status": "intact" },
+        "obj_mice": { "name": "six dapple-grey horses", "status": "alive" },
+        "obj_rat": { "name": "a fat coachman with the finest moustachios", "status": "alive" },
+        "obj_lizards": { "name": "six footmen in laced livery", "status": "alive" },
+        "obj_gown": { "status": "intact", "location_id": null },
+        "obj_glass_slipper_1": { "status": "intact", "location_id": null },
+        "obj_glass_slipper_2": { "status": "intact", "location_id": null },
+        "char_cinderella": { "location_id": "loc_ball_hall", "goal": "return home before midnight strikes" }
+      },
+      "required_beats": [
+        "the godmother appears and asks why Cinderella weeps",
+        "a pumpkin is turned into a golden coach; six mice into horses; a rat into a coachman; six lizards into footmen",
+        "Cinderella's rags become a gown of gold and silver, beset with jewels, and a pair of glass slippers",
+        "the godmother warns her in plain terms: if she stays one moment past midnight, coach, horses, footmen, and gown will all revert"
+      ],
+      "reader_must_learn": ["midnight_condition"],
+      "tone": "wondrous, hushed, a little uncanny",
+      "length_budget": 450,
+      "invariants": [
+        "the transformation is witnessed by no one but Cinderella and the godmother",
+        "the midnight condition is stated aloud, not merely implied"
+      ]
+    },
+    {
+      "id": "scene_06_first_ball_arrival",
+      "order": 6,
+      "pov": "char_cinderella",
+      "location_id": "loc_ball_hall",
+      "characters_present": ["char_cinderella", "char_prince", "char_stepmother", "char_stepsister_elder", "char_stepsister_charlotte"],
+      "dramatic_function": "The court sees a beauty it cannot place; the Prince's attention turns to her; her own family fails to recognize her. Opens the irony gap that scene 9 will pay off.",
+      "entry_state": { "char_cinderella": { "location_id": "loc_ball_hall" } },
+      "exit_state": {
+        "_new_relationships": [
+          { "id": "rel_008", "from_id": "char_prince", "to_id": "char_cinderella", "kind": "courts", "sentiment": "smitten", "bag": {} }
+        ]
+      },
+      "required_beats": [
+        "a hush falls and the dancing stops as she enters",
+        "the old King himself remarks on her beauty",
+        "the King's son leads her out to dance",
+        "no one — including her own stepmother and sisters — recognizes her"
+      ],
+      "reader_must_learn": ["cinderella_is_the_ball_girl"],
+      "tone": "dazzled, luminous",
+      "length_budget": 400,
+      "invariants": ["Cinderella's stepfamily gives no sign of recognizing her"]
+    },
+    {
+      "id": "scene_07_first_ball_departure",
+      "order": 7,
+      "pov": "char_cinderella",
+      "location_id": "loc_ball_hall",
+      "characters_present": ["char_cinderella", "char_stepsister_elder", "char_stepsister_charlotte"],
+      "dramatic_function": "Demonstrate her wit and generosity in disguise, and establish the safe pattern of leaving in good time — the calm before scene 10 breaks it.",
+      "entry_state": {},
+      "exit_state": { "char_cinderella": { "location_id": "loc_chimney_corner" } },
+      "required_beats": [
+        "Cinderella sits with her sisters and shares the oranges and citrons the Prince gave her",
+        "the sisters do not know her",
+        "she leaves at a quarter to twelve, well ahead of the deadline, and thanks the King and the Prince for their civility",
+        "she reaches home safely, with time to spare"
+      ],
+      "tone": "wry, tender",
+      "length_budget": 350,
+      "invariants": ["nothing is lost or left behind this night"]
+    },
+    {
+      "id": "scene_08_home_and_thanks",
+      "order": 8,
+      "pov": "char_cinderella",
+      "location_id": "loc_garden",
+      "characters_present": ["char_cinderella", "char_godmother"],
+      "dramatic_function": "Close the loop on night one and set up her wanting to go again — low-key connective tissue, not a discovery scene.",
+      "entry_state": { "char_cinderella": { "location_id": "loc_chimney_corner" } },
+      "exit_state": {},
+      "required_beats": [
+        "Cinderella thanks her godmother",
+        "she confesses she would be glad to go to the ball again the next night",
+        "the godmother agrees to send her again"
+      ],
+      "tone": "grateful, anticipatory",
+      "length_budget": 200,
+      "invariants": []
+    },
+    {
+      "id": "scene_09_the_sisters_recount",
+      "order": 9,
+      "pov": "char_cinderella",
+      "location_id": "loc_house",
+      "characters_present": ["char_cinderella", "char_stepsister_elder", "char_stepsister_charlotte"],
+      "dramatic_function": "The irony-gap centerpiece: the sisters describe the mystery princess to Cinderella's own face, certain she cannot possibly know who they mean.",
+      "entry_state": { "char_cinderella": { "location_id": "loc_chimney_corner" } },
+      "exit_state": {},
+      "required_beats": [
+        "the sisters return home and can talk of nothing but the beautiful unknown princess at the ball",
+        "Cinderella asks the princess's name; the sisters say they do not know it",
+        "Cinderella asks, with feigned idle curiosity, to borrow Miss Charlotte's yellow suit so she might see the ball for herself",
+        "she is refused and mocked for the suggestion, as expected"
+      ],
+      "reader_must_learn": ["sisters_unaware_cinderella_attended"],
+      "tone": "layered — comic on the surface, quietly charged underneath",
+      "length_budget": 400,
+      "invariants": [
+        "the sisters give no sign of recognizing Cinderella as the princess",
+        "Cinderella gives no sign that she was there"
+      ]
+    },
+    {
+      "id": "scene_10_second_ball_the_flight",
+      "order": 10,
+      "pov": "char_cinderella",
+      "location_id": "loc_ball_hall",
+      "characters_present": ["char_cinderella", "char_prince"],
+      "dramatic_function": "The midnight condition detonates. The plant from scene 5 pays off in the loss of one slipper and the total reversal of the magic.",
+      "entry_state": { "char_cinderella": { "location_id": "loc_ball_hall" } },
+      "exit_state": {
+        "char_cinderella": { "location_id": "loc_chimney_corner" },
+        "obj_pumpkin": { "name": "a pumpkin", "status": "whole" },
+        "obj_mice": { "name": "six mice", "status": "alive" },
+        "obj_rat": { "name": "a rat", "status": "alive" },
+        "obj_lizards": { "name": "six lizards", "status": "alive" },
+        "obj_gown": { "status": "reverted", "location_id": null },
+        "obj_glass_slipper_1": { "status": "lost", "location_id": "loc_palace_steps" }
+      },
+      "required_beats": [
+        "Cinderella returns for the second ball, more beautifully dressed than before",
+        "she is so happy she loses all track of time",
+        "she hears the clock begin to strike twelve and flees the hall at once",
+        "in her haste she loses one glass slipper on the palace steps",
+        "the Prince picks up the slipper she left behind, having failed to catch her",
+        "at the last stroke of midnight, coach, horses, coachman, footmen, and gown all revert to a pumpkin, mice, a rat, lizards, and rags"
+      ],
+      "pays_off": [{ "fact_ref": "midnight_condition", "plant": "scene_05_godmother" }],
+      "tone": "breathless, precarious, a little frightening",
+      "length_budget": 450,
+      "invariants": [
+        "exactly one slipper is recovered by the Prince; the other leaves with Cinderella",
+        "the reversal is total except for the retained slipper"
+      ]
+    },
+    {
+      "id": "scene_11_the_kept_slipper",
+      "order": 11,
+      "pov": "char_cinderella",
+      "location_id": "loc_chimney_corner",
+      "characters_present": ["char_cinderella"],
+      "dramatic_function": "Plants the second chain: proof survives the reversal, hidden. Mirrors the schema's own worked example of a possession created here and read back at the fitting.",
+      "entry_state": { "char_cinderella": { "location_id": "loc_chimney_corner" } },
+      "exit_state": {
+        "obj_glass_slipper_2": { "location_id": null },
+        "_new_relationships": [
+          { "id": "rel_009", "from_id": "char_cinderella", "to_id": "obj_glass_slipper_2", "kind": "possesses", "sentiment": null, "bag": {} }
+        ]
+      },
+      "required_beats": [
+        "Cinderella arrives home on foot, in her old clothes, out of breath",
+        "of all her finery, only the fellow glass slipper remains, kept in her pocket",
+        "she says nothing of the ball to anyone in the household"
+      ],
+      "reader_must_learn": ["cinderella_kept_second_slipper"],
+      "tone": "quiet, secretive",
+      "length_budget": 200,
+      "invariants": ["no one else in the household learns she still has a slipper"]
+    },
+    {
+      "id": "scene_12_the_proclamation",
+      "order": 12,
+      "pov": "char_gentleman_usher",
+      "location_id": "loc_kingdom_houses",
+      "characters_present": ["char_gentleman_usher"],
+      "dramatic_function": "Raise the stakes across the kingdom before the search narrows onto the true owner. An omniscient-narration beat the nominal protagonist isn't present for — see authoring-notes.md.",
+      "entry_state": {},
+      "exit_state": { "char_gentleman_usher": { "location_id": "loc_house" } },
+      "required_beats": [
+        "the Prince has it proclaimed by trumpet that he will marry whichever lady's foot fits the glass slipper",
+        "the slipper is tried on princesses, then duchesses, then all the ladies of the court, in vain",
+        "the search reaches at last the house of Cinderella's father"
+      ],
+      "tone": "expectant, almost farcical in its futility",
+      "length_budget": 250,
+      "invariants": []
+    },
+    {
+      "id": "scene_13_the_fitting",
+      "order": 13,
+      "pov": "char_cinderella",
+      "location_id": "loc_house",
+      "characters_present": ["char_cinderella", "char_stepsister_elder", "char_stepsister_charlotte", "char_gentleman_usher"],
+      "dramatic_function": "The recognition scene: both plants pay off together — the fit itself, and the produced fellow slipper.",
+      "entry_state": { "char_cinderella": { "location_id": "loc_chimney_corner" } },
+      "exit_state": {
+        "obj_glass_slipper_1": { "status": "intact", "location_id": null },
+        "obj_gown": { "status": "intact", "location_id": null },
+        "char_cinderella": { "location_id": "loc_house" },
+        "_new_character_knowledge": [
+          { "id": "ck_001", "character_id": "char_prince", "fact_ref": "cinderella_is_the_ball_girl", "learned_at_scene": "scene_13_the_fitting", "bag": {} },
+          { "id": "ck_002", "character_id": "char_stepsister_elder", "fact_ref": "cinderella_is_the_ball_girl", "learned_at_scene": "scene_13_the_fitting", "bag": {} },
+          { "id": "ck_003", "character_id": "char_stepsister_charlotte", "fact_ref": "cinderella_is_the_ball_girl", "learned_at_scene": "scene_13_the_fitting", "bag": {} }
+        ]
+      },
+      "required_beats": [
+        "the sisters try the slipper in vain, squeezing and forcing their feet",
+        "Cinderella asks if she may try, and is laughed at",
+        "the gentleman-in-waiting says he has orders to let every maiden try, and looks earnestly at Cinderella, finding her very beautiful",
+        "the slipper goes onto her foot with perfect ease",
+        "Cinderella draws the fellow slipper from her pocket and puts it on",
+        "the godmother appears and touches Cinderella's clothes with her wand, turning them richer than ever before, in full view of the sisters this time"
+      ],
+      "pays_off": [{ "fact_ref": "cinderella_kept_second_slipper", "plant": "scene_11_the_kept_slipper" }],
+      "tone": "electric, cathartic",
+      "length_budget": 450,
+      "invariants": [
+        "the slipper fits no one else who tries it",
+        "this transformation, unlike scene 5's, is witnessed openly by the stepfamily"
+      ]
+    },
+    {
+      "id": "scene_14_forgiveness_and_marriage",
+      "order": 14,
+      "pov": "char_cinderella",
+      "location_id": "loc_ball_hall",
+      "characters_present": ["char_cinderella", "char_stepsister_elder", "char_stepsister_charlotte", "char_prince"],
+      "dramatic_function": "Resolution: mercy extended, the household's inversion undone in Cinderella's favor rather than avenged.",
+      "entry_state": { "char_cinderella": { "location_id": "loc_house" } },
+      "exit_state": {
+        "char_cinderella": { "location_id": "loc_ball_hall", "status": "alive" },
+        "char_stepsister_elder": { "location_id": "loc_ball_hall" },
+        "char_stepsister_charlotte": { "location_id": "loc_ball_hall" },
+        "_new_relationships": [
+          { "id": "rel_010", "from_id": "char_prince", "to_id": "char_cinderella", "kind": "married_to", "sentiment": "loves", "bag": {} }
+        ]
+      },
+      "required_beats": [
+        "the two sisters fling themselves at Cinderella's feet and beg pardon for all their ill usage of her",
+        "Cinderella forgives them freely and embraces them, and says she loves them with all her heart",
+        "she is taken to the palace and presented to the Prince, lovelier than ever",
+        "they are married within a few days",
+        "Cinderella, as good as she is beautiful, lodges her sisters in the palace and that same day marries them to two great lords of the court"
+      ],
+      "tone": "warm, generous, fairy-tale-closing",
+      "length_budget": 350,
+      "invariants": ["Cinderella takes no revenge on her stepfamily"]
+    }
+  ],
+  "voice_card": {
+    "style_preset": "fairy-tale / fable",
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "omniscient but close-focused on Cinderella; steps back only for scene 12's circuit of the kingdom",
+    "register": "plain, warmly ironic, folk-narrator; understates cruelty and wonder alike",
+    "sentence_rhythm": "short declarative sentences; occasional triads (rule-of-three lists — the pumpkin, the mice, the rat; princesses, duchesses, all the court)",
+    "imagery_palette": ["hearth ash and cinders", "gold and silver brocade", "glass catching candlelight", "garden vermin transfigured into finery"],
+    "dialogue_density": "low to moderate; the narrator reports more than it stages, with dialogue reserved for the sharpest lines (the sisters' jeers, the godmother's warning)",
+    "style_exemplar": "The cinders did not care that she was beautiful; they only made her so, night after night, until one night they didn't."
+  },
+  "metadata": {
+    "title": "Cinderella, or the Little Glass Slipper",
+    "source": "Andrew Lang (ed.), The Blue Fairy Book, Longmans, Green & Co., 1889 (Project Gutenberg #503; itself credited by Lang to Charles Perrault, 1697) — no Disney-derived material; see fixtures/authoring-notes.md for the copyright-hygiene check",
+    "created_at": "2026-08-25T00:00:00Z"
+  }
+}
