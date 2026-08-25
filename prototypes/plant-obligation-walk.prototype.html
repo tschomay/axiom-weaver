@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>PROTOTYPE — Plant-and-payoff obligation walk</title>
+<style>
+  :root {
+    --ink: #241f1a;
+    --paper: #faf6ef;
+    --panel: #fffdf8;
+    --line: #ddd3c0;
+    --accent: #8a3b2a;
+    --accent-soft: #f0ddd3;
+    --good: #2f6b3a;
+    --bad: #a3311f;
+    --muted: #7a7263;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", serif;
+    line-height: 1.5;
+  }
+  .banner {
+    background: var(--accent);
+    color: white;
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 0.3rem; }
+  .intro {
+    max-width: 62rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1rem 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  .intro p { margin: 0.4rem 0; }
+  .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 90rem; }
+  @media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } }
+  section.panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+  }
+  h2 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 1.05rem; margin-top: 0; }
+  h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.95rem; color: var(--accent); margin-bottom: 0.4rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin-bottom: 0.8rem; }
+  th, td { text-align: left; padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.78rem; text-transform: uppercase; color: var(--muted); }
+  .tag { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.72rem; padding: 0.1rem 0.45rem; border-radius: 999px; margin: 0.1rem 0.15rem 0.1rem 0; }
+  .tag.plant { background: var(--accent-soft); color: var(--accent); }
+  .tag.seed { background: #dce8db; color: var(--good); }
+  .tag.error { background: #f4d9d4; color: var(--bad); }
+  .obligation { border-left: 3px solid var(--accent); padding: 0.4rem 0.7rem; margin-bottom: 0.5rem; background: #fff; border-radius: 0 6px 6px 0; }
+  .obligation .instr { font-style: italic; color: var(--accent); }
+  .error-item { border-left: 3px solid var(--bad); padding: 0.4rem 0.7rem; margin-bottom: 0.5rem; background: #fff6f4; border-radius: 0 6px 6px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.88rem; }
+  .verify-item { border-left: 3px solid var(--bad); padding: 0.4rem 0.7rem; margin-bottom: 0.5rem; background: #fff6f4; border-radius: 0 6px 6px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.88rem; }
+  .verify-item.ok { border-left-color: var(--good); background: #f2f8f1; }
+  button {
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0.2rem 0.3rem 0.2rem 0;
+  }
+  button.secondary { background: white; color: var(--accent); border: 1px solid var(--accent); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .tabs { display: flex; gap: 0.4rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+  .tabs button.tab { background: white; color: var(--ink); border: 1px solid var(--line); }
+  .tabs button.tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .step { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.88rem; margin: 0.3rem 0; }
+  .step-desc { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.9rem; color: var(--muted); margin-bottom: 0.6rem; }
+  .form-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.5rem; align-items: center; }
+  .form-row input, .form-row select { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.85rem; padding: 0.3rem 0.4rem; border: 1px solid var(--line); border-radius: 4px; }
+  .form-row label { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.78rem; color: var(--muted); }
+  code { background: #f0ebe0; padding: 0.05rem 0.3rem; border-radius: 4px; font-size: 0.85em; }
+  .empty { color: var(--muted); font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.88rem; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="banner">Prototype — throwaway — answers issue #8 only</div>
+<h1>The plant-and-payoff obligation walk</h1>
+
+<div class="intro">
+  <p><strong>Question this demo answers:</strong> given Scene Cards whose <code>pays_off</code>
+  field names, per fact, the earlier scene that must plant it (or marks it as already true from
+  the World Model seed), does the backward walk produce obligations that are specific enough for
+  a writer to act on, vague enough not to telegraph the payoff, and catchable when the author
+  gets the order wrong or forgets to declare the plant?</p>
+  <p>Add scenes and payoff entries by hand in <strong>Free play</strong>, or step through the
+  <strong>Guided walkthroughs</strong> built from the Cinderella and <em>A Christmas Carol</em>
+  fixtures. Every click re-runs the walk and re-renders the obligations, the instruction text
+  that would go to the writer, and any validation errors.</p>
+</div>
+
+<div class="layout">
+  <section class="panel">
+    <h2>Drive it</h2>
+
+    <h3>Guided walkthroughs</h3>
+    <div class="tabs" id="tabs"></div>
+    <div id="scenario-desc" class="step-desc"></div>
+    <div id="scenario-steps"></div>
+
+    <h3 style="margin-top:1.2rem;">Free play</h3>
+    <div class="form-row">
+      <label>Scene id <input id="fp-scene-id" placeholder="scene_new" size="10"></label>
+      <label>Order <input id="fp-scene-order" type="number" size="4"></label>
+      <button class="secondary" id="fp-add-scene">Add scene</button>
+    </div>
+    <div class="form-row">
+      <label>Payoff scene <select id="fp-payoff-scene"></select></label>
+      <label>fact_ref <input id="fp-fact-ref" placeholder="the_will_was_forged" size="18"></label>
+      <label>plant <select id="fp-plant"></select></label>
+      <button class="secondary" id="fp-add-entry">Add pays_off entry</button>
+    </div>
+    <div class="form-row">
+      <button id="fp-reset">Reset free play</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>State</h2>
+    <h3>Scene Cards</h3>
+    <table>
+      <thead><tr><th>id</th><th>order</th><th>reader_must_learn</th><th>pays_off</th></tr></thead>
+      <tbody id="scene-table"></tbody>
+    </table>
+
+    <h3>Obligations produced by the walk</h3>
+    <div id="obligations"></div>
+
+    <h3>Validation errors</h3>
+    <div id="errors"></div>
+
+    <h3>Post-generation verification (mock digests)</h3>
+    <div class="step-desc">Simulates the digest each obligated scene actually produced, then checks its <code>plants_opened</code> against what it owed.</div>
+    <div id="verify"></div>
+  </section>
+</div>
+
+<script>
+// ---------------------------------------------------------------------------
+// Pure module — this is the part that lifts into the real compiler.
+// No DOM references below this line until the "UI wiring" comment.
+// ---------------------------------------------------------------------------
+
+function deslug(ref) {
+  return ref.replace(/^met:/, "having met ").replace(/_/g, " ");
+}
+
+function instructionFor(obligation) {
+  return `Understated setup: make the reader register ${deslug(obligation.fact_ref)} without ` +
+    `dwelling on it — a detail that passes by, not a flagged clue.`;
+}
+
+// sceneCards: [{id, order, reader_must_learn: [fact_ref], pays_off: [{fact_ref, plant: sceneId|null}]}]
+// seedKnownFacts: Set<fact_ref> — facts true from the World Model seed (character_knowledge rows
+// with learned_at_scene: null, per docs/schema/story-package.md)
+function deriveObligations(sceneCards, seedKnownFacts) {
+  const byId = new Map(sceneCards.map((s) => [s.id, s]));
+  const obligationsByScene = new Map();
+  const errors = [];
+
+  for (const scene of sceneCards) {
+    for (const entry of scene.pays_off || []) {
+      const { fact_ref, plant } = entry;
+
+      if (plant == null) {
+        if (!seedKnownFacts.has(fact_ref)) {
+          errors.push({
+            type: "unfounded_seed_payoff",
+            scene: scene.id,
+            fact_ref,
+            message: `${scene.id} pays off "${fact_ref}" as seed-grounded, but no seed row ` +
+              `establishes it. Either the author names a plant scene or seeds the fact.`,
+          });
+        }
+        continue;
+      }
+
+      const plantScene = byId.get(plant);
+      if (!plantScene) {
+        errors.push({
+          type: "unknown_plant_scene",
+          scene: scene.id,
+          fact_ref,
+          plant,
+          message: `${scene.id} names ${plant} as the plant for "${fact_ref}", but no such ` +
+            `scene exists in this Story Package.`,
+        });
+        continue;
+      }
+
+      if (plantScene.order >= scene.order) {
+        errors.push({
+          type: "plant_after_payoff",
+          scene: scene.id,
+          fact_ref,
+          plant,
+          message: `${plant} (order ${plantScene.order}) can't plant "${fact_ref}" for ` +
+            `${scene.id} (order ${scene.order}) — it doesn't come strictly before it. ` +
+            `Authoring error, caught before generation.`,
+        });
+        continue;
+      }
+
+      if (!(plantScene.reader_must_learn || []).includes(fact_ref)) {
+        errors.push({
+          type: "plant_not_declared",
+          scene: scene.id,
+          fact_ref,
+          plant,
+          message: `${plant} is named as the plant for "${fact_ref}" but doesn't list it in ` +
+            `its own reader_must_learn — the compiler won't invent where the plant lands.`,
+        });
+        continue;
+      }
+
+      if (!obligationsByScene.has(plant)) obligationsByScene.set(plant, []);
+      obligationsByScene.get(plant).push({ fact_ref, for_payoff: scene.id });
+    }
+  }
+
+  return { obligationsByScene, errors };
+}
+
+// digestsBySceneId: {[sceneId]: {plants_opened: [fact_ref]}}
+function verifyPlants(obligationsByScene, digestsBySceneId) {
+  const report = [];
+  for (const [sceneId, obligations] of obligationsByScene.entries()) {
+    const digest = digestsBySceneId[sceneId];
+    const opened = new Set((digest && digest.plants_opened) || []);
+    for (const ob of obligations) {
+      report.push({
+        scene: sceneId,
+        fact_ref: ob.fact_ref,
+        for_payoff: ob.for_payoff,
+        status: opened.has(ob.fact_ref) ? "planted" : "missed",
+      });
+    }
+  }
+  return report;
+}
+
+// ---------------------------------------------------------------------------
+// UI wiring — throwaway. Everything below reaches into the DOM; none of it
+// ships past this prototype's lifetime.
+// ---------------------------------------------------------------------------
+
+let scenes = [];
+let mockDigests = {};
+
+function render() {
+  const seedKnown = new Set(scenes._seedKnown || []);
+  const { obligationsByScene, errors } = deriveObligations(scenes, seedKnown);
+
+  // scene table
+  const tbody = document.getElementById("scene-table");
+  tbody.innerHTML = scenes.length
+    ? scenes
+        .slice()
+        .sort((a, b) => a.order - b.order)
+        .map(
+          (s) => `<tr>
+            <td>${s.id}</td>
+            <td>${s.order}</td>
+            <td>${(s.reader_must_learn || []).map((f) => `<span class="tag plant">${f}</span>`).join("") || "—"}</td>
+            <td>${(s.pays_off || [])
+              .map(
+                (e) =>
+                  `<span class="tag ${e.plant ? "plant" : "seed"}">${e.fact_ref} ← ${e.plant || "seed"}</span>`
+              )
+              .join("") || "—"}</td>
+          </tr>`
+        )
+        .join("")
+    : `<tr><td colspan="4" class="empty">No scenes yet.</td></tr>`;
+
+  // obligations
+  const obDiv = document.getElementById("obligations");
+  if (obligationsByScene.size === 0) {
+    obDiv.innerHTML = `<div class="empty">No plant obligations derived.</div>`;
+  } else {
+    obDiv.innerHTML = [...obligationsByScene.entries()]
+      .sort((a, b) => (byId(a[0])?.order ?? 0) - (byId(b[0])?.order ?? 0))
+      .map(
+        ([sceneId, obs]) =>
+          obs
+            .map(
+              (o) => `<div class="obligation">
+                <strong>${sceneId}</strong> owes a plant for <strong>${o.for_payoff}</strong>
+                (fact: <code>${o.fact_ref}</code>)<br>
+                <span class="instr">"${instructionFor(o)}"</span>
+              </div>`
+            )
+            .join("")
+      )
+      .join("");
+  }
+
+  // errors
+  const errDiv = document.getElementById("errors");
+  errDiv.innerHTML = errors.length
+    ? errors.map((e) => `<div class="error-item"><span class="tag error">${e.type}</span> ${e.message}</div>`).join("")
+    : `<div class="empty">None.</div>`;
+
+  // verification against mock digests
+  const verifyDiv = document.getElementById("verify");
+  const report = verifyPlants(obligationsByScene, mockDigests);
+  verifyDiv.innerHTML = report.length
+    ? report
+        .map(
+          (r) => `<div class="verify-item ${r.status === "planted" ? "ok" : ""}">
+            <strong>${r.scene}</strong> → <code>${r.fact_ref}</code> for ${r.for_payoff}:
+            <strong>${r.status === "planted" ? "planted ✓" : "MISSED — logged to run report"}</strong>
+          </div>`
+        )
+        .join("")
+    : `<div class="empty">No obligated scenes have a mock digest yet.</div>`;
+
+  // free-play selects
+  const payoffSel = document.getElementById("fp-payoff-scene");
+  const plantSel = document.getElementById("fp-plant");
+  const opts = scenes
+    .slice()
+    .sort((a, b) => a.order - b.order)
+    .map((s) => `<option value="${s.id}">${s.id} (order ${s.order})</option>`)
+    .join("");
+  payoffSel.innerHTML = opts;
+  plantSel.innerHTML = `<option value="">— seed (already true) —</option>` + opts;
+
+  function byId(id) {
+    return scenes.find((s) => s.id === id);
+  }
+}
+
+function resetFreePlay() {
+  scenes = [
+    { id: "scene_01", order: 1, reader_must_learn: [], pays_off: [] },
+  ];
+  scenes._seedKnown = [];
+  mockDigests = {};
+  render();
+}
+
+document.getElementById("fp-add-scene").addEventListener("click", () => {
+  const id = document.getElementById("fp-scene-id").value.trim();
+  const order = Number(document.getElementById("fp-scene-order").value);
+  if (!id || !Number.isFinite(order)) return;
+  if (scenes.some((s) => s.id === id)) return;
+  scenes.push({ id, order, reader_must_learn: [], pays_off: [] });
+  render();
+});
+
+document.getElementById("fp-add-entry").addEventListener("click", () => {
+  const payoffId = document.getElementById("fp-payoff-scene").value;
+  const factRef = document.getElementById("fp-fact-ref").value.trim();
+  const plant = document.getElementById("fp-plant").value || null;
+  if (!payoffId || !factRef) return;
+  const payoffScene = scenes.find((s) => s.id === payoffId);
+  payoffScene.pays_off.push({ fact_ref: factRef, plant });
+  // convenience: if a plant scene was picked, auto-declare the fact in its reader_must_learn
+  // (mirrors an author filling in both fields; free play skips typing it twice)
+  if (plant) {
+    const plantScene = scenes.find((s) => s.id === plant);
+    if (plantScene && !plantScene.reader_must_learn.includes(factRef)) {
+      plantScene.reader_must_learn.push(factRef);
+    }
+  } else {
+    scenes._seedKnown = scenes._seedKnown || [];
+    if (!scenes._seedKnown.includes(factRef)) scenes._seedKnown.push(factRef);
+  }
+  render();
+});
+
+document.getElementById("fp-reset").addEventListener("click", resetFreePlay);
+
+// ---------------------------------------------------------------------------
+// Guided walkthroughs
+// ---------------------------------------------------------------------------
+
+const scenarios = {
+  cinderella: {
+    label: "Cinderella — happy path",
+    desc:
+      "The two clean chains from docs/research/fixture-stories.md: the midnight condition " +
+      "(godmother's warning, scene 5 → the flight at scene 10) and the retained slipper " +
+      "(scene 11 → the fitting at scene 13). Step through and watch scene 5 and scene 11 pick " +
+      "up obligations, phrased without naming scene 10 or 13.",
+    setup() {
+      scenes = [
+        { id: "s01_remarriage", order: 1, reader_must_learn: [], pays_off: [] },
+        { id: "s02_ball_proclaimed", order: 2, reader_must_learn: [], pays_off: [] },
+        { id: "s03_jeered", order: 3, reader_must_learn: [], pays_off: [] },
+        { id: "s04_sisters_depart", order: 4, reader_must_learn: [], pays_off: [] },
+        { id: "s05_godmother", order: 5, reader_must_learn: [], pays_off: [] },
+        { id: "s06_first_ball_arrival", order: 6, reader_must_learn: [], pays_off: [] },
+        { id: "s07_first_ball_leaves", order: 7, reader_must_learn: [], pays_off: [] },
+        { id: "s08_home_thanks", order: 8, reader_must_learn: [], pays_off: [] },
+        { id: "s09_sisters_recount", order: 9, reader_must_learn: [], pays_off: [] },
+        { id: "s10_second_ball_flight", order: 10, reader_must_learn: [], pays_off: [] },
+        { id: "s11_home_slipper_kept", order: 11, reader_must_learn: [], pays_off: [] },
+        { id: "s12_proclamation_fitting", order: 12, reader_must_learn: [], pays_off: [] },
+        { id: "s13_cinderella_fits", order: 13, reader_must_learn: [], pays_off: [] },
+        { id: "s14_marriage", order: 14, reader_must_learn: [], pays_off: [] },
+      ];
+      scenes._seedKnown = [];
+      mockDigests = {};
+      render();
+    },
+    steps: [
+      {
+        label: "Declare the midnight condition at scene 5",
+        run() {
+          const s = scenes.find((s) => s.id === "s05_godmother");
+          s.reader_must_learn.push("midnight_condition");
+        },
+      },
+      {
+        label: "Scene 10 pays it off",
+        run() {
+          const s = scenes.find((s) => s.id === "s10_second_ball_flight");
+          s.pays_off.push({ fact_ref: "midnight_condition", plant: "s05_godmother" });
+        },
+      },
+      {
+        label: "Declare the retained slipper at scene 11",
+        run() {
+          const s = scenes.find((s) => s.id === "s11_home_slipper_kept");
+          s.reader_must_learn.push("second_slipper_kept");
+        },
+      },
+      {
+        label: "Scene 13 pays it off",
+        run() {
+          const s = scenes.find((s) => s.id === "s13_cinderella_fits");
+          s.pays_off.push({ fact_ref: "second_slipper_kept", plant: "s11_home_slipper_kept" });
+        },
+      },
+      {
+        label: "Simulate scene 5's digest — plant made",
+        run() {
+          mockDigests["s05_godmother"] = { plants_opened: ["midnight_condition"] };
+        },
+      },
+      {
+        label: "Simulate scene 11's digest — plant MISSED (writer forgot it)",
+        run() {
+          mockDigests["s11_home_slipper_kept"] = { plants_opened: [] };
+        },
+      },
+    ],
+  },
+
+  carol: {
+    label: "A Christmas Carol — multi-scene reinforcement + seed fact",
+    desc:
+      "\"Surplus population\" is planted at the counting-house scene and paid off ~1,900 lines " +
+      "later by the Ghost of Christmas Present — but Marley's warning scene also reinforces it. " +
+      "Two plant scenes, one payoff. Scrooge's chain is grounded in the World Model seed (he's " +
+      "already forging it before the story opens) — no scene owns that plant.",
+    setup() {
+      scenes = [
+        { id: "s01_counting_house", order: 1, reader_must_learn: [], pays_off: [] },
+        { id: "s02_portly_gentlemen", order: 2, reader_must_learn: [], pays_off: [] },
+        { id: "s05_marleys_ghost", order: 5, reader_must_learn: [], pays_off: [] },
+        { id: "s09_fezziwig", order: 9, reader_must_learn: [], pays_off: [] },
+        { id: "s15_cratchit_dinner", order: 15, reader_must_learn: [], pays_off: [] },
+        { id: "s16_ghost_of_present", order: 16, reader_must_learn: [], pays_off: [] },
+        { id: "s24_scrooge_redeemed", order: 24, reader_must_learn: [], pays_off: [] },
+      ];
+      scenes._seedKnown = ["scrooge_forges_his_own_chain"];
+      mockDigests = {};
+      render();
+    },
+    steps: [
+      {
+        label: "Scene 1: Scrooge says 'decrease the surplus population'",
+        run() {
+          const s = scenes.find((s) => s.id === "s01_counting_house");
+          s.reader_must_learn.push("surplus_population_line");
+        },
+      },
+      {
+        label: "Scene 5: Marley's ghost reinforces the chain motif (same fact, second plant)",
+        run() {
+          const s = scenes.find((s) => s.id === "s05_marleys_ghost");
+          s.reader_must_learn.push("surplus_population_line");
+        },
+      },
+      {
+        label: "Scene 16: the Ghost of Christmas Present quotes it back — two plants, one payoff",
+        run() {
+          const s = scenes.find((s) => s.id === "s16_ghost_of_present");
+          s.pays_off.push(
+            { fact_ref: "surplus_population_line", plant: "s01_counting_house" },
+            { fact_ref: "surplus_population_line", plant: "s05_marleys_ghost" }
+          );
+        },
+      },
+      {
+        label: "Scene 24: Scrooge's redemption pays off a fact seeded before the story starts",
+        run() {
+          const s = scenes.find((s) => s.id === "s24_scrooge_redeemed");
+          s.pays_off.push({ fact_ref: "scrooge_forges_his_own_chain", plant: null });
+        },
+      },
+      {
+        label: "Simulate digests — scene 1 planted, scene 5 missed",
+        run() {
+          mockDigests["s01_counting_house"] = { plants_opened: ["surplus_population_line"] };
+          mockDigests["s05_marleys_ghost"] = { plants_opened: [] };
+        },
+      },
+    ],
+  },
+
+  illegal: {
+    label: "Illegal cases — caught before generation",
+    desc:
+      "Three authoring mistakes the walk must reject rather than silently patch over: a payoff " +
+      "pointing at a scene that comes later, a plant scene that never declared the fact in its " +
+      "own reader_must_learn, and a seed-grounded payoff for a fact the seed never establishes.",
+    setup() {
+      scenes = [
+        { id: "s01_early", order: 1, reader_must_learn: [], pays_off: [] },
+        { id: "s02_mid", order: 2, reader_must_learn: [], pays_off: [] },
+        { id: "s03_late", order: 3, reader_must_learn: [], pays_off: [] },
+      ];
+      scenes._seedKnown = [];
+      mockDigests = {};
+      render();
+    },
+    steps: [
+      {
+        label: "Scene 1 'pays off' scene 3 — plant comes after the payoff",
+        run() {
+          const s = scenes.find((s) => s.id === "s01_early");
+          s.pays_off.push({ fact_ref: "future_fact", plant: "s03_late" });
+        },
+      },
+      {
+        label: "Scene 3 names scene 2 as its plant, but scene 2 never declared the fact",
+        run() {
+          const s = scenes.find((s) => s.id === "s03_late");
+          s.pays_off.push({ fact_ref: "undeclared_fact", plant: "s02_mid" });
+        },
+      },
+      {
+        label: "Scene 2 claims a seed-grounded payoff for a fact the seed never establishes",
+        run() {
+          const s = scenes.find((s) => s.id === "s02_mid");
+          s.pays_off.push({ fact_ref: "never_seeded_fact", plant: null });
+        },
+      },
+    ],
+  },
+};
+
+let activeScenario = null;
+let scenarioStepIndex = 0;
+
+function renderTabs() {
+  const tabs = document.getElementById("tabs");
+  tabs.innerHTML = Object.entries(scenarios)
+    .map(
+      ([key, s]) =>
+        `<button class="tab ${key === activeScenario ? "active" : ""}" data-scenario="${key}">${s.label}</button>`
+    )
+    .join("");
+  tabs.querySelectorAll("button").forEach((btn) =>
+    btn.addEventListener("click", () => startScenario(btn.dataset.scenario))
+  );
+}
+
+function startScenario(key) {
+  activeScenario = key;
+  scenarioStepIndex = 0;
+  scenarios[key].setup();
+  renderTabs();
+  renderScenarioSteps();
+}
+
+function renderScenarioSteps() {
+  const s = scenarios[activeScenario];
+  document.getElementById("scenario-desc").textContent = s.desc;
+  const stepsDiv = document.getElementById("scenario-steps");
+  stepsDiv.innerHTML = "";
+  s.steps.forEach((step, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = `${i + 1}. ${step.label}`;
+    btn.disabled = i !== scenarioStepIndex;
+    btn.addEventListener("click", () => {
+      step.run();
+      scenarioStepIndex++;
+      render();
+      renderScenarioSteps();
+    });
+    const wrap = document.createElement("div");
+    wrap.className = "step";
+    wrap.appendChild(btn);
+    stepsDiv.appendChild(wrap);
+  });
+}
+
+// boot
+startScenario("cinderella");
+</script>
+</body>
+</html>
