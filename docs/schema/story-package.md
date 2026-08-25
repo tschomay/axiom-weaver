@@ -157,7 +157,7 @@ not a bug to reconcile.
 | `tone` | TEXT | no | |
 | `length_budget` | INTEGER | no | target word count |
 | `invariants` | TEXT[] | no, default `[]` | constraints beyond entry/exit that must hold throughout |
-| `pays_off` | TEXT[] FK → `scene_card.id` | no, default `[]` | earlier scenes this one resolves; drives the backward plant-obligation walk (issue #8) |
+| `pays_off` | `{fact_ref: TEXT, plant: TEXT FK → scene_card.id \| null}[]` | no, default `[]` | facts this scene resolves and where each was planted (`null` = grounded in the World Model seed, not any scene); drives the backward plant-obligation walk, [ADR 0004](../adr/0004-plant-obligation-walk.md) |
 
 A thin, transitional scene can legitimately carry only the eight required fields — optional
 fields default to empty/null rather than forcing every scene to declare tone, beats, and
@@ -205,6 +205,9 @@ the World Model tables' state at the close of a compiled run, same table shapes.
 
 - **How a tier is enforced** — validation against `entry_state`/`exit_state`, unattended
   resolution of volitional proposals, diagnostics and severities. Issue #9.
+- **The exact writer-facing obligation instruction and verification/retry policy** for
+  `pays_off` — settled in [ADR 0004](../adr/0004-plant-obligation-walk.md); this schema only
+  fixes the field's shape.
 - **The real fact-identity scheme behind `fact_ref`** — resolved in
   [The Scene Digest and the told-ledger](https://github.com/tschomay/axiom-weaver/issues/7) /
   [ADR 0003](../adr/0003-scene-digest-and-told-ledger.md): an author-declared or auto-generated
