@@ -52,13 +52,22 @@ dramatic irony. Collapsing them is why story engines read flat.
 Every fact therefore has two states: true-in-world and known-to-reader. The World Model
 stops the engine contradicting itself; the Discourse Record stops it repeating itself.
 
-- **Scene Digest** — the compressed record emitted alongside each scene's prose, and the
-  only thing that circulates in long-range context. Carries: event summary, entities on
-  stage, facts revealed, plants opened, payoffs closed, emotional register at open and
-  close, **imagery signature** (the concrete images actually used), and **closing
-  situation** (where everyone stands physically and emotionally at the end).
-- **Told-ledger** — per-fact and per-entity record of when the reader learned something,
-  driving introduce / assume / re-anchor decisions.
+- **Scene Digest** — the compressed record emitted by the writer in the *same* structured
+  call as the scene's prose (no separate extraction call), and the only thing that
+  circulates in long-range context. Carries: event summary, entities on stage, facts
+  revealed, plants opened, payoffs closed, **imagery signature** (the concrete images
+  actually used, capped at 3), and **closing situation** (where everyone stands physically
+  *and emotionally* at the end — the sole home for emotional state; there is no separate
+  "emotional register" field). Target ~150–220 tokens. A **rollup** (Chapter/Part Digest)
+  shares this schema but aggregates over its window rather than concatenating: event
+  summary is freshly synthesized, list fields union, imagery signature re-caps to 3 by
+  recency, closing situation inherits the window's last scene. See ADR 0003.
+- **Told-ledger** — a single table of `{fact_ref, first_learned_scene, last_touched_scene,
+  centrality}`, driving introduce / assume / re-anchor decisions. A **fact** is an
+  author-declared or auto-generated slug — not required to correspond to a World Model
+  row/column — so it can name things the schema has no column for ("the will was forged").
+  Entity introduction ("has the reader met Marcus?") rides the same mechanism via an
+  auto-generated `met:<entity_id>` fact, not a parallel structure.
 
 ## Context assembly
 
