@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>PROTOTYPE — The zoom-level context assembler</title>
+<style>
+  :root {
+    --ink: #1e2430;
+    --paper: #f3f6f8;
+    --panel: #ffffff;
+    --line: #d7dfe6;
+    --accent: #1f5c8a;
+    --accent-soft: #dbeaf4;
+    --good: #2f6b3a;
+    --good-soft: #dff0e0;
+    --bad: #a3311f;
+    --bad-soft: #f7ded9;
+    --muted: #647085;
+    --scene: #8a5a1f;
+    --scene-soft: #f4e6d3;
+    --chapter: #5a3f9c;
+    --chapter-soft: #e7e0f6;
+    --part: #1f7a7a;
+    --part-soft: #dbf0f0;
+    --book: #9c3f6f;
+    --book-soft: #f6e0eb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 1.6rem 2rem 3rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .banner {
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 0.9rem;
+  }
+  h1 { font-size: 1.55rem; margin: 0 0 0.3rem; }
+  .intro {
+    max-width: 68rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1rem 1.3rem;
+    margin-bottom: 1.4rem;
+  }
+  .intro p { margin: 0.4rem 0; font-size: 0.94rem; }
+  .layout { display: grid; grid-template-columns: 27rem 1fr; gap: 1.4rem; max-width: 100rem; align-items: start; }
+  @media (max-width: 1150px) { .layout { grid-template-columns: 1fr; } }
+  section.panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+  h2 { font-size: 1rem; margin: 0 0 0.5rem; }
+  h3 { font-size: 0.88rem; color: var(--accent); margin: 0.9rem 0 0.4rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  code { background: #eef2f5; padding: 0.05rem 0.3rem; border-radius: 4px; font-size: 0.85em; }
+  button {
+    font-size: 0.83rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.42rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0.15rem 0.3rem 0.15rem 0;
+  }
+  button.secondary { background: white; color: var(--accent); border: 1px solid var(--accent); }
+  button.danger { background: white; color: var(--bad); border: 1px solid var(--bad); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  button:hover:not(:disabled) { filter: brightness(1.08); }
+  .tabs { display: flex; gap: 0.35rem; margin-bottom: 0.7rem; flex-wrap: wrap; }
+  .tabs button.tab { background: white; color: var(--ink); border: 1px solid var(--line); font-size: 0.8rem; }
+  .tabs button.tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .step-desc { font-size: 0.87rem; color: var(--muted); margin-bottom: 0.6rem; }
+  .form-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.55rem; align-items: center; }
+  .form-row label { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 0.3rem; }
+  .form-row input[type="number"] { width: 4.2rem; padding: 0.25rem 0.35rem; border: 1px solid var(--line); border-radius: 4px; }
+  .form-row input[type="range"] { width: 8rem; }
+  .toggle { display: flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; }
+  .hint { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+  .empty { color: var(--muted); font-size: 0.85rem; font-style: italic; }
+
+  .chunklist { display: flex; flex-direction: column; gap: 0.28rem; }
+  .chunk {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr 4.5rem;
+    gap: 0.6rem;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    font-size: 0.83rem;
+  }
+  .chunk .badge {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.12rem 0.4rem;
+    border-radius: 999px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .chunk .tok { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .chunk.hit { background: var(--good-soft); border-color: #bcdcc0; }
+  .chunk.miss { background: var(--bad-soft); border-color: #edc4bb; }
+  .band-header { font-size: 1.1rem; }
+  .badge.header { background: #e4e9ee; color: var(--ink); }
+  .badge.book { background: var(--book-soft); color: var(--book); }
+  .badge.part { background: var(--part-soft); color: var(--part); }
+  .badge.chapter { background: var(--chapter-soft); color: var(--chapter); }
+  .badge.scene { background: var(--scene-soft); color: var(--scene); }
+  .badge.tail { background: #eee6d8; color: #8a6a1f; }
+  .badge.volatile { background: var(--accent-soft); color: var(--accent); }
+
+  .totalsbar { display: flex; gap: 1.2rem; flex-wrap: wrap; margin: 0.6rem 0 0.9rem; }
+  .stat { background: #f7f9fb; border: 1px solid var(--line); border-radius: 8px; padding: 0.5rem 0.8rem; min-width: 8rem; }
+  .stat .n { font-size: 1.25rem; font-weight: 600; }
+  .stat .l { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+  .stat.good .n { color: var(--good); }
+  .stat.bad .n { color: var(--bad); }
+
+  .levels-tree { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.82rem; }
+  .level-row { display: flex; align-items: center; gap: 0.5rem; }
+  .level-row .name { width: 9.5rem; flex-shrink: 0; color: var(--muted); }
+  .level-row .fill { display: flex; gap: 0.15rem; }
+  .level-row .cell { width: 1.1rem; height: 1.1rem; border-radius: 3px; background: #e4e9ee; border: 1px solid var(--line); }
+  .level-row .cell.on { background: var(--accent); border-color: var(--accent); }
+
+  .evict-list { display: flex; flex-direction: column; gap: 0.3rem; }
+  .evict-item { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.82rem; padding: 0.3rem 0.5rem; border-radius: 5px; }
+  .evict-item.in { background: var(--good-soft); }
+  .evict-item.out { background: var(--bad-soft); text-decoration: line-through; opacity: 0.85; }
+
+  table.measure { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  table.measure th, table.measure td { text-align: right; padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+  table.measure th:first-child, table.measure td:first-child { text-align: left; }
+  table.measure th { color: var(--muted); font-weight: 500; font-size: 0.72rem; text-transform: uppercase; }
+
+  .sparkline { display: flex; align-items: flex-end; gap: 1px; height: 5.5rem; border-bottom: 1px solid var(--line); margin: 0.6rem 0; }
+  .sparkline .bar { flex: 1 1 auto; background: var(--accent-soft); position: relative; min-width: 1px; }
+  .sparkline .bar.miss-heavy { background: #f0c9be; }
+  .sparkline .bar .cached { position: absolute; bottom: 0; left: 0; right: 0; background: var(--accent); }
+
+  .log { display: flex; flex-direction: column; gap: 0.25rem; max-height: 11rem; overflow-y: auto; font-size: 0.8rem; }
+  .log-entry { padding: 0.25rem 0.5rem; border-radius: 5px; background: #f7f9fb; }
+  .log-entry.rollup { background: var(--chapter-soft); }
+
+  .why-illegal { background: var(--bad-soft); border: 1px solid #edc4bb; border-radius: 8px; padding: 0.7rem 0.9rem; font-size: 0.86rem; margin-top: 0.6rem; }
+  .callout { background: var(--accent-soft); border-radius: 8px; padding: 0.7rem 0.9rem; font-size: 0.86rem; margin-top: 0.6rem; }
+</style>
+</head>
+<body>
+
+<div class="banner">Prototype — throwaway — answers issue #12 only</div>
+<h1>The zoom-level context assembler</h1>
+
+<div class="intro">
+  <p><strong>Question this demo answers:</strong> given a story and a scene index, what exactly
+  goes into the writer's prompt — in what order, with what cache boundary, filtered how, and
+  budgeted how when it grows too large — so that the digest hierarchy stays affordable at novel
+  scale under Gemini's <em>prefix-match</em> caching (research: <code>docs/research/gemini-capabilities.md</code>)?</p>
+  <p>Drive it with the <strong>Cinderella</strong> fixture scene by scene, jump straight to a
+  simulated 600-scene novel to see whether growth is actually bounded, or flip the "wrong order"
+  toggle to watch the cache collapse the research warned about. The <strong>logic module</strong>
+  below the page (search for <code>PORTABLE MODULE</code> in the source) is the part meant to
+  survive past this prototype.</p>
+</div>
+
+<div class="layout">
+  <div>
+    <section class="panel">
+      <h2>Drive it</h2>
+      <div class="tabs" id="tabs"></div>
+      <div class="step-desc" id="scenario-desc"></div>
+      <div id="scenario-steps"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Free play</h2>
+      <div class="form-row">
+        <button id="btn-advance">Advance one scene</button>
+        <button class="secondary" id="btn-reset">Reset (POC mode)</button>
+      </div>
+      <div class="form-row">
+        <label>Window size (every level) <input id="cfg-window" type="number" min="2" max="8" value="4"></label>
+      </div>
+      <div class="form-row">
+        <label>Volatile-tail budget (tokens)
+          <input id="cfg-budget" type="range" min="100" max="4000" step="50" value="3000">
+          <span id="cfg-budget-val">3000</span>
+        </label>
+      </div>
+      <div class="form-row toggle">
+        <input type="checkbox" id="cfg-wrong-order">
+        <label for="cfg-wrong-order">Use the <strong>wrong order</strong> (World Model rows first, not last)</label>
+      </div>
+      <div class="hint">Changing the window size or budget takes effect on the next scene you advance; it does not retroactively rebuild history.</div>
+    </section>
+
+    <section class="panel">
+      <h2>Digest-hierarchy shape</h2>
+      <div class="levels-tree" id="levels-tree"></div>
+      <div class="hint">Each row is one resolution level. Filled cells are open (unrolled) items; a level rolls up into the next once it fills, exactly like carrying a digit in base-<span id="window-echo">4</span> counting. This is what keeps growth bounded rather than linear — see the Novel-scale tab.</div>
+    </section>
+
+    <section class="panel">
+      <h2>Event log</h2>
+      <div class="log" id="event-log"></div>
+    </section>
+  </div>
+
+  <div>
+    <section class="panel">
+      <h2>Assembled prompt for the scene just generated</h2>
+      <div class="totalsbar" id="totals"></div>
+      <div class="chunklist" id="chunklist"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Volatile-tail budget &amp; eviction</h2>
+      <div class="hint">Priority order, highest to lowest — everything above the line is included; the line moves down as the budget shrinks.</div>
+      <div class="evict-list" id="evict-list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Growth across the read</h2>
+      <div class="hint">One bar per scene generated so far. Solid fill = cached tokens (from the previous call's identical prefix); pale = tokens billed at full price this call.</div>
+      <div class="sparkline" id="sparkline"></div>
+      <table class="measure" id="measure-table"></table>
+    </section>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+ * PORTABLE MODULE — the part meant to survive this prototype.
+ * Pure. No DOM. Lift this into lib/context-assembler.js once #12 is settled.
+ * ========================================================================= */
+const ContextAssembler = (() => {
+  'use strict';
+
+  // Rough token estimate for prototype purposes only — a real implementation
+  // calls Gemini's countTokens. ~3.6 chars/token approximates English prose
+  // and JSON structure closely enough to demonstrate growth shape.
+  function estimateTokens(value) {
+    if (value == null) return 0;
+    const str = typeof value === 'string' ? value : JSON.stringify(value);
+    return Math.max(1, Math.round(str.length / 3.6));
+  }
+
+  function levelLabel(i) {
+    if (i === 0) return 'Scene Digests';
+    if (i === 1) return 'Chapter Digests';
+    if (i === 2) return 'Part Digests';
+    return 'Book Digests (L' + i + ')';
+  }
+  function levelBadge(i) {
+    if (i === 0) return 'scene';
+    if (i === 1) return 'chapter';
+    if (i === 2) return 'part';
+    return 'book';
+  }
+
+  // A rollup is deliberately a stand-in for the real cheap-model call
+  // (ADR 0003 §6): event_summary is "freshly synthesized" for real, templated
+  // here. Everything else (unions, imagery re-cap to 3, closing_situation
+  // inherited from the window's last item) matches the ADR exactly.
+  function synthesizeRollup(items, levelIndex) {
+    const entities = new Set(), facts = new Set(), plants = new Set(), payoffs = new Set();
+    let imagery = [];
+    items.forEach(it => {
+      (it.entities_on_stage || []).forEach(e => entities.add(e));
+      (it.facts_revealed || []).forEach(f => facts.add(f));
+      (it.plants_opened || []).forEach(f => plants.add(f));
+      (it.payoffs_closed || []).forEach(f => payoffs.add(f));
+      imagery = imagery.concat(it.imagery_signature || []);
+    });
+    const first = items[0], last = items[items.length - 1];
+    const span = items.length === 1 ? first.sceneLabel : (first.sceneLabel + '–' + last.sceneLabel);
+    const joined = items.map(i => i.event_summary).join(' → ');
+    return {
+      id: 'L' + (levelIndex + 1) + ':' + first.id + '..' + last.id,
+      sceneLabel: span,
+      kind: 'rollup',
+      level: levelIndex + 1,
+      event_summary: '[simulated rollup of ' + items.length + '] ' + joined.slice(0, 220) + (joined.length > 220 ? '…' : ''),
+      entities_on_stage: [...entities],
+      facts_revealed: [...facts],
+      plants_opened: [...plants],
+      payoffs_closed: [...payoffs],
+      imagery_signature: imagery.slice(-3),
+      closing_situation: last.closing_situation,
+    };
+  }
+
+  // Pushes one freshly-emitted Scene Digest onto level 0, then cascades
+  // rollups upward exactly like carrying a digit in base-`window` counting:
+  // whenever a level reaches `window` items, all of them roll up into one
+  // item on the next level and the level is cleared. This is what makes
+  // growth logarithmic in the number of scenes rather than linear — a fixed
+  // two-level (chapter/part) hierarchy does NOT have this property past the
+  // point where the Part-Digest band itself would need to grow forever; see
+  // the "Novel scale" walkthrough tab.
+  function pushSceneDigest(levels, sceneDigest, window) {
+    levels = levels.map(l => ({ items: l.items.slice() }));
+    if (levels.length === 0) levels.push({ items: [] });
+    levels[0].items.push(sceneDigest);
+    const events = [];
+    let i = 0;
+    while (levels[i] && levels[i].items.length >= window) {
+      const closed = levels[i].items;
+      levels[i] = { items: [] };
+      const rolled = synthesizeRollup(closed, i);
+      if (levels.length <= i + 1) levels.push({ items: [] });
+      levels[i + 1] = { items: [...levels[i + 1].items, rolled] };
+      events.push({ level: i, label: levelLabel(i), closedCount: closed.length, rolled });
+      i++;
+    }
+    return { levels, events };
+  }
+
+  // Filtering is a deterministic join off the Scene Card's own
+  // `characters_present` / `location_id` — never inferred from prose or the
+  // previous scene's closing_situation, which is freeform. See "Filtering"
+  // in the resolution below.
+  function filterWorldModel(scene, worldModel) {
+    const present = new Set(scene.characters_present || []);
+    const locId = scene.location_id;
+    const characters = worldModel.characters.filter(c => present.has(c.id));
+    const location = worldModel.locations.find(l => l.id === locId) || null;
+    const heldByPresent = new Set(
+      worldModel.relationships
+        .filter(r => r.kind === 'possesses' && present.has(r.from_id))
+        .map(r => r.to_id)
+    );
+    const objects = worldModel.objects.filter(o => o.location_id === locId || heldByPresent.has(o.id));
+    const relBoth = worldModel.relationships.filter(r => present.has(r.from_id) && present.has(r.to_id));
+    const relOne = worldModel.relationships.filter(r => present.has(r.from_id) !== present.has(r.to_id));
+    return { present, characters, location, objects, relBoth, relOne };
+  }
+
+  // Priority order, highest to lowest. Index 0 ("core") is never dropped;
+  // the rest are dropped from the END of this list first when the volatile
+  // budget is exceeded. See the ticket's "what is sacrificed first".
+  function buildVolatileTail(scene, worldModel, toldLedger, obligations, budgetTokens) {
+    const wm = filterWorldModel(scene, worldModel);
+    const essential = new Set([
+      ...(scene.reader_must_learn || []),
+      ...(scene.must_stay_hidden || []),
+      ...((scene.pays_off || []).map(p => p.fact_ref)),
+    ]);
+    const know = worldModel.character_knowledge || [];
+    const knowEssential = know.filter(k => wm.present.has(k.character_id) && essential.has(k.fact_ref));
+    const knowExtra = know.filter(k => wm.present.has(k.character_id) && !essential.has(k.fact_ref));
+    const toldEssential = toldLedger.filter(t => essential.has(t.fact_ref));
+    const toldExtra = toldLedger.filter(t => !essential.has(t.fact_ref));
+
+    const groups = [
+      {
+        key: 'core', droppable: false,
+        label: 'Scene Card + plant obligations + present characters/location/objects',
+        items: { scene_card: scene, obligations, characters: wm.characters, location: wm.location, objects: wm.objects },
+      },
+      { key: 'told_essential', droppable: true, label: "Told-ledger rows for this scene's own facts", items: toldEssential },
+      { key: 'rel_both', droppable: true, label: 'Relationships between two present entities', items: wm.relBoth },
+      { key: 'rel_one', droppable: true, label: 'Relationships touching one present entity', items: wm.relOne },
+      { key: 'know_essential', droppable: true, label: "In-world knowledge tied to this scene's facts", items: knowEssential },
+      { key: 'know_extra', droppable: true, label: 'Other in-world knowledge of present characters', items: knowExtra },
+      { key: 'told_extra', droppable: true, label: 'Broader told-ledger slice (re-anchoring context, #13)', items: toldExtra },
+    ];
+
+    const coreTokens = estimateTokens(groups[0].items);
+    let used = coreTokens;
+    const included = [{ ...groups[0], tokens: coreTokens }];
+    const evicted = [];
+    for (let i = 1; i < groups.length; i++) {
+      const g = groups[i];
+      const empty = Array.isArray(g.items) && g.items.length === 0;
+      const t = estimateTokens(g.items);
+      if (empty) continue;
+      if (used + t <= budgetTokens) { included.push({ ...g, tokens: t }); used += t; }
+      else { evicted.push({ ...g, tokens: t }); }
+    }
+    return { included, evicted, tokens: used, budgetTokens, mandatoryOverBudget: coreTokens > budgetTokens, all: groups };
+  }
+
+  // Assembles the ordered, cache-shaped chunk list for one scene's prompt.
+  // Correct order (research finding: caching is prefix-match, not diff):
+  //   1. header            — immutable across the whole read, explicit cache
+  //   2. coarsest digests → finest digests, each band itself append-only
+  //   3. verbatim tail of the previous scene — replaced every scene
+  //   4. the volatile tail — current Scene Card, obligations, WM rows,
+  //      told-ledger slice — mutates every scene, so it goes LAST
+  // `wrongOrder: true` deliberately violates this (volatile tail first) to
+  // demonstrate what the research warned would happen to the cache.
+  function assemble(levels, scene, worldModel, toldLedger, obligations, prevTailText, config) {
+    const header = { id: 'header', tokens: config.headerTokens, label: 'Writer contract + Voice Card + WM schema', badge: 'header' };
+    const bandChunks = [];
+    for (let k = levels.length - 1; k >= 1; k--) {
+      levels[k].items.forEach(it => bandChunks.push({
+        id: it.id, tokens: estimateTokens(it),
+        label: levelLabel(k) + ': ' + it.sceneLabel, badge: levelBadge(k),
+      }));
+    }
+    (levels[0] ? levels[0].items : []).forEach(it => bandChunks.push({
+      id: it.id, tokens: estimateTokens(it),
+      label: 'Scene Digest: ' + it.sceneLabel, badge: 'scene',
+    }));
+
+    const tailChunk = prevTailText
+      ? { id: 'tail:' + scene.id, tokens: estimateTokens(prevTailText), label: 'Verbatim tail of previous scene', badge: 'tail' }
+      : null;
+
+    const volatile = buildVolatileTail(scene, worldModel, toldLedger, obligations, config.volatileBudget);
+    const volatileChunk = {
+      id: 'volatile:' + scene.id, tokens: volatile.tokens,
+      label: 'Current scene: card + obligations + WM rows + told-ledger', badge: 'volatile', detail: volatile,
+    };
+
+    const chunks = config.wrongOrder
+      ? [header, volatileChunk, ...bandChunks, ...(tailChunk ? [tailChunk] : [])]
+      : [header, ...bandChunks, ...(tailChunk ? [tailChunk] : []), volatileChunk];
+
+    return { chunks, volatile };
+  }
+
+  // Prefix-match cache simulation, matching the research exactly: walk both
+  // chunk lists together; every position where the id still matches is a
+  // cache hit; the FIRST mismatch ends the match, no partial credit past it.
+  function cacheHit(prevChunks, chunks) {
+    let i = 0, tokens = 0;
+    while (i < prevChunks.length && i < chunks.length && prevChunks[i].id === chunks[i].id) {
+      tokens += chunks[i].tokens;
+      i++;
+    }
+    return { cachedTokens: tokens, firstMissIndex: i };
+  }
+
+  return { estimateTokens, levelLabel, levelBadge, pushSceneDigest, filterWorldModel, buildVolatileTail, assemble, cacheHit };
+})();
+/* ========================================================================= */
+
+
+/* -------------------------------------------------------------------------
+ * Page wiring below. Throwaway — none of this ships.
+ * ---------------------------------------------------------------------- */
+
+// --- Cinderella fixture (real Scene Cards + World Model from fixtures/cinderella/package.json,
+// hand-authored digests standing in for what the writer would actually emit) ---
+const WORLD_MODEL = {
+  characters: [
+    { id: 'char_cinderella', name: 'Cinderella' },
+    { id: 'char_father', name: "Cinderella's father" },
+    { id: 'char_stepmother', name: 'the Stepmother' },
+    { id: 'char_stepsister_elder', name: 'the elder stepsister' },
+    { id: 'char_stepsister_charlotte', name: 'Miss Charlotte' },
+    { id: 'char_godmother', name: "Cinderella's godmother" },
+    { id: 'char_prince', name: "the King's son" },
+    { id: 'char_gentleman_usher', name: 'the gentleman-in-waiting' },
+  ],
+  locations: [
+    { id: 'loc_house', name: "her father's house" },
+    { id: 'loc_chimney_corner', name: 'the chimney-corner' },
+    { id: 'loc_garden', name: 'the garden' },
+    { id: 'loc_ball_hall', name: "the King's ballroom" },
+    { id: 'loc_palace_steps', name: 'the palace steps' },
+    { id: 'loc_kingdom_houses', name: 'the houses of the kingdom' },
+  ],
+  objects: [
+    { id: 'obj_glass_slipper_2', name: 'the fellow glass slipper', location_id: null },
+  ],
+  relationships: [
+    { id: 'rel_001', from_id: 'char_stepmother', to_id: 'char_cinderella', kind: 'stepmother_of', sentiment: 'resents' },
+    { id: 'rel_002', from_id: 'char_father', to_id: 'char_cinderella', kind: 'father_of', sentiment: null },
+    { id: 'rel_003', from_id: 'char_stepmother', to_id: 'char_stepsister_elder', kind: 'mother_of', sentiment: 'dotes_on' },
+    { id: 'rel_004', from_id: 'char_stepmother', to_id: 'char_stepsister_charlotte', kind: 'mother_of', sentiment: 'dotes_on' },
+    { id: 'rel_005', from_id: 'char_stepsister_elder', to_id: 'char_cinderella', kind: 'stepsister_of', sentiment: 'disdains' },
+    { id: 'rel_006', from_id: 'char_stepsister_charlotte', to_id: 'char_cinderella', kind: 'stepsister_of', sentiment: 'disdains' },
+    { id: 'rel_007', from_id: 'char_godmother', to_id: 'char_cinderella', kind: 'godmother_of', sentiment: 'loves' },
+  ],
+  character_knowledge: [], // grows during the walkthrough — see advanceScene()
+};
+
+const SCENES = [
+  { id: 'scene_01_remarriage', order: 1, location_id: 'loc_house', characters_present: ['char_cinderella','char_father','char_stepmother','char_stepsister_elder','char_stepsister_charlotte'], reader_must_learn: [], pays_off: [],
+    digest: { event_summary: 'The father remarries a proud widow with two vain daughters; Cinderella is turned out of her own place and set to the household drudgery, sleeping by the cinders.', entities_on_stage: ['char_cinderella','char_father','char_stepmother','char_stepsister_elder','char_stepsister_charlotte'], imagery_signature: ['the cinder-heap by the hearth','two daughters as haughty as their mother'], closing_situation: 'Cinderella sleeps in the chimney-corner, work-worn and uncomplaining; the household now runs on her labor.' } },
+  { id: 'scene_02_the_ball_proclaimed', order: 2, location_id: 'loc_house', characters_present: ['char_cinderella','char_stepmother','char_stepsister_elder','char_stepsister_charlotte'], reader_must_learn: [], pays_off: [],
+    digest: { event_summary: "Word of the King's ball consumes the sisters; Cinderella helps them plan finery, not imagining herself invited.", entities_on_stage: ['char_cinderella','char_stepmother','char_stepsister_elder','char_stepsister_charlotte'], imagery_signature: ['invitation cards passed hand to hand'], closing_situation: 'The sisters are giddy with ball-planning; Cinderella stands ready to help them dress, expecting nothing for herself.' } },
+  { id: 'scene_03_dressing_the_sisters', order: 3, location_id: 'loc_house', characters_present: ['char_cinderella','char_stepsister_elder','char_stepsister_charlotte'], reader_must_learn: [], pays_off: [],
+    digest: { event_summary: "Cinderella dresses her sisters' hair with real skill and no bitterness; they mock the idea of a Cinderwench at a ball.", entities_on_stage: ['char_cinderella','char_stepsister_elder','char_stepsister_charlotte'], imagery_signature: ['a comb through curled hair','laughter aimed like a slap'], closing_situation: "Cinderella has finished the sisters' hair and said nothing in her own defense; the jeer hangs in the room." } },
+  { id: 'scene_04_sisters_depart', order: 4, location_id: 'loc_house', characters_present: ['char_cinderella','char_stepmother','char_stepsister_elder','char_stepsister_charlotte'], reader_must_learn: [], pays_off: [],
+    digest: { event_summary: 'The stepmother and sisters leave for the ball; alone at last, Cinderella weeps.', entities_on_stage: ['char_cinderella','char_stepmother','char_stepsister_elder','char_stepsister_charlotte'], imagery_signature: ['the door closing on departing skirts','tears by an empty hearth'], closing_situation: 'The house stands empty of everyone but Cinderella, who cries by the fire, alone.' } },
+  { id: 'scene_05_godmother', order: 5, location_id: 'loc_garden', characters_present: ['char_cinderella','char_godmother'], reader_must_learn: ['midnight_condition'], pays_off: [],
+    digest: { event_summary: "The godmother answers Cinderella's tears, transmutes a pumpkin, mice, a rat, and lizards into coach, horses, coachman, and footmen, and turns her rags into a jeweled gown and glass slippers — with one explicit condition: everything reverts at midnight.", entities_on_stage: ['char_cinderella','char_godmother'], facts_revealed: ['midnight_condition'], imagery_signature: ['a pumpkin scooped and gilded whole','glass slippers catching the light','six grey mice harnessed into a team'], closing_situation: "Cinderella stands transformed in gold and glass, the godmother's midnight warning ringing in her ears." } },
+  { id: 'scene_06_first_ball_arrival', order: 6, location_id: 'loc_ball_hall', characters_present: ['char_cinderella','char_prince','char_stepmother','char_stepsister_elder','char_stepsister_charlotte'], reader_must_learn: ['cinderella_is_the_ball_girl'], pays_off: [],
+    digest: { event_summary: "An unknown beauty enters the ball; the dancing stops, the old King praises her, the Prince claims every dance — and neither the stepmother nor the sisters recognize their own Cinderella.", entities_on_stage: ['char_cinderella','char_prince','char_stepmother','char_stepsister_elder','char_stepsister_charlotte'], facts_revealed: ['cinderella_is_the_ball_girl'], imagery_signature: ['a hush falling over the hall',"the Prince's hand offered without hesitation"], closing_situation: 'Cinderella dances with the Prince as the guest no one can place; her stepfamily watches without recognizing her.' } },
+  { id: 'scene_07_first_ball_departure', order: 7, location_id: 'loc_ball_hall', characters_present: ['char_cinderella','char_stepsister_elder','char_stepsister_charlotte'], reader_must_learn: [], pays_off: [],
+    digest: { event_summary: "Cinderella sits with her unknowing sisters, shares the Prince's oranges with easy generosity, and leaves at a quarter to twelve — well ahead of the deadline — reaching home safely.", entities_on_stage: ['char_cinderella','char_stepsister_elder','char_stepsister_charlotte'], imagery_signature: ['oranges pressed into unsuspecting hands','a clock glanced at with time to spare'], closing_situation: 'Cinderella is safely home in good time, the midnight condition unbroken and still unknown to anyone but her and the godmother.' } },
+  { id: 'scene_08_home_and_thanks', order: 8, location_id: 'loc_garden', characters_present: ['char_cinderella','char_godmother'], reader_must_learn: [], pays_off: [],
+    digest: { event_summary: "Cinderella thanks her godmother for the evening and admits she'd love to return the next night; the godmother agrees.", entities_on_stage: ['char_cinderella','char_godmother'], imagery_signature: ['a quiet thank-you by the garden gate'], closing_situation: 'The arrangement is set for a second night at the ball; nothing about tonight has been discovered by the household.' } },
+  { id: 'scene_09_the_sisters_recount', order: 9, location_id: 'loc_house', characters_present: ['char_cinderella','char_stepsister_elder','char_stepsister_charlotte'], reader_must_learn: ['sisters_unaware_cinderella_attended'], pays_off: [],
+    digest: { event_summary: "The sisters return consumed by talk of the mystery princess and describe her, in detail, to Cinderella's own unrecognized face; her request to borrow a yellow suit to see the ball herself is refused and mocked, exactly as expected.", entities_on_stage: ['char_cinderella','char_stepsister_elder','char_stepsister_charlotte'], facts_revealed: ['sisters_unaware_cinderella_attended'], imagery_signature: ['the princess described inches from the person being described','a borrowed-suit request waved off with a laugh'], closing_situation: 'The sisters have unwittingly confirmed her disguise held completely; her request to attend has been refused, as planned.' } },
+  { id: 'scene_10_second_ball_the_flight', order: 10, location_id: 'loc_ball_hall', characters_present: ['char_cinderella','char_prince'], reader_must_learn: [], pays_off: [{ fact_ref: 'midnight_condition', plant: 'scene_05_godmother' }],
+    digest: { event_summary: 'Back a second night, Cinderella loses track of time; the clock strikes twelve, she flees, loses one glass slipper on the palace steps as the Prince fails to catch her — at the final stroke, coach, horses, footmen, and gown all revert, exactly as warned.', entities_on_stage: ['char_cinderella','char_prince'], payoffs_closed: ['midnight_condition'], imagery_signature: ['a slipper left behind on the palace steps','gold and silver collapsing back into pumpkin and rags'], closing_situation: 'Cinderella is fleeing home on foot in tatters, one glass slipper lost behind her; the midnight warning has been paid in full.' } },
+  { id: 'scene_11_the_kept_slipper', order: 11, location_id: 'loc_chimney_corner', characters_present: ['char_cinderella'], reader_must_learn: ['cinderella_kept_second_slipper'], pays_off: [],
+    digest: { event_summary: 'Cinderella arrives home breathless and in her old clothes; of all the finery only the fellow glass slipper survives, kept secretly in her pocket, and she tells the household nothing.', entities_on_stage: ['char_cinderella'], facts_revealed: ['cinderella_kept_second_slipper'], imagery_signature: ['a single glass slipper warm in a pocket of rags'], closing_situation: 'Cinderella is home, ordinary and unremarked-on again, with one glass slipper hidden on her person and a secret she keeps to herself.' } },
+  { id: 'scene_12_the_proclamation', order: 12, location_id: 'loc_kingdom_houses', characters_present: ['char_gentleman_usher'], reader_must_learn: [], pays_off: [],
+    digest: { event_summary: 'By royal proclamation the Prince declares he will marry whoever the lost glass slipper fits; it is tried in vain on princesses, duchesses, and every lady of the court, until the search reaches Cinderella\'s own house.', entities_on_stage: ['char_gentleman_usher'], imagery_signature: ["a trumpet call carrying the Prince's proclamation",'a glass slipper offered to foot after foot that will not fit'], closing_situation: 'The fitting search has narrowed, house by house, to the very door Cinderella lives behind.' } },
+  { id: 'scene_13_the_fitting', order: 13, location_id: 'loc_house', characters_present: ['char_cinderella','char_stepsister_elder','char_stepsister_charlotte','char_gentleman_usher'], reader_must_learn: [], pays_off: [{ fact_ref: 'cinderella_kept_second_slipper', plant: 'scene_11_the_kept_slipper' }],
+    digest: { event_summary: "The sisters fail to force the slipper on; Cinderella, laughed at for asking, is allowed to try — it fits perfectly, she produces the fellow slipper from her pocket, and the godmother appears to transform her clothes again, this time in full view of the sisters.", entities_on_stage: ['char_cinderella','char_stepsister_elder','char_stepsister_charlotte','char_gentleman_usher'], payoffs_closed: ['cinderella_kept_second_slipper'], imagery_signature: ['a slipper sliding on with no resistance at all','a second slipper drawn from a ragged pocket'], closing_situation: 'Cinderella stands revealed before her sisters as the mystery princess, both slippers accounted for.' } },
+  { id: 'scene_14_forgiveness_and_marriage', order: 14, location_id: 'loc_ball_hall', characters_present: ['char_cinderella','char_stepsister_elder','char_stepsister_charlotte','char_prince'], reader_must_learn: [], pays_off: [],
+    digest: { event_summary: "The sisters beg forgiveness and are freely pardoned; Cinderella is married to the Prince within days and, as generous as she is beautiful, has her sisters lodged at court and married to two great lords.", entities_on_stage: ['char_cinderella','char_stepsister_elder','char_stepsister_charlotte','char_prince'], imagery_signature: ['sisters kneeling for pardon they receive without condition','a palace wedding within days'], closing_situation: "Cinderella is married to the Prince and has raised her once-cruel sisters up beside her at court; the household inversion from scene one is undone entirely in her favor." } },
+];
+
+// Plant obligations are what ADR 0004's walk would hand this scene — the
+// templated instruction only, never the payoff scene's name.
+function obligationsFor(scene) {
+  const plantedHere = SCENES.filter(s => (s.pays_off || []).some(p => p.plant === scene.id))
+    .flatMap(s => s.pays_off.filter(p => p.plant === scene.id));
+  return plantedHere.map(p => ({
+    fact_ref: p.fact_ref,
+    instruction: 'Make the reader register "' + p.fact_ref.replace(/_/g, ' ') + '" without dwelling on it — a detail that passes by, not a flagged clue.',
+  }));
+}
+
+function makeSceneDigest(scene) {
+  return { id: 'scene:' + scene.id, sceneLabel: 'S' + scene.order, ...scene.digest };
+}
+
+// -- app state --
+let W = 4;
+let VOL_BUDGET = 3000;
+let WRONG_ORDER = false;
+const HEADER_TOKENS = 15000;
+
+let state = null; // { levels, toldLedger, wm, sceneIdx, prevTail, prevChunks, history, log }
+
+function freshWorldModel() {
+  return JSON.parse(JSON.stringify(WORLD_MODEL));
+}
+
+function resetPOC() {
+  state = { levels: [], toldLedger: [], wm: freshWorldModel(), seenEntities: new Set(), sceneIdx: 0, prevTail: null, prevChunks: [], history: [], log: [], synthetic: false };
+  render();
+}
+
+function resetSynthetic() {
+  state = { levels: [], toldLedger: [], wm: freshWorldModel(), seenEntities: new Set(), sceneIdx: 0, prevTail: null, prevChunks: [], history: [], log: [], synthetic: true };
+  render();
+}
+
+// Deterministic synthetic scene generator for the novel-scale walkthrough —
+// same shape as a real Scene Card/digest, sized to the token budget the
+// research's own worked example used (~200-350 tok/digest).
+function syntheticScene(n) {
+  const chars = ['char_a', 'char_b', 'char_c'];
+  const loc = 'loc_' + ((n % 5) + 1);
+  const present = [chars[n % 3], chars[(n + 1) % 3]];
+  const pad = 'The scene advances the plot with a small, concrete incident that keeps the world consistent and moves one thread forward. ';
+  return {
+    id: 'synth_' + n, order: n, location_id: loc, characters_present: present, reader_must_learn: [], pays_off: [],
+    digest: {
+      event_summary: 'Scene ' + n + ': ' + pad,
+      entities_on_stage: present,
+      imagery_signature: ['image_' + (n % 7)],
+      closing_situation: 'Scene ' + n + " ends with the characters' situation updated in a small, consistent way.",
+    },
+  };
+}
+
+function toldLedgerAfterScene(toldLedger, scene, seenEntities) {
+  const next = toldLedger.map(t => ({ ...t }));
+  function touch(factRef) {
+    const existing = next.find(t => t.fact_ref === factRef);
+    if (existing) existing.last_touched_scene = scene.id;
+    else next.push({ fact_ref: factRef, first_learned_scene: scene.id, last_touched_scene: scene.id, centrality: 'normal' });
+  }
+  (scene.reader_must_learn || []).forEach(touch);
+  (scene.digest.payoffs_closed || []).forEach(touch);
+  (scene.characters_present || []).forEach(id => {
+    if (!seenEntities.has(id)) { seenEntities.add(id); touch('met:' + id); }
+  });
+  return next;
+}
+
+function characterKnowledgeAfterScene(wm, scene) {
+  const wm2 = JSON.parse(JSON.stringify(wm));
+  (scene.reader_must_learn || []).forEach(factRef => {
+    (scene.characters_present || []).forEach(charId => {
+      if (!wm2.character_knowledge.some(k => k.character_id === charId && k.fact_ref === factRef)) {
+        wm2.character_knowledge.push({ character_id: charId, fact_ref: factRef, learned_at_scene: scene.id });
+      }
+    });
+  });
+  return wm2;
+}
+
+function advanceScene() {
+  const scene = state.synthetic ? syntheticScene(state.sceneIdx + 1) : SCENES[state.sceneIdx];
+  if (!scene) return;
+  const obligations = state.synthetic ? [] : obligationsFor(scene);
+  const config = { headerTokens: HEADER_TOKENS, volatileBudget: VOL_BUDGET, wrongOrder: WRONG_ORDER };
+
+  const { chunks, volatile } = ContextAssembler.assemble(state.levels, scene, state.wm, state.toldLedger, obligations, state.prevTail, config);
+  const hit = ContextAssembler.cacheHit(state.prevChunks, chunks);
+  const totalTokens = chunks.reduce((a, c) => a + c.tokens, 0) + 800; // +response schema, never cacheable
+
+  const sceneDigest = makeSceneDigest(scene);
+  const pushed = ContextAssembler.pushSceneDigest(state.levels, sceneDigest, W);
+
+  state.levels = pushed.levels;
+  state.toldLedger = toldLedgerAfterScene(state.toldLedger, scene, state.seenEntities);
+  state.wm = characterKnowledgeAfterScene(state.wm, scene);
+  state.prevTail = scene.digest.closing_situation; // stand-in for the actual final paragraph of prose
+  state.prevChunks = chunks;
+  state.sceneIdx += 1;
+
+  const record = {
+    sceneIdx: state.sceneIdx, sceneLabel: sceneDigest.sceneLabel || ('scene ' + state.sceneIdx),
+    totalTokens, cachedTokens: hit.cachedTokens, chunks, volatile, rollupEvents: pushed.events,
+  };
+  state.history.push(record);
+  pushed.events.forEach(ev => state.log.unshift({ kind: 'rollup', text: ev.label + ' rolled up ' + ev.closedCount + ' items into one → ' + ev.rolled.sceneLabel }));
+  state.log.unshift({ kind: 'advance', text: 'Advanced to ' + record.sceneLabel + ' — ' + totalTokens + ' tok total, ' + hit.cachedTokens + ' cached (' + Math.round(100 * hit.cachedTokens / totalTokens) + '%)' });
+  state.log = state.log.slice(0, 60);
+
+  render();
+  return record;
+}
+
+function runTo(n) {
+  while (state.sceneIdx < n) advanceScene();
+}
+
+// ---------------------------------------------------------------------
+// Rendering
+// ---------------------------------------------------------------------
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+function render() {
+  renderChunklist();
+  renderLevelsTree();
+  renderEvictList();
+  renderLog();
+  renderSparkline();
+  renderMeasureTable();
+  document.getElementById('window-echo').textContent = W;
+  document.getElementById('cfg-window').value = W;
+  document.getElementById('cfg-budget').value = VOL_BUDGET;
+  document.getElementById('cfg-budget-val').textContent = VOL_BUDGET;
+  document.getElementById('cfg-wrong-order').checked = WRONG_ORDER;
+}
+
+function renderChunklist() {
+  const last = state.history[state.history.length - 1];
+  const totalsEl = document.getElementById('totals');
+  const listEl = document.getElementById('chunklist');
+  totalsEl.innerHTML = '';
+  listEl.innerHTML = '';
+  if (!last) {
+    listEl.appendChild(el('div', 'empty', 'No scene generated yet — advance one, or start a guided walkthrough.'));
+    return;
+  }
+  const pct = Math.round(100 * last.cachedTokens / last.totalTokens);
+  const stats = [
+    ['Total prompt', last.totalTokens + ' tok', ''],
+    ['Cached', last.cachedTokens + ' tok', 'good'],
+    ['Billed fresh', (last.totalTokens - last.cachedTokens) + ' tok', last.totalTokens - last.cachedTokens > last.totalTokens * 0.5 ? 'bad' : ''],
+    ['Cache-hit fraction', pct + '%', pct > 60 ? 'good' : (pct < 20 ? 'bad' : '')],
+  ];
+  stats.forEach(([l, n, cls]) => {
+    const s = el('div', 'stat ' + cls);
+    s.appendChild(el('div', 'n', n));
+    s.appendChild(el('div', 'l', l));
+    totalsEl.appendChild(s);
+  });
+
+  const hit = ContextAssembler.cacheHit(
+    state.history.length > 1 ? state.history[state.history.length - 2].chunks : [],
+    last.chunks
+  );
+  last.chunks.forEach((c, i) => {
+    const row = el('div', 'chunk ' + (i < hit.firstMissIndex ? 'hit' : 'miss'));
+    row.appendChild(el('div', 'badge ' + c.badge, c.badge));
+    row.appendChild(el('div', '', c.label));
+    row.appendChild(el('div', 'tok', c.tokens + ' tok'));
+    listEl.appendChild(row);
+  });
+  if (WRONG_ORDER) {
+    const note = el('div', 'why-illegal');
+    note.innerHTML = "<strong>Wrong order active:</strong> the volatile tail — which mutates every single scene — sits right after the header instead of last. Because caching is a strict prefix match, that one early, ever-changing chunk invalidates every token after it, every call: the entire digest hierarchy has to be rebilled at full price, every scene, no matter how large it's grown. Only the header (chunk 1, still first either way) survives.";
+    listEl.appendChild(note);
+  }
+}
+
+function renderLevelsTree() {
+  const treeEl = document.getElementById('levels-tree');
+  treeEl.innerHTML = '';
+  if (!state.levels.length) {
+    treeEl.appendChild(el('div', 'empty', 'No digests yet.'));
+    return;
+  }
+  state.levels.forEach((lvl, i) => {
+    const row = el('div', 'level-row');
+    row.appendChild(el('div', 'name', ContextAssembler.levelLabel(i) + ' (' + lvl.items.length + '/' + W + ')'));
+    const fill = el('div', 'fill');
+    for (let c = 0; c < W; c++) fill.appendChild(el('div', 'cell' + (c < lvl.items.length ? ' on' : '')));
+    row.appendChild(fill);
+    treeEl.appendChild(row);
+  });
+}
+
+function renderEvictList() {
+  const last = state.history[state.history.length - 1];
+  const listEl = document.getElementById('evict-list');
+  listEl.innerHTML = '';
+  if (!last) { listEl.appendChild(el('div', 'empty', '—')); return; }
+  const v = last.volatile;
+  v.included.forEach(g => {
+    const row = el('div', 'evict-item in');
+    row.appendChild(el('span', '', g.label));
+    row.appendChild(el('span', '', g.tokens + ' tok' + (g.droppable === false ? ' · mandatory' : '')));
+    listEl.appendChild(row);
+  });
+  v.evicted.forEach(g => {
+    const row = el('div', 'evict-item out');
+    row.appendChild(el('span', '', g.label));
+    row.appendChild(el('span', '', g.tokens + ' tok · evicted'));
+    listEl.appendChild(row);
+  });
+  if (v.mandatoryOverBudget) {
+    listEl.appendChild(el('div', 'why-illegal', 'The mandatory core alone (' + v.tokens + ' tok) exceeds the budget (' + v.budgetTokens + ' tok). Nothing droppable is left to cut — this scene needs a bigger budget, not a smarter eviction order.'));
+  }
+}
+
+function renderLog() {
+  const logEl = document.getElementById('event-log');
+  logEl.innerHTML = '';
+  if (!state.log.length) { logEl.appendChild(el('div', 'empty', 'Nothing yet.')); return; }
+  state.log.forEach(entry => logEl.appendChild(el('div', 'log-entry' + (entry.kind === 'rollup' ? ' rollup' : ''), entry.text)));
+}
+
+function renderSparkline() {
+  const sparkEl = document.getElementById('sparkline');
+  sparkEl.innerHTML = '';
+  if (!state.history.length) return;
+  const max = Math.max(...state.history.map(h => h.totalTokens));
+  // downsample to at most ~120 bars for very long synthetic runs
+  const hist = state.history;
+  const step = Math.max(1, Math.ceil(hist.length / 120));
+  for (let i = 0; i < hist.length; i += step) {
+    const h = hist[i];
+    const bar = el('div', 'bar' + (h.cachedTokens / h.totalTokens < 0.3 ? ' miss-heavy' : ''));
+    bar.style.height = Math.max(2, Math.round(100 * h.totalTokens / max)) + '%';
+    bar.title = h.sceneLabel + ': ' + h.totalTokens + ' tok total, ' + h.cachedTokens + ' cached';
+    const cached = el('div', 'cached');
+    cached.style.height = Math.round(100 * h.cachedTokens / h.totalTokens) + '%';
+    bar.appendChild(cached);
+    sparkEl.appendChild(bar);
+  }
+}
+
+function renderMeasureTable() {
+  const tableEl = document.getElementById('measure-table');
+  tableEl.innerHTML = '';
+  if (!state.history.length) return;
+  const milestones = [3, 20, 100, 250, 600].filter(n => state.history.some(h => h.sceneIdx === n) || n <= state.history.length);
+  const rows = [...new Set(milestones)].map(n => state.history[Math.min(n, state.history.length) - 1]).filter(Boolean);
+  const head = el('tr');
+  ['Scene', 'Total tok', 'Cached tok', 'Cache-hit %', 'Deepest open level'].forEach(h => head.appendChild(el('th', '', h)));
+  tableEl.appendChild(head);
+  rows.forEach(r => {
+    const row = el('tr');
+    row.appendChild(el('td', '', r.sceneLabel));
+    row.appendChild(el('td', '', String(r.totalTokens)));
+    row.appendChild(el('td', '', String(r.cachedTokens)));
+    row.appendChild(el('td', '', Math.round(100 * r.cachedTokens / r.totalTokens) + '%'));
+    row.appendChild(el('td', '', String(state.levels.length)));
+    tableEl.appendChild(row);
+  });
+}
+
+// ---------------------------------------------------------------------
+// Guided walkthroughs
+// ---------------------------------------------------------------------
+const SCENARIOS = [
+  {
+    key: 'poc', title: 'Cinderella, scene by scene',
+    desc: 'The happy path at POC scale. Window size 4: watch a Chapter Digest form the moment scene 4 completes, and the assembled prompt stay tiny throughout — this is what "the POC compiles a short story" (map Notes) actually looks like from the assembler\'s side.',
+    steps: () => {
+      const steps = [{ label: 'Reset to POC mode, window 4', run: () => { W = 4; VOL_BUDGET = 3000; WRONG_ORDER = false; resetPOC(); } }];
+      for (let i = 1; i <= 14; i++) steps.push({ label: 'Advance to scene ' + i, run: () => advanceScene() });
+      return steps;
+    },
+  },
+  {
+    key: 'novel', title: 'Novel scale (jump to scene 600)',
+    desc: 'The edge case the ticket asks for directly: "measure assembled prompt size at scene 3, 20, and a simulated scene 250 — plus cache-hit fraction at each. If growth isn\'t roughly logarithmic, the design has a leak — find it." Synthetic scenes, same window-4 rule. Watch the level tree grow a new row (Book Digests) instead of the Part-Digest band growing forever.',
+    steps: () => [
+      { label: 'Reset to synthetic novel mode, window 4', run: () => { W = 4; VOL_BUDGET = 3000; WRONG_ORDER = false; resetSynthetic(); } },
+      { label: 'Jump to scene 3', run: () => runTo(3) },
+      { label: 'Jump to scene 20', run: () => runTo(20) },
+      { label: 'Jump to scene 100', run: () => runTo(100) },
+      { label: 'Jump to scene 250', run: () => runTo(250) },
+      { label: 'Jump to scene 600', run: () => runTo(600) },
+    ],
+  },
+  {
+    key: 'illegal', title: 'Wrong order (should be illegal)',
+    desc: 'What the research warned against: put the volatile tail (which mutates every scene) right after the header instead of last. Run this at novel scale, after 249 scenes have built up a real digest hierarchy, so the mistake has something to lose. Caching is a prefix match — one early volatile chunk poisons everything after it, every single call. Non-obvious finding: fixing the order back doesn\'t recover the cache on the very next scene — the fraction lags by one scene, because that scene is still being compared against the previous (wrongly-ordered) call\'s actual bytes.',
+    steps: () => [
+      { label: 'Reset to novel-scale mode, window 4, correct order', run: () => { W = 4; VOL_BUDGET = 3000; WRONG_ORDER = false; resetSynthetic(); } },
+      { label: 'Jump to scene 249 (build up a real hierarchy)', run: () => runTo(249) },
+      { label: 'Flip to the WRONG order', run: () => { WRONG_ORDER = true; } },
+      { label: 'Advance to scene 250 — watch cache-hit fraction fall', run: () => advanceScene() },
+      { label: 'Fix it: flip back to the correct order', run: () => { WRONG_ORDER = false; } },
+      { label: 'Advance to scene 251 — still low: one scene of lag', run: () => advanceScene() },
+      { label: 'Advance to scene 252 — now it recovers', run: () => advanceScene() },
+    ],
+  },
+  {
+    key: 'budget', title: 'Shrink the volatile budget',
+    desc: 'Scene 6 is the biggest scene in the fixture: five present characters, the Prince, and the whole stepfamily web of relationships. Re-run the fixture at a shrinking volatile-tail budget and watch the eviction list give things up in priority order on scene 6 — the mandatory core (Scene Card, obligations, present-entity rows) is never touched.',
+    steps: () => [
+      { label: 'Reset to POC mode, window 4, generous budget (3000 tok)', run: () => { W = 4; VOL_BUDGET = 3000; WRONG_ORDER = false; resetPOC(); runTo(6); } },
+      { label: 'Shrink budget to 400 tok and re-run to scene 6', run: () => { VOL_BUDGET = 400; resetPOC(); runTo(6); } },
+      { label: 'Shrink further to 150 tok (past the mandatory core) and re-run', run: () => { VOL_BUDGET = 150; resetPOC(); runTo(6); } },
+      { label: 'Restore a generous budget (3000 tok) and re-run', run: () => { VOL_BUDGET = 3000; resetPOC(); runTo(6); } },
+    ],
+  },
+];
+
+let activeScenario = 0;
+let activeStep = -1;
+
+function renderTabs() {
+  const tabsEl = document.getElementById('tabs');
+  tabsEl.innerHTML = '';
+  SCENARIOS.forEach((s, i) => {
+    const b = el('button', 'tab' + (i === activeScenario ? ' active' : ''), s.title);
+    b.onclick = () => { activeScenario = i; activeStep = -1; renderScenario(); };
+    tabsEl.appendChild(b);
+  });
+}
+
+function renderScenario() {
+  const scenario = SCENARIOS[activeScenario];
+  document.getElementById('scenario-desc').textContent = scenario.desc;
+  const stepsEl = document.getElementById('scenario-steps');
+  stepsEl.innerHTML = '';
+  const steps = scenario.steps();
+  steps.forEach((step, i) => {
+    const b = el('button', i <= activeStep ? 'secondary' : '', (i + 1) + '. ' + step.label);
+    b.disabled = i !== activeStep + 1;
+    b.onclick = () => { step.run(); activeStep = i; render(); renderScenario(); };
+    stepsEl.appendChild(b);
+    stepsEl.appendChild(document.createElement('br'));
+  });
+  const resetBtn = el('button', 'danger', 'Restart this walkthrough');
+  resetBtn.onclick = () => { activeStep = -1; renderScenario(); };
+  stepsEl.appendChild(resetBtn);
+}
+
+// ---------------------------------------------------------------------
+// Wiring
+// ---------------------------------------------------------------------
+document.getElementById('btn-advance').onclick = () => { if (!state) resetPOC(); advanceScene(); };
+document.getElementById('btn-reset').onclick = () => resetPOC();
+document.getElementById('cfg-window').onchange = (e) => { W = Math.max(2, Math.min(8, parseInt(e.target.value, 10) || 4)); document.getElementById('window-echo').textContent = W; };
+document.getElementById('cfg-budget').oninput = (e) => { VOL_BUDGET = parseInt(e.target.value, 10); document.getElementById('cfg-budget-val').textContent = VOL_BUDGET; };
+document.getElementById('cfg-wrong-order').onchange = (e) => { WRONG_ORDER = e.target.checked; };
+
+renderTabs();
+renderScenario();
+resetPOC();
+</script>
+
+</body>
+</html>
