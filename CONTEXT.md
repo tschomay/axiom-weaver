@@ -35,8 +35,13 @@ fixed script.
   reads; many = tightly the same story every time. Also the *variance* dial (see below).
 - **Voice Card** — the narrator as a first-class object: person, tense, narrative
   distance, register, sentence rhythm, imagery palette, dialogue density, and an optional
-  hand-written **style exemplar**. **Style presets** (mystery, adventure, whimsical, …)
-  expand into an editable Voice Card rather than acting as opaque tags.
+  hand-written **style exemplar**, empty by default. **Style presets** (Fairy-Tale/Fable,
+  Gothic/Brooding, Whimsical/Playful, Hardboiled/Terse, Lyrical/Literary validated so far)
+  expand into a fully materialized, editable Voice Card rather than acting as opaque tags;
+  an edited field lives in the card itself, never as a diff against the shared preset, so
+  editing a preset later can't silently change a story already told in it. A Scene Card's
+  `tone` never edits the Voice Card — it's a separate instruction, layered alongside it,
+  that governs imagery selection and emphasis for that scene only. See ADR 0007.
 
 ## The two memories
 
@@ -71,11 +76,19 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
 
 ## Context assembly
 
-- **Zoom levels** — the "concentric circles" are *resolution levels*, not categories: full
-  Scene Digests for the current chapter, rolled-up **Chapter Digests** for the current
-  part, **Part Digests** for the whole book, plus the verbatim tail of the immediately
-  preceding scene. Context grows logarithmically with book length. The original scopes
-  (characters present, this location) survive as the *filter* applied within each level.
+- **Zoom levels** — the "concentric circles" are *resolution levels*, not categories, and the
+  hierarchy is **recursive and unbounded in depth**, not fixed at two rollup levels: Scene
+  Digests roll up into **Chapter Digests** once a window fills, Chapter Digests roll up into
+  **Part Digests**, and Part Digests roll up into **Book Digests** (`L3`, `L4`, …) for a long
+  enough telling — each level holding at most a fixed window of items before it rolls up into
+  the next, like carrying a digit in base-W counting. This — not a fixed chapter/part pair — is
+  what actually makes context grow logarithmically with book length; a fixed two-level scheme
+  degrades to linear growth in the Part-Digest band. Chapter/Part/Book here are
+  compiler-internal resolution windows sized by scene count, not the authored book's chapter
+  breaks. Plus the verbatim tail — the *final paragraph of the previously generated prose* — of
+  the immediately preceding scene. The original scopes (characters present, this location)
+  survive as the *filter* applied within each level, off the Scene Card's own fields, never
+  inferred from prose. See [ADR 0008](docs/adr/0008-zoom-level-context-assembler.md).
 - **Plant obligations** — derived, not authored: a Scene Card's `pays_off` names, per fact,
   which earlier scene must plant it (or marks it grounded in the World Model seed), and the
   compiler walks the sequence backwards to turn those links into per-scene obligations. A
