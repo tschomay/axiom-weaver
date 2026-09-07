@@ -35,8 +35,13 @@ fixed script.
   reads; many = tightly the same story every time. Also the *variance* dial (see below).
 - **Voice Card** — the narrator as a first-class object: person, tense, narrative
   distance, register, sentence rhythm, imagery palette, dialogue density, and an optional
-  hand-written **style exemplar**. **Style presets** (mystery, adventure, whimsical, …)
-  expand into an editable Voice Card rather than acting as opaque tags.
+  hand-written **style exemplar**, empty by default. **Style presets** (Fairy-Tale/Fable,
+  Gothic/Brooding, Whimsical/Playful, Hardboiled/Terse, Lyrical/Literary validated so far)
+  expand into a fully materialized, editable Voice Card rather than acting as opaque tags;
+  an edited field lives in the card itself, never as a diff against the shared preset, so
+  editing a preset later can't silently change a story already told in it. A Scene Card's
+  `tone` never edits the Voice Card — it's a separate instruction, layered alongside it,
+  that governs imagery selection and emphasis for that scene only. See ADR 0007.
 
 ## The two memories
 
