@@ -94,7 +94,17 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   and diffable against another run.
 - **Variance contract** — each Scene Card declares its **invariants** (required beats,
   facts revealed, exit state). Everything unnamed is free to vary: dialogue, imagery,
-  interiority, micro-beat order, which details get attention.
+  interiority, micro-beat order, which details get attention. `reader_must_learn` /
+  `must_stay_hidden` / `exit_state` are checked mechanically against the digest;
+  `required_beats` is self-reported by the writer's own diagnostics, never independently
+  re-verified. A miss gets one bounded retry at read-time then accept-and-log (never
+  blocking), immediate warning at author-time — except **`must_stay_hidden`**, which is
+  log-only at read-time: prose streams before the digest is checkable, so a leak can't be
+  un-shown. The dial is `required_beats` density via per-scene `tight`/`normal`/`loose`
+  presets (never temperature); reproducibility is **persistence-only** — Gemini's `seed`
+  doesn't guarantee determinism, so re-reading means reading the stored Compiled edition,
+  never re-running the model. The reader is told once, unobtrusively (a landing-page line),
+  not per-read. See [ADR 0006](docs/adr/0006-variance-contract.md).
 - **Continuity pass** — a pass over **digests, never full prose**, that may edit seams
   (openings, transitions, first-mention violations, recycled imagery) but may **not**
   change events. Working on abstractions is what lets it scale to novel length.
