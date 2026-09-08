@@ -121,8 +121,11 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
 ## Compilation
 
 - **Compile occasions** — *author-time* (stepwise, human in the loop, iterating a card) and
-  *read-time* (a reader opens the story and it performs start to finish, unattended). One
-  engine, two supervision modes.
+  *read-time* (unattended). One engine, two supervision modes. The primary pathway for
+  read-time is **batch**: the whole compiled edition is generated before a reader ever opens
+  it, not performed live in front of one token by token. Live, interactive generation in front
+  of an active reader is a future expansion, out of scope for this map — "unattended" means no
+  human in the loop, not a race against a reader's eyes. See ADR 0011.
 - **Baked edition** — a fixed, known-good run shipped as the default so a reader's first
   experience is not a coin flip.
 - **Compiled edition** — any persisted run (seed, digests, prose), re-readable, shareable,
@@ -140,9 +143,17 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   doesn't guarantee determinism, so re-reading means reading the stored Compiled edition,
   never re-running the model. The reader is told once, unobtrusively (a landing-page line),
   not per-read. See [ADR 0006](docs/adr/0006-variance-contract.md).
-- **Continuity pass** — a pass over **digests, never full prose**, that may edit seams
-  (openings, transitions, first-mention violations, recycled imagery) but may **not**
-  change events. Working on abstractions is what lets it scale to novel length.
+- **Continuity pass** — a pass over **digests, never full prose**, scoped to exactly three
+  digest-detectable modes (cold opens/hard resets, told-ledger miscalibration, stale imagery —
+  dropped setup is owned entirely by the plant-obligation walk instead). It may edit seams
+  (openings, transitions, recycled imagery) but may **not** change events, enforced as a
+  field-level rule: a repair may only touch prose plus `closing_situation`/`imagery_signature`/
+  `reanchor_used`, never `facts_revealed`/`plants_opened`/`payoffs_closed`/`state_updates`.
+  Runs author-time with full authority, and read-time once per scene against the persisted
+  edition (never a live reader, since read-time generation is batch — see Compile occasions);
+  a repair's downstream effect is handled by marking later scenes **stale**, not by cascading
+  or re-checking itself. Working on abstractions is what lets it scale to novel length. See
+  ADR 0011.
 - **State-update tiers** — the authority boundary on what the engine may commit:
   **physical** (location, possessions, time, injury) and **epistemic** (who now knows
   what) are engine-writable and auto-committed; **volitional/relational** (goals,
