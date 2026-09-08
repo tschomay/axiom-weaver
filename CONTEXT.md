@@ -164,12 +164,32 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   if compatible with the card's invariants, otherwise dropped; silence is always inaction,
   never invention, so cross-run divergence on a volitional column is accepted variance,
   identical in kind to dialogue and imagery. See ADR 0005.
+- **Writer prompt contract** — the single structured call that produces a scene:
+  `prose → scene_digest → state_updates → diagnostics`, in that response order, so a
+  streaming reader sees words immediately and everything after prose is written *about*
+  prose that already exists. Payload order, coarsest to most volatile: the explicit-cache
+  header (contract prose, Voice Card, World Model column/tier legend) → the implicit-cache
+  digest hierarchy → the verbatim tail of the previous scene's prose → the volatile tail
+  (Scene Card, payoff-side plant instructions, the re-anchoring list, the imagery ledger,
+  scene `tone`, filtered World Model rows, told-ledger slice). `MAX_TOKENS` truncation is a
+  required code path, not an edge case: when prose survived the cut, a cheap **digest-only
+  fallback call** recovers `scene_digest`/`state_updates` from the recovered prose alone;
+  when prose itself was cut mid-clause, the whole scene gets one retry with a larger output
+  budget before falling back. Every failure path — truncation, malformed output, recitation,
+  content filters — resolves to the map's one existing shape: a single bounded retry, then
+  accept-and-log, never blocking a read-time run. See
+  [ADR 0012](docs/adr/0012-writer-prompt-contract.md).
 - **Diagnostics** — the writer reports unsatisfiable beats and contradictions rather than
-  silently papering over them. Author-time they surface as compile warnings; read-time the
-  engine resolves autonomously within the invariants and logs to a **run report**. A
-  read-time `error` gets one bounded retry, then falls back to the World Model's pre-scene
-  value and logs — the World Model is never committed a contradiction outright. No
-  diagnostic severity aborts a read-time run (ADR 0005).
+  silently papering over them, via exactly two self-reported types, `beat_unsatisfied` and
+  `missing_fact` — every other diagnostic (`entry_state_mismatch`,
+  `exit_state_contradiction`, `unauthorized_entity_update`, `unentailed_reversion`, a missed
+  plant, a `must_stay_hidden` leak, a truncated or failed scene) is the compiler grading the
+  writer's other outputs after the call returns, not a self-report; the full taxonomy is in
+  [ADR 0012](docs/adr/0012-writer-prompt-contract.md). Author-time diagnostics surface as
+  compile warnings; read-time the engine resolves autonomously within the invariants and
+  logs to a **run report**. A read-time `error` gets one bounded retry, then falls back to
+  the World Model's pre-scene value and logs — the World Model is never committed a
+  contradiction outright. No diagnostic severity aborts a read-time run (ADR 0005).
 - **Stale** — a scene whose upstream digest changed on facts-revealed, plants, or closing
   situation. Flagged, never auto-recompiled. Stale-but-standing is a legitimate state.
 
