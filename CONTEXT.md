@@ -61,7 +61,9 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   call as the scene's prose (no separate extraction call), and the only thing that
   circulates in long-range context. Carries: event summary, entities on stage, facts
   revealed, plants opened, payoffs closed, **imagery signature** (the concrete images
-  actually used, capped at 3), **closing situation** (where everyone stands physically
+  actually used, capped at 3, each entry domain-tagged against the Voice Card's
+  `imagery_palette` — `{image, domain}`, `domain: null` for an ad hoc image outside the
+  palette; added by ADR 0010), **closing situation** (where everyone stands physically
   *and emotionally* at the end — the sole home for emotional state; there is no separate
   "emotional register" field), and **`reanchor_used`** (the introduce/assume/reanchor/
   reintroduce band the writer self-reports per touched entity, added by ADR 0009). Target
@@ -69,6 +71,16 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   shares this schema but aggregates over its window rather than concatenating: event
   summary is freshly synthesized, list fields union, imagery signature re-caps to 3 by
   recency, closing situation inherits the window's last scene. See ADR 0003.
+- **Imagery ledger** — the recency instruction built from prior scenes' `imagery_signature`
+  entries, grouped by domain tag, and rendered to the writer after the Voice Card block:
+  domains already drawn from (with a short gist), plus palette items not yet drawn from.
+  Governs reuse of the *vehicle within* a domain — a palette domain is itself a licensed
+  **motif** and may recur across the whole telling on purpose; the ledger never suppresses
+  a domain, only nudges away from repeating the same phrasing inside it. Framed positively
+  ("already drawn from" + "not yet drawn from"); a raw blocklist was tried and rejected —
+  it can't tell "don't repeat this phrasing" from "don't touch this domain," so it
+  suppresses imagery the Voice Card wants kept. See
+  [ADR 0010](docs/adr/0010-repetition-and-voice-drift-control.md).
 - **Told-ledger** — a single table of `{fact_ref, first_learned_scene, last_touched_scene,
   centrality}`, driving introduce / assume / re-anchor decisions. A **fact** is an
   author-declared or auto-generated slug — not required to correspond to a World Model

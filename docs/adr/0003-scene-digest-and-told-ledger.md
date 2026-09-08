@@ -68,6 +68,15 @@ checkable by the continuity pass. This is an extension, not a reopening: every f
 decided here (item 2) stands: `reanchor_used` earns its place the same way — it makes one
 more rubric mode detectable — rather than being added speculatively.
 
+[ADR 0010](0010-repetition-and-voice-drift-control.md) reshapes `imagery_signature`'s
+entries from bare strings to `{image: string, domain: string | null}`, still capped at 3:
+the writer self-tags each recorded image against a Voice Card `imagery_palette` domain (or
+`null` for an ad hoc image outside the palette) at emission time. This is what lets the
+imagery ledger fed to later scenes distinguish a licensed motif (same domain) from lazy
+repetition (same phrasing) with a plain tag-equality check — no fuzzy matching, no extra
+call. Rollup behavior (item 6 above) is unchanged: union then re-cap to 3 by recency, now
+operating on `{image, domain}` pairs instead of bare strings.
+
 ## Consequences
 
 - Unblocks #12 (zoom-level context assembler), #13 (re-anchoring policy), and #14
