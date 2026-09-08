@@ -61,9 +61,11 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   call as the scene's prose (no separate extraction call), and the only thing that
   circulates in long-range context. Carries: event summary, entities on stage, facts
   revealed, plants opened, payoffs closed, **imagery signature** (the concrete images
-  actually used, capped at 3), and **closing situation** (where everyone stands physically
+  actually used, capped at 3), **closing situation** (where everyone stands physically
   *and emotionally* at the end — the sole home for emotional state; there is no separate
-  "emotional register" field). Target ~150–220 tokens. A **rollup** (Chapter/Part Digest)
+  "emotional register" field), and **`reanchor_used`** (the introduce/assume/reanchor/
+  reintroduce band the writer self-reports per touched entity, added by ADR 0009). Target
+  ~150–220 tokens. A **rollup** (Chapter/Part Digest)
   shares this schema but aggregates over its window rather than concatenating: event
   summary is freshly synthesized, list fields union, imagery signature re-caps to 3 by
   recency, closing situation inherits the window's last scene. See ADR 0003.
@@ -73,6 +75,14 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   row/column — so it can name things the schema has no column for ("the will was forged").
   Entity introduction ("has the reader met Marcus?") rides the same mechanism via an
   auto-generated `met:<entity_id>` fact, not a parallel structure.
+- **Re-anchoring policy** — the introduce / assume / reanchor / reintroduce decision for each
+  entity present in a scene, driven by `scenes_since_last_touch` and the told-ledger's
+  `centrality` (a `low`/`medium`/`high` ordinal, not a continuous score). Expressed to the
+  writer as a per-entity annotated list; plot facts stay owned by `reader_must_learn` /
+  `must_stay_hidden` instead. The writer self-reports the band it actually used per entity in
+  the digest's `reanchor_used` field, which is what makes **told-ledger miscalibration**
+  (see the rubric below) checkable by the continuity pass. See
+  [ADR 0009](docs/adr/0009-reanchoring-policy.md).
 
 ## Context assembly
 

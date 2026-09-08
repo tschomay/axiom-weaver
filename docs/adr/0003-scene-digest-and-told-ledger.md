@@ -59,6 +59,15 @@ Scene Card's `reader_must_learn`/`must_stay_hidden` all reference it without def
    learned-or-not, so there's no "chapter told-ledger" to compose — #12 queries the flat
    ledger by recency at assembly time instead.
 
+## Addendum (2026-09-08)
+
+[ADR 0009](0009-reanchoring-policy.md) extends the digest field set with `reanchor_used:
+{entity_id, band}[]` — the writer's self-reported introduce/assume/reanchor/reintroduce
+band per touched entity, which is what makes told-ledger miscalibration (ADR 0002)
+checkable by the continuity pass. This is an extension, not a reopening: every field
+decided here (item 2) stands: `reanchor_used` earns its place the same way — it makes one
+more rubric mode detectable — rather than being added speculatively.
+
 ## Consequences
 
 - Unblocks #12 (zoom-level context assembler), #13 (re-anchoring policy), and #14
