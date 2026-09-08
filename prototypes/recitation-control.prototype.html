@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>PROTOTYPE — Recitation control on the famous-prose fixture</title>
+<style>
+  :root {
+    --ink: #241f1a;
+    --paper: #faf6ef;
+    --panel: #fffdf8;
+    --line: #ddd3c0;
+    --accent: #8a3b2a;
+    --accent-soft: #f0ddd3;
+    --good: #2f6b3a;
+    --bad: #a13a2a;
+    --muted: #7a7263;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", serif;
+    line-height: 1.55;
+  }
+  .banner {
+    background: var(--accent);
+    color: white;
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 0.3rem; }
+  h2 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 1.05rem; margin-top: 0; color: var(--accent); }
+  h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.92rem; margin: 1rem 0 0.4rem; }
+  h4 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.82rem; margin: 0.8rem 0 0.3rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+  .intro, .panel {
+    max-width: 74rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 1.4rem;
+  }
+  .intro p, .panel p { margin: 0.4rem 0; }
+  .meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.86rem; color: var(--muted); }
+  code { background: #f0ebe0; padding: 0.05rem 0.3rem; border-radius: 4px; font-size: 0.9em; }
+  .prose { font-size: 1rem; white-space: pre-wrap; background: white; border: 1px solid var(--line); border-radius: 8px; padding: 0.9rem 1.1rem; }
+  .fields { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-bottom: 0.9rem; }
+  .fields th, .fields td { text-align: left; padding: 0.35rem 0.55rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .fields th { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.72rem; text-transform: uppercase; color: var(--muted); }
+  .finding { border-left: 3px solid var(--accent); padding: 0.4rem 0.8rem; margin: 0.6rem 0; background: #fff; border-radius: 0 6px 6px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.88rem; }
+  .finding.good { border-left-color: var(--good); }
+  .finding.gap { border-left-color: var(--bad); }
+  .tag { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.72rem; padding: 0.1rem 0.45rem; border-radius: 999px; margin: 0.05rem 0.2rem 0.05rem 0; background: var(--accent-soft); color: var(--accent); }
+  .tag.mandated { background: #fdeecb; color: #8a6a1a; }
+  .tag.original { background: #dcecdd; color: var(--good); }
+  mark.mandated { background: #fdeecb; padding: 0 0.15rem; border-radius: 3px; }
+  .section-label { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); margin: 1.2rem 0 0.3rem; border-top: 1px dashed var(--line); padding-top: 0.6rem; }
+  .section-label:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+</style>
+</head>
+<body>
+
+<div class="banner">Prototype — throwaway — answers issue #17 only</div>
+<h1>Recitation control on the famous-prose fixture</h1>
+
+<div class="intro">
+  <p><strong>Question this demo answers:</strong> when the Story Package is a story the
+  model has memorised (<em>A Christmas Carol</em>), does the engine perform it or recite
+  it — and how would the compiler even tell? Built against
+  <code>scene_01_counting_house</code> — the single highest recitation-risk scene in
+  either fixture, since its own <code>required_beats</code> already quote three of the
+  book's most famous lines.</p>
+  <p class="meta">A note on method, up front: this session has no Gemini API credentials
+  and no network path to Google's endpoints, so <strong>no real model call was made</strong>.
+  What follows is (a) an architectural finding that holds regardless of which model
+  renders the scene, established by reading the fixture's own JSON rather than by
+  running anything, and (b) one short hand-written performance of the scene, used the
+  same way issue #16's prototype used a hand-written scene — as a concrete artifact to
+  react to, not as a substitute for a real measurement. The real baseline (does
+  <code>gemini-3.7-flash</code> actually trip <code>finishReason: RECITATION</code> on
+  this fixture) is called out below as an execution step for whoever builds
+  <a href="https://github.com/tschomay/axiom-weaver/issues/19">the read-time run loop</a>,
+  not something this planning session can produce a number for.</p>
+</div>
+
+<div class="panel">
+  <h2>1. The finding that decided this ticket: the Scene Card already quotes Dickens</h2>
+  <p><code>scene_01_counting_house.required_beats</code>, verbatim from
+  <code>fixtures/a-christmas-carol/package.json</code>:</p>
+  <table class="fields">
+    <tr><th>#</th><th>required_beats entry</th><th></th></tr>
+    <tr><td>1</td><td>Fred visits, wishes his uncle a merry Christmas, and invites him to dinner; Scrooge answers <mark class="mandated">'Bah! Humbug!'</mark> and refuses</td><td><span class="tag mandated">author-quoted</span></td></tr>
+    <tr><td>2</td><td>two portly gentlemen ask Scrooge for a subscription for the poor; he asks whether there are no prisons, no workhouses</td><td><span class="tag mandated">author-paraphrased, close</span></td></tr>
+    <tr><td>3</td><td>told that many would rather die than go there, Scrooge answers that they had better do it, and <mark class="mandated">decrease the surplus population</mark></td><td><span class="tag mandated">author-quoted</span></td></tr>
+    <tr><td>4</td><td>Scrooge grudgingly allows Bob Cratchit the whole of Christmas Day off, calling it <mark class="mandated">a poor excuse for picking a man's pocket every twenty-fifth of December</mark></td><td><span class="tag mandated">author-quoted</span></td></tr>
+    <tr><td>5</td><td>Scrooge walks home alone through the fog to his gloomy chambers</td><td><span class="tag original">original paraphrase</span></td></tr>
+  </table>
+  <div class="finding gap">
+    <strong>Three of five required beats already embed Dickens' own wording.</strong>
+    The fixture author (issue #18) chose to quote rather than paraphrase the book's
+    three most recognisable lines. Any writer model instructed to satisfy these beats
+    will reproduce those phrases <em>on purpose</em> — that is not the writer
+    recalling training data, it is the writer following its brief. This single fact
+    reshapes the rest of the ticket: the question is never "did any Dickens wording
+    appear in the output," it's "did wording appear that the Scene Card never asked
+    for."
+  </div>
+</div>
+
+<div class="panel">
+  <h2>2. Why a client-side text-similarity detector can't be built here</h2>
+  <p>The obvious instinct — diff the generated prose against the source novel,
+  n-gram overlap or longest-common-substring, flag anything over a threshold — runs
+  into an architectural wall specific to this project, not a tooling limitation:</p>
+  <div class="finding">
+    <strong>The compiler's data model never holds canonical source prose.</strong>
+    The Story Package schema (<code>docs/schema/story-package.md</code>, ADR 0001) is
+    Scene Cards and World Model rows — Fabula and Syuzhet, author-owned. The engine's
+    read-time inputs (ADR 0008's zoom-level assembler, ADR 0012's volatile tail) are
+    built entirely from that schema plus the engine's own Scene/Chapter/Part digests.
+    There is no field anywhere in the pipeline that carries "here is Dickens' actual
+    paragraph for this scene, diff your output against it." Building one would mean
+    embedding a full copy of the source novel into every famous-prose Story Package
+    for the sole purpose of self-plagiarism-checking — a new schema surface this
+    ticket has no mandate to add, and one that would only ever fire for the
+    minority of Story Packages built from a memorised work in the first place.
+  </div>
+  <div class="finding">
+    <strong>Diffing against the Scene Card's own text detects the wrong thing.</strong>
+    The only text the compiler <em>does</em> hold at read time is the Scene Card
+    itself — and per finding 1, that text already contains the phrases most likely
+    to trip a naive detector, by design. A local LCS check against
+    <code>required_beats</code> would just confirm the writer did its job, every
+    time, on every scene in every fixture — pure noise, not a recitation signal.
+  </div>
+  <div class="finding good">
+    <strong>The one detector that actually exists lives on the far side of the API
+    call, not in the compiler.</strong> Gemini's own training-corpus matcher reports
+    <code>finishReason: RECITATION</code> (confirmed in the discovery document by
+    <a href="https://github.com/tschomay/axiom-weaver/issues/5">issue #5</a>'s
+    research, <code>docs/research/gemini-capabilities.md</code> §1) — Google's
+    classifier compares against everything it was trained on, which is exactly the
+    comparison this ticket wants and exactly the comparison the compiler has no way
+    to run locally. <a href="https://github.com/tschomay/axiom-weaver/issues/16">Issue
+    #16</a>'s writer prompt contract (ADR 0012 item 6) already gave this ticket a
+    retry-on-<code>RECITATION</code> hook to inherit rather than re-derive.
+  </div>
+</div>
+
+<div class="panel">
+  <h2>3. Worked example — one hand-written performance</h2>
+  <p class="meta">Original prose in the fixture's Voice Card register (Dickensian
+  comic-gothic, intrusive narrator, per <code>fixtures/a-christmas-carol/package.json</code>),
+  written to satisfy all five required beats. The three author-mandated quotations
+  are highlighted; everything else is this prototype's own paraphrase, not Dickens'
+  actual sentences.</p>
+  <div class="prose">Scrooge's office kept a chill of its own, colder than the fog outside could account for, and he liked it that way. So when his nephew Fred came in stamping the cold off his boots and glowing with more Christmas than any one room could reasonably hold, Scrooge received him the way he received most things that cost him nothing and asked for something back. "A merry Christmas, uncle! Dine with us tomorrow." Scrooge's answer arrived before the invitation had properly landed: <mark class="mandated">"Bah! Humbug!"</mark> Fred took the refusal the way he took everything from his uncle, cheerfully, and let himself back out into the weather no worse for it.
+
+He had scarcely gone before two portly gentlemen arrived instead, subscription-book in hand, wanting a little something for the Poor at this festive season. Scrooge wanted to know whether the prisons were still standing. They were. The workhouses too? Also standing, though the gentlemen allowed that many of the poor would rather die than go into one. "If they would rather die," Scrooge said, entirely satisfied with the logic of it, "they had better do it, and <mark class="mandated">decrease the surplus population</mark>." The gentlemen withdrew with their book unsigned.
+
+By the time the light failed, only Bob Cratchit remained, hunched at his desk in a coat too thin for the cold he wasn't allowed a fire against, and screwing up the courage to ask for the whole of Christmas Day off. Scrooge granted it the way he granted everything — as an injury he'd remember. "A <mark class="mandated">poor excuse for picking a man's pocket every twenty-fifth of December</mark>," he said, buttoning his coat to the chin, "but I suppose you must have it." Then he went out alone into the fog, which had no trouble finding his gloomy chambers, since it went everywhere else that evening too.</div>
+  <table class="fields">
+    <tr><th>Check</th><th>Result</th></tr>
+    <tr><td>All 5 required_beats present</td><td><span class="tag original">yes</span></td></tr>
+    <tr><td>Invariant — "Scrooge is courteous to no one this scene"</td><td><span class="tag original">holds</span></td></tr>
+    <tr><td>Length vs. 500-word budget</td><td>~330 words (0.66×) — under the 0.8–1.3× band ADR 0012 found reasonable for its own sample; this prototype prioritised showing quotation placement clearly over hitting the budget precisely</td></tr>
+    <tr><td>Sentences <em>outside</em> the three mandated quotations</td><td>original paraphrase — no attempt made to reproduce Dickens' actual narration, description, or sentence rhythm beyond what the Voice Card already specifies (long cumulative sentences, wry editorializing)</td></tr>
+  </table>
+  <div class="finding good">
+    The three mandated phrases sit inside otherwise-original sentences without reading
+    as seams — a human editor skimming this would flag them as quotation, not as the
+    surrounding prose secretly being Dickens'. That's the qualitative version of the
+    diagnosis this ticket asks for: <strong>whole-passage reproduction did not happen
+    here; isolated-line reproduction did, exactly where the Scene Card asked for it.</strong>
+    This is one hand-written sample, not a statistical claim about
+    <code>gemini-3.7-flash</code>'s actual behaviour — see the baseline gap in the box
+    below.
+  </div>
+</div>
+
+<div class="panel">
+  <h2>4. Decision: detection, diagnosis, mitigation</h2>
+  <table class="fields">
+    <tr><th>Question</th><th>Decision</th></tr>
+    <tr><td>Detection</td><td><code>finishReason: RECITATION</code> from the Gemini API is the <em>only</em> detector. No client-side n-gram/LCS text-similarity check is built (§2) — there is nothing in the compiler's data model to diff against.</td></tr>
+    <tr><td>Authored quotation vs. unbidden recall</td><td>Not distinguished, because it doesn't need to be. A phrase quoted in <code>required_beats</code>/dialogue is the writer satisfying its brief, identical in kind to any other mandated line — not a defect. This ticket's concern is scoped to reproduction the Scene Card never asked for.</td></tr>
+    <tr><td>Baseline</td><td>Not measurable in this session — no API access. Becomes an execution step for <a href="https://github.com/tschomay/axiom-weaver/issues/19">issue #19</a>'s first real run of the <em>A Christmas Carol</em> fixture: log <code>finishReason</code> per scene, watch specifically for <code>RECITATION</code> on this fixture vs. its near-absence on Cinderella (the control).</td></tr>
+    <tr><td>Mitigation</td><td>Reuse ADR 0012 item 6 as-is: one retry with a paraphrase instruction on <code>RECITATION</code>; a second occurrence falls through to the existing <code>scene_generation_failed</code> path, logged via the already-reserved <code>recitation_flagged</code> diagnostic (ADR 0012 item 7). No new mechanism. No preemptive Voice Card detuning — that trade against prose quality is only worth making if the baseline (above) shows a persistent problem.</td></tr>
+    <tr><td>Public-domain reality check</td><td>Legally moot — both fixtures are public domain. The line this ticket draws: an <em>engine-initiated</em>, multi-sentence verbatim reproduction the Scene Card never requested would make the POC dishonest about its own capability; an author-instructed short quotation, or the model's compliant rendering of one, is not that.</td></tr>
+  </table>
+</div>
+
+<div class="section-label">Answer, in one line</div>
+<p class="meta">The engine performs unless Google's own classifier says otherwise; the compiler has no independent way to check, and the one case that looked like a problem on paper (the Scene Card's own famous quotations) turns out not to be recitation at all. Full reasoning and consequences in ADR 0013.</p>
+
+</body>
+</html>
