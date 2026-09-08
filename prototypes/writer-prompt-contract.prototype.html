@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>PROTOTYPE — The writer prompt contract</title>
+<style>
+  :root {
+    --ink: #241f1a;
+    --paper: #faf6ef;
+    --panel: #fffdf8;
+    --line: #ddd3c0;
+    --accent: #8a3b2a;
+    --accent-soft: #f0ddd3;
+    --good: #2f6b3a;
+    --bad: #a13a2a;
+    --muted: #7a7263;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", serif;
+    line-height: 1.55;
+  }
+  .banner {
+    background: var(--accent);
+    color: white;
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 0.3rem; }
+  h2 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 1.05rem; margin-top: 0; color: var(--accent); }
+  h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.92rem; margin: 1rem 0 0.4rem; }
+  h4 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.82rem; margin: 0.8rem 0 0.3rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+  .intro, .panel {
+    max-width: 74rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 1.4rem;
+  }
+  .intro p, .panel p { margin: 0.4rem 0; }
+  .meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.86rem; color: var(--muted); }
+  code { background: #f0ebe0; padding: 0.05rem 0.3rem; border-radius: 4px; font-size: 0.9em; }
+  .tabs { display: flex; gap: 0.4rem; margin-bottom: 0.9rem; flex-wrap: wrap; max-width: 74rem; }
+  button.tab {
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    background: white;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button.tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .pane { display: none; }
+  .pane.active { display: block; }
+  .prose { font-size: 1rem; white-space: pre-wrap; background: white; border: 1px solid var(--line); border-radius: 8px; padding: 0.9rem 1.1rem; }
+  .fields { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-bottom: 0.9rem; }
+  .fields th, .fields td { text-align: left; padding: 0.35rem 0.55rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .fields th { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.72rem; text-transform: uppercase; color: var(--muted); }
+  pre.tmpl { background: #f0ebe0; padding: 0.8rem 1rem; border-radius: 8px; font-size: 0.82rem; white-space: pre-wrap; font-family: "SF Mono", Menlo, monospace; overflow-x: auto; }
+  pre.json { background: #241f1a; color: #f3ead9; padding: 0.9rem 1.1rem; border-radius: 8px; font-size: 0.8rem; white-space: pre-wrap; font-family: "SF Mono", Menlo, monospace; overflow-x: auto; }
+  .finding { border-left: 3px solid var(--accent); padding: 0.4rem 0.8rem; margin: 0.6rem 0; background: #fff; border-radius: 0 6px 6px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.88rem; }
+  .finding.good { border-left-color: var(--good); }
+  .finding.gap { border-left-color: var(--bad); }
+  .tag { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.72rem; padding: 0.1rem 0.45rem; border-radius: 999px; margin: 0.05rem 0.2rem 0.05rem 0; background: var(--accent-soft); color: var(--accent); }
+  .tag.assume { background: #dcecdd; color: var(--good); }
+  .tag.reanchor { background: #fdeecb; color: #8a6a1a; }
+  .section-label { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); margin: 1rem 0 0.3rem; border-top: 1px dashed var(--line); padding-top: 0.6rem; }
+  .section-label:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+  .cache-h { color: var(--good); font-weight: 600; }
+  .cache-i { color: #8a6a1a; font-weight: 600; }
+  .cache-n { color: var(--bad); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="banner">Prototype — throwaway — answers issue #16 only</div>
+<h1>The writer prompt contract</h1>
+
+<div class="intro">
+  <p><strong>Question this demo answers:</strong> what is the exact input/output contract
+  for a single scene-generation call — the output schema, the instruction layering when many
+  constraints (plant obligations, re-anchoring, imagery ledger, voice, variance dial) land in
+  one prompt, length control, and the failure paths (truncation, malformed output, content
+  filters) that an unattended read-time compile cannot just retry forever.</p>
+  <p class="meta">Built against the <strong>Cinderella</strong> fixture,
+  <code>scene_13_the_fitting</code> (order 13 of 14) — chosen because it is the first scene
+  after a rollup boundary (so the cached digest hierarchy is exactly three Chapter Digests,
+  nothing flatter or messier to show), it carries a live plant-payoff obligation (issue #8),
+  and its re-anchoring bands span <code>assume</code> <em>and</em> <code>reanchor</code> at
+  once. Prose and JSON output were written by hand against the template below, standing in for
+  the writer call — no live model wiring, same precedent as
+  <code>prototype/voice-card-style-presets</code>, <code>prototype/context-assembler</code>, and
+  <code>prototype/repetition-voice-drift-control</code>.</p>
+</div>
+
+<div class="tabs" id="tabs"></div>
+<div id="panes"></div>
+
+<script>
+const tabs = [
+  { id: "contract", label: "1. The output contract" },
+  { id: "layering", label: "2. Instruction layering" },
+  { id: "generated", label: "3. Generated scene 13" },
+  { id: "failure", label: "4. Truncation & failure handling" },
+  { id: "diagnostics", label: "5. Diagnostics taxonomy" },
+];
+const tabsEl = document.getElementById("tabs");
+const panesEl = document.getElementById("panes");
+tabs.forEach((t, i) => {
+  const b = document.createElement("button");
+  b.className = "tab" + (i === 0 ? " active" : "");
+  b.textContent = t.label;
+  b.onclick = () => {
+    document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+    document.querySelectorAll(".pane").forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    document.getElementById("pane-" + t.id).classList.add("active");
+  };
+  tabsEl.appendChild(b);
+});
+</script>
+
+<!-- ============================================================ -->
+<!-- TAB 1: THE OUTPUT CONTRACT -->
+<!-- ============================================================ -->
+<div class="pane active" id="pane-contract">
+  <div class="panel">
+    <h2>The output schema</h2>
+    <p>One <code>streamGenerateContent</code> call, <code>generationConfig.responseFormat.text</code>
+    with <code>mimeType: application/json</code> and a <code>responseJsonSchema</code> using
+    <code>$defs</code>/<code>$ref</code> — per <a href="https://github.com/tschomay/axiom-weaver/blob/claude/dynamic-novel-compiler-qeahkf/docs/research/gemini-capabilities.md">#5's research</a>,
+    not <code>responseSchema</code> (deprecated) and not the Interactions API (its
+    server-side <code>store=true</code> history would duplicate the Discourse Record the
+    compiler already owns). <code>propertyOrdering</code> pins the top-level emission order to
+    <code>prose → scene_digest → state_updates → diagnostics</code>: prose first so a
+    streaming reader sees words immediately, not after the whole digest has been thought
+    through; everything after it is written <em>about</em> prose that already exists.</p>
+    <p>Every field below traces to a named ADR — nothing is invented for this ticket alone.
+    The schema is deliberately lean: it is billed as input on <strong>every</strong> call and
+    cannot be cached (research finding #4), so a fat schema is a real per-scene tax, not a
+    one-time cost.</p>
+    <pre class="json">{
+  "$defs": {
+    "ImagerySignatureEntry": {
+      "type": "object",
+      "properties": {
+        "image":  { "type": "string" },
+        "domain": { "type": ["string", "null"] }
+      },
+      "required": ["image", "domain"]
+    },
+    "ReanchorEntry": {
+      "type": "object",
+      "properties": {
+        "entity_id": { "type": "string" },
+        "band": { "type": "string", "enum": ["introduce", "assume", "reanchor", "reintroduce"] }
+      },
+      "required": ["entity_id", "band"]
+    },
+    "SceneDigest": {
+      "type": "object",
+      "propertyOrdering": ["event_summary", "entities_on_stage", "facts_revealed",
+                            "plants_opened", "payoffs_closed", "imagery_signature",
+                            "closing_situation", "reanchor_used"],
+      "properties": {
+        "event_summary":      { "type": "string", "description": "<= ~2 sentences (ADR 0003)" },
+        "entities_on_stage":  { "type": "array", "items": { "type": "string" } },
+        "facts_revealed":     { "type": "array", "items": { "type": "string" }, "description": "reader-facing fact_refs, not in-world knowledge" },
+        "plants_opened":      { "type": "array", "items": { "type": "string" } },
+        "payoffs_closed":     { "type": "array", "items": { "type": "string" } },
+        "imagery_signature":  { "type": "array", "items": { "$ref": "#/$defs/ImagerySignatureEntry" }, "maxItems": 3 },
+        "closing_situation":  { "type": "string", "description": "<= ~2 sentences; physical AND emotional (ADR 0003)" },
+        "reanchor_used":      { "type": "array", "items": { "$ref": "#/$defs/ReanchorEntry" } }
+      },
+      "required": ["event_summary", "entities_on_stage", "facts_revealed", "plants_opened",
+                   "payoffs_closed", "imagery_signature", "closing_situation", "reanchor_used"]
+    },
+    "StateUpdate": {
+      "type": "object",
+      "properties": {
+        "entity_id": { "type": "string" },
+        "column":    { "type": "string" },
+        "value":     {}
+      },
+      "required": ["entity_id", "column", "value"],
+      "description": "Tier (P/E/V) is looked up from the column name at validation time (ADR 0001/0005) — the writer proposes a value, it never declares a tier."
+    },
+    "NewRelationship": {
+      "type": "object",
+      "properties": {
+        "from_id": { "type": "string" }, "to_id": { "type": "string" },
+        "kind": { "type": "string" }, "sentiment": { "type": ["string", "null"] }
+      },
+      "required": ["from_id", "to_id", "kind", "sentiment"]
+    },
+    "NewCharacterKnowledge": {
+      "type": "object",
+      "properties": {
+        "character_id": { "type": "string" }, "fact_ref": { "type": "string" }
+      },
+      "required": ["character_id", "fact_ref"],
+      "description": "learned_at_scene and id are filled in by the compiler, not the writer."
+    },
+    "StateUpdates": {
+      "type": "object",
+      "propertyOrdering": ["updates", "new_relationships", "new_character_knowledge"],
+      "properties": {
+        "updates":               { "type": "array", "items": { "$ref": "#/$defs/StateUpdate" } },
+        "new_relationships":     { "type": "array", "items": { "$ref": "#/$defs/NewRelationship" } },
+        "new_character_knowledge": { "type": "array", "items": { "$ref": "#/$defs/NewCharacterKnowledge" } }
+      },
+      "required": ["updates", "new_relationships", "new_character_knowledge"]
+    },
+    "Diagnostic": {
+      "type": "object",
+      "properties": {
+        "type":   { "type": "string", "enum": ["beat_unsatisfied", "missing_fact"] },
+        "detail": { "type": "string" }
+      },
+      "required": ["type", "detail"],
+      "description": "Compiler-derived diagnostics (state-update rejections, plant misses, etc.) are NOT writer fields — see tab 5."
+    }
+  },
+  "type": "object",
+  "propertyOrdering": ["prose", "scene_digest", "state_updates", "diagnostics"],
+  "properties": {
+    "prose":         { "type": "string" },
+    "scene_digest":  { "$ref": "#/$defs/SceneDigest" },
+    "state_updates": { "$ref": "#/$defs/StateUpdates" },
+    "diagnostics":   { "type": "array", "items": { "$ref": "#/$defs/Diagnostic" } }
+  },
+  "required": ["prose", "scene_digest", "state_updates", "diagnostics"]
+}</pre>
+    <div class="finding">
+      <strong>Why <code>diagnostics</code> only has two writer-facing types.</strong>
+      Everything else the map's Diagnostics section (<code>CONTEXT.md</code>) talks about —
+      <code>exit_state_contradiction</code>, <code>unauthorized_entity_update</code>,
+      <code>unentailed_reversion</code>, <code>entry_state_mismatch</code>, dropped-plant misses
+      — is the compiler grading the writer's <code>state_updates</code>/digest <em>after</em>
+      the call returns (ADR 0004 §6, ADR 0005 §5). Asking the writer to self-report those too
+      would be asking it to grade its own homework in the same breath it does the homework —
+      redundant with the mechanical check and a wider schema for no reliability gain. The
+      writer only reports what <em>only it</em> can know: that a beat didn't fit, or that it
+      needed a fact the context didn't supply.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Length control</h2>
+    <p>Rendered as a soft target with an <strong>asymmetric</strong> tolerance band, not a hard
+    cap: <code>"Aim for approximately {length_budget} words. A little over is fine if the beats
+    need room; well under is a sign a beat was skipped."</code> Asymmetric because undershoot
+    usually means a beat got cut (a variance-contract miss), while overshoot just costs a bit
+    more output budget — the two failure directions aren't equally bad.</p>
+    <p><code>maxOutputTokens</code> is budgeted at roughly <strong>2× the length budget in
+    tokens</strong> (research recommendation), which has to cover prose <em>plus</em> the
+    digest/state_updates/diagnostics tail that comes after it in the same response — a
+    budget sized to prose alone would starve the tail and manufacture truncation on every call.
+    Tab 3 reports the actual word count the hand-written scene 13 landed at, against this
+    budget, as the honesty check the ticket asks for ("the prose is the evidence").</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 2: INSTRUCTION LAYERING -->
+<!-- ============================================================ -->
+<div class="pane" id="pane-layering">
+  <div class="panel">
+    <h2>Payload order, assembled for scene 13</h2>
+    <p>Segment order follows <a href="https://github.com/tschomay/axiom-weaver/blob/main/docs/adr/0008-zoom-level-context-assembler.md">ADR 0008</a>'s
+    mandate directly: <span class="cache-h">explicit-cache header</span> (never changes
+    within a read) → <span class="cache-i">implicit-cache digest hierarchy</span> (append-only)
+    → <span class="cache-n">uncached verbatim tail + volatile tail</span> (mutates every
+    scene). Where this ticket had to add its own decision: <strong>where the Voice Card's
+    imagery ledger and the scene's own tone instruction go.</strong> ADR 0007 and ADR 0010 both
+    describe the ledger as rendered "after the Voice Card block, before the scene's tone
+    instruction" — but the Voice Card lives in the cached header while <code>tone</code> is a
+    Scene Card field that ADR 0008 places in the volatile tail. Those two placements can't be
+    textually adjacent across a cache boundary. Resolved here by treating "after Voice Card,
+    before tone" as describing the <em>volatile tail's own internal order</em>: the ledger
+    (which mutates every scene, so cannot live in the explicit-cache header regardless) renders
+    inside the tail, immediately before the Scene Card's <code>tone</code> line. This is exactly
+    the kind of seam the map's Notes said this ticket would have to close — three separate ADRs
+    each solved their own piece without one of them owning where the pieces physically meet.</p>
+
+    <div class="section-label cache-h">Explicit-cache header (systemInstruction — created once per read, referenced by every scene's call)</div>
+    <pre class="tmpl">You are the performance engine for a Dynamic Novel Compiler. You render a fixed
+Story Package into prose. You never invent plot: the scene's beats, entry/exit
+state, and what the reader learns are authored — your only freedom is HOW it is
+told (dialogue, imagery, interiority, micro-beat order, pacing within budget).
+
+OUTPUT: prose, then scene_digest, then state_updates, then diagnostics, in that
+order, matching the response schema exactly.
+
+STATE UPDATES: for each World Model column you touch, propose {entity_id, column,
+value}. Physical and epistemic columns (location, possessions, status, who-knows-
+what) are committed automatically if they satisfy or merely extend this scene's
+exit_state, and are REJECTED if they contradict exit_state, target an entity this
+scene never mentions, or revert a previously-established fact without this scene
+giving grounds to. Volitional columns (goal, sentiment) are proposals only —
+propose freely, the engine decides whether to keep them.
+
+MUST_STAY_HIDDEN is absolute. Prose streams to the reader before anything else in
+your response is checkable — once a hidden fact is on the page, it cannot be
+un-shown. Treat it as a hard constraint, not a soft preference.
+
+DIAGNOSTICS: report beat_unsatisfied if a required beat could not be honored
+without contradicting something else in the scene, and missing_fact if you needed
+a fact you were not given. Do not report anything else — the compiler checks
+state-update validity, plant obligations, and invariant satisfaction on its own.
+
+LENGTH: aim for approximately the scene's length_budget in words. A little over
+is fine if the beats need room; well under is a sign a beat got cut.
+
+VOICE (story-level, stable across the whole telling):
+- Point of view: third, past tense. Narrative distance: omniscient but
+  close-focused on Cinderella; steps back only for the kingdom-circuit scene.
+- Register: plain, warmly ironic, folk-narrator; understates cruelty and wonder alike.
+- Sentence rhythm: short declarative sentences; occasional triads.
+- Preferred imagery (draw from these before inventing new ones): hearth ash and
+  cinders; gold and silver brocade; glass catching candlelight; garden vermin
+  transfigured into finery.
+- Dialogue: low to moderate; report more than you stage; reserve dialogue for the
+  sharpest lines.
+- Exemplar, for calibration only — do not reuse its content: "The cinders did not
+  care that she was beautiful; they only made her so, night after night, until one
+  night they didn't."
+
+WORLD MODEL SCHEMA (columns you may propose values for; tier in parens — you don't
+need to reason about tier, just propose what the scene implies):
+- character: location_id (P), status (P), goal (V)
+- location: (no writable columns used by this story)
+- object: location_id (P), status (P)
+- relationship: kind (P, only via new_relationships), sentiment (V)
+- character_knowledge: existence of a row is the fact (E, via new_character_knowledge)</pre>
+
+    <div class="section-label cache-i">Implicit-cache digest hierarchy (append-only; scene 13 lands right after a rollup, so this is exactly 3 Chapter Digests, no loose Scene Digests)</div>
+    <pre class="tmpl">CHAPTER DIGEST 1 (scenes 1-4):
+  A widower remarries a proud woman with two vain daughters; Cinderella is demoted
+  to servant and sleeps by the hearth. Word comes of the Prince's ball; the sisters
+  preen while Cinderella dresses them, then mocks the idea of her attending. The
+  family departs, leaving Cinderella alone in tears.
+  entities: char_cinderella, char_father, char_stepmother, char_stepsister_elder,
+            char_stepsister_charlotte
+  facts_revealed: []  plants_opened: []  payoffs_closed: []
+  imagery: [hearth ash and cinders: "ash-smudged hands at the cold grate"]
+  closing_situation: Cinderella alone in the emptied house, weeping by the hearth
+                      as evening comes on.
+
+CHAPTER DIGEST 2 (scenes 5-8):
+  A fairy godmother transforms pumpkin, mice, rat, and lizards into coach and
+  retinue, and Cinderella's rags into a gown and glass slippers, under a strict
+  midnight condition. At the ball she dazzles the court and the Prince, unrecognized
+  by her own family; she leaves in good time, shares her favors with her sisters in
+  disguise, and thanks her godmother, already hoping to return.
+  entities: char_cinderella, char_godmother, char_prince, char_stepmother,
+            char_stepsister_elder, char_stepsister_charlotte
+  facts_revealed: [midnight_condition, cinderella_is_the_ball_girl]
+  plants_opened: [midnight_condition]  payoffs_closed: []
+  imagery: [gold and silver brocade: "a gown finer than any in the kingdom",
+            glass catching candlelight: "slippers that rang faintly on the stair"]
+  closing_situation: Cinderella at the chimney-corner, grateful, already hoping for
+                      a second night.
+
+CHAPTER DIGEST 3 (scenes 9-12):
+  The sisters recount the mystery princess to Cinderella's own unknowing face and
+  refuse to lend her a dress. She returns to a second ball, more radiant still, but
+  loses track of time; fleeing at the midnight bell she leaves a glass slipper on
+  the steps as her magic reverts, and comes home in rags with only its match hidden
+  in her pocket. The Prince proclaims he will marry whoever the slipper fits, and
+  the search moves house to house toward her father's door.
+  entities: char_cinderella, char_stepsister_elder, char_stepsister_charlotte,
+            char_prince, char_gentleman_usher
+  facts_revealed: [sisters_unaware_cinderella_attended, cinderella_kept_second_slipper]
+  plants_opened: [cinderella_kept_second_slipper]  payoffs_closed: [midnight_condition]
+  imagery: [glass catching candlelight: "one slipper left on the palace steps",
+            hearth ash and cinders: "home again in rags, breathless"]
+  closing_situation: the search for the slipper's owner has narrowed, house by
+                      house, to arrive at last at her father's door.</pre>
+
+    <div class="section-label">Uncached — verbatim tail (final paragraph of scene 12's actual prose, not its digest)</div>
+    <pre class="tmpl">...and so the gentleman-in-waiting came, as he had come to a hundred doors before
+this one, to a house no grander than the rest, and had the slipper carried up the
+steps behind him, not knowing — how could he? — that he was about to be the first
+person in the kingdom to guess correctly by accident.</pre>
+
+    <div class="section-label cache-n">Uncached — volatile tail (mutates every scene; the order below is this ticket's own contribution)</div>
+    <pre class="tmpl">SCENE CARD — scene_13_the_fitting (order 13)
+Location: her father's house. Present: Cinderella, the elder stepsister,
+Miss Charlotte, the gentleman-in-waiting.
+Dramatic function: the recognition scene — both plants pay off together.
+Entry state: char_cinderella.location_id = loc_chimney_corner (verified against
+  current World Model — matches, no entry_state_mismatch).
+Exit state (reach by scene's end): obj_glass_slipper_1.status=intact,
+  location_id=null; obj_gown.status=intact, location_id=null;
+  char_cinderella.location_id=loc_house.
+Required beats:
+  - the sisters try the slipper in vain, squeezing and forcing their feet
+  - Cinderella asks if she may try, and is laughed at
+  - the gentleman-in-waiting says he has orders to let every maiden try, and
+    looks earnestly at Cinderella, finding her very beautiful
+  - the slipper goes onto her foot with perfect ease
+  - Cinderella draws the fellow slipper from her pocket and puts it on
+  - the godmother appears and touches Cinderella's clothes with her wand,
+    turning them richer than ever before, in full view of the sisters this time
+Invariants: the slipper fits no one else who tries it; this transformation,
+  unlike the first, is witnessed openly by the stepfamily.
+Tone: electric, cathartic.
+Length budget: 450 words.
+
+THIS SCENE RESOLVES (pays_off — report in payoffs_closed once resolved):
+  - cinderella kept second slipper (planted earlier; you do not need to invent
+    where — it was already declared there)
+  [note: ADR 0004 only specified the PLANT-side instruction template ("make the
+   reader register X without dwelling on it"). The payoff side needed its own,
+   symmetric rendering — this ticket adds it.]
+
+RE-ANCHORING (scenes since last touch → band; centrality in parens):
+  - Cinderella (high): 2 scenes — assume, established
+  - the elder stepsister (medium): 4 scenes — reanchor lightly, a distinguishing
+    clause, not a re-explanation
+  - Miss Charlotte (medium): 4 scenes — reanchor lightly, same as above
+  - the gentleman-in-waiting (low): 1 scene — assume, just introduced last scene
+  - the kept glass slipper (obj_glass_slipper_2, high): 2 scenes — assume
+  - the recovered glass slipper (obj_glass_slipper_1, high): 3 scenes — assume
+  - the gown (medium): 3 scenes — assume
+
+IMAGERY LEDGER (vary the phrasing, not the domain — recurrence inside a domain is
+licensed, reusing the same wording is not):
+  - hearth ash and cinders — already drawn from (scenes 1, 4, 11)
+  - gold and silver brocade — already drawn from (scenes 5, 6)
+  - glass catching candlelight — already drawn from (scenes 5, 10)
+  - garden vermin transfigured into finery — already drawn from (scene 5)
+  [note: every palette domain has now been used at least once. There is nothing
+   left for a "not yet drawn from" list — the block degrades gracefully to a
+   pure "already drawn from" list, still positive-framed per ADR 0010, never a
+   blocklist.]
+
+SCENE TONE (this scene only — shapes emphasis, never overrides the voice above):
+electric, cathartic
+
+WORLD MODEL ROWS (filtered to this scene's footprint — characters_present, their
+location, and objects present or held; ADR 0008 §4):
+  char_cinderella: {location_id: loc_chimney_corner, status: alive}
+  char_stepsister_elder: {location_id: loc_house, status: alive}
+  char_stepsister_charlotte: {location_id: loc_house, status: alive}
+  char_gentleman_usher: {location_id: loc_house, status: alive}
+  loc_house: {name: "her father's house"}
+  obj_glass_slipper_1: {status: lost, location_id: loc_palace_steps}  <- carried in
+  obj_glass_slipper_2: {status: intact, location_id: null}  <- possessed by Cinderella
+
+TOLD-LEDGER SLICE (met:-facts for entities present this scene; ADR 0009 §5):
+  met:char_cinderella (scene 1), met:char_stepsister_elder (scene 1),
+  met:char_stepsister_charlotte (scene 1), met:char_gentleman_usher (scene 12)</pre>
+
+    <div class="finding gap">
+      <strong>Gap this exposed: the godmother isn't in this scene's
+      <code>characters_present</code>, but a required beat has her walk in.</strong> ADR 0008's
+      join is deterministic off declared fields only — it will not pull her World Model row
+      (her <code>bag: {nature: "fairy"}</code>, her relationship to Cinderella) unless she's
+      listed. She has no state to update here, so ADR 0005's footprint rule never rejects
+      anything — but the writer still has to characterize her from nothing but her name and
+      the beat text. <strong>Recommendation for whoever next authors or edits a Story
+      Package:</strong> <code>characters_present</code> should list every character with an
+      on-page beat, not only those whose World Model row changes. This is an authoring
+      convention gap in the fixture (#18), not a bug in this contract — flagged here rather
+      than silently worked around, and not fixed in the fixture file itself since that's
+      outside this ticket's scope.
+    </div>
+    <div class="finding gap">
+      <strong>A second, sharper instance of the same class: <code>char_prince</code> is not
+      present in scene 13, but the fixture's <code>exit_state</code> has him learning
+      <code>cinderella_is_the_ball_girl</code> here.</strong> Unlike the godmother, this
+      <em>is</em> a state-update, and ADR 0005 §2's footprint rule is unambiguous:
+      <code>unauthorized_entity_update</code> for any proposal touching an entity absent from
+      the scene. A correctly-instructed writer must simply not propose that row — see tab 3's
+      <code>state_updates</code>, which drops it — logged as a <code>missing_fact</code>-style
+      note rather than committed. The fixture's own fix is either moving
+      <code>char_prince</code> into <code>characters_present</code> (plausible — many tellings
+      have him present for the fitting) or moving that one <code>character_knowledge</code> row
+      to scene 14, where he is present. Not this ticket's fixture to edit; flagged for whoever
+      next touches #18.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 3: GENERATED SCENE 13 -->
+<!-- ============================================================ -->
+<div class="pane" id="pane-generated">
+  <div class="panel">
+    <h2>The response, exactly as it would come back</h2>
+    <p class="meta">Written by hand against the assembled prompt in tab 2, standing in for the
+    writer call (no live model wiring — see the intro). <code>prose</code> is first in the
+    actual JSON; shown as rendered text here for readability.</p>
+    <h3>prose</h3>
+    <div class="prose">The elder sister sat first, and squeezed, and turned red in the face, and would not admit that her heel had refused the slipper by a good half-inch. The younger fared no better, though she pushed until the stitching at her toe gave way. The gentleman-in-waiting held the slipper very correctly through both attempts and said nothing at all about either one, which was its own kind of verdict.
+
+"Let me try," said Cinderella, from her corner by the door.
+
+Her sisters burst out laughing, the easy laugh of people to whom a joke costs nothing. A Cinderwench, at the slipper of a princess! But the gentleman-in-waiting only looked at her — looked, in fact, the way no one in that house had troubled to look at her in a long while — and said that his orders were to let every maiden in the kingdom try who wished it, and he did not see that she should be the one exception. He found her, though he did not say so aloud, very beautiful indeed.
+
+The slipper went on as if it had been cut to her foot that very morning. In a manner of speaking, it had.
+
+Her sisters' laughter stopped the way a clock stops when the weight runs out. Before either of them could find a new objection, Cinderella drew the fellow slipper from her pocket — the one she had kept three days now, telling no one, turning it over some nights by the light of the banked fire, ash and glass both catching what little there was to catch — and set it beside its match.
+
+That was when the godmother came in, as godmothers do, by no door anyone had troubled to open, and touched her wand to Cinderella's rags. The gown that came over her was gold and silver, finer than either ball's had been, and this time no one in the room blinked and failed to know her. Her sisters saw it happen with their own eyes: the ash-grey servant who had dressed their hair not a week before, becoming, feature by feature, the beautiful stranger the whole court had danced with — and understood, all at once and a full week too late, exactly whose oranges they had eaten on the palace steps, and whose foot they had just watched a glass slipper accept without complaint.</div>
+
+    <h3>scene_digest</h3>
+    <pre class="json">{
+  "event_summary": "The sisters fail the slipper in turn; Cinderella asks to try and is mocked, then fits it perfectly and produces its match from her pocket. The godmother appears and restores her finery openly, and the sisters recognize her at last.",
+  "entities_on_stage": ["char_cinderella", "char_stepsister_elder", "char_stepsister_charlotte", "char_gentleman_usher", "char_godmother"],
+  "facts_revealed": [],
+  "plants_opened": [],
+  "payoffs_closed": ["cinderella_kept_second_slipper"],
+  "imagery_signature": [
+    { "image": "ash and glass both catching what little firelight there was", "domain": "hearth ash and cinders" },
+    { "image": "a gown of gold and silver, finer than either ball's had been", "domain": "gold and silver brocade" }
+  ],
+  "closing_situation": "Cinderella stands in her father's house with both slippers on her feet, dressed richer than ever before in plain view of her astonished sisters, the godmother beside her.",
+  "reanchor_used": [
+    { "entity_id": "char_cinderella", "band": "assume" },
+    { "entity_id": "char_stepsister_elder", "band": "reanchor" },
+    { "entity_id": "char_stepsister_charlotte", "band": "reanchor" },
+    { "entity_id": "char_gentleman_usher", "band": "assume" }
+  ]
+}</pre>
+    <p class="meta">Note <code>facts_revealed: []</code> — the <em>reader</em> already knew
+    Cinderella was the ball's mystery guest since scene 6; what's new here is only that the
+    <em>sisters</em> now know, which is a <code>character_knowledge</code> fact
+    (<code>state_updates</code>, below), not a told-ledger one. <code>godmother</code> appears
+    in <code>entities_on_stage</code> despite not being in <code>reanchor_used</code> — direct
+    consequence of the gap flagged in tab 2: she was never in the re-anchoring instruction to
+    begin with, so the writer has nothing to self-report a band against.</p>
+
+    <h3>state_updates</h3>
+    <pre class="json">{
+  "updates": [
+    { "entity_id": "obj_glass_slipper_1", "column": "status", "value": "intact" },
+    { "entity_id": "obj_glass_slipper_1", "column": "location_id", "value": null },
+    { "entity_id": "obj_gown", "column": "status", "value": "intact" },
+    { "entity_id": "obj_gown", "column": "location_id", "value": null },
+    { "entity_id": "char_cinderella", "column": "location_id", "value": "loc_house" }
+  ],
+  "new_relationships": [],
+  "new_character_knowledge": [
+    { "character_id": "char_stepsister_elder", "fact_ref": "cinderella_is_the_ball_girl" },
+    { "character_id": "char_stepsister_charlotte", "fact_ref": "cinderella_is_the_ball_girl" }
+  ]
+}</pre>
+    <p class="meta"><code>char_prince</code> learning the same fact — present in the fixture's
+    authored <code>exit_state</code> — is deliberately <strong>not</strong> proposed here; see
+    the gap noted in tab 2. Every other line matches the Scene Card's <code>exit_state</code>
+    exactly, so the validator (ADR 0005) accepts all five updates as satisfying the invariant.</p>
+
+    <h3>diagnostics</h3>
+    <pre class="json">[
+  { "type": "missing_fact", "detail": "The godmother is not listed in this scene's characters_present, so her World Model row (relationship, established nature) was not in context. Characterized her from the required beat text and the established prior appearance in scene 5 only." }
+]</pre>
+
+    <h3>Evaluation — is this the evidence the ticket asked for?</h3>
+    <table class="fields">
+      <tr><th>Check</th><th>Result</th></tr>
+      <tr><td>Length budget</td><td>390 words against a 450-word budget (87%, inside the 0.8–1.3× band) — landed toward the low end because the two dialogue beats resolve quickly on the page; a beat list with more back-and-forth would naturally want more room. Consistent with the asymmetric tolerance in tab 1: under budget here is fine, not a miss.</td></tr>
+      <tr><td>All six required beats present</td><td>Yes — sisters fail in turn, Cinderella asks and is mocked, the usher's line and his private judgement, the perfect fit, the second slipper from the pocket, the open transformation.</td></tr>
+      <tr><td>Invariants held</td><td>Yes — no one else's foot fits (both sisters fail on the page); the transformation is explicitly witnessed ("her sisters saw it happen with their own eyes"), unlike scene 5's.</td></tr>
+      <tr><td>Re-anchoring bands audible in the prose, not just reported</td><td>Yes — the stepsisters get a light callback ("the way no one in that house had troubled to look at her") rather than a re-introduction; the usher is used by role with no re-explanation, matching <code>assume</code>.</td></tr>
+      <tr><td>Imagery ledger honored</td><td>Both domains used recur in phrasing distinct from their prior appearances ("ash and glass both catching what little firelight there was" vs. scene 11's unrecorded phrasing) rather than reusing a stock line — consistent with ADR 0010's "vary the vehicle, not the domain."</td></tr>
+      <tr><td>Voice held (register, rhythm)</td><td>Plain declaratives, one triad-adjacent construction ("squeezed... turned red... would not admit"), understated cruelty and wonder alike — matches the Voice Card without a person/tense shift.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 4: TRUNCATION & FAILURE HANDLING -->
+<!-- ============================================================ -->
+<div class="pane" id="pane-failure">
+  <div class="panel">
+    <h2>Truncation is a required code path (research finding #5)</h2>
+    <p><code>MAX_TOKENS</code> under a schema returns truncated, unparseable JSON with
+    <strong>no partial-object recovery</strong> from the API itself. Because
+    <code>propertyOrdering</code> puts <code>prose</code> first, the common failure shape is:
+    prose completes, and the digest/state_updates/diagnostics tail gets cut. The reader may
+    already have streamed and read that prose — it cannot be un-shown — so the recovery has to
+    salvage the digest, not discard the scene.</p>
+
+    <h3>1. Simulated raw stream, cut mid-digest</h3>
+    <pre class="tmpl">{"prose":"The elder sister sat first, and squeezed [...] whose foot they had just watched a glass slipper accept without complaint.","scene_digest":{"event_summary":"The sisters fail the slipper in turn; Cinderella asks to try and is mocked, then fits it perfectly and produces its match from her po</pre>
+    <p class="meta">(<code>finishReason: MAX_TOKENS</code> — <code>candidate.content</code> ends mid-string, no closing brace.)</p>
+
+    <h3>2. Recovery of the prose field</h3>
+    <p>The prose value's opening quote and closing quote are both present in this example — the
+    cut landed after <code>prose</code> completed. A relaxed parser scans for
+    <code>"prose":"</code>, then reads forward applying JSON string-unescaping until it hits the
+    matching unescaped closing quote. Streaming already proved (research §3) that partial JSON
+    strings concatenate cleanly, so this is the same incremental parser the reader already
+    needs, just run once more against the buffered final state. Recovered prose here is
+    <strong>complete</strong> — the cut only reached into <code>scene_digest.event_summary</code>.</p>
+
+    <h3>3. The digest-only fallback call (required component, not an optimization)</h3>
+    <p>A second, cheap call — <code>gemini-3.5-flash-lite</code>, <code>thinking_level: LOW</code>
+    — carrying only: the recovered prose verbatim, and the Scene Card fields a digest actually
+    needs to reference (<code>reader_must_learn</code>, <code>must_stay_hidden</code>,
+    <code>pays_off</code>, the Voice Card's <code>imagery_palette</code> for domain-tagging).
+    Schema is narrowed to <code>{scene_digest, state_updates}</code> — <code>diagnostics</code>
+    is dropped from this call; the compiler injects its own <code>truncated_scene</code> entry
+    directly, since "the writer's own diagnostics" don't exist for a call the writer never
+    finished making.</p>
+    <pre class="json">{
+  "scene_digest": { "...": "same shape and, in this case, materially the same content as tab 3's — the fallback model reconstructs it correctly from prose alone, since nothing in scene_digest depends on information outside the prose it's given" },
+  "state_updates": { "...": "reconstructed the same five updates as tab 3 by reading the prose's own physical claims (slipper intact and off her foot, gown restored, her location)" }
+}</pre>
+    <p class="meta">Run-report entry for this scene: <code>{"type":"truncated_scene", "scene_id":"scene_13_the_fitting", "detail":"primary call hit MAX_TOKENS after prose; digest recovered via fallback call", "severity":"info"}</code> — <code>info</code>, not
+    <code>error</code>, because full recovery succeeded and nothing had to be guessed.</p>
+
+    <h3>4. When prose itself is cut (the worse case)</h3>
+    <p>If the closing quote for <code>prose</code> is never reached — the cut landed mid-sentence,
+    well short of the length budget — recovery of a fragment is still possible, but committing a
+    scene that visibly stops mid-clause is worse than retrying. Policy: retry the <em>whole</em>
+    scene call once, with <code>maxOutputTokens</code> raised ~50% and a one-line addition to the
+    scene-specific instruction ("previous attempt ran long — be more concise while still hitting
+    every required beat"). This is the same "one bounded retry, then accept-and-log" shape ADR
+    0004/0005/0006 already use everywhere else on the map — this ticket doesn't invent a new
+    policy, it applies the existing one to a new failure class. If the retry also truncates
+    mid-prose, the fragment is committed anyway (never blocking a read-time run) with
+    <code>severity: error</code> and a note for the continuity pass, which is the one mechanism
+    positioned to patch an opening/seam on its next pass (ADR 0011) — it cannot fix a scene that
+    stops partway through, but it can smooth what comes after it.</p>
+
+    <h3>Other finish reasons</h3>
+    <table class="fields">
+      <tr><th>finishReason</th><th>Handling</th></tr>
+      <tr><td><code>MALFORMED_RESPONSE</code></td><td>One retry, identical prompt (schema-constrained decode failures are often non-reproducible). Still malformed → <code>scene_generation_failed</code>, see below.</td></tr>
+      <tr><td><code>RECITATION</code></td><td>One retry with an appended instruction: "paraphrase and reinterpret this moment in your own words; do not reproduce source-text phrasing." Still flagged → logged <code>recitation_flagged</code> and handed to issue #17, which owns detection/measurement for the famous-prose fixture specifically — this ticket only wires the retry hook, not the policy.</td></tr>
+      <tr><td><code>SAFETY</code> / <code>PROHIBITED_CONTENT</code> / <code>BLOCKLIST</code> / <code>SPII</code></td><td>One retry with a fiction-framing reminder appended ("this is literary narrative content within the authored Scene Card's bounds; render the beats as prose"). Still blocked → <code>content_filtered</code> error, <code>scene_generation_failed</code> fallback.</td></tr>
+      <tr><td>Any failure surviving its one retry</td><td><strong><code>scene_generation_failed</code></strong>: commit whatever prose exists (a stub placeholder only in the total-failure case where none was produced at all); build the digest conservatively — empty <code>facts_revealed</code>/<code>plants_opened</code>/<code>payoffs_closed</code> (never invent that something happened), <code>closing_situation</code> copied forward from the previous scene's with a note. Logged at <code>error</code>. The run continues — per the map's Notes, nothing may block on an author who isn't there.</td></tr>
+    </table>
+    <div class="finding good">
+      Every failure path above resolves to the same uniform shape the rest of the map already
+      established: <strong>one bounded retry, then accept-and-log, never block.</strong> This
+      ticket's contribution is enumerating which Gemini-specific failure modes exist (research
+      §1) and giving each one the specific retry instruction that gives it the best odds — not a
+      new escalation policy.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 5: DIAGNOSTICS TAXONOMY -->
+<!-- ============================================================ -->
+<div class="pane" id="pane-diagnostics">
+  <div class="panel">
+    <h2>Writer-self-reported vs. compiler-derived</h2>
+    <p>The output schema (tab 1) only carries two writer-facing diagnostic types. Everything
+    else in <code>CONTEXT.md</code>'s Diagnostics section is the compiler grading the writer's
+    other outputs after the call returns — it needs no schema field of its own, and giving it
+    one would be paying schema-token cost for something a writer self-report can't make more
+    reliable anyway.</p>
+    <table class="fields">
+      <tr><th>Type</th><th>Reported by</th><th>When</th><th>Owner</th></tr>
+      <tr><td><code>beat_unsatisfied</code></td><td>Writer (schema field)</td><td>A required beat couldn't be honored without contradicting something else in the scene.</td><td>Variance contract, ADR 0006 — self-reported, never independently re-verified.</td></tr>
+      <tr><td><code>missing_fact</code></td><td>Writer (schema field)</td><td>The writer needed a fact the assembled context didn't supply (no <code>lookup</code> tool exists — ADR 0008 §5).</td><td>Context assembler, ADR 0008 — closes the loop the no-tools decision opened.</td></tr>
+      <tr><td><code>entry_state_mismatch</code></td><td>Compiler (pre-generation)</td><td>The Scene Card's asserted entry state doesn't match the live World Model.</td><td>State-update authority, ADR 0005 §1.</td></tr>
+      <tr><td><code>exit_state_contradiction</code> / <code>unauthorized_entity_update</code> / <code>unentailed_reversion</code></td><td>Compiler (post-generation)</td><td>A proposed P/E <code>state_update</code> fails validation.</td><td>ADR 0005 §2.</td></tr>
+      <tr><td><code>dropped_proposal</code> / accepted-volitional <code>info</code></td><td>Compiler (post-generation)</td><td>A volitional proposal was dropped, or accepted.</td><td>ADR 0005 §5.</td></tr>
+      <tr><td><code>plant_obligation_missed</code> ("dropped setup")</td><td>Compiler (post-generation)</td><td>An obligated scene's <code>plants_opened</code> doesn't cover what it owed.</td><td>Plant-obligation walk, ADR 0004 §6.</td></tr>
+      <tr><td><code>must_stay_hidden_violation</code></td><td>Compiler (post-generation, log-only)</td><td>A hidden fact leaked into <code>facts_revealed</code>. Cannot be un-shown — log-only, per ADR 0006 §4.</td><td>Variance contract, ADR 0006.</td></tr>
+      <tr><td><code>truncated_scene</code> / <code>scene_generation_failed</code> / <code>recitation_flagged</code> / <code>content_filtered</code></td><td>Compiler (call-level)</td><td>See tab 4.</td><td>This ticket, #16.</td></tr>
+    </table>
+
+    <h3>Illustrative example — <code>beat_unsatisfied</code> firing for real</h3>
+    <p class="meta">Not drawn from scene 13 (which satisfied every beat cleanly — see tab 3);
+    a short synthetic case to show the field doing its job, since a clean run doesn't exercise
+    it.</p>
+    <pre class="tmpl">Scene Card required_beats includes: "she confesses her fear to her brother" AND
+invariant: "she shows no weakness in front of her brother" — directly opposed.
+
+Writer's diagnostics:
+[{ "type": "beat_unsatisfied",
+   "detail": "Could not have her confess fear to her brother without contradicting
+              this scene's own invariant that she shows no weakness in front of
+              him. Wrote her deflecting the question instead." }]</pre>
+    <p>Read-time: logged to the run report, run continues — this is exactly the kind of
+    underspecified-card signal issue #19's run report is meant to aggregate across many runs
+    (per the map's Notes) so an author can see which cards need tightening. Author-time: this
+    surfaces immediately as a compile warning instead, per ADR 0006 §3.</p>
+  </div>
+</div>
+
+</body>
+</html>
