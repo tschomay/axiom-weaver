@@ -154,6 +154,7 @@ not a bug to reconcile.
 | `required_beats` | TEXT[] | no, default `[]` | the variance-contract dial |
 | `reader_must_learn` | TEXT[] | no, default `[]` | fact-refs, aligned with `character_knowledge.fact_ref` / the told-ledger scheme |
 | `must_stay_hidden` | TEXT[] | no, default `[]` | fact-refs that must not surface this scene |
+| `force_reintroduce` | TEXT[] | no, default `[]` | fact-refs/entity ids forced into the `reintroduce` re-anchoring band on this scene regardless of the computed band; [ADR 0009](../adr/0009-reanchoring-policy.md) |
 | `tone` | TEXT | no | |
 | `length_budget` | INTEGER | no | target word count |
 | `invariants` | TEXT[] | no, default `[]` | constraints beyond entry/exit that must hold throughout |
