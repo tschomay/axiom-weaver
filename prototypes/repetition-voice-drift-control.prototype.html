@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>PROTOTYPE — Repetition and voice-drift control</title>
+<style>
+  :root {
+    --ink: #241f1a;
+    --paper: #faf6ef;
+    --panel: #fffdf8;
+    --line: #ddd3c0;
+    --accent: #8a3b2a;
+    --accent-soft: #f0ddd3;
+    --good: #2f6b3a;
+    --bad: #a13a2a;
+    --muted: #7a7263;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", serif;
+    line-height: 1.55;
+  }
+  .banner {
+    background: var(--accent);
+    color: white;
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 0.3rem; }
+  h2 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 1.05rem; margin-top: 0; color: var(--accent); }
+  h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.92rem; margin: 0.9rem 0 0.3rem; }
+  .intro, .panel {
+    max-width: 68rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 1.4rem;
+  }
+  .intro p, .panel p { margin: 0.4rem 0; }
+  .meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.86rem; color: var(--muted); }
+  code { background: #f0ebe0; padding: 0.05rem 0.3rem; border-radius: 4px; font-size: 0.9em; }
+  .tabs { display: flex; gap: 0.4rem; margin-bottom: 0.9rem; flex-wrap: wrap; max-width: 68rem; }
+  button.tab {
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    background: white;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button.tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .pane { display: none; }
+  .pane.active { display: block; }
+  .side { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; max-width: 68rem; }
+  @media (max-width: 900px) { .side { grid-template-columns: 1fr; } }
+  .colhead { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.4rem; }
+  .colhead.without { color: var(--bad); }
+  .colhead.with { color: var(--good); }
+  .prose { font-size: 1rem; white-space: pre-wrap; background: white; border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem 1rem; }
+  .repeat { background: #fbe0d8; border-radius: 3px; padding: 0 0.1rem; }
+  .varied { background: #dcecdd; border-radius: 3px; padding: 0 0.1rem; }
+  .scenehead { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.86rem; color: var(--muted); margin: 1.1rem 0 0.4rem; }
+  .fields { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-bottom: 0.9rem; }
+  .fields th, .fields td { text-align: left; padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .fields th { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.72rem; text-transform: uppercase; color: var(--muted); }
+  pre.tmpl { background: #f0ebe0; padding: 0.8rem 1rem; border-radius: 8px; font-size: 0.85rem; white-space: pre-wrap; font-family: "SF Mono", Menlo, monospace; }
+  .finding { border-left: 3px solid var(--accent); padding: 0.4rem 0.8rem; margin: 0.5rem 0; background: #fff; border-radius: 0 6px 6px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.9rem; }
+  .finding.decline { border-left-color: var(--muted); color: var(--muted); }
+  .tag { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.72rem; padding: 0.1rem 0.45rem; border-radius: 999px; margin: 0.05rem 0.2rem 0.05rem 0; background: var(--accent-soft); color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="banner">Prototype — throwaway — answers issue #14 only</div>
+<h1>Repetition and voice-drift control</h1>
+
+<div class="intro">
+  <p><strong>Question this demo answers:</strong> what an imagery ledger records, how it
+  normalizes "is this the same image", how it tells a licensed motif from lazy repetition,
+  what instruction wording actually produces variation without breaking the voice, and
+  whether scene-shape variety and voice drift need their own mechanisms in <a href="#14">#14</a>
+  or stay where <a href="#adr2">ADR 0002</a> already put them.</p>
+  <p class="meta">Identical input across every sample below: Cinderella fixture, Voice Card
+  <code>fairy-tale / fable</code> (imagery palette: <em>hearth ash and cinders · gold and
+  silver brocade · glass catching candlelight · garden vermin transfigured into finery</em>),
+  three consecutive house-set scenes — <code>scene_01_remarriage</code> (tone: wistful,
+  quietly bleak), <code>scene_03_dressing_the_sisters</code> (sardonic, needling),
+  <code>scene_04_sisters_depart</code> (lonely). Each excerpt was written by hand against the
+  rendering template below, standing in for the writer call — no live model wiring, same as
+  the <code>prototype/voice-card-style-presets</code> precedent. Excerpts are trimmed for
+  length, not full <code>length_budget</code>.</p>
+</div>
+
+<div class="tabs" id="tabs"></div>
+<div id="panes"></div>
+
+<div class="panel">
+  <h2>The ledger, scene by scene</h2>
+  <p>The ledger is built entirely from prior scenes' own <code>imagery_signature</code> digest
+  field (ADR 0003) — no new call, no re-reading prose. Each recorded image is self-tagged by
+  the writer against a Voice Card palette domain at emission time (the one schema change this
+  ticket makes: <code>imagery_signature</code> becomes <code>{image, domain}[]</code>, still
+  capped at 3, domain <code>null</code> for an ad hoc image outside the palette).</p>
+  <table class="fields">
+    <tr><th>After scene</th><th>imagery_signature recorded</th><th>Ledger shown to the next scene's writer call</th></tr>
+    <tr>
+      <td><code>scene_01</code></td>
+      <td>
+        <span class="tag">hearth ash and cinders</span> "ash-blackened fingers"<br>
+        <span class="tag">hearth ash and cinders</span> "ash settling after a fire goes out"
+      </td>
+      <td>fed into <code>scene_03</code>'s prompt (below)</td>
+    </tr>
+    <tr>
+      <td><code>scene_03</code></td>
+      <td>
+        <span class="tag">hearth ash and cinders</span> "grate, soot-print"
+      </td>
+      <td>unioned with scene_01's, fed into <code>scene_04</code>'s prompt (below)</td>
+    </tr>
+    <tr>
+      <td><code>scene_04</code></td>
+      <td>
+        <span class="tag">glass catching candlelight</span> "her face caught faint in the glass"
+      </td>
+      <td>—</td>
+    </tr>
+  </table>
+
+  <h3>Instruction block rendered for <code>scene_03</code>'s writer call</h3>
+  <pre class="tmpl">IMAGERY LEDGER (from Scene Digests seen so far — vary the vehicle, not the domain;
+recurrence *inside* a domain is fine, reusing the same phrasing is not):
+- hearth ash and cinders — already drawn from in scene_01 ("ash-blackened fingers",
+  "ash settling after a fire goes out")
+Palette not yet drawn from: gold and silver brocade; glass catching candlelight;
+garden vermin transfigured into finery</pre>
+
+  <h3>Instruction block rendered for <code>scene_04</code>'s writer call</h3>
+  <pre class="tmpl">IMAGERY LEDGER (from Scene Digests seen so far):
+- hearth ash and cinders — already drawn from in scene_01, scene_03 ("ash-blackened
+  fingers", "ash settling after a fire goes out", "grate, soot-print")
+Palette not yet drawn from: gold and silver brocade; glass catching candlelight;
+garden vermin transfigured into finery</pre>
+
+  <p class="meta">This block renders <em>after</em> the Voice Card block and <em>before</em>
+  the scene's own tone instruction (see ADR 0007's template) — ordering matters, see
+  Finding 5 below.</p>
+
+  <h3>What we tried and declined: the raw blocklist</h3>
+  <pre class="tmpl">Do not use: ash, cinders, grate, soot. These images have already appeared.</pre>
+  <p>Hand-testing this framing against the same three scenes produced prose that avoided
+  hearth imagery <em>entirely</em> rather than varying it — the sisters' hair-dressing scene
+  lost its ash-blackened-fingers detail (a beat-adjacent, characterful image, not filler) and
+  reached for generic substitutes ("her hands moved quickly") that read flatter than the
+  original. A blocklist can't distinguish "don't repeat this phrasing" from "don't touch this
+  domain," so it over-corrects. Declined — see Finding 4.</p>
+</div>
+
+<div class="panel">
+  <h2>Findings</h2>
+
+  <div class="finding">
+    <strong>1. What gets recorded.</strong> Nothing new beyond <code>imagery_signature</code>
+    (ADR 0003), upgraded to carry a domain tag per entry. No verb ledger, no sentence-opener
+    tracking, no sensory-channel field — each would cost digest tokens without independently
+    catching a rubric mode <code>imagery_signature</code> doesn't already cover (ADR 0003's
+    "a field earns its place" test).
+  </div>
+  <div class="finding">
+    <strong>2. Normalization.</strong> Domain-tag matching, not string or embedding
+    similarity. The writer already has to pick from (or knowingly step outside) the Voice
+    Card's <code>imagery_palette</code> to write the sentence — self-tagging the choice at
+    emission time is free; comparing tags at ledger-build time is a plain equality check, no
+    extra call, consistent with the no-<code>lookup</code>-tool / no-fuzzy-retrieval
+    constraint from #12.
+  </div>
+  <div class="finding">
+    <strong>3. Motif vs. repetition.</strong> <code>imagery_palette</code> domains already
+    <em>are</em> the motif declaration — "draw from these before inventing new ones" (ADR
+    0007) licenses a domain to recur across the whole telling on purpose. The ledger
+    constrains reuse of the same <em>vehicle within</em> a domain, never suppresses the
+    domain. Scheduling one specific image (not a whole domain) as a deliberate one-off
+    callback is a real, separate need neither fixture forces — <a href="#fog">stays fog</a>.
+  </div>
+  <div class="finding">
+    <strong>4. The instruction.</strong> Positive-framed "already drawn from" list plus an
+    explicit unused-palette nudge, not a "do not use" blocklist — the blocklist over-corrects
+    by suppressing the whole domain (sample above). scene_04's excerpt shows the positive
+    framing doing real work: pulled toward <em>glass catching candlelight</em> (unused so
+    far) for the window-at-dusk beat, landing an image the scene's own content invited
+    (Cinderella catching her reflection) rather than forcing hearth imagery to recur a third
+    time.
+  </div>
+  <div class="finding">
+    <strong>5. Voice and ledger don't fight.</strong> Register, narrative distance, and
+    sentence rhythm hold across all three "with ledger" excerpts (short declaratives, the
+    plain warmly-ironic narrator) while only the concrete image varies — because the ledger
+    block renders <em>after</em> the Voice Card block and is scoped explicitly to imagery
+    ("vary the vehicle, not the domain"), so it reads as refinement within the voice, never a
+    competing instruction. No wording change to the Voice Card template (ADR 0007) needed.
+  </div>
+  <div class="finding decline">
+    <strong>6. Scene-shape variety — not reopened.</strong> ADR 0002 already ruled this
+    "consciously accepted, unaddressed for v1" and explicitly said revisiting it is "new fog,
+    not a reopening of this decision." Nothing in this prototype changes that: variety stays
+    <em>permitted</em>, via the author-set <code>length_budget</code> that already differs
+    per Scene Card (350 / 300 / 200 across these three), never <em>pushed</em> by a new
+    mechanism or digest field. No new field added.
+  </div>
+  <div class="finding decline">
+    <strong>7. Voice drift — not reopened.</strong> ADR 0002 is explicit: voice drift is
+    "generation-time only… no post-hoc mechanism catches a drift that already happened."
+    ADR 0007's sketch of anchoring drift-measurement against generated-prose stats
+    (average sentence length, dialogue fraction) is <strong>not adopted</strong> here as a
+    verification or continuity-pass-flagging step — doing so would quietly reopen ADR 0002's
+    ownership split (voice drift stays outside the continuity pass; the Voice Card carries
+    the full weight). #14's only contribution on this front is Finding 5: confirming the
+    ledger instruction doesn't itself introduce drift by fighting the Voice Card block.
+  </div>
+</div>
+
+<script>
+  const tabs = [
+    { id: 'without', label: 'Without ledger', cls: 'without' },
+    { id: 'with', label: 'With ledger', cls: 'with' },
+  ];
+  const scenes = [
+    {
+      id: 'scene_01_remarriage',
+      head: 'scene_01_remarriage — tone: wistful, quietly bleak — budget 350 (excerpt)',
+      without: `The wedding was small and the mourning shorter than anyone thought decent. Within a season there was a new mistress of the house, and she brought two daughters with faces as proud as her own. Cinderella swept the hearth and found herself, by the second week, sleeping beside its <mark class="repeat">ashes</mark>. Her gowns went to the sisters; her bed went to the <mark class="repeat">cinders</mark>. She did not complain. The <mark class="repeat">ash</mark> got into everything — her hair, her hands, the hems of the one dress she kept. At night she watched the embers die and told herself this was only for now.`,
+      with: null,
+    },
+    {
+      id: 'scene_03_dressing_the_sisters',
+      head: 'scene_03_dressing_the_sisters — tone: sardonic, needling — budget 300 (excerpt)',
+      without: `Cinderella dressed her sisters' hair with a skill neither of them had troubled to learn themselves, pinning curls with <mark class="repeat">ash</mark>-blackened fingers she was careful to keep from the ribbons. "Imagine," said the elder, watching herself in the glass, "a Cinderwench at a ball." Charlotte laughed the laugh she had learned from her mother. Cinderella said nothing. Her hands, dusted gray at the knuckles, moved on to the second sister's hair, patient as <mark class="repeat">ash settling after a fire goes out</mark>.`,
+      with: `Cinderella dressed her sisters' hair with a skill neither of them had troubled to learn, her nails still rimmed dark from scouring the <mark class="varied">grate</mark> that morning. "Imagine," said the elder, watching herself in the glass, "a Cinderwench at a ball." Charlotte laughed the laugh she had learned from her mother. Cinderella said nothing, only worked a stray curl into place and stepped back from the <mark class="varied">soot-print</mark> she'd left on the vanity's edge before either sister could notice it.`,
+    },
+    {
+      id: 'scene_04_sisters_depart',
+      head: 'scene_04_sisters_depart — tone: lonely — budget 200 (excerpt)',
+      without: `The carriage went off in a clatter of gowns and gladness, and the house went quiet the way <mark class="repeat">ash goes quiet once the flame has left it</mark>. Cinderella sat by the hearth, alone with the small gray drifts that had become, this past year, the nearest thing she had to company. She let herself cry, once, the way the coals let themselves dim once no one was left to feed them. Then she wiped her face with a hand that came away streaked with <mark class="repeat">ash</mark>, and said nothing to anyone, because there was no one left to say it to.`,
+      with: `The carriage went off in a clatter of gowns and gladness, and Cinderella was left with the ordinary hush of a house that has emptied out. She sat where the firelight found the window and, for a while, watched <mark class="varied">her own face caught faint in the glass</mark> — plainer, she thought, than any princess's, but hers. She let herself cry, once, then dried her face on her sleeve and went back to raking the grate, because the fire would not tend itself, and no one else was left to ask.`,
+    },
+  ];
+
+  const tabsEl = document.getElementById('tabs');
+  const panesEl = document.getElementById('panes');
+
+  tabs.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.className = 'tab' + (i === 0 ? ' active' : '');
+    b.textContent = t.label;
+    b.onclick = () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.pane').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      document.getElementById('pane-' + t.id).classList.add('active');
+    };
+    tabsEl.appendChild(b);
+  });
+
+  tabs.forEach((t, i) => {
+    const pane = document.createElement('div');
+    pane.className = 'pane' + (i === 0 ? ' active' : '');
+    pane.id = 'pane-' + t.id;
+    let html = `<div class="panel"><h2>${t.label}</h2>`;
+    scenes.forEach(s => {
+      const text = t.id === 'without' ? s.without : (s.with || s.without);
+      const note = t.id === 'with' && !s.with
+        ? '<p class="meta">Identical to "without" — the ledger is empty for the first scene; nothing to react to yet.</p>'
+        : '';
+      html += `<div class="scenehead">${s.head}</div>${note}<div class="prose">${text}</div>`;
+    });
+    html += '</div>';
+    pane.innerHTML = html;
+    panesEl.appendChild(pane);
+  });
+</script>
+
+</body>
+</html>
