@@ -179,6 +179,15 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   content filters — resolves to the map's one existing shape: a single bounded retry, then
   accept-and-log, never blocking a read-time run. See
   [ADR 0012](docs/adr/0012-writer-prompt-contract.md).
+- **Recitation control** — detection for a memorised-source fixture is
+  `finishReason: RECITATION` from the API and nothing else: the compiler's data model
+  (Scene Cards, World Model, digests) never holds canonical source prose, so there is
+  nothing to diff generated prose against locally, and diffing against the Scene Card's
+  own text would just detect the writer following author-mandated quotations
+  (`required_beats` may legitimately embed a source's exact wording — an authoring
+  choice, not recall). Mitigation is the existing one-retry-then-`scene_generation_failed`
+  shape, tagged `recitation_flagged`; no new mechanism. See
+  [ADR 0013](docs/adr/0013-recitation-control.md).
 - **Diagnostics** — the writer reports unsatisfiable beats and contradictions rather than
   silently papering over them, via exactly two self-reported types, `beat_unsatisfied` and
   `missing_fact` — every other diagnostic (`entry_state_mismatch`,
@@ -226,3 +235,8 @@ speculative until generation-time Voice Card constraint is proven insufficient.
 > **Avoid**: assuming the continuity pass can catch every seam failure. It is
 > constitutionally digest-only (see Continuity pass, above), so amnesia and the two
 > voice-level modes are structurally outside its reach.
+
+**Recitation is deliberately not a ninth row here.** It's a source-fidelity concern —
+does the Performance layer reproduce someone else's fixed prose — not a
+Fabula/Syuzhet-continuity one, so it doesn't fit this rubric's axis. See Recitation
+control, above, and ADR 0013.
