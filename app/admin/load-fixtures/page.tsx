@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 type Result =
@@ -79,6 +80,12 @@ export default function LoadFixturesPage() {
             </p>
           ))}
         </div>
+      )}
+
+      {(status === 'done' || status === 'error') && (
+        <p>
+          <Link href="/">← Back to home</Link>
+        </p>
       )}
     </main>
   );
