@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { storyRepository } from '@/persistence';
 import { WorldModel } from '@/world-model/world-model';
 
@@ -51,8 +52,8 @@ export default async function Home() {
       <h2>Stories</h2>
       {stories.length === 0 ? (
         <p className="meta">
-          Nothing loaded. Run <code>npm run load-fixtures</code> to retain the two fixture Story
-          Packages.
+          Nothing loaded. Run <code>npm run load-fixtures</code> from a terminal, or use{' '}
+          <Link href="/admin/load-fixtures">/admin/load-fixtures</Link> from a browser.
         </p>
       ) : (
         stories.map((story) => (
@@ -85,6 +86,14 @@ export default async function Home() {
         <li>
           <code>GET /api/stories/{'{storyId}'}/proposals</code> — the proposals queue: volitional
           proposals awaiting the author
+        </li>
+      </ul>
+
+      <h2>Admin</h2>
+      <ul className="paths">
+        <li>
+          <Link href="/admin/load-fixtures">/admin/load-fixtures</Link> — (re)load both fixture
+          Story Packages, from a browser
         </li>
       </ul>
     </main>
