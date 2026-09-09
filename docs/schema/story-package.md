@@ -203,6 +203,12 @@ is a convenience pointer to the current version, not the sole record — an edit
 `package_version` must stay dereferenceable after later edits. `edition/{runId}/world-model.json`
 holds the World Model tables' state at the close of a compiled run, same table shapes.
 
+A parallel append-only **state-update commit log** — `story/{storyId}/draft/state-log.json`
+(Working Draft) / `edition/{runId}/state-log.json` (Compiled edition) — records every committed
+P/E update and every resolved volitional proposal per scene, which is what makes "World Model as
+of scene N" (not just "right now") reconstructable. See
+[ADR 0016](../adr/0016-author-surfaces-and-the-state-log.md).
+
 ---
 
 ## What this schema deliberately does not settle

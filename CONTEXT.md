@@ -251,6 +251,33 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   `entities_on_stage`, `plants_opened`, or `closing_situation`. A property of the Working
   Draft only, never of a Compiled edition (see Working Draft, above). Flagged, never
   auto-recompiled. Stale-but-standing is a legitimate state.
+- **State-update commit log** — a per-story, per-scene append-only ledger,
+  `{scene_index, entity_id, column, tier, previous_value, new_value, status}`
+  (`status`: `committed` / `proposed_applied` / `proposed_dropped`), recording every World
+  Model change ADR 0005 accepted or resolved — not a new authority, just keeping what ADR
+  0005 already decided instead of only the final value. "World Model as of scene N" is the
+  seed replayed through every `committed`/`proposed_applied` entry with
+  `scene_index ≤ N`; nothing else persists per-scene World Model state. Also the proposals
+  queue's backing store — a proposal is a log entry not yet resolved. Persisted at
+  `story/{storyId}/draft/state-log.json` (Working Draft) and
+  `edition/{runId}/state-log.json` (Compiled edition, immutable once the run completes).
+  See [ADR 0016](docs/adr/0016-author-surfaces-and-the-state-log.md).
+- **Author surfaces** — four screens, not the six an early read of the candidates suggested:
+  the **scene compile view** (diagnostics + the proposals queue, scoped to the card just
+  compiled — author-time compiling is stepwise, one card at a time, so there's always
+  exactly one card in view when either fires); the **World & Discourse inspector** (World
+  Model + told-ledger as two tabs over one scene-index scrubber — both answer "state as of
+  scene N" pointed at a different one of the two memories); **stale badges** as inline
+  decoration on the Working Draft's scene list, not a screen of their own; and the **run
+  report** with manual Baked-promotion. At author-time, a volitional proposal is never
+  auto-applied or auto-dropped the way ADR 0005 §3 resolves it at read-time (that rule is
+  explicitly framed around no author being present) — it sits in the proposals queue until
+  the author accepts or rejects it, and leaving it pending never blocks compiling the next
+  scene. Diagnostic severity decides *which surface*, not just how loud: `error`/`warn`
+  render live in the scene compile view at author-time, `info` (an already-resolved
+  volitional commit) is run-report-only, never surfaced live, since that was the one
+  category issue #21 flagged as risking becoming noise. See
+  [ADR 0016](docs/adr/0016-author-surfaces-and-the-state-log.md).
 
 ## The seam-failure rubric
 
