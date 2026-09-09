@@ -130,6 +130,23 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   experience is not a coin flip.
 - **Compiled edition** — any persisted run (seed, digests, prose), re-readable, shareable,
   and diffable against another run.
+- **Read-time run loop** — pressing "generate a new telling" starts a durable Vercel Workflow
+  run, one step per scene (writer call → state-update validation → continuity pass → digest
+  rollup if a window closes → Blob flush), *never* streamed to a present reader — the reader
+  sees only scene-count progress ("compiling scene 7 of 14") over the same resumable stream
+  built for reconnect-safety, then reads the finished edition once the run completes. The
+  reader's choice is three-way — **Baked** / a saved version from their **library** / **generate
+  a new telling** — and every completed run persists via the loop's own scene-boundary flush;
+  library semantics (naming, sharing, retention) belong to Compiled editions and staleness,
+  below. A brand-new run ID is minted on every "generate a new telling"; only the reader's own
+  still-in-flight run is ever rejoined. A pre-generation estimate shows wall-clock time only
+  (never cost), from scene count × that story's rolling average per-scene compile time. Budget
+  is soft-logged, never a hard cap. Per-scene failures resolve via the existing
+  retry-then-accept-and-log shape; a systemic outage halts and lets the platform's own
+  retry/backoff resume it, offering the reader a Baked fallback past ~90s of stalled progress. A
+  run with >20% of its scenes degraded to fallback is marked `degraded` and can never be
+  auto-promoted to Baked (promotion is always manual, author-initiated). See
+  [ADR 0014](docs/adr/0014-read-time-run-loop.md).
 - **Variance contract** — each Scene Card declares its **invariants** (required beats,
   facts revealed, exit state). Everything unnamed is free to vary: dialogue, imagery,
   interiority, micro-beat order, which details get attention. `reader_must_learn` /
