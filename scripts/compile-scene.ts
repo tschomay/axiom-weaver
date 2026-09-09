@@ -8,7 +8,18 @@
  * With `GEMINI_API_KEY` set this makes a real writer call. Without one it replays the recorded
  * fixture-stub under `fixtures/recorded/`, and says so on every run — issue #40's definition of
  * done asks for exactly that distinction to be called out rather than silently skipped.
+ *
+ * Unlike `npm run dev`/`build`, this script runs under `tsx` directly, which does not auto-load
+ * `.env.local` the way Next.js does — so `GEMINI_API_KEY` in `.env.local` would otherwise be
+ * silently invisible here. `process.loadEnvFile` (Node >=20.6) closes that gap without a new
+ * dependency; it is a no-op, not an error, when the file does not exist.
  */
+
+try {
+  process.loadEnvFile('.env.local');
+} catch {
+  // No .env.local — recorded fixtures still work without one.
+}
 
 import { readFixturePackage } from '../src/fixtures/load';
 import { parseVoiceCard } from '../src/voice/voice-card';
