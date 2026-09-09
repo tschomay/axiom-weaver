@@ -1,0 +1,82 @@
+:root {
+  color-scheme: light dark;
+  --ink: #1c1a17;
+  --paper: #faf8f4;
+  --muted: #6b6559;
+  --rule: #ddd6c9;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #ece7dd;
+    --paper: #16150f;
+    --muted: #9a9284;
+    --rule: #35322a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.6 ui-serif, Georgia, "Times New Roman", serif;
+}
+
+main {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin: 0 0 0.25rem;
+}
+
+h2 {
+  font-size: 1.1rem;
+  margin: 2.5rem 0 0.75rem;
+}
+
+p,
+li {
+  color: var(--ink);
+}
+
+.lede {
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.story {
+  border-top: 1px solid var(--rule);
+  padding: 1rem 0;
+}
+
+.story h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.meta {
+  color: var(--muted);
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+code {
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+}
+
+ul.paths {
+  list-style: none;
+  padding: 0;
+}
+
+ul.paths li {
+  padding: 0.15rem 0;
+}
