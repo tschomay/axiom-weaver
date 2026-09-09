@@ -30,6 +30,45 @@ export const DIAGNOSTIC_CODES = [
   'accepted_proposal',
   /** A volitional proposal recorded for the author to resolve (ADR 0016 §3). */
   'pending_proposal',
+
+  // --- Writer self-reported (ADR 0012 item 1) ------------------------------------------------
+  //
+  // The only two types that occupy a field in the response schema. Everything else in this list
+  // is the compiler grading the writer's other outputs after the call returns — giving those a
+  // schema field would pay schema-token cost on every call for something a self-report cannot
+  // make more reliable.
+
+  /** A required beat could not be honored without contradicting something else (ADR 0006 §2). */
+  'beat_unsatisfied',
+  /** The writer needed a fact the assembled context did not supply (ADR 0008 §5). */
+  'missing_fact',
+
+  // --- Compiler, post-generation (ADR 0004 §6, ADR 0006) -------------------------------------
+
+  /** An obligated scene's `plants_opened` does not cover what it owed — "dropped setup". */
+  'plant_obligation_missed',
+  /** A scene declared a payoff it never reported closing. */
+  'payoff_not_closed',
+  /** A `reader_must_learn` fact absent from the digest's `facts_revealed`. */
+  'reader_must_learn_missed',
+  /**
+   * A hidden fact leaked into `facts_revealed`.
+   *
+   * Log-only, always: prose streams before the digest is checkable, so by the time this fires the
+   * reader has probably already read it. ADR 0006 §4 documents this as an accepted gap.
+   */
+  'must_stay_hidden_violation',
+
+  // --- Compiler, call-level (ADR 0012 item 7, ADR 0013 item 5) -------------------------------
+
+  /** `MAX_TOKENS` cut the response after prose; the digest was recovered by a fallback call. */
+  'truncated_scene',
+  /** A call failed past its one bounded retry. Whatever prose exists is committed regardless. */
+  'scene_generation_failed',
+  /** `finishReason: RECITATION` survived its paraphrase retry (ADR 0013). */
+  'recitation_flagged',
+  /** A safety/blocklist finish reason survived its fiction-framing retry. */
+  'content_filtered',
 ] as const;
 
 export type DiagnosticCode = (typeof DIAGNOSTIC_CODES)[number];
@@ -64,6 +103,17 @@ const SEVERITY_BY_CODE: Record<DiagnosticCode, Severity> = {
   dropped_proposal: 'warn',
   accepted_proposal: 'info',
   pending_proposal: 'warn',
+  beat_unsatisfied: 'warn',
+  missing_fact: 'warn',
+  plant_obligation_missed: 'warn',
+  payoff_not_closed: 'warn',
+  reader_must_learn_missed: 'warn',
+  must_stay_hidden_violation: 'error',
+  // `info`, not `error`: full recovery succeeded and nothing had to be guessed.
+  truncated_scene: 'info',
+  scene_generation_failed: 'error',
+  recitation_flagged: 'warn',
+  content_filtered: 'error',
 };
 
 export function severityOf(code: DiagnosticCode): Severity {

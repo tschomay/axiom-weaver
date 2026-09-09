@@ -1,0 +1,173 @@
+{
+  "_note": [
+    "A recorded stand-in for model output, not model output — see the companion note in",
+    "cinderella-scene-13.json. Ticket 2 (issue #40) had no Gemini credentials, and its definition",
+    "of done sanctions a recorded fixture-stub provided it is called out rather than silently",
+    "skipped. Prior digests are hand-written from each Scene Card's own content; the scene 8",
+    "response is hand-written in the fixture's Voice Card register.",
+    "",
+    "This fixture is the recitation control case (ADR 0013): A Christmas Carol is a story the",
+    "writer model has almost certainly memorised close to verbatim, and scene 1's Scene Card",
+    "already quotes Dickens on purpose. A recorded stub cannot produce a RECITATION finish reason,",
+    "so the baseline ADR 0013 item 6 defers to execution stays deferred — the retry hook is wired",
+    "and unexercised against a real model."
+  ],
+  "story_id": "a-christmas-carol",
+  "target_scene_id": "scene_08_the_cratchits",
+  "window": 4,
+  "prior_digests": {
+    "scene_01_counting_house": {
+      "event_summary": "Scrooge refuses his nephew's invitation, two gentlemen's subscription for the poor, and any warmth to his clerk, remarking that the dying had better do it and decrease the surplus population.",
+      "entities_on_stage": ["char_scrooge", "char_bob_cratchit", "char_fred", "char_portly_gentleman", "loc_counting_house"],
+      "facts_revealed": ["surplus_population_remark"],
+      "plants_opened": ["surplus_population_remark"],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "one coal's worth of fire and a clerk's comforter", "domain": "cold and firelight" },
+        { "image": "the ledger closed on the day like a lid", "domain": "chains, ledgers, and cash-boxes" }
+      ],
+      "closing_situation": "Scrooge walks home alone through the fog to his gloomy chambers, having refused everyone who asked him for anything.",
+      "reanchor_used": [
+        { "entity_id": "char_scrooge", "band": "introduce" },
+        { "entity_id": "char_bob_cratchit", "band": "introduce" },
+        { "entity_id": "char_fred", "band": "introduce" },
+        { "entity_id": "char_portly_gentleman", "band": "introduce" }
+      ]
+    },
+    "scene_02_the_haunting_begins": {
+      "event_summary": "The door-knocker becomes Marley's face. That night Marley's ghost appears bound in a chain of cash-boxes and ledgers, declares he forged it in life, shows Scrooge the crowded air, and promises three Spirits.",
+      "entities_on_stage": ["char_scrooge", "char_marley", "loc_scrooges_chambers"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "a chain wound of cash-boxes, keys, and deeds", "domain": "chains, ledgers, and cash-boxes" }
+      ],
+      "closing_situation": "Scrooge alone again in his chambers, warned of three Spirits and too shaken to undress before falling asleep.",
+      "reanchor_used": [
+        { "entity_id": "char_scrooge", "band": "assume" },
+        { "entity_id": "char_marley", "band": "introduce" }
+      ]
+    },
+    "scene_03_the_first_spirit": {
+      "event_summary": "The bell tolls one and a strange childlike figure draws back Scrooge's bed-curtains. The Ghost of Christmas Past takes him by the hand and they pass through the wall.",
+      "entities_on_stage": ["char_scrooge", "char_ghost_past", "loc_scrooges_chambers"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "a light springing from the crown of its head", "domain": "cold and firelight" }
+      ],
+      "closing_situation": "Scrooge is out of his own room and out of his own time, holding a Spirit's hand.",
+      "reanchor_used": [
+        { "entity_id": "char_scrooge", "band": "assume" },
+        { "entity_id": "char_ghost_past", "band": "introduce" }
+      ]
+    },
+    "scene_04_the_lonely_school": {
+      "event_summary": "Young Scrooge sits alone in an empty schoolroom at Christmas. His sister Fan arrives to fetch him home for good, and the present-day Scrooge is moved almost to tears.",
+      "entities_on_stage": ["char_scrooge", "char_ghost_past", "char_fan", "loc_school"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "a fire too small for a room that size", "domain": "cold and firelight" }
+      ],
+      "closing_situation": "Scrooge stands watching a boy he was and a sister he lost, and says nothing about either.",
+      "reanchor_used": [
+        { "entity_id": "char_scrooge", "band": "assume" },
+        { "entity_id": "char_ghost_past", "band": "assume" },
+        { "entity_id": "char_fan", "band": "introduce" }
+      ]
+    },
+    "scene_05_fezziwigs_ball": {
+      "event_summary": "Old Fezziwig throws his warehouse open for a joyous Christmas ball. The Spirit remarks it is a small thing to be so grateful for, and Scrooge wishes he could say a word or two to his own clerk.",
+      "entities_on_stage": ["char_scrooge", "char_ghost_past", "char_fezziwig", "loc_fezziwigs_warehouse"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "a warehouse floor swept and lit like a ballroom", "domain": "feast and want side by side" }
+      ],
+      "closing_situation": "Scrooge, watching a master who made his people happy for the price of a few pounds, is uneasy about his own.",
+      "reanchor_used": [
+        { "entity_id": "char_scrooge", "band": "assume" },
+        { "entity_id": "char_ghost_past", "band": "assume" },
+        { "entity_id": "char_fezziwig", "band": "introduce" }
+      ]
+    },
+    "scene_06_belle_then_and_now": {
+      "event_summary": "Belle releases the younger Scrooge from their engagement, having watched gain replace her in him. The Spirit then shows her years later with a family of her own, and Scrooge seizes the extinguisher-cap.",
+      "entities_on_stage": ["char_scrooge", "char_ghost_past", "char_belle", "loc_belle_household"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "a hearth loud with other people's children", "domain": "cold and firelight" }
+      ],
+      "closing_situation": "Scrooge is back in his own room, having put out the Spirit's light rather than watch any more of it.",
+      "reanchor_used": [
+        { "entity_id": "char_scrooge", "band": "assume" },
+        { "entity_id": "char_ghost_past", "band": "assume" },
+        { "entity_id": "char_belle", "band": "introduce" }
+      ]
+    },
+    "scene_07_the_second_spirit": {
+      "event_summary": "Scrooge wakes to his own room transformed by a mound of Christmas plenty and a giant Spirit sitting on it. The Ghost of Christmas Present takes him out into the streets.",
+      "entities_on_stage": ["char_scrooge", "char_ghost_present", "loc_scrooges_chambers"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "turkeys, geese, and great joints heaped to the ceiling", "domain": "feast and want side by side" },
+        { "image": "the fog going up in bells over the snow", "domain": "fog thinning into bells and daylight" }
+      ],
+      "closing_situation": "Scrooge is out in a Christmas morning full of people, holding the robe of a Spirit made entirely of abundance.",
+      "reanchor_used": [
+        { "entity_id": "char_scrooge", "band": "assume" },
+        { "entity_id": "char_ghost_present", "band": "introduce" }
+      ]
+    }
+  },
+  "previous_paragraph": "They went on through the streets that way, the Spirit scattering out of its torch something that made quarrelling men laugh at themselves, until they came to a door in a court off Camden Town: four rooms, one fire, and a dinner already being carried in by people who had been counting the days to it since Easter.",
+  "response": {
+    "prose": "The Cratchits had a goose. It was a small goose, and there was a great deal of applesauce and mashed potato arranged around it in the manner of people who have learned to make a little look like enough, and not one of them said so aloud. Mrs. Cratchit carried it in as though it were a swan. Martha, who had come in late and been hidden behind the closet door for the pleasure of surprising her father, was forgiven before she had finished explaining herself.\n\nTiny Tim sat on his little stool very close to his father's side, and Bob held his withered little hand as if he were afraid it might be taken from him.\n\nHe had been to church, Bob said, and had told his father, coming home, that he hoped the people saw him — because he was a cripple, and it might be pleasant to them to remember upon Christmas Day who made lame beggars walk and blind men see. Bob's voice was steady when he said it, and not otherwise.\n\nScrooge, who had spent a lifetime being spoken to and not hearing it, heard that.\n\n\"Spirit,\" he said, and found he had to begin again. \"Spirit, tell me if Tiny Tim will live.\"\n\n\"I see a vacant seat,\" said the Ghost, \"in the poor chimney-corner, and a crutch without an owner, carefully preserved. If these shadows remain unaltered by the Future, the child will die.\"\n\n\"No, no,\" said Scrooge. \"Oh no, kind Spirit. Say he will be spared.\"\n\n\"If these shadows remain unaltered by the Future, none other of my race will find him here. What then? If he be like to die, he had better do it, and decrease the surplus population.\"\n\nScrooge heard his own words come back to him out of a Spirit's mouth, in a room where they now had a name and a face and a crutch propped against a chair, and he hung his head and was overcome with penitence and grief.\n\nThe dinner went on around him, as dinners do. The pudding came in — a small one for a family of that size, and nobody said so, which is a thing families learn to do together and never discuss. It was praised as though it had come from a shop that would have refused Bob Cratchit credit. The apples and oranges were put upon the table, the chestnuts went on the fire, and Bob proposed the health of Mr. Scrooge, the Founder of the Feast, which Mrs. Cratchit received with an opinion she was good enough to keep to about half of.\n\nScrooge did not hear much of that either. He was watching a stool by the fender, and the small figure on it, and the crutch leaning where a hand could reach it without getting up. He had been in that room some minutes and had already learned the one thing he had spent sixty years arranging not to know: that the surplus population has a chair at a table somewhere, and a father who holds its hand as if it might be taken away.",
+    "scene_digest": {
+      "event_summary": "The Cratchits sit down to a small, happy Christmas dinner. Bob reports Tiny Tim's hope that people saw him at church; Scrooge asks whether Tim will live and the Spirit answers with Scrooge's own surplus-population line, leaving him stricken.",
+      "entities_on_stage": ["char_scrooge", "char_ghost_present", "char_bob_cratchit", "char_mrs_cratchit", "char_tiny_tim", "char_peter_cratchit", "char_martha_cratchit"],
+      "facts_revealed": ["tiny_tims_fate_uncertain"],
+      "plants_opened": ["tiny_tims_fate_uncertain"],
+      "payoffs_closed": ["surplus_population_remark"],
+      "imagery_signature": [
+        { "image": "a small goose made to look like enough", "domain": "feast and want side by side" },
+        { "image": "a crutch propped against a chair by the fire", "domain": "cold and firelight" }
+      ],
+      "closing_situation": "Scrooge sits in the Cratchits' flat unable to look away from Tiny Tim's stool, his own words about the surplus population returned to him with a child attached.",
+      "reanchor_used": [
+        { "entity_id": "char_scrooge", "band": "assume" },
+        { "entity_id": "char_ghost_present", "band": "assume" },
+        { "entity_id": "char_bob_cratchit", "band": "reintroduce" },
+        { "entity_id": "char_mrs_cratchit", "band": "introduce" },
+        { "entity_id": "char_tiny_tim", "band": "introduce" },
+        { "entity_id": "char_peter_cratchit", "band": "introduce" },
+        { "entity_id": "char_martha_cratchit", "band": "introduce" }
+      ]
+    },
+    "_state_updates_note": [
+      "No location_id update for Scrooge, deliberately. The Scene Card's exit_state is empty and",
+      "its entry_state puts him in the streets: this is a vision-journey, and the author's model is",
+      "that Scrooge does not physically move. A writer proposing loc_cratchit_flat here is proposing",
+      "a change nothing in the card entails, and ticket 1's validator rejects it as an",
+      "unentailed_reversion. A correctly-instructed writer simply does not propose it — the same",
+      "shape as ADR 0012's prototype dropping the char_prince knowledge row in Cinderella scene 13."
+    ],
+    "state_updates": {
+      "updates": [],
+      "new_relationships": [],
+      "new_character_knowledge": [
+        { "character_id": "char_scrooge", "fact_ref": "tiny_tims_fate_uncertain" }
+      ]
+    },
+    "diagnostics": []
+  }
+}
