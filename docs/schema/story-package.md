@@ -196,9 +196,12 @@ POC with no concurrent multi-author editing.
 with characters knowing nothing beyond what's implied by the Fabula. Where the author needs a
 character to start already knowing something, seed a row with `learned_at_scene: null`.
 
-**Persistence path**, per [`docs/research/vercel-runtime.md`](../research/vercel-runtime.md):
-`story/{storyId}/package.json` for the authored package; `edition/{runId}/world-model.json` for
-the World Model tables' state at the close of a compiled run, same table shapes.
+**Persistence path**, per [`docs/research/vercel-runtime.md`](../research/vercel-runtime.md) and
+[ADR 0015](../adr/0015-compiled-editions-and-staleness.md): each `package_version` is written to
+its own immutable snapshot at `story/{storyId}/package/{version}.json`; `story/{storyId}/package.json`
+is a convenience pointer to the current version, not the sole record — an edition's pinned
+`package_version` must stay dereferenceable after later edits. `edition/{runId}/world-model.json`
+holds the World Model tables' state at the close of a compiled run, same table shapes.
 
 ---
 
