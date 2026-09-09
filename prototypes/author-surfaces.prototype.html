@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>PROTOTYPE — Author surfaces that feed the mechanics</title>
+<style>
+  :root {
+    --ink: #241f1a;
+    --paper: #faf6ef;
+    --panel: #fffdf8;
+    --line: #ddd3c0;
+    --accent: #8a3b2a;
+    --accent-soft: #f0ddd3;
+    --good: #2f6b3a;
+    --good-soft: #e2ecdf;
+    --warn: #9a6b12;
+    --warn-soft: #f6ecd6;
+    --bad: #a3352b;
+    --bad-soft: #f6ded9;
+    --muted: #7a7263;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", serif;
+    line-height: 1.55;
+  }
+  .banner {
+    background: var(--accent);
+    color: white;
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 0.3rem; }
+  h2 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 1.05rem; margin-top: 0; color: var(--accent); }
+  h3 { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.92rem; margin: 0.9rem 0 0.3rem; }
+  .intro, .panel {
+    max-width: 70rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 1.4rem;
+  }
+  .intro p, .panel p { margin: 0.4rem 0; }
+  .meta { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.86rem; color: var(--muted); }
+  code { background: #f0ebe0; padding: 0.05rem 0.3rem; border-radius: 4px; font-size: 0.9em; }
+  ol, ul { margin: 0.4rem 0; padding-left: 1.4rem; }
+  .tabs { display: flex; gap: 0.4rem; margin-bottom: 0.9rem; flex-wrap: wrap; max-width: 70rem; }
+  button.tab {
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    background: white;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button.tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .pane { display: none; max-width: 70rem; }
+  .pane.active { display: block; }
+  .screen {
+    background: #fffefb;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1rem 1.3rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+  }
+  .screen-label {
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .fields { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 0.9rem; }
+  .fields th, .fields td { text-align: left; padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .fields th { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.72rem; text-transform: uppercase; color: var(--muted); }
+  .prose { font-size: 1.02rem; white-space: pre-wrap; }
+  .tag { display: inline-block; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.72rem; padding: 0.1rem 0.45rem; border-radius: 999px; margin: 0.05rem 0.2rem 0.05rem 0; background: var(--accent-soft); color: var(--accent); }
+  .tag.good { background: var(--good-soft); color: var(--good); }
+  .tag.warn { background: var(--warn-soft); color: var(--warn); }
+  .tag.bad { background: var(--bad-soft); color: var(--bad); }
+  .tag.muted { background: #ece6d8; color: var(--muted); }
+  .diag {
+    border-left: 3px solid var(--warn);
+    background: var(--warn-soft);
+    border-radius: 0 6px 6px 0;
+    padding: 0.5rem 0.8rem;
+    margin: 0.5rem 0;
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size: 0.88rem;
+  }
+  .diag.error { border-left-color: var(--bad); background: var(--bad-soft); }
+  .diag-head { font-weight: 600; margin-bottom: 0.15rem; }
+  .proposal {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+  }
+  .proposal .body { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.9rem; }
+  .proposal .actions { display: flex; gap: 0.4rem; flex-shrink: 0; }
+  .btn {
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    font-size: 0.82rem;
+    border-radius: 6px;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--line);
+    background: white;
+    cursor: default;
+  }
+  .btn.accept { background: var(--good); color: white; border-color: var(--good); }
+  .btn.reject { background: white; color: var(--bad); border-color: var(--bad); }
+  .scrubber { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.85rem; }
+  .scrubber input[type=range] { flex: 1; }
+  .toggle-row { display: flex; gap: 0.4rem; margin-bottom: 0.8rem; }
+  .badge-stale {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.72rem;
+    background: var(--warn-soft); color: var(--warn); border: 1px solid #e3cd93;
+    border-radius: 999px; padding: 0.1rem 0.5rem;
+  }
+  .draft-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.45rem 0.2rem; border-bottom: 1px solid var(--line); font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.88rem; }
+  .draft-row .num { color: var(--muted); width: 1.6rem; }
+  .draft-row .title { flex: 1; }
+  .finding { border-left: 3px solid var(--accent); padding: 0.4rem 0.8rem; margin: 0.5rem 0; background: #fff; border-radius: 0 6px 6px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.9rem; }
+  pre.tmpl { background: #f0ebe0; padding: 0.8rem 1rem; border-radius: 8px; font-size: 0.85rem; white-space: pre-wrap; font-family: "SF Mono", Menlo, monospace; }
+  .rank { display: flex; align-items: baseline; gap: 0.6rem; margin: 0.35rem 0; }
+  .rank .n { font-family: -apple-system, Helvetica, Arial, sans-serif; font-weight: 700; color: var(--accent); width: 1.4rem; }
+</style>
+</head>
+<body>
+
+<div class="banner">Prototype — throwaway — answers issue #21 only</div>
+<h1>Author surfaces that feed the mechanics</h1>
+
+<div class="intro">
+  <p><strong>Question this demo answers:</strong> what does the author need to <em>see</em>
+  between compiles for the machinery to be steerable? Issue #21 named six candidate surfaces —
+  compile diagnostics, the proposals queue, World Model inspection, the told-ledger view, stale
+  badges, and run reports — and asked which are essential to the POC, which collapse into one
+  shared inspector, and which are noise. This file mocks rough screens for each candidate, then
+  settles the collapse and the ranking below the tabs.</p>
+  <p class="meta">No live model wiring — the repo has no app yet to wire one into (the map's Out
+  of scope already excludes "the app shell"). Every screen below is hand-populated from the
+  <strong>Cinderella</strong> fixture (14 scenes) and, for the run report, <strong>A Christmas
+  Carol</strong> (20 scenes) — both from <code>fixtures/</code>.</p>
+</div>
+
+<div class="tabs" id="tabs"></div>
+<div id="panes"></div>
+
+<!-- ============================================================ -->
+<!-- PANE A — Scene compile view -->
+<!-- ============================================================ -->
+<div class="pane" data-pane="A">
+
+<div class="screen">
+  <div class="screen-label">Scene compile view — scene_01_remarriage · author-time · Cinderella</div>
+  <p class="meta">The screen the author is already looking at when they press "compile this
+  scene" — <em>not</em> a separate build log. Diagnostics and proposals both land here, scoped to
+  the card just compiled, because author-time compiling is stepwise, one card at a time
+  (<code>CONTEXT.md</code>, Compile occasions) — there is always exactly one card in view when a
+  diagnostic fires.</p>
+
+  <h3>Diagnostics</h3>
+  <div class="diag">
+    <div class="diag-head">missing_fact <span class="tag muted">writer self-report</span></div>
+    The writer flagged: no established fact for <em>why</em> the father permits the household
+    inversion — proceeding on implication only (a passive, conflict-averse father), no
+    <code>fact_ref</code> to point at. <span class="meta">Not blocking — the beat still lands; this
+    just tells the author the card is under-specified here if that "why" ever matters later
+    (e.g. a payoff that needs it).</span>
+  </div>
+  <p class="meta">No <code>error</code>-severity diagnostic on this card — nothing to show at that
+  level here. See the <a href="#severity">severity → surface mapping</a> finding below for what an
+  <code>exit_state_contradiction</code> or <code>unentailed_reversion</code> would look like in
+  this same slot: red, not amber, and named against the exact <code>exit_state</code> column it
+  contradicts, not a generic error string.</p>
+
+  <h3>Proposals queue</h3>
+  <p class="meta">Volitional/relational updates the engine drafted for this scene. Nothing here
+  commits to the World Model until the author acts — see the
+  <a href="#author-time-proposals">author-time proposal resolution</a> finding for why this differs
+  from read time.</p>
+  <div class="proposal">
+    <div class="body">
+      <strong>rel(char_stepmother → char_cinderella).sentiment</strong> — propose
+      <code>"contemptuous"</code> <span class="tag warn">volitional</span><br>
+      <span class="meta">Grounds: the scene's required beats have the stepmother demoting
+      Cinderella to housework and the chimney-corner with no narrated remorse. Nothing in
+      <code>exit_state</code> names this relationship, so it isn't required — but it isn't
+      contradicted either.</span>
+    </div>
+    <div class="actions">
+      <span class="btn accept">Accept</span>
+      <span class="btn reject">Reject</span>
+    </div>
+  </div>
+  <p class="meta">Accepting writes the relationship row now, at author-time, with the author
+  watching — the exact "Jim now distrusts his brother" moment issue #21 called out. Leaving it
+  unresolved doesn't block compiling scene 2; it just sits here, tagged to scene 1, until the
+  author comes back to it.</p>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PANE B — World & Discourse inspector -->
+<!-- ============================================================ -->
+<div class="pane" data-pane="B">
+
+<div class="screen">
+  <div class="screen-label">World &amp; Discourse inspector · Cinderella · Working Draft</div>
+  <p class="meta">One screen, two tabs over the <em>same</em> scene-index scrubber — the World
+  Model (what's true) and the told-ledger (what the reader's been told) are the two halves of
+  <code>CONTEXT.md</code>'s "two memories," and an author asking "what does my story know right
+  now" wants to ask it of both from the same place. See the
+  <a href="#state-log">state-update commit log</a> finding for how "as of scene N" is actually
+  computed — it isn't free.</p>
+
+  <div class="scrubber">
+    <span>scene 1</span>
+    <input type="range" min="1" max="14" value="12" disabled />
+    <span>scene 14</span>
+    <strong>→ as of scene_12_the_proclamation</strong>
+  </div>
+  <div class="toggle-row">
+    <span class="btn accept">World Model</span>
+    <span class="btn">Told-ledger</span>
+  </div>
+
+  <h3>World Model, as of scene 12</h3>
+  <table class="fields">
+    <tr><th>Entity</th><th>State</th></tr>
+    <tr><td><code>char_cinderella</code></td><td>location: <code>loc_house</code> · status: <code>alive</code></td></tr>
+    <tr><td><code>obj_glass_slipper_2</code></td><td>held by <code>char_cinderella</code> (relationship <code>possesses</code>, since scene 11) · location: <code>NULL</code></td></tr>
+    <tr><td>rel(<code>char_stepmother</code> → <code>char_cinderella</code>)</td><td><code>sentiment: contemptuous</code> <span class="tag muted">from the proposal accepted in scene 1</span></td></tr>
+    <tr><td><code>char_prince</code></td><td>location: <code>loc_kingdom_houses</code> — searching every house in the kingdom (proclamation, scene 12)</td></tr>
+  </table>
+  <p class="meta">Reconstructed by replaying the commit log's entries with
+  <code>scene_index ≤ 12</code> over the World Model seed — not a live query against "the" World
+  Model, which only ever holds the <em>current</em> scene's state.</p>
+
+  <h3>Told-ledger, as of scene 12 <span class="tag muted">other tab, shown for contrast</span></h3>
+  <table class="fields">
+    <tr><th>Fact</th><th>First learned</th><th>Centrality</th><th>Reader knows…</th></tr>
+    <tr><td><code>cinderella_kept_second_slipper</code></td><td>scene 11</td><td>high</td><td>yes — planted, not yet paid off</td></tr>
+    <tr><td><code>met:char_prince</code></td><td>scene 6</td><td>high</td><td>yes</td></tr>
+    <tr><td><code>cinderella_is_the_ball_girl</code></td><td>—</td><td>—</td><td><strong>not yet</strong> — the Prince doesn't know either; scene 13 pays this off for both</td></tr>
+  </table>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PANE C — Working Draft (stale badges) -->
+<!-- ============================================================ -->
+<div class="pane" data-pane="C">
+
+<div class="screen">
+  <div class="screen-label">Working Draft · Cinderella · scene list</div>
+  <p class="meta">Stale badges are <strong>not</strong> their own screen — they're inline
+  decoration on the list the author is already scrolling to pick the next card to edit. This
+  mock simulates the author having just re-edited scene 5's <code>exit_state</code> and
+  recompiled it.</p>
+
+  <div class="draft-row"><span class="num">4</span><span class="title">scene_04_sisters_depart</span><span class="tag good">compiled · package v3</span></div>
+  <div class="draft-row"><span class="num">5</span><span class="title">scene_05_godmother</span><span class="tag good">recompiled just now · package v4</span></div>
+  <div class="draft-row"><span class="num">6</span><span class="title">scene_06_first_ball_arrival</span><span class="badge-stale">⚠ stale — upstream changed</span></div>
+  <div class="draft-row"><span class="num">7</span><span class="title">scene_07_first_ball_departure</span><span class="badge-stale">⚠ stale — upstream changed</span></div>
+  <div class="draft-row"><span class="num">8</span><span class="title">scene_08_home_and_thanks</span><span class="badge-stale">⚠ stale — upstream changed</span></div>
+
+  <h3>Diff popover — scene 6's badge, expanded</h3>
+  <div class="diag">
+    <div class="diag-head">scene_05_godmother changed (package v3 → v4)</div>
+    <code>facts_revealed</code>: added <code>godmother_grants_midnight_limit</code> ·
+    <code>closing_situation</code> changed. This is the same field-scoped diff ADR 0015 §6 already
+    defines for comparing two Compiled editions — reused here, not reinvented, for a Working Draft
+    scene against its own predecessor.
+  </div>
+  <p class="meta">Stale-but-standing: nothing here nags the author or blocks reading the draft.
+  Scene 6 stays exactly as compiled until the author chooses to revisit it.</p>
+</div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- PANE D — Run report -->
+<!-- ============================================================ -->
+<div class="pane" data-pane="D">
+
+<div class="screen">
+  <div class="screen-label">Run report · A Christmas Carol · aggregated across 20 read-time runs</div>
+  <p class="meta">Visited occasionally, after read-time runs exist to aggregate — not part of the
+  per-compile loop the other three surfaces live in. Chosen fixture here on purpose: at 20 scenes
+  with real length-budget pressure (Stave descriptions run long), it's the fixture more likely to
+  show real degrade counts.</p>
+
+  <table class="fields">
+    <tr><th>Scene Card</th><th>Runs degraded</th><th>Common diagnostic</th><th></th></tr>
+    <tr><td><code>scene_01_counting_house</code></td><td>1 / 20</td><td><span class="tag warn">recitation_flagged</span> (retried once, resolved)</td><td></td></tr>
+    <tr><td><code>scene_09_the_spirits_tour</code></td><td>5 / 20</td><td><span class="tag bad">truncated_scene</span> — long required-beats list vs. length_budget</td><td></td></tr>
+    <tr><td><code>scene_14_the_unwatched_corpse</code></td><td>0 / 20</td><td>—</td><td></td></tr>
+  </table>
+  <p class="meta"><code>scene_09_the_spirits_tour</code> degrading on 25% of runs is exactly the
+  "which Scene Cards are underspecified" signal ADR 0014 §8 names — it needs a smaller
+  <code>required_beats</code> list or a larger <code>length_budget</code>, not a compiler fix.</p>
+
+  <h3>Promote to Baked</h3>
+  <div class="proposal">
+    <div class="body"><strong>run_2f91a…</strong> — completed, not degraded, package v7<br>
+    <span class="meta">The only automatic-vs-manual line ADR 0014 §9 draws: this button is the
+    entire mechanism. A <code>degraded</code> run's promote action is disabled outright, not just
+    discouraged.</span></div>
+    <div class="actions"><span class="btn accept">Promote to Baked</span></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+  var tabs = [
+    {k:'A', label:'A — Scene compile view'},
+    {k:'B', label:'B — World & Discourse inspector'},
+    {k:'C', label:'C — Working Draft / stale badges'},
+    {k:'D', label:'D — Run report'}
+  ];
+  var tabsEl = document.getElementById('tabs');
+  tabs.forEach(function(t, i){
+    var b = document.createElement('button');
+    b.className = 'tab' + (i===0 ? ' active' : '');
+    b.textContent = t.label;
+    b.onclick = function(){
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+      document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');
+      document.querySelector('.pane[data-pane="'+t.k+'"]').classList.add('active');
+    };
+    tabsEl.appendChild(b);
+  });
+  document.querySelector('.pane[data-pane="A"]').classList.add('active');
+</script>
+
+<!-- ============================================================ -->
+<!-- FINDINGS — the actual decisions this ticket settles -->
+<!-- ============================================================ -->
+
+<div class="panel">
+  <h2>Six candidates collapse to four surfaces</h2>
+  <p>World Model inspection and the told-ledger view are the same interaction — "show me state as
+  of scene N" — pointed at the World Model in one tab and the Discourse Record in the other
+  (pane B). Compile diagnostics and the proposals queue are both scoped to <em>the card just
+  compiled</em>, so they share a screen too (pane A) rather than forcing the author to leave the
+  card they're editing to find out what it just produced. Stale badges aren't a screen at all —
+  they're two words and a popover on a list the author is already looking at (pane C). That leaves
+  four surfaces, not six:</p>
+  <div class="rank"><span class="n">1</span> Scene compile view (diagnostics + proposals) — pane A</div>
+  <div class="rank"><span class="n">2</span> World &amp; Discourse inspector (World Model + told-ledger) — pane B</div>
+  <div class="rank"><span class="n">3</span> Stale badges, inline on the Working Draft — pane C</div>
+  <div class="rank"><span class="n">4</span> Run report + Baked-promotion — pane D</div>
+  <p class="meta">All four ship for the POC. None was cut as pure noise — see
+  <a href="#severity">severity → surface mapping</a> for the one piece of information (accepted
+  volitional commits, <code>info</code>-severity) that <em>is</em> cut from live display and pushed
+  to the run report only, so it doesn't become the noise the author learns to ignore.</p>
+</div>
+
+<div class="panel" id="state-log">
+  <h2>Finding: a World Model commit log is a missing piece, not an implementation detail</h2>
+  <p>Pane B's scrubber ("state as of scene 12") exposed a real gap. <code>docs/schema/story-package.md</code>
+  and <a href="../adr/0015-compiled-editions-and-staleness.md">ADR 0015</a> §4 only ever persist
+  <em>current</em> World Model state — <code>edition/{runId}/world-model.json</code> is a single
+  snapshot at the close of a run, and the live Working Draft World Model is likewise just "now."
+  Neither lets an author scrub backward to "what did the world look like right before scene 6" —
+  the underlying fact was never being kept.</p>
+  <p><strong>Decision:</strong> every committed World Model change — every accepted P/E update
+  (ADR 0005 §2) and every resolved volitional proposal (accepted or dropped) — is appended to a
+  per-story, per-scene <strong>state-update commit log</strong>:
+  <code>{scene_index, entity_id, column, tier, previous_value, new_value, status}</code>,
+  <code>status</code> one of <code>committed</code> / <code>proposed_applied</code> /
+  <code>proposed_dropped</code>. It's an append-only ledger, not a new authority — ADR 0005 still
+  decides what's accepted; this just keeps what ADR 0005 decided instead of only keeping the
+  final value. "World Model as of scene N" is the seed replayed forward through every
+  <code>committed</code>/<code>proposed_applied</code> entry with <code>scene_index ≤ N</code>,
+  which is exactly what pane B's table above does by hand. It also becomes the proposals queue's
+  own backing store (pane A) — a proposal is just a log entry not yet resolved.</p>
+  <p class="meta">Persistence path, following ADR 0015's existing convention:
+  <code>story/{storyId}/draft/state-log.json</code> for the Working Draft,
+  <code>edition/{runId}/state-log.json</code> for a Compiled edition (same shape, immutable once
+  the run completes). This is a schema addition, not a new mechanism — it changes nothing about
+  what ADR 0005 accepts or rejects, only what gets kept afterward.</p>
+</div>
+
+<div class="panel" id="author-time-proposals">
+  <h2>Finding: author-time closes a gap ADR 0005 deliberately left for read-time</h2>
+  <p>ADR 0005 §3 ("Unattended resolution has one rule: apply, or don't") is framed explicitly
+  around read-time — "at read time there's no author to confirm a volitional proposal." It never
+  claims to cover author-time, where an author <em>is</em> present. Issue #21's own text ("Accepting
+  one edits the World Model — so this is an authoring surface, not just a notification") is asking
+  this ticket to fill that silence, not to relitigate ADR 0005.</p>
+  <p><strong>Decision:</strong> at author-time, a volitional proposal is <em>never</em> auto-applied
+  or auto-dropped — it sits in the proposals queue (pane A) as <code>proposed</code> until the
+  author explicitly accepts or rejects it. Accept commits the log entry as
+  <code>proposed_applied</code>; reject as <code>proposed_dropped</code>; leaving it untouched
+  keeps it pending and does <strong>not</strong> block compiling the next scene — entry-state
+  checks on later scenes read the World Model's last <em>resolved</em> value, exactly as if the
+  proposal didn't exist yet, matching CONTEXT.md's "unattended, never blocking" preference even
+  though an author is present here. At read-time (no author to ask), ADR 0005 §3's existing
+  apply-or-drop invariant test is unchanged — this ticket narrows nothing there, it only names what
+  happens in the one supervision mode ADR 0005 was silent about.</p>
+</div>
+
+<div class="panel" id="severity">
+  <h2>Finding: severity decides which surface, not just how loud</h2>
+  <p>ADR 0005 §5 already has three severities (<code>error</code> / <code>warn</code> /
+  <code>info</code>); this ticket maps them to where they render so the Scene compile view doesn't
+  drown in log lines the author will learn to skim past:</p>
+  <table class="fields">
+    <tr><th>Severity</th><th>Example</th><th>Surface</th></tr>
+    <tr><td><span class="tag bad">error</span></td><td><code>exit_state_contradiction</code>, <code>unentailed_reversion</code>, <code>entry_state_mismatch</code>, <code>unauthorized_entity_update</code></td><td>Scene compile view (pane A), red, named against the exact contradicted field. Also logged to the run report.</td></tr>
+    <tr><td><span class="tag warn">warn</span></td><td>writer-reported <code>beat_unsatisfied</code> / <code>missing_fact</code>; a volitional proposal auto-dropped at read-time</td><td>Scene compile view (pane A) at author-time; run report only at read-time (no author watching live).</td></tr>
+    <tr><td><span class="tag muted">info</span></td><td>an accepted volitional commit (ADR 0005 §5) that needed no author decision because it was <em>already</em> resolved by an earlier author-time accept</td><td><strong>Run report only</strong> (pane D) — never surfaced live. This is the one category issue #21 flagged as risking "noise the author will learn to ignore," and it's cut from live display entirely rather than shown quietly.</td></tr>
+  </table>
+</div>
+
+<div class="panel">
+  <h2>What was deliberately left alone</h2>
+  <ul>
+    <li>The general UI shell, styling, and navigation around these four surfaces — build work per
+    the map's Out of scope, not a decision this ticket makes.</li>
+    <li>Whether the commit log ever needs pruning/compaction at novel scale — the map's POC targets
+    a 14–20 scene short story; an unbounded append-only log is fine at that scale and revisiting it
+    is exactly the kind of thing that belongs in "Not yet specified" if novel scale ever forces it.</li>
+    <li>A UI for <em>editing</em> the World Model directly (outside of accepting a proposal) —
+    plausible, but issue #21 didn't ask for it and no other ticket's decision depends on it existing
+    for the POC.</li>
+  </ul>
+</div>
+
+</body>
+</html>
