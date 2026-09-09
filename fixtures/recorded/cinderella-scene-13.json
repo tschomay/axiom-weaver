@@ -1,0 +1,245 @@
+{
+  "_note": [
+    "A recorded stand-in for model output, not model output. No Gemini credentials were available",
+    "in the session that built ticket 2 (issue #40), and its definition of done sanctions exactly",
+    "this: a recorded fixture-stub standing in for the writer's response, called out rather than",
+    "silently skipped. The prior digests are hand-written from each Scene Card's own content; the",
+    "scene 13 response is the hand-written performance from ADR 0012's prototype",
+    "(prototypes/writer-prompt-contract.prototype.html on branch prototype/writer-prompt-contract).",
+    "Replace this file with a real recording the first time the writer call runs against the API."
+  ],
+  "story_id": "cinderella",
+  "target_scene_id": "scene_13_the_fitting",
+  "window": 4,
+  "prior_digests": {
+    "scene_01_remarriage": {
+      "event_summary": "A widower remarries a proud woman with two haughty daughters. The household turns over: Cinderella is demoted to servant and sent to sleep in the chimney-corner.",
+      "entities_on_stage": ["char_cinderella", "char_father", "char_stepmother", "char_stepsister_elder", "char_stepsister_charlotte", "loc_house"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "ash-smudged hands at the cold grate", "domain": "hearth ash and cinders" }
+      ],
+      "closing_situation": "Cinderella bedded down among the cinders while the rest of the house sleeps upstairs, saying nothing of it.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "introduce" },
+        { "entity_id": "char_father", "band": "introduce" },
+        { "entity_id": "char_stepmother", "band": "introduce" },
+        { "entity_id": "char_stepsister_elder", "band": "introduce" },
+        { "entity_id": "char_stepsister_charlotte", "band": "introduce" }
+      ]
+    },
+    "scene_02_the_ball_proclaimed": {
+      "event_summary": "Word arrives that the King's son will give a ball and invite all persons of fashion. The sisters think of nothing else; no one imagines Cinderella might go.",
+      "entities_on_stage": ["char_cinderella", "char_stepmother", "char_stepsister_elder", "char_stepsister_charlotte", "loc_house"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "brocade held up against the light and argued over", "domain": "gold and silver brocade" }
+      ],
+      "closing_situation": "The house is turned over to preparations Cinderella is expected to serve and not share in.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" },
+        { "entity_id": "char_stepmother", "band": "assume" },
+        { "entity_id": "char_stepsister_elder", "band": "assume" },
+        { "entity_id": "char_stepsister_charlotte", "band": "assume" }
+      ]
+    },
+    "scene_03_dressing_the_sisters": {
+      "event_summary": "Cinderella dresses her sisters' hair with skill and good nature. They jeer at the thought of a Cinderwench at a ball, and she does not ask to go.",
+      "entities_on_stage": ["char_cinderella", "char_stepsister_elder", "char_stepsister_charlotte", "loc_house"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [],
+      "closing_situation": "The sisters are dressed and pleased with themselves; Cinderella has said nothing about wanting to go.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" },
+        { "entity_id": "char_stepsister_elder", "band": "assume" },
+        { "entity_id": "char_stepsister_charlotte", "band": "assume" }
+      ]
+    },
+    "scene_04_sisters_depart": {
+      "event_summary": "The stepmother and both sisters leave for the ball. Left alone in the emptied house, Cinderella weeps.",
+      "entities_on_stage": ["char_cinderella", "char_stepmother", "char_stepsister_elder", "char_stepsister_charlotte", "loc_house"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "the grate gone grey with the house empty", "domain": "hearth ash and cinders" }
+      ],
+      "closing_situation": "Cinderella alone in the emptied house, weeping by the hearth as evening comes on.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" },
+        { "entity_id": "char_stepmother", "band": "assume" },
+        { "entity_id": "char_stepsister_elder", "band": "assume" },
+        { "entity_id": "char_stepsister_charlotte", "band": "assume" }
+      ]
+    },
+    "scene_05_godmother": {
+      "event_summary": "Her godmother appears, turns pumpkin, mice, rat and lizards into coach and retinue and her rags into a gown with glass slippers, and warns her in plain terms to be gone before midnight.",
+      "entities_on_stage": ["char_cinderella", "char_godmother", "obj_pumpkin", "obj_mice", "obj_rat", "obj_lizards", "obj_gown", "obj_glass_slipper_1", "obj_glass_slipper_2", "loc_garden"],
+      "facts_revealed": ["midnight_condition"],
+      "plants_opened": ["midnight_condition"],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "a rat grown whiskered and coachmanly", "domain": "garden vermin transfigured into finery" },
+        { "image": "a gown of gold and silver stiff as new coin", "domain": "gold and silver brocade" },
+        { "image": "slippers that rang faintly on the step", "domain": "glass catching candlelight" }
+      ],
+      "closing_situation": "Cinderella rides out in a golden coach, warned and delighted, with the hour named and agreed.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" },
+        { "entity_id": "char_godmother", "band": "introduce" }
+      ]
+    },
+    "scene_06_first_ball_arrival": {
+      "event_summary": "A hush falls as she enters. The old King remarks on her beauty, his son leads her out to dance, and her own stepmother and sisters fail to recognize her.",
+      "entities_on_stage": ["char_cinderella", "char_prince", "char_stepmother", "char_stepsister_elder", "char_stepsister_charlotte", "loc_palace"],
+      "facts_revealed": ["cinderella_is_the_ball_girl"],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "candlelight caught and thrown back from her heels", "domain": "glass catching candlelight" }
+      ],
+      "closing_situation": "Cinderella is the wonder of the ball and entirely unknown to her own family, dancing with the King's son.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" },
+        { "entity_id": "char_prince", "band": "introduce" },
+        { "entity_id": "char_stepmother", "band": "assume" },
+        { "entity_id": "char_stepsister_elder", "band": "assume" },
+        { "entity_id": "char_stepsister_charlotte", "band": "assume" }
+      ]
+    },
+    "scene_07_first_ball_departure": {
+      "event_summary": "She sits with her unknowing sisters and shares the oranges and citrons the Prince gave her, then leaves at a quarter to twelve and reaches home with time to spare.",
+      "entities_on_stage": ["char_cinderella", "char_stepsister_elder", "char_stepsister_charlotte", "loc_palace"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [],
+      "closing_situation": "Cinderella home well ahead of the hour, the pattern established and safe.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" },
+        { "entity_id": "char_stepsister_elder", "band": "assume" },
+        { "entity_id": "char_stepsister_charlotte", "band": "assume" }
+      ]
+    },
+    "scene_08_home_and_thanks": {
+      "event_summary": "Cinderella thanks her godmother and admits she would be glad to go again tomorrow. The godmother agrees to send her.",
+      "entities_on_stage": ["char_cinderella", "char_godmother", "loc_chimney_corner"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "the banked fire keeping its small red under the ash", "domain": "hearth ash and cinders" }
+      ],
+      "closing_situation": "Cinderella at the chimney-corner, grateful, already hoping for a second night.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" },
+        { "entity_id": "char_godmother", "band": "reanchor" }
+      ]
+    },
+    "scene_09_the_sisters_recount": {
+      "event_summary": "The sisters can talk of nothing but the beautiful stranger and describe her to Cinderella's own face. Cinderella asks to borrow a dress and is refused and mocked.",
+      "entities_on_stage": ["char_cinderella", "char_stepsister_elder", "char_stepsister_charlotte", "loc_house"],
+      "facts_revealed": ["sisters_unaware_cinderella_attended"],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [],
+      "closing_situation": "The sisters go on praising a princess they are standing in front of, and refuse her the loan of a dress.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" },
+        { "entity_id": "char_stepsister_elder", "band": "assume" },
+        { "entity_id": "char_stepsister_charlotte", "band": "assume" }
+      ]
+    },
+    "scene_10_second_ball_the_flight": {
+      "event_summary": "At the second ball she loses all track of time, hears the clock begin to strike twelve, and flees, leaving one glass slipper on the steps as the magic reverts entirely.",
+      "entities_on_stage": ["char_cinderella", "char_prince", "obj_glass_slipper_1", "obj_gown", "loc_palace_steps"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": ["midnight_condition"],
+      "imagery_signature": [
+        { "image": "one slipper left bright on the dark steps", "domain": "glass catching candlelight" }
+      ],
+      "closing_situation": "Cinderella in her old clothes on the road home, the coach a pumpkin again and one slipper lost behind her.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" },
+        { "entity_id": "char_prince", "band": "reanchor" }
+      ]
+    },
+    "scene_11_the_kept_slipper": {
+      "event_summary": "Cinderella reaches home on foot and out of breath. Of all the finery only the fellow glass slipper remains, kept in her pocket, and she says nothing of the ball to anyone.",
+      "entities_on_stage": ["char_cinderella", "obj_glass_slipper_2", "loc_house"],
+      "facts_revealed": ["cinderella_kept_second_slipper"],
+      "plants_opened": ["cinderella_kept_second_slipper"],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "glass turned over by firelight, ash on the hand holding it", "domain": "hearth ash and cinders" }
+      ],
+      "closing_situation": "Cinderella back at the hearth with the second slipper hidden and no one in the house any the wiser.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" }
+      ]
+    },
+    "scene_12_the_proclamation": {
+      "event_summary": "The Prince proclaims by trumpet that he will marry whoever the slipper fits. It is tried on princesses, then duchesses, then all the court, and the search reaches her father's house.",
+      "entities_on_stage": ["char_gentleman_usher", "obj_glass_slipper_1", "loc_house"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": [],
+      "imagery_signature": [
+        { "image": "the slipper carried on a cushion from door to door", "domain": "glass catching candlelight" }
+      ],
+      "closing_situation": "The search for the slipper's owner has narrowed, house by house, to arrive at last at her father's door.",
+      "reanchor_used": [
+        { "entity_id": "char_gentleman_usher", "band": "introduce" }
+      ]
+    }
+  },
+  "previous_paragraph": "...and so the gentleman-in-waiting came, as he had come to a hundred doors before this one, to a house no grander than the rest, and had the slipper carried up the steps behind him, not knowing — how could he? — that he was about to be the first person in the kingdom to guess correctly by accident.",
+  "response": {
+    "prose": "The elder sister sat first, and squeezed, and turned red in the face, and would not admit that her heel had refused the slipper by a good half-inch. The younger fared no better, though she pushed until the stitching at her toe gave way. The gentleman-in-waiting held the slipper very correctly through both attempts and said nothing at all about either one, which was its own kind of verdict.\n\n\"Let me try,\" said Cinderella, from her corner by the door.\n\nHer sisters burst out laughing, the easy laugh of people to whom a joke costs nothing. A Cinderwench, at the slipper of a princess! But the gentleman-in-waiting only looked at her — looked, in fact, the way no one in that house had troubled to look at her in a long while — and said that his orders were to let every maiden in the kingdom try who wished it, and he did not see that she should be the one exception. He found her, though he did not say so aloud, very beautiful indeed.\n\nThe slipper went on as if it had been cut to her foot that very morning. In a manner of speaking, it had.\n\nHer sisters' laughter stopped the way a clock stops when the weight runs out. Before either of them could find a new objection, Cinderella drew the fellow slipper from her pocket — the one she had kept three days now, telling no one, turning it over some nights by the light of the banked fire, ash and glass both catching what little there was to catch — and set it beside its match.\n\nThat was when the godmother came in, as godmothers do, by no door anyone had troubled to open, and touched her wand to Cinderella's rags. The gown that came over her was gold and silver, finer than either ball's had been, and this time no one in the room blinked and failed to know her. Her sisters saw it happen with their own eyes: the ash-grey servant who had dressed their hair not a week before, becoming, feature by feature, the beautiful stranger the whole court had danced with — and understood, all at once and a full week too late, exactly whose oranges they had eaten on the palace steps, and whose foot they had just watched a glass slipper accept without complaint.",
+    "scene_digest": {
+      "event_summary": "The sisters fail the slipper in turn; Cinderella asks to try and is mocked, then fits it perfectly and produces its match from her pocket. The godmother appears and restores her finery openly, and the sisters recognize her at last.",
+      "entities_on_stage": ["char_cinderella", "char_stepsister_elder", "char_stepsister_charlotte", "char_gentleman_usher", "char_godmother"],
+      "facts_revealed": [],
+      "plants_opened": [],
+      "payoffs_closed": ["cinderella_kept_second_slipper"],
+      "imagery_signature": [
+        { "image": "ash and glass both catching what little firelight there was", "domain": "hearth ash and cinders" },
+        { "image": "a gown of gold and silver, finer than either ball's had been", "domain": "gold and silver brocade" }
+      ],
+      "closing_situation": "Cinderella stands in her father's house with both slippers on, dressed richer than ever before in plain view of her astonished sisters, the godmother beside her.",
+      "reanchor_used": [
+        { "entity_id": "char_cinderella", "band": "assume" },
+        { "entity_id": "char_stepsister_elder", "band": "reanchor" },
+        { "entity_id": "char_stepsister_charlotte", "band": "reanchor" },
+        { "entity_id": "char_gentleman_usher", "band": "assume" }
+      ]
+    },
+    "state_updates": {
+      "updates": [
+        { "entity_id": "obj_glass_slipper_1", "column": "status", "value": "intact" },
+        { "entity_id": "obj_glass_slipper_1", "column": "location_id", "value": null },
+        { "entity_id": "obj_gown", "column": "status", "value": "intact" },
+        { "entity_id": "obj_gown", "column": "location_id", "value": null },
+        { "entity_id": "char_cinderella", "column": "location_id", "value": "loc_house" }
+      ],
+      "new_relationships": [],
+      "new_character_knowledge": [
+        { "character_id": "char_stepsister_elder", "fact_ref": "cinderella_is_the_ball_girl" },
+        { "character_id": "char_stepsister_charlotte", "fact_ref": "cinderella_is_the_ball_girl" }
+      ]
+    },
+    "diagnostics": [
+      {
+        "type": "missing_fact",
+        "detail": "The godmother is not listed in this scene's characters_present, so her World Model row was not in context. Characterized her from the required beat text and her established prior appearance only."
+      }
+    ]
+  }
+}

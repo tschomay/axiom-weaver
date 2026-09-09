@@ -1,0 +1,131 @@
+/**
+ * Recovering `prose` from a truncated response (ADR 0012 decision 5).
+ *
+ * `MAX_TOKENS` under a schema returns truncated, unparseable JSON with no partial-object recovery
+ * from the API itself (Gemini research finding #5). Because `propertyOrdering` puts `prose` first,
+ * the common failure shape is that prose completes and the digest/state_updates/diagnostics tail
+ * gets cut — and the reader may already have streamed and read that prose. It cannot be un-shown,
+ * so the recovery has to salvage the digest, not discard the scene.
+ *
+ * This is the same incremental JSON-string parse the streaming reader already needs, run once
+ * more against the buffered final state: scan for the `prose` key, then read forward applying
+ * string unescaping until the matching unescaped closing quote.
+ */
+
+export interface ProseSalvage {
+  readonly prose: string;
+  /** True when the closing quote was found — prose is complete, only the tail was cut. */
+  readonly complete: boolean;
+}
+
+/**
+ * Pull `prose` out of a possibly-truncated JSON buffer.
+ *
+ * Returns `null` only when the key itself never appeared, which means the cut landed before the
+ * model wrote anything at all.
+ */
+export function salvageProse(buffer: string): ProseSalvage | null {
+  const key = '"prose"';
+  const keyAt = buffer.indexOf(key);
+  if (keyAt === -1) return null;
+
+  // Step past the key, its colon, and any whitespace, to the opening quote of the value.
+  let index = keyAt + key.length;
+  while (index < buffer.length && buffer[index] !== '"') {
+    const char = buffer[index]!;
+    if (char !== ':' && char.trim() !== '') return null;
+    index += 1;
+  }
+  if (index >= buffer.length) return null;
+  index += 1;
+
+  const out: string[] = [];
+  while (index < buffer.length) {
+    const char = buffer[index]!;
+
+    if (char === '\\') {
+      const escape = buffer[index + 1];
+      if (escape === undefined) break; // cut mid-escape; keep what we have
+      index += 2;
+      switch (escape) {
+        case 'n':
+          out.push('\n');
+          break;
+        case 't':
+          out.push('\t');
+          break;
+        case 'r':
+          out.push('\r');
+          break;
+        case 'b':
+          out.push('\b');
+          break;
+        case 'f':
+          out.push('\f');
+          break;
+        case 'u': {
+          const hex = buffer.slice(index, index + 4);
+          if (hex.length < 4) return { prose: out.join(''), complete: false };
+          out.push(String.fromCharCode(Number.parseInt(hex, 16)));
+          index += 4;
+          break;
+        }
+        default:
+          out.push(escape);
+      }
+      continue;
+    }
+
+    if (char === '"') {
+      return { prose: out.join(''), complete: true };
+    }
+
+    out.push(char);
+    index += 1;
+  }
+
+  return { prose: out.join(''), complete: false };
+}
+
+/**
+ * The final paragraph of a scene's prose — the verbatim tail the next scene opens against
+ * (ADR 0008 decision 3).
+ *
+ * A paragraph, not a fixed word count, and deliberately not the digest's `closing_situation`,
+ * which is a summary rather than the words the reader actually read.
+ */
+export function finalParagraph(prose: string): string | null {
+  const paragraphs = prose
+    .split(/\n\s*\n/)
+    .map((part) => part.trim())
+    .filter((part) => part !== '');
+  return paragraphs[paragraphs.length - 1] ?? null;
+}
+
+/** Word count against `length_budget`. ADR 0012 decision 4's band is 0.8x-1.3x, asymmetric. */
+export function wordCount(prose: string): number {
+  const words = prose.trim().match(/\S+/g);
+  return words === null ? 0 : words.length;
+}
+
+export const LENGTH_BAND = { low: 0.8, high: 1.3 } as const;
+
+/**
+ * Whether a scene landed inside the tolerance band.
+ *
+ * Asymmetric on purpose: undershoot usually means a dropped beat, which is a variance-contract
+ * miss, while overshoot only costs output budget.
+ */
+export function lengthVerdict(
+  prose: string,
+  budget: number | undefined,
+): { words: number; ratio: number | null; verdict: 'ok' | 'under' | 'over' | 'unbudgeted' } {
+  const words = wordCount(prose);
+  if (budget === undefined || budget <= 0) {
+    return { words, ratio: null, verdict: 'unbudgeted' };
+  }
+  const ratio = words / budget;
+  if (ratio < LENGTH_BAND.low) return { words, ratio, verdict: 'under' };
+  if (ratio > LENGTH_BAND.high) return { words, ratio, verdict: 'over' };
+  return { words, ratio, verdict: 'ok' };
+}

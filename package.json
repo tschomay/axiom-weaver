@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "load-fixtures": "tsx scripts/load-fixtures.ts"
+    "load-fixtures": "tsx scripts/load-fixtures.ts",
+    "compile-scene": "tsx scripts/compile-scene.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",
