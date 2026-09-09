@@ -128,8 +128,39 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   human in the loop, not a race against a reader's eyes. See ADR 0011.
 - **Baked edition** — a fixed, known-good run shipped as the default so a reader's first
   experience is not a coin flip.
-- **Compiled edition** — any persisted run (seed, digests, prose), re-readable, shareable,
-  and diffable against another run.
+- **Compiled edition** — any persisted run (World Model seed, digests, prose, run report),
+  pinned to the `package_version` it was compiled from, re-readable, shareable, and diffable
+  against another run of the same `package_version`. Immutable once produced: a Compiled
+  edition stays fully correct forever for the version it pins, even after the author advances
+  the Story Package further — it is never marked stale and carries no version-drift signal.
+  Addressable and shareable by its run ID/URL indefinitely; nothing is ever auto-deleted.
+  Sharing an edition's URL exposes only its own content (prose, digests) — never the Story
+  Package behind it, which stays an author-only surface. Diffing two editions is scoped to a
+  matched `package_version` pair (a cross-version comparison is a different question — see
+  Working Draft, below) and compares Scene Digest fields per scene as the primary surface,
+  with both editions' full prose available side-by-side — never a line-level text diff of
+  prose. This is a direct instantiation of the variance contract, below. See
+  [ADR 0015](docs/adr/0015-compiled-editions-and-staleness.md).
+- **Library** — the story-scoped, author-gated list of saved Compiled editions a reader can
+  return to (the second arm of the read-time run loop's three-way choice, below). Not a
+  personal collection per reader — there are no reader accounts. Only the author can
+  save/name/delete library entries; a reader can still generate a run and share it by direct
+  URL, or rejoin their own still-in-flight run, without library-write access. See
+  [ADR 0015](docs/adr/0015-compiled-editions-and-staleness.md).
+- **Working Draft** — the single per-story, author-time-only sequence of scenes built up via
+  stepwise author-time compiles (see Compile occasions, below), always tracking the current
+  `package_version` on a per-scene basis. **Staleness is a property of the Working Draft
+  only** — never of a Compiled edition. Editing a Scene Card and recompiling it compares the
+  scene's freshly produced Scene Digest against the digest it replaces, scoped to
+  `facts_revealed`, `entities_on_stage`, `closing_situation`, and `plants_opened`
+  (`payoffs_closed` only ever references an earlier plant so can't create a forward
+  dependency, already covered by the plant-obligation walk's own validation;
+  `imagery_signature`/`reanchor_used`/`event_summary` carry no downstream dependency). Any
+  diff in those fields flags every later scene in the Working Draft stale — bluntly, for v1,
+  never auto-recompiled or cascaded — carrying the source scene's diff summary rather than a
+  computed per-scene relevance judgment. Stale-but-standing is legitimate: nothing nags the
+  author, and a Working Draft with stale scenes remains fully readable. See
+  [ADR 0015](docs/adr/0015-compiled-editions-and-staleness.md).
 - **Read-time run loop** — pressing "generate a new telling" starts a durable Vercel Workflow
   run, one step per scene (writer call → state-update validation → continuity pass → digest
   rollup if a window closes → Blob flush), *never* streamed to a present reader — the reader
@@ -216,8 +247,10 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   logs to a **run report**. A read-time `error` gets one bounded retry, then falls back to
   the World Model's pre-scene value and logs — the World Model is never committed a
   contradiction outright. No diagnostic severity aborts a read-time run (ADR 0005).
-- **Stale** — a scene whose upstream digest changed on facts-revealed, plants, or closing
-  situation. Flagged, never auto-recompiled. Stale-but-standing is a legitimate state.
+- **Stale** — a Working Draft scene whose upstream digest changed on `facts_revealed`,
+  `entities_on_stage`, `plants_opened`, or `closing_situation`. A property of the Working
+  Draft only, never of a Compiled edition (see Working Draft, above). Flagged, never
+  auto-recompiled. Stale-but-standing is a legitimate state.
 
 ## The seam-failure rubric
 
