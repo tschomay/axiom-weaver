@@ -80,3 +80,44 @@ ul.paths {
 ul.paths li {
   padding: 0.15rem 0;
 }
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 28rem;
+}
+
+.admin-form label {
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+}
+
+.admin-form input {
+  font: 15px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.4rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.admin-form button {
+  font: 15px/1.5 ui-serif, Georgia, "Times New Roman", serif;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--ink);
+  border-radius: 0.4rem;
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.admin-form button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.admin-error {
+  color: #b3261e;
+}
