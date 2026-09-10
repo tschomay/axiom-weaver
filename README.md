@@ -10,10 +10,10 @@ Start with [`CONTEXT.md`](./CONTEXT.md) for the ubiquitous language,
 
 ## What is built
 
-The compiler, end to end: the persistence half, the writer call, and the loop that drives one
-call per scene into a whole persisted edition. Still to come: a real UI
-([#42](https://github.com/tschomay/axiom-weaver/issues/42)) — everything below is reachable from
-a script or an API route, not yet from a screen.
+The compiler, end to end: the persistence half, the writer call, the loop that drives one call per
+scene into a whole persisted edition, and the four author surfaces over all of it. Everything below
+is reachable from a script, an API route, and — for the four surfaces ADR 0016 settled on — a
+screen.
 
 ### Persistence and state
 
@@ -61,6 +61,17 @@ What loading the two fixtures through all of it turned up is in
 | The Working Draft: field-scoped digest diff, blunt staleness propagation | `src/draft/working-draft.ts` | ADR 0015 §1/§3 |
 | Author-time stepwise compiling into the draft | `src/draft/draft-compile.ts` | ADR 0011 §2, ADR 0016 §3 |
 | Manual Baked promotion, refused for a degraded run | `StoryRepository.promoteToBaked` | ADR 0014 §9 |
+
+### The author surfaces
+
+| Area | Where | Fixed by |
+| --- | --- | --- |
+| Working Draft scene list, staleness, what can be compiled next | `src/draft/draft-view.ts` | ADR 0015 §1/§3, ADR 0016 §1 |
+| "State as of scene N" for both memories — World Model and told-ledger | `src/draft/inspector.ts` | ADR 0016 §1/§2 |
+| Accepting or rejecting a volitional proposal at author-time | `src/draft/proposals.ts` | ADR 0016 §3 |
+| The run report as a screen: per-card aggregation, promotability | `src/edition/report-view.ts` | ADR 0014 §8/§9, ADR 0016 §1 |
+| Recognizing the author on a write surface | `src/admin/authorize.ts` | ADR 0015 §5 |
+| The screens themselves | `app/stories/[storyId]/` | ADR 0016 §1 |
 
 ## Running it
 
@@ -132,6 +143,23 @@ Persistence goes through a `BlobStore` interface with two implementations. With
 filesystem under `.data/` (gitignored) at exactly the same pathnames. See `.env.example` and
 `src/persistence/paths.ts` for the layout.
 
+### The screens
+
+| Screen | What an author does there |
+| --- | --- |
+| `/stories/{storyId}` | The **Working Draft** and the **scene compile view**. Compile a card and read what it produced — the `error` and `warn` diagnostics named against the exact field each one contradicts, and the volitional proposals waiting on a decision. Stale badges sit inline on the scene list, each carrying ADR 0015 §6's field-scoped diff as its popover. |
+| `/stories/{storyId}/inspector` | The **World & Discourse inspector**: the World Model and the told-ledger as two tabs over one scene-index scrubber, both reconstructed rather than stored. |
+| `/stories/{storyId}/runs` | The **run report**: every run aggregated by Scene Card — "this card degraded on 4 of 20 reads" — and the manual promotion of a completed, non-degraded run to Baked. |
+
+Compiling, resolving a proposal and promoting a run are writes, and ADR 0015 §5 keeps them to the
+author. A deployment asks for the same `BLOB_READ_WRITE_TOKEN` every other write surface uses; a
+local filesystem-backed instance has no shared store to protect and asks for nothing.
+
+A compile calls the writer model, and on the project's free-tier key one telling spends the whole
+day's allowance (see [`AGENTS.md`](./AGENTS.md)). So the Working Draft carries a **compose from the
+Scene Card** toggle: the stand-in writer exercises validation, the continuity pass and staleness
+without a model call. The compile view always names which of the two wrote the scene.
+
 ### Read surfaces
 
 | Route | What it serves |
@@ -145,3 +173,10 @@ filesystem under `.data/` (gitignored) at exactly the same pathnames. See `.env.
 | `POST /api/stories/{storyId}/tellings` | generate a new telling — mints a fresh run id and starts the loop |
 | `GET /api/tellings/{runId}` | one telling: scene-count progress while it runs, `?include=scenes` for the prose once it is finished |
 | `POST /api/tellings/{runId}/promote` | promote a completed, non-degraded run to Baked (author-gated) |
+| `GET /api/stories/{storyId}/draft` | the Working Draft's scene list: compiled-against version, staleness and its diff, what can be compiled next |
+| `POST /api/stories/{storyId}/draft/compile` | compile one Scene Card into the Working Draft; `{"writer":"stand_in"}` composes from the card instead of calling the model (author-gated) |
+| `POST /api/stories/{storyId}/proposals/{sequence}` | accept or reject one volitional proposal (author-gated) |
+| `GET /api/stories/{storyId}/inspector?scene=N` | both inspector tabs at one scrubber position |
+| `GET /api/stories/{storyId}/run-report` | every run of a story, aggregated by Scene Card, with each run's promotability |
+| `GET /api/tellings/{runId}/report` | one run's full report |
+| `GET /api/author/session` | whether this instance wants a token before offering a write |

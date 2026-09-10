@@ -4,6 +4,15 @@
   --paper: #faf8f4;
   --muted: #6b6559;
   --rule: #ddd6c9;
+  --panel: #fffdf8;
+  --accent: #8a3b2a;
+  --good: #2f6b3a;
+  --good-soft: #e2ecdf;
+  --warn: #8a5f10;
+  --warn-soft: #f6ecd6;
+  --bad: #a3352b;
+  --bad-soft: #f6ded9;
+  --neutral-soft: #ece6d8;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,6 +21,15 @@
     --paper: #16150f;
     --muted: #9a9284;
     --rule: #35322a;
+    --panel: #1d1b15;
+    --accent: #d98b74;
+    --good: #8fc79a;
+    --good-soft: #1f2a20;
+    --warn: #d8b467;
+    --warn-soft: #2d2718;
+    --bad: #e29288;
+    --bad-soft: #2f1d1a;
+    --neutral-soft: #26241d;
   }
 }
 
@@ -120,4 +138,275 @@ ul.paths li {
 
 .admin-error {
   color: #b3261e;
+}
+
+/* --- Author surfaces (ADR 0016) ----------------------------------------------------------- */
+
+main.wide {
+  max-width: 64rem;
+}
+
+a {
+  color: inherit;
+}
+
+.story-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.story-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.story-nav a:hover {
+  border-bottom-color: var(--muted);
+}
+
+.story-nav a.current {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.panel {
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: var(--panel);
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+}
+
+.panel h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+}
+
+.tag {
+  display: inline-block;
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  background: var(--neutral-soft);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.tag.good {
+  background: var(--good-soft);
+  color: var(--good);
+}
+
+.tag.warn {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.tag.bad {
+  background: var(--bad-soft);
+  color: var(--bad);
+}
+
+/* The Working Draft's scene list — the list stale badges decorate (ADR 0016 §1). */
+.scene-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.scene-row.selected {
+  background: var(--neutral-soft);
+}
+
+.scene-row .num {
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+  min-width: 2rem;
+}
+
+.scene-row .title {
+  font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  flex: 1 1 14rem;
+}
+
+.scene-row .actions {
+  margin-left: auto;
+  display: flex;
+  gap: 0.4rem;
+}
+
+button.badge-stale {
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--warn-soft);
+  color: var(--warn);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+  cursor: pointer;
+}
+
+button.badge-stale:hover {
+  border-color: var(--warn);
+}
+
+button.action {
+  font: 13px/1.5 ui-serif, Georgia, 'Times New Roman', serif;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.35rem;
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+button.action:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+button.action:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+button.action.primary {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+/* A diagnostic, named against the exact field it contradicts (ADR 0016 §4). */
+.diagnostic {
+  border-left: 3px solid var(--warn);
+  background: var(--warn-soft);
+  border-radius: 0 0.35rem 0.35rem 0;
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.diagnostic.error {
+  border-left-color: var(--bad);
+  background: var(--bad-soft);
+}
+
+.diagnostic .head {
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 600;
+}
+
+.proposal {
+  border: 1px solid var(--rule);
+  border-radius: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.proposal .body {
+  flex: 1 1 20rem;
+  font-size: 0.9rem;
+}
+
+.scrubber {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 0.75rem 0;
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+}
+
+.scrubber input[type='range'] {
+  flex: 1 1 16rem;
+  accent-color: var(--accent);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0;
+}
+
+table.rows {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin: 0.5rem 0 1rem;
+}
+
+table.rows th,
+table.rows td {
+  text-align: left;
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+table.rows th {
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.prose-preview {
+  white-space: pre-wrap;
+  border-left: 2px solid var(--rule);
+  padding-left: 0.9rem;
+  margin: 0.5rem 0;
+  max-height: 20rem;
+  overflow-y: auto;
+}
+
+.token-field {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0.75rem 0;
+}
+
+.token-field input[type='password'] {
+  font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.35rem;
+  background: var(--paper);
+  color: var(--ink);
+  flex: 1 1 18rem;
+}
+
+/* The stand-in-writer choice: a checkbox and the reason to reach for it. */
+.writer-toggle {
+  display: block;
+  margin: 0.75rem 0;
+}
+
+.writer-toggle input {
+  margin-right: 0.5rem;
+}
+
+.writer-toggle .why {
+  display: block;
+  margin: 0.15rem 0 0 1.6rem;
 }
