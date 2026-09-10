@@ -17,9 +17,13 @@
  */
 
 import { z } from 'zod';
-import { DIAGNOSTIC_CODES, type Diagnostic, type Surface } from '../validator/diagnostics';
+import {
+  DIAGNOSTIC_CODES,
+  surfacesFor,
+  type Diagnostic,
+  type Surface,
+} from '../validator/diagnostics';
 import { CONTINUITY_MODES } from '../continuity/continuity-pass';
-import { surfacesFor } from '../validator/diagnostics';
 import type { Occasion } from '../validator/state-update-authority';
 import { FINISH_REASONS } from '../writer/model-client';
 
