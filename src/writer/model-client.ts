@@ -37,6 +37,15 @@ export interface ModelUsage {
    * assembly ordering is actually working, and an ordering mistake is invisible in the prose.
    */
   readonly cached_tokens: number;
+  /**
+   * `usageMetadata.thoughtsTokenCount`.
+   *
+   * Counted against the same `maxOutputTokens` cap as the visible response (confirmed against the
+   * live endpoint, not doc-only: a 60-token cap at `thinking_level: MEDIUM` returned 82 thinking
+   * tokens and zero output). Without this logged, a `MAX_TOKENS` finish with output well under
+   * budget looks inexplicable — this is the number that explains it.
+   */
+  readonly thoughts_tokens: number;
 }
 
 export interface ModelRequest {
@@ -124,6 +133,7 @@ export class GeminiClient implements ModelClient {
         prompt_tokens: body.usageMetadata?.promptTokenCount ?? 0,
         output_tokens: body.usageMetadata?.candidatesTokenCount ?? 0,
         cached_tokens: body.usageMetadata?.cachedContentTokenCount ?? 0,
+        thoughts_tokens: body.usageMetadata?.thoughtsTokenCount ?? 0,
       },
     };
   }
@@ -138,6 +148,7 @@ interface GenerateContentResponse {
     promptTokenCount?: number;
     candidatesTokenCount?: number;
     cachedContentTokenCount?: number;
+    thoughtsTokenCount?: number;
   };
 }
 

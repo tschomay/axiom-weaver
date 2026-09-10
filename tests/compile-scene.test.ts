@@ -34,7 +34,11 @@ class ScriptedClient implements ModelClient {
 }
 
 function response(text: string, finish: FinishReason = 'STOP'): ModelResponse {
-  return { text, finish_reason: finish, usage: { prompt_tokens: 0, output_tokens: 0, cached_tokens: 0 } };
+  return {
+    text,
+    finish_reason: finish,
+    usage: { prompt_tokens: 0, output_tokens: 0, cached_tokens: 0, thoughts_tokens: 0 },
+  };
 }
 
 const RECORDINGS = [

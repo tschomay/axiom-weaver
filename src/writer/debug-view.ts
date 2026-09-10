@@ -80,7 +80,7 @@ export function renderCompiledSceneReport(
 
   for (const call of compiled.calls) {
     lines.push(
-      `  ${call.purpose} — ${call.model} — finish: ${call.finish_reason} — prompt ${call.prompt_tokens} / output ${call.output_tokens} / cached ${call.cached_tokens}`,
+      `  ${call.purpose} — ${call.model} — finish: ${call.finish_reason} — prompt ${call.prompt_tokens} / output ${call.output_tokens} / thinking ${call.thoughts_tokens} / cached ${call.cached_tokens}`,
     );
   }
 

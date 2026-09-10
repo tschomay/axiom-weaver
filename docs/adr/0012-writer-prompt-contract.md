@@ -156,6 +156,32 @@ fixtures rather than fixed here (out of this ticket's scope):
   propose that row; the prototype's `state_updates` drops it. The fixture's fix is
   moving the character or the knowledge row.
 
+## Amendment (2026-09-10)
+
+Issue #40 shipped this ADR's fallback path but never ran it against the live endpoint — no
+`GEMINI_API_KEY` was available at the time (see PR #46). With a key added to both the dev
+environment and Vercel's production environment, the first two real writer calls (Cinderella's
+`scene_13_the_fitting` and A Christmas Carol's `scene_08_the_cratchits`) both hit `MAX_TOKENS`
+with visible output well under decision 4's "roughly 2x the length budget" figure. Direct probing
+of the live endpoint confirmed why: `thinkingConfig.thinkingLevel` reasoning tokens are billed
+against the same `maxOutputTokens` cap as prose, not a separate one — a 60-token cap at
+`thinking_level: MEDIUM` returned 82 thinking tokens and zero visible output. This split was
+already in the Gemini capabilities research's own cost model (~1,200 thinking tokens against
+~1,800 prose tokens per scene, §2's quantified-saving table) but decision 4's formula never
+carried that ratio into the actual `maxOutputTokens` sent on the wire.
+
+Fixed in `maxOutputTokensFor` (`src/writer/compile-scene.ts`): the prose+tail figure from decision
+4 is unchanged, but the total request budget now reserves an additional 40% on top of it for
+thinking, matching the research's own ratio and the two live calls observed (35-50% consumed by
+thinking). `ModelUsage`/`CallRecord` now also carry `thoughts_tokens`
+(`usageMetadata.thoughtsTokenCount`), logged alongside `cached_tokens` for the same reason ADR
+0008's own measurement logs cache fraction — a budgeting mistake here is invisible in the prose,
+same as a cache-ordering mistake is.
+
+The truncation-salvage path (decision 5) itself is unaffected and worked correctly both times;
+this amendment only widens the primary call's budget so salvage is the exception again rather
+than the routine case.
+
 ## Consequences
 
 - `docs/research/gemini-capabilities.md`'s five headline findings (structured

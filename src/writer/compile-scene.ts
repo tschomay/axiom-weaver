@@ -50,10 +50,26 @@ import {
 } from './model-client';
 import { finalParagraph, lengthVerdict, salvageProse } from './salvage';
 
-/** ADR 0012 decision 4: roughly 2x the length budget in tokens, sized to cover the digest tail. */
+/**
+ * ADR 0012 decision 4: roughly 2x the length budget in tokens, sized to cover prose and the
+ * digest/state_updates/diagnostics tail.
+ *
+ * That figure alone under-budgets in practice: `thinkingConfig.thinkingLevel` reasoning tokens are
+ * billed against this same `maxOutputTokens` cap, not a separate one (confirmed against the live
+ * endpoint — a 60-token cap at `thinking_level: MEDIUM` returned 82 thinking tokens and zero
+ * output; the Gemini capabilities research's own cost model already assumed this split, ~1,200
+ * thinking tokens against ~1,800 prose tokens per scene — `docs/research/gemini-capabilities.md`
+ * §2). Both real fixture compiles run against a live key hit `MAX_TOKENS` well under the
+ * prose+tail figure alone, thinking having consumed 35-50% of the cap. `THINKING_RESERVE_FRACTION`
+ * reserves headroom for that on top of the prose+tail budget, rather than folding it into the same
+ * multiplier where it can't be told apart from prose room.
+ */
+const THINKING_RESERVE_FRACTION = 0.4;
+
 export function maxOutputTokensFor(scene: SceneCard): number {
   const words = scene.length_budget ?? 500;
-  return Math.ceil(words * 2 * 1.4);
+  const proseAndTail = Math.ceil(words * 2 * 1.4);
+  return Math.ceil(proseAndTail / (1 - THINKING_RESERVE_FRACTION));
 }
 
 export interface CompileSceneInput {
@@ -93,6 +109,7 @@ export interface CallRecord {
   readonly prompt_tokens: number;
   readonly output_tokens: number;
   readonly cached_tokens: number;
+  readonly thoughts_tokens: number;
 }
 
 /** Which retry class a finish reason falls into, or `null` for one that needs no retry. */
@@ -351,6 +368,7 @@ function record(
     prompt_tokens: response.usage.prompt_tokens,
     output_tokens: response.usage.output_tokens,
     cached_tokens: response.usage.cached_tokens,
+    thoughts_tokens: response.usage.thoughts_tokens,
   };
 }
 

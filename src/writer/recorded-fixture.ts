@@ -75,7 +75,7 @@ export function clientFor(fixture: RecordedFixture): RecordedClient {
   const response: ModelResponse = {
     text: JSON.stringify(fixture.response),
     finish_reason: 'STOP',
-    usage: { prompt_tokens: 0, output_tokens: 0, cached_tokens: 0 },
+    usage: { prompt_tokens: 0, output_tokens: 0, cached_tokens: 0, thoughts_tokens: 0 },
   };
   return new RecordedClient({ [fixture.target_scene_id]: [response] });
 }
