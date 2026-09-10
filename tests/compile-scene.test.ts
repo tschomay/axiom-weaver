@@ -3,7 +3,11 @@ import { readFixturePackage } from '@/fixtures/load';
 import { parseVoiceCard } from '@/voice/voice-card';
 import { walkPlantObligations } from '@/plants/obligation-walk';
 import { replayTo } from '@/writer/run-state';
-import { compileScene } from '@/writer/compile-scene';
+import {
+  MIN_THINKING_RESERVE_TOKENS,
+  compileScene,
+  maxOutputTokensFor,
+} from '@/writer/compile-scene';
 import { clientFor, readRecordedFixture } from '@/writer/recorded-fixture';
 import { renderCompiledSceneReport } from '@/writer/debug-view';
 import {
@@ -15,6 +19,7 @@ import {
   type ModelResponse,
 } from '@/writer/model-client';
 import { scenesInOrder, type SceneCard } from '@/schema/story-package';
+import { scene as sceneCard } from './helpers';
 
 /** A client that hands back a scripted sequence regardless of what it is asked. */
 class ScriptedClient implements ModelClient {
@@ -276,5 +281,25 @@ describe('failure paths (ADR 0012 decisions 5 and 6)', () => {
     const client = new ScriptedClient([response(JSON.stringify(recording.response))]);
     const compiled = await compileScene({ ...base, client });
     expect(compiled.calls).toHaveLength(1);
+  });
+});
+
+describe('the output-token budget (issue #49)', () => {
+  it('reserves room to think that a short scene does not lose', () => {
+    // Thinking scales with how tangled the scene is, not with its word count: a 200-word scene
+    // measured 897 thinking tokens against a cap that used to be 934 for the whole response.
+    const short = maxOutputTokensFor(sceneCard({ length_budget: 200 }));
+    const long = maxOutputTokensFor(sceneCard({ length_budget: 500 }));
+
+    expect(short).toBeGreaterThan(200 * 2 * 1.4 + MIN_THINKING_RESERVE_TOKENS - 1);
+    expect(long).toBeGreaterThan(short);
+    // Every thinking figure the first live run measured (897–2,633) fits, on the shortest scene.
+    expect(short - Math.ceil(200 * 2 * 1.4)).toBeGreaterThanOrEqual(2_633);
+  });
+
+  it('lets the proportional reserve take over once a scene is long enough to need it', () => {
+    const huge = maxOutputTokensFor(sceneCard({ length_budget: 5_000 }));
+    const proseAndTail = Math.ceil(5_000 * 2 * 1.4);
+    expect(huge - proseAndTail).toBeGreaterThan(MIN_THINKING_RESERVE_TOKENS);
   });
 });

@@ -90,14 +90,108 @@ export const WRITER_MODEL = 'gemini-3.7-flash';
 export const WRITER_MODEL_FALLBACK = 'gemini-3.6-flash';
 export const FALLBACK_MODEL = 'gemini-3.5-flash-lite';
 
+/**
+ * The model to reach for when what is scarce is *requests*, not quality.
+ *
+ * On the project's free-tier key, `gemini-3.7-flash` and `gemini-3.6-flash` share a 20
+ * requests/day ceiling — a single 14-scene telling exhausts it — while `gemini-3.5-flash-lite`
+ * carries a much larger daily allowance. It is the wrong model to judge prose by and the right
+ * one to prove a loop with, so it is opt-in only: nothing selects it automatically, because a
+ * silent quality downgrade is worse than a rate limit. Set `AXIOM_WRITER_MODEL` to choose it (see
+ * `AGENTS.md`), and the run report's per-call `model` field records what actually wrote each
+ * scene.
+ */
+export const TESTING_WRITER_MODEL = FALLBACK_MODEL;
+
+/**
+ * Which model the writer call should use: `AXIOM_WRITER_MODEL` if set, else `WRITER_MODEL`.
+ *
+ * Deliberately an override of the *request*, not a rewrite inside the client: a client that
+ * quietly answered on a different model than it was asked for would make `compileScene` log a
+ * `model_fallback` that never happened, and put a falsehood in every run report.
+ */
+export function writerModelFromEnv(
+  env: Record<string, string | undefined> = process.env,
+): string {
+  const override = env['AXIOM_WRITER_MODEL'];
+  return override === undefined || override === '' ? WRITER_MODEL : override;
+}
+
 const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models';
 
 /** HTTP statuses worth a retry or a model swap — capacity/availability, not a real request bug. */
 const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
 const RETRY_BACKOFF_MS = 1500;
 
-/** Thrown only for a status in `RETRYABLE_STATUSES`, so callers can tell it apart from a real bug. */
-class RetryableStatusError extends Error {}
+/**
+ * Thrown only for a status in `RETRYABLE_STATUSES`, so callers can tell it apart from a real bug.
+ *
+ * A 429 carries two things worth reading rather than guessing at: how long the API says to wait,
+ * and whether what ran out was a per-minute allowance or the day's. They are different failures —
+ * one clears in a minute, the other at midnight Pacific — and on a 20-requests/day key, spending
+ * a retry on the second is spending 5% of the day's budget to be told the same thing twice.
+ */
+class RetryableStatusError extends Error {
+  /** `RetryInfo.retryDelay` from the response body, in milliseconds, when the API sent one. */
+  readonly retryAfterMs: number | null;
+  /** True when a per-day quota is exhausted: waiting will not help, only another model will. */
+  readonly exhaustedForToday: boolean;
+
+  constructor(
+    message: string,
+    options: { retryAfterMs?: number | null; exhaustedForToday?: boolean } = {},
+  ) {
+    super(message);
+    this.retryAfterMs = options.retryAfterMs ?? null;
+    this.exhaustedForToday = options.exhaustedForToday ?? false;
+  }
+}
+
+/** Never wait longer than this on the API's own say-so, whatever the body claims. */
+const MAX_HONORED_RETRY_MS = 60_000;
+
+/**
+ * Read a 429's own account of itself: `RetryInfo.retryDelay`, and whether the exhausted quota is
+ * a per-day one. Both are best-effort — an unparseable body just means the defaults apply.
+ */
+export function readQuotaFailure(body: string): {
+  retryAfterMs: number | null;
+  exhaustedForToday: boolean;
+} {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(body);
+  } catch {
+    return { retryAfterMs: null, exhaustedForToday: false };
+  }
+
+  const details = (parsed as { error?: { details?: unknown } })?.error?.details;
+  if (!Array.isArray(details)) return { retryAfterMs: null, exhaustedForToday: false };
+
+  let retryAfterMs: number | null = null;
+  let exhaustedForToday = false;
+
+  for (const detail of details as Array<Record<string, unknown>>) {
+    const type = typeof detail['@type'] === 'string' ? (detail['@type'] as string) : '';
+
+    if (type.endsWith('RetryInfo') && typeof detail['retryDelay'] === 'string') {
+      const seconds = Number.parseFloat((detail['retryDelay'] as string).replace(/s$/, ''));
+      if (Number.isFinite(seconds) && seconds > 0) {
+        retryAfterMs = Math.min(Math.ceil(seconds * 1000), MAX_HONORED_RETRY_MS);
+      }
+    }
+
+    if (type.endsWith('QuotaFailure') && Array.isArray(detail['violations'])) {
+      for (const violation of detail['violations'] as Array<Record<string, unknown>>) {
+        const quotaId = typeof violation['quotaId'] === 'string' ? violation['quotaId'] : '';
+        const metric = typeof violation['quotaMetric'] === 'string' ? violation['quotaMetric'] : '';
+        if (/PerDay/i.test(quotaId) || /per_day/i.test(metric)) exhaustedForToday = true;
+      }
+    }
+  }
+
+  return { retryAfterMs, exhaustedForToday };
+}
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -137,17 +231,29 @@ export class GeminiClient implements ModelClient {
       return await this.attempt(request, request.model);
     } catch (error) {
       if (!(error instanceof RetryableStatusError)) throw error;
-      await sleep(RETRY_BACKOFF_MS);
+
+      // A day's quota does not come back in a minute. Skip the same-model retry entirely and go
+      // straight to a different model, which is a different quota bucket.
+      if (error.exhaustedForToday) return await this.swapModel(request, error);
+
+      await sleep(error.retryAfterMs ?? RETRY_BACKOFF_MS);
 
       try {
         return await this.attempt(request, request.model);
       } catch (retried) {
-        if (!(retried instanceof RetryableStatusError) || request.model === WRITER_MODEL_FALLBACK) {
-          throw retried;
-        }
-        return await this.attempt(request, WRITER_MODEL_FALLBACK);
+        if (!(retried instanceof RetryableStatusError)) throw retried;
+        return await this.swapModel(request, retried);
       }
     }
+  }
+
+  /** The last resort: the same request on the capacity fallback, or the failure as it stands. */
+  private async swapModel(
+    request: ModelRequest,
+    error: RetryableStatusError,
+  ): Promise<ModelResponse> {
+    if (request.model === WRITER_MODEL_FALLBACK) throw error;
+    return this.attempt(request, WRITER_MODEL_FALLBACK);
   }
 
   private async attempt(request: ModelRequest, model: string): Promise<ModelResponse> {
@@ -170,8 +276,14 @@ export class GeminiClient implements ModelClient {
     });
 
     if (!response.ok) {
-      const message = `Gemini ${model} returned ${response.status}: ${await response.text()}`;
-      if (RETRYABLE_STATUSES.has(response.status)) throw new RetryableStatusError(message);
+      const body = await response.text();
+      const message = `Gemini ${model} returned ${response.status}: ${body}`;
+      if (RETRYABLE_STATUSES.has(response.status)) {
+        throw new RetryableStatusError(
+          message,
+          response.status === 429 ? readQuotaFailure(body) : {},
+        );
+      }
       throw new Error(message);
     }
 

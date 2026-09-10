@@ -5,6 +5,12 @@
  *   npm run telling -- a-christmas-carol
  *   npm run telling -- cinderella --verbose
  *   npm run telling -- cinderella --promote    # promote the run to Baked afterwards
+ *   npm run telling -- cinderella --model gemini-3.5-flash-lite   # trade prose for headroom
+ *
+ * `--model` (or `AXIOM_WRITER_MODEL`) exists because the project's key is free-tier: the writer
+ * model and its capacity fallback share 20 requests a day, which one 14-scene telling spends in
+ * full. Flash-Lite has a far larger daily allowance and writes worse prose — the right trade for
+ * proving the loop works, the wrong one for judging what it wrote. See `AGENTS.md`.
  *
  * This is what "pressing generate a new telling" does, minus the button (the author- and
  * reader-facing screens are ticket 4's). With `GEMINI_API_KEY` set every scene is a real writer
@@ -17,7 +23,12 @@
 
 import { readFixturePackage } from '../src/fixtures/load';
 import { storyRepository } from '../src/persistence';
-import { GeminiClient, type ModelClient } from '../src/writer/model-client';
+import {
+  GeminiClient,
+  WRITER_MODEL,
+  writerModelFromEnv,
+  type ModelClient,
+} from '../src/writer/model-client';
 import { SyntheticWriterClient } from '../src/writer/synthetic-client';
 import { runTelling, progressText } from '../src/edition/run-loop';
 import { renderRunReport } from '../src/edition/report-view';
@@ -28,7 +39,10 @@ async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const verbose = args.includes('--verbose');
   const promote = args.includes('--promote');
-  const fixture = args.find((arg) => !arg.startsWith('--')) ?? 'cinderella';
+  const modelFlag = args.indexOf('--model');
+  const writerModel = modelFlag === -1 ? writerModelFromEnv() : (args[modelFlag + 1] ?? '');
+  const fixture =
+    args.find((arg) => !arg.startsWith('--') && arg !== writerModel) ?? 'cinderella';
 
   const pkg = await readFixturePackage(fixture);
   const repository = storyRepository();
@@ -45,8 +59,13 @@ async function main(): Promise<void> {
   console.log(`\n${'#'.repeat(78)}`);
   console.log(`# ${fixture} — generate a new telling`);
   console.log(
-    `# writer: ${live === null ? 'STAND-IN (no GEMINI_API_KEY set, so no model was called — every scene is composed from its Scene Card)' : 'LIVE Gemini calls'}`,
+    `# writer: ${live === null ? 'STAND-IN (no GEMINI_API_KEY set, so no model was called — every scene is composed from its Scene Card)' : `LIVE Gemini calls to ${writerModel}`}`,
   );
+  if (live !== null && writerModel !== WRITER_MODEL) {
+    console.log(
+      `# NOTE: ${writerModel} is not the writer model this project judges prose by — it is here for request headroom`,
+    );
+  }
   console.log(
     `# estimate: ${estimate.text}${estimate.from_default ? ' (project-wide default — this story has no measured runs yet)' : ' (from this story’s own measured runs)'}`,
   );
@@ -56,6 +75,7 @@ async function main(): Promise<void> {
     pkg,
     client,
     repository,
+    writerModel,
     onProgress: (event) => console.log(`  ${progressText(event)}`),
   });
 
