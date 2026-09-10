@@ -3,11 +3,19 @@
  *
  * ADR 0014 §8 fixes what the report *holds*; ticket 3's definition of done asks for it to be "a
  * real, readable artifact (even if only queryable via a script at this stage)". The author-facing
- * screen is ticket 4's (ADR 0016 §1) — this is the same data rendered for a terminal, and both
+ * screen is ADR 0016 §1's fourth surface — this is the same data rendered for a terminal, and both
  * read the same document, so the screen inherits a shape that has already been read by somebody.
+ *
+ * Two renderings live here, then: `renderRunReport` / `renderCardAggregates` for a terminal, and
+ * `buildRunReportView` for the screen. The screen's payload is deliberately the *same* projection
+ * — per-Scene-Card aggregation across runs, plus what each run's promotability is — rather than a
+ * second opinion about what a run report says.
  */
 
-import { aggregateByCard, type CardAggregate, type RunReport } from './run-report';
+import { aggregateByCard, isPromotable, type CardAggregate, type RunReport } from './run-report';
+import type { StoryPackage } from '../schema/story-package';
+import type { StoryRepository } from '../persistence/story-repository';
+import type { BakedPointer } from './edition';
 
 const RULE = '='.repeat(78);
 
@@ -105,4 +113,63 @@ export function renderCardAggregates(reports: readonly RunReport[]): string {
 function describeDegraded(card: CardAggregate): string {
   if (card.degraded_runs === 0) return `compiled cleanly on all ${card.runs} read(s)`;
   return `degraded on ${card.degraded_runs} of ${card.runs} read(s)`;
+}
+
+// --- The author-facing screen (ADR 0016 §1, surface 4) ----------------------------------------
+
+export interface RunSummaryView {
+  readonly run_id: string;
+  readonly package_version: number;
+  readonly occasion: RunReport['occasion'];
+  readonly status: RunReport['status'];
+  readonly degraded: boolean;
+  readonly degraded_scene_count: number;
+  readonly scene_count: number;
+  readonly scenes_compiled: number;
+  readonly duration_ms: number;
+  readonly started_at: string;
+  readonly completed_at: string | null;
+  readonly budget: RunReport['budget'];
+  /** ADR 0014 §9: only a completed, non-degraded run may ever be promoted to Baked. */
+  readonly promotable: boolean;
+  readonly is_baked: boolean;
+}
+
+export interface RunReportView {
+  readonly story_id: string;
+  readonly title: string;
+  readonly baked: BakedPointer | null;
+  readonly runs: RunSummaryView[];
+  readonly by_card: CardAggregate[];
+}
+
+export async function buildRunReportView(
+  repository: StoryRepository,
+  pkg: StoryPackage,
+): Promise<RunReportView> {
+  const reports = await repository.getRunReports(pkg.story_id);
+  const baked = await repository.getBakedPointer(pkg.story_id);
+
+  return {
+    story_id: pkg.story_id,
+    title: pkg.metadata.title,
+    baked,
+    runs: reports.map((report) => ({
+      run_id: report.run_id,
+      package_version: report.package_version,
+      occasion: report.occasion,
+      status: report.status,
+      degraded: report.degraded,
+      degraded_scene_count: report.degraded_scene_count,
+      scene_count: report.scene_count,
+      scenes_compiled: report.scenes.length,
+      duration_ms: report.duration_ms,
+      started_at: report.started_at,
+      completed_at: report.completed_at,
+      budget: report.budget,
+      promotable: isPromotable(report),
+      is_baked: baked?.run_id === report.run_id,
+    })),
+    by_card: aggregateByCard(reports),
+  };
 }

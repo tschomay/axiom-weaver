@@ -45,8 +45,8 @@ export default async function Home() {
       <h1>Axiom Weaver</h1>
       <p className="lede">
         A story is authored once as a structured Story Package and performed into prose on every
-        read. This deployment carries the persistence layer only — the World Model, the Story
-        Package schema, the state-update commit log, and the state-update authority validator.
+        read. Pick a story to open its author surfaces: the Working Draft and its scene compile
+        view, the World &amp; Discourse inspector, and the run report.
       </p>
 
       <h2>Stories</h2>
@@ -58,11 +58,18 @@ export default async function Home() {
       ) : (
         stories.map((story) => (
           <div className="story" key={story.storyId}>
-            <h3>{story.title}</h3>
+            <h3>
+              <Link href={`/stories/${story.storyId}`}>{story.title}</Link>
+            </h3>
             <p className="meta">
               {story.storyId} · package_version {story.packageVersion} (retained:{' '}
               {story.retainedVersions.join(', ')}) · {story.scenes} scene cards · {story.entities}{' '}
               entities
+            </p>
+            <p className="meta">
+              <Link href={`/stories/${story.storyId}`}>Working Draft</Link> ·{' '}
+              <Link href={`/stories/${story.storyId}/inspector`}>World &amp; Discourse</Link> ·{' '}
+              <Link href={`/stories/${story.storyId}/runs`}>Run report</Link>
             </p>
           </div>
         ))
@@ -86,6 +93,41 @@ export default async function Home() {
         <li>
           <code>GET /api/stories/{'{storyId}'}/proposals</code> — the proposals queue: volitional
           proposals awaiting the author
+        </li>
+        <li>
+          <code>GET /api/stories/{'{storyId}'}/draft</code> — the Working Draft&apos;s scene list,
+          with staleness
+        </li>
+        <li>
+          <code>GET /api/stories/{'{storyId}'}/inspector?scene=N</code> — both inspector tabs at
+          one scrubber position
+        </li>
+        <li>
+          <code>GET /api/stories/{'{storyId}'}/run-report</code> — runs aggregated by Scene Card
+        </li>
+        <li>
+          <code>GET /api/tellings/{'{runId}'}/report</code> — one run&apos;s full report
+        </li>
+      </ul>
+
+      <h2>Author surfaces</h2>
+      <p className="meta">
+        The four surfaces ADR 0016 settled on. Compiling a scene, resolving a proposal and
+        promoting a run are writes, and a deployment asks for the same{' '}
+        <code>BLOB_READ_WRITE_TOKEN</code> every other write surface uses; a local
+        filesystem-backed instance asks for nothing.
+      </p>
+      <ul className="paths">
+        <li>
+          <code>/stories/{'{storyId}'}</code> — Working Draft, stale badges, and the scene compile
+          view (diagnostics + proposals queue)
+        </li>
+        <li>
+          <code>/stories/{'{storyId}'}/inspector</code> — World Model and told-ledger over one
+          scene-index scrubber
+        </li>
+        <li>
+          <code>/stories/{'{storyId}'}/runs</code> — run report and the manual Baked promotion
         </li>
       </ul>
 

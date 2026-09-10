@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { bearerToken, isAuthorizedAdminRequest } from '@/admin/authorize';
+import { bearerToken, isAuthorizedAuthorRequest } from '@/admin/authorize';
 import { storyRepository } from '@/persistence';
 import { BakedPromotionError } from '@/persistence/story-repository';
 
@@ -12,10 +12,10 @@ export const dynamic = 'force-dynamic';
  * both. Author-gated by the same token every other write surface uses (ADR 0015 §5: only the
  * author saves, names or deletes; a reader can still share a run by its own URL).
  *
- * The button that calls this lives on the run report screen, which is ticket 4's to build.
+ * The button that calls this lives on the run report screen (`/stories/{storyId}/runs`).
  */
 export async function POST(request: Request, { params }: { params: Promise<{ runId: string }> }) {
-  if (!isAuthorizedAdminRequest(bearerToken(request))) {
+  if (!isAuthorizedAuthorRequest(bearerToken(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
