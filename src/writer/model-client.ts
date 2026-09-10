@@ -117,11 +117,66 @@ export function writerModelFromEnv(
   return override === undefined || override === '' ? WRITER_MODEL : override;
 }
 
+/**
+ * The prefix below which Gemini 3.x caches nothing, implicitly or explicitly
+ * (`docs/research/gemini-capabilities.md` §2 — 4,096 for Gemini 3.x, 2,048 for 2.0/2.5).
+ *
+ * It is a property of the model, not of this code, and it is the reason a short story can do
+ * everything ADR 0008 asks and still never see a cache hit: the assembler can order the prompt
+ * perfectly and the stable prefix still has to be big enough to qualify. `npm run cache-check`
+ * measures a story against it without spending a call.
+ */
+export const MIN_CACHEABLE_TOKENS = 4096;
+
 const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models';
 
 /** HTTP statuses worth a retry or a model swap — capacity/availability, not a real request bug. */
 const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
-const RETRY_BACKOFF_MS = 1500;
+
+/**
+ * Backoff between attempts: exponential, with full jitter, and only ever a floor under whatever
+ * the API itself asked for.
+ *
+ * Exponential because a service that is overloaded now is likely still overloaded 1.5 seconds
+ * from now, and jittered because every scene of a run retries on the same schedule otherwise —
+ * a compile that retried in lockstep would arrive back at the endpoint as a small thundering
+ * herd of one. `Retry-After` and `RetryInfo` override both: an API that says when to come back
+ * knows better than any local schedule.
+ */
+export const RETRY_BACKOFF_MS = 1500;
+export const RETRY_BACKOFF_MULTIPLIER = 3;
+
+/** Never wait longer than this between attempts, whatever the schedule computes. */
+export const MAX_BACKOFF_MS = 30_000;
+
+/**
+ * How long one request may take before it is abandoned as hung.
+ *
+ * A writer call is seconds (27.4s mean on the first live run, worst case 36.6s); two minutes is
+ * far outside that. Without it a socket that never answers stalls a scene forever — the run loop
+ * would offer the reader the Baked edition at 90 seconds (ADR 0014 §7) and then wait on that
+ * request for the rest of the process's life.
+ */
+export const REQUEST_TIMEOUT_MS = 120_000;
+
+/**
+ * Backoff for attempt `n` (0-based), with full jitter, floored by what the API asked for.
+ *
+ * Full jitter — a uniform draw from `[0, delay]` rather than `delay ± something` — is the variant
+ * that actually decorrelates retries; the halved average wait is a bonus, not the point.
+ */
+export function backoffFor(
+  attempt: number,
+  askedForMs: number | null,
+  random: () => number = Math.random,
+): number {
+  const scheduled = Math.min(
+    RETRY_BACKOFF_MS * RETRY_BACKOFF_MULTIPLIER ** attempt,
+    MAX_BACKOFF_MS,
+  );
+  const jittered = Math.round(random() * scheduled);
+  return Math.max(jittered, askedForMs ?? 0);
+}
 
 /**
  * Thrown only for a status in `RETRYABLE_STATUSES`, so callers can tell it apart from a real bug.
@@ -147,8 +202,26 @@ class RetryableStatusError extends Error {
   }
 }
 
-/** Never wait longer than this on the API's own say-so, whatever the body claims. */
+/** Never wait longer than this on the API's own say-so, whatever the body or header claims. */
 const MAX_HONORED_RETRY_MS = 60_000;
+
+/** `Retry-After`, in either of its two legal forms: delta-seconds, or an HTTP date. */
+export function retryAfterHeaderMs(
+  headers: Headers,
+  now: () => number = Date.now,
+): number | null {
+  const raw = headers.get('retry-after');
+  if (raw === null || raw.trim() === '') return null;
+
+  const seconds = Number.parseFloat(raw);
+  if (Number.isFinite(seconds)) {
+    return seconds <= 0 ? 0 : Math.min(Math.ceil(seconds * 1000), MAX_HONORED_RETRY_MS);
+  }
+
+  const at = Date.parse(raw);
+  if (Number.isNaN(at)) return null;
+  return Math.min(Math.max(0, at - now()), MAX_HONORED_RETRY_MS);
+}
 
 /**
  * Read a 429's own account of itself: `RetryInfo.retryDelay`, and whether the exhausted quota is
@@ -198,6 +271,41 @@ function sleep(ms: number): Promise<void> {
 }
 
 /**
+ * A client-side floor on how often requests leave, so a per-minute quota is respected rather than
+ * discovered.
+ *
+ * The free tier allows 5 requests/minute on the writer models. A sequential compile is usually
+ * slower than that on its own, but a scene that retries twice is not, and a `429` spent finding
+ * that out costs a request from the day's 20. Off unless a caller asks for it
+ * (`AXIOM_REQUESTS_PER_MINUTE`): a default that silently paced every run would be a surprising
+ * thing for a library to do, and the number is a property of the key, not of the code.
+ */
+export class RequestPacer {
+  private readonly minIntervalMs: number;
+  private next = 0;
+
+  constructor(requestsPerMinute: number | null) {
+    this.minIntervalMs =
+      requestsPerMinute === null || requestsPerMinute <= 0 ? 0 : 60_000 / requestsPerMinute;
+  }
+
+  static fromEnv(env: Record<string, string | undefined> = process.env): RequestPacer {
+    const raw = env['AXIOM_REQUESTS_PER_MINUTE'];
+    const parsed = raw === undefined || raw === '' ? Number.NaN : Number.parseFloat(raw);
+    return new RequestPacer(Number.isFinite(parsed) ? parsed : null);
+  }
+
+  /** Resolves when the next request is allowed to leave. */
+  async wait(now: () => number = Date.now, pause: (ms: number) => Promise<void> = sleep): Promise<void> {
+    if (this.minIntervalMs === 0) return;
+    const at = now();
+    const waitFor = Math.max(0, this.next - at);
+    this.next = Math.max(at, this.next) + this.minIntervalMs;
+    if (waitFor > 0) await pause(waitFor);
+  }
+}
+
+/**
  * The live client.
  *
  * `responseJsonSchema` is used rather than the current `responseFormat`: the research left
@@ -216,14 +324,73 @@ function sleep(ms: number): Promise<void> {
  */
 export class GeminiClient implements ModelClient {
   private readonly apiKey: string;
+  private readonly pacer: RequestPacer;
+  private readonly timeoutMs: number;
 
-  constructor(apiKey: string) {
+  constructor(
+    apiKey: string,
+    options: { pacer?: RequestPacer; timeoutMs?: number } = {},
+  ) {
     this.apiKey = apiKey;
+    this.pacer = options.pacer ?? new RequestPacer(null);
+    this.timeoutMs = options.timeoutMs ?? REQUEST_TIMEOUT_MS;
   }
 
   static fromEnv(env: NodeJS.ProcessEnv = process.env): GeminiClient | null {
     const key = env['GEMINI_API_KEY'];
-    return key === undefined || key === '' ? null : new GeminiClient(key);
+    if (key === undefined || key === '') return null;
+    return new GeminiClient(key, { pacer: RequestPacer.fromEnv(env) });
+  }
+
+  /**
+   * `models.countTokens` — what a prompt actually costs as input, rather than what the
+   * assembler's 4-chars-per-token estimate guesses.
+   *
+   * Worth having its own method for two reasons the research names: the response schema is billed
+   * as input on every call and is not cacheable (§1 finding 4, *"keep it lean; measure it with
+   * countTokens"*), and whether a prefix clears `MIN_CACHEABLE_TOKENS` is a question an estimate
+   * cannot settle. It is a separate endpoint from `generateContent` and generates nothing, which
+   * is what makes it usable on a key whose generate quota is spent.
+   */
+  async countTokens(
+    model: string,
+    parts: { systemInstruction?: string; contents: string },
+  ): Promise<number> {
+    await this.pacer.wait();
+    const response = await this.fetchWithTimeout(`${ENDPOINT}/${model}:countTokens`, {
+      generateContentRequest: {
+        model: `models/${model}`,
+        ...(parts.systemInstruction === undefined || parts.systemInstruction === ''
+          ? {}
+          : { systemInstruction: { parts: [{ text: parts.systemInstruction }] } }),
+        contents: [{ role: 'user', parts: [{ text: parts.contents }] }],
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Gemini ${model} countTokens returned ${response.status}: ${await response.text()}`);
+    }
+    const body = (await response.json()) as { totalTokens?: number };
+    return body.totalTokens ?? 0;
+  }
+
+  /** One POST, abandoned if the endpoint never answers. */
+  private async fetchWithTimeout(url: string, body: unknown): Promise<Response> {
+    const abort = AbortSignal.timeout(this.timeoutMs);
+    try {
+      return await fetch(url, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-goog-api-key': this.apiKey },
+        body: JSON.stringify(body),
+        signal: abort,
+      });
+    } catch (error) {
+      // A timeout is a capacity failure, not a request bug: it retries and swaps model like one.
+      if (error instanceof Error && (error.name === 'TimeoutError' || error.name === 'AbortError')) {
+        throw new RetryableStatusError(`Gemini request timed out after ${this.timeoutMs}ms`);
+      }
+      throw error;
+    }
   }
 
   async generate(request: ModelRequest): Promise<ModelResponse> {
@@ -236,12 +403,16 @@ export class GeminiClient implements ModelClient {
       // straight to a different model, which is a different quota bucket.
       if (error.exhaustedForToday) return await this.swapModel(request, error);
 
-      await sleep(error.retryAfterMs ?? RETRY_BACKOFF_MS);
+      await sleep(backoffFor(0, error.retryAfterMs));
 
       try {
         return await this.attempt(request, request.model);
       } catch (retried) {
         if (!(retried instanceof RetryableStatusError)) throw retried;
+        if (retried.exhaustedForToday) return await this.swapModel(request, retried);
+        // The second wait is longer than the first, and the fallback model deserves to arrive at
+        // an endpoint that has had a moment rather than immediately after two failures.
+        await sleep(backoffFor(1, retried.retryAfterMs));
         return await this.swapModel(request, retried);
       }
     }
@@ -257,32 +428,32 @@ export class GeminiClient implements ModelClient {
   }
 
   private async attempt(request: ModelRequest, model: string): Promise<ModelResponse> {
-    const response = await fetch(`${ENDPOINT}/${model}:generateContent`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'x-goog-api-key': this.apiKey,
+    await this.pacer.wait();
+    const response = await this.fetchWithTimeout(`${ENDPOINT}/${model}:generateContent`, {
+      systemInstruction: { parts: [{ text: request.systemInstruction }] },
+      contents: [{ role: 'user', parts: [{ text: request.contents }] }],
+      generationConfig: {
+        responseMimeType: 'application/json',
+        responseJsonSchema: request.responseJsonSchema,
+        maxOutputTokens: request.maxOutputTokens,
+        thinkingConfig: { thinkingLevel: request.thinkingLevel },
       },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: request.systemInstruction }] },
-        contents: [{ role: 'user', parts: [{ text: request.contents }] }],
-        generationConfig: {
-          responseMimeType: 'application/json',
-          responseJsonSchema: request.responseJsonSchema,
-          maxOutputTokens: request.maxOutputTokens,
-          thinkingConfig: { thinkingLevel: request.thinkingLevel },
-        },
-      }),
     });
 
     if (!response.ok) {
       const body = await response.text();
       const message = `Gemini ${model} returned ${response.status}: ${body}`;
       if (RETRYABLE_STATUSES.has(response.status)) {
-        throw new RetryableStatusError(
-          message,
-          response.status === 429 ? readQuotaFailure(body) : {},
-        );
+        const quota: { retryAfterMs: number | null; exhaustedForToday: boolean } =
+          response.status === 429
+            ? readQuotaFailure(body)
+            : { retryAfterMs: null, exhaustedForToday: false };
+        throw new RetryableStatusError(message, {
+          ...quota,
+          // A `Retry-After` header outranks the body: it is the standard place to say it, and
+          // some 429s and 503s carry it without any RetryInfo detail at all.
+          retryAfterMs: retryAfterHeaderMs(response.headers) ?? quota.retryAfterMs,
+        });
       }
       throw new Error(message);
     }

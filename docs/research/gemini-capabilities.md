@@ -128,7 +128,7 @@ You then reference it via `GenerateContentRequest.cachedContent` (*"The name of 
 
 | Property | Value | Source |
 | --- | --- | --- |
-| Minimum cacheable tokens | **4,096** for Gemini 3.x; 2,048 for Gemini 2.0/2.5 | **[doc-only]** <https://ai.google.dev/gemini-api/docs/caching> |
+| Minimum cacheable tokens | **4,096** for Gemini 3.x; 2,048 for Gemini 2.0/2.5 | **[doc-only]** <https://ai.google.dev/gemini-api/docs/caching>, and **consistent with measurement**: two live runs whose widest shared prefix was 1,943 `countTokens` tokens returned `cachedContentTokenCount: 0` on all 30 calls — see [`run-loop-first-measurements.md`](run-loop-first-measurements.md) and issue #50 |
 | Maximum | up to the model's context window | **[doc-only]** same |
 | Explicit TTL default | **1 hour**, updatable via `cachedContents.patch` (*"only expiration is updatable"* — discovery doc) | **[doc-only]** same + discovery |
 | Cache-hit token price | **10% of the standard input price** (i.e. a 90% discount) on Gemini 2.5+ / 3.x; 75% on Gemini 2.0 | pricing page + **[doc-only]** overview page |
@@ -136,6 +136,7 @@ You then reference it via `GenerateContentRequest.cachedContent` (*"The name of 
 | Explicit-cache **storage** | **$0.000001 per token per hour** for all Flash / Flash-Lite classes = **$1.00 per 1M-token-hour**; $0.0000045/tok/hr for 3.1 Pro / 3 Pro / 2.5 Pro | <https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing> ("Context Cache Storage price for Explicit Caching") |
 | Implicit-cache storage | **none** | **[doc-only]** overview page |
 | Verifying a hit | `usageMetadata.cachedContentTokenCount` — *"Number of tokens in the cached part of the prompt"*; note `promptTokenCount` *"is still the total effective prompt size"* | discovery doc |
+| Measuring a prefix without spending a call | `models.countTokens` — a separate endpoint that generates nothing, and **confirmed live** to answer normally on a key whose `generateContent` quota for the day was exhausted. `npm run cache-check -- <story> --count-tokens` | measured |
 
 Concrete cache-hit prices from the pricing page (Global endpoint, standard tier): Gemini 3.7 Flash **$0.075/M** cached vs $0.75/M uncached input (promo pricing through 2026-12-31); Gemini 3.5 Flash **$0.15/M** vs $1.50/M; Gemini 3.5 Flash-Lite **$0.03/M** vs $0.30/M; Gemini 3.1 Pro Preview **$0.20/M** vs $2.00/M.
 

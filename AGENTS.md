@@ -37,6 +37,15 @@ Before spending live calls, know which you need:
 - **Judging the prose** — that needs `gemini-3.7-flash`, and therefore needs the budget. Plan the
   run, don't discover halfway through that it is gone.
 
+Two things that make a rate-limited key go further:
+
+- **`AXIOM_REQUESTS_PER_MINUTE`** paces requests client-side instead of discovering the per-minute
+  limit with a `429` that costs one of the day's 20. Set it to the key's own RPM.
+- **`models.countTokens` is not on the generate quota.** It answers normally on a key whose
+  `generateContent` allowance is spent, which makes any question about prompt size — schema cost,
+  cache-prefix size, whether the payload has grown — answerable on a day when nothing else is.
+  `npm run cache-check -- <story> --count-tokens` is the ready-made version.
+
 **If the rate limit is blocking real work, say so and ask the owner to add billing.** Tier 1 is
 instant on adding a billing account (`docs/research/gemini-capabilities.md` §6) and lifts these
 limits by orders of magnitude. Ask rather than working around it with a weaker model, and never
