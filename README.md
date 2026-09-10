@@ -47,6 +47,8 @@ What loading the two fixtures through all of it turned up is in
 | Truncation salvage, digest-only fallback, per-finish-reason retries | `src/writer/compile-scene.ts`, `src/writer/salvage.ts` | ADR 0012 §5/§6, ADR 0013 |
 | Variance-contract checks against the digest | `src/variance/variance-contract.ts` | ADR 0006 |
 | Assembled-prompt debug view | `src/writer/debug-view.ts` | ADR 0008's own cache-ordering measurement |
+| Cacheable-prefix walk, and whether it survives a scene | `src/assembler/cache-prefix.ts` | ADR 0008 §3, issue #50 |
+| Backoff with jitter, `Retry-After`, quota-aware 429s, pacing, timeouts | `src/writer/model-client.ts` | measured against the live API |
 
 ### The run loop
 
@@ -105,6 +107,23 @@ With `GEMINI_API_KEY` set every scene is a real writer call. Without one a **sta
 answers from the Scene Cards themselves — enough to exercise validation, the continuity pass,
 rollups and the flush, and no more; every call it makes reports zero tokens, which is how a run
 report says that nothing was called.
+
+### Checking the cache
+
+```bash
+npm run cache-check                                 # cinderella, offline estimates
+npm run cache-check -- cinderella --count-tokens    # real token counts, needs a key
+```
+
+Caching is a prefix match, so ADR 0008's payload order only pays off while each scene's stable
+prefix survives into the next scene's prompt — and an ordering mistake is invisible in the prose,
+showing up live only as `cachedContentTokenCount` staying at zero. This asks both questions that
+decide a cache hit: does the prefix survive (a reset at a rollup is expected; anywhere else is a
+bug), and does it clear the model's 4,096-token minimum. `--count-tokens` uses `models.countTokens`,
+which generates nothing and works on a key whose generate quota is spent.
+
+The ordering half is also a test (`tests/cache-prefix.test.ts`), so a reordering that breaks it
+fails the suite rather than a novel-scale bill.
 
 ### Storage
 

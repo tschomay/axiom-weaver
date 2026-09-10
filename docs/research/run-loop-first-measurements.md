@@ -52,7 +52,8 @@ make visible:
   prose budget.
 - **Cached tokens were zero on all 14 calls.** ADR 0008's payload ordering exists to make the
   explicit-cache header and the implicit-cache digest prefix pay off, and on this run neither
-  did. Worth its own look: it may be the fallback model, the prompt size, or the ordering not
+  did. **Answered** in #50 — see "Why nothing cached", below: the ordering is right and the
+  prefix is simply below the model's 4,096-token minimum. Worth its own look: it may be the fallback model, the prompt size, or the ordering not
   doing what it was designed to do — which is exactly the failure the research's constraint 8
   says is invisible in the prose and only visible in this number.
 - **The run was correctly marked `degraded`** (3 of 7 scenes, past ADR 0014 §7's 20%) and is
@@ -95,6 +96,49 @@ Three things this run establishes that the first could not:
   what had gone stale.
 - **Zero cached tokens is not the fallback model's doing** (#50). Two models, 30 calls, no cache
   hit at all. Explanation (4) on that issue can be struck.
+
+## Why nothing cached (#50)
+
+Both runs returned `cachedContentTokenCount: 0` on every call — 30 calls, two models. Caching is a
+**prefix** match (`gemini-capabilities.md` §2), so there are exactly two ways to lose it, and
+`npm run cache-check` asks both against a story without spending a generate call.
+
+**The ordering is fine.** Across both fixtures, every scene's cacheable prefix — the explicit-cache
+header, then the append-only digest hierarchy — is intact at the head of the next scene's prompt,
+except at a rollup, where a closed window replaces N Scene Digests with one and rewrites the middle
+of the payload. ADR 0008 already calls that a cache-invalidating event and budgets one expensive
+scene per closed window; on Cinderella it lands on scenes 5, 9 and 13, exactly a window apart.
+`tests/cache-prefix.test.ts` now holds that property, so a future reordering that quietly moves a
+World Model row up the payload fails a test instead of costing 85% of a novel-scale read.
+
+**The prefix is too small, and no amount of ordering fixes that.** Gemini 3.x caches nothing below
+**4,096 tokens**, implicitly or explicitly. Measured with `countTokens` on `gemini-3.7-flash`:
+
+| | Cinderella, 14 scenes |
+| --- | --- |
+| Whole prompt | 1,812 → 3,794 tokens |
+| Widest shared prefix | **1,943 tokens** |
+| Minimum for any cache hit | 4,096 |
+
+So the first cache hit this project sees will not be on a short story. The shared prefix does grow
+as the telling accumulates — its post-rollup floor rose 969 → 1,264 → 1,536 across Cinderella's
+three windows — and extrapolating that ~270 tokens per closed window, a story crosses 4,096
+somewhere around its fiftieth scene. Which is the same thing the research's §2 cost model already
+implies: caching is what makes *novel* scale affordable ($4.41 vs $28.71 per read), and at POC
+scale it was never going to be the thing that mattered.
+
+Two consequences worth stating plainly, because they are easy to get wrong later:
+
+- **Explicit caching would not help today.** The 4,096-token minimum applies to
+  `cachedContents.create` too, and the header alone is ~970 tokens. Building explicit caching now
+  would add a resource to create, patch and expire in exchange for nothing measurable. The time to
+  build it is when `cache-check` reports a prefix over the minimum — the research already prefers
+  it to implicit caching there, since *"cache hits aren't guaranteed"* and an unattended read-time
+  compile should not have a 40× cost variance depending on the weather.
+- **`countTokens` is free of the generate quota.** It is a separate endpoint that generates
+  nothing, and it answered normally on a key whose `generateContent` allowance for the day was
+  entirely spent. It is the right tool for any question about prompt size, and the only honest one
+  for a question about a threshold measured in real tokens.
 
 ## What is not measured here
 

@@ -76,7 +76,19 @@ export class SyntheticWriterClient implements ModelClient {
     // model's unparseable response too.
     if (scene === undefined) return this.respond('{}');
 
-    return this.respond(JSON.stringify(this.compose(scene)));
+    return this.respond(this.composeFor(scene));
+  }
+
+  /**
+   * The response this client would give for a scene, as JSON, without a request round trip.
+   *
+   * Exposed for the tools that need a whole story's worth of plausible digests without pretending
+   * to make calls — `scripts/cache-check.ts` walks every scene's assembled prompt this way.
+   * Calling it advances the client's own band bookkeeping exactly as `generate` does, so scenes
+   * must still be composed in order.
+   */
+  composeFor(scene: SceneCard): string {
+    return JSON.stringify(this.compose(scene));
   }
 
   private respond(text: string): ModelResponse {
