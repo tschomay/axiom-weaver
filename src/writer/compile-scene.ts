@@ -50,10 +50,26 @@ import {
 } from './model-client';
 import { finalParagraph, lengthVerdict, salvageProse } from './salvage';
 
-/** ADR 0012 decision 4: roughly 2x the length budget in tokens, sized to cover the digest tail. */
+/**
+ * ADR 0012 decision 4: roughly 2x the length budget in tokens, sized to cover prose and the
+ * digest/state_updates/diagnostics tail.
+ *
+ * That figure alone under-budgets in practice: `thinkingConfig.thinkingLevel` reasoning tokens are
+ * billed against this same `maxOutputTokens` cap, not a separate one (confirmed against the live
+ * endpoint — a 60-token cap at `thinking_level: MEDIUM` returned 82 thinking tokens and zero
+ * output; the Gemini capabilities research's own cost model already assumed this split, ~1,200
+ * thinking tokens against ~1,800 prose tokens per scene — `docs/research/gemini-capabilities.md`
+ * §2). Both real fixture compiles run against a live key hit `MAX_TOKENS` well under the
+ * prose+tail figure alone, thinking having consumed 35-50% of the cap. `THINKING_RESERVE_FRACTION`
+ * reserves headroom for that on top of the prose+tail budget, rather than folding it into the same
+ * multiplier where it can't be told apart from prose room.
+ */
+const THINKING_RESERVE_FRACTION = 0.4;
+
 export function maxOutputTokensFor(scene: SceneCard): number {
   const words = scene.length_budget ?? 500;
-  return Math.ceil(words * 2 * 1.4);
+  const proseAndTail = Math.ceil(words * 2 * 1.4);
+  return Math.ceil(proseAndTail / (1 - THINKING_RESERVE_FRACTION));
 }
 
 export interface CompileSceneInput {
@@ -93,6 +109,7 @@ export interface CallRecord {
   readonly prompt_tokens: number;
   readonly output_tokens: number;
   readonly cached_tokens: number;
+  readonly thoughts_tokens: number;
 }
 
 /** Which retry class a finish reason falls into, or `null` for one that needs no retry. */
@@ -193,7 +210,13 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
   };
 
   let attempt = await input.client.generate(request);
-  calls.push(record(attempt, WRITER_MODEL, 'writer'));
+  calls.push(record(attempt, 'writer'));
+  if (attempt.model !== WRITER_MODEL) {
+    note(
+      'model_fallback',
+      `${scene.id}: ${WRITER_MODEL} was unavailable; ${attempt.model} answered the writer call instead`,
+    );
+  }
 
   let parsed = parseWriterResponse(attempt);
   let retryClass = parsed === null ? retryClassFor(attempt.finish_reason) : null;
@@ -215,7 +238,7 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
           ? Math.ceil(request.maxOutputTokens * 1.5)
           : request.maxOutputTokens,
     });
-    calls.push(record(retried, WRITER_MODEL, 'writer_retry'));
+    calls.push(record(retried, 'writer_retry'));
     attempt = retried;
     parsed = parseWriterResponse(retried);
 
@@ -257,7 +280,7 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
         maxOutputTokens: 2048,
         thinkingLevel: 'LOW',
       });
-      calls.push(record(fallback, FALLBACK_MODEL, 'digest_fallback'));
+      calls.push(record(fallback, 'digest_fallback'));
 
       const recovered = FallbackResponseSchema.safeParse(safeJson(fallback.text));
       if (recovered.success) {
@@ -339,18 +362,15 @@ function bodyOf(assembled: AssembledPrompt): string {
   });
 }
 
-function record(
-  response: ModelResponse,
-  model: string,
-  purpose: CallRecord['purpose'],
-): CallRecord {
+function record(response: ModelResponse, purpose: CallRecord['purpose']): CallRecord {
   return {
-    model,
+    model: response.model,
     purpose,
     finish_reason: response.finish_reason,
     prompt_tokens: response.usage.prompt_tokens,
     output_tokens: response.usage.output_tokens,
     cached_tokens: response.usage.cached_tokens,
+    thoughts_tokens: response.usage.thoughts_tokens,
   };
 }
 
