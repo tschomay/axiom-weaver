@@ -12,6 +12,11 @@ export const dynamic = 'force-dynamic';
  * percentage, and never prose (§4). `?include=scenes` returns the edition's prose once it is
  * complete — a reader reads the finished edition, exactly as they would a Baked one.
  *
+ * ADR 0014 §4 delivers that progress over the Workflow's own resumable stream, so one mechanism
+ * serves both reconnect-safety and the progress UI. Polling this route is the stand-in until the
+ * loop runs on that platform, and it reads the same number from the same place the stream would:
+ * the manifest's scene index, which is written by the step that completed the scene.
+ *
  * What it never exposes is the Story Package behind the edition — Scene Cards, World Model seed,
  * Voice Card stay author-only however many editions get shared (ADR 0015 §5).
  */

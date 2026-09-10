@@ -127,6 +127,19 @@ describe('detecting seams (ADR 0011 §1)', () => {
     expect(findings[0]?.detail).toContain('first learned in scene 1');
   });
 
+  it('reports one finding per broken seam, not one per check that catches it', () => {
+    const findings = detectSeams(
+      check({
+        // Both the band comparison and the never-met check see this entity.
+        expectedBands: [band('char_ada', 'introduce')],
+        digest: digest({ reanchor_used: [{ entity_id: 'char_ada', band: 'assume' }] }),
+        previous: null,
+      }),
+    );
+
+    expect(findings).toHaveLength(1);
+  });
+
   it('catches an entity assumed known that the reader has never met', () => {
     const findings = detectSeams(
       check({

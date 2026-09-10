@@ -110,7 +110,9 @@ export function detectSeams(input: SeamCheckInput): SeamFinding[] {
   // pitched it. Entities already reported as cold opens are excluded so one broken seam produces
   // one finding.
   const reported = digest.reanchor_used.filter((used) => !coldOpened.has(used.entity_id));
+  const miscalibrated = new Set<string>();
   for (const mismatch of bandMismatches(input.expectedBands, reported)) {
+    miscalibrated.add(mismatch.entity_id);
     findings.push({
       ...at,
       mode: 'told_ledger_miscalibration',
@@ -142,6 +144,9 @@ export function detectSeams(input: SeamCheckInput): SeamFinding[] {
   // catches the case where the writer assumed someone the policy never saw coming.
   for (const used of digest.reanchor_used) {
     if (used.band !== 'assume') continue;
+    // One broken seam, one finding: an entity the band comparison already caught does not need
+    // catching twice, and a second finding would spend a second repair call on the same opening.
+    if (miscalibrated.has(used.entity_id)) continue;
     if (input.ledgerAtEntry.row(metFact(used.entity_id)) !== null) continue;
     findings.push({
       ...at,
