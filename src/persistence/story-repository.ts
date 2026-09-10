@@ -16,14 +16,43 @@ import {
 } from '../schema/story-package';
 import { StateLog, StateLogSchema } from '../world-model/state-log';
 import { WorldModel } from '../world-model/world-model';
+import {
+  BakedPointerSchema,
+  EDITION_SCHEMA_VERSION,
+  EditionDiscourseSchema,
+  EditionManifestSchema,
+  EditionSceneSchema,
+  RunIndexSchema,
+  type BakedPointer,
+  type EditionDiscourse,
+  type EditionManifest,
+  type EditionScene,
+  type RunIndex,
+} from '../edition/edition';
+import { RunReportSchema, isPromotable, type RunReport } from '../edition/run-report';
+import {
+  DraftManifestSchema,
+  DraftSceneSchema,
+  emptyDraftManifest,
+  type DraftManifest,
+  type DraftScene,
+} from '../draft/working-draft';
 import type { BlobStore } from './blob-store';
 import {
+  bakedPointerPath,
+  draftManifestPath,
+  draftScenePath,
   draftStateLogPath,
+  editionDiscoursePath,
+  editionManifestPath,
+  editionScenePath,
   editionStateLogPath,
   editionWorldModelPath,
   packagePointerPath,
   packageVersionPath,
   packageVersionPrefix,
+  runIndexPath,
+  runReportPath,
   versionFromPackagePath,
 } from './paths';
 
@@ -170,6 +199,202 @@ export class StoryRepository {
     return WorldModel.fromJSON(storyId, JSON.parse(body));
   }
 
+  // --- Compiled editions ---------------------------------------------------------------------
+  //
+  // Written as the run produces them (ADR 0014 §2's scene-boundary flush). Workflow persistence
+  // is not an archive — retention is a day on Hobby — so the edition is these documents, never
+  // the run's event log (`docs/research/vercel-runtime.md` §2).
+
+  /**
+   * The manifest is the one edition document that is rewritten during a run: its scene index
+   * grows at every boundary and its status closes out at the end. Everything else is written once.
+   */
+  async putEditionManifest(manifest: EditionManifest): Promise<void> {
+    await this.store.put(
+      editionManifestPath(manifest.run_id),
+      stringify(EditionManifestSchema.parse(manifest)),
+      { allowOverwrite: true },
+    );
+  }
+
+  async getEditionManifest(runId: string): Promise<EditionManifest | null> {
+    const body = await this.store.get(editionManifestPath(runId));
+    if (body === null) return null;
+    return EditionManifestSchema.parse(JSON.parse(body));
+  }
+
+  /** A scene document, written once. A Compiled edition is immutable once produced. */
+  async putEditionScene(scene: EditionScene): Promise<void> {
+    await this.store.put(
+      editionScenePath(scene.run_id, scene.scene_index),
+      stringify(EditionSceneSchema.parse(scene)),
+      { allowOverwrite: true },
+    );
+  }
+
+  async getEditionScene(runId: string, sceneIndex: number): Promise<EditionScene | null> {
+    const body = await this.store.get(editionScenePath(runId, sceneIndex));
+    if (body === null) return null;
+    return EditionSceneSchema.parse(JSON.parse(body));
+  }
+
+  /** Every scene of an edition, in order — what a reader is handed once a run completes. */
+  async getEditionScenes(runId: string): Promise<EditionScene[]> {
+    const manifest = await this.getEditionManifest(runId);
+    if (manifest === null) return [];
+    const scenes: EditionScene[] = [];
+    for (const entry of manifest.scenes) {
+      const scene = await this.getEditionScene(runId, entry.scene_index);
+      if (scene !== null) scenes.push(scene);
+    }
+    return scenes.sort((a, b) => a.scene_index - b.scene_index);
+  }
+
+  async putEditionDiscourse(discourse: EditionDiscourse): Promise<void> {
+    await this.store.put(
+      editionDiscoursePath(discourse.run_id),
+      stringify(EditionDiscourseSchema.parse(discourse)),
+      { allowOverwrite: true },
+    );
+  }
+
+  async getEditionDiscourse(runId: string): Promise<EditionDiscourse | null> {
+    const body = await this.store.get(editionDiscoursePath(runId));
+    if (body === null) return null;
+    return EditionDiscourseSchema.parse(JSON.parse(body));
+  }
+
+  // --- Run reports ---------------------------------------------------------------------------
+
+  /**
+   * Rewritten at every scene boundary, not only at the close of the run: a run that dies halfway
+   * still has to be able to say what happened to the scenes it did compile.
+   */
+  async putRunReport(report: RunReport): Promise<void> {
+    await this.store.put(
+      runReportPath(report.run_id),
+      stringify(RunReportSchema.parse(report)),
+      { allowOverwrite: true },
+    );
+  }
+
+  async getRunReport(runId: string): Promise<RunReport | null> {
+    const body = await this.store.get(runReportPath(runId));
+    if (body === null) return null;
+    return RunReportSchema.parse(JSON.parse(body));
+  }
+
+  // --- The per-story run index -----------------------------------------------------------------
+
+  async getRunIndex(storyId: string): Promise<RunIndex> {
+    const body = await this.store.get(runIndexPath(storyId));
+    if (body === null) {
+      return { schema_version: EDITION_SCHEMA_VERSION, story_id: storyId, runs: [] };
+    }
+    return RunIndexSchema.parse(JSON.parse(body));
+  }
+
+  /** Record (or update) a run in its story's index. Idempotent on run id. */
+  async registerRun(manifest: EditionManifest): Promise<RunIndex> {
+    const index = await this.getRunIndex(manifest.story_id);
+    const runs = index.runs.filter((run) => run.run_id !== manifest.run_id);
+    runs.push({
+      run_id: manifest.run_id,
+      package_version: manifest.package_version,
+      status: manifest.status,
+      degraded: manifest.degraded,
+      started_at: manifest.started_at,
+    });
+    runs.sort((a, b) => a.started_at.localeCompare(b.started_at));
+    const updated: RunIndex = { ...index, runs };
+    await this.store.put(runIndexPath(manifest.story_id), stringify(updated), {
+      allowOverwrite: true,
+    });
+    return updated;
+  }
+
+  /** Every run report a story has, oldest first — the input to ADR 0014 §8's aggregation. */
+  async getRunReports(storyId: string): Promise<RunReport[]> {
+    const index = await this.getRunIndex(storyId);
+    const reports: RunReport[] = [];
+    for (const run of index.runs) {
+      const report = await this.getRunReport(run.run_id);
+      if (report !== null) reports.push(report);
+    }
+    return reports;
+  }
+
+  // --- Baked promotion (ADR 0014 §9) -----------------------------------------------------------
+
+  async getBakedPointer(storyId: string): Promise<BakedPointer | null> {
+    const body = await this.store.get(bakedPointerPath(storyId));
+    if (body === null) return null;
+    return BakedPointerSchema.parse(JSON.parse(body));
+  }
+
+  /**
+   * Promote a completed run to Baked.
+   *
+   * Manual and author-initiated, always — nothing in the run loop calls this. A `degraded` run is
+   * refused outright (ADR 0014 §7/§9): the reader who asked for it can still read it, but it never
+   * becomes the edition a first-time reader is handed by default.
+   */
+  async promoteToBaked(runId: string, now: Date = new Date()): Promise<BakedPointer> {
+    const manifest = await this.getEditionManifest(runId);
+    if (manifest === null) throw new BakedPromotionError(runId, 'no such run');
+    if (!isPromotable({ status: manifest.status, degraded: manifest.degraded })) {
+      throw new BakedPromotionError(
+        runId,
+        manifest.degraded
+          ? 'the run is marked degraded and can never be promoted'
+          : `the run is ${manifest.status}, not complete`,
+      );
+    }
+
+    const pointer: BakedPointer = {
+      schema_version: EDITION_SCHEMA_VERSION,
+      story_id: manifest.story_id,
+      run_id: runId,
+      package_version: manifest.package_version,
+      promoted_at: now.toISOString(),
+    };
+    await this.store.put(bakedPointerPath(manifest.story_id), stringify(pointer), {
+      allowOverwrite: true,
+    });
+    return pointer;
+  }
+
+  // --- The Working Draft (ADR 0015 §1) ---------------------------------------------------------
+
+  async getDraftManifest(storyId: string): Promise<DraftManifest> {
+    const body = await this.store.get(draftManifestPath(storyId));
+    if (body === null) return emptyDraftManifest(storyId);
+    return DraftManifestSchema.parse(JSON.parse(body));
+  }
+
+  async putDraftManifest(manifest: DraftManifest): Promise<void> {
+    await this.store.put(
+      draftManifestPath(manifest.story_id),
+      stringify(DraftManifestSchema.parse(manifest)),
+      { allowOverwrite: true },
+    );
+  }
+
+  /** A Working Draft scene is overwritten on every recompile — that is what a draft is. */
+  async putDraftScene(scene: DraftScene): Promise<void> {
+    await this.store.put(
+      draftScenePath(scene.story_id, scene.scene_index),
+      stringify(DraftSceneSchema.parse(scene)),
+      { allowOverwrite: true },
+    );
+  }
+
+  async getDraftScene(storyId: string, sceneIndex: number): Promise<DraftScene | null> {
+    const body = await this.store.get(draftScenePath(storyId, sceneIndex));
+    if (body === null) return null;
+    return DraftSceneSchema.parse(JSON.parse(body));
+  }
+
   // --- Convenience -------------------------------------------------------------------------
 
   /** The seed World Model of a story's current package. */
@@ -177,6 +402,13 @@ export class StoryRepository {
     const pkg = await this.getCurrentPackage(storyId);
     if (pkg === null) return null;
     return WorldModel.fromSeed(pkg.story_id, pkg.world_model_seed);
+  }
+}
+
+export class BakedPromotionError extends Error {
+  constructor(runId: string, reason: string) {
+    super(`Refusing to promote "${runId}" to Baked: ${reason}`);
+    this.name = 'BakedPromotionError';
   }
 }
 

@@ -71,6 +71,16 @@ export const DIAGNOSTIC_CODES = [
   'content_filtered',
   /** `WRITER_MODEL` was unavailable (a retryable HTTP status); `WRITER_MODEL_FALLBACK` answered. */
   'model_fallback',
+
+  // --- Continuity pass (ADR 0011) ------------------------------------------------------------
+  //
+  // A caught seam is not itself a diagnostic: the pass repairs what it catches, so what the run
+  // report needs to know is what happened to the repair. Both codes carry the seam's own detail.
+
+  /** A broken seam was caught and repaired inside the pass's field authority (ADR 0011 §4). */
+  'continuity_seam_repaired',
+  /** A repair was discarded — it broke field authority, failed, or could not be applied. */
+  'continuity_repair_rejected',
 ] as const;
 
 export type DiagnosticCode = (typeof DIAGNOSTIC_CODES)[number];
@@ -118,6 +128,12 @@ const SEVERITY_BY_CODE: Record<DiagnosticCode, Severity> = {
   content_filtered: 'error',
   // `info`, not `error`: the call still fully succeeded, just from the fallback model.
   model_fallback: 'info',
+  // `info`: a seam the pass caught and fixed on its own needed no live decision from anybody —
+  // ADR 0016 §4's run-report-only category exactly.
+  continuity_seam_repaired: 'info',
+  // `warn`: the seam is still there. An author looking at the card can fix it; a read-time run
+  // carries on regardless, which is why it is not an `error`.
+  continuity_repair_rejected: 'warn',
 };
 
 export function severityOf(code: DiagnosticCode): Severity {

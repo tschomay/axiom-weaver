@@ -12,13 +12,21 @@
  * story/{storyId}/draft/manifest.json       Working Draft: per-scene compiled_against + stale
  * story/{storyId}/draft/scene-{n}.json      Working Draft: prose + Scene Digest per scene
  * story/{storyId}/draft/state-log.json      Working Draft: state-update commit log
+ * story/{storyId}/runs.json                 the story's own list of run ids (see below)
  * edition/{runId}/manifest.json             Compiled edition: status, pinned version, index
  * edition/{runId}/scene-{n}.json            Compiled edition: prose + Scene Digest per scene
  * edition/{runId}/world-model.json          World Model at close of run
  * edition/{runId}/discourse.json            Discourse Record + told-ledger at close of run
  * edition/{runId}/state-log.json            Compiled edition: state-update commit log
+ * edition/{runId}/run-report.json           Compiled edition: the run report (ADR 0014 §8)
  * baked/{storyId}.json                      pointer to the Baked edition's runId
  * ```
+ *
+ * `story/{storyId}/runs.json` is the one path here the settled layout does not name. Editions are
+ * addressed by run id alone, which is right for sharing but leaves "which runs belong to this
+ * story" unanswerable without listing every edition in the store — and ADR 0014 §8 requires that
+ * question, since the run report aggregates across runs grouped by Scene Card id. It is an index,
+ * not content: an edition stands on its own without it.
  */
 
 export const storyPrefix = (storyId: string): string => `story/${storyId}/`;
@@ -52,6 +60,12 @@ export const editionWorldModelPath = (runId: string): string =>
 export const editionDiscoursePath = (runId: string): string => `edition/${runId}/discourse.json`;
 
 export const editionStateLogPath = (runId: string): string => `edition/${runId}/state-log.json`;
+
+/** The run report, stored as a Blob document alongside the edition (ADR 0014 §8). */
+export const runReportPath = (runId: string): string => `edition/${runId}/run-report.json`;
+
+/** The per-story index of run ids — a lookup, never a second copy of an edition. */
+export const runIndexPath = (storyId: string): string => `story/${storyId}/runs.json`;
 
 export const bakedPointerPath = (storyId: string): string => `baked/${storyId}.json`;
 

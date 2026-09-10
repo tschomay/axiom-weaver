@@ -104,7 +104,7 @@ export interface CompiledScene {
 
 export interface CallRecord {
   readonly model: string;
-  readonly purpose: 'writer' | 'writer_retry' | 'digest_fallback';
+  readonly purpose: 'writer' | 'writer_retry' | 'digest_fallback' | 'continuity_repair';
   readonly finish_reason: FinishReason;
   readonly prompt_tokens: number;
   readonly output_tokens: number;

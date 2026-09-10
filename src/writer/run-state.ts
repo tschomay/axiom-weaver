@@ -42,10 +42,15 @@ export class RunState {
   readonly imageryHistory: RecordedImagery[] = [];
   previousParagraph: string | null = null;
 
-  constructor(pkg: StoryPackage, options: { window?: number; summarize?: Summarizer } = {}) {
+  constructor(
+    pkg: StoryPackage,
+    options: { window?: number; summarize?: Summarizer; runId?: string } = {},
+  ) {
     this.pkg = pkg;
     this.model = WorldModel.fromSeed(pkg.story_id, pkg.world_model_seed);
-    this.log = new StateLog(pkg.story_id);
+    // A read-time run's log is persisted as `edition/{runId}/state-log.json` and carries the run
+    // it belongs to; the Working Draft's carries none (ADR 0016 §2).
+    this.log = new StateLog(pkg.story_id, options.runId ?? null);
     this.hierarchy = new DigestHierarchy(options.window, options.summarize);
     this.ledger = ToldLedger.forPackage(pkg);
   }
@@ -156,7 +161,7 @@ export function replayTo(
   pkg: StoryPackage,
   targetSceneId: string,
   priorDigests: ReadonlyMap<string, SceneDigest>,
-  options: { window?: number; summarize?: Summarizer; occasion?: Occasion } = {},
+  options: { window?: number; summarize?: Summarizer; occasion?: Occasion; runId?: string } = {},
 ): RunState {
   const state = new RunState(pkg, options);
   const occasion = options.occasion ?? 'read_time';
