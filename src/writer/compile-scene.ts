@@ -51,25 +51,47 @@ import {
 import { finalParagraph, lengthVerdict, salvageProse } from './salvage';
 
 /**
- * ADR 0012 decision 4: roughly 2x the length budget in tokens, sized to cover prose and the
- * digest/state_updates/diagnostics tail.
+ * The output-token cap for one scene: prose and its tail, plus room to think.
  *
- * That figure alone under-budgets in practice: `thinkingConfig.thinkingLevel` reasoning tokens are
- * billed against this same `maxOutputTokens` cap, not a separate one (confirmed against the live
- * endpoint — a 60-token cap at `thinking_level: MEDIUM` returned 82 thinking tokens and zero
- * output; the Gemini capabilities research's own cost model already assumed this split, ~1,200
- * thinking tokens against ~1,800 prose tokens per scene — `docs/research/gemini-capabilities.md`
- * §2). Both real fixture compiles run against a live key hit `MAX_TOKENS` well under the
- * prose+tail figure alone, thinking having consumed 35-50% of the cap. `THINKING_RESERVE_FRACTION`
- * reserves headroom for that on top of the prose+tail budget, rather than folding it into the same
- * multiplier where it can't be told apart from prose room.
+ * ADR 0012 decision 4 sizes the prose half — roughly 2x the length budget in tokens, covering the
+ * digest/state_updates/diagnostics tail as well as the prose itself.
+ *
+ * The thinking half is a *floor*, not a fraction of that, and the floor is what the first live run
+ * of the run loop bought (`docs/research/run-loop-first-measurements.md`, issue #49). Reserving a
+ * percentage of the prose budget assumes hard scenes are long ones, and the measurement says
+ * otherwise: a 200-word scene spent 897 thinking tokens where a 350-word scene spent 1,410, and
+ * every one of the run's seven first-attempt calls hit `MAX_TOKENS` — three of them twice, which
+ * is what degraded the run. Thinking scales with how tangled the scene is (beats, state, plants),
+ * not with how many words the author asked for, so the reserve cannot be derived from word count.
+ *
+ * Reserving generously is close to free: `maxOutputTokens` is a ceiling, not an allocation —
+ * nothing is billed for headroom that goes unused — and the binding limit on the project's key is
+ * requests per day, not tokens per minute. Spending one call per scene instead of two is worth
+ * far more than a tight cap.
+ *
+ * `thinkingConfig.thinkingLevel` reasoning tokens bill against this same cap rather than a
+ * separate one (confirmed against the live endpoint: a 60-token cap at `thinking_level: MEDIUM`
+ * returned 82 thinking tokens and zero output), which is why they need budgeting here at all.
  */
 const THINKING_RESERVE_FRACTION = 0.4;
+
+/**
+ * The floor under the thinking reserve, in tokens.
+ *
+ * Measured: 897–2,633 thinking tokens per call across the first live run's 14 calls, on
+ * `gemini-3.6-flash` (the capacity fallback, which answered every call that run). 3,000 clears the
+ * observed worst case with room, and is a starting point to re-measure against `gemini-3.7-flash`
+ * when it is reachable, not a settled number.
+ */
+export const MIN_THINKING_RESERVE_TOKENS = 3000;
 
 export function maxOutputTokensFor(scene: SceneCard): number {
   const words = scene.length_budget ?? 500;
   const proseAndTail = Math.ceil(words * 2 * 1.4);
-  return Math.ceil(proseAndTail / (1 - THINKING_RESERVE_FRACTION));
+  const proportional = Math.ceil(
+    proseAndTail * (THINKING_RESERVE_FRACTION / (1 - THINKING_RESERVE_FRACTION)),
+  );
+  return proseAndTail + Math.max(proportional, MIN_THINKING_RESERVE_TOKENS);
 }
 
 export interface CompileSceneInput {
@@ -85,6 +107,11 @@ export interface CompileSceneInput {
   readonly imageryHistory: readonly RecordedImagery[];
   readonly previousParagraph: string | null;
   readonly occasion: 'author_time' | 'read_time';
+  /**
+   * Which model writes the scene. Defaults to `WRITER_MODEL`; overridden only deliberately, to
+   * trade prose quality for request headroom on a rate-limited key (see `TESTING_WRITER_MODEL`).
+   */
+  readonly writerModel?: string;
 }
 
 export interface CompiledScene {
@@ -200,8 +227,9 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
   }
 
   // --- The call, and its one bounded retry ------------------------------------------------
+  const writerModel = input.writerModel ?? WRITER_MODEL;
   const request = {
-    model: WRITER_MODEL,
+    model: writerModel,
     systemInstruction: assembled.header.text,
     contents: bodyOf(assembled),
     responseJsonSchema: writerResponseJsonSchema(),
@@ -211,10 +239,10 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
 
   let attempt = await input.client.generate(request);
   calls.push(record(attempt, 'writer'));
-  if (attempt.model !== WRITER_MODEL) {
+  if (attempt.model !== writerModel) {
     note(
       'model_fallback',
-      `${scene.id}: ${WRITER_MODEL} was unavailable; ${attempt.model} answered the writer call instead`,
+      `${scene.id}: ${writerModel} was unavailable; ${attempt.model} answered the writer call instead`,
     );
   }
 

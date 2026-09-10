@@ -131,6 +131,8 @@ export interface RunTellingInput {
   /** Minted fresh for every telling (ADR 0014 §3) unless a caller is resuming a known run. */
   readonly runId?: string;
   readonly occasion?: Occasion;
+  /** Overrides the writer model for every scene of the run — see `TESTING_WRITER_MODEL`. */
+  readonly writerModel?: string;
   readonly window?: number;
   readonly onProgress?: ProgressListener;
   readonly step?: StepRunner;
@@ -235,6 +237,7 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
               voiceCard,
               client: input.client,
               occasion,
+              writerModel: input.writerModel,
               previous,
               runId,
               repository,
@@ -309,6 +312,7 @@ interface CompileStepInput {
   readonly voiceCard: ReturnType<typeof parseVoiceCard>;
   readonly client: ModelClient;
   readonly occasion: Occasion;
+  readonly writerModel: string | undefined;
   readonly previous: { scene_id: string; digest: SceneDigest } | null;
   readonly runId: string;
   readonly repository: StoryRepository;
@@ -347,6 +351,7 @@ async function compileStep(input: CompileStepInput): Promise<SceneOutcome> {
     imageryHistory: state.imageryHistory,
     previousParagraph: state.previousParagraph,
     occasion: input.occasion,
+    writerModel: input.writerModel,
   });
 
   // 2. State-update validation (ADR 0005). The writer's proposals are never trusted on sight.

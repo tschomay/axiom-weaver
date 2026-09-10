@@ -3,7 +3,7 @@ import { storyRepository } from '@/persistence';
 import { runTelling } from '@/edition/run-loop';
 import { mintRunId } from '@/edition/edition';
 import { estimateCompile } from '@/edition/run-report';
-import { GeminiClient } from '@/writer/model-client';
+import { GeminiClient, writerModelFromEnv } from '@/writer/model-client';
 import { SyntheticWriterClient } from '@/writer/synthetic-client';
 import { scenesInOrder } from '@/schema/story-package';
 
@@ -72,7 +72,13 @@ export async function POST(
   const runId = mintRunId(storyId);
   const scenes = scenesInOrder(pkg).length;
 
-  void runTelling({ pkg, client, repository, runId }).catch((error: unknown) => {
+  void runTelling({
+    pkg,
+    client,
+    repository,
+    runId,
+    writerModel: writerModelFromEnv(),
+  }).catch((error: unknown) => {
     // The run's own failure path has already marked the manifest `failed` and flushed it; this is
     // only so a crash is not silent in the server log.
     console.error(`telling ${runId} stopped:`, error);
