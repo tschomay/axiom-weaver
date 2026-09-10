@@ -8,6 +8,7 @@ next-env.d.ts
 
 # Local filesystem-backed blob store (see src/persistence/fs-blob-store.ts)
 .data/
+.data-*/
 
 .env
 .env.local

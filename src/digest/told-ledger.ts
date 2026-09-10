@@ -11,6 +11,7 @@
  * for the reader while a character remains ignorant of it, and vice versa.
  */
 
+import { z } from 'zod';
 import type { SceneCard, StoryPackage } from '../schema/story-package';
 import { entityAssertions, newRelationships, scenesInOrder } from '../schema/story-package';
 import type { SceneDigest } from './scene-digest';
@@ -19,13 +20,19 @@ import type { SceneDigest } from './scene-digest';
 export const CENTRALITIES = ['low', 'medium', 'high'] as const;
 export type Centrality = (typeof CENTRALITIES)[number];
 
-export interface ToldLedgerRow {
-  readonly fact_ref: string;
-  readonly first_learned_scene: number;
+/**
+ * A told-ledger row. Schema-first because the Discourse Record is persisted with a Compiled
+ * edition (`edition/{runId}/discourse.json`, ADR 0015 §4) and read back from it.
+ */
+export const ToldLedgerRowSchema = z.object({
+  fact_ref: z.string().min(1),
+  first_learned_scene: z.number().int().nonnegative(),
   /** Load-bearing for ADR 0009's decay: recency, not just first-learned, decides the band. */
-  readonly last_touched_scene: number;
-  readonly centrality: Centrality;
-}
+  last_touched_scene: z.number().int().nonnegative(),
+  centrality: z.enum(CENTRALITIES),
+});
+
+export type ToldLedgerRow = z.infer<typeof ToldLedgerRowSchema>;
 
 /** The `met:` prefix ADR 0003 decision 4 names. Kept in one place so nobody re-spells it. */
 export const MET_PREFIX = 'met:';

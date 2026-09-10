@@ -12,7 +12,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "load-fixtures": "tsx scripts/load-fixtures.ts",
-    "compile-scene": "tsx scripts/compile-scene.ts"
+    "compile-scene": "tsx scripts/compile-scene.ts",
+    "telling": "tsx scripts/run-telling.ts",
+    "run-report": "tsx scripts/run-report.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",

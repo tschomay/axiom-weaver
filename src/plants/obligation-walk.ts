@@ -178,6 +178,24 @@ export function walkPlantObligations(pkg: StoryPackage): PlantWalk {
   return { obligations, errors };
 }
 
+/**
+ * Thrown when a package fails the walk. ADR 0004 §4: the three errors are statically checkable
+ * from Scene Cards alone, so a compile — author-time or read-time — rejects here, before a token
+ * is spent, rather than silently patching around a plant that is not there.
+ */
+export class PlantWalkRejectedError extends Error {
+  readonly walk: PlantWalk;
+
+  constructor(storyId: string, walk: PlantWalk) {
+    super(
+      `the plant-obligation walk rejected "${storyId}" before generation: ` +
+        walk.errors.map((error) => `[${error.code}] ${error.message}`).join('; '),
+    );
+    this.name = 'PlantWalkRejectedError';
+    this.walk = walk;
+  }
+}
+
 export function obligationsFor(walk: PlantWalk, scene: SceneCard): PlantObligation[] {
   return walk.obligations.get(scene.id) ?? [];
 }
