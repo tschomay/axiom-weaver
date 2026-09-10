@@ -69,6 +69,8 @@ export const DIAGNOSTIC_CODES = [
   'recitation_flagged',
   /** A safety/blocklist finish reason survived its fiction-framing retry. */
   'content_filtered',
+  /** `WRITER_MODEL` was unavailable (a retryable HTTP status); `WRITER_MODEL_FALLBACK` answered. */
+  'model_fallback',
 ] as const;
 
 export type DiagnosticCode = (typeof DIAGNOSTIC_CODES)[number];
@@ -114,6 +116,8 @@ const SEVERITY_BY_CODE: Record<DiagnosticCode, Severity> = {
   scene_generation_failed: 'error',
   recitation_flagged: 'warn',
   content_filtered: 'error',
+  // `info`, not `error`: the call still fully succeeded, just from the fallback model.
+  model_fallback: 'info',
 };
 
 export function severityOf(code: DiagnosticCode): Severity {

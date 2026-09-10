@@ -182,6 +182,28 @@ The truncation-salvage path (decision 5) itself is unaffected and worked correct
 this amendment only widens the primary call's budget so salvage is the exception again rather
 than the routine case.
 
+A second, separate gap surfaced in the same session: `gemini-3.7-flash` itself returned `503
+UNAVAILABLE` ("high demand") for several minutes straight, and `GeminiClient.generate` simply
+threw — no retry, no fallback, no `ModelResponse` for `compileScene` to build a conservative
+digest from, so the whole compile crashed. This is a gap in the ADR itself, not just the
+implementation: decisions 5 and 6 give every *finish-reason* failure the "one bounded retry, then
+accept-and-log" shape, but neither considers a *transport-level* failure (the call never
+completing at all). Fixed by giving `GeminiClient.generate` the same shape one layer down: retry
+the requested model once after a short backoff, then try `gemini-3.6-flash` once — the Gemini
+capabilities research's §7 already named it as "a same-price fallback" for a different anticipated
+failure (a schema-constrained decode loop), and the same reasoning (different model, different
+capacity pool, same price) applies to an availability outage. Only a retryable HTTP status (429,
+5xx) triggers this; a 400/401/403 is a real request bug, not capacity, and retrying or swapping
+models would only mask it. Live-verified in this session: with `gemini-3.7-flash` still down, the
+fallback call to `gemini-3.6-flash` answered but itself hit `MAX_TOKENS` (the thinking-budget gap
+above), which triggered `compileScene`'s own existing retry — by then `gemini-3.7-flash` had
+recovered, and that retry completed cleanly with `STOP`. Both fixes in this amendment were
+exercised together, live, in the one call that produced this paragraph's evidence. Logged as
+`model_fallback` (`info`) when it fires, so which model actually wrote a scene is never silently
+lost. If every attempt is exhausted (both models down), `generate` still throws — unlike a
+finish-reason failure, there is no partial `ModelResponse` to salvage from at that point, so
+surfacing it loudly remains more honest than inventing a stub.
+
 ## Consequences
 
 - `docs/research/gemini-capabilities.md`'s five headline findings (structured

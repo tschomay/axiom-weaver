@@ -64,6 +64,13 @@ export interface ModelResponse {
   readonly text: string;
   readonly finish_reason: FinishReason;
   readonly usage: ModelUsage;
+  /**
+   * The model that actually generated this response — not necessarily the one requested. A
+   * capacity-outage fallback (see `WRITER_MODEL_FALLBACK`) means the request's `model` and the
+   * response's `model` can differ; callers report this one so the debug view stays honest about
+   * what actually wrote the scene.
+   */
+  readonly model: string;
 }
 
 export interface ModelClient {
@@ -72,9 +79,29 @@ export interface ModelClient {
 
 /** The models the research's §7 split recommends. */
 export const WRITER_MODEL = 'gemini-3.7-flash';
+/**
+ * Same-price previous-generation Flash (Gemini capabilities research §7: *"watch for the
+ * schema-constrained decode-loop report on this model; if the POC reproduces it,
+ * `gemini-3.6-flash` is a same-price fallback"*). That reasoning generalizes past the one bug it
+ * was named for: a different model is also a different capacity pool, so it is exactly what
+ * `GeminiClient.generate` reaches for when `WRITER_MODEL` itself is unavailable (confirmed live —
+ * `gemini-3.7-flash` returned `503 UNAVAILABLE` for several minutes straight during this session).
+ */
+export const WRITER_MODEL_FALLBACK = 'gemini-3.6-flash';
 export const FALLBACK_MODEL = 'gemini-3.5-flash-lite';
 
 const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models';
+
+/** HTTP statuses worth a retry or a model swap — capacity/availability, not a real request bug. */
+const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
+const RETRY_BACKOFF_MS = 1500;
+
+/** Thrown only for a status in `RETRYABLE_STATUSES`, so callers can tell it apart from a real bug. */
+class RetryableStatusError extends Error {}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 /**
  * The live client.
@@ -84,6 +111,14 @@ const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models';
  * live endpoint, and picking the surface that is present in the published discovery document is
  * the one that can be checked from here. When that open item is settled, this is the single
  * function that changes.
+ *
+ * A transport-level failure gets the same "one bounded retry" shape every finish-reason failure
+ * already gets in `compile-scene.ts`, applied one layer below it: retry the same model once after
+ * a short backoff, then try `WRITER_MODEL_FALLBACK` once. Only a status in `RETRYABLE_STATUSES`
+ * triggers this — a schema-rejection 400 or an auth 401 is a real bug, not capacity, and retrying
+ * or swapping models would only hide it. If every attempt is exhausted, this still throws; unlike
+ * a finish-reason failure, `compileScene` has no `ModelResponse` to build a conservative digest
+ * from at that point, so surfacing the failure loudly is more honest than inventing one.
  */
 export class GeminiClient implements ModelClient {
   private readonly apiKey: string;
@@ -98,7 +133,25 @@ export class GeminiClient implements ModelClient {
   }
 
   async generate(request: ModelRequest): Promise<ModelResponse> {
-    const response = await fetch(`${ENDPOINT}/${request.model}:generateContent`, {
+    try {
+      return await this.attempt(request, request.model);
+    } catch (error) {
+      if (!(error instanceof RetryableStatusError)) throw error;
+      await sleep(RETRY_BACKOFF_MS);
+
+      try {
+        return await this.attempt(request, request.model);
+      } catch (retried) {
+        if (!(retried instanceof RetryableStatusError) || request.model === WRITER_MODEL_FALLBACK) {
+          throw retried;
+        }
+        return await this.attempt(request, WRITER_MODEL_FALLBACK);
+      }
+    }
+  }
+
+  private async attempt(request: ModelRequest, model: string): Promise<ModelResponse> {
+    const response = await fetch(`${ENDPOINT}/${model}:generateContent`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -117,9 +170,9 @@ export class GeminiClient implements ModelClient {
     });
 
     if (!response.ok) {
-      throw new Error(
-        `Gemini ${request.model} returned ${response.status}: ${await response.text()}`,
-      );
+      const message = `Gemini ${model} returned ${response.status}: ${await response.text()}`;
+      if (RETRYABLE_STATUSES.has(response.status)) throw new RetryableStatusError(message);
+      throw new Error(message);
     }
 
     const body = (await response.json()) as GenerateContentResponse;
@@ -129,6 +182,7 @@ export class GeminiClient implements ModelClient {
     return {
       text,
       finish_reason: normalizeFinishReason(candidate?.finishReason),
+      model: body.modelVersion ?? model,
       usage: {
         prompt_tokens: body.usageMetadata?.promptTokenCount ?? 0,
         output_tokens: body.usageMetadata?.candidatesTokenCount ?? 0,
@@ -150,6 +204,7 @@ interface GenerateContentResponse {
     cachedContentTokenCount?: number;
     thoughtsTokenCount?: number;
   };
+  modelVersion?: string;
 }
 
 function normalizeFinishReason(raw: string | undefined): FinishReason {

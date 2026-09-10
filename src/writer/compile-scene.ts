@@ -210,7 +210,13 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
   };
 
   let attempt = await input.client.generate(request);
-  calls.push(record(attempt, WRITER_MODEL, 'writer'));
+  calls.push(record(attempt, 'writer'));
+  if (attempt.model !== WRITER_MODEL) {
+    note(
+      'model_fallback',
+      `${scene.id}: ${WRITER_MODEL} was unavailable; ${attempt.model} answered the writer call instead`,
+    );
+  }
 
   let parsed = parseWriterResponse(attempt);
   let retryClass = parsed === null ? retryClassFor(attempt.finish_reason) : null;
@@ -232,7 +238,7 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
           ? Math.ceil(request.maxOutputTokens * 1.5)
           : request.maxOutputTokens,
     });
-    calls.push(record(retried, WRITER_MODEL, 'writer_retry'));
+    calls.push(record(retried, 'writer_retry'));
     attempt = retried;
     parsed = parseWriterResponse(retried);
 
@@ -274,7 +280,7 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
         maxOutputTokens: 2048,
         thinkingLevel: 'LOW',
       });
-      calls.push(record(fallback, FALLBACK_MODEL, 'digest_fallback'));
+      calls.push(record(fallback, 'digest_fallback'));
 
       const recovered = FallbackResponseSchema.safeParse(safeJson(fallback.text));
       if (recovered.success) {
@@ -356,13 +362,9 @@ function bodyOf(assembled: AssembledPrompt): string {
   });
 }
 
-function record(
-  response: ModelResponse,
-  model: string,
-  purpose: CallRecord['purpose'],
-): CallRecord {
+function record(response: ModelResponse, purpose: CallRecord['purpose']): CallRecord {
   return {
-    model,
+    model: response.model,
     purpose,
     finish_reason: response.finish_reason,
     prompt_tokens: response.usage.prompt_tokens,

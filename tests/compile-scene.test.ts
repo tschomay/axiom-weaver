@@ -33,10 +33,15 @@ class ScriptedClient implements ModelClient {
   }
 }
 
-function response(text: string, finish: FinishReason = 'STOP'): ModelResponse {
+function response(
+  text: string,
+  finish: FinishReason = 'STOP',
+  model: string = WRITER_MODEL,
+): ModelResponse {
   return {
     text,
     finish_reason: finish,
+    model,
     usage: { prompt_tokens: 0, output_tokens: 0, cached_tokens: 0, thoughts_tokens: 0 },
   };
 }
@@ -189,7 +194,7 @@ describe('failure paths (ADR 0012 decisions 5 and 6)', () => {
     const { base } = await setUp('cinderella', 'cinderella-scene-13');
     const client = new ScriptedClient([
       response(truncatedAfterProse, 'MAX_TOKENS'),
-      response(fallbackBody),
+      response(fallbackBody, 'STOP', FALLBACK_MODEL),
     ]);
 
     const compiled = await compileScene({ ...base, client });
