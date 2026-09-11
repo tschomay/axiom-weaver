@@ -19,13 +19,20 @@ import { STYLE_PRESETS, cardFromPreset, type VoiceCard } from '../voice/voice-ca
 // --- Sections -----------------------------------------------------------------------------
 
 /**
- * The five field groups the screen drills into (ADR 0017 §7).
+ * The field groups the screen drills into (ADR 0017 §7).
  *
  * They are a property of the package's shape rather than of the layout: the same five are the
  * sidebar on a desktop and the drill-down list on a phone, which is what keeps the two from
  * becoming two designs to hold in sync.
  */
-export const EDITOR_SECTIONS = ['story', 'voice', 'world', 'scenes', 'publish'] as const;
+export const EDITOR_SECTIONS = [
+  'story',
+  'voice',
+  'world',
+  'scenes',
+  'transfer',
+  'publish',
+] as const;
 
 export type EditorSection = (typeof EDITOR_SECTIONS)[number];
 
@@ -34,6 +41,7 @@ export const SECTION_LABELS: Record<EditorSection, string> = {
   voice: 'Voice Card',
   world: 'World Model seed',
   scenes: 'Scene Cards',
+  transfer: 'Import / export',
   publish: 'Publish',
 };
 

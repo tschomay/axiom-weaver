@@ -8,7 +8,7 @@
  * that true is to have no grid to begin with. The same control renders on a phone and a desktop.
  */
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { BagValue } from '@/schema/story-package';
 import type { TableName } from '@/schema/tiers';
 import {
@@ -446,5 +446,35 @@ function BagValueControl({
         onChange(row.type === 'number' ? Number(event.target.value) : event.target.value)
       }
     />
+  );
+}
+
+/**
+ * "Open a file…" as a real button driving a real file input.
+ *
+ * A `<label>` dressed as a button loses the button styling (the rule is `button.action`) and the
+ * keyboard affordances with it; a button that clicks a hidden input keeps both.
+ */
+export function FileOpenButton({ onText }: { onText: (text: string) => void }) {
+  const input = useRef<HTMLInputElement | null>(null);
+  return (
+    <>
+      <button type="button" className="action" onClick={() => input.current?.click()}>
+        Open a file…
+      </button>
+      <input
+        ref={input}
+        type="file"
+        className="hidden-file"
+        accept="application/json,.json"
+        onChange={(event) => {
+          const file = event.target.files?.[0];
+          if (file === undefined) return;
+          void file.text().then(onText);
+          // Cleared so re-opening the same file fires `change` again.
+          event.target.value = '';
+        }}
+      />
+    </>
   );
 }

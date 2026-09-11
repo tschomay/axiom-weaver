@@ -302,6 +302,9 @@ button.action.primary {
 .diagnostic .head {
   font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
   font-weight: 600;
+  /* A dotted path is one unbreakable word in a monospace face — at 390px it is wider than the
+     screen, and a diagnostic that pushes the page sideways is worse than one that wraps mid-id. */
+  overflow-wrap: anywhere;
 }
 
 .proposal {
@@ -955,4 +958,22 @@ button.tiny:disabled {
 
 .bad-note {
   color: var(--bad);
+}
+
+/* --- Import and export (issue #90, ADR 0017 §6) -------------------------------------------- */
+
+/* The file input a button drives. Hidden, not removed — it is still the thing doing the work. */
+input.hidden-file {
+  display: none;
+}
+
+.field textarea.import-box {
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  min-height: 9rem;
+  max-width: 100%;
+  white-space: pre;
+  overflow-wrap: normal;
+  /* A package is one long line per value; wrapping it would make it unreadable, so this is one
+     of the two places the rule against horizontal scrolling gives way — inside its own box. */
+  overflow-x: auto;
 }

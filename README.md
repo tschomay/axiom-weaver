@@ -216,7 +216,7 @@ filesystem under `.data/` (gitignored) at exactly the same pathnames. See `.env.
 | `/stories/{storyId}/diff` | **Compare two tellings** of the same `package_version`: per scene, the Scene Digest fields that came out differently, the volitional proposals the two runs resolved differently, and both performances to read side by side. Never a line-level text diff of prose — two performances of one Scene Card share almost no words. |
 | `/stories/{storyId}/read` | The reader's three-way choice (ADR 0014 §3): the **Baked** edition, the **library** of tellings the author saved under names worth telling apart, or **generate a telling** — the whole compiler behind one button: a fresh run id, one writer call per scene in order, scene-count progress while it runs, and the finished edition as prose. Every completed telling stays readable and shareable by its own run id whether or not it is in the library. |
 | `/stories/{storyId}/edit` | The **Manuscript** (ADR 0017): metadata, the Voice Card, the World Model seed, and the Scene Cards. Every edit autosaves into a per-story draft that nothing else can see, carrying the `updated_at` it was read at so a second tab is refused rather than silently discarded. The linter runs continuously beside it, and every problem is a link to the field that owns it. **Publish** names the `package_version` it is about to write and says that the bump will flag the Working Draft stale; **discard** drops the draft and returns the story to its published package. |
-| `/stories/new` | Start a story **from scratch**, or **duplicate** any retained version of any story under a new `story_id` — which is what makes the five fixtures usable as templates: only the package travels, so the copy has no Working Draft, no runs and no editions. |
+| `/stories/new` | Start a story **from scratch**, **duplicate** any retained version of any story under a new `story_id` — which is what makes the five fixtures usable as templates: only the package travels, so the copy has no Working Draft, no runs and no editions — or **import** a package as JSON. |
 
 An author never types an id: `pov`, `location_id`, relationship endpoints and every other entity
 reference is a picker over the World Model seed, because the errors hand-authoring actually
@@ -227,7 +227,17 @@ volitional assertion it is at the moment it is asserted. The reserved `_new_rela
 `_new_character_knowledge` keys are "create a row this scene makes" buttons rather than keys to
 know about. A `pays_off` entry picks its plant from **earlier scenes only**, each labelled with
 whether it actually declares the fact, because ADR 0004 rejects the pair if it does not — and
-deleting a card that something plants at says so before the delete, not after. A `bag` is flat key/value
+deleting a card that something plants at says so before the delete, not after.
+
+**Import and export** is the escape hatch, and the reason the forms above are allowed to stay
+narrow: an authoring gap is never a dead end. Export writes the same JSON the fixtures are written
+in — two spaces, one trailing newline — so an exported retained version is byte-for-byte what the
+store holds, and export → import → export is byte-identical for all five fixtures,
+`_authoring_conventions` and every other block the schema has never heard of included. Import goes
+through the linter before anything is saved and lands in the **Manuscript**, never in a retained
+version: a second path to a published package would be a path around the publish gate. A package
+with broken references imports anyway and reports its problems — a half-broken import you can fix
+in the editor beats a rejection that leaves you holding a text file. A `bag` is flat key/value
 rows whose value types are text, number, true/false, list and empty — Principle 4's "no nested
 objects" is enforced by the control having no way to express one, not by a rule the author has to
 remember. Desktop puts the section list and the editor side by side; a narrow viewport stacks them

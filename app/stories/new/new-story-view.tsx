@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { slugifyStoryId } from '@/authoring/story-id';
 import { AuthorTokenField, useAuthorSession } from '../../author-token';
+import { parseImport, type ImportResult } from '@/authoring/transfer';
+import { FileOpenButton } from '../[storyId]/edit/controls';
 import { useStoryIdCheck } from '../[storyId]/edit/use-story-id-check';
 
 export interface DuplicableStory {
@@ -16,7 +18,8 @@ export interface DuplicableStory {
 }
 
 /**
- * Two of ADR 0017 §5's three entry points. (The third, Edit, starts from a story that exists.)
+ * Two of ADR 0017 §5's three entry points, plus §6's escape hatch. (The third entry point, Edit,
+ * starts from a story that already exists.)
  *
  * Duplicate is the one that carries weight: it is what makes the five fixtures function as
  * templates. Starting from a story with a complete plant chain and a filled Voice Card is a
@@ -27,7 +30,8 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
   const router = useRouter();
   const session = useAuthorSession();
 
-  const [mode, setMode] = useState<'new' | 'duplicate'>('new');
+  const [mode, setMode] = useState<'new' | 'duplicate' | 'import'>('new');
+  const [imported, setImported] = useState<ImportResult | null>(null);
   const [title, setTitle] = useState('');
   const [storyId, setStoryId] = useState('');
   const [touchedId, setTouchedId] = useState(false);
@@ -39,7 +43,16 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
   const [error, setError] = useState<string | null>(null);
 
   // The id follows the title until the author edits it, and stops following the moment they do.
-  const effectiveId = touchedId ? storyId : slugifyStoryId(title);
+  // An import proposes the package's own id and title, which the author can still override —
+  // the id in a file is a suggestion here, not a claim on a blob path.
+  const importedPkg = imported !== null && imported.ok ? imported : null;
+  const effectiveTitle =
+    title !== '' || importedPkg === null ? title : importedPkg.summary.title;
+  const effectiveId = touchedId
+    ? storyId
+    : importedPkg !== null && title === ''
+      ? slugifyStoryId(importedPkg.summary.story_id)
+      : slugifyStoryId(title);
   const availability = useStoryIdCheck(effectiveId, true);
 
   const source = stories.find((story) => story.storyId === from);
@@ -49,11 +62,68 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
     session.canWrite &&
     !busy &&
     availability === 'free' &&
-    (mode === 'new' ? title.trim() !== '' : source !== undefined && version !== null);
+    (mode === 'new'
+      ? title.trim() !== ''
+      : mode === 'import'
+        ? importedPkg !== null && effectiveTitle.trim() !== ''
+        : source !== undefined && version !== null);
+
+  /**
+   * An import starts as an empty story and is then filled in.
+   *
+   * Two writes rather than one, deliberately: the package lands in the **Manuscript** through the
+   * ordinary save path, which is the only way in that the publish gate sits in front of.
+   */
+  const createFromImport = async (): Promise<string | null> => {
+    if (importedPkg === null) return 'nothing to import';
+    const created = await fetch('/api/manuscripts', {
+      method: 'POST',
+      headers: session.headers(),
+      body: JSON.stringify({
+        source: 'new',
+        title: effectiveTitle.trim(),
+        story_id: effectiveId,
+      }),
+    });
+    const seeded = (await created.json()) as {
+      story_id?: string;
+      updated_at?: string;
+      error?: string;
+    };
+    if (!created.ok || seeded.story_id === undefined || seeded.updated_at === undefined) {
+      return seeded.error ?? `could not start the story (${created.status})`;
+    }
+
+    const saved = await fetch(`/api/stories/${seeded.story_id}/manuscript`, {
+      method: 'PUT',
+      headers: session.headers(),
+      body: JSON.stringify({
+        package: { ...importedPkg.package, story_id: seeded.story_id },
+        updated_at: seeded.updated_at,
+      }),
+    });
+    if (!saved.ok) {
+      const body = (await saved.json()) as { error?: string };
+      return body.error ?? `the story was created but the package did not import (${saved.status})`;
+    }
+    router.push(`/stories/${seeded.story_id}/edit?section=story`);
+    return null;
+  };
 
   const create = () => {
     setBusy(true);
     setError(null);
+
+    if (mode === 'import') {
+      void createFromImport()
+        .then(setError)
+        .catch((reason: unknown) =>
+          setError(reason instanceof Error ? reason.message : 'could not import the story'),
+        )
+        .finally(() => setBusy(false));
+      return;
+    }
+
     void fetch('/api/manuscripts', {
       method: 'POST',
       headers: session.headers(),
@@ -112,6 +182,13 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
         >
           Duplicate an existing story
         </button>
+        <button
+          type="button"
+          className={mode === 'import' ? 'action primary' : 'action'}
+          onClick={() => setMode('import')}
+        >
+          Import a package
+        </button>
       </div>
 
       {mode === 'duplicate' ? (
@@ -162,13 +239,65 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
         )
       ) : null}
 
+      {mode === 'import' ? (
+        <>
+          <p className="lede">
+            A Story Package as JSON — one you exported, or a fixture straight out of{' '}
+            <code>fixtures/</code>. It lands in the new story&apos;s draft, where you can fix
+            whatever the linter finds before publishing.
+          </p>
+
+          <div className="row-actions">
+            <FileOpenButton onText={(body) => setImported(parseImport(body))} />
+          </div>
+
+          <div className="field">
+            <label>
+              <span className="label-text">or paste it here</span>
+              <textarea
+                className="import-box"
+                spellCheck={false}
+                placeholder='{ "schema_version": "1.0", … }'
+                onChange={(event) =>
+                  setImported(
+                    event.target.value.trim() === '' ? null : parseImport(event.target.value),
+                  )
+                }
+              />
+            </label>
+          </div>
+
+          {imported === null ? null : imported.ok ? (
+            <p className="meta">
+              {imported.summary.title === '' ? '(untitled)' : imported.summary.title} —{' '}
+              {imported.summary.scenes} scene{imported.summary.scenes === 1 ? '' : 's'},{' '}
+              {imported.summary.entities} entities ·{' '}
+              {imported.lint.errors.length === 0
+                ? 'no errors'
+                : `${imported.lint.errors.length} error${imported.lint.errors.length === 1 ? '' : 's'} to fix before it can publish`}
+              {imported.summary.extra_blocks.length === 0
+                ? ''
+                : ` · keeps ${imported.summary.extra_blocks.join(', ')}`}
+            </p>
+          ) : (
+            <p className="admin-error">{imported.message}</p>
+          )}
+        </>
+      ) : null}
+
       <div className="field">
         <label>
           <span className="label-text">Title</span>
           <input
             type="text"
             value={title}
-            placeholder={mode === 'duplicate' ? `${source?.title ?? ''} (copy)` : 'The Dragon of…'}
+            placeholder={
+              mode === 'duplicate'
+                ? `${source?.title ?? ''} (copy)`
+                : mode === 'import'
+                  ? (importedPkg?.summary.title ?? 'from the package')
+                  : 'The Dragon of…'
+            }
             onChange={(event) => setTitle(event.target.value)}
           />
         </label>
@@ -203,7 +332,11 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
 
       <div className="row-actions">
         <button type="button" className="action primary" disabled={!ready} onClick={create}>
-          {mode === 'new' ? 'Create the draft' : 'Duplicate into a new draft'}
+          {mode === 'new'
+            ? 'Create the draft'
+            : mode === 'import'
+              ? 'Import into a new draft'
+              : 'Duplicate into a new draft'}
         </button>
       </div>
 
