@@ -1,0 +1,271 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "the-lamp-at-cairn-head",
+  "_authoring_conventions": {
+    "note": "Same conventions as fixtures/cinderella — see fixtures/authoring-notes.md. This package is original, written for this repository; nothing in it is adapted from an existing work.",
+    "entry_state_and_exit_state": "{ <entity_id>: { <column>: <value>, ... }, ... } — one object per touched entity, naming only the core columns this scene asserts.",
+    "new_rows_in_exit_state": "Reserved keys _new_relationships / _new_character_knowledge, using the same row shape as world_model_seed.",
+    "why_this_fixture_exists": "Five scenes — the longest of the three short packages, and the one that exercises must_stay_hidden across a whole story: the same fact is withheld by four scenes and paid off by the fifth.",
+    "characters_present_includes_the_absent": "char_innes is listed in characters_present for the two scenes whose beats name him, though he is not in the room. characters_present is what the deterministic join reads: a character a beat names but the list omits reaches the writer as a name with no World Model row behind it, which the compiler reports as missing_fact.",
+    "seed_grounded_payoff": "scene_05 pays off innes_vanished_in_february with plant: null — a fact no scene plants because a character_knowledge row establishes it before the story opens (ADR 0004)."
+  },
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_reeve",
+        "name": "Aldous Reeve",
+        "location_id": "loc_boat",
+        "status": "alive",
+        "goal": "keep the light for eight weeks and go home",
+        "bag": {
+          "post": "relief keeper, Northern Lights Board",
+          "note": "has never worked a rock station before and has said so to nobody"
+        }
+      },
+      {
+        "id": "char_kerr",
+        "name": "Kerr",
+        "location_id": "loc_boat",
+        "status": "alive",
+        "goal": null,
+        "bag": {
+          "trade": "boatman on the Cairn Head relief run",
+          "note": "has landed at this station twice a year for nineteen years and will not stay the night"
+        }
+      },
+      {
+        "id": "char_innes",
+        "name": "Tomas Innes",
+        "location_id": null,
+        "status": "missing",
+        "goal": null,
+        "bag": {
+          "post": "principal keeper, Cairn Head",
+          "note": "walked off the station in February; the boat found the door open and the light burning"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_boat",
+        "name": "the relief boat",
+        "bag": { "description": "an open launch that comes alongside the rock twice a year and does not linger" }
+      },
+      {
+        "id": "loc_landing",
+        "name": "the landing",
+        "bag": { "description": "twelve iron rungs up wet rock, and a door at the top of them" }
+      },
+      {
+        "id": "loc_keepers_room",
+        "name": "the keeper's room",
+        "bag": { "description": "a stove, two chairs, one of them worn, and the log on the table" }
+      },
+      {
+        "id": "loc_stair",
+        "name": "the tower stair",
+        "bag": { "description": "eighty-one steps, granite, wet at the bottom in any weather" }
+      },
+      {
+        "id": "loc_lamp_room",
+        "name": "the lamp room",
+        "bag": { "description": "glass on all sides, brass at the centre, and the sea on every horizon" }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_lamp",
+        "name": "the Cairn Head lamp",
+        "location_id": "loc_lamp_room",
+        "status": "burning",
+        "bag": { "description": "a brass-housed light that should not be lit by day and is" }
+      },
+      {
+        "id": "obj_logbook",
+        "name": "the station log",
+        "location_id": "loc_keepers_room",
+        "status": "closed",
+        "bag": { "description": "one line a watch, in the same hand for eleven years" }
+      },
+      {
+        "id": "obj_boots",
+        "name": "a pair of sea-boots",
+        "location_id": "loc_stair",
+        "status": "wet",
+        "bag": { "description": "set at the foot of the stair, turned to face the way up" }
+      }
+    ],
+    "relationships": [
+      { "id": "rel_001", "from_id": "char_kerr", "to_id": "char_innes", "kind": "landed_supplies_for", "sentiment": "fond", "bag": {} },
+      { "id": "rel_002", "from_id": "char_reeve", "to_id": "char_innes", "kind": "relieves", "sentiment": null, "bag": {} }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_001",
+        "character_id": "char_reeve",
+        "fact_ref": "innes_vanished_in_february",
+        "learned_at_scene": null,
+        "bag": { "source": "the Board's letter of appointment" }
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_landing",
+      "order": 1,
+      "pov": "char_reeve",
+      "location_id": "loc_landing",
+      "characters_present": ["char_reeve", "char_kerr"],
+      "dramatic_function": "Land the keeper, strand him, and put the story's one impossible fact in front of the reader while there is still an ordinary explanation available.",
+      "entry_state": { "char_reeve": { "location_id": "loc_boat", "status": "alive" } },
+      "exit_state": { "char_reeve": { "location_id": "loc_keepers_room" } },
+      "required_beats": [
+        "Kerr puts Reeve on the rungs with his chest and his bedding and does not cut the engine",
+        "Kerr says the next boat is in eight weeks and that he has never once stayed the night here",
+        "the lamp is burning as Reeve climbs, in daylight, hours before any keeper would light it",
+        "Reeve tells himself the Board must have left it lit, and writes the time of his landing in the log"
+      ],
+      "reader_must_learn": ["the_lamp_was_burning_before_reeve_lit_it"],
+      "must_stay_hidden": ["reeve_never_left_cairn_head"],
+      "tone": "grey, practical, a dread that has not declared itself",
+      "length_budget": 400,
+      "invariants": [
+        "Reeve is alone on the rock when the boat goes",
+        "nothing in the scene is presented as supernatural"
+      ]
+    },
+    {
+      "id": "scene_02_the_log",
+      "order": 2,
+      "pov": "char_reeve",
+      "location_id": "loc_keepers_room",
+      "characters_present": ["char_reeve", "char_innes"],
+      "dramatic_function": "Give the absence a name and a handwriting, and put one date in the record that cannot be where it is.",
+      "entry_state": { "char_reeve": { "location_id": "loc_keepers_room" } },
+      "exit_state": { "obj_logbook": { "status": "open at the last entry" } },
+      "required_beats": [
+        "Reeve reads back through eleven years of Tomas Innes keeping one line a watch, wind and glass and oil",
+        "the entries stop in February, which is what the Board told him to expect",
+        "the last entry is dated three days after that, in the same hand, and says only that the light was kept",
+        "Reeve leaves the log open on the table and does not write under it"
+      ],
+      "reader_must_learn": ["the_last_log_entry_is_dated_after_innes_vanished"],
+      "must_stay_hidden": ["reeve_never_left_cairn_head"],
+      "tone": "close, quiet, the horror arriving as a clerical discrepancy",
+      "length_budget": 400,
+      "invariants": [
+        "the handwriting is never described as Reeve's own",
+        "Innes does not appear; only his hand does"
+      ]
+    },
+    {
+      "id": "scene_03_the_stair",
+      "order": 3,
+      "pov": "char_reeve",
+      "location_id": "loc_stair",
+      "characters_present": ["char_reeve"],
+      "dramatic_function": "Turn the discrepancy physical: something is on the rock with him, and the evidence only points one way.",
+      "entry_state": { "char_reeve": { "location_id": "loc_keepers_room" } },
+      "exit_state": {
+        "char_reeve": { "location_id": "loc_stair" },
+        "obj_boots": { "status": "still dripping" }
+      },
+      "required_beats": [
+        "there are wet prints on the granite, going up, and Reeve counts them twice to be sure",
+        "there is no set coming down, and the sea has not been over the rock in three days",
+        "a pair of sea-boots stands at the foot of the stair, dripping, turned to face the way up",
+        "Reeve puts his own boot beside a print and does not let himself finish the comparison"
+      ],
+      "reader_must_learn": ["the_prints_on_the_stair_only_go_up"],
+      "must_stay_hidden": ["reeve_never_left_cairn_head"],
+      "tone": "airless; the reader is a step ahead of the narrator and cannot warn him",
+      "length_budget": 350,
+      "invariants": [
+        "Reeve never says the prints are his size",
+        "nothing is seen; only left behind"
+      ]
+    },
+    {
+      "id": "scene_04_the_lamp",
+      "order": 4,
+      "pov": "char_reeve",
+      "location_id": "loc_lamp_room",
+      "characters_present": ["char_reeve"],
+      "dramatic_function": "Take the last ordinary explanation away: the work is being done, correctly, by somebody who is not him.",
+      "entry_state": {
+        "char_reeve": { "location_id": "loc_stair" },
+        "obj_lamp": { "location_id": "loc_lamp_room" }
+      },
+      "exit_state": {
+        "char_reeve": { "location_id": "loc_lamp_room" },
+        "obj_lamp": { "status": "burning" }
+      },
+      "required_beats": [
+        "Reeve climbs at dusk to light the lamp and finds it already lit and the brass already warm",
+        "the oil is down by exactly one watch and the wick is trimmed the way he trims it",
+        "he keeps the watch anyway, because keeping it is the only thing on the rock he still knows how to do",
+        "at midnight he writes one line in the log: the light was kept"
+      ],
+      "reader_must_learn": ["the_brass_is_warm_before_reeve_touches_it"],
+      "must_stay_hidden": ["reeve_never_left_cairn_head"],
+      "tone": "resigned, almost peaceful; a man doing his job inside something he has stopped arguing with",
+      "length_budget": 400,
+      "invariants": [
+        "Reeve does not search the tower",
+        "the line he writes matches the wording of the last entry in the log"
+      ]
+    },
+    {
+      "id": "scene_05_the_relief",
+      "order": 5,
+      "pov": "char_reeve",
+      "location_id": "loc_landing",
+      "characters_present": ["char_reeve", "char_kerr", "char_innes"],
+      "dramatic_function": "Collect everything at once: the lamp that was lit before he landed, and the vanishing the Board's letter told him about, are the same event seen from inside it.",
+      "entry_state": { "char_reeve": { "location_id": "loc_lamp_room" } },
+      "exit_state": {
+        "char_reeve": { "location_id": "loc_landing" },
+        "char_innes": { "status": "accounted for" }
+      },
+      "required_beats": [
+        "the relief boat comes alongside eight weeks to the day and Reeve goes down the rungs with his chest",
+        "Kerr looks up at him from the launch and greets him by the name Tomas Innes, the way you greet a man you have landed supplies for since he was young",
+        "Reeve turns back and the lamp is burning above him in daylight, exactly as it was on the day he landed",
+        "he goes back up the rungs, because the light has to be kept, and Kerr does not cut the engine"
+      ],
+      "reader_must_learn": ["reeve_never_left_cairn_head"],
+      "pays_off": [
+        { "fact_ref": "the_lamp_was_burning_before_reeve_lit_it", "plant": "scene_01_the_landing" },
+        { "fact_ref": "innes_vanished_in_february", "plant": null }
+      ],
+      "tone": "cold, complete, no explanation offered and none needed",
+      "length_budget": 400,
+      "invariants": [
+        "nobody in the scene explains what has happened",
+        "the story ends with the light still being kept"
+      ]
+    }
+  ],
+  "voice_card": {
+    "style_preset": "gothic_brooding",
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "close on Reeve and never once ahead of him; the reader sees more than he admits",
+    "register": "spare, weather-worn, procedural about work and evasive about fear",
+    "sentence_rhythm": "long sentences for the sea and the stair, then a short one that stops the paragraph dead",
+    "imagery_palette": [
+      "wet granite and iron rungs",
+      "brass and lamp oil",
+      "handwriting in a ruled column",
+      "grey water with no horizon in it"
+    ],
+    "dialogue_density": "very low; Kerr speaks twice in the whole story and both times it matters",
+    "style_exemplar": "The light was burning when he came up the rungs, in daylight, and he told himself the Board had left it so."
+  },
+  "metadata": {
+    "title": "The Lamp at Cairn Head",
+    "source": "Original, written for this repository — no adapted material.",
+    "created_at": "2026-09-11T00:00:00Z"
+  }
+}

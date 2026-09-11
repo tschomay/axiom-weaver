@@ -3,6 +3,7 @@ import { storyRepository } from '@/persistence';
 import { runTelling } from '@/edition/run-loop';
 import { mintRunId } from '@/edition/edition';
 import { estimateCompile } from '@/edition/run-report';
+import { buildTellingsView } from '@/edition/tellings-view';
 import { GeminiClient, writerModelFromEnv } from '@/writer/model-client';
 import { SyntheticWriterClient } from '@/writer/synthetic-client';
 import { scenesInOrder } from '@/schema/story-package';
@@ -27,18 +28,7 @@ export async function GET(
     return NextResponse.json({ error: `No package retained for "${storyId}"` }, { status: 404 });
   }
 
-  const index = await repository.getRunIndex(storyId);
-  const estimate = estimateCompile(
-    scenesInOrder(pkg).length,
-    await repository.getRunReports(storyId),
-  );
-
-  return NextResponse.json({
-    story_id: storyId,
-    baked: await repository.getBakedPointer(storyId),
-    runs: index.runs,
-    estimate,
-  });
+  return NextResponse.json(await buildTellingsView(repository, pkg));
 }
 
 /**
@@ -57,7 +47,7 @@ export async function GET(
  * takes an un-awaited loop with it, and only the scenes already flushed to Blob survive.
  */
 export async function POST(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ storyId: string }> },
 ) {
   const { storyId } = await params;
@@ -68,7 +58,18 @@ export async function POST(
     return NextResponse.json({ error: `No package retained for "${storyId}"` }, { status: 404 });
   }
 
-  const client = GeminiClient.fromEnv() ?? new SyntheticWriterClient(pkg);
+  // The same choice the author-time compile offers, for the same reason: on a rate-limited key a
+  // whole telling is the day's allowance, and proving the loop runs is a different question from
+  // judging what it wrote (AGENTS.md, The Gemini API key). Never chosen silently — the run report
+  // records the model every call used either way.
+  const body = (await request.json().catch(() => null)) as { writer?: unknown } | null;
+  if (body?.writer !== undefined && body.writer !== 'live' && body.writer !== 'stand_in') {
+    return NextResponse.json({ error: 'writer must be "live" or "stand_in"' }, { status: 400 });
+  }
+  const requestedWriter = body?.writer === 'stand_in' ? 'stand_in' : 'live';
+
+  const live = requestedWriter === 'live' ? GeminiClient.fromEnv() : null;
+  const client = live ?? new SyntheticWriterClient(pkg);
   const runId = mintRunId(storyId);
   const scenes = scenesInOrder(pkg).length;
 
@@ -89,6 +90,16 @@ export async function POST(
       run_id: runId,
       story_id: storyId,
       scene_count: scenes,
+      writer: {
+        live: live !== null,
+        requested: requestedWriter,
+        model:
+          live !== null
+            ? writerModelFromEnv()
+            : requestedWriter === 'stand_in'
+              ? 'stand-in writer — composed from the Scene Cards, no model called'
+              : 'stand-in writer — no GEMINI_API_KEY configured, so no model was called',
+      },
       estimate: estimateCompile(scenes, await repository.getRunReports(storyId)),
       status_path: `/api/tellings/${runId}`,
     },

@@ -11,6 +11,7 @@ export function StoryNav({ storyId }: { storyId: string }) {
     { href: base, label: 'Working Draft' },
     { href: `${base}/inspector`, label: 'World & Discourse' },
     { href: `${base}/runs`, label: 'Run report' },
+    { href: `${base}/read`, label: 'Read' },
   ];
 
   return (

@@ -39,6 +39,25 @@ interface FieldChange {
   new_value: unknown;
 }
 
+/** One line of the compile-the-rest summary: what each card produced, kept after it scrolls by. */
+interface BulkOutcome {
+  scene_id: string;
+  scene_index: number;
+  diagnostics: number;
+  errors: number;
+  proposals: number;
+  newly_stale: number;
+  failed: string | null;
+}
+
+interface DraftScene {
+  scene_id: string;
+  scene_index: number;
+  prose: string;
+  compiled_against_package_version: number;
+  stale: boolean;
+}
+
 interface Resolution {
   status: string;
   applied: boolean;
@@ -62,6 +81,8 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
   const [openDiff, setOpenDiff] = useState<string | null>(null);
   const [standIn, setStandIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [bulk, setBulk] = useState<{ outcomes: BulkOutcome[]; remaining: number } | null>(null);
+  const [draftProse, setDraftProse] = useState<DraftScene[] | null>(null);
   // The compile view sits below a scene list that is as long as the story; a compile the author
   // has to go looking for is a compile they read late.
   const compileView = useRef<HTMLDivElement | null>(null);
@@ -75,12 +96,9 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
     if (response.ok) setDraft((await response.json()) as DraftView);
   }, [storyId]);
 
-  const compile = useCallback(
-    async (sceneId: string) => {
-      setCompiling(sceneId);
-      setError(null);
-      setCompiled(null);
-      setResolutions({});
+  /** One compile, as the API answers it. Callers own what the screen does with the answer. */
+  const compileOne = useCallback(
+    async (sceneId: string): Promise<CompileResponse | { error: string }> => {
       try {
         const response = await fetch(`/api/stories/${storyId}/draft/compile`, {
           method: 'POST',
@@ -88,17 +106,101 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
           body: JSON.stringify({ scene_id: sceneId, writer: standIn ? 'stand_in' : 'live' }),
         });
         const body = (await response.json()) as CompileResponse & { error?: string };
-        if (!response.ok) setError(body.error ?? `Compile failed (${response.status})`);
-        else setCompiled(body);
-        await refresh();
+        if (!response.ok) return { error: body.error ?? `Compile failed (${response.status})` };
+        return body;
       } catch {
-        setError('Network error — the compile may or may not have finished. Reload to see.');
-      } finally {
-        setCompiling(null);
+        return { error: 'Network error — the compile may or may not have finished. Reload to see.' };
       }
     },
-    [refresh, session, standIn, storyId],
+    [session, standIn, storyId],
   );
+
+  const compile = useCallback(
+    async (sceneId: string) => {
+      setCompiling(sceneId);
+      setError(null);
+      setCompiled(null);
+      setBulk(null);
+      setResolutions({});
+      const result = await compileOne(sceneId);
+      if ('error' in result) setError(result.error);
+      else setCompiled(result);
+      await refresh();
+      setCompiling(null);
+    },
+    [compileOne, refresh],
+  );
+
+  /**
+   * Compile every card the draft has not built yet, in order.
+   *
+   * Sequential and never parallel: a scene is compiled against the digests of the scenes before
+   * it, so scene 4 cannot start until scene 3 has landed. The per-card diagnostics are the point
+   * of author-time compiling, so each card's counts are kept in a summary rather than replaced by
+   * the next card's — and the last card compiled stays open in the scene compile view.
+   *
+   * It stops at the first failure instead of pressing on: everything after a failed scene would be
+   * compiled against a history that does not exist.
+   */
+  const compileRest = useCallback(async () => {
+    const pending = draft.scenes.filter((scene) => !scene.compiled);
+    if (pending.length === 0) return;
+
+    setError(null);
+    setCompiled(null);
+    setResolutions({});
+    const outcomes: BulkOutcome[] = [];
+    setBulk({ outcomes, remaining: pending.length });
+
+    for (const [index, scene] of pending.entries()) {
+      setCompiling(scene.scene_id);
+      const result = await compileOne(scene.scene_id);
+
+      if ('error' in result) {
+        outcomes.push({
+          scene_id: scene.scene_id,
+          scene_index: scene.scene_index,
+          diagnostics: 0,
+          errors: 0,
+          proposals: 0,
+          newly_stale: 0,
+          failed: result.error,
+        });
+        setBulk({ outcomes: [...outcomes], remaining: 0 });
+        setError(`Stopped at ${scene.scene_id}: ${result.error}`);
+        break;
+      }
+
+      outcomes.push({
+        scene_id: scene.scene_id,
+        scene_index: scene.scene_index,
+        diagnostics: result.diagnostics.length,
+        errors: result.diagnostics.filter((entry) => entry.severity === 'error').length,
+        proposals: result.proposals.length,
+        newly_stale: result.staleness.newly_stale.length,
+        failed: null,
+      });
+      setBulk({ outcomes: [...outcomes], remaining: pending.length - index - 1 });
+      setCompiled(result);
+    }
+
+    await refresh();
+    setCompiling(null);
+  }, [compileOne, draft.scenes, refresh]);
+
+  const readDraft = useCallback(async () => {
+    if (draftProse !== null) {
+      setDraftProse(null);
+      return;
+    }
+    const response = await fetch(`/api/stories/${storyId}/draft/scenes`);
+    if (!response.ok) {
+      setError('Could not read the draft.');
+      return;
+    }
+    const body = (await response.json()) as { scenes: DraftScene[] };
+    setDraftProse(body.scenes);
+  }, [draftProse, storyId]);
 
   const resolve = useCallback(
     async (sequence: number, decision: 'accept' | 'reject') => {
@@ -135,6 +237,8 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
     [refresh, session, storyId],
   );
 
+  const uncompiled = draft.scenes.filter((scene) => !scene.compiled).length;
+
   return (
     <>
       <AuthorTokenField session={session} />
@@ -162,6 +266,32 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
         </span>
       </label>
 
+      <p className="bulk-actions">
+        <button
+          type="button"
+          className="action primary"
+          disabled={compiling !== null || !session.canWrite || uncompiled === 0}
+          onClick={() => void compileRest()}
+          title={
+            uncompiled === 0
+              ? 'Every card in the package is already in the draft.'
+              : undefined
+          }
+        >
+          {bulk !== null && bulk.remaining > 0
+            ? `Compiling… ${bulk.remaining} to go`
+            : `Compile the rest (${uncompiled})`}
+        </button>
+        <button
+          type="button"
+          className="action"
+          disabled={compiling !== null || draft.scenes.every((scene) => !scene.compiled)}
+          onClick={() => void readDraft()}
+        >
+          {draftProse === null ? 'Read the draft' : 'Hide the draft'}
+        </button>
+      </p>
+
       <div>
         {draft.scenes.map((scene) => (
           <SceneRow
@@ -183,6 +313,74 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
         Stale-but-standing is a legitimate state (ADR 0015 §1): nothing here auto-recompiles and
         nothing nags. A stale scene stays exactly as compiled until you choose to revisit it.
       </p>
+
+      {bulk !== null && bulk.outcomes.length > 0 && (
+        <div className="panel">
+          <h3>
+            Compiled {bulk.outcomes.filter((outcome) => outcome.failed === null).length} card(s)
+            {bulk.remaining > 0 ? ` · ${bulk.remaining} still to go` : ''}
+          </h3>
+          <p className="meta">
+            Each card&apos;s own diagnostics, kept so a run of compiles does not bury them. The last
+            card is open in full below.
+          </p>
+          <div className="table-scroll">
+            <table className="rows">
+              <tbody>
+                <tr>
+                  <th>scene</th>
+                  <th>diagnostics</th>
+                  <th>proposals</th>
+                  <th>newly stale</th>
+                </tr>
+                {bulk.outcomes.map((outcome) => (
+                  <tr key={outcome.scene_id}>
+                    <td>
+                      <span className="meta">{outcome.scene_index}</span>{' '}
+                      <code>{outcome.scene_id}</code>
+                    </td>
+                    <td>
+                      {outcome.failed !== null ? (
+                        <span className="tag bad">failed</span>
+                      ) : outcome.diagnostics === 0 ? (
+                        <span className="meta">clean</span>
+                      ) : (
+                        <span className={outcome.errors > 0 ? 'tag bad' : 'tag warn'}>
+                          {outcome.diagnostics}
+                          {outcome.errors > 0 ? ` (${outcome.errors} error)` : ''}
+                        </span>
+                      )}
+                    </td>
+                    <td className="meta">{outcome.proposals === 0 ? '—' : outcome.proposals}</td>
+                    <td className="meta">{outcome.newly_stale === 0 ? '—' : outcome.newly_stale}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {draftProse !== null && (
+        <div className="panel">
+          <h3>The Working Draft, end to end</h3>
+          <p className="meta">
+            {draftProse.length} of {draft.scenes.length} scenes. A draft is not an edition: it is
+            overwritten scene by scene as you recompile, it can stop halfway, and a stale scene
+            stands until you choose to revisit it.
+          </p>
+          {draftProse.map((scene) => (
+            <div key={scene.scene_id}>
+              <p className="meta scene-marker">
+                {scene.scene_index}. {scene.scene_id} · package v
+                {scene.compiled_against_package_version}
+                {scene.stale ? ' · stale' : ''}
+              </p>
+              <div className="edition-prose">{scene.prose}</div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {compiled !== null && (
         <SceneCompileView
@@ -313,6 +511,9 @@ function SceneCompileView({
   onResolve: (sequence: number, decision: 'accept' | 'reject') => Promise<void>;
 }) {
   const errors = result.diagnostics.filter((entry) => entry.severity === 'error');
+  const standInRepairs = result.diagnostics.some(
+    (entry) => entry.code === 'continuity_repair_rejected',
+  );
 
   return (
     <div className="panel" ref={panelRef}>
@@ -361,6 +562,14 @@ function SceneCompileView({
         <p className="meta">
           Each error names the exact field to edit on the Scene Card — nothing here was applied to
           the World Model.
+        </p>
+      )}
+      {!result.writer.live && standInRepairs && (
+        <p className="meta">
+          The continuity pass runs on every compile and calls the model to repair the seams it
+          catches. The stand-in cannot answer a repair call, so every seam it caught is reported
+          here as standing — those lines are about the stand-in, not about your Scene Cards.
+          Compile with the writer model to see which of them a repair would have closed.
         </p>
       )}
 

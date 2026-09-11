@@ -31,6 +31,16 @@ function walkFixture(fixture: string) {
   });
 }
 
+/**
+ * The fixtures long enough for a rollup window to close.
+ *
+ * The ordering invariant below is checked on every fixture, because that is what a reordering
+ * would break and it is true at any length. The two assertions after it are about *scale* — a
+ * rollup reset to find, and a prefix that accumulates across a long telling — and a three-scene
+ * package has neither. Splitting them keeps the short fixtures honest rather than exempt.
+ */
+const SCALE_FIXTURES = ['cinderella', 'a-christmas-carol'] as const;
+
 describe.each(FIXTURE_STORY_IDS)('cacheable prefix — %s', (fixture) => {
   it('survives from each scene into the next, except where a rollup rewrites the middle', async () => {
     const walked = await walkFixture(fixture);
@@ -48,12 +58,15 @@ describe.each(FIXTURE_STORY_IDS)('cacheable prefix — %s', (fixture) => {
     }
 
     expect(unexplained).toEqual([]);
-    expect(rollupResets).toBeGreaterThan(0);
+    // A rollup is the only licensed reset, in both directions: a story long enough to close a
+    // window must show one, and one too short to close a window must show none at all.
+    expect(rollupResets > 0).toBe(walked.some((prompt) => prompt.after_rollup));
   });
 
   it('holds the header and digest hierarchy, and nothing that changes every scene', async () => {
     const walked = await walkFixture(fixture);
-    const prompt = walked[3]!;
+    // Mid-story where there is a middle; the last scene of a three-card package otherwise.
+    const prompt = walked[Math.min(3, walked.length - 1)]!;
     const prefix = cacheablePrefixOf(prompt.assembled);
 
     expect(wirePromptOf(prompt.assembled).startsWith(prefix)).toBe(true);
@@ -65,6 +78,9 @@ describe.each(FIXTURE_STORY_IDS)('cacheable prefix — %s', (fixture) => {
     }
   });
 
+});
+
+describe.each(SCALE_FIXTURES)('cacheable prefix at scale — %s', (fixture) => {
   it('grows the shared prefix as the telling accumulates', async () => {
     const walked = await walkFixture(fixture);
     const shared = walked

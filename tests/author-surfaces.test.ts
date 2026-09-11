@@ -19,6 +19,7 @@ import { buildDraftView } from '@/draft/draft-view';
 import { draftDigestEntries, inspectAsOf, toldLedgerAsOf } from '@/draft/inspector';
 import { resolveDraftProposal, NoSuchStoryError } from '@/draft/proposals';
 import { buildRunReportView } from '@/edition/report-view';
+import { buildTellingsView } from '@/edition/tellings-view';
 import { isAuthorizedAuthorRequest, isLocalAuthorInstance } from '@/admin/authorize';
 import { StateLog, worldModelAsOf } from '@/world-model/state-log';
 import { scenesInOrder, type StoryPackage } from '@/schema/story-package';
@@ -352,6 +353,36 @@ describe('the run report (ADR 0016 §1, surface 4)', () => {
       const after = await buildRunReportView(repository, pkg);
       expect(after.baked?.run_id).toBe(runId);
       expect(after.runs[0]?.is_baked).toBe(true);
+    });
+  });
+});
+
+describe("the reader's choice (ADR 0014 §3)", () => {
+  it('offers the Baked edition, the runs so far, and a wall-clock estimate', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await readFixturePackage('the-dragon-of-thistlewick');
+      await repository.putPackage(pkg);
+
+      const empty = await buildTellingsView(repository, pkg);
+      expect(empty.runs).toEqual([]);
+      expect(empty.baked).toBeNull();
+      expect(empty.scene_count).toBe(pkg.scene_cards.length);
+      // With no run of this story's own to measure, the estimate rests on the project default and
+      // says so rather than implying it measured something.
+      expect(empty.estimate.from_default).toBe(true);
+      // ADR 0014 §5: wall-clock only. A money figure here would be a promise nothing can keep.
+      expect(empty.estimate.text).toMatch(/^about /);
+
+      const first = mintRunId(pkg.story_id);
+      await runTelling({ pkg, client: new SyntheticWriterClient(pkg), repository, runId: first });
+      const second = mintRunId(pkg.story_id);
+      await runTelling({ pkg, client: new SyntheticWriterClient(pkg), repository, runId: second });
+      await repository.promoteToBaked(first);
+
+      const view = await buildTellingsView(repository, pkg);
+      // Newest first: the telling a reader wants is almost always the one that just finished.
+      expect(view.runs.map((run) => run.run_id)).toEqual([second, first]);
+      expect(view.baked?.run_id).toBe(first);
     });
   });
 });

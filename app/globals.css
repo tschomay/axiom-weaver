@@ -410,3 +410,30 @@ table.rows th {
   display: block;
   margin: 0.15rem 0 0 1.6rem;
 }
+
+/* Generating a telling, and reading what came out. */
+progress.run-progress {
+  width: 100%;
+  height: 0.5rem;
+  accent-color: var(--accent);
+}
+
+.scene-marker {
+  margin: 1.5rem 0 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 11px;
+}
+
+.edition-prose {
+  white-space: pre-wrap;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 38rem;
+}
+
+.bulk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
