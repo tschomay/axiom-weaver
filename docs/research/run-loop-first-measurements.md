@@ -145,3 +145,51 @@ Two consequences worth stating plainly, because they are easy to get wrong later
 Cost in money (the run report deliberately carries tokens, not dollars — ADR 0014 §5), novel-scale
 prompt growth, cache behaviour under a warm explicit cache, and anything at all about
 `gemini-3.7-flash`. The fog item stays open for those; it is narrower now than it was.
+
+## After the project review (11 September 2026)
+
+A review of the whole project against the ADRs found fourteen gaps between what the decisions say
+and what the code did (#57–#71, #73, #77). Several were only visible in a live run, and this is what
+changed on the numbers. All of these runs are `gemini-3.5-flash-lite`, because the writer models'
+daily allowance was spent before the review started (#65) — so they measure *mechanism*, not prose.
+
+**`the-dragon-of-thistlewick`, before and after:**
+
+| | Before | After |
+| --- | --- | --- |
+| Model calls, 3 scenes | 5 | **3** |
+| False `plant_obligation_missed` | 1 of 1 planting scenes | **0** |
+| Continuity repairs needed | 2 (both rewriting the same paragraph) | **0** |
+| Scene 3's `closing_situation` | scene 2's, verbatim | **its own** |
+| `imagery_signature` entries where `image == domain` | 3 of 3 | **1 of 9** |
+
+**`the-lamp-at-cairn-head`, before and after:**
+
+| | Before | After |
+| --- | --- | --- |
+| Model calls, 5 scenes | 10 | **6** (5 writer + 1 rollup synthesis) |
+| Continuity repairs needed | 5 | **0** |
+| `error` diagnostics | 1 (`unauthorized_entity_update`) | **0** |
+| Digest-only fallback calls | 1 | **0** |
+
+The repairs did not get better at repairing; the seams stopped arising. Most of that is #62 — the
+Voice Card was selling `imagery_palette` entries as phrases to reuse rather than domains to draw
+from, so the writer lifted the labels into the prose verbatim and then tagged each recorded image
+with its own text, which left ADR 0010's domain-equality check comparing a label against itself.
+
+**The rollup synthesis is real now** (#60). Every run before this one used
+`concatenatingSummarizer`, which the ADR names as the thing that stops growth being logarithmic.
+A level-1 digest from the 14-scene Cinderella run, freshly synthesized:
+
+> Transformed by her fairy godmother, Cinderella attends the royal ball where she captivates the
+> court and charms the Prince without her family recognizing her. After a magical evening, she
+> returns home safely and secures her godmother's promise to attend again.
+
+**Still zero cached tokens**, and still for the reason #50 established: the shared prefix is under
+the model's 4,096-token minimum on stories this short. Nothing here changes that, and nothing
+should try to until `cache-check` reports a prefix over the minimum.
+
+**One measurement this review could not make.** Scenes land at 49–79% of their `length_budget`
+across all four fixtures, which ADR 0012 §4 reads as a dropped beat rather than a short scene. That
+is either the light model writing short or the length framing being too weak, and the two are not
+separable without a `gemini-3.7-flash` run. Open as #78.
