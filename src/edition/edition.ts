@@ -40,6 +40,23 @@ export const EditionSceneEntrySchema = z.object({
   repairs_applied: z.number().int().nonnegative().default(0),
 });
 
+/**
+ * Why a `failed` run stopped.
+ *
+ * The manifest has always recorded *that* a run failed and never *why*, which is fine for a
+ * reader — ADR 0014 §4 shows them scene-count progress and nothing else — and useless for the
+ * author surface that has to decide what to offer next. The one failure worth telling apart is a
+ * spent daily quota: waiting does not clear it, and only a model with its own allowance gets past
+ * it today. Choosing that model stays a decision for a person (AGENTS.md), so this records the
+ * fact and nothing more.
+ */
+export const EditionFailureSchema = z.object({
+  detail: z.string(),
+  quota_exhausted_for_today: z.boolean().default(false),
+  /** The model that ran out, so the surface can say what it was. */
+  model: z.string().nullable().default(null),
+});
+
 export const EditionManifestSchema = z.object({
   schema_version: z.string().default(EDITION_SCHEMA_VERSION),
   run_id: z.string().min(1),
@@ -58,6 +75,8 @@ export const EditionManifestSchema = z.object({
   state_log_path: z.string().nullable().default(null),
   started_at: z.string(),
   completed_at: z.string().nullable().default(null),
+  /** Null on every status but `failed`, and on a failure with nothing useful to say. */
+  failure: EditionFailureSchema.nullable().default(null),
 });
 
 export const EditionSceneSchema = z.object({
@@ -143,6 +162,7 @@ export const BakedPointerSchema = z.object({
 });
 
 export type EditionManifest = z.infer<typeof EditionManifestSchema>;
+export type EditionFailure = z.infer<typeof EditionFailureSchema>;
 export type EditionSceneEntry = z.infer<typeof EditionSceneEntrySchema>;
 export type EditionScene = z.infer<typeof EditionSceneSchema>;
 export type EditionDiscourse = z.infer<typeof EditionDiscourseSchema>;

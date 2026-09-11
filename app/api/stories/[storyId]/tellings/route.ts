@@ -4,7 +4,11 @@ import { runTelling } from '@/edition/run-loop';
 import { mintRunId } from '@/edition/edition';
 import { estimateCompile } from '@/edition/run-report';
 import { buildTellingsView } from '@/edition/tellings-view';
-import { GeminiClient, writerModelFromEnv } from '@/writer/model-client';
+import {
+  GeminiClient,
+  isSelectableWriterModel,
+  writerModelFromEnv,
+} from '@/writer/model-client';
 import { SyntheticWriterClient } from '@/writer/synthetic-client';
 import { scenesInOrder } from '@/schema/story-package';
 
@@ -62,11 +66,25 @@ export async function POST(
   // whole telling is the day's allowance, and proving the loop runs is a different question from
   // judging what it wrote (AGENTS.md, The Gemini API key). Never chosen silently — the run report
   // records the model every call used either way.
-  const body = (await request.json().catch(() => null)) as { writer?: unknown } | null;
+  const body = (await request.json().catch(() => null)) as
+    | { writer?: unknown; model?: unknown }
+    | null;
   if (body?.writer !== undefined && body.writer !== 'live' && body.writer !== 'stand_in') {
     return NextResponse.json({ error: 'writer must be "live" or "stand_in"' }, { status: 400 });
   }
   const requestedWriter = body?.writer === 'stand_in' ? 'stand_in' : 'live';
+
+  // A named model is how a reader takes up the offer a quota-failed run leaves on the manifest.
+  // Their choice, never a default — the run report records what actually wrote each scene.
+  if (body?.model !== undefined) {
+    if (typeof body.model !== 'string' || !isSelectableWriterModel(body.model)) {
+      return NextResponse.json(
+        { error: `"${String(body.model)}" is not a writer model this deployment will call` },
+        { status: 400 },
+      );
+    }
+  }
+  const writerModel = typeof body?.model === 'string' ? body.model : writerModelFromEnv();
 
   const live = requestedWriter === 'live' ? GeminiClient.fromEnv() : null;
   const client = live ?? new SyntheticWriterClient(pkg);
@@ -78,7 +96,7 @@ export async function POST(
     client,
     repository,
     runId,
-    writerModel: writerModelFromEnv(),
+    writerModel,
   }).catch((error: unknown) => {
     // The run's own failure path has already marked the manifest `failed` and flushed it; this is
     // only so a crash is not silent in the server log.
@@ -95,7 +113,7 @@ export async function POST(
         requested: requestedWriter,
         model:
           live !== null
-            ? writerModelFromEnv()
+            ? writerModel
             : requestedWriter === 'stand_in'
               ? 'stand-in writer — composed from the Scene Cards, no model called'
               : 'stand-in writer — no GEMINI_API_KEY configured, so no model was called',

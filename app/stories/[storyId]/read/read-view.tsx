@@ -2,12 +2,16 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { TellingsView } from '@/edition/tellings-view';
+import type { QuotaOffer } from '@/writer/model-client';
+import { QuotaPrompt } from '../../../quota-prompt';
 
 interface Progress {
   run_id: string;
   status: 'running' | 'complete' | 'failed';
   degraded: boolean;
   progress: { scenes_compiled: number; scene_count: number; text: string };
+  /** Present when the run stopped on a spent daily quota — a failure with a way past it. */
+  quota?: QuotaOffer | null;
 }
 
 interface EditionScene {
@@ -29,6 +33,7 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
     provenance: string | null;
   } | null>(null);
   const [writer, setWriter] = useState<string | null>(null);
+  const [quota, setQuota] = useState<QuotaOffer | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const prose = useRef<HTMLDivElement | null>(null);
@@ -63,9 +68,13 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
             await read(body.run_id);
             await refresh();
           } else if (body.status === 'failed') {
-            setError(
-              `The run stopped before it finished. Its report says how far it got — ${body.progress.text}.`,
-            );
+            // The scenes it did compile are flushed and stand; what a quota failure costs is the
+            // rest of the run. Offering the headroom model beats reporting a dead end.
+            if (body.quota !== null && body.quota !== undefined) setQuota(body.quota);
+            else
+              setError(
+                `The run stopped before it finished. Its report says how far it got — ${body.progress.text}.`,
+              );
             await refresh();
           }
         })
@@ -78,15 +87,20 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
     if (reading !== null) prose.current?.scrollIntoView({ behavior: 'smooth' });
   }, [reading]);
 
-  const generate = useCallback(async () => {
+  const generate = useCallback(
+    async (model?: string) => {
     setBusy(true);
     setError(null);
+    setQuota(null);
     setReading(null);
     try {
       const response = await fetch(`/api/stories/${storyId}/tellings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ writer: standIn ? 'stand_in' : 'live' }),
+        body: JSON.stringify({
+          writer: standIn ? 'stand_in' : 'live',
+          ...(model === undefined ? {} : { model }),
+        }),
       });
       const body = (await response.json()) as {
         run_id?: string;
@@ -115,7 +129,9 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
     } finally {
       setBusy(false);
     }
-  }, [refresh, standIn, storyId, view.scene_count]);
+    },
+    [refresh, standIn, storyId, view.scene_count],
+  );
 
   return (
     <>
@@ -156,6 +172,16 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
       </p>
 
       {error !== null && <p className="admin-error">{error}</p>}
+
+      {quota !== null && (
+        <QuotaPrompt
+          offer={quota}
+          what="Start a fresh telling"
+          busy={busy}
+          onProceed={(model) => void generate(model)}
+          onDismiss={() => setQuota(null)}
+        />
+      )}
 
       {running !== null && (
         <div className="panel">

@@ -56,6 +56,8 @@ export async function compileSceneIntoDraft(input: {
   sceneId: string;
   client: ModelClient;
   repository: StoryRepository;
+  /** Which model writes the scene. Defaults to `WRITER_MODEL`, as the read-time loop does. */
+  writerModel?: string;
   window?: number;
   now?: () => Date;
 }): Promise<DraftCompileResult> {
@@ -85,6 +87,7 @@ export async function compileSceneIntoDraft(input: {
     ledger: state.ledger,
     plantWalk: walk,
     client: input.client,
+    writerModel: input.writerModel,
     imageryHistory: state.imageryHistory,
     previousParagraph: state.previousParagraph,
     occasion: 'author_time',

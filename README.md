@@ -186,6 +186,13 @@ day's allowance (see [`AGENTS.md`](./AGENTS.md)). So the Working Draft carries a
 Scene Card** toggle: the stand-in writer exercises validation, the continuity pass and staleness
 without a model call. The compile view always names which of the two wrote the scene.
 
+When the day's allowance does run out, neither surface fails outright. The writer model and its
+capacity fallback share one daily quota, and once both are gone no retry helps before midnight
+Pacific — but `gemini-3.5-flash-lite` has its own, much larger one. So the compile view and the Read
+screen **offer** it and wait: a named model is something the author asks for, never something the
+compiler reaches for on their behalf, because a silent quality downgrade is worse than a rate limit.
+Whatever the light model writes is recorded as written by it.
+
 ### Read surfaces
 
 | Route | What it serves |

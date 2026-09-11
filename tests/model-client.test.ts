@@ -8,6 +8,9 @@ import {
   WRITER_MODEL,
   WRITER_MODEL_FALLBACK,
   backoffFor,
+  dailyQuotaFailure,
+  isSelectableWriterModel,
+  quotaOffer,
   readQuotaFailure,
   retryAfterHeaderMs,
   writerModelFromEnv,
@@ -176,6 +179,40 @@ describe('GeminiClient — transport-level retry and model fallback', () => {
     expect(result.model).toBe(WRITER_MODEL_FALLBACK);
   });
 
+  it('leaves a spent daily quota recognisable, with the headroom model to offer', async () => {
+    // Both buckets gone: the writer model and the capacity fallback share the day's 20 requests.
+    fetchMock
+      .mockResolvedValueOnce(statusResponse(429, quotaBody({ perDay: true, retryDelay: '57s' })))
+      .mockResolvedValueOnce(statusResponse(429, quotaBody({ perDay: true, retryDelay: '57s' })));
+    const client = new GeminiClient('key');
+
+    const thrown: unknown = await run(client, baseRequest()).catch((error: unknown) => error);
+    const failure = dailyQuotaFailure(thrown, WRITER_MODEL);
+
+    expect(failure).not.toBeNull();
+    expect(failure?.model).toBe(WRITER_MODEL);
+    // The offer, not the taking of it: nothing here selects a model, it only says which one is
+    // left to ask for (AGENTS.md — never degrade the writer model silently to dodge a quota).
+    expect(quotaOffer(failure!.model, failure!.detail).retry_with_model).toBe(
+      TESTING_WRITER_MODEL,
+    );
+  });
+
+  it('does not mistake a per-minute quota, or an outage, for the day being gone', async () => {
+    fetchMock
+      .mockResolvedValueOnce(statusResponse(503, { error: {} }))
+      .mockResolvedValueOnce(statusResponse(503, { error: {} }))
+      .mockResolvedValueOnce(statusResponse(500, { error: {} }));
+    const client = new GeminiClient('key');
+
+    const thrown: unknown = await run(client, baseRequest()).catch((error: unknown) => error);
+
+    // A 500 clears on its own; the day's quota does not. Offering a weaker model for the first
+    // would be trading prose quality away for nothing.
+    expect(dailyQuotaFailure(thrown, WRITER_MODEL)).toBeNull();
+    expect(dailyQuotaFailure(new Error('something else'), WRITER_MODEL)).toBeNull();
+  });
+
   it('waits the API’s own retry delay on a per-minute quota, then tries again', async () => {
     fetchMock
       .mockResolvedValueOnce(statusResponse(429, quotaBody({ perDay: false, retryDelay: '57s' })))
@@ -333,5 +370,22 @@ describe('request pacing', () => {
     expect(new RequestPacer(5)).toBeInstanceOf(RequestPacer);
     expect(RequestPacer.fromEnv({ AXIOM_REQUESTS_PER_MINUTE: 'lots' })).toBeInstanceOf(RequestPacer);
     expect(RequestPacer.fromEnv({})).toBeInstanceOf(RequestPacer);
+  });
+});
+
+describe('what a surface may ask for', () => {
+  it('offers nothing further once the caller is already on the headroom model', () => {
+    // There is no fourth model to fall to, and a prompt that kept offering one would be pretending
+    // the author still had a choice.
+    expect(quotaOffer(TESTING_WRITER_MODEL, 'spent').retry_with_model).toBeNull();
+  });
+
+  it('will only call a model the project has a reason to run', () => {
+    expect(isSelectableWriterModel(WRITER_MODEL)).toBe(true);
+    expect(isSelectableWriterModel(WRITER_MODEL_FALLBACK)).toBe(true);
+    expect(isSelectableWriterModel(TESTING_WRITER_MODEL)).toBe(true);
+    // A request naming any model it likes would point the project's key at anything the API serves.
+    expect(isSelectableWriterModel('gemini-9-ultra')).toBe(false);
+    expect(isSelectableWriterModel('')).toBe(false);
   });
 });

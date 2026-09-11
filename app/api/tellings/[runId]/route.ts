@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { storyRepository } from '@/persistence';
+import { WRITER_MODEL, quotaOffer } from '@/writer/model-client';
 
 export const dynamic = 'force-dynamic';
 
@@ -46,6 +47,14 @@ export async function GET(request: Request, { params }: { params: Promise<{ runI
     },
     started_at: manifest.started_at,
     completed_at: manifest.completed_at,
+    // Why a run stopped, when it stopped for a reason a surface can act on. A spent daily quota is
+    // the one such reason: the run is over either way, but another model would get past it today,
+    // and the same offer the author-time compile makes is put here to the reader.
+    failure: manifest.failure,
+    quota:
+      manifest.failure?.quota_exhausted_for_today === true
+        ? quotaOffer(manifest.failure.model ?? WRITER_MODEL, manifest.failure.detail)
+        : null,
   };
 
   const include = new URL(request.url).searchParams.get('include');
