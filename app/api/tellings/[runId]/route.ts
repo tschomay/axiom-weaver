@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { storyRepository } from '@/persistence';
 import { WRITER_MODEL, quotaOffer } from '@/writer/model-client';
+import { STALL_THRESHOLD_MS } from '@/edition/run-loop';
+import type { EditionManifest } from '@/edition/edition';
 
 export const dynamic = 'force-dynamic';
 
@@ -55,6 +57,11 @@ export async function GET(request: Request, { params }: { params: Promise<{ runI
       manifest.failure?.quota_exhausted_for_today === true
         ? quotaOffer(manifest.failure.model ?? WRITER_MODEL, manifest.failure.detail)
         : null,
+    // ADR 0014 §7's escape hatch. The loop emits `baked_fallback_offered` to an in-process
+    // listener, which the HTTP path does not have — a reader polling this route saw the progress
+    // bar stop and was offered nothing. Computed here from the clock the flush writes, so the
+    // same poll that carries the scene count carries the offer.
+    baked_fallback: await stallOffer(repository, manifest),
   };
 
   const include = new URL(request.url).searchParams.get('include');
@@ -73,4 +80,28 @@ export async function GET(request: Request, { params }: { params: Promise<{ runI
   }
 
   return NextResponse.json(body);
+}
+
+/**
+ * The offer a reader gets when a run stops advancing (ADR 0014 §7).
+ *
+ * Read the Baked edition now; the live run keeps compiling, unattended, whether they take it or
+ * not — the offer is a progress event, never an instruction to the loop, so nothing here touches
+ * the run. `null` unless the run is genuinely still going, has been quiet past the threshold, and
+ * the story actually has a Baked edition to fall back to: offering one that does not exist would
+ * be worse than the stalled bar.
+ */
+async function stallOffer(
+  repository: ReturnType<typeof storyRepository>,
+  manifest: EditionManifest,
+  now: number = Date.now(),
+): Promise<{ run_id: string; stalled_ms: number } | null> {
+  if (manifest.status !== 'running') return null;
+
+  const since = manifest.last_scene_completed_at ?? manifest.started_at;
+  const stalledMs = now - Date.parse(since);
+  if (!Number.isFinite(stalledMs) || stalledMs < STALL_THRESHOLD_MS) return null;
+
+  const baked = await repository.getBakedPointer(manifest.story_id);
+  return baked === null ? null : { run_id: baked.run_id, stalled_ms: stalledMs };
 }

@@ -12,6 +12,8 @@ interface Progress {
   progress: { scenes_compiled: number; scene_count: number; text: string };
   /** Present when the run stopped on a spent daily quota — a failure with a way past it. */
   quota?: QuotaOffer | null;
+  /** ADR 0014 §7: the run has been quiet past the threshold and a Baked edition exists. */
+  baked_fallback?: { run_id: string; stalled_ms: number } | null;
 }
 
 interface EditionScene {
@@ -198,6 +200,22 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
             value={running.progress.scenes_compiled}
             max={running.progress.scene_count}
           />
+          {running.baked_fallback !== null && running.baked_fallback !== undefined && (
+            // ADR 0014 §7. The run keeps compiling either way — taking the offer reads the Baked
+            // edition now, it does not stop or replace the telling being made.
+            <p className="meta">
+              This one has been quiet for{' '}
+              {Math.round(running.baked_fallback.stalled_ms / 1000)}s.{' '}
+              <button
+                type="button"
+                className="action"
+                onClick={() => void read(running.baked_fallback!.run_id)}
+              >
+                Read the Baked edition meanwhile
+              </button>{' '}
+              — this telling carries on in the background.
+            </p>
+          )}
         </div>
       )}
 

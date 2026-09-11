@@ -203,6 +203,7 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
     discourse_path: null,
     state_log_path: null,
     started_at: startedAt.toISOString(),
+    last_scene_completed_at: null,
     completed_at: null,
     failure: null,
   };
@@ -458,6 +459,10 @@ async function compileStep(input: CompileStepInput): Promise<SceneOutcome> {
       durationMs: finishedAt.getTime() - startedAt.getTime(),
     }),
   );
+
+  // The stall clock (ADR 0014 §7): the run advanced, so whatever a reader is waiting on now
+  // started now. Written with the flush, because that is the moment it is true.
+  input.manifest.last_scene_completed_at = finishedAt.toISOString();
 
   const degradedCount = input.manifest.scenes.filter((item) => item.degraded).length;
   input.manifest.degraded = isRunDegraded(input.manifest.scene_count, degradedCount);

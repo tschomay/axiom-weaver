@@ -441,3 +441,55 @@ describe('the told-ledger learns presence from the join, not only the self-repor
     }
   });
 });
+
+describe('the stall offer reaches a reader, not only an in-process listener (issue #70)', () => {
+  it('records when the last scene finished, at the flush that made it true', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await cinderella();
+      await repository.putPackage(pkg);
+
+      const { manifest } = await runTelling({
+        pkg,
+        client: new SyntheticWriterClient(pkg),
+        repository,
+      });
+
+      expect(manifest.last_scene_completed_at).not.toBeNull();
+      // The clock a poll measures against advances with the run, not with the request.
+      expect(Date.parse(manifest.last_scene_completed_at!)).toBeGreaterThanOrEqual(
+        Date.parse(manifest.started_at),
+      );
+    });
+  });
+
+  it('leaves it null on a run that never completed a scene', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await cinderella();
+      await repository.putPackage(pkg);
+      const scenes = scenesInOrder(pkg);
+      const events: ProgressEvent[] = [];
+
+      await expect(
+        runTelling({
+          pkg,
+          client: new FailingForScenes(
+            new SyntheticWriterClient(pkg),
+            new Set([scenes[0]!.id]),
+            'throw',
+          ),
+          repository,
+          outageRetries: 0,
+          outageBackoffMs: 0,
+          onProgress: (event) => events.push(event),
+        }),
+      ).rejects.toThrow();
+
+      const manifest = await repository.getEditionManifest(
+        (events[0] as { run_id: string }).run_id,
+      );
+      // Nothing finished, so the stall clock falls back to `started_at` — which is what the
+      // route measures when a run wedges on its very first scene.
+      expect(manifest?.last_scene_completed_at).toBeNull();
+    });
+  });
+});

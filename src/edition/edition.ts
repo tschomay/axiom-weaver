@@ -74,6 +74,15 @@ export const EditionManifestSchema = z.object({
   discourse_path: z.string().nullable().default(null),
   state_log_path: z.string().nullable().default(null),
   started_at: z.string(),
+  /**
+   * When the last scene finished — the clock ADR 0014 §7's stall offer is measured against.
+   *
+   * Written at every scene-boundary flush, because that is the only moment the run actually
+   * advances. A reader polling for progress has no other way to tell "still compiling scene 3"
+   * from "wedged on scene 3 four minutes ago": the scene count looks identical either way, and
+   * the loop's own `baked_fallback_offered` event only ever reaches an in-process listener.
+   */
+  last_scene_completed_at: z.string().nullable().default(null),
   completed_at: z.string().nullable().default(null),
   /** Null on every status but `failed`, and on a failure with nothing useful to say. */
   failure: EditionFailureSchema.nullable().default(null),

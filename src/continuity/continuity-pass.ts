@@ -330,6 +330,7 @@ export function repairPrompt(input: {
       '',
       `The image "${finding.subject}" repeats phrasing an earlier scene already used.`,
       finding.detail,
+      '',
       'Find those exact words in the passage below and give a different vehicle for the same',
       'domain — the domain is a licensed motif to keep, the wording is what has gone stale, so',
       'stay inside the domain and change how it is said.',
@@ -599,11 +600,12 @@ export function applyRepair(input: {
     if (target === null || target.trim() === '') {
       return 'the imagery repair named no phrase to replace';
     }
-    if (!input.prose.includes(target)) {
-      return `the imagery repair named a phrase that is not in the prose verbatim ("${target}")`;
+    const span = locatePhrase(input.prose, target);
+    if (span === null) {
+      return `the imagery repair named a phrase that is not in the prose ("${target}")`;
     }
     return {
-      prose: input.prose.replace(target, repair.replacement),
+      prose: input.prose.slice(0, span.start) + repair.replacement + input.prose.slice(span.end),
       digest: {
         ...input.digest,
         imagery_signature:
@@ -628,6 +630,37 @@ export function applyRepair(input: {
       ...(repair.reanchor_used === null ? {} : { reanchor_used: repair.reanchor_used }),
     },
   };
+}
+
+/**
+ * Find the words a repair named, in the prose it named them from.
+ *
+ * Exact first, which is what the prompt asks for and what almost always comes back. Failing that,
+ * a whitespace-insensitive and case-insensitive search over the same text.
+ *
+ * The strictness here was never the safety property — that comes from the compiler doing the
+ * substitution itself, so a repair is structurally incapable of rewriting the scene (ADR 0011 §4).
+ * Requiring a model to reproduce a span byte-for-byte is a harsher demand than that needs, and a
+ * correctly-caught stale-imagery seam was being discarded over a capital letter, with the call
+ * already spent and `continuity_repair_rejected` reading like a field-authority violation.
+ */
+export function locatePhrase(
+  prose: string,
+  phrase: string,
+): { start: number; end: number } | null {
+  const exact = prose.indexOf(phrase);
+  if (exact !== -1) return { start: exact, end: exact + phrase.length };
+
+  // Build a pattern that matches the phrase's words in order across any run of whitespace.
+  const words = phrase.trim().split(/\s+/).filter((word) => word !== '');
+  if (words.length === 0) return null;
+  const pattern = new RegExp(words.map(escapeRegExp).join('\\s+'), 'i');
+  const match = pattern.exec(prose);
+  return match === null ? null : { start: match.index, end: match.index + match[0].length };
+}
+
+function escapeRegExp(text: string): string {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 /** Replace the stale phrasing in the signature, keeping its domain — the motif is licensed. */
