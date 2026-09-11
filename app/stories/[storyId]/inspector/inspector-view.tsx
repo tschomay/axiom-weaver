@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import type { InspectorPayload } from '@/draft/inspector';
 import type { Character, Relationship, StoryObject } from '@/schema/story-package';
@@ -53,6 +54,26 @@ export function InspectorView({
   const compiled = payload.compiled_scenes.includes(sceneIndex);
   const model = payload.world_model;
 
+  /**
+   * The last scene the Working Draft has actually built.
+   *
+   * Both memories are reconstructed from what the draft compiled — the World Model from the
+   * commit log those compiles wrote, the told-ledger from their Scene Digests — so the frontier
+   * is where the answers stop changing. Past it the scrubber still moves and the screen still
+   * answers, but it answers for the frontier. Saying so is the difference between a screen that
+   * looks broken and one that is telling the author what it knows.
+   */
+  const frontier = payload.compiled_scenes.at(-1) ?? 0;
+  const nothingCompiled = payload.compiled_scenes.length === 0;
+  const beyondFrontier = sceneIndex > frontier;
+
+  const position =
+    sceneIndex === 0
+      ? 'seed — nothing told yet'
+      : beyondFrontier
+        ? `${card?.id ?? `scene ${sceneIndex}`} — showing ${frontier === 0 ? 'the seed' : `scene ${frontier}`}`
+        : `as of ${card?.id ?? `scene ${sceneIndex}`}`;
+
   return (
     <>
       <h2>World &amp; Discourse inspector</h2>
@@ -73,10 +94,8 @@ export function InspectorView({
           aria-label="Scene index"
         />
         <span>scene {lastScene}</span>
-        <strong>
-          {sceneIndex === 0 ? 'seed — nothing told yet' : `as of ${card?.id ?? `scene ${sceneIndex}`}`}
-        </strong>
-        {sceneIndex > 0 && !compiled && <span className="tag">not compiled</span>}
+        <strong>{position}</strong>
+        {sceneIndex > 0 && !compiled && <span className="tag warn">not compiled</span>}
         {loading && <span className="meta">reading…</span>}
       </div>
 
@@ -84,6 +103,35 @@ export function InspectorView({
         {payload.compiled_scenes.length} scene(s) compiled in the draft · {payload.log_entries}{' '}
         commit-log entries
       </p>
+
+      {nothingCompiled ? (
+        <div className="panel">
+          <h3>Nothing to move through yet</h3>
+          <p className="meta">
+            Neither memory is stored per scene — the World Model is replayed from the commit log a
+            compile writes, and the told-ledger from the Scene Digests a compile produces. This
+            story&apos;s Working Draft has compiled no scenes, so both are empty at every scrubber
+            position and the slider will not appear to do anything. That is the honest answer, not
+            a stalled screen.
+          </p>
+          <p className="meta">
+            <Link href={`/stories/${storyId}`}>Compile a scene in the Working Draft</Link>, and
+            this screen fills in behind it. The World Model table below is the seed — the state
+            the story starts from, before anything has happened or been told.
+          </p>
+        </div>
+      ) : (
+        beyondFrontier && (
+          <div className="panel">
+            <h3>Past the draft</h3>
+            <p className="meta">
+              The Working Draft stops at scene {frontier}. Both memories below are as of scene{' '}
+              {frontier}, not scene {sceneIndex} — nothing has been compiled in between to change
+              them.
+            </p>
+          </div>
+        )
+      )}
 
       <div className="tabs">
         <button
@@ -173,8 +221,12 @@ export function InspectorView({
           </p>
           {payload.told_ledger.length === 0 ? (
             <p className="meta">
-              Nothing has been told yet. The ledger fills as scenes are compiled — a fact enters it
-              by having been told, not by a card intending to tell it.
+              {nothingCompiled
+                ? 'Nothing has been told yet, and nothing will be at any scrubber position until the Working Draft compiles a scene.'
+                : sceneIndex === 0
+                  ? 'Nothing has been told at the seed — the story has not started.'
+                  : `Nothing had been told as of scene ${Math.min(sceneIndex, frontier)}.`}{' '}
+              A fact enters the ledger by having been told, not by a card intending to tell it.
             </p>
           ) : (
             <table className="rows">

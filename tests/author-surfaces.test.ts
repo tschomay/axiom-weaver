@@ -169,6 +169,78 @@ describe('the World & Discourse inspector (ADR 0016 §1, surface 2)', () => {
     });
   });
 
+  /**
+   * The two states issue #93 reported as "the tab does not change when I move the slider".
+   *
+   * Both are correct behaviour rather than a stalled read — but they are only defensible if the
+   * screen says so, which is why the inspector now renders a panel in each. These tests pin the
+   * invariant those panels assert to the author: past the draft's frontier, the answer really is
+   * the frontier's answer, and with nothing compiled it really is the seed everywhere.
+   */
+  it('answers identically at every position when the draft has compiled nothing', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await readFixturePackage('the-amber-cat');
+      const log = await repository.getDraftStateLog(pkg.story_id);
+      const digests = await draftDigestEntries(repository, pkg);
+
+      expect(digests).toEqual([]);
+
+      const seed = inspectAsOf({ pkg, log, digests, sceneIndex: 0 });
+      for (const sceneIndex of [1, 2, 3, 4]) {
+        const at = inspectAsOf({ pkg, log, digests, sceneIndex });
+        expect(at.world_model.toJSON()).toEqual(seed.world_model.toJSON());
+        expect(at.told_ledger).toEqual([]);
+        expect(at.changes_at_scene).toEqual([]);
+      }
+      // The signal the screen reads to know it should say so.
+      expect(seed.compiled_scenes).toEqual([]);
+    });
+  });
+
+  it('answers for the frontier at every position past it', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await readFixturePackage('the-lamp-at-cairn-head');
+      await compileDraft(repository, pkg, 2);
+
+      const log = await repository.getDraftStateLog(pkg.story_id);
+      const digests = await draftDigestEntries(repository, pkg);
+      const frontier = inspectAsOf({ pkg, log, digests, sceneIndex: 2 });
+
+      expect(frontier.compiled_scenes).toEqual([1, 2]);
+      // A partially built draft is the ordinary author-time state, not an edge case.
+      expect(scenesInOrder(pkg).length).toBeGreaterThan(2);
+
+      for (const sceneIndex of [3, 4, 5]) {
+        const beyond = inspectAsOf({ pkg, log, digests, sceneIndex });
+        expect(beyond.world_model.toJSON()).toEqual(frontier.world_model.toJSON());
+        expect(beyond.told_ledger).toEqual(frontier.told_ledger);
+        expect(beyond.changes_at_scene).toEqual([]);
+      }
+    });
+  });
+
+  it('does move both memories across the frontier it has compiled', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await readFixturePackage('the-dragon-of-thistlewick');
+      await compileDraft(repository, pkg, 3);
+
+      const log = await repository.getDraftStateLog(pkg.story_id);
+      const digests = await draftDigestEntries(repository, pkg);
+      const at = (sceneIndex: number) => inspectAsOf({ pkg, log, digests, sceneIndex });
+
+      // The positive half of #93: within the draft, moving the scrubber really does change both
+      // tabs. char_pellow walks the story's length, which is what makes him the honest probe —
+      // char_maudlin never leaves the hive yard and would pass a broken replay.
+      expect(at(0).world_model.value('char_pellow', 'location_id')).toBe('loc_village_green');
+      expect(at(1).world_model.value('char_pellow', 'location_id')).toBe('loc_hill_path');
+      expect(at(2).world_model.value('char_pellow', 'location_id')).toBe('loc_hive_yard');
+
+      expect(at(0).told_ledger).toEqual([]);
+      expect(at(1).told_ledger.length).toBeGreaterThan(0);
+      expect(at(3).told_ledger.length).toBeGreaterThanOrEqual(at(1).told_ledger.length);
+    });
+  });
+
   it('answers both tabs at one scrubber position', async () => {
     await withRepository(async (repository) => {
       const pkg = await readFixturePackage('cinderella');
