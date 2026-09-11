@@ -10,6 +10,7 @@
 import type { StoryPackage } from '../schema/story-package';
 import { scenesInOrder } from '../schema/story-package';
 import type { StoryRepository } from '../persistence/story-repository';
+import { TESTING_WRITER_MODEL } from '../writer/model-client';
 import { estimateCompile, type CompileEstimate } from './run-report';
 import type { BakedPointer, RunIndex } from './edition';
 
@@ -20,6 +21,11 @@ export interface TellingsView {
   readonly baked: BakedPointer | null;
   readonly runs: RunIndex['runs'];
   readonly estimate: CompileEstimate;
+  /**
+   * The model with the largest daily allowance this deployment will call — named here rather than
+   * spelled out in a screen, so there is one place that knows which model that is.
+   */
+  readonly headroom_model: string;
 }
 
 export async function buildTellingsView(
@@ -37,5 +43,6 @@ export async function buildTellingsView(
     // Newest first: the run a reader wants is almost always the one that just finished.
     runs: [...index.runs].reverse(),
     estimate: estimateCompile(sceneCount, await repository.getRunReports(pkg.story_id)),
+    headroom_model: TESTING_WRITER_MODEL,
   };
 }

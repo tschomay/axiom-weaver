@@ -74,16 +74,18 @@ export const EditionManifestSchema = z.object({
   discourse_path: z.string().nullable().default(null),
   state_log_path: z.string().nullable().default(null),
   started_at: z.string(),
-  /**
-   * When the last scene finished — the clock ADR 0014 §7's stall offer is measured against.
-   *
-   * Written at every scene-boundary flush, because that is the only moment the run actually
-   * advances. A reader polling for progress has no other way to tell "still compiling scene 3"
-   * from "wedged on scene 3 four minutes ago": the scene count looks identical either way, and
-   * the loop's own `baked_fallback_offered` event only ever reaches an in-process listener.
-   */
-  last_scene_completed_at: z.string().nullable().default(null),
   completed_at: z.string().nullable().default(null),
+  /**
+   * When the run last reported anything — rewritten at every scene-boundary flush.
+   *
+   * `status` alone cannot tell a live run from an abandoned one. A loop that dies mid-flight — a
+   * dev server restarting, a serverless invocation ending and taking the un-awaited loop with it
+   * (`docs/research/vercel-runtime.md` §2), a crash before the failure path runs — leaves the
+   * manifest saying `running` forever, and a reader watching scene-count progress waits on a run
+   * that no longer exists. This is what makes that distinguishable without writing to an edition
+   * from a read.
+   */
+  updated_at: z.string().nullable().default(null),
   /** Null on every status but `failed`, and on a failure with nothing useful to say. */
   failure: EditionFailureSchema.nullable().default(null),
 });
@@ -169,6 +171,43 @@ export const BakedPointerSchema = z.object({
   /** Manual and author-initiated, always — never a value the run loop writes for itself. */
   promoted_at: z.string(),
 });
+
+/**
+ * How long a `running` manifest may go without reporting before it is treated as abandoned.
+ *
+ * Generous on purpose, and a different question from ADR 0014 §7's stall threshold: that one asks
+ * "is this slow enough to offer the reader the Baked edition while it carries on", and this one
+ * asks "is anything still running at all". A live scene with retries and a paced key can take
+ * minutes, so the cost of guessing early is telling a reader their run is dead while it is
+ * writing.
+ */
+export const ABANDONED_AFTER_MS = 6 * 60_000;
+
+/**
+ * Milliseconds since a run last reported, or `null` when it has reported nothing at all.
+ *
+ * Falls back to `started_at` for a manifest written before `updated_at` existed, and for the
+ * window between a run starting and its first scene landing.
+ */
+export function msSinceLastReport(
+  manifest: Pick<EditionManifest, 'updated_at' | 'started_at'>,
+  now: Date = new Date(),
+): number | null {
+  const last = manifest.updated_at ?? manifest.started_at;
+  const at = Date.parse(last);
+  if (Number.isNaN(at)) return null;
+  return Math.max(0, now.getTime() - at);
+}
+
+/** Whether a run still calling itself `running` has stopped reporting for long enough to doubt. */
+export function hasStoppedReporting(
+  manifest: Pick<EditionManifest, 'status' | 'updated_at' | 'started_at'>,
+  now: Date = new Date(),
+): boolean {
+  if (manifest.status !== 'running') return false;
+  const since = msSinceLastReport(manifest, now);
+  return since !== null && since > ABANDONED_AFTER_MS;
+}
 
 export type EditionManifest = z.infer<typeof EditionManifestSchema>;
 export type EditionFailure = z.infer<typeof EditionFailureSchema>;

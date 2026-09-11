@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -6,8 +6,19 @@ import { FileSystemBlobStore } from '@/persistence/fs-blob-store';
 import { StoryRepository, BakedPromotionError } from '@/persistence/story-repository';
 import { readFixturePackage } from '@/fixtures/load';
 import { SyntheticWriterClient } from '@/writer/synthetic-client';
-import { progressText, runTelling, type ProgressEvent } from '@/edition/run-loop';
+import {
+  STALL_THRESHOLD_MS,
+  progressText,
+  runTelling,
+  type ProgressEvent,
+} from '@/edition/run-loop';
 import { PlantWalkRejectedError } from '@/plants/obligation-walk';
+import {
+  ABANDONED_AFTER_MS,
+  hasStoppedReporting,
+  mintRunId,
+  msSinceLastReport,
+} from '@/edition/edition';
 import { DEGRADED_RUN_FRACTION, isRunDegraded } from '@/edition/run-report';
 import { renderRunReport } from '@/edition/report-view';
 import { scenesInOrder, type StoryPackage } from '@/schema/story-package';
@@ -19,6 +30,10 @@ import {
 } from '@/writer/model-client';
 import { RunState } from '@/writer/run-state';
 import { metFact } from '@/digest/told-ledger';
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 async function withRepository<T>(run: (repository: StoryRepository) => Promise<T>): Promise<T> {
   const root = await mkdtemp(join(tmpdir(), 'axiom-run-loop-'));
@@ -261,6 +276,64 @@ describe('the read-time run loop (ADR 0014)', () => {
     });
   });
 
+  it('closes the manifest even when the rest of the close-out cannot be written', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await cinderella();
+      await repository.putPackage(pkg);
+      const scenes = scenesInOrder(pkg);
+
+      // The World Model snapshot is the first thing `closeOut` writes, and it is written before
+      // the manifest. A store that refuses it used to leave the run reading `running` for good —
+      // and a reader watching scene-count progress waits on a loop that is already gone.
+      vi.spyOn(repository, 'putEditionWorldModel').mockRejectedValue(new Error('blob refused'));
+
+      const events: ProgressEvent[] = [];
+      await expect(
+        runTelling({
+          pkg,
+          client: new FailingForScenes(
+            new SyntheticWriterClient(pkg),
+            new Set([scenes[1]!.id]),
+            'throw',
+          ),
+          repository,
+          outageRetries: 0,
+          outageBackoffMs: 0,
+          onProgress: (event) => events.push(event),
+        }),
+      ).rejects.toThrow('503 UNAVAILABLE');
+
+      const manifest = await repository.getEditionManifest(
+        (events[0] as { run_id: string }).run_id,
+      );
+      expect(manifest?.status).toBe('failed');
+      expect(manifest?.failure?.detail).toContain('503 UNAVAILABLE');
+    });
+  });
+
+  it('stamps every scene-boundary flush, so a dead run can be told from a slow one', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await cinderella();
+      await repository.putPackage(pkg);
+
+      const runId = mintRunId(pkg.story_id);
+      await runTelling({ pkg, client: new SyntheticWriterClient(pkg), repository, runId });
+      const manifest = await repository.getEditionManifest(runId);
+
+      expect(manifest?.updated_at).not.toBeNull();
+      // A finished run is never stalled, however long ago it finished.
+      expect(hasStoppedReporting(manifest!, new Date(Date.now() + ABANDONED_AFTER_MS * 10))).toBe(
+        false,
+      );
+      // A run still calling itself `running` long after its last word is not running.
+      const stuck = { ...manifest!, status: 'running' as const };
+      expect(hasStoppedReporting(stuck, new Date(Date.parse(stuck.updated_at!) + 1000))).toBe(false);
+      expect(
+        hasStoppedReporting(stuck, new Date(Date.parse(stuck.updated_at!) + ABANDONED_AFTER_MS + 1)),
+      ).toBe(true);
+    });
+  });
+
   it('offers the Baked edition once a scene stalls past the threshold (§7)', async () => {
     await withRepository(async (repository) => {
       const pkg = await cinderella();
@@ -442,8 +515,8 @@ describe('the told-ledger learns presence from the join, not only the self-repor
   });
 });
 
-describe('the stall offer reaches a reader, not only an in-process listener (issue #70)', () => {
-  it('records when the last scene finished, at the flush that made it true', async () => {
+describe('the §7 Baked offer rides the same clock as stopped_reporting (issue #70)', () => {
+  it('stamps updated_at at the flush, which is what a poll measures the offer against', async () => {
     await withRepository(async (repository) => {
       const pkg = await cinderella();
       await repository.putPackage(pkg);
@@ -454,42 +527,21 @@ describe('the stall offer reaches a reader, not only an in-process listener (iss
         repository,
       });
 
-      expect(manifest.last_scene_completed_at).not.toBeNull();
-      // The clock a poll measures against advances with the run, not with the request.
-      expect(Date.parse(manifest.last_scene_completed_at!)).toBeGreaterThanOrEqual(
-        Date.parse(manifest.started_at),
-      );
+      expect(manifest.updated_at).not.toBeNull();
+      expect(msSinceLastReport(manifest)).not.toBeNull();
     });
   });
 
-  it('leaves it null on a run that never completed a scene', async () => {
-    await withRepository(async (repository) => {
-      const pkg = await cinderella();
-      await repository.putPackage(pkg);
-      const scenes = scenesInOrder(pkg);
-      const events: ProgressEvent[] = [];
-
-      await expect(
-        runTelling({
-          pkg,
-          client: new FailingForScenes(
-            new SyntheticWriterClient(pkg),
-            new Set([scenes[0]!.id]),
-            'throw',
-          ),
-          repository,
-          outageRetries: 0,
-          outageBackoffMs: 0,
-          onProgress: (event) => events.push(event),
-        }),
-      ).rejects.toThrow();
-
-      const manifest = await repository.getEditionManifest(
-        (events[0] as { run_id: string }).run_id,
-      );
-      // Nothing finished, so the stall clock falls back to `started_at` — which is what the
-      // route measures when a run wedges on its very first scene.
-      expect(manifest?.last_scene_completed_at).toBeNull();
-    });
+  it('reads as quiet past ADR 0014 §7 s threshold long before it reads as abandoned', async () => {
+    // The two questions the one clock answers. §7 asks whether to offer something to read while a
+    // run carries on; `stopped_reporting` asks whether anything is running at all, and calling a
+    // live scene dead while it is writing is the worse mistake — so its bound is far longer.
+    const manifest = {
+      status: 'running' as const,
+      started_at: new Date(Date.now() - 2 * 60_000).toISOString(),
+      updated_at: new Date(Date.now() - 2 * 60_000).toISOString(),
+    };
+    expect(msSinceLastReport(manifest)).toBeGreaterThan(STALL_THRESHOLD_MS);
+    expect(hasStoppedReporting(manifest)).toBe(false);
   });
 });
