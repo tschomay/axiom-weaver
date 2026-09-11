@@ -48,7 +48,7 @@ import {
   type ModelClient,
   type ModelResponse,
 } from './model-client';
-import { finalParagraph, lengthVerdict, salvageProse } from './salvage';
+import { finalParagraph, lengthVerdict, normalizeProse, salvageProse } from './salvage';
 
 /**
  * The output-token cap for one scene: prose and its tail, plus room to think.
@@ -347,7 +347,9 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
     }
   }
 
-  const response = parsed;
+  // Normalize before anything reads the prose: the verbatim tail, the continuity pass's opening
+  // paragraph, the word count and the reader all split on real newlines (issue #64).
+  const response: WriterResponse = { ...parsed, prose: normalizeProse(parsed.prose) };
 
   // --- Post-generation --------------------------------------------------------------------
   for (const writerDiagnostic of response.diagnostics) {

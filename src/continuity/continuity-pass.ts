@@ -256,12 +256,24 @@ export function shapeFor(mode: ContinuityMode): RepairShape {
   return mode === 'stale_imagery' ? 'imagery_swap' : 'opening_rewrite';
 }
 
+/**
+ * What a repair call may hand back.
+ *
+ * `closing_situation` is deliberately **not** here, though ADR 0011 §4 permits a repair to touch
+ * it. §5 confines an opening rewrite to the opening beat and says it "never regenerates the scene
+ * body" — so a rewrite of how a scene *picks up* cannot legitimately move where it *ends*, and
+ * asking for the field only created a way to get it wrong. It did: the repair prompt shows the
+ * model the **previous** scene's closing situation (that is the seam it is repairing against) and
+ * never the scene's own, so the model dutifully echoed the previous one back and the field-level
+ * authority check waved it through, because `closing_situation` was on the repairable list. A
+ * whole scene's ending was overwritten with the one before it. The field is now carried over
+ * verbatim, which is both correct and one less thing billed on every repair call.
+ */
 export const RepairResponseSchema = z.object({
   /** The replacement text: a new opening paragraph, or the phrase that replaces a stale image. */
   replacement: z.string().min(1),
   /** Imagery swap only: the exact phrase to replace, which must appear verbatim in the prose. */
   original_phrase: z.string().min(1).nullable().default(null),
-  closing_situation: z.string().nullable().default(null),
   imagery_signature: z.array(ImagerySignatureSchema).nullable().default(null),
   reanchor_used: z.array(ReanchorUsedSchema).nullable().default(null),
 });
@@ -286,12 +298,6 @@ export function repairResponseJsonSchema(shape: RepairShape): Record<string, unk
       description: 'The exact words to replace, copied verbatim from the prose.',
     };
     required.push('original_phrase');
-  } else {
-    properties['closing_situation'] = {
-      type: 'string',
-      description:
-        'The scene digest closing_situation, unchanged unless the rewrite genuinely moved it.',
-    };
   }
 
   return {
@@ -302,21 +308,31 @@ export function repairResponseJsonSchema(shape: RepairShape): Record<string, unk
   };
 }
 
-/** The prompt for a targeted repair. Fed only what the repair needs — never the whole scene. */
+/**
+ * The prompt for a targeted repair. Fed only what the repair needs — never the whole scene.
+ *
+ * `findings` is a group, not a single seam, because every `opening_rewrite` finding on a scene
+ * targets the same words. Repairing them one at a time meant one model call each, each rewriting
+ * what the last one produced while being handed a `detail` describing an opening that no longer
+ * existed — so only the final rewrite survived, and the earlier seams were reported repaired
+ * without being. One call, every seam stated, one replacement.
+ */
 export function repairPrompt(input: {
-  finding: SeamFinding;
+  findings: readonly SeamFinding[];
   fragment: string;
   previousClosing: string | null;
   toldLedgerLines: readonly string[];
 }): string {
-  const { finding } = input;
+  const finding = input.findings[0]!;
   if (finding.mode === 'stale_imagery') {
     return [
       'You are repairing one recycled image in a finished scene. Change nothing else.',
       '',
       `The image "${finding.subject}" repeats phrasing an earlier scene already used.`,
+      finding.detail,
       'Find those exact words in the passage below and give a different vehicle for the same',
-      'domain — the domain is a licensed motif, the wording is what has gone stale.',
+      'domain — the domain is a licensed motif to keep, the wording is what has gone stale, so',
+      'stay inside the domain and change how it is said.',
       '',
       'PASSAGE:',
       input.fragment,
@@ -326,11 +342,12 @@ export function repairPrompt(input: {
     ].join('\n');
   }
 
+  const seams = input.findings.map((entry) => `  - ${entry.detail}`).join('\n');
   return [
     'You are repairing the opening of a finished scene. Rewrite only the opening paragraph.',
     'The events of the scene are settled and may not change — only how the scene picks up.',
     '',
-    `SEAM: ${finding.detail}`,
+    input.findings.length === 1 ? `SEAM: ${finding.detail}` : `SEAMS (all in this one opening):\n${seams}`,
     '',
     input.previousClosing === null
       ? 'This is the first scene of the telling; there is nothing before it.'
@@ -420,7 +437,7 @@ export async function continuityPass(input: ContinuityPassInput): Promise<Contin
       }),
     );
 
-  for (const finding of findings) {
+  for (const group of groupBySharedRepair(findings)) {
     const budget = ATTEMPTS_PER_SEAM[input.occasion];
     let rejection: string | null = null;
     let applied = false;
@@ -428,7 +445,7 @@ export async function continuityPass(input: ContinuityPassInput): Promise<Contin
 
     while (attempts < budget && !applied) {
       attempts += 1;
-      const attempt = await attemptRepair({ ...input, prose, digest, finding });
+      const attempt = await attemptRepair({ ...input, prose, digest, findings: group });
       if (attempt.call !== null) calls.push(attempt.call);
       if (attempt.repaired === null) {
         rejection = attempt.rejection;
@@ -440,23 +457,44 @@ export async function continuityPass(input: ContinuityPassInput): Promise<Contin
       rejection = null;
     }
 
-    repairs.push({ finding, applied, rejection, attempts });
-    if (applied) {
-      note(
-        'continuity_seam_repaired',
-        finding,
-        `${finding.mode} repaired in ${finding.scene_id}: ${finding.detail}`,
-      );
-    } else {
-      note(
-        'continuity_repair_rejected',
-        finding,
-        `${finding.mode} in ${finding.scene_id} was caught but not repaired (${rejection ?? 'no repair produced'}); the seam stands and is logged`,
-      );
+    // One attempt, but every seam it addressed gets its own outcome — the run report aggregates
+    // per finding, and a group that failed failed for all of them.
+    for (const finding of group) {
+      repairs.push({ finding, applied, rejection, attempts });
+      if (applied) {
+        note(
+          'continuity_seam_repaired',
+          finding,
+          `${finding.mode} repaired in ${finding.scene_id}: ${finding.detail}`,
+        );
+      } else {
+        note(
+          'continuity_repair_rejected',
+          finding,
+          `${finding.mode} in ${finding.scene_id} was caught but not repaired (${rejection ?? 'no repair produced'}); the seam stands and is logged`,
+        );
+      }
     }
   }
 
   return { prose, digest, findings, repairs, diagnostics, calls };
+}
+
+/**
+ * Group findings that would repair the same words into one call.
+ *
+ * Every `opening_rewrite` finding on a scene rewrites the same opening paragraph, so N of them
+ * means N calls that each clobber the last — ADR 0011 §7 bounds repairs per scene, and letting
+ * the count scale with findings that all touch one paragraph is exactly what that bound is for.
+ * `imagery_swap` stays one call per finding: each names a distinct phrase in a distinct place,
+ * which is why ADR 0011 §5 kept two shapes rather than one.
+ */
+export function groupBySharedRepair(findings: readonly SeamFinding[]): SeamFinding[][] {
+  const opening = findings.filter((finding) => shapeFor(finding.mode) === 'opening_rewrite');
+  const swaps = findings
+    .filter((finding) => shapeFor(finding.mode) === 'imagery_swap')
+    .map((finding) => [finding]);
+  return opening.length === 0 ? swaps : [opening, ...swaps];
 }
 
 interface RepairAttempt {
@@ -466,9 +504,13 @@ interface RepairAttempt {
 }
 
 async function attemptRepair(
-  input: ContinuityPassInput & { prose: string; digest: SceneDigest; finding: SeamFinding },
+  input: ContinuityPassInput & {
+    prose: string;
+    digest: SceneDigest;
+    findings: readonly SeamFinding[];
+  },
 ): Promise<RepairAttempt> {
-  const { finding } = input;
+  const finding = input.findings[0]!;
   const shape = shapeFor(finding.mode);
   const fragment = shape === 'opening_rewrite' ? openingParagraph(input.prose) : input.prose;
 
@@ -482,7 +524,7 @@ async function attemptRepair(
       model: FALLBACK_MODEL,
       systemInstruction: '',
       contents: repairPrompt({
-        finding,
+        findings: input.findings,
         fragment,
         previousClosing: input.previous?.digest.closing_situation ?? null,
         toldLedgerLines: toldLedgerLines(input.ledgerAtEntry, input.scene),
@@ -579,9 +621,7 @@ export function applyRepair(input: {
     prose: `${repair.replacement}${input.prose.slice(opening.length)}`,
     digest: {
       ...input.digest,
-      ...(repair.closing_situation === null
-        ? {}
-        : { closing_situation: repair.closing_situation }),
+      // `closing_situation` is carried over: an opening rewrite never reaches the scene's end.
       ...(repair.imagery_signature === null
         ? {}
         : { imagery_signature: repair.imagery_signature }),
@@ -601,10 +641,20 @@ function swapSignature(
   );
 }
 
-/** The scene's opening beat: everything up to the first paragraph break. */
+/**
+ * The scene's opening beat: everything up to the first paragraph break.
+ *
+ * A scene with no paragraph break at all falls back to its first sentence rather than its whole
+ * text. Returning the whole scene here would let an opening rewrite replace the scene body, which
+ * ADR 0011 §5 forbids outright — and it is reachable, because a writer call can return prose whose
+ * breaks arrived escaped (issue #64). `normalizeProse` fixes that case upstream; this is the
+ * backstop for a genuinely unbroken scene.
+ */
 export function openingParagraph(prose: string): string {
   const index = prose.indexOf('\n\n');
-  return index === -1 ? prose : prose.slice(0, index);
+  if (index !== -1) return prose.slice(0, index);
+  const sentence = /[.!?]["'\u201d\u2019]?\s/.exec(prose);
+  return sentence === null ? prose : prose.slice(0, sentence.index + sentence[0].length - 1);
 }
 
 function parseRepair(text: string): RepairResponse | null {
