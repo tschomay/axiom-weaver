@@ -13,6 +13,7 @@ function digest(overrides: Partial<SceneDigest> = {}): SceneDigest {
     imagery_signature: [],
     closing_situation: 'and then it stopped',
     reanchor_used: [],
+    grounded_claims: [],
     ...overrides,
   };
 }

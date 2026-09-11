@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   checkEntryState,
+  checkGroundedClaims,
   commitValidated,
   sceneFootprint,
   validateStateUpdates,
@@ -434,5 +435,93 @@ describe('commitValidated', () => {
 
     expect(model.value('char_jim', 'goal')).toBe('keep his head down');
     expect(log.pendingProposals()).toHaveLength(1);
+  });
+});
+
+describe('checkGroundedClaims — prose grounding (ADR 0018 decision 2)', () => {
+  it('is silent when a claim agrees with the World Model', () => {
+    const mismatches = checkGroundedClaims(
+      scene(),
+      { grounded_claims: [{ entity_id: 'char_jim', column: 'status', asserted_value: 'alive' }] },
+      jimsWorld(),
+    );
+    expect(mismatches).toEqual([]);
+  });
+
+  it('reports the same amnesia guard unentailed_reversion catches, over prose instead of state_updates', () => {
+    const model = jimsWorld();
+    model.setColumn('char_jim', 'status', 'injured');
+
+    const mismatches = checkGroundedClaims(
+      scene({ entry_state: { char_jim: { location_id: 'loc_home', status: 'injured' } } }),
+      {
+        grounded_claims: [{ entity_id: 'char_jim', column: 'status', asserted_value: 'alive' }],
+      },
+      model,
+    );
+
+    expect(mismatches).toEqual([
+      {
+        entity_id: 'char_jim',
+        column: 'status',
+        asserted_value: 'alive',
+        committed_value: 'injured',
+      },
+    ]);
+  });
+
+  it('is silent once a required beat entails the claimed value — same test as unentailed_reversion', () => {
+    const model = jimsWorld();
+    model.setColumn('char_jim', 'status', 'injured');
+
+    const card = scene({
+      entry_state: { char_jim: { location_id: 'loc_home', status: 'injured' } },
+      required_beats: ['Jim walks to the park', 'a stranger binds his leg and he is alive and well again'],
+    });
+
+    const mismatches = checkGroundedClaims(
+      card,
+      { grounded_claims: [{ entity_id: 'char_jim', column: 'status', asserted_value: 'alive' }] },
+      model,
+    );
+    expect(mismatches).toEqual([]);
+  });
+
+  it('is silent when nothing is committed yet — filling a null column is an extension, not a reversion', () => {
+    const model = jimsWorld();
+    model.setColumn('char_jim', 'status', null);
+
+    const mismatches = checkGroundedClaims(
+      scene(),
+      { grounded_claims: [{ entity_id: 'char_jim', column: 'status', asserted_value: 'alive' }] },
+      model,
+    );
+    expect(mismatches).toEqual([]);
+  });
+
+  it('ignores a claim about a volitional column — out of scope for a P/E-only checkpoint', () => {
+    const mismatches = checkGroundedClaims(
+      scene(),
+      {
+        grounded_claims: [
+          { entity_id: 'char_jim', column: 'goal', asserted_value: 'leave town for good' },
+        ],
+      },
+      jimsWorld(),
+    );
+    expect(mismatches).toEqual([]);
+  });
+
+  it('ignores a claim about an entity the World Model has no row for', () => {
+    const mismatches = checkGroundedClaims(
+      scene(),
+      {
+        grounded_claims: [
+          { entity_id: 'char_ghost', column: 'status', asserted_value: 'alive' },
+        ],
+      },
+      jimsWorld(),
+    );
+    expect(mismatches).toEqual([]);
   });
 });

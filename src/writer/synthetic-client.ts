@@ -119,6 +119,9 @@ export class SyntheticWriterClient implements ModelClient {
     return {
       entity_id: entityId,
       band: bandFor(centrality, last === undefined ? null : sceneOrder - last),
+      // Same reasoning as the zero token counts above: inventing an anchoring clause the
+      // stand-in never wrote would be fiction in a report meant to carry only real signal.
+      anchor_text: null,
     };
   }
 
@@ -161,6 +164,9 @@ export class SyntheticWriterClient implements ModelClient {
         domain === null ? [] : [{ image: `${domain}, as of scene ${scene.order}`, domain }],
       closing_situation: closingSituation(scene),
       reanchor_used: [...reanchorUsed],
+      // Same reasoning: the stand-in composes prose from the card's own beats, not from a
+      // scrutiny of what it just wrote, so it has nothing honest to claim here either.
+      grounded_claims: [],
     };
   }
 }

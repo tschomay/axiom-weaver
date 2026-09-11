@@ -502,6 +502,7 @@ describe('the told-ledger learns presence from the join, not only the self-repor
         imagery_signature: [],
         closing_situation: 'y',
         reanchor_used: [],
+        grounded_claims: [],
       },
       null,
     );

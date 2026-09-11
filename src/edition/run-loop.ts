@@ -42,7 +42,7 @@ import {
   isDailyQuotaExhausted,
   type ModelClient,
 } from '../writer/model-client';
-import type { Occasion } from '../validator/state-update-authority';
+import { checkGroundedClaims, type Occasion } from '../validator/state-update-authority';
 import type { Diagnostic } from '../validator/diagnostics';
 import type { SceneDigest } from '../digest/scene-digest';
 import { continuityPass, type ContinuityPassResult } from '../continuity/continuity-pass';
@@ -416,14 +416,19 @@ async function compileStep(input: CompileStepInput): Promise<SceneOutcome> {
     writerModel: input.writerModel,
   });
 
-  // 2. State-update validation (ADR 0005). The writer's proposals are never trusted on sight.
+  // 2a. Prose grounding (ADR 0018) — read against the World Model as it stands at scene entry,
+  //     which is why this runs *before* 2b commits this scene's own proposed updates.
+  const groundedClaimMismatches = checkGroundedClaims(scene, compiled.digest, state.model);
+
+  // 2b. State-update validation (ADR 0005). The writer's proposals are never trusted on sight.
   const validation = state.commitWriterUpdates(
     scene,
     compiled.response.state_updates,
     input.occasion,
   );
 
-  // 3. The continuity pass (ADR 0011), against the told-ledger as it stands at scene entry.
+  // 3. The continuity pass (ADR 0011), against the told-ledger as it stands at scene entry, plus
+  //    2a's grounding mismatches folded in as findings (ADR 0018) — one repair call site, not two.
   const pass = await continuityPass({
     scene,
     digest: compiled.digest,
@@ -435,6 +440,7 @@ async function compileStep(input: CompileStepInput): Promise<SceneOutcome> {
     imageryHistory: state.imageryHistory,
     client: input.client,
     occasion: input.occasion,
+    groundedClaimMismatches,
   });
 
   // 4. Advance the run: told-ledger, imagery history, and the digest rollup if a window closes.

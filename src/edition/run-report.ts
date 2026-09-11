@@ -23,7 +23,7 @@ import {
   type Diagnostic,
   type Surface,
 } from '../validator/diagnostics';
-import { CONTINUITY_MODES } from '../continuity/continuity-pass';
+import { FINDING_MODES } from '../continuity/continuity-pass';
 import type { Occasion } from '../validator/state-update-authority';
 import { FINISH_REASONS } from '../writer/model-client';
 
@@ -63,7 +63,7 @@ export const ReportedDiagnosticSchema = z.object({
 });
 
 export const ReportedRepairSchema = z.object({
-  mode: z.enum(CONTINUITY_MODES),
+  mode: z.enum(FINDING_MODES),
   subject: z.string(),
   applied: z.boolean(),
   attempts: z.number().int().nonnegative(),

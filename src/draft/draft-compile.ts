@@ -24,7 +24,7 @@ import { compileScene, type CallRecord, type CompiledScene } from '../writer/com
 import type { ModelClient } from '../writer/model-client';
 import { continuityPass, type ContinuityPassResult } from '../continuity/continuity-pass';
 import type { Diagnostic } from '../validator/diagnostics';
-import type { ValidationResult } from '../validator/state-update-authority';
+import { checkGroundedClaims, type ValidationResult } from '../validator/state-update-authority';
 import type { StoryRepository } from '../persistence/story-repository';
 import { draftScenePath } from '../persistence/paths';
 import {
@@ -102,6 +102,9 @@ export async function compileSceneIntoDraft(input: {
     occasion: 'author_time',
   });
 
+  // ADR 0018: read against the World Model as it stands at scene entry, before commit below.
+  const groundedClaimMismatches = checkGroundedClaims(scene, compiled.digest, state.model);
+
   const validation = state.commitWriterUpdates(
     scene,
     compiled.response.state_updates,
@@ -123,6 +126,7 @@ export async function compileSceneIntoDraft(input: {
     imageryHistory: state.imageryHistory,
     client: input.client,
     occasion: 'author_time',
+    groundedClaimMismatches,
   });
 
   // The digest this recompile replaces — what the later draft scenes were built against.

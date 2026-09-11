@@ -15,10 +15,11 @@ import {
   recordRecompile,
   staleScenes,
 } from '@/draft/working-draft';
+import { z } from 'zod';
 import { SceneDigestSchema, type SceneDigest } from '@/digest/scene-digest';
 import { scenesInOrder, type StoryPackage } from '@/schema/story-package';
 
-function digest(overrides: Partial<SceneDigest> = {}): SceneDigest {
+function digest(overrides: Partial<z.input<typeof SceneDigestSchema>> = {}): SceneDigest {
   return SceneDigestSchema.parse({
     event_summary: 'The sisters are dressed for the ball.',
     closing_situation: 'They leave; Cinderella is alone at the hearth.',

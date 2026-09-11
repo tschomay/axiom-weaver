@@ -17,8 +17,9 @@
  */
 
 import type { SceneCard } from '../schema/story-package';
-import type { SceneDigest, ImagerySignature } from '../digest/scene-digest';
+import type { SceneDigest, ImagerySignature, ReanchorBand } from '../digest/scene-digest';
 import { ImagerySignatureSchema, ReanchorUsedSchema } from '../digest/scene-digest';
+import type { GroundedClaimMismatch } from '../validator/state-update-authority';
 import { ToldLedger, metFact } from '../digest/told-ledger';
 import { bandMismatches, type BandDecision } from '../assembler/reanchoring';
 import type { RecordedImagery } from '../voice/imagery-ledger';
@@ -40,11 +41,28 @@ export const CONTINUITY_MODES = [
 
 export type ContinuityMode = (typeof CONTINUITY_MODES)[number];
 
+/**
+ * A finding's mode. `ContinuityMode` is what `detectSeams` itself produces — ADR 0011 §1's three,
+ * unchanged. `prose_grounding_mismatch` never comes from `detectSeams`: it is constructed from the
+ * state-update validator's `grounded_claims` check (ADR 0018) and folded in by `continuityPass`
+ * alongside this pass's own findings. Reusing this pass's repair machinery is a second *caller* of
+ * it, not a claim that the continuity pass now owns a fourth mode — ownership of *deciding*
+ * something is wrong stays wherever ADR 0002 put it.
+ */
+export type FindingMode = ContinuityMode | 'prose_grounding_mismatch';
+
+/** `CONTINUITY_MODES` plus the one finding shape this pass repairs but does not itself detect. */
+export const FINDING_MODES = [...CONTINUITY_MODES, 'prose_grounding_mismatch'] as const;
+
 export interface SeamFinding {
-  readonly mode: ContinuityMode;
+  readonly mode: FindingMode;
   readonly scene_id: string;
   readonly scene_index: number;
-  /** What the finding is about: an entity id, a `fact_ref`, or the recycled phrase itself. */
+  /**
+   * What the finding is about: an entity id, a `fact_ref`, the recycled phrase itself, or — for
+   * `prose_grounding_mismatch` — `"<entity_id>.<column>"`, since more than one claim can name the
+   * same entity and a repair must know which one it resolved.
+   */
   readonly subject: string;
   readonly detail: string;
 }
@@ -142,12 +160,14 @@ export function detectSeams(input: SeamCheckInput): SeamFinding[] {
   // An entity assumed known that the reader has never met at all: the told-ledger has no `met:`
   // row for them. The band comparison above only covers entities the policy ranked, so this
   // catches the case where the writer assumed someone the policy never saw coming.
+  const neverMet = new Set<string>();
   for (const used of digest.reanchor_used) {
     if (used.band !== 'assume') continue;
     // One broken seam, one finding: an entity the band comparison already caught does not need
     // catching twice, and a second finding would spend a second repair call on the same opening.
     if (miscalibrated.has(used.entity_id)) continue;
     if (input.ledgerAtEntry.row(metFact(used.entity_id)) !== null) continue;
+    neverMet.add(used.entity_id);
     findings.push({
       ...at,
       mode: 'told_ledger_miscalibration',
@@ -155,6 +175,30 @@ export function detectSeams(input: SeamCheckInput): SeamFinding[] {
       detail:
         `${scene.id} assumes the reader knows "${used.entity_id}", but the told-ledger holds no ` +
         `"${metFact(used.entity_id)}" row — the reader has never met them`,
+    });
+  }
+
+  // ADR 0018 decision 3: `bandMismatches` (above) catches a self-report that disagrees with what
+  // the *policy* expected; it reads no prose, so a self-report that disagrees with what was
+  // actually *written* passes it untouched. `anchor_text`'s own cap (ADR 0018 decision 1) is short
+  // enough that only a real re-establishing paragraph reliably needs truncating — so a light band
+  // (`assume`/`reanchor`) reported alongside a capped `anchor_text` is inconsistent on its face,
+  // independent of what the told-ledger expected. A heuristic on internal consistency, not
+  // independent proof `anchor_text` matches the prose word-for-word (ADR 0018 decision 3).
+  const LIGHT_BANDS = new Set<ReanchorBand>(['assume', 'reanchor']);
+  for (const used of digest.reanchor_used) {
+    if (coldOpened.has(used.entity_id) || miscalibrated.has(used.entity_id)) continue;
+    if (neverMet.has(used.entity_id)) continue;
+    if (!LIGHT_BANDS.has(used.band)) continue;
+    if (used.anchor_text === null || !used.anchor_text.endsWith('…')) continue;
+    findings.push({
+      ...at,
+      mode: 'told_ledger_miscalibration',
+      subject: used.entity_id,
+      detail:
+        `${scene.id} claims band "${used.band}" for "${used.entity_id}", but its own anchor_text ` +
+        `("${used.anchor_text}") needed truncating to fit a light re-anchor's cap — what was ` +
+        `actually written reads as a heavier band than the one reported`,
     });
   }
 
@@ -206,6 +250,9 @@ export const REPAIRABLE_DIGEST_FIELDS = [
   'closing_situation',
   'imagery_signature',
   'reanchor_used',
+  /** ADR 0018 decision 4: a `prose_grounding_mismatch` repair may correct the claim it resolved,
+   *  otherwise it goes stale against the prose it was extracted from. */
+  'grounded_claims',
 ] as const;
 
 export interface RepairSubject {
@@ -252,8 +299,15 @@ function stable(value: unknown): string {
  */
 export type RepairShape = 'opening_rewrite' | 'imagery_swap';
 
-export function shapeFor(mode: ContinuityMode): RepairShape {
-  return mode === 'stale_imagery' ? 'imagery_swap' : 'opening_rewrite';
+/**
+ * `prose_grounding_mismatch` reuses the `imagery_swap` shape (locate and swap just the offending
+ * phrase) rather than `opening_rewrite`: like stale imagery, it names one specific span, not
+ * necessarily the scene's opening (ADR 0018 decision 4).
+ */
+export function shapeFor(mode: FindingMode): RepairShape {
+  return mode === 'stale_imagery' || mode === 'prose_grounding_mismatch'
+    ? 'imagery_swap'
+    : 'opening_rewrite';
 }
 
 /**
@@ -343,6 +397,24 @@ export function repairPrompt(input: {
     ].join('\n');
   }
 
+  if (finding.mode === 'prose_grounding_mismatch') {
+    return [
+      'You are repairing one factual contradiction in a finished scene. Change nothing else.',
+      '',
+      finding.detail,
+      '',
+      'Find the clause in the passage below that makes this claim and rewrite just that clause',
+      'so it agrees with the World Model instead — change only what is needed to stop the',
+      'contradiction, keep the same sentence shape and voice wherever possible.',
+      '',
+      'PASSAGE:',
+      input.fragment,
+      '',
+      'Return the exact words to replace (copied verbatim from the passage) and their replacement.',
+      'Do not restate events, do not add or remove anything the passage does not already say.',
+    ].join('\n');
+  }
+
   const seams = input.findings.map((entry) => `  - ${entry.detail}`).join('\n');
   return [
     'You are repairing the opening of a finished scene. Rewrite only the opening paragraph.',
@@ -390,6 +462,30 @@ export interface ContinuityPassInput extends SeamCheckInput {
   readonly state_updates: WriterStateUpdates;
   readonly client: ModelClient;
   readonly occasion: Occasion;
+  /**
+   * ADR 0018: mismatches from the state-update validator's `checkGroundedClaims`, computed by the
+   * caller against the World Model as it stood at scene entry (before this scene's own
+   * `state_updates` commit) and folded in here so this pass's repair machinery is the one place
+   * that spends a repair call — not a second, parallel one.
+   */
+  readonly groundedClaimMismatches?: readonly GroundedClaimMismatch[];
+}
+
+/** Turn validator-detected mismatches into findings this pass's repair machinery can process. */
+function groundingFindings(
+  mismatches: readonly GroundedClaimMismatch[],
+  at: { scene_id: string; scene_index: number },
+): SeamFinding[] {
+  return mismatches.map((mismatch) => ({
+    ...at,
+    mode: 'prose_grounding_mismatch',
+    subject: `${mismatch.entity_id}.${mismatch.column}`,
+    detail:
+      `${at.scene_id} asserts ${mismatch.entity_id}.${mismatch.column} = ` +
+      `${JSON.stringify(mismatch.asserted_value)} in its prose, but the World Model holds ` +
+      `${JSON.stringify(mismatch.committed_value)} — this appears in no entry_state, exit_state, ` +
+      `or required beat`,
+  }));
 }
 
 /**
@@ -415,7 +511,13 @@ const REPAIR_MAX_OUTPUT_TOKENS = 1024;
  * it never mutates anything itself.
  */
 export async function continuityPass(input: ContinuityPassInput): Promise<ContinuityPassResult> {
-  const findings = detectSeams(input);
+  const findings = [
+    ...detectSeams(input),
+    ...groundingFindings(input.groundedClaimMismatches ?? [], {
+      scene_id: input.scene.id,
+      scene_index: input.scene.order,
+    }),
+  ];
   const repairs: RepairOutcome[] = [];
   const diagnostics: Diagnostic[] = [];
   const calls: CallRecord[] = [];
@@ -430,7 +532,12 @@ export async function continuityPass(input: ContinuityPassInput): Promise<Contin
   ) =>
     diagnostics.push(
       diagnostic(code, {
-        entity_id: finding.mode === 'stale_imagery' ? null : finding.subject,
+        // Neither `stale_imagery`'s recycled phrase nor `prose_grounding_mismatch`'s compound
+        // `"<entity_id>.<column>"` is a raw entity id.
+        entity_id:
+          finding.mode === 'stale_imagery' || finding.mode === 'prose_grounding_mismatch'
+            ? null
+            : finding.subject,
         column: null,
         scene_id: finding.scene_id,
         scene_index: finding.scene_index,
@@ -598,14 +705,33 @@ export function applyRepair(input: {
   if (shapeFor(finding.mode) === 'imagery_swap') {
     const target = repair.original_phrase;
     if (target === null || target.trim() === '') {
-      return 'the imagery repair named no phrase to replace';
+      return 'the repair named no phrase to replace';
     }
     const span = locatePhrase(input.prose, target);
     if (span === null) {
-      return `the imagery repair named a phrase that is not in the prose ("${target}")`;
+      return `the repair named a phrase that is not in the prose ("${target}")`;
     }
+    const repairedProse =
+      input.prose.slice(0, span.start) + repair.replacement + input.prose.slice(span.end);
+
+    if (finding.mode === 'prose_grounding_mismatch') {
+      // No new call re-derives the correct value, so there is nothing to write in its place —
+      // dropping the resolved claim (keyed by the same "<entity_id>.<column>" subject the finding
+      // was built from) is what keeps it from going stale against the prose it no longer matches
+      // (ADR 0018 decision 4).
+      return {
+        prose: repairedProse,
+        digest: {
+          ...input.digest,
+          grounded_claims: input.digest.grounded_claims.filter(
+            (claim) => `${claim.entity_id}.${claim.column}` !== finding.subject,
+          ),
+        },
+      };
+    }
+
     return {
-      prose: input.prose.slice(0, span.start) + repair.replacement + input.prose.slice(span.end),
+      prose: repairedProse,
       digest: {
         ...input.digest,
         imagery_signature:

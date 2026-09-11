@@ -542,5 +542,6 @@ function conservativeDigest(input: CompileSceneInput): SceneDigest {
         ? '[unchanged — scene could not be generated]'
         : `${previous} [unchanged — scene could not be generated]`,
     reanchor_used: [],
+    grounded_claims: [],
   };
 }

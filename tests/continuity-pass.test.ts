@@ -8,6 +8,7 @@ import {
   shapeFor,
   type SeamCheckInput,
 } from '@/continuity/continuity-pass';
+import { z } from 'zod';
 import { SceneDigestSchema, type SceneDigest } from '@/digest/scene-digest';
 import {
   groupBySharedRepair,
@@ -22,7 +23,8 @@ import type { ModelClient, ModelRequest, ModelResponse } from '@/writer/model-cl
 import type { WriterStateUpdates } from '@/writer/response-schema';
 import { scene } from './helpers';
 
-function digest(overrides: Partial<SceneDigest> = {}): SceneDigest {
+/** Input type, not `SceneDigest` itself — lets a test omit fields the schema defaults. */
+function digest(overrides: Partial<z.input<typeof SceneDigestSchema>> = {}): SceneDigest {
   return SceneDigestSchema.parse({
     event_summary: 'Jim walks to the park.',
     closing_situation: 'Jim is on the bench, watching the gate.',
@@ -186,6 +188,79 @@ describe('detecting seams (ADR 0011 §1)', () => {
     );
     expect(findings).toEqual([]);
   });
+
+  it('catches a light band whose own anchor_text needed truncating (ADR 0018 decision 3)', () => {
+    const ledger = new ToldLedger();
+    ledger.touch('met:char_ada', 1);
+    const truncated = `${'a distinguishing clause that ran on and on'.repeat(6)}…`;
+    const findings = detectSeams(
+      check({
+        ledgerAtEntry: ledger,
+        expectedBands: [band('char_ada', 'assume')],
+        digest: digest({
+          entities_on_stage: ['char_ada'],
+          reanchor_used: [{ entity_id: 'char_ada', band: 'assume', anchor_text: truncated }],
+        }),
+        previous: null,
+      }),
+    );
+
+    expect(findings.map((finding) => finding.mode)).toEqual(['told_ledger_miscalibration']);
+    expect(findings[0]?.detail).toContain('needed truncating');
+  });
+
+  it('does not flag a light band whose anchor_text is a short clause, or none at all', () => {
+    const ledger = new ToldLedger();
+    ledger.touch('met:char_ada', 1);
+
+    const shortClause = detectSeams(
+      check({
+        ledgerAtEntry: ledger,
+        expectedBands: [band('char_ada', 'assume')],
+        digest: digest({
+          entities_on_stage: ['char_ada'],
+          reanchor_used: [
+            { entity_id: 'char_ada', band: 'assume', anchor_text: "her brother's ring" },
+          ],
+        }),
+        previous: null,
+      }),
+    );
+    expect(shortClause).toEqual([]);
+
+    const noAnchor = detectSeams(
+      check({
+        ledgerAtEntry: ledger,
+        expectedBands: [band('char_ada', 'assume')],
+        digest: digest({
+          entities_on_stage: ['char_ada'],
+          reanchor_used: [{ entity_id: 'char_ada', band: 'assume', anchor_text: null }],
+        }),
+        previous: null,
+      }),
+    );
+    expect(noAnchor).toEqual([]);
+  });
+
+  it('does not double-report an entity bandMismatches already caught', () => {
+    const ledger = new ToldLedger();
+    ledger.touch('met:char_ada', 1);
+    const truncated = `${'a distinguishing clause that ran on and on'.repeat(6)}…`;
+    const findings = detectSeams(
+      check({
+        ledgerAtEntry: ledger,
+        // The policy expected a heavier band than "assume" — bandMismatches catches this first.
+        expectedBands: [band('char_ada', 'reanchor')],
+        digest: digest({
+          entities_on_stage: ['char_ada'],
+          reanchor_used: [{ entity_id: 'char_ada', band: 'assume', anchor_text: truncated }],
+        }),
+        previous: null,
+      }),
+    );
+
+    expect(findings).toHaveLength(1);
+  });
 });
 
 describe('edit authority (ADR 0011 §4)', () => {
@@ -313,6 +388,43 @@ describe('the two repair shapes (ADR 0011 §5)', () => {
     expect(shapeFor('cold_open')).toBe('opening_rewrite');
     expect(shapeFor('told_ledger_miscalibration')).toBe('opening_rewrite');
     expect(shapeFor('stale_imagery')).toBe('imagery_swap');
+    // ADR 0018 decision 4: reuses imagery_swap's locate-and-swap shape, not a new one.
+    expect(shapeFor('prose_grounding_mismatch')).toBe('imagery_swap');
+  });
+
+  it('repairs a prose-grounding mismatch by swapping the phrase and dropping the resolved claim', () => {
+    const prose = 'The resin copy tucked against her ribs had its chipped eye on the wrong side.';
+    const applied = applyRepair({
+      prose,
+      digest: digest({
+        grounded_claims: [
+          { entity_id: 'obj_forgery', column: 'location_id', asserted_value: 'char_vess' },
+          { entity_id: 'char_vess', column: 'status', asserted_value: 'alive' },
+        ],
+      }),
+      finding: {
+        mode: 'prose_grounding_mismatch',
+        scene_id: 'scene_04',
+        scene_index: 4,
+        subject: 'obj_forgery.location_id',
+        detail: '',
+      },
+      repair: {
+        replacement: 'The resin copy on the pedestal',
+        original_phrase: 'The resin copy tucked against her ribs',
+        imagery_signature: null,
+        reanchor_used: null,
+      },
+    });
+
+    if (typeof applied === 'string') throw new Error(applied);
+    expect(applied.prose).toBe(
+      'The resin copy on the pedestal had its chipped eye on the wrong side.',
+    );
+    // The resolved claim is gone; an unrelated claim on a different entity/column survives.
+    expect(applied.digest.grounded_claims).toEqual([
+      { entity_id: 'char_vess', column: 'status', asserted_value: 'alive' },
+    ]);
   });
 
   it('finds the opening beat as everything before the first paragraph break', () => {
@@ -405,6 +517,42 @@ describe('the pass end to end', () => {
     expect(result.findings).toEqual([]);
     expect(client.requests).toEqual([]);
     expect(result.prose).toBe('The body.');
+  });
+
+  it('folds in the validator-detected grounding mismatches and repairs them (ADR 0018)', async () => {
+    const client = new ScriptedClient([
+      JSON.stringify({
+        replacement: 'the amber cat now in her coat',
+        original_phrase: 'the resin copy tucked against her ribs',
+      }),
+    ]);
+    const result = await continuityPass({
+      ...check({
+        digest: digest({
+          grounded_claims: [
+            { entity_id: 'obj_forgery', column: 'location_id', asserted_value: 'char_vess' },
+          ],
+        }),
+      }),
+      prose: 'She felt the resin copy tucked against her ribs.',
+      state_updates: NO_UPDATES,
+      client,
+      occasion: 'read_time',
+      groundedClaimMismatches: [
+        {
+          entity_id: 'obj_forgery',
+          column: 'location_id',
+          asserted_value: 'char_vess',
+          committed_value: 'loc_vault_pedestal',
+        },
+      ],
+    });
+
+    expect(result.findings.map((finding) => finding.mode)).toEqual(['prose_grounding_mismatch']);
+    expect(result.repairs[0]?.applied).toBe(true);
+    expect(result.prose).toBe('She felt the amber cat now in her coat.');
+    expect(result.digest.grounded_claims).toEqual([]);
+    expect(result.diagnostics.map((entry) => entry.code)).toEqual(['continuity_seam_repaired']);
   });
 });
 
