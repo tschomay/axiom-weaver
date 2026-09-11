@@ -186,6 +186,14 @@ day's allowance (see [`AGENTS.md`](./AGENTS.md)). So the Working Draft carries a
 Scene Card** toggle: the stand-in writer exercises validation, the continuity pass and staleness
 without a model call. The compile view always names which of the two wrote the scene.
 
+A telling runs inside the server process that started it, so a restarted dev server — or a
+serverless invocation that returns and takes the un-awaited loop with it — ends a run without it
+ever reaching its own failure path. `status` would go on saying `running` for good, so the manifest
+records when the run last reported and the Read screen stops believing a run it has not heard from:
+it says the run stopped reporting, says how far it got, and offers a fresh telling rather than a
+progress bar that never moves. A leftover run from an earlier visit can be picked back up from the
+tellings list.
+
 When the day's allowance does run out, neither surface fails outright. The writer model and its
 capacity fallback share one daily quota, and once both are gone no retry helps before midnight
 Pacific — but `gemini-3.5-flash-lite` has its own, much larger one. So the compile view and the Read

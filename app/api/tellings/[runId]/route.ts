@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { storyRepository } from '@/persistence';
 import { WRITER_MODEL, quotaOffer } from '@/writer/model-client';
+import { hasStoppedReporting, msSinceLastReport } from '@/edition/edition';
 
 export const dynamic = 'force-dynamic';
 
@@ -47,6 +48,15 @@ export async function GET(request: Request, { params }: { params: Promise<{ runI
     },
     started_at: manifest.started_at,
     completed_at: manifest.completed_at,
+    updated_at: manifest.updated_at,
+    /**
+     * How long since the run reported anything, and whether that is long enough to stop believing
+     * it. A loop can die without ever reaching its own failure path — a restarted dev server, a
+     * serverless invocation ending and taking the un-awaited loop with it — and `status` would go
+     * on saying `running` for good. Computed on read; nothing is written to an edition from here.
+     */
+    stalled_ms: msSinceLastReport(manifest),
+    stopped_reporting: hasStoppedReporting(manifest),
     // Why a run stopped, when it stopped for a reason a surface can act on. A spent daily quota is
     // the one such reason: the run is over either way, but another model would get past it today,
     // and the same offer the author-time compile makes is put here to the reader.
