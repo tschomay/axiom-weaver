@@ -270,6 +270,13 @@ Whatever the light model writes is recorded as written by it.
 | `GET /api/stories/{storyId}/diff?a={runId}&b={runId}` | two tellings of one `package_version` set beside each other |
 | `GET /api/tellings/{runId}/report` | one run's full report |
 | `GET /api/author/session` | whether this instance wants a token before offering a write |
+| `GET /api/stories/{storyId}/manuscript` | the Manuscript, its lint result, and the version a publish would write |
+| `PUT /api/stories/{storyId}/manuscript` | save; carries the `updated_at` it was read at, refused with a 409 if the stored copy moved on (author-gated) |
+| `DELETE /api/stories/{storyId}/manuscript` | discard — the story returns to its published package (author-gated) |
+| `POST /api/stories/{storyId}/manuscript/publish` | strict-parse → lint → `max(retained) + 1` → retain → repoint; a rejection returns the lint result and writes nothing (author-gated) |
+| `POST /api/manuscripts` | start one: `{"source":"new"\|"edit"\|"duplicate"}` (author-gated) |
+| `POST /api/authoring/lint` | lint a package body without saving — what the import path validates against |
+| `GET /api/authoring/story-id-available?id=` | whether a `story_id` is free |
 | `GET /api/stories/{storyId}/draft/scenes` | the Working Draft's prose, in order, however far it has been built |
 
 `POST /api/stories/{storyId}/tellings` takes the same `{"writer":"stand_in"}` choice the author-time
