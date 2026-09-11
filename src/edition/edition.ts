@@ -157,6 +157,18 @@ export const RunIndexSchema = z.object({
         status: z.enum(EDITION_STATUSES),
         degraded: z.boolean().default(false),
         started_at: z.string(),
+        /**
+         * The library (ADR 0015 §5): the author-curated shortlist of tellings worth returning to.
+         *
+         * A flag on the index rather than a second document, because the library *is* a subset of
+         * the runs a story already has — ADR 0014 §3 keeps every completed run and ADR 0015 §5
+         * never auto-deletes one, so removing a library entry takes a telling off the list and
+         * never off the shelf: its run id keeps working, and a reader who has the URL keeps it.
+         */
+        saved: z.boolean().default(false),
+        /** What the author called it. `null` for a run nobody has named. */
+        name: z.string().nullable().default(null),
+        saved_at: z.string().nullable().default(null),
       }),
     )
     .default([]),

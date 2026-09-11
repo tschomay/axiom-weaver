@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { TellingsView } from '@/edition/tellings-view';
 import type { QuotaOffer } from '@/writer/model-client';
 import { QuotaPrompt } from '../../../quota-prompt';
+import { AuthorTokenField, useAuthorSession } from '../../../author-token';
 
 interface Progress {
   run_id: string;
@@ -58,6 +59,10 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
   const [error, setError] = useState<string | null>(null);
   /** The run the server has stopped hearing from, if any. */
   const [stalled, setStalled] = useState<Progress | null>(null);
+  // ADR 0015 §5: the library is author-gated. A reader sees it and reads from it; only the author
+  // saves, names or removes an entry — which is why this is the same session every other write
+  // surface uses rather than a second notion of who is allowed.
+  const session = useAuthorSession();
   /** Bumped to reschedule a poll whose answer was unusable, so a blip cannot end the watch. */
   const [poll, setPoll] = useState(0);
   const failedPolls = useRef(0);
@@ -162,6 +167,43 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
     if (reading !== null) prose.current?.scrollIntoView({ behavior: 'smooth' });
   }, [reading]);
 
+  const saveToLibrary = useCallback(
+    async (runId: string, current: string | null) => {
+      const name = window.prompt('Name this telling for the library', current ?? '');
+      if (name === null || name.trim() === '') return;
+      setError(null);
+      const response = await fetch(`/api/tellings/${runId}/library`, {
+        method: 'POST',
+        headers: session.headers(),
+        body: JSON.stringify({ name }),
+      });
+      if (!response.ok) {
+        const body = (await response.json()) as { error?: string };
+        setError(body.error ?? `Could not save ${runId}`);
+        return;
+      }
+      await refresh();
+    },
+    [refresh, session],
+  );
+
+  const removeFromLibrary = useCallback(
+    async (runId: string) => {
+      setError(null);
+      const response = await fetch(`/api/tellings/${runId}/library`, {
+        method: 'DELETE',
+        headers: session.headers(),
+      });
+      if (!response.ok) {
+        const body = (await response.json()) as { error?: string };
+        setError(body.error ?? `Could not remove ${runId}`);
+        return;
+      }
+      await refresh();
+    },
+    [refresh, session],
+  );
+
   const generate = useCallback(
     async (model?: string) => {
     setBusy(true);
@@ -209,6 +251,10 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
     },
     [refresh, standIn, storyId, view.scene_count],
   );
+
+  // Newest saved first: the library is a shortlist, and the thing most recently thought worth
+  // keeping is the one most likely to be wanted.
+  const library = view.runs.filter((run) => run.saved && run.name !== null);
 
   return (
     <>
@@ -347,6 +393,62 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
         </div>
       )}
 
+      <AuthorTokenField session={session} />
+
+      {/*
+        The middle arm of ADR 0014 §3's three-way choice. Every completed run is kept and stays
+        readable below; the library is the author's shortlist of the ones worth coming back to,
+        under names a reader can tell apart (ADR 0015 §5). Removing an entry takes a telling off
+        this list and never off the shelf — its run id keeps working.
+      */}
+      <h3>Library</h3>
+      {library.length === 0 ? (
+        <p className="meta">
+          Nothing saved yet.{' '}
+          {session.canWrite
+            ? 'Save a finished telling below to keep it here under a name.'
+            : 'The author saves tellings here worth returning to.'}
+        </p>
+      ) : (
+        library.map((run) => (
+          <div className="proposal" key={run.run_id}>
+            <div className="body">
+              <strong>{run.name}</strong>{' '}
+              {view.baked?.run_id === run.run_id && <span className="tag good">Baked</span>}
+              {run.degraded && <span className="tag bad">degraded</span>}
+              <br />
+              <span className="meta">
+                <code>{run.run_id}</code> · package v{run.package_version}
+              </span>
+            </div>
+            <div className="actions">
+              <button type="button" className="action" onClick={() => void read(run.run_id)}>
+                Read
+              </button>
+              {session.canWrite && (
+                <>
+                  <button
+                    type="button"
+                    className="action"
+                    onClick={() => void saveToLibrary(run.run_id, run.name)}
+                  >
+                    Rename
+                  </button>
+                  <button
+                    type="button"
+                    className="action"
+                    title="Takes it off this list. The telling itself is never deleted — its run id keeps working."
+                    onClick={() => void removeFromLibrary(run.run_id)}
+                  >
+                    Remove
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        ))
+      )}
+
       <h3>Tellings</h3>
       {view.runs.length === 0 ? (
         <p className="meta">None yet. The button above makes one.</p>
@@ -386,6 +488,15 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
               >
                 Read
               </button>
+              {session.canWrite && run.status === 'complete' && !run.saved && (
+                <button
+                  type="button"
+                  className="action"
+                  onClick={() => void saveToLibrary(run.run_id, null)}
+                >
+                  Save
+                </button>
+              )}
             </div>
           </div>
         ))

@@ -297,6 +297,7 @@ export class StoryRepository {
   /** Record (or update) a run in its story's index. Idempotent on run id. */
   async registerRun(manifest: EditionManifest): Promise<RunIndex> {
     const index = await this.getRunIndex(manifest.story_id);
+    const existing = index.runs.find((run) => run.run_id === manifest.run_id);
     const runs = index.runs.filter((run) => run.run_id !== manifest.run_id);
     runs.push({
       run_id: manifest.run_id,
@@ -304,6 +305,11 @@ export class StoryRepository {
       status: manifest.status,
       degraded: manifest.degraded,
       started_at: manifest.started_at,
+      // The loop rewrites this entry at every scene boundary; the library is the author's, not
+      // the loop's, so it is carried across rather than reset by a run advancing.
+      saved: existing?.saved ?? false,
+      name: existing?.name ?? null,
+      saved_at: existing?.saved_at ?? null,
     });
     runs.sort((a, b) => a.started_at.localeCompare(b.started_at));
     const updated: RunIndex = { ...index, runs };
@@ -322,6 +328,63 @@ export class StoryRepository {
       if (report !== null) reports.push(report);
     }
     return reports;
+  }
+
+  // --- The library (ADR 0015 §5) ---------------------------------------------------------------
+
+  /**
+   * Save a telling to the story's library under a name, or rename one already there.
+   *
+   * The library is "a single story-scoped flat list, not a personal collection per reader" and is
+   * author-gated — only the author saves, names or deletes (ADR 0015 §5). The route above this
+   * enforces that; this only refuses what makes no sense: a run that does not exist, and one that
+   * never finished, since ADR 0014 §3's second arm is a telling a reader can *return to*.
+   */
+  async saveToLibrary(runId: string, name: string, now: Date = new Date()): Promise<RunIndex> {
+    const manifest = await this.getEditionManifest(runId);
+    if (manifest === null) throw new LibraryError(runId, 'no such run');
+    if (manifest.status !== 'complete') {
+      throw new LibraryError(runId, `a telling is saveable once it has finished (it is ${manifest.status})`);
+    }
+
+    const trimmed = name.trim();
+    if (trimmed === '') throw new LibraryError(runId, 'a library entry needs a name');
+
+    return this.updateRunIndexEntry(manifest.story_id, runId, {
+      saved: true,
+      name: trimmed,
+      saved_at: now.toISOString(),
+    });
+  }
+
+  /**
+   * Take a telling off the library list.
+   *
+   * Off the list, never off the shelf. ADR 0014 §3 and ADR 0015 §5 both say a completed run is
+   * "never auto-deleted" and stays "addressable and shareable by its run ID/URL indefinitely" — so
+   * this clears the curation and leaves the edition exactly where it was.
+   */
+  async removeFromLibrary(storyId: string, runId: string): Promise<RunIndex> {
+    return this.updateRunIndexEntry(storyId, runId, {
+      saved: false,
+      name: null,
+      saved_at: null,
+    });
+  }
+
+  private async updateRunIndexEntry(
+    storyId: string,
+    runId: string,
+    patch: Partial<RunIndex['runs'][number]>,
+  ): Promise<RunIndex> {
+    const index = await this.getRunIndex(storyId);
+    const found = index.runs.find((run) => run.run_id === runId);
+    if (found === undefined) throw new LibraryError(runId, `not a telling of "${storyId}"`);
+
+    const runs = index.runs.map((run) => (run.run_id === runId ? { ...run, ...patch } : run));
+    const updated: RunIndex = { ...index, runs };
+    await this.store.put(runIndexPath(storyId), stringify(updated), { allowOverwrite: true });
+    return updated;
   }
 
   // --- Baked promotion (ADR 0014 §9) -----------------------------------------------------------
@@ -402,6 +465,14 @@ export class StoryRepository {
     const pkg = await this.getCurrentPackage(storyId);
     if (pkg === null) return null;
     return WorldModel.fromSeed(pkg.story_id, pkg.world_model_seed);
+  }
+}
+
+/** Why a library write was refused. The library is the author's shortlist, not the run index. */
+export class LibraryError extends Error {
+  constructor(runId: string, reason: string) {
+    super(`Cannot change the library entry for "${runId}": ${reason}`);
+    this.name = 'LibraryError';
   }
 }
 
