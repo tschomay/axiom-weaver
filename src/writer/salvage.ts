@@ -122,7 +122,23 @@ export function finalParagraph(prose: string): string | null {
     .split(/\n\s*\n/)
     .map((part) => part.trim())
     .filter((part) => part !== '');
-  return paragraphs[paragraphs.length - 1] ?? null;
+  const last = paragraphs[paragraphs.length - 1] ?? null;
+  if (last === null) return null;
+  if (paragraphs.length > 1) return last;
+  // A scene that came back as one unbroken block (issue #73) has no final paragraph to speak of,
+  // and handing the whole scene forward would make the verbatim tail the most expensive thing in
+  // the volatile payload — then trim it from the front at the length backstop, so the next scene
+  // opens against a fragment starting mid-sentence. Its closing sentences are the honest answer.
+  return lastSentences(last);
+}
+
+/** The closing sentences of an unbroken block, up to a paragraph's worth. */
+const UNBROKEN_TAIL_SENTENCES = 3;
+
+function lastSentences(text: string): string {
+  const sentences = text.match(/[^.!?]+[.!?]+["'\u201d\u2019]?\s*/g);
+  if (sentences === null || sentences.length <= UNBROKEN_TAIL_SENTENCES) return text;
+  return sentences.slice(-UNBROKEN_TAIL_SENTENCES).join('').trim();
 }
 
 /** Word count against `length_budget`. ADR 0012 decision 4's band is 0.8x-1.3x, asymmetric. */

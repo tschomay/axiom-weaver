@@ -6,6 +6,7 @@ import {
   writerResponseJsonSchema,
 } from '@/writer/response-schema';
 import { finalParagraph, lengthVerdict, salvageProse, wordCount } from '@/writer/salvage';
+import { writerContract } from '@/writer/contract';
 import { SceneDigestSchema, TWO_SENTENCE_CHARS } from '@/digest/scene-digest';
 import { plantInstruction, payoffInstruction } from '@/plants/obligation-walk';
 import { renderVoiceCard, cardFromPreset } from '@/voice/voice-card';
@@ -326,5 +327,29 @@ describe('the two-sentence caps (ADR 0003 decision 5)', () => {
     const summary = 'Cinderella loses a slipper on the stair.';
     expect(SceneDigestSchema.parse({ event_summary: summary, closing_situation: 'x' })
       .event_summary).toBe(summary);
+  });
+});
+
+describe('prose form (issue #73)', () => {
+  it('asks for paragraphs in the cached header, where a whole-telling rule belongs', () => {
+    const contract = writerContract();
+    expect(contract).toMatch(/FORM:/);
+    expect(contract).toMatch(/separated by a blank line/);
+  });
+
+  it('hands forward the closing sentences of an unbroken scene, not the whole of it', () => {
+    // 445 words in one block is a real thing a writer call returned. Before this, the verbatim
+    // tail was the entire scene, then trimmed from the front — so the next scene opened against a
+    // fragment starting mid-sentence.
+    const unbroken =
+      'She opened the hive. The bees were having a difficult morning. ' +
+      'He put the lance down. The clover crock came out. He forgot what he came for.';
+    const tail = finalParagraph(unbroken);
+    expect(tail).toBe('He put the lance down. The clover crock came out. He forgot what he came for.');
+    expect(tail!.length).toBeLessThan(unbroken.length);
+  });
+
+  it('leaves a properly paragraphed scene alone', () => {
+    expect(finalParagraph('First beat.\n\nSecond beat.\n\nAnd its close.')).toBe('And its close.');
   });
 });

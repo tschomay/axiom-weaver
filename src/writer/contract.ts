@@ -57,6 +57,11 @@ export function writerContract(): string {
     '',
     'LENGTH: aim for approximately the scene\'s stated length budget in words. A little over is fine',
     'if the beats need room; well under is a sign a beat got cut.',
+    '',
+    'FORM: write in paragraphs, separated by a blank line, the way published prose is set — a new',
+    'paragraph on a change of speaker, of beat, or of vantage. A scene delivered as one unbroken',
+    'block is not a scene. The compiler reads your final paragraph as the words the next scene',
+    'opens against, so a scene with no paragraph breaks has no usable ending to hand forward.',
   ].join('\n');
 }
 
