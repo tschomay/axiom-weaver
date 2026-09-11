@@ -10,6 +10,7 @@
  */
 
 import { lintPackage, type LintResult } from './lint';
+import { RESERVED_STORY_IDS, STORY_ID_PATTERN } from './story-id';
 import {
   MANUSCRIPT_SCHEMA_VERSION,
   ManuscriptSchema,
@@ -25,15 +26,10 @@ import {
 
 const CURRENT_SCHEMA_VERSION = '1.0';
 
-/** A `story_id` slugged from a title: the shape every fixture id already has. */
-export function slugifyStoryId(title: string): string {
-  return title
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 60);
-}
+// Re-exported so the server side keeps one import for "everything about a Manuscript"; the rules
+// themselves live in `./story-id`, which a browser bundle can also reach — this module cannot,
+// because the linter it gates publishing with pulls in the fixture loader and `node:fs` with it.
+export { RESERVED_STORY_IDS, STORY_ID_PATTERN, slugifyStoryId } from './story-id';
 
 export interface NewManuscriptSource {
   readonly source: 'new';
@@ -76,7 +72,7 @@ export async function storyIdAvailable(
   repository: StoryRepository,
   storyId: string,
 ): Promise<boolean> {
-  if (!/^[a-z0-9][a-z0-9-]*$/.test(storyId)) return false;
+  if (!STORY_ID_PATTERN.test(storyId) || RESERVED_STORY_IDS.has(storyId)) return false;
   if ((await repository.getPointer(storyId)) !== null) return false;
   return (await repository.getManuscript(storyId)) === null;
 }
@@ -149,9 +145,7 @@ export async function seedManuscript(
   }
 
   if (!(await storyIdAvailable(repository, seed.story_id))) {
-    const reason = /^[a-z0-9][a-z0-9-]*$/.test(seed.story_id)
-      ? 'story_id_taken'
-      : 'invalid_story_id';
+    const reason = STORY_ID_PATTERN.test(seed.story_id) ? 'story_id_taken' : 'invalid_story_id';
     throw new ManuscriptSeedError(
       reason,
       reason === 'story_id_taken'
@@ -248,7 +242,7 @@ export async function renameManuscript(
     throw new ManuscriptConflictError(fromStoryId, stored.updated_at, expectedUpdatedAt);
   }
   if (!(await storyIdAvailable(repository, toStoryId))) {
-    const reason = /^[a-z0-9][a-z0-9-]*$/.test(toStoryId) ? 'story_id_taken' : 'invalid_story_id';
+    const reason = STORY_ID_PATTERN.test(toStoryId) ? 'story_id_taken' : 'invalid_story_id';
     throw new ManuscriptSeedError(reason, `"${toStoryId}" is not available as a story id`);
   }
 

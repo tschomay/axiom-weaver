@@ -482,3 +482,350 @@ pre.quota-detail {
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   gap: 1.5rem;
 }
+
+/* --- The authoring screen (ADR 0017 §6/§7) ------------------------------------------------ */
+
+/*
+ * Desktop puts the section list and the editor side by side; a narrow viewport stacks them into
+ * a drill-down, where "which section am I in" is the URL and the back gesture is the navigation.
+ * Both states are the same markup — the section list is hidden, never rebuilt as a mobile
+ * variant to keep in sync.
+ */
+.editor-shell {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.section-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  position: sticky;
+  top: 1rem;
+}
+
+.section-list button {
+  font: 14px/1.5 ui-serif, Georgia, 'Times New Roman', serif;
+  text-align: left;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 0.35rem;
+  padding: 0.45rem 0.6rem;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.section-list button:hover {
+  border-color: var(--rule);
+}
+
+.section-list button.current {
+  background: var(--neutral-soft);
+  color: var(--ink);
+}
+
+.section-list button .count {
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+}
+
+.section-back {
+  display: none;
+}
+
+@media (max-width: 52rem) {
+  .editor-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .editor-shell.at-list .section-body {
+    display: none;
+  }
+
+  .editor-shell:not(.at-list) .section-list {
+    display: none;
+  }
+
+  .section-back {
+    display: block;
+    margin: 0 0 0.75rem;
+  }
+
+  .section-list {
+    position: static;
+  }
+}
+
+/* A labelled control. Stacked at every width — a form that reflows into columns reflows the
+   author's place in it too. The control sits inside its label, so the two are associated
+   without an id. */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0.75rem 0;
+}
+
+.field > label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* A field holding several controls is a fieldset, stripped of the browser's box. */
+fieldset.field {
+  border: none;
+  padding: 0;
+  min-width: 0;
+}
+
+fieldset.field > legend {
+  padding: 0;
+}
+
+.field .label-text {
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.field input[type='text'],
+.field input[type='number'],
+.field select,
+.field textarea {
+  font: 15px/1.5 ui-serif, Georgia, 'Times New Roman', serif;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.35rem;
+  background: var(--paper);
+  color: var(--ink);
+  width: 100%;
+  /* Full width on a phone, capped on a desktop: a one-word value in a 700px box reads as a
+     mistake, and a line of prose that long is hard to scan back along. */
+  max-width: min(100%, 36rem);
+}
+
+.field input:disabled,
+.field select:disabled {
+  opacity: 0.6;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 4.5rem;
+}
+
+.field .hint {
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+}
+
+.field.flagged input,
+.field.flagged select,
+.field.flagged textarea {
+  border-color: var(--bad);
+}
+
+/* A tier badge, beside the control it governs rather than in a legend. */
+.tier {
+  font: 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  border-radius: 999px;
+  padding: 0 0.35rem;
+  background: var(--neutral-soft);
+  color: var(--muted);
+  cursor: help;
+}
+
+.tier.V {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+/* One seed row, one entity: a stacked card, never a column in a grid that scrolls sideways. */
+.entity-card {
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: var(--panel);
+  padding: 0.6rem 0.9rem;
+  margin: 0.6rem 0;
+}
+
+.entity-card.flagged {
+  border-color: var(--bad);
+}
+
+.entity-card > summary {
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.entity-card > summary .name {
+  font-weight: 600;
+}
+
+.entity-card > summary .id {
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+}
+
+.row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* A bag: flat key/value rows, wrapping rather than scrolling. On a phone a row wraps onto three
+   lines, so it carries a rule down its left edge — otherwise a value sits under a key it does
+   not belong to and reads as if it did. */
+.bag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin: 0.35rem 0;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--rule);
+}
+
+.bag-row input[type='text'],
+.bag-row select {
+  font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 0.3rem 0.45rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.3rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.bag-row .key {
+  flex: 1 1 8rem;
+  min-width: 0;
+}
+
+.bag-row .val {
+  flex: 2 1 10rem;
+  min-width: 0;
+}
+
+.list-row {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin: 0.3rem 0;
+}
+
+.list-row input[type='text'] {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: 14px/1.5 ui-serif, Georgia, 'Times New Roman', serif;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.3rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+button.tiny {
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.3rem;
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+button.tiny:hover:not(:disabled) {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+button.tiny:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* The save indicator: autosave is invisible until it fails, so it has to say so itself. */
+.save-state {
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: baseline;
+}
+
+.save-state.bad {
+  color: var(--bad);
+}
+
+.editor-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+/* The lint panel — a problem is a link to the field that owns it, never only a sentence. */
+.lint-problem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-left: 3px solid var(--warn);
+  background: var(--warn-soft);
+  border-radius: 0 0.35rem 0.35rem 0;
+  padding: 0.45rem 0.7rem;
+  margin: 0.4rem 0;
+  font: 13px/1.5 ui-serif, Georgia, 'Times New Roman', serif;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.lint-problem.error {
+  border-left-color: var(--bad);
+  background: var(--bad-soft);
+}
+
+/* The path comes first: several of the linter's messages are predicates whose subject is the
+   field they name, so reading them in the other order leaves the sentence headless. */
+.lint-problem .where {
+  display: block;
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.entity-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.empty-note {
+  border: 1px dashed var(--rule);
+  border-radius: 0.5rem;
+  padding: 0.9rem 1.1rem;
+  margin: 0.75rem 0;
+  color: var(--muted);
+}
