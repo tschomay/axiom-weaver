@@ -427,14 +427,18 @@ function renderState(scene: SceneCard): string {
 
 function renderPlantObligations(obligations: readonly PlantObligation[]): string {
   if (obligations.length === 0) return '';
-  const lines = ['THIS SCENE PLANTS (report each in plants_opened):'];
+  const lines = [
+    'THIS SCENE PLANTS (each line opens with the fact_ref to report, verbatim, in plants_opened):',
+  ];
   for (const obligation of obligations) lines.push(`  - ${obligation.instruction}`);
   return lines.join('\n');
 }
 
 function renderPayoffInstructions(payoffs: readonly PlantObligation[]): string {
   if (payoffs.length === 0) return '';
-  const lines = ['THIS SCENE RESOLVES:'];
+  const lines = [
+    'THIS SCENE RESOLVES (each line opens with the fact_ref to report, verbatim, in payoffs_closed):',
+  ];
   for (const payoff of payoffs) lines.push(`  - ${payoff.instruction}`);
   return lines.join('\n');
 }

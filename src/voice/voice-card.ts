@@ -165,7 +165,8 @@ export function renderVoiceCard(card: VoiceCard): string {
     `- Point of view: ${card.person}, ${card.tense} tense. Narrative distance: ${card.narrative_distance}.`,
     `- Register: ${card.register}`,
     `- Sentence rhythm: ${card.sentence_rhythm}`,
-    `- Preferred imagery (draw from these before inventing new ones): ${card.imagery_palette.join('; ')}`,
+    `- Imagery domains (draw fresh images from within these before inventing new ones; they are` +
+      ` domains to draw from, never phrases to reuse verbatim): ${card.imagery_palette.join('; ')}`,
     `- Dialogue: ${card.dialogue_density}`,
   ];
   if (card.style_exemplar.trim() !== '') {

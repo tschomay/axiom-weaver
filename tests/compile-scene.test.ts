@@ -276,6 +276,23 @@ describe('failure paths (ADR 0012 decisions 5 and 6)', () => {
     expect(failure?.severity).toBe('error');
   });
 
+  it('retries a response that finished cleanly but does not satisfy the schema', async () => {
+    const { base, recording } = await setUp('cinderella', 'cinderella-scene-13');
+    // Valid JSON, `STOP`, and missing a required digest field. `parseWriterResponse` already
+    // treats this exactly like unparseable output, so the retry shape has to as well — before,
+    // a `STOP` that failed validation got no retry at all and fell straight to salvage.
+    const client = new ScriptedClient([
+      response(JSON.stringify({ prose: 'a scene', scene_digest: { event_summary: 'x' } })),
+      response(JSON.stringify(recording.response)),
+    ]);
+
+    const compiled = await compileScene({ ...base, client });
+
+    expect(client.requests).toHaveLength(2);
+    expect(compiled.calls.map((call) => call.purpose)).toEqual(['writer', 'writer_retry']);
+    expect(compiled.digest.event_summary).not.toBe('');
+  });
+
   it('does not retry a response that parsed cleanly', async () => {
     const { base, recording } = await setUp('cinderella', 'cinderella-scene-13');
     const client = new ScriptedClient([response(JSON.stringify(recording.response))]);
