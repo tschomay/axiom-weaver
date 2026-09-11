@@ -50,6 +50,7 @@ export default async function EditPage({
     <EditView
       storyId={storyId}
       published={pkg !== null}
+      retainedVersions={await repository.listPackageVersions(storyId)}
       initialSection={named}
       initialScene={typeof scene === 'string' ? scene : null}
       initial={{

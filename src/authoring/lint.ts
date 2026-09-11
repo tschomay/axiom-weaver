@@ -34,7 +34,7 @@ import {
   type SceneCard,
   type StoryPackage,
 } from '../schema/story-package';
-import { sceneCardCrossReferences } from '../fixtures/load';
+import { sceneCardCrossReferences } from '../fixtures/cross-reference';
 import { walkPlantObligations } from '../plants/obligation-walk';
 import { STYLE_PRESETS, cardFromPreset } from '../voice/voice-card';
 import { WorldModel } from '../world-model/world-model';

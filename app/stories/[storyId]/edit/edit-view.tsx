@@ -18,6 +18,7 @@ import { VoiceSection } from './voice-section';
 import { WorldSection } from './world-section';
 import { ScenesSection } from './scenes-section';
 import { PublishSection } from './publish-section';
+import { TransferPanel } from './transfer-panel';
 
 export interface ManuscriptPayload extends Manuscript {
   lint: LintResult;
@@ -58,12 +59,15 @@ export function EditView({
   storyId,
   initial,
   published,
+  retainedVersions,
   initialSection,
   initialScene,
 }: {
   storyId: string;
   initial: ManuscriptPayload;
   published: boolean;
+  /** Retained `package_version`s, so the escape hatch can export any one of them. */
+  retainedVersions: readonly number[];
   /** `null` means the URL named no section: the drill-down list, on a narrow viewport. */
   initialSection: EditorSection | null;
   /** The Scene Card the URL names, if any — the third level of the drill-down. */
@@ -288,6 +292,7 @@ export function EditView({
     voice: 0,
     world: counts.entities + counts.relationships,
     scenes: counts.scenes,
+    transfer: 0,
     publish: lint.errors.length,
   };
 
@@ -388,6 +393,14 @@ export function EditView({
               problemsFor={problemsFor}
               openSceneId={openScene}
               onOpenScene={showScene}
+            />
+          ) : null}
+          {section === 'transfer' ? (
+            <TransferPanel
+              storyId={storyId}
+              pkg={pkg}
+              retainedVersions={retainedVersions}
+              onImport={edit}
             />
           ) : null}
           {section === 'publish' ? (
