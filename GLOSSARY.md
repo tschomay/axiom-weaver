@@ -61,6 +61,7 @@ Grouped the way `CONTEXT.md` groups them; alphabetical within each group.
 | Manuscript | The author's mutable, unversioned working copy of a Story Package — the only thing an edit writes. | A retained `package_version` is immutable because editions pin it forever; the Manuscript is where an author's every-few-seconds writes go so that invariant never has to bend. Not prose, and not the Working Draft (which is compiled *scenes*). | Seeded empty, from the current package, or duplicated from any retained version of any story (ADR 0017). |
 | Package linter | The one check that answers "what is wrong with this package", in two severities. | The errors hand-authoring actually produces are cross-reference errors, not prose ones — so tooling, not author discipline, is what catches them. | Read continuously by the authoring screen and as a gate by publish; every problem carries the path of the field that owns it. |
 | Proposals queue | Pending volitional state changes the engine can't auto-commit. | Volitional facts are where blind trust would hurt most; queuing forces a human decision. | Author reviews and resolves from the scene compile view. |
+| Prose grounding | Checking a scene's own generated prose against World Model state and the claimed re-anchoring band, via digest fields extracted in the same writer call (ADR 0018). | Every other guardrail compared self-reported side-channels to each other; nothing compared prose to what actually happened until this. | `grounded_claims` feeds the amnesia guard; `reanchor_used[].anchor_text` feeds told-ledger miscalibration — both repaired, never blocking. |
 | Publish | The single act that turns a Manuscript into the next retained `package_version`. | Concentrates the strict parse, the linter gate and staleness propagation into one deliberate moment instead of firing them on every save. | Strict-parse → lint → `max(retained) + 1` → retain → repoint; an `error` blocks it, a `warn` never does (ADR 0017). |
 | Read-time run loop | The unattended run: writer call → validation → continuity pass → rollup → flush, per scene (ADR 0014). | Batch generation with resumable progress survives a restart; live streaming would not. | `npm run telling -- <fixture>`, or `POST .../tellings`. |
 | Recitation control | Detection defined as exactly `finishReason: RECITATION`, nothing else. | The compiler holds no canonical source prose to diff against locally, so the API's own signal is the only reliable one. | Not configured — a single check on the API response (ADR 0013). |
@@ -78,7 +79,7 @@ author fixed Fabula/Syuzhet up front. See [ADR 0002](docs/adr/0002-seam-failure-
 
 | Mode | Looks like | Digest-detectable? | Caught by |
 | --- | --- | --- | --- |
-| Amnesia | Narration contradicts a fact the reader already holds true. | No | State-update validator (`unentailed_reversion`) |
+| Amnesia | Narration contradicts a fact the reader already holds true. | Partially | State-update validator (`unentailed_reversion` + `prose_grounding_mismatch`) |
 | Character-voice homogenization | Dialogue/interiority reads interchangeable across characters. | No | Generation-time only (Voice Card), unverified |
 | Cold opens / hard resets | A scene ignores the prior scene's closing situation. | Yes | Continuity pass |
 | Dropped setup | An unpaid plant, or a payoff with no plant. | Yes | Plant-obligation walk |

@@ -19,7 +19,7 @@
 
 import { z } from 'zod';
 import { REANCHOR_BANDS, SceneDigestSchema } from '../digest/scene-digest';
-import { IMAGERY_SIGNATURE_CAP, TWO_SENTENCE_CHARS } from '../digest/scene-digest';
+import { ANCHOR_TEXT_CHARS, IMAGERY_SIGNATURE_CAP, TWO_SENTENCE_CHARS } from '../digest/scene-digest';
 
 /**
  * The only two diagnostics the *writer* self-reports (ADR 0012 decision 1).
@@ -171,10 +171,46 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
               properties: {
                 entity_id: { $ref: '#/$defs/entityRef' },
                 band: { type: 'string', enum: [...REANCHOR_BANDS] },
+                anchor_text: {
+                  anyOf: [{ type: 'string', maxLength: ANCHOR_TEXT_CHARS }, { type: 'null' }],
+                  description:
+                    'The distinguishing clause you actually wrote to place this entity — copied ' +
+                    'from the prose, not paraphrased. null if band is "assume" (nothing was ' +
+                    'written to anchor it).',
+                },
               },
-              required: ['entity_id', 'band'],
-              propertyOrdering: ['entity_id', 'band'],
+              required: ['entity_id', 'band', 'anchor_text'],
+              propertyOrdering: ['entity_id', 'band', 'anchor_text'],
             },
+          },
+          grounded_claims: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                entity_id: { $ref: '#/$defs/entityRef' },
+                column: {
+                  type: 'string',
+                  description: 'A World Model column name, exactly as it appears in the payload.',
+                },
+                asserted_value: {
+                  anyOf: [
+                    { type: 'string' },
+                    { type: 'number' },
+                    { type: 'boolean' },
+                    { type: 'null' },
+                  ],
+                  description: 'The value the prose asserts for this column, as of scene close.',
+                },
+              },
+              required: ['entity_id', 'column', 'asserted_value'],
+              propertyOrdering: ['entity_id', 'column', 'asserted_value'],
+            },
+            description:
+              'Physical/epistemic-tier facts the prose states or implies about entities present ' +
+              'in the scene that the World Model already tracks — only ones the prose actually ' +
+              'touches, not a restatement of everything you know. Leave empty if the prose makes ' +
+              'no such claims.',
           },
         },
         required: [
@@ -186,6 +222,7 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
           'imagery_signature',
           'closing_situation',
           'reanchor_used',
+          'grounded_claims',
         ],
         propertyOrdering: [
           'event_summary',
@@ -196,6 +233,7 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
           'imagery_signature',
           'closing_situation',
           'reanchor_used',
+          'grounded_claims',
         ],
       },
       stateUpdates: {

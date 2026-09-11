@@ -118,6 +118,19 @@ Three severities, and — per the map's Notes ("nothing may block on an author w
   issue #20 (compiled editions) can diff which proposals landed in which run.
 - **`info`** — an accepted volitional commit. Logged for the same run-diffing purpose.
 
+## Addendum (2026-09-11)
+
+[ADR 0018](0018-prose-grounding.md) runs §2's `unentailed_reversion` test a second time, over a
+second input: the new `grounded_claims` digest field (a scene's prose-derived claims about
+World-Model-tracked entities) instead of `state_updates`. Same rule, same "appears nowhere in
+`entry_state`/`exit_state`/`required_beats`" test — this is not a new rule, it's the existing one
+finally reaching the thing this ADR's own worked example was always implicitly about (the engine
+not drifting away from a prior commitment), applied to what the prose says instead of only what
+the engine proposed to write. Unlike a rejected `state_update`, a mismatch here has no World Model
+value to fall back to — the World Model was never wrong, only the prose contradicts it — so it
+surfaces as a distinct diagnostic, `prose_grounding_mismatch`, repaired rather than rejected (ADR
+0018 §4), at the same post-generation checkpoint (§1) `state_updates` are already validated at.
+
 ## Consequences
 
 - `docs/schema/story-package.md`'s "what this schema deliberately does not settle" pointer to

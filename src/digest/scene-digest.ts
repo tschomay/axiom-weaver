@@ -6,6 +6,12 @@
  * ties to a seam-failure rubric mode (ADR 0002) or a named consumer — a field earns its place by
  * making some failure detectable, so nothing here is added speculatively.
  *
+ * ADR 0018 adds two more, piggybacked on this same structured call rather than a second one:
+ * `grounded_claims` (physical/epistemic claims the prose makes about World-Model-tracked
+ * entities, checked by the state-update validator's amnesia guard) and `reanchor_used[].
+ * anchor_text` (a short extract of the clause actually used to place an entity, checked for
+ * internal consistency against the claimed band by the continuity pass).
+ *
  * The caps in ADR 0003 decision 5 are enforced by the schema itself rather than by prompt
  * wording, because the schema is what the model is decoded against.
  */
@@ -29,16 +35,32 @@ export const TWO_SENTENCE_CHARS = 400;
  */
 const cappedSentences = z
   .string()
-  .transform((text) => (text.length <= TWO_SENTENCE_CHARS ? text : trimToCap(text)));
+  .transform((text) => (text.length <= TWO_SENTENCE_CHARS ? text : trimToCap(text, TWO_SENTENCE_CHARS)));
 
 /** Cut at the cap, then back off to the last sentence end, or failing that the last word. */
-function trimToCap(text: string): string {
-  const cut = text.slice(0, TWO_SENTENCE_CHARS);
+function trimToCap(text: string, maxChars: number): string {
+  const cut = text.slice(0, maxChars);
   const sentence = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('! '), cut.lastIndexOf('? '));
-  if (sentence > TWO_SENTENCE_CHARS / 2) return cut.slice(0, sentence + 1);
+  if (sentence > maxChars / 2) return cut.slice(0, sentence + 1);
   const word = cut.lastIndexOf(' ');
-  return `${(word > TWO_SENTENCE_CHARS / 2 ? cut.slice(0, word) : cut).trimEnd()}…`;
+  return `${(word > maxChars / 2 ? cut.slice(0, word) : cut).trimEnd()}…`;
 }
+
+/**
+ * ADR 0018 decision 1: "roughly a clause's length" — the mechanical proxy for ADR 0009 §6's craft
+ * rule ("a distinguishing clause, not a re-explanation"). Short enough that a full re-establishing
+ * paragraph reliably hits the cap and gets trimmed, which is exactly the signal decision 3's
+ * internal-consistency check reads.
+ */
+export const ANCHOR_TEXT_CHARS = 160;
+
+const cappedAnchorText = z
+  .string()
+  .min(1)
+  .nullable()
+  .transform((text) =>
+    text === null || text.length <= ANCHOR_TEXT_CHARS ? text : trimToCap(text, ANCHOR_TEXT_CHARS),
+  );
 
 export const IMAGERY_SIGNATURE_CAP = 3;
 
@@ -70,6 +92,28 @@ export const ImagerySignatureSchema = z.object({
 export const ReanchorUsedSchema = z.object({
   entity_id: z.string().min(1),
   band: z.enum(REANCHOR_BANDS),
+  /**
+   * ADR 0018 decision 1/3 — a short extract of the clause actually used to place this entity,
+   * `null` when the band is `assume` (nothing was written to anchor it). Checked for internal
+   * consistency against `band` (a light band whose `anchor_text` hit the cap above is
+   * inconsistent on its face), not independently verified against the prose word-for-word.
+   */
+  anchor_text: cappedAnchorText.default(null),
+});
+
+/**
+ * ADR 0018 decision 1/2 — a physical/epistemic-tier claim the prose makes about a
+ * World-Model-tracked entity. Checked by the state-update validator's amnesia guard
+ * (`unentailed_reversion`, ADR 0005 §2) against the entity's actually-committed World Model
+ * value — the same test that already runs over `state_updates`, run here over a second input.
+ * `asserted_value` mirrors `state_updates`' own value union (`StateValue`): the writer proposes a
+ * value only, never a tier — tier is looked up from the column name at check time, same as ADR
+ * 0005's `state_updates` handling.
+ */
+export const GroundedClaimSchema = z.object({
+  entity_id: z.string().min(1),
+  column: z.string().min(1),
+  asserted_value: z.union([z.string(), z.number(), z.boolean(), z.null()]),
 });
 
 export const SceneDigestSchema = z.object({
@@ -83,10 +127,13 @@ export const SceneDigestSchema = z.object({
   closing_situation: cappedSentences,
   /** ADR 0009 decision 8 — self-reported, never independently re-verified against the prose. */
   reanchor_used: z.array(ReanchorUsedSchema).default([]),
+  /** ADR 0018 decision 1 — scoped to entities the told-ledger already tracks, naturally sparse. */
+  grounded_claims: z.array(GroundedClaimSchema).default([]),
 });
 
 export type ImagerySignature = z.infer<typeof ImagerySignatureSchema>;
 export type ReanchorUsed = z.infer<typeof ReanchorUsedSchema>;
+export type GroundedClaim = z.infer<typeof GroundedClaimSchema>;
 export type SceneDigest = z.infer<typeof SceneDigestSchema>;
 
 /**
@@ -167,6 +214,8 @@ export async function rollUp(
       closing_situation: last.digest.closing_situation,
       // A band is a per-scene decision about one moment; a window has no single band to report.
       reanchor_used: [],
+      // Same reasoning: a claim is a point-in-time assertion, not a thread a window aggregates.
+      grounded_claims: [],
     },
   };
 }

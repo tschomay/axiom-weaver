@@ -39,6 +39,7 @@ import {
 import { WorldModel, type WorldModelRow } from '../world-model/world-model';
 import type { NewStateLogEntry, StateLog, StateLogStatus } from '../world-model/state-log';
 import { diagnostic, type Diagnostic } from './diagnostics';
+import type { SceneDigest } from '../digest/scene-digest';
 
 /** Author-time compiling has a human present; read-time never does. */
 export type Occasion = 'author_time' | 'read_time';
@@ -432,6 +433,63 @@ export function validateStateUpdates(options: ValidateOptions): ValidationResult
     .filter((entry): entry is NewStateLogEntry => entry !== null);
 
   return { scene, occasion, verdicts, diagnostics, entries };
+}
+
+// --- Prose grounding (ADR 0018) -------------------------------------------------------------
+
+export interface GroundedClaimMismatch {
+  readonly entity_id: string;
+  readonly column: string;
+  readonly asserted_value: StateValue;
+  readonly committed_value: StateValue;
+}
+
+/**
+ * ADR 0018 decision 2: the amnesia guard's own test — §2's `unentailed_reversion` — run a second
+ * time, over `grounded_claims` instead of `state_updates`. Must run *before* this scene's own
+ * `state_updates` are committed (`model` is read as of scene entry), the same snapshot
+ * `unentailed_reversion` itself reads inside `validateStateUpdates`.
+ *
+ * Unlike `state_updates`, a claim is never committed and there is nothing to accept or reject —
+ * it is a read-out of what the prose already asserts, not a proposed write — so this returns
+ * mismatches for the caller to route into the continuity pass's repair machinery (ADR 0011 §5)
+ * instead of a `Diagnostic` directly: the World Model was never wrong, only the prose disagrees
+ * with it, and "what happened about it" is exactly what `continuity_seam_repaired`/
+ * `continuity_repair_rejected` already exist to record (`diagnostics.ts`).
+ */
+export function checkGroundedClaims(
+  scene: SceneCard,
+  digest: Pick<SceneDigest, 'grounded_claims'>,
+  model: WorldModel,
+): GroundedClaimMismatch[] {
+  const mismatches: GroundedClaimMismatch[] = [];
+
+  for (const claim of digest.grounded_claims) {
+    const table = model.tableOf(claim.entity_id);
+    if (table === null) continue; // extraction named an entity the World Model doesn't have
+
+    const authority = columnAuthority(table, claim.column);
+    // Physical/epistemic claims only (ADR 0018 decision 1's own scope) — an unknown column or a
+    // volitional one may legitimately have diverged run to run (ADR 0005 §4) or not exist at all;
+    // either way it is an extraction-quality question, not this checkpoint's to flag.
+    if (!authority.known || !isAutoCommittedTier(authority.tier)) continue;
+
+    const current = (model.value(claim.entity_id, claim.column) ?? null) as StateValue;
+    // Only a change *away from* a committed value can be a reversion — the same carve-out
+    // `resolveAutoCommitted`'s amnesia guard makes below for a column that was null.
+    if (current === null) continue;
+    if (current === claim.asserted_value) continue;
+    if (isEntailedByCard(claim.asserted_value, scene, model)) continue;
+
+    mismatches.push({
+      entity_id: claim.entity_id,
+      column: claim.column,
+      asserted_value: claim.asserted_value,
+      committed_value: current,
+    });
+  }
+
+  return mismatches;
 }
 
 function resolveAutoCommitted(
