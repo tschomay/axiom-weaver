@@ -59,6 +59,7 @@ What loading the two fixtures through all of it turned up is in
 | Compiled edition documents, run index, Baked pointer | `src/edition/edition.ts`, `src/persistence/story-repository.ts` | ADR 0015 §4 |
 | The run report, its cross-run aggregation by Scene Card, the wall-clock estimate | `src/edition/run-report.ts` | ADR 0014 §5/§6/§8 |
 | The Working Draft: field-scoped digest diff, blunt staleness propagation | `src/draft/working-draft.ts` | ADR 0015 §1/§3 |
+| Comparing two tellings of one `package_version` — digest fields, volitional divergence, both performances | `src/edition/edition-diff.ts` | ADR 0015 §6 |
 | Author-time stepwise compiling into the draft | `src/draft/draft-compile.ts` | ADR 0011 §2, ADR 0016 §3 |
 | Manual Baked promotion, refused for a degraded run | `StoryRepository.promoteToBaked` | ADR 0014 §9 |
 
@@ -127,6 +128,20 @@ npm run telling -- cinderella --promote    # …and promote the run to Baked
 npm run run-report -- cinderella           # every run of a story, aggregated by Scene Card
 ```
 
+### Comparing two tellings
+
+```bash
+npm run compare -- cinderella                       # the story's two most recent finished runs
+npm run compare -- <runIdA> <runIdB>
+npm run compare -- cinderella --prose 13            # …and read scene 13 from both
+```
+
+Same story, told uniquely each time is the whole proposition, and this is where it stops being a
+claim: the Scene Digest fields that came out differently per scene, the volitional columns the two
+runs resolved differently (ADR 0005 §4 grants exactly that freedom), and both performances to read.
+A pair has to share a `package_version` — a cross-version comparison asks what an author's *edit*
+did, which is the Working Draft's staleness, not generation variance.
+
 `npm run telling` is what pressing "generate a new telling" does, minus the button. It mints a
 fresh run id, compiles every scene in order, flushes each one to Blob before the next starts, and
 prints the run report: per-scene calls, diagnostics, continuity repairs, degraded scenes, and the
@@ -168,6 +183,7 @@ filesystem under `.data/` (gitignored) at exactly the same pathnames. See `.env.
 | `/stories/{storyId}` | The **Working Draft** and the **scene compile view**. Compile a card and read what it produced — the `error` and `warn` diagnostics named against the exact field each one contradicts, and the volitional proposals waiting on a decision. Stale badges sit inline on the scene list, each carrying ADR 0015 §6's field-scoped diff as its popover. |
 | `/stories/{storyId}/inspector` | The **World & Discourse inspector**: the World Model and the told-ledger as two tabs over one scene-index scrubber, both reconstructed rather than stored. |
 | `/stories/{storyId}/runs` | The **run report**: every run aggregated by Scene Card — "this card degraded on 4 of 20 reads" — and the manual promotion of a completed, non-degraded run to Baked. |
+| `/stories/{storyId}/diff` | **Compare two tellings** of the same `package_version`: per scene, the Scene Digest fields that came out differently, the volitional proposals the two runs resolved differently, and both performances to read side by side. Never a line-level text diff of prose — two performances of one Scene Card share almost no words. |
 | `/stories/{storyId}/read` | **Generate a telling** — the whole compiler behind one button: a fresh run id, one writer call per scene in order, scene-count progress while it runs, and the finished edition as prose. Also reads back any telling the story has already produced. |
 
 The Working Draft has the same two moves at author-time: **Compile the rest** builds every card the
@@ -219,6 +235,7 @@ Whatever the light model writes is recorded as written by it.
 | `POST /api/stories/{storyId}/proposals/{sequence}` | accept or reject one volitional proposal (author-gated) |
 | `GET /api/stories/{storyId}/inspector?scene=N` | both inspector tabs at one scrubber position |
 | `GET /api/stories/{storyId}/run-report` | every run of a story, aggregated by Scene Card, with each run's promotability |
+| `GET /api/stories/{storyId}/diff?a={runId}&b={runId}` | two tellings of one `package_version` set beside each other |
 | `GET /api/tellings/{runId}/report` | one run's full report |
 | `GET /api/author/session` | whether this instance wants a token before offering a write |
 | `GET /api/stories/{storyId}/draft/scenes` | the Working Draft's prose, in order, however far it has been built |

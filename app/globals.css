@@ -461,3 +461,24 @@ pre.quota-detail {
   max-height: 12rem;
   margin: 0.5rem 0 0;
 }
+
+/* Comparing two tellings (ADR 0015 §6). */
+.diff-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.diff-picker select {
+  max-width: min(100%, 24rem);
+  margin-left: 0.25rem;
+}
+
+/* Side by side to read, never a line-level diff: two performances share almost no words. */
+.diff-prose {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.5rem;
+}
