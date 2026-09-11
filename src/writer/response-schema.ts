@@ -19,7 +19,7 @@
 
 import { z } from 'zod';
 import { REANCHOR_BANDS, SceneDigestSchema } from '../digest/scene-digest';
-import { IMAGERY_SIGNATURE_CAP } from '../digest/scene-digest';
+import { IMAGERY_SIGNATURE_CAP, TWO_SENTENCE_CHARS } from '../digest/scene-digest';
 
 /**
  * The only two diagnostics the *writer* self-reports (ADR 0012 decision 1).
@@ -109,15 +109,33 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
   return {
     type: 'object',
     $defs: {
-      factRef: { type: 'string' },
-      entityRef: { type: 'string' },
+      factRef: {
+        type: 'string',
+        description:
+          'A fact_ref slug, copied verbatim from the Scene Card wherever one is given (the ' +
+          'reader-must-learn list, must-stay-hidden, and the plant and payoff instructions, ' +
+          'which open with the slug). For a fact the card did not name, coin a short ' +
+          'lower_snake_case slug. Never a sentence.',
+      },
+      entityRef: {
+        type: 'string',
+        description:
+          'A World Model entity id exactly as it appears in the payload (char_…, loc_…, obj_…) ' +
+          '— never a display name.',
+      },
       imagerySignature: {
         type: 'object',
         properties: {
-          image: { type: 'string' },
+          image: {
+            type: 'string',
+            description: 'The concrete image as it appears in the prose, not the domain label.',
+          },
           domain: {
             anyOf: [{ type: 'string' }, { type: 'null' }],
-            description: 'A Voice Card imagery_palette domain, or null for an ad hoc image.',
+            description:
+              'The Voice Card imagery domain this image was drawn from, copied verbatim from ' +
+              'that list, or null for an image outside it. The domain is the category; the ' +
+              'image is the concrete phrasing you actually wrote — they are never the same text.',
           },
         },
         required: ['image', 'domain'],
@@ -126,7 +144,11 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
       sceneDigest: {
         type: 'object',
         properties: {
-          event_summary: { type: 'string', description: 'At most two sentences.' },
+          event_summary: {
+            type: 'string',
+            maxLength: TWO_SENTENCE_CHARS,
+            description: 'At most two sentences.',
+          },
           entities_on_stage: { type: 'array', items: { $ref: '#/$defs/entityRef' } },
           facts_revealed: { type: 'array', items: { $ref: '#/$defs/factRef' } },
           plants_opened: { type: 'array', items: { $ref: '#/$defs/factRef' } },
@@ -138,6 +160,7 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
           },
           closing_situation: {
             type: 'string',
+            maxLength: TWO_SENTENCE_CHARS,
             description:
               'Where the scene leaves things, physically and emotionally. At most two sentences.',
           },

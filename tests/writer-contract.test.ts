@@ -6,7 +6,9 @@ import {
   writerResponseJsonSchema,
 } from '@/writer/response-schema';
 import { finalParagraph, lengthVerdict, salvageProse, wordCount } from '@/writer/salvage';
-import { SceneDigestSchema } from '@/digest/scene-digest';
+import { SceneDigestSchema, TWO_SENTENCE_CHARS } from '@/digest/scene-digest';
+import { plantInstruction, payoffInstruction } from '@/plants/obligation-walk';
+import { renderVoiceCard, cardFromPreset } from '@/voice/voice-card';
 import { checkVarianceContract, shouldRetry } from '@/variance/variance-contract';
 import { SceneCardSchema } from '@/schema/story-package';
 
@@ -250,5 +252,79 @@ describe('client-side response validation', () => {
     expect(result.success).toBe(true);
     expect(result.data?.diagnostics).toEqual([]);
     expect(result.data?.state_updates.updates).toEqual([]);
+  });
+});
+
+describe('the reporting tokens the writer is asked for', () => {
+  it('opens the plant instruction with the fact_ref it wants back in plants_opened', () => {
+    const instruction = plantInstruction('the_dragons_smoke_smells_of_clover');
+    // The slug verbatim, so the writer has a token to copy rather than a sentence to echo.
+    expect(instruction).toContain('`the_dragons_smoke_smells_of_clover`');
+    expect(instruction).toContain('plants_opened');
+    // And the deslugged phrase, which is what actually goes on the page.
+    expect(instruction).toContain("the dragon's smoke smells of clover".replace("'", ''));
+  });
+
+  it('opens the payoff instruction the same way, for payoffs_closed', () => {
+    const instruction = payoffInstruction('loose_stair_rail');
+    expect(instruction).toContain('`loose_stair_rail`');
+    expect(instruction).toContain('payoffs_closed');
+  });
+
+  it('names neither the payoff scene nor any scene id, per ADR 0004 decision 5', () => {
+    expect(plantInstruction('loose_stair_rail')).not.toMatch(/scene_\d/);
+  });
+
+  it('describes factRef and entityRef so the writer returns slugs, not sentences', () => {
+    const defs = writerResponseJsonSchema()['$defs'] as Record<string, Record<string, unknown>>;
+    expect(defs['factRef']?.['description']).toMatch(/slug/i);
+    expect(defs['factRef']?.['description']).toMatch(/never a sentence/i);
+    expect(defs['entityRef']?.['description']).toMatch(/never a display name/i);
+  });
+
+  it('tells the writer an image and its domain are never the same text', () => {
+    const defs = writerResponseJsonSchema()['$defs'] as Record<string, Record<string, unknown>>;
+    const properties = defs['imagerySignature']?.['properties'] as Record<
+      string,
+      Record<string, unknown>
+    >;
+    expect(properties['domain']?.['description']).toMatch(/never the same text/i);
+    expect(properties['image']?.['description']).toMatch(/not the domain label/i);
+  });
+
+  it('sells the Voice Card palette as domains to draw from, not phrases to reuse', () => {
+    const rendered = renderVoiceCard(cardFromPreset('gothic_brooding'));
+    expect(rendered).toMatch(/Imagery domains/);
+    expect(rendered).toMatch(/never phrases to reuse verbatim/);
+  });
+});
+
+describe('the two-sentence caps (ADR 0003 decision 5)', () => {
+  it('constrains decoding on the wire, where the cap can still do something', () => {
+    const defs = writerResponseJsonSchema()['$defs'] as Record<string, Record<string, unknown>>;
+    const properties = defs['sceneDigest']?.['properties'] as Record<
+      string,
+      Record<string, unknown>
+    >;
+    expect(properties['event_summary']?.['maxLength']).toBe(TWO_SENTENCE_CHARS);
+    expect(properties['closing_situation']?.['maxLength']).toBe(TWO_SENTENCE_CHARS);
+  });
+
+  it('trims an over-long summary rather than throwing away the scene it came with', () => {
+    const long = `${'The stepsisters argued about the ribbons. '.repeat(20)}`;
+    const parsed = SceneDigestSchema.safeParse({
+      event_summary: long,
+      closing_situation: long,
+    });
+    expect(parsed.success).toBe(true);
+    expect(parsed.data?.event_summary.length).toBeLessThanOrEqual(TWO_SENTENCE_CHARS);
+    // Trimmed at a sentence end, not mid-word.
+    expect(parsed.data?.event_summary).toMatch(/ribbons\.$/);
+  });
+
+  it('leaves a summary inside the cap exactly as written', () => {
+    const summary = 'Cinderella loses a slipper on the stair.';
+    expect(SceneDigestSchema.parse({ event_summary: summary, closing_situation: 'x' })
+      .event_summary).toBe(summary);
   });
 });

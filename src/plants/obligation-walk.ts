@@ -67,9 +67,14 @@ export function deslug(factRef: string): string {
  *
  * Deliberately never names the payoff scene — that is what keeps it vague enough not to telegraph
  * while staying specific enough to act on.
+ *
+ * The slug is carried verbatim alongside the deslugged phrase because those two do different
+ * jobs: the phrase tells the writer what to put on the page, the slug is the token it has to
+ * report back. Without the slug the writer reports the instruction sentence itself, which makes
+ * every planting scene look like a dropped plant.
  */
 export function plantInstruction(factRef: string): string {
-  return `make the reader register ${deslug(factRef)} without dwelling on it — a detail that passes by, not a flagged clue`;
+  return `\`${factRef}\` — make the reader register that ${deslug(factRef)}, without dwelling on it: a detail that passes by, not a flagged clue. Report \`${factRef}\` in plants_opened.`;
 }
 
 /**
@@ -78,10 +83,11 @@ export function plantInstruction(factRef: string): string {
  * ADR 0004 templated only the plant side. The paying-off scene needs its own, symmetric
  * instruction — not to invent the resolution (the required beats usually already narrate it), but
  * to tell the writer which `fact_ref` to report in `payoffs_closed`, so the post-hoc obligation
- * check has something to verify against.
+ * check has something to verify against. Same shape as the plant side: the slug verbatim, then
+ * the readable phrase.
  */
 export function payoffInstruction(factRef: string): string {
-  return `this scene resolves ${deslug(factRef)} (planted earlier — you do not need to invent where) — report it in payoffs_closed once resolved`;
+  return `\`${factRef}\` — this scene resolves that ${deslug(factRef)} (planted earlier; you do not need to invent where). Report \`${factRef}\` in payoffs_closed once it is resolved.`;
 }
 
 /** Facts known from the World Model seed: `character_knowledge` rows with no learning scene. */

@@ -247,7 +247,12 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
   }
 
   let parsed = parseWriterResponse(attempt);
-  let retryClass = parsed === null ? retryClassFor(attempt.finish_reason) : null;
+  // A response that finished cleanly but does not satisfy the schema is the `MALFORMED_RESPONSE`
+  // case by another route — `parseWriterResponse` already treats the two the same, so the retry
+  // shape has to as well (ADR 0012 decision 6). Without this fallback a `STOP` that failed
+  // validation got no retry at all and went straight to salvage.
+  let retryClass =
+    parsed === null ? (retryClassFor(attempt.finish_reason) ?? 'malformed_response') : null;
 
   // MAX_TOKENS with prose complete is not a retry — it is a salvage, handled below. Only a cut
   // that landed *inside* prose warrants re-running the whole scene.

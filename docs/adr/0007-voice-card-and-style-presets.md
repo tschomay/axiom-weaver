@@ -95,3 +95,24 @@ not just look plausible as a schema.
   actually surface in the Scene Digest's `imagery_signature`) rather than against the
   card's text description — flag deviation to the continuity pass, never gate the
   read-time run on it.
+
+## Amendment (2026-09-11)
+
+Decision 3's rendering template calls the palette line *"Preferred imagery (draw from these before
+inventing new ones)"*. [ADR 0010](0010-repetition-and-voice-drift-control.md) §4 — written after
+this one — reinterprets what those entries **are**: "a palette domain is the motif declaration; the
+ledger governs only the vehicle within it." The template never carried that word into the prompt,
+and the first live run of a fixture showed the cost (issue #62): the writer read the entries as
+stock phrases and lifted them into the prose verbatim, producing lines like *"shaking a shift like
+a wet flag pulled from laundry on a line of pure grievance"*, and tagged its `imagery_signature`
+entries with `image === domain`, which makes ADR 0010's whole tag-equality mechanism degenerate.
+
+The line now names them as domains and says what to do with them:
+
+```
+- Imagery domains (draw fresh images from within these before inventing new ones; they are
+  domains to draw from, never phrases to reuse verbatim): {imagery_palette}
+```
+
+This is ADR 0010's decision reaching back into this ADR's template, not a new one. Nothing else in
+decision 3 changes, and decision 5's separation of `tone` from the voice is untouched.

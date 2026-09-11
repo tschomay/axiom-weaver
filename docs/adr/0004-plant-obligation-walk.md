@@ -92,3 +92,25 @@ too loudly. The walk exists so the writer sees an obligation, never the payoff.
 - Authors gain an implicit naming convention: `fact_ref` slugs used in a `pays_off` entry
   should read as a short plain-language label, since the walk turns them directly into the
   writer's instruction.
+
+## Amendment (2026-09-11)
+
+Decision 5 templates the plant-side instruction from the `fact_ref` alone, deslugged — and the
+implementation rendered *only* the deslugged phrase. The first live run of
+`the-dragon-of-thistlewick` (issue #57) showed what that costs: the writer was asked to "report
+each in `plants_opened`" without ever being shown the token to report, so it reported the
+instruction sentence itself, and decision 6's post-generation check logged a false
+`plant_obligation_missed` on the one scene that had actually planted correctly.
+
+The instruction now carries the slug verbatim alongside the deslugged phrase, because the two do
+different jobs — the phrase is what goes on the page, the slug is what comes back in the digest:
+
+```
+`the_dragons_smoke_smells_of_clover` — make the reader register that the dragons smoke smells of
+clover, without dwelling on it: a detail that passes by, not a flagged clue. Report
+`the_dragons_smoke_smells_of_clover` in plants_opened.
+```
+
+[ADR 0012](0012-writer-prompt-contract.md) decision 3's payoff-side instruction gets the same
+shape, for symmetry and for the same reason. Decision 5's actual constraint is untouched: neither
+instruction names the payoff scene, so the plant still cannot telegraph where it lands.
