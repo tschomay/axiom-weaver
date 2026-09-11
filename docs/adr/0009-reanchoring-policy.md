@@ -95,6 +95,18 @@ actually check it, despite the rubric already committing it to being digest-dete
    miscalibration actually checkable: the continuity pass computes the expected band from
    told-ledger state at scene entry and compares it against `reanchor_used`.
 
+## Addendum (2026-09-11)
+
+[ADR 0018](0018-prose-grounding.md) partially closes §8's "self-reported and not independently
+re-verified against the prose" caveat. `reanchor_used` entries gain `anchor_text: string | null` —
+a short extract of the clause actually used to place the entity — and the continuity pass checks
+it for internal consistency against the claimed band (a light band claimed alongside an
+`anchor_text` long enough to have hit the field's own length cap is inconsistent on its face). This
+is still not independent verification against the prose word-for-word, only against what the
+writer itself reports having written — a narrower claim than "verified," but a real one where
+before there was none. Detected as a new finding (`reanchor_underreport`) inside the existing
+`told_ledger_miscalibration` mode, not a new mode.
+
 ## Consequences
 
 - `docs/schema/story-package.md`'s Scene Card table gains `force_reintroduce: fact_ref[]`.

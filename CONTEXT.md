@@ -216,12 +216,17 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   dropped setup is owned entirely by the plant-obligation walk instead). It may edit seams
   (openings, transitions, recycled imagery) but may **not** change events, enforced as a
   field-level rule: a repair may only touch prose plus `closing_situation`/`imagery_signature`/
-  `reanchor_used`, never `facts_revealed`/`plants_opened`/`payoffs_closed`/`state_updates`.
-  Runs author-time with full authority, and read-time once per scene against the persisted
-  edition (never a live reader, since read-time generation is batch — see Compile occasions);
-  a repair's downstream effect is handled by marking later scenes **stale**, not by cascading
-  or re-checking itself. Working on abstractions is what lets it scale to novel length. See
-  ADR 0011.
+  `reanchor_used`/`grounded_claims`, never `facts_revealed`/`plants_opened`/`payoffs_closed`/
+  `state_updates`. Runs author-time with full authority, and read-time once per scene against the
+  persisted edition (never a live reader, since read-time generation is batch — see Compile
+  occasions); a repair's downstream effect is handled by marking later scenes **stale**, not by
+  cascading or re-checking itself. Working on abstractions is what lets it scale to novel length.
+  Its repair primitives are also called from outside the pass, by the state-update validator's
+  prose-grounding checkpoint (see State-update tiers, below) — a second caller of the same
+  locate-and-swap machinery, not a fourth mode. `reanchor_used` self-reports now carry a short
+  `anchor_text` extract, checked for internal consistency against the claimed band — narrowing,
+  not yet closing, ADR 0009 §8's "self-reported and not independently re-verified" gap. See
+  ADR 0011, ADR 0018.
 - **State-update tiers** — the authority boundary on what the engine may commit:
   **physical** (location, possessions, time, injury) and **epistemic** (who now knows
   what) are engine-writable and auto-committed; **volitional/relational** (goals,
@@ -231,7 +236,12 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   card gave no grounds to touch (the **amnesia guard**). A volitional proposal is applied
   if compatible with the card's invariants, otherwise dropped; silence is always inaction,
   never invention, so cross-run divergence on a volitional column is accepted variance,
-  identical in kind to dialogue and imagery. See ADR 0005.
+  identical in kind to dialogue and imagery. The amnesia guard's same test also runs over
+  `grounded_claims` — physical/epistemic claims the writer extracts from its own generated
+  prose about World-Model-tracked entities — catching a contradiction that lives only in prose
+  and never touches `state_updates` for that column; since nothing was actually written wrong,
+  this repairs the prose (via the continuity pass's repair machinery) rather than falling back
+  to a prior value. See ADR 0005, ADR 0018.
 - **Writer prompt contract** — the single structured call that produces a scene:
   `prose → scene_digest → state_updates → diagnostics`, in that response order, so a
   streaming reader sees words immediately and everything after prose is written *about*
@@ -308,7 +318,7 @@ failures, ordered here worst to least severe.
 
 | Mode | Reader notices via | Digest-detectable? | Mechanism owner |
 | --- | --- | --- | --- |
-| **Amnesia** | Narration contradicts a fact they already hold true | No — it's a World Model contradiction, not a digest-continuity one | State-update validator (`unentailed_reversion`, ADR 0005) |
+| **Amnesia** | Narration contradicts a fact they already hold true | Partially — `grounded_claims` catches a claim the writer surfaces about a tracked entity; a contradiction the extraction step misses entirely still isn't caught | State-update validator (`unentailed_reversion` + `prose_grounding_mismatch`, ADR 0005, ADR 0018) |
 | **Character-voice homogenization** | Dialogue/interiority reads interchangeable across characters | No — no digest field captures it | Generation-time only (Voice Card), unverified |
 | **Voice drift** | The *narrator's* register, distance, or rhythm shifts scene to scene | No | Generation-time only (Voice Card), unverified |
 | **Cold opens / hard resets** | A scene ignores the prior scene's closing situation | Yes — `closing situation` | Continuity pass |

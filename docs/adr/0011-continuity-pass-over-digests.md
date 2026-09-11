@@ -118,6 +118,18 @@ list), and a scene's ending was overwritten with the one before it. `closing_sit
 carried over verbatim on both repair shapes. Decision 4's permission is unchanged — nothing exercises
 it, which is the point.
 
+**Repair primitives get a second caller.** [ADR 0018](0018-prose-grounding.md)
+(prose grounding) reuses this ADR's repair machinery from outside the pass itself:
+`REPAIRABLE_DIGEST_FIELDS` gains `grounded_claims` so a `prose_grounding_mismatch` finding from
+the state-update validator can repair via the same locate-and-swap primitive §5 built for
+`imagery_swap`, and `told_ledger_miscalibration` gains a second detection path
+(`reanchor_underreport`, checking the new `reanchor_used[].anchor_text` field for internal
+consistency) that reuses the existing `opening_rewrite` shape. Both go through
+`checkRepairAuthority` unchanged. Neither adds a fourth mode or reopens decision 1's three-mode
+scope — ownership of *deciding* something is wrong stays where ADR 0002 put it (amnesia with the
+state-update validator, told-ledger miscalibration with this pass); only the repair mechanics are
+shared, the same way any two callers of the same function share it.
+
 **Findings that repair the same words are repaired in one call.** Decision 5's two shapes are per
 *mode*; the implementation read that as per *finding*, so a scene with three `opening_rewrite`
 findings spent three calls each rewriting what the last one produced, each handed a `detail`

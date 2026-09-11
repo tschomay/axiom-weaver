@@ -77,6 +77,18 @@ repetition (same phrasing) with a plain tag-equality check — no fuzzy matching
 call. Rollup behavior (item 6 above) is unchanged: union then re-cap to 3 by recency, now
 operating on `{image, domain}` pairs instead of bare strings.
 
+## Addendum (2026-09-11)
+
+[ADR 0018](0018-prose-grounding.md) extends the digest field set again, for the same reason every
+prior extension has: it makes one more rubric-relevant thing checkable, not because it seemed
+useful. `grounded_claims: {entity_id, column, asserted_value}[]` — the physical/epistemic claims a
+scene's prose makes about entities the told-ledger already tracks — lets the state-update
+validator's existing `unentailed_reversion` test (ADR 0005 §2) run over prose-derived claims, not
+just `state_updates`. And `reanchor_used` (ADR 0009's addendum above) gains one more sub-field,
+`anchor_text: string | null`, a short extract of the actual clause used to place an entity, capped
+like the digest's other length-bounded fields. Both ride the same structured call this ADR's
+decision 3 already established — no second call.
+
 ## Consequences
 
 - Unblocks #12 (zoom-level context assembler), #13 (re-anchoring policy), and #14
