@@ -2,7 +2,7 @@
   "name": "axiom-weaver",
   "version": "0.1.0",
   "private": true,
-  "description": "The Dynamic Novel Compiler — a story authored once as a Story Package and performed into prose on every read.",
+  "description": "The Dynamic Novel Compiler \u2014 a story authored once as a Story Package and performed into prose on every read.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,6 +15,7 @@
     "compile-scene": "tsx scripts/compile-scene.ts",
     "telling": "tsx scripts/run-telling.ts",
     "run-report": "tsx scripts/run-report.ts",
+    "compare": "tsx scripts/compare.ts",
     "cache-check": "tsx scripts/cache-check.ts"
   },
   "dependencies": {
