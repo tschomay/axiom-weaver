@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -8,10 +8,15 @@ import { readFixturePackage } from '@/fixtures/load';
 import { SyntheticWriterClient } from '@/writer/synthetic-client';
 import { progressText, runTelling, type ProgressEvent } from '@/edition/run-loop';
 import { PlantWalkRejectedError } from '@/plants/obligation-walk';
+import { ABANDONED_AFTER_MS, hasStoppedReporting, mintRunId } from '@/edition/edition';
 import { DEGRADED_RUN_FRACTION, isRunDegraded } from '@/edition/run-report';
 import { renderRunReport } from '@/edition/report-view';
 import { scenesInOrder, type StoryPackage } from '@/schema/story-package';
 import type { ModelClient, ModelRequest, ModelResponse } from '@/writer/model-client';
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 async function withRepository<T>(run: (repository: StoryRepository) => Promise<T>): Promise<T> {
   const root = await mkdtemp(join(tmpdir(), 'axiom-run-loop-'));
@@ -251,6 +256,64 @@ describe('the read-time run loop (ADR 0014)', () => {
       // next reads this, and an outage is not something it can offer a way past.
       expect(manifest?.failure?.detail).toContain('503 UNAVAILABLE');
       expect(manifest?.failure?.quota_exhausted_for_today).toBe(false);
+    });
+  });
+
+  it('closes the manifest even when the rest of the close-out cannot be written', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await cinderella();
+      await repository.putPackage(pkg);
+      const scenes = scenesInOrder(pkg);
+
+      // The World Model snapshot is the first thing `closeOut` writes, and it is written before
+      // the manifest. A store that refuses it used to leave the run reading `running` for good —
+      // and a reader watching scene-count progress waits on a loop that is already gone.
+      vi.spyOn(repository, 'putEditionWorldModel').mockRejectedValue(new Error('blob refused'));
+
+      const events: ProgressEvent[] = [];
+      await expect(
+        runTelling({
+          pkg,
+          client: new FailingForScenes(
+            new SyntheticWriterClient(pkg),
+            new Set([scenes[1]!.id]),
+            'throw',
+          ),
+          repository,
+          outageRetries: 0,
+          outageBackoffMs: 0,
+          onProgress: (event) => events.push(event),
+        }),
+      ).rejects.toThrow('503 UNAVAILABLE');
+
+      const manifest = await repository.getEditionManifest(
+        (events[0] as { run_id: string }).run_id,
+      );
+      expect(manifest?.status).toBe('failed');
+      expect(manifest?.failure?.detail).toContain('503 UNAVAILABLE');
+    });
+  });
+
+  it('stamps every scene-boundary flush, so a dead run can be told from a slow one', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await cinderella();
+      await repository.putPackage(pkg);
+
+      const runId = mintRunId(pkg.story_id);
+      await runTelling({ pkg, client: new SyntheticWriterClient(pkg), repository, runId });
+      const manifest = await repository.getEditionManifest(runId);
+
+      expect(manifest?.updated_at).not.toBeNull();
+      // A finished run is never stalled, however long ago it finished.
+      expect(hasStoppedReporting(manifest!, new Date(Date.now() + ABANDONED_AFTER_MS * 10))).toBe(
+        false,
+      );
+      // A run still calling itself `running` long after its last word is not running.
+      const stuck = { ...manifest!, status: 'running' as const };
+      expect(hasStoppedReporting(stuck, new Date(Date.parse(stuck.updated_at!) + 1000))).toBe(false);
+      expect(
+        hasStoppedReporting(stuck, new Date(Date.parse(stuck.updated_at!) + ABANDONED_AFTER_MS + 1)),
+      ).toBe(true);
     });
   });
 

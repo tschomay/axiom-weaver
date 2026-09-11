@@ -182,6 +182,7 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
     state_log_path: null,
     started_at: startedAt.toISOString(),
     completed_at: null,
+    updated_at: startedAt.toISOString(),
     failure: null,
   };
 
@@ -260,20 +261,45 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
       // rather than flattened into "the run stopped". What to do about it is nobody's decision
       // here — the run is over either way.
       const quota = dailyQuotaFailure(error, input.writerModel ?? WRITER_MODEL);
-      await closeOut({
-        repository,
-        manifest,
-        report,
-        state,
-        status: 'failed',
-        failure: {
-          detail,
-          quota_exhausted_for_today: quota !== null,
-          model: quota?.model ?? input.writerModel ?? null,
-        },
-        startedAt,
-        now,
-      });
+      const failure = {
+        detail,
+        quota_exhausted_for_today: quota !== null,
+        model: quota?.model ?? input.writerModel ?? null,
+      };
+
+      // Close the manifest *first*, on its own. `closeOut` writes the World Model, the commit log
+      // and the Discourse Record before it touches the manifest, and a store that refuses any one
+      // of those would otherwise leave a dead run reading `running` forever — the reader waits on
+      // a loop that is already gone. The status is the one field somebody is blocked on.
+      manifest.status = 'failed';
+      manifest.failure = failure;
+      manifest.updated_at = now().toISOString();
+      await repository.putEditionManifest(manifest);
+      await repository.registerRun(manifest);
+
+      try {
+        // The rest of the close-out is worth having and is no longer load-bearing: the manifest
+        // above already says the run is over. A failure here must not replace the failure that
+        // actually ended the run.
+        await closeOut({
+          repository,
+          manifest,
+          report,
+          state,
+          status: 'failed',
+          failure,
+          startedAt,
+          now,
+        });
+      } catch (closeError) {
+        emit({
+          type: 'run_failed',
+          run_id: runId,
+          scene_number: sceneNumber,
+          detail: `${detail} (and the close-out did not finish: ${closeError instanceof Error ? closeError.message : String(closeError)})`,
+        });
+        throw error;
+      }
       emit({ type: 'run_failed', run_id: runId, scene_number: sceneNumber, detail });
       throw error;
     }
@@ -436,6 +462,7 @@ async function compileStep(input: CompileStepInput): Promise<SceneOutcome> {
   input.report.degraded_scene_count = degradedCount;
   input.report.budget = sumBudget(input.report.scenes, input.report.budget.expected_output_tokens);
 
+  input.manifest.updated_at = finishedAt.toISOString();
   await repository.putEditionManifest(input.manifest);
   await repository.putRunReport(input.report);
 
@@ -536,6 +563,7 @@ async function closeOut(input: {
   manifest.status = input.status;
   manifest.failure = input.failure ?? null;
   manifest.completed_at = completedAt.toISOString();
+  manifest.updated_at = completedAt.toISOString();
   manifest.world_model_path = editionWorldModelPath(manifest.run_id);
   manifest.discourse_path = editionDiscoursePath(manifest.run_id);
   manifest.state_log_path = editionStateLogPath(manifest.run_id);
