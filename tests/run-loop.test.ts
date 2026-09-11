@@ -12,7 +12,14 @@ import { ABANDONED_AFTER_MS, hasStoppedReporting, mintRunId } from '@/edition/ed
 import { DEGRADED_RUN_FRACTION, isRunDegraded } from '@/edition/run-report';
 import { renderRunReport } from '@/edition/report-view';
 import { scenesInOrder, type StoryPackage } from '@/schema/story-package';
-import type { ModelClient, ModelRequest, ModelResponse } from '@/writer/model-client';
+import {
+  RetryableStatusError,
+  type ModelClient,
+  type ModelRequest,
+  type ModelResponse,
+} from '@/writer/model-client';
+import { RunState } from '@/writer/run-state';
+import { metFact } from '@/digest/told-ledger';
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -419,5 +426,81 @@ describe('the read-time run loop (ADR 0014)', () => {
       expect(steps).toHaveLength(scenesInOrder(pkg).length);
       expect(steps[0]).toBe('scene-1');
     });
+  });
+});
+
+describe('a spent daily allowance is not an outage (issue #65)', () => {
+  /** Answers every call the way a key whose day is gone does. */
+  class QuotaExhaustedClient implements ModelClient {
+    calls = 0;
+    async generate(): Promise<ModelResponse> {
+      this.calls += 1;
+      throw new RetryableStatusError('429 RESOURCE_EXHAUSTED: GenerateRequestsPerDay', {
+        exhaustedForToday: true,
+        retryAfterMs: 28_000,
+      });
+    }
+  }
+
+  it('stops on the first refusal instead of re-attempting the step', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await cinderella();
+      await repository.putPackage(pkg);
+      const client = new QuotaExhaustedClient();
+      const events: ProgressEvent[] = [];
+
+      await expect(
+        runTelling({
+          pkg,
+          client,
+          repository,
+          outageRetries: 2,
+          outageBackoffMs: 0,
+          onProgress: (event) => events.push(event),
+        }),
+      ).rejects.toThrow(/RESOURCE_EXHAUSTED/);
+
+      // Before: three attempts at the step, each costing a request. The day's allowance is
+      // twenty, and it does not come back before midnight Pacific.
+      expect(client.calls).toBe(1);
+
+      const manifest = await repository.getEditionManifest(
+        (events[0] as { run_id: string }).run_id,
+      );
+      expect(manifest?.status).toBe('failed');
+      // Recorded as the one failure a surface can offer a way past.
+      expect(manifest?.failure?.quota_exhausted_for_today).toBe(true);
+    });
+  });
+});
+
+describe('the told-ledger learns presence from the join, not only the self-report (issue #67)', () => {
+  it('records a location the writer left out of entities_on_stage', async () => {
+    const pkg = await cinderella();
+    const state = new RunState(pkg);
+    const scene = scenesInOrder(pkg)[0]!;
+
+    await state.advance(
+      scene,
+      {
+        event_summary: 'x',
+        // The writer named the characters and forgot the room they were standing in.
+        entities_on_stage: [...scene.characters_present],
+        facts_revealed: [],
+        plants_opened: [],
+        payoffs_closed: [],
+        imagery_signature: [],
+        closing_situation: 'y',
+        reanchor_used: [],
+      },
+      null,
+    );
+
+    // Without this, the next scene set in the same room computes `introduce` for a place the
+    // reader has not left — and the continuity pass agrees, because it reads the same empty row.
+    expect(state.ledger.row(metFact(scene.location_id))).not.toBeNull();
+    for (const characterId of scene.characters_present) {
+      expect(state.ledger.row(metFact(characterId))).not.toBeNull();
+    }
   });
 });

@@ -131,7 +131,13 @@ export interface CompiledScene {
 
 export interface CallRecord {
   readonly model: string;
-  readonly purpose: 'writer' | 'writer_retry' | 'digest_fallback' | 'continuity_repair';
+  readonly purpose:
+    | 'writer'
+    | 'writer_retry'
+    | 'digest_fallback'
+    | 'continuity_repair'
+    /** A digest-hierarchy rollup synthesis (ADR 0003 §6), charged to the scene that closed it. */
+    | 'digest_rollup';
   readonly finish_reason: FinishReason;
   readonly prompt_tokens: number;
   readonly output_tokens: number;

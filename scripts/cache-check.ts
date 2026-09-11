@@ -46,7 +46,7 @@ async function main(): Promise<void> {
   // The stand-in writer supplies what earlier scenes would have produced. Its prose is filler and
   // its digests are the Scene Cards' own declarations, which is all the assembler consumes — so
   // the sizes below are the real ones for this story at this length.
-  const walked = promptWalk(pkg, (scene) => {
+  const walked = await promptWalk(pkg, (scene) => {
     const response = WriterResponseSchema.parse(JSON.parse(client.composeFor(scene)));
     return { digest: response.scene_digest, prose: response.prose };
   });

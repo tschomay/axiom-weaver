@@ -43,7 +43,7 @@ async function compileOne(fixture: string, recordingName: string, verbose: boole
   const live = GeminiClient.fromEnv();
   const client: ModelClient = live ?? clientFor(recording);
 
-  const state = replayTo(pkg, recording.target_scene_id, recording.prior_digests, {
+  const state = await replayTo(pkg, recording.target_scene_id, recording.prior_digests, {
     window: recording.window,
   });
   const scene = scenesInOrder(pkg).find((card) => card.id === recording.target_scene_id);

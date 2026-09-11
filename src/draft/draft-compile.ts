@@ -19,7 +19,8 @@ import type { SceneDigest } from '../digest/scene-digest';
 import { PlantWalkRejectedError, walkPlantObligations } from '../plants/obligation-walk';
 import { parseVoiceCard } from '../voice/voice-card';
 import { replayTo } from '../writer/run-state';
-import { compileScene, type CompiledScene } from '../writer/compile-scene';
+import { modelSummarizer, type RollupCall } from '../digest/hierarchy';
+import { compileScene, type CallRecord, type CompiledScene } from '../writer/compile-scene';
 import type { ModelClient } from '../writer/model-client';
 import { continuityPass, type ContinuityPassResult } from '../continuity/continuity-pass';
 import type { Diagnostic } from '../validator/diagnostics';
@@ -64,6 +65,8 @@ export async function compileSceneIntoDraft(input: {
   const { pkg, repository } = input;
   const now = input.now ?? (() => new Date());
 
+  const rollupCalls: RollupCall[] = [];
+
   const walk = walkPlantObligations(pkg);
   if (walk.errors.length > 0) throw new PlantWalkRejectedError(pkg.story_id, walk);
 
@@ -73,9 +76,15 @@ export async function compileSceneIntoDraft(input: {
   }
 
   const priorDigests = await draftDigests(repository, pkg, scene.order);
-  const state = replayTo(pkg, scene.id, priorDigests, {
+  const state = await replayTo(pkg, scene.id, priorDigests, {
     window: input.window,
     occasion: 'author_time',
+    // ADR 0003 §6's fresh synthesis, not the offline concatenation. A replay can close a window
+    // just as a run can, and a Working Draft built on pasted-together summaries misremembers its
+    // own earlier chapters exactly as a telling would.
+    summarize: modelSummarizer(input.client, {
+      onCall: (call) => rollupCalls.push(call),
+    }),
   });
 
   const compiled = await compileScene({
@@ -153,7 +162,21 @@ export async function compileSceneIntoDraft(input: {
   await repository.putDraftStateLog(log);
 
   return {
-    compiled,
+    // A window that closed during the replay spent a synthesis call; the compile view's call
+    // list is where an author sees what a compile cost, so it belongs there rather than nowhere.
+    compiled: {
+      ...compiled,
+      calls: [
+        ...compiled.calls,
+        ...rollupCalls.map(
+          (call): CallRecord => ({
+            ...call,
+            purpose: 'digest_rollup',
+            finish_reason: call.finish_reason as CallRecord['finish_reason'],
+          }),
+        ),
+      ],
+    },
     pass,
     validation,
     manifest: outcome.manifest,

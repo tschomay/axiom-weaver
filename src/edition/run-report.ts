@@ -38,7 +38,13 @@ export const DEGRADED_RUN_FRACTION = 0.2;
 
 export const CallRecordSchema = z.object({
   model: z.string().min(1),
-  purpose: z.enum(['writer', 'writer_retry', 'digest_fallback', 'continuity_repair']),
+  purpose: z.enum([
+    'writer',
+    'writer_retry',
+    'digest_fallback',
+    'continuity_repair',
+    'digest_rollup',
+  ]),
   finish_reason: z.enum(FINISH_REASONS),
   prompt_tokens: z.number().int().nonnegative(),
   output_tokens: z.number().int().nonnegative(),
