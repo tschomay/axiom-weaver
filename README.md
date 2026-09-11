@@ -184,7 +184,7 @@ filesystem under `.data/` (gitignored) at exactly the same pathnames. See `.env.
 | `/stories/{storyId}/inspector` | The **World & Discourse inspector**: the World Model and the told-ledger as two tabs over one scene-index scrubber, both reconstructed rather than stored. |
 | `/stories/{storyId}/runs` | The **run report**: every run aggregated by Scene Card — "this card degraded on 4 of 20 reads" — and the manual promotion of a completed, non-degraded run to Baked. |
 | `/stories/{storyId}/diff` | **Compare two tellings** of the same `package_version`: per scene, the Scene Digest fields that came out differently, the volitional proposals the two runs resolved differently, and both performances to read side by side. Never a line-level text diff of prose — two performances of one Scene Card share almost no words. |
-| `/stories/{storyId}/read` | **Generate a telling** — the whole compiler behind one button: a fresh run id, one writer call per scene in order, scene-count progress while it runs, and the finished edition as prose. Also reads back any telling the story has already produced. |
+| `/stories/{storyId}/read` | The reader's three-way choice (ADR 0014 §3): the **Baked** edition, the **library** of tellings the author saved under names worth telling apart, or **generate a telling** — the whole compiler behind one button: a fresh run id, one writer call per scene in order, scene-count progress while it runs, and the finished edition as prose. Every completed telling stays readable and shareable by its own run id whether or not it is in the library. |
 
 The Working Draft has the same two moves at author-time: **Compile the rest** builds every card the
 draft has not reached yet, in order, keeping each card's own diagnostics in a summary rather than
@@ -230,6 +230,8 @@ Whatever the light model writes is recorded as written by it.
 | `POST /api/stories/{storyId}/tellings` | generate a new telling — mints a fresh run id and starts the loop |
 | `GET /api/tellings/{runId}` | one telling: scene-count progress while it runs, `?include=scenes` for the prose once it is finished |
 | `POST /api/tellings/{runId}/promote` | promote a completed, non-degraded run to Baked (author-gated) |
+| `POST /api/tellings/{runId}/library` | save or rename a finished telling in the story's library (author-gated) |
+| `DELETE /api/tellings/{runId}/library` | take it off that list — never off the shelf; the run id keeps working (author-gated) |
 | `GET /api/stories/{storyId}/draft` | the Working Draft's scene list: compiled-against version, staleness and its diff, what can be compiled next |
 | `POST /api/stories/{storyId}/draft/compile` | compile one Scene Card into the Working Draft; `{"writer":"stand_in"}` composes from the card instead of calling the model (author-gated) |
 | `POST /api/stories/{storyId}/proposals/{sequence}` | accept or reject one volitional proposal (author-gated) |
