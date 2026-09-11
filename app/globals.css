@@ -730,7 +730,8 @@ fieldset.field > legend {
   margin: 0.3rem 0;
 }
 
-.list-row input[type='text'] {
+.list-row input[type='text'],
+.list-row textarea {
   flex: 1 1 auto;
   min-width: 0;
   font: 14px/1.5 ui-serif, Georgia, 'Times New Roman', serif;
@@ -739,6 +740,16 @@ fieldset.field > legend {
   border-radius: 0.3rem;
   background: var(--paper);
   color: var(--ink);
+}
+
+/* Entries that are sentences — a required beat, an invariant — get room to be read back. */
+.list-row.tall {
+  align-items: flex-start;
+}
+
+.list-row textarea {
+  resize: vertical;
+  min-height: 3.2rem;
 }
 
 button.tiny {
@@ -828,4 +839,120 @@ button.tiny:disabled {
   padding: 0.9rem 1.1rem;
   margin: 0.75rem 0;
   color: var(--muted);
+}
+
+/* --- The Scene Card editor (issue #89) ---------------------------------------------------- */
+
+/*
+ * The third level of the drill-down. Desktop shows the scene list beside the open card; a narrow
+ * viewport shows one or the other, with the open scene in the URL so the back gesture walks back
+ * out scene → scene list → section list.
+ */
+.scenes-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 62rem) {
+  .scenes-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .scenes-shell.at-scene .scene-list {
+    display: none;
+  }
+
+  .scenes-shell:not(.at-scene) .scene-body {
+    display: none;
+  }
+}
+
+/* A scene row: its number, a button that opens it, its problem count, and the two moves. */
+.scene-row .scene-open {
+  flex: 1 1 12rem;
+  min-width: 0;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.scene-row .scene-open:hover .title {
+  text-decoration: underline;
+}
+
+.scene-placeholder {
+  margin-top: 3rem;
+}
+
+/* One assertion, or one row a scene creates. A list at every width — never a grid. */
+.state-row {
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: var(--panel);
+  padding: 0.5rem 0.8rem;
+  margin: 0.6rem 0;
+}
+
+.state-row.created {
+  border-left: 3px solid var(--accent);
+}
+
+.state-editor {
+  border-top: 1px solid var(--rule);
+  margin-top: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.state-editor h3 {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 1rem;
+}
+
+/* The tier of the column being asserted, spelled out beside the control that asserts it. */
+.tier-note {
+  margin: 0.15rem 0 0.35rem;
+}
+
+.tier-note.volitional {
+  color: var(--warn);
+}
+
+/* One `pays_off` pair, marked where ADR 0004's walk would reject it. */
+.payoff {
+  border-left: 2px solid var(--rule);
+  padding-left: 0.6rem;
+  margin: 0.5rem 0;
+}
+
+.payoff.bad {
+  border-left-color: var(--bad);
+}
+
+.payoff select {
+  font: 14px/1.5 ui-serif, Georgia, 'Times New Roman', serif;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.3rem;
+  background: var(--paper);
+  color: var(--ink);
+  width: 100%;
+  max-width: min(100%, 36rem);
+}
+
+.payoff .list-row input[type='text'] {
+  font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.bad-note {
+  color: var(--bad);
 }
