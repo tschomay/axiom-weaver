@@ -55,6 +55,8 @@ screen.
 | State-update authority: entry check, accept/reject/flag, proposals | `src/validator/state-update-authority.ts` | ADR 0005, ADR 0016 §3 |
 | Diagnostics and their surfaces | `src/validator/diagnostics.ts` | ADR 0005 §5, ADR 0016 §4 |
 | Blob layout, retained `package_version` snapshots | `src/persistence/` | ADR 0015 §2/§4 |
+| The Manuscript: the author's mutable working copy, seeded three ways, published once | `src/schema/manuscript.ts`, `src/authoring/manuscript.ts` | ADR 0017 §1–§3, §5 |
+| The package linter: errors that block a publish, warnings that never do | `src/authoring/lint.ts` | ADR 0017 §4 |
 | Fixture loading and cross-reference checking | `src/fixtures/load.ts` | — |
 
 What loading the two fixtures through all of it turned up is in

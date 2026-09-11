@@ -12,7 +12,7 @@
  * - **Never `del()` + `put()` to update.** Overwrites go through `allowOverwrite`.
  */
 
-import { get, head, list, put } from '@vercel/blob';
+import { del, get, head, list, put } from '@vercel/blob';
 import { BlobConflictError, type BlobStore } from './blob-store';
 
 export interface VercelBlobStoreOptions {
@@ -63,6 +63,11 @@ export class VercelBlobStore implements BlobStore {
       addRandomSuffix: false,
       allowOverwrite,
     });
+  }
+
+  async remove(pathname: string): Promise<void> {
+    // A real removal, not the del()+put() rewrite the header forbids. `del` is idempotent.
+    await del(pathname, this.auth);
   }
 
   async list(prefix: string): Promise<string[]> {

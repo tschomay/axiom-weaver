@@ -22,6 +22,14 @@ export interface BlobStore {
   list(prefix: string): Promise<string[]>;
   /** Whether a pathname holds anything. */
   head(pathname: string): Promise<boolean>;
+  /**
+   * Delete a document. A no-op when the pathname holds nothing.
+   *
+   * This is not the `del()` + `put()` update the Vercel store's own notes forbid — that is a
+   * *rewrite* pretending to be two operations. This is a genuine removal, and the one caller is
+   * discarding a Manuscript (ADR 0017 §9). No retained snapshot is ever removed through it.
+   */
+  remove(pathname: string): Promise<void>;
 }
 
 export class BlobConflictError extends Error {

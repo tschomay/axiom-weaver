@@ -9,6 +9,7 @@
  * ```
  * story/{storyId}/package.json              pointer to the current package_version
  * story/{storyId}/package/{version}.json    retained, immutable package_version snapshot
+ * story/{storyId}/manuscript.json           the author's mutable working copy (ADR 0017 §1)
  * story/{storyId}/draft/manifest.json       Working Draft: per-scene compiled_against + stale
  * story/{storyId}/draft/scene-{n}.json      Working Draft: prose + Scene Digest per scene
  * story/{storyId}/draft/state-log.json      Working Draft: state-update commit log
@@ -39,6 +40,14 @@ export const packageVersionPath = (storyId: string, version: number): string =>
   `story/${storyId}/package/${version}.json`;
 
 export const packageVersionPrefix = (storyId: string): string => `story/${storyId}/package/`;
+
+/**
+ * The Manuscript: mutable, unversioned, at most one per story, and the only thing an edit writes.
+ *
+ * Deliberately a sibling of the pointer rather than a child of `package/`, whose every entry is
+ * immutable (ADR 0015 §2). Nothing outside the authoring surface reads this path.
+ */
+export const manuscriptPath = (storyId: string): string => `story/${storyId}/manuscript.json`;
 
 export const draftManifestPath = (storyId: string): string =>
   `story/${storyId}/draft/manifest.json`;

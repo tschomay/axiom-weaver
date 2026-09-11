@@ -147,6 +147,26 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   save/name/delete library entries; a reader can still generate a run and share it by direct
   URL, or rejoin their own still-in-flight run, without library-write access. See
   [ADR 0015](docs/adr/0015-compiled-editions-and-staleness.md).
+- **Manuscript** — the author's mutable, unversioned working copy of a Story Package: at most
+  one per story, the only thing an edit ever writes, and invisible to every other surface in
+  the system. Not prose — it is the score being revised, not the performance — and not the
+  **Working Draft**, which is the accumulating sequence of *compiled scenes*. A story with an
+  unpublished Manuscript is, to the compiler, the Working Draft, the run loop and every
+  edition, unchanged: they all still resolve through the published package pointer. Parsed
+  loosely (a story being written from scratch has no scenes yet and satisfies none of the
+  package's required fields); the strict parse happens only at publish. Seeded three ways —
+  empty, from the story's current package, or duplicated from any retained version of any
+  story under a new `story_id`. See
+  [ADR 0017](docs/adr/0017-the-manuscript-and-publishing.md).
+- **Publish** — the single deliberate act that turns a Manuscript into the next retained
+  `package_version`: strict-parse, then lint, then `max(retained) + 1`, then retain and
+  repoint. The author no longer increments `package_version` by hand. Blocked by any linter
+  **error** (a defect that would otherwise fail at compile time, further from the field that
+  caused it) and never by a **warning** (a judgment about craft the author is allowed to
+  disagree with). Because it is the only write that advances the version, it is also the only
+  moment **staleness** propagates — which is the deliberate-edit boundary blunt propagation
+  always assumed. Publishing leaves the Manuscript in place; **discard** is its own action.
+  See [ADR 0017](docs/adr/0017-the-manuscript-and-publishing.md).
 - **Working Draft** — the single per-story, author-time-only sequence of scenes built up via
   stepwise author-time compiles (see Compile occasions, below), always tracking the current
   `package_version` on a per-scene basis. **Staleness is a property of the Working Draft
