@@ -8,6 +8,34 @@ Start with [`CONTEXT.md`](./CONTEXT.md) for the ubiquitous language,
 [`docs/adr/`](./docs/adr/) for the decisions behind it. Agent setup is in
 [`AGENTS.md`](./AGENTS.md).
 
+## Why this exists
+
+Most story-generation systems either replay a fixed script or freewheel from a prompt with no
+memory of what's already true or already told — producing dead repetition at one extreme and
+self-contradiction at the other, especially past a few thousand words. Axiom Weaver treats a story
+as a **compiled artifact** instead: an author writes it once, completely and precisely, as
+structured data — a Story Package — and a compiler *performs* it into prose on every read. The
+plot, the facts, and the beats the author actually specified stay fixed across readings; only what
+they left unspecified — phrasing, imagery, micro-beat order — is free to vary. Same story, told
+uniquely each time.
+
+The mechanism rests on keeping separate two things most story engines collapse into one memory:
+**what is true in the world** (the World Model) and **what the reader has been told, and when**
+(the told-ledger). That divergence is what makes secrets and dramatic irony possible instead of
+accidental. Every engine write is also tiered by what kind of fact it touches — physical and
+epistemic facts commit automatically, but volitional ones (goals, feelings, allegiances) can only
+be *proposed* — so the model can't quietly rewrite a character's motivations while still being
+free to phrase a scene differently each time. A plant-obligation walk, a continuity pass, and a
+variance contract then catch what a naive re-run would get wrong: dropped setups, contradicted
+facts, and recycled imagery.
+
+**The paradigm** is three layers instead of the usual two: the author owns the **Fabula** (the
+world and its events) and the **Syuzhet** (the arrangement — what scene shows what, in what
+order); the engine owns only the **Performance** — the actual sentences. The author writes the
+score; the engine performs it, the way an actor performs a fixed script differently each night.
+See [`GLOSSARY.md`](./GLOSSARY.md) for every non-standard term this project uses, and
+[`CONTEXT.md`](./CONTEXT.md) for the canonical ubiquitous language they're drawn from.
+
 ## What is built
 
 The compiler, end to end: the persistence half, the writer call, the loop that drives one call per
