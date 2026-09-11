@@ -11,6 +11,7 @@ import {
 import { SceneDigestSchema, type SceneDigest } from '@/digest/scene-digest';
 import {
   groupBySharedRepair,
+  locatePhrase,
   repairPrompt,
   repairResponseJsonSchema,
 } from '@/continuity/continuity-pass';
@@ -286,7 +287,7 @@ describe('the two repair shapes (ADR 0011 §5)', () => {
     ]);
   });
 
-  it('refuses an imagery repair that names a phrase the prose does not contain verbatim', () => {
+  it('refuses an imagery repair that names a phrase the prose does not contain at all', () => {
     const applied = applyRepair({
       prose: 'The body of the scene.',
       digest: digest(),
@@ -305,7 +306,7 @@ describe('the two repair shapes (ADR 0011 §5)', () => {
       },
     });
 
-    expect(applied).toContain('not in the prose verbatim');
+    expect(applied).toContain('not in the prose');
   });
 
   it('maps each mode to its shape', () => {
@@ -484,5 +485,47 @@ describe('prose whose paragraph breaks arrived escaped (issue #64)', () => {
     const unbroken = 'She opened the hive. The bees were having a difficult morning.';
     expect(openingParagraph(unbroken)).toBe('She opened the hive.');
     expect(openingParagraph(unbroken).length).toBeLessThan(unbroken.length);
+  });
+});
+
+describe('locating the words an imagery repair named (issue #77)', () => {
+  const prose = 'Rain on the glass,\n  again, and the room went quiet.';
+
+  it('takes an exact match, which is what the prompt asks for', () => {
+    expect(locatePhrase(prose, 'the room went quiet')).toEqual({ start: 32, end: 51 });
+  });
+
+  it('forgives a capital and a line break the model did not reproduce', () => {
+    const span = locatePhrase(prose, 'rain on the glass, again');
+    expect(span).not.toBeNull();
+    expect(prose.slice(span!.start, span!.end)).toBe('Rain on the glass,\n  again');
+  });
+
+  it('still refuses a phrase the prose does not contain', () => {
+    expect(locatePhrase(prose, 'sleet on the sill')).toBeNull();
+  });
+
+  it('swaps over the located span, not over the phrase the model typed', () => {
+    const applied = applyRepair({
+      prose,
+      digest: digest({ imagery_signature: [{ image: 'rain on glass', domain: 'weather' }] }),
+      finding: {
+        mode: 'stale_imagery',
+        scene_id: 'scene_04',
+        scene_index: 4,
+        subject: 'rain on glass',
+        detail: '',
+      },
+      repair: {
+        // Lowercased and with the break collapsed — a repair that used to be thrown away.
+        replacement: 'Sleet on the sill',
+        original_phrase: 'rain on the glass, again',
+        imagery_signature: null,
+        reanchor_used: null,
+      },
+    });
+
+    if (typeof applied === 'string') throw new Error(applied);
+    expect(applied.prose).toBe('Sleet on the sill, and the room went quiet.');
   });
 });

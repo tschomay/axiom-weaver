@@ -16,6 +16,13 @@ interface Progress {
   /** How long since the run reported anything, and whether that is long enough to doubt it. */
   stalled_ms?: number | null;
   stopped_reporting?: boolean;
+  /**
+   * ADR 0014 §7: the run has been quiet past the offer threshold and a Baked edition exists.
+   *
+   * A different question from `stopped_reporting`, which asks whether anything is running at all.
+   * This one assumes it is, and offers something to read while it finishes.
+   */
+  baked_fallback?: { run_id: string; stalled_ms: number } | null;
 }
 
 interface EditionScene {
@@ -321,6 +328,22 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
             value={running.progress.scenes_compiled}
             max={running.progress.scene_count}
           />
+          {running.baked_fallback !== null && running.baked_fallback !== undefined && (
+            // ADR 0014 §7. Taking the offer reads the Baked edition now; it does not stop or
+            // replace the telling being made, which carries on unattended either way.
+            <p className="meta">
+              This is taking longer than usual —{' '}
+              {Math.round(running.baked_fallback.stalled_ms / 1000)}s since the last scene landed.{' '}
+              <button
+                type="button"
+                className="action"
+                onClick={() => void read(running.baked_fallback!.run_id)}
+              >
+                Read the Baked edition meanwhile
+              </button>{' '}
+              This telling keeps compiling in the background.
+            </p>
+          )}
         </div>
       )}
 

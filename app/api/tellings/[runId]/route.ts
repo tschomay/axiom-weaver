@@ -1,7 +1,12 @@
 import { NextResponse } from 'next/server';
 import { storyRepository } from '@/persistence';
 import { WRITER_MODEL, quotaOffer } from '@/writer/model-client';
-import { hasStoppedReporting, msSinceLastReport } from '@/edition/edition';
+import {
+  hasStoppedReporting,
+  msSinceLastReport,
+  type EditionManifest,
+} from '@/edition/edition';
+import { STALL_THRESHOLD_MS } from '@/edition/run-loop';
 
 export const dynamic = 'force-dynamic';
 
@@ -65,6 +70,13 @@ export async function GET(request: Request, { params }: { params: Promise<{ runI
       manifest.failure?.quota_exhausted_for_today === true
         ? quotaOffer(manifest.failure.model ?? WRITER_MODEL, manifest.failure.detail)
         : null,
+    // ADR 0014 §7's escape hatch, off the same clock `stalled_ms` reads and at a much shorter
+    // threshold. The two questions are different: `stopped_reporting` asks whether anything is
+    // running at all, this asks whether a reader has waited long enough to be offered something to
+    // read *while* it carries on. The loop emits `baked_fallback_offered` to an in-process
+    // listener, which the HTTP path does not have — so a reader polling this route was offered
+    // nothing at all.
+    baked_fallback: await stallOffer(repository, manifest),
   };
 
   const include = new URL(request.url).searchParams.get('include');
@@ -83,4 +95,25 @@ export async function GET(request: Request, { params }: { params: Promise<{ runI
   }
 
   return NextResponse.json(body);
+}
+
+/**
+ * The offer a reader gets once a run has been quiet past ADR 0014 §7's threshold.
+ *
+ * Read the Baked edition now; the live run keeps compiling, unattended, whether they take it or
+ * not — the offer is a progress event, never an instruction to the loop, so nothing here touches
+ * the run. `null` unless the story actually has a Baked edition: offering one that does not exist
+ * would be worse than the stalled bar.
+ */
+async function stallOffer(
+  repository: ReturnType<typeof storyRepository>,
+  manifest: EditionManifest,
+): Promise<{ run_id: string; stalled_ms: number } | null> {
+  if (manifest.status !== 'running') return null;
+
+  const stalledMs = msSinceLastReport(manifest);
+  if (stalledMs === null || stalledMs < STALL_THRESHOLD_MS) return null;
+
+  const baked = await repository.getBakedPointer(manifest.story_id);
+  return baked === null ? null : { run_id: baked.run_id, stalled_ms: stalledMs };
 }

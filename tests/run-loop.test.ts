@@ -6,9 +6,19 @@ import { FileSystemBlobStore } from '@/persistence/fs-blob-store';
 import { StoryRepository, BakedPromotionError } from '@/persistence/story-repository';
 import { readFixturePackage } from '@/fixtures/load';
 import { SyntheticWriterClient } from '@/writer/synthetic-client';
-import { progressText, runTelling, type ProgressEvent } from '@/edition/run-loop';
+import {
+  STALL_THRESHOLD_MS,
+  progressText,
+  runTelling,
+  type ProgressEvent,
+} from '@/edition/run-loop';
 import { PlantWalkRejectedError } from '@/plants/obligation-walk';
-import { ABANDONED_AFTER_MS, hasStoppedReporting, mintRunId } from '@/edition/edition';
+import {
+  ABANDONED_AFTER_MS,
+  hasStoppedReporting,
+  mintRunId,
+  msSinceLastReport,
+} from '@/edition/edition';
 import { DEGRADED_RUN_FRACTION, isRunDegraded } from '@/edition/run-report';
 import { renderRunReport } from '@/edition/report-view';
 import { scenesInOrder, type StoryPackage } from '@/schema/story-package';
@@ -502,5 +512,36 @@ describe('the told-ledger learns presence from the join, not only the self-repor
     for (const characterId of scene.characters_present) {
       expect(state.ledger.row(metFact(characterId))).not.toBeNull();
     }
+  });
+});
+
+describe('the §7 Baked offer rides the same clock as stopped_reporting (issue #70)', () => {
+  it('stamps updated_at at the flush, which is what a poll measures the offer against', async () => {
+    await withRepository(async (repository) => {
+      const pkg = await cinderella();
+      await repository.putPackage(pkg);
+
+      const { manifest } = await runTelling({
+        pkg,
+        client: new SyntheticWriterClient(pkg),
+        repository,
+      });
+
+      expect(manifest.updated_at).not.toBeNull();
+      expect(msSinceLastReport(manifest)).not.toBeNull();
+    });
+  });
+
+  it('reads as quiet past ADR 0014 §7 s threshold long before it reads as abandoned', async () => {
+    // The two questions the one clock answers. §7 asks whether to offer something to read while a
+    // run carries on; `stopped_reporting` asks whether anything is running at all, and calling a
+    // live scene dead while it is writing is the worse mistake — so its bound is far longer.
+    const manifest = {
+      status: 'running' as const,
+      started_at: new Date(Date.now() - 2 * 60_000).toISOString(),
+      updated_at: new Date(Date.now() - 2 * 60_000).toISOString(),
+    };
+    expect(msSinceLastReport(manifest)).toBeGreaterThan(STALL_THRESHOLD_MS);
+    expect(hasStoppedReporting(manifest)).toBe(false);
   });
 });
