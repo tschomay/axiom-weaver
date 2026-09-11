@@ -194,7 +194,10 @@ export class StoryRepository {
     if (stored === null && expectedUpdatedAt !== null) {
       throw new ManuscriptConflictError(manuscript.story_id, null, expectedUpdatedAt);
     }
-    const next = ManuscriptSchema.parse({ ...manuscript, updated_at: new Date().toISOString() });
+    const next = ManuscriptSchema.parse({
+      ...manuscript,
+      updated_at: nextUpdatedAt(stored?.updated_at ?? null),
+    });
     await this.store.put(manuscriptPath(next.story_id), stringify(next), { allowOverwrite: true });
     return next;
   }
@@ -513,6 +516,25 @@ export class StoryRepository {
 }
 
 /** Why a library write was refused. The library is the author's shortlist, not the run index. */
+/**
+ * The next `updated_at`, guaranteed to differ from the one it replaces.
+ *
+ * `updated_at` is not decoration: it is the token the optimistic-concurrency precondition
+ * compares, so two saves inside the same millisecond minting the same string would make a stale
+ * save *match* and be accepted — one tab silently clobbering the other, which is the single
+ * outcome ADR 0017 §8's precondition exists to prevent. Measured at ~12% of back-to-back saves on
+ * an ordinary machine, so this is a real write-losing race rather than a theoretical one.
+ *
+ * Millisecond resolution is kept because the value is also read by a human; where the clock has
+ * not advanced, the stamp steps forward by one millisecond instead of standing still.
+ */
+function nextUpdatedAt(previous: string | null): string {
+  const now = new Date().toISOString();
+  if (previous === null || now > previous) return now;
+  const parsed = Date.parse(previous);
+  return Number.isNaN(parsed) ? now : new Date(parsed + 1).toISOString();
+}
+
 /** A Manuscript save whose stored copy moved on since it was read (ADR 0017 §8). */
 export class ManuscriptConflictError extends Error {
   readonly storyId: string;

@@ -17,7 +17,11 @@ import {
   type ManuscriptSource,
 } from '../schema/manuscript';
 import { parseStoryPackage, type StoryPackage } from '../schema/story-package';
-import type { PackagePointer, StoryRepository } from '../persistence/story-repository';
+import {
+  ManuscriptConflictError,
+  type PackagePointer,
+  type StoryRepository,
+} from '../persistence/story-repository';
 
 const CURRENT_SCHEMA_VERSION = '1.0';
 
@@ -201,6 +205,67 @@ export async function seedManuscript(
   );
 }
 
+/**
+ * The `package_version` the next publish will write.
+ *
+ * Exposed so a surface can say which version it is about to create *before* the author commits
+ * to it, rather than reporting it afterwards. Same rule as the publish itself: `max(retained) + 1`,
+ * never the author's arithmetic (§3).
+ */
+export async function nextPackageVersion(
+  repository: StoryRepository,
+  storyId: string,
+): Promise<number> {
+  const retained = await repository.listPackageVersions(storyId);
+  return retained.length === 0 ? 1 : Math.max(...retained) + 1;
+}
+
+/**
+ * Rename a Manuscript's `story_id` before it has ever published (ADR 0017 §5).
+ *
+ * A `story_id` is the key of every blob path a story owns, so once a version is retained — and
+ * an edition may pin it — the id is fixed. Before that there is nothing to break: the Manuscript
+ * is the only thing under that key, and moving it is a write at the new path and a delete at the
+ * old one.
+ */
+export async function renameManuscript(
+  repository: StoryRepository,
+  fromStoryId: string,
+  toStoryId: string,
+  expectedUpdatedAt: string | null,
+): Promise<Manuscript> {
+  const stored = await repository.getManuscript(fromStoryId);
+  if (stored === null) {
+    throw new ManuscriptSeedError('story_not_found', `no Manuscript for "${fromStoryId}"`);
+  }
+  if (stored.based_on_version !== null || (await repository.getPointer(fromStoryId)) !== null) {
+    throw new ManuscriptSeedError(
+      'story_id_taken',
+      `"${fromStoryId}" has already published, so its story id is fixed`,
+    );
+  }
+  if (expectedUpdatedAt !== stored.updated_at) {
+    throw new ManuscriptConflictError(fromStoryId, stored.updated_at, expectedUpdatedAt);
+  }
+  if (!(await storyIdAvailable(repository, toStoryId))) {
+    const reason = /^[a-z0-9][a-z0-9-]*$/.test(toStoryId) ? 'story_id_taken' : 'invalid_story_id';
+    throw new ManuscriptSeedError(reason, `"${toStoryId}" is not available as a story id`);
+  }
+
+  const moved = await repository.putManuscript(
+    {
+      ...stored,
+      story_id: toStoryId,
+      package: { ...stored.package, story_id: toStoryId },
+    },
+    null,
+  );
+  // Only after the new path holds the work: a failed delete leaves a stale copy, which is
+  // recoverable, where a failed write after a delete would not be.
+  await repository.deleteManuscript(fromStoryId);
+  return moved;
+}
+
 export class PublishRejectedError extends Error {
   readonly lint: LintResult;
 
@@ -245,8 +310,7 @@ export async function publishManuscript(
     throw new ManuscriptSeedError('story_not_found', `no Manuscript for "${storyId}" to publish`);
   }
 
-  const retained = await repository.listPackageVersions(storyId);
-  const nextVersion = retained.length === 0 ? 1 : Math.max(...retained) + 1;
+  const nextVersion = await nextPackageVersion(repository, storyId);
   const candidate = { ...manuscript.package, story_id: storyId, package_version: nextVersion };
 
   const lint = lintPackage(candidate);

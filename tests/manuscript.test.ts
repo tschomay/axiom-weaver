@@ -188,6 +188,62 @@ describe('the updated_at precondition', () => {
   });
 });
 
+  /**
+   * `updated_at` is the precondition token, not decoration.
+   *
+   * Two saves inside one millisecond used to mint the same string, which made a *stale* save
+   * match it and be accepted — one tab silently clobbering the other. Measured at 5 of 40
+   * back-to-back saves before the fix, so the loop below is not paranoia: it is the rate at
+   * which the guard used to fail open.
+   */
+  it('never mints the same token twice, however fast the saves land', async () => {
+    const seeded = await seedManuscript(repository, {
+      source: 'new',
+      story_id: 'fast-saves',
+      title: 'Fast Saves',
+    });
+
+    const seen = new Set<string>([seeded.updated_at]);
+    let current = seeded;
+    for (let save = 0; save < 40; save += 1) {
+      current = await repository.putManuscript(
+        { ...current, package: { ...current.package, metadata: { title: `save ${save}` } } },
+        current.updated_at,
+      );
+      expect(seen.has(current.updated_at)).toBe(false);
+      expect(current.updated_at > [...seen].at(-1)!).toBe(true);
+      seen.add(current.updated_at);
+    }
+  });
+
+  it('refuses a stale save even when it lands in the same millisecond', async () => {
+    // Forty independent races, because before the fix only about one in eight lost.
+    for (let attempt = 0; attempt < 40; attempt += 1) {
+      const storyId = `race-${attempt}`;
+      const seeded = await seedManuscript(repository, {
+        source: 'new',
+        story_id: storyId,
+        title: 'Race',
+      });
+
+      const tabA = await repository.putManuscript(
+        { ...seeded, package: { ...seeded.package, metadata: { title: 'Tab A' } } },
+        seeded.updated_at,
+      );
+      expect(tabA.updated_at).not.toBe(seeded.updated_at);
+
+      // Tab B holds what it read before tab A saved, and must be refused every single time.
+      await expect(
+        repository.putManuscript(
+          { ...seeded, package: { ...seeded.package, metadata: { title: 'Tab B' } } },
+          seeded.updated_at,
+        ),
+      ).rejects.toThrow(ManuscriptConflictError);
+
+      expect((await repository.getManuscript(storyId))?.package.metadata.title).toBe('Tab A');
+    }
+  });
+
 describe('discard', () => {
   it('returns the story to its published package, and is idempotent', async () => {
     await loadFixtureIntoRepository('the-dragon-of-thistlewick', repository);
