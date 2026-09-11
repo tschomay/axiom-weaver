@@ -87,6 +87,27 @@ export const RETRY_INSTRUCTIONS = {
 export type RetryClass = keyof typeof RETRY_INSTRUCTIONS;
 
 /**
+ * The instruction for the one bounded retry an *invariant* miss gets.
+ *
+ * Distinct from `RETRY_INSTRUCTIONS` above, which answer a call that failed. This one answers a
+ * call that succeeded and came back missing something the Scene Card required — ADR 0004 §6,
+ * ADR 0005 §5 and ADR 0006 §3 all specify the same shape for it: "one bounded retry (same
+ * instruction restated), then accept-and-log."
+ *
+ * Restating means naming exactly what was missed, not re-sending the prompt unchanged: the writer
+ * already had the instruction and did not act on it, so repeating it verbatim is the one thing
+ * known not to work.
+ */
+export function restateMissedInvariants(misses: readonly string[]): string {
+  return [
+    'The previous attempt of this scene did not satisfy everything the Scene Card requires.',
+    'Write the scene again, keeping what worked, and make sure of each of these:',
+    ...misses.map((miss) => `  - ${miss}`),
+    'Report each fact_ref named above verbatim in the digest field it belongs to.',
+  ].join('\n');
+}
+
+/**
  * The prompt for the digest-only fallback call (ADR 0012 decision 5).
  *
  * Carries only the recovered prose and the Scene Card fields a digest actually has to reference —

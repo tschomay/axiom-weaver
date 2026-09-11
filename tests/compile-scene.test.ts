@@ -301,6 +301,89 @@ describe('failure paths (ADR 0012 decisions 5 and 6)', () => {
   });
 });
 
+describe('the one bounded retry on an invariant miss (issue #61)', () => {
+  /**
+   * The recorded response with one invariant dropped.
+   *
+   * `scene_13_the_fitting` declares `pays_off: cinderella_kept_second_slipper` and the recording
+   * duly reports it in `payoffs_closed`. Emptying that field is a scene that came back missing
+   * something its card required — a `finishReason` of `STOP` says nothing about it.
+   */
+  function missingItsPayoff(recording: { response: Record<string, unknown> }): string {
+    const digest = recording.response['scene_digest'] as Record<string, unknown>;
+    return JSON.stringify({
+      ...recording.response,
+      scene_digest: { ...digest, payoffs_closed: [] },
+    });
+  }
+
+  it('retries once, restating what was missed rather than re-sending the prompt', async () => {
+    const { base, recording } = await setUp('cinderella', 'cinderella-scene-13');
+    const client = new ScriptedClient([
+      response(missingItsPayoff(recording)),
+      response(JSON.stringify(recording.response)),
+    ]);
+
+    const compiled = await compileScene({ ...base, client });
+
+    expect(client.requests).toHaveLength(2);
+    expect(client.requests[1]?.contents).toContain(
+      'did not satisfy everything the Scene Card requires',
+    );
+    expect(client.requests[1]?.contents).toContain('cinderella_kept_second_slipper');
+    expect(compiled.digest.payoffs_closed).toEqual(['cinderella_kept_second_slipper']);
+    expect(compiled.diagnostics.map((entry) => entry.code)).toContain('invariant_retry_accepted');
+    expect(compiled.diagnostics.map((entry) => entry.code)).not.toContain('payoff_not_closed');
+  });
+
+  it('keeps the first attempt when the retry does no better', async () => {
+    const { base, recording } = await setUp('cinderella', 'cinderella-scene-13');
+    const missed = missingItsPayoff(recording);
+    const client = new ScriptedClient([response(missed), response(missed)]);
+
+    const compiled = await compileScene({ ...base, client });
+
+    expect(client.requests).toHaveLength(2);
+    const codes = compiled.diagnostics.map((entry) => entry.code);
+    expect(codes).toContain('invariant_retry_discarded');
+    // The miss is still logged under its own code — accept-and-log, per ADR 0006 §3.
+    expect(codes).toContain('payoff_not_closed');
+  });
+
+  it('never retries at author-time — the author is present and can fix the card', async () => {
+    const { base, recording } = await setUp('cinderella', 'cinderella-scene-13');
+    const client = new ScriptedClient([response(missingItsPayoff(recording))]);
+
+    const compiled = await compileScene({ ...base, client, occasion: 'author_time' });
+
+    expect(client.requests).toHaveLength(1);
+    expect(compiled.diagnostics.map((entry) => entry.code)).toContain('payoff_not_closed');
+  });
+
+  it('spends at most one retry per scene, shared with the finish-reason retry', async () => {
+    const { base, recording } = await setUp('cinderella', 'cinderella-scene-13');
+    // A malformed first attempt spends the budget; the retry that comes back missing its payoff
+    // does not get a second one.
+    const client = new ScriptedClient([
+      response('not json at all', 'MALFORMED_RESPONSE'),
+      response(missingItsPayoff(recording)),
+    ]);
+
+    const compiled = await compileScene({ ...base, client });
+
+    expect(client.requests).toHaveLength(2);
+    expect(compiled.calls.filter((call) => call.purpose === 'writer_retry')).toHaveLength(1);
+    expect(compiled.diagnostics.map((entry) => entry.code)).toContain('payoff_not_closed');
+  });
+
+  it('does not retry a scene that satisfied its card', async () => {
+    const { base, recording } = await setUp('cinderella', 'cinderella-scene-13');
+    const client = new ScriptedClient([response(JSON.stringify(recording.response))]);
+    await compileScene({ ...base, client });
+    expect(client.requests).toHaveLength(1);
+  });
+});
+
 describe('the output-token budget (issue #49)', () => {
   it('reserves room to think that a short scene does not lose', () => {
     // Thinking scales with how tangled the scene is, not with its word count: a 200-word scene
