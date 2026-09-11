@@ -131,11 +131,14 @@ export interface RollupSummary {
  * stops growth being logarithmic. Synthesis is a cheap model call in production
  * (`gemini-3.5-flash-lite`, per the research's §7 split); `summarize` is that call, injected so
  * the shape of a rollup stays testable without one.
+ *
+ * Asynchronous because that call is: a rollup is the one place in the hierarchy that reaches the
+ * model, and pretending otherwise is what left the synthesis unwired for as long as it was.
  */
-export function rollUp(
+export async function rollUp(
   window: LeveledDigest[],
-  summarize: (window: LeveledDigest[]) => RollupSummary,
-): LeveledDigest {
+  summarize: (window: LeveledDigest[]) => RollupSummary | Promise<RollupSummary>,
+): Promise<LeveledDigest> {
   const last = window[window.length - 1];
   if (last === undefined) {
     throw new Error('Cannot roll up an empty window');
@@ -147,12 +150,14 @@ export function rollUp(
     return [...seen];
   };
 
+  const summary = await summarize(window);
+
   return {
     level: last.level + 1,
     scene_orders: window.flatMap((item) => item.scene_orders),
     scene_ids: window.flatMap((item) => item.scene_ids),
     digest: {
-      event_summary: summarize(window).event_summary,
+      event_summary: summary.event_summary,
       entities_on_stage: union((digest) => digest.entities_on_stage),
       facts_revealed: union((digest) => digest.facts_revealed),
       plants_opened: union((digest) => digest.plants_opened),

@@ -84,13 +84,14 @@ export interface WalkedScene {
  * loop does — so the digest hierarchy, told-ledger and imagery history are the real ones.
  *
  * `sceneFor` supplies what the writer would have returned. Recorded digests, a stand-in writer, or
- * a stored edition all work; nothing here calls a model.
+ * a stored edition all work; nothing here calls a model — the run state is built with the offline
+ * summarizer, since the question this asks is about payload ordering, not about what a rollup says.
  */
-export function promptWalk(
+export async function promptWalk(
   pkg: StoryPackage,
   sceneFor: (scene: SceneCard, state: RunState) => WalkedScene,
   options: { window?: number } = {},
-): WalkedPrompt[] {
+): Promise<WalkedPrompt[]> {
   const voiceCard = parseVoiceCard(pkg.voice_card);
   const walk = walkPlantObligations(pkg);
   const state = new RunState(pkg, { window: options.window });
@@ -130,7 +131,7 @@ export function promptWalk(
 
     const produced = sceneFor(scene, state);
     const rollupsBefore = state.hierarchy.rollupEvents().length;
-    state.advance(scene, produced.digest, produced.prose);
+    await state.advance(scene, produced.digest, produced.prose);
     afterRollup = state.hierarchy.rollupEvents().length > rollupsBefore;
   }
 

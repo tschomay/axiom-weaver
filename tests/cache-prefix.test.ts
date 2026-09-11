@@ -21,13 +21,12 @@ import { MIN_CACHEABLE_TOKENS } from '@/writer/model-client';
  * which is a slow, expensive way to learn that someone moved a World Model row up the payload.
  * These tests are the fast way.
  */
-function walkFixture(fixture: string) {
-  return readFixturePackage(fixture).then((pkg) => {
-    const client = new SyntheticWriterClient(pkg);
-    return promptWalk(pkg, (scene) => {
-      const response = WriterResponseSchema.parse(JSON.parse(client.composeFor(scene)));
-      return { digest: response.scene_digest, prose: response.prose };
-    });
+async function walkFixture(fixture: string) {
+  const pkg = await readFixturePackage(fixture);
+  const client = new SyntheticWriterClient(pkg);
+  return promptWalk(pkg, (scene) => {
+    const response = WriterResponseSchema.parse(JSON.parse(client.composeFor(scene)));
+    return { digest: response.scene_digest, prose: response.prose };
   });
 }
 

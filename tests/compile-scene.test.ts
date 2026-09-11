@@ -60,7 +60,7 @@ async function setUp(fixture: string, recordingName: string) {
   const pkg = await readFixturePackage(fixture);
   const recording = await readRecordedFixture(recordingName);
   const walk = walkPlantObligations(pkg);
-  const state = replayTo(pkg, recording.target_scene_id, recording.prior_digests, {
+  const state = await replayTo(pkg, recording.target_scene_id, recording.prior_digests, {
     window: recording.window,
   });
   const scene = scenesInOrder(pkg).find(

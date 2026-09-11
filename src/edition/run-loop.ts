@@ -29,8 +29,19 @@ import {
   type PlantWalk,
 } from '../plants/obligation-walk';
 import { RunState } from '../writer/run-state';
-import { compileScene, maxOutputTokensFor, type CompiledScene } from '../writer/compile-scene';
-import { WRITER_MODEL, dailyQuotaFailure, type ModelClient } from '../writer/model-client';
+import { modelSummarizer, type RollupCall } from '../digest/hierarchy';
+import {
+  compileScene,
+  maxOutputTokensFor,
+  type CallRecord,
+  type CompiledScene,
+} from '../writer/compile-scene';
+import {
+  WRITER_MODEL,
+  dailyQuotaFailure,
+  isDailyQuotaExhausted,
+  type ModelClient,
+} from '../writer/model-client';
 import type { Occasion } from '../validator/state-update-authority';
 import type { Diagnostic } from '../validator/diagnostics';
 import type { SceneDigest } from '../digest/scene-digest';
@@ -164,7 +175,18 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
 
   const scenes = scenesInOrder(pkg);
   const voiceCard = parseVoiceCard(pkg.voice_card);
-  const state = new RunState(pkg, { window: input.window, runId });
+  // ADR 0003 §6's fresh synthesis, on the cheap model, not the offline concatenation the
+  // hierarchy defaults to. The digest hierarchy is the telling's whole long-range memory.
+  //
+  // The sink is declared before the state because the summarizer is built into it, and a rollup
+  // is a request like any other: a run report that did not account for it would be understating
+  // what the telling cost.
+  const rollupCalls: RollupCall[] = [];
+  const state = new RunState(pkg, {
+    window: input.window,
+    runId,
+    summarize: modelSummarizer(input.client, { onCall: (call) => rollupCalls.push(call) }),
+  });
   const startedAt = now();
 
   const manifest: EditionManifest = {
@@ -235,6 +257,7 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
               pkg,
               scene,
               state,
+              rollupCalls,
               walk,
               voiceCard,
               client: input.client,
@@ -319,6 +342,8 @@ interface CompileStepInput {
   readonly pkg: StoryPackage;
   readonly scene: SceneCard;
   readonly state: RunState;
+  /** The run's rollup-call sink, read by the step that closed a window. */
+  readonly rollupCalls: readonly RollupCall[];
   readonly walk: PlantWalk;
   readonly voiceCard: ReturnType<typeof parseVoiceCard>;
   readonly client: ModelClient;
@@ -387,7 +412,10 @@ async function compileStep(input: CompileStepInput): Promise<SceneOutcome> {
   });
 
   // 4. Advance the run: told-ledger, imagery history, and the digest rollup if a window closes.
-  state.advance(scene, pass.digest, pass.prose);
+  //    A closed window spends a synthesis call, which belongs to the scene that closed it.
+  const rollupCallsBefore = input.rollupCalls.length;
+  await state.advance(scene, pass.digest, pass.prose);
+  const rollupCalls = input.rollupCalls.slice(rollupCallsBefore);
 
   const degraded = isDegraded(compiled);
   const diagnostics: Diagnostic[] = [
@@ -423,6 +451,7 @@ async function compileStep(input: CompileStepInput): Promise<SceneOutcome> {
       scene,
       compiled,
       pass,
+      rollupCalls,
       diagnostics,
       degraded,
       occasion: input.occasion,
@@ -458,6 +487,7 @@ function reportScene(input: {
   scene: SceneCard;
   compiled: CompiledScene;
   pass: ContinuityPassResult;
+  rollupCalls: readonly RollupCall[];
   diagnostics: readonly Diagnostic[];
   degraded: boolean;
   occasion: Occasion;
@@ -468,7 +498,13 @@ function reportScene(input: {
     scene_index: input.scene.order,
     degraded: input.degraded,
     duration_ms: Math.max(0, input.durationMs),
-    calls: [...input.compiled.calls, ...input.pass.calls],
+    calls: [
+      ...input.compiled.calls,
+      ...input.pass.calls,
+      ...input.rollupCalls.map(
+        (call): CallRecord => ({ ...call, purpose: 'digest_rollup', finish_reason: call.finish_reason as CallRecord['finish_reason'] }),
+      ),
+    ],
     diagnostics: input.diagnostics.map((entry) => reportDiagnostic(entry, input.occasion)),
     repairs: input.pass.repairs.map((repair) => ({
       mode: repair.finding.mode,
@@ -496,6 +532,12 @@ async function withOutageRetry<T>(
       return await run();
     } catch (error) {
       lastError = error;
+      // ADR 0014 §7's retry is for a *systemic outage* — repeated hard errors the platform's own
+      // backoff can ride out. A spent daily allowance is not an outage: it clears at midnight
+      // Pacific, and every re-attempt here costs two more of the day's twenty requests (the
+      // writer model, then its capacity fallback) to be told the same thing again. The client
+      // already refuses to retry this; a loop that retried anyway would undo that.
+      if (isDailyQuotaExhausted(error)) break;
       if (attempt === retries) break;
       await new Promise((resolve) => setTimeout(resolve, backoffMs * (attempt + 1)));
     }

@@ -27,7 +27,8 @@ import {
   type ValidationResult,
 } from '../validator/state-update-authority';
 import { DigestHierarchy, type Summarizer } from '../digest/hierarchy';
-import { ToldLedger } from '../digest/told-ledger';
+import { joinSceneRows, presentEntityIds } from '../assembler/join';
+import { ToldLedger, metFact } from '../digest/told-ledger';
 import type { SceneDigest } from '../digest/scene-digest';
 import type { RecordedImagery } from '../voice/imagery-ledger';
 import type { WriterStateUpdates } from './response-schema';
@@ -61,14 +62,25 @@ export class RunState {
    * Order matters: the digest updates the told-ledger and imagery history *before* it is pushed
    * onto the hierarchy, because a rollup clears the band it consumed and the ledger needs to have
    * seen every scene individually.
+   *
+   * `met:` facts are touched from the digest's `entities_on_stage` **and** the deterministic join
+   * (ADR 0008 §4) — the same join that built the prompt's re-anchoring list and filtered World
+   * Model rows. Trusting the self-report alone meant one omitted array entry silently reset a
+   * character or a location for the rest of the telling: the reader's memory of a place they had
+   * not left went missing, the next scene computed `introduce`, and the continuity pass agreed
+   * with it, because expectation and report were being read off the same empty row. The join is
+   * already the authority on presence everywhere else in the compiler.
    */
-  advance(scene: SceneCard, digest: SceneDigest, prose: string | null): void {
+  async advance(scene: SceneCard, digest: SceneDigest, prose: string | null): Promise<void> {
     this.ledger.applyDigest(digest, scene.order);
+    for (const entityId of presentEntityIds(joinSceneRows(scene, this.model))) {
+      this.ledger.touch(metFact(entityId), scene.order);
+    }
     this.imageryHistory.push({
       scene_order: scene.order,
       signature: digest.imagery_signature,
     });
-    this.hierarchy.push(digest, scene.id, scene.order);
+    await this.hierarchy.push(digest, scene.id, scene.order);
     if (prose !== null) this.previousParagraph = finalParagraph(prose);
   }
 
@@ -157,12 +169,12 @@ export class RunState {
  * digests are what earlier scenes contributed to context, and the Scene Cards' authored
  * `exit_state` is what they contributed to the World Model. Both are already on record.
  */
-export function replayTo(
+export async function replayTo(
   pkg: StoryPackage,
   targetSceneId: string,
   priorDigests: ReadonlyMap<string, SceneDigest>,
   options: { window?: number; summarize?: Summarizer; occasion?: Occasion; runId?: string } = {},
-): RunState {
+): Promise<RunState> {
   const state = new RunState(pkg, options);
   const occasion = options.occasion ?? 'read_time';
 
@@ -173,7 +185,7 @@ export function replayTo(
       throw new Error(`No recorded digest for "${scene.id}", needed to reach "${targetSceneId}"`);
     }
     state.commitAuthoredExitState(scene, occasion);
-    state.advance(scene, digest, null);
+    await state.advance(scene, digest, null);
   }
 
   return state;

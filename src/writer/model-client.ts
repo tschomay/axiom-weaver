@@ -141,8 +141,22 @@ export interface DailyQuotaFailure {
 }
 
 export function dailyQuotaFailure(error: unknown, model: string): DailyQuotaFailure | null {
-  if (!(error instanceof RetryableStatusError) || !error.exhaustedForToday) return null;
-  return { detail: error.message, model, retry_after_ms: error.retryAfterMs };
+  if (!isDailyQuotaExhausted(error)) return null;
+  const failure = error as RetryableStatusError;
+  return { detail: failure.message, model, retry_after_ms: failure.retryAfterMs };
+}
+
+/**
+ * Whether a failure is the day's allowance running out, rather than anything a wait could clear.
+ *
+ * Worth its own predicate because the answer changes what a caller should *do*, not just what it
+ * reports: `GeminiClient.generate` already skips its same-model retry on this, and any loop above
+ * it has to do the same or the care is undone. A run loop that re-attempted a step three times
+ * spent six requests — two models, three attempts — on a quota that only resets at midnight
+ * Pacific, out of a daily allowance of twenty.
+ */
+export function isDailyQuotaExhausted(error: unknown): boolean {
+  return error instanceof RetryableStatusError && error.exhaustedForToday;
 }
 
 /**
@@ -255,7 +269,7 @@ export function backoffFor(
  * one clears in a minute, the other at midnight Pacific — and on a 20-requests/day key, spending
  * a retry on the second is spending 5% of the day's budget to be told the same thing twice.
  */
-class RetryableStatusError extends Error {
+export class RetryableStatusError extends Error {
   /** `RetryInfo.retryDelay` from the response body, in milliseconds, when the API sent one. */
   readonly retryAfterMs: number | null;
   /** True when a per-day quota is exhausted: waiting will not help, only another model will. */
