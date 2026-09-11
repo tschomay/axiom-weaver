@@ -3,7 +3,13 @@ import { bearerToken, isAuthorizedAuthorRequest } from '@/admin/authorize';
 import { storyRepository } from '@/persistence';
 import { compileSceneIntoDraft } from '@/draft/draft-compile';
 import { surfacesFor } from '@/validator/diagnostics';
-import { GeminiClient, writerModelFromEnv } from '@/writer/model-client';
+import {
+  GeminiClient,
+  dailyQuotaFailure,
+  isSelectableWriterModel,
+  quotaOffer,
+  writerModelFromEnv,
+} from '@/writer/model-client';
 import { SyntheticWriterClient } from '@/writer/synthetic-client';
 import { PlantWalkRejectedError } from '@/plants/obligation-walk';
 
@@ -31,7 +37,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ sto
   const repository = storyRepository();
 
   const body = (await request.json().catch(() => null)) as
-    | { scene_id?: unknown; writer?: unknown }
+    | { scene_id?: unknown; writer?: unknown; model?: unknown }
     | null;
   const sceneId = typeof body?.scene_id === 'string' ? body.scene_id : null;
   if (sceneId === null) {
@@ -41,6 +47,15 @@ export async function POST(request: Request, { params }: { params: Promise<{ sto
     return NextResponse.json({ error: 'writer must be "live" or "stand_in"' }, { status: 400 });
   }
   const requestedWriter = body?.writer === 'stand_in' ? 'stand_in' : 'live';
+
+  // A named model is how an author takes up the offer a spent daily quota produces below. It is
+  // always their choice and never a default: nothing here reaches for a cheaper model on its own.
+  if (body?.model !== undefined) {
+    if (typeof body.model !== 'string' || !isSelectableWriterModel(body.model)) {
+      return NextResponse.json({ error: `"${String(body.model)}" is not a writer model this deployment will call` }, { status: 400 });
+    }
+  }
+  const writerModel = typeof body?.model === 'string' ? body.model : writerModelFromEnv();
 
   const pkg = await repository.getCurrentPackage(storyId);
   if (pkg === null) {
@@ -61,11 +76,27 @@ export async function POST(request: Request, { params }: { params: Promise<{ sto
 
   let result;
   try {
-    result = await compileSceneIntoDraft({ pkg, sceneId, client, repository });
+    result = await compileSceneIntoDraft({ pkg, sceneId, client, repository, writerModel });
   } catch (error) {
     if (error instanceof PlantWalkRejectedError) {
       return NextResponse.json({ error: error.message }, { status: 409 });
     }
+
+    // The day's allowance is spent. The client has already tried the capacity fallback, so no
+    // retry on this model will do anything before midnight Pacific — but a model with its own,
+    // larger allowance would. Hand the surface what it needs to *ask*, rather than degrading the
+    // writer quietly, which would put a scene in the draft nobody chose the model for.
+    const quota = dailyQuotaFailure(error, writerModel);
+    if (quota !== null) {
+      return NextResponse.json(
+        {
+          error: `${quota.model} has no requests left today.`,
+          quota: quotaOffer(quota.model, quota.detail, quota.retry_after_ms),
+        },
+        { status: 429 },
+      );
+    }
+
     // A scene whose predecessors are not in the draft cannot be compiled, and `replayTo` says so
     // rather than compiling against an empty history. That is a request problem, not a crash.
     return NextResponse.json(
@@ -88,7 +119,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ sto
       requested: requestedWriter,
       model:
         live !== null
-          ? writerModelFromEnv()
+          ? writerModel
           : requestedWriter === 'stand_in'
             ? 'stand-in writer — composed from the Scene Card, no model called'
             : 'stand-in writer — no GEMINI_API_KEY configured, so no model was called',

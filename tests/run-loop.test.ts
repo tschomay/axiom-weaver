@@ -246,6 +246,11 @@ describe('the read-time run loop (ADR 0014)', () => {
       expect(manifest?.status).toBe('failed');
       expect(manifest?.scenes).toHaveLength(2);
       expect(events.at(-1)?.type).toBe('run_failed');
+
+      // The manifest says *why*, not just that it stopped — the surface that offers what to do
+      // next reads this, and an outage is not something it can offer a way past.
+      expect(manifest?.failure?.detail).toContain('503 UNAVAILABLE');
+      expect(manifest?.failure?.quota_exhausted_for_today).toBe(false);
     });
   });
 

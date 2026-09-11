@@ -30,7 +30,7 @@ import {
 } from '../plants/obligation-walk';
 import { RunState } from '../writer/run-state';
 import { compileScene, maxOutputTokensFor, type CompiledScene } from '../writer/compile-scene';
-import type { ModelClient } from '../writer/model-client';
+import { WRITER_MODEL, dailyQuotaFailure, type ModelClient } from '../writer/model-client';
 import type { Occasion } from '../validator/state-update-authority';
 import type { Diagnostic } from '../validator/diagnostics';
 import type { SceneDigest } from '../digest/scene-digest';
@@ -39,6 +39,7 @@ import type { StoryRepository } from '../persistence/story-repository';
 import {
   EDITION_SCHEMA_VERSION,
   mintRunId,
+  type EditionFailure,
   type EditionManifest,
   type EditionSceneEntry,
 } from './edition';
@@ -181,6 +182,7 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
     state_log_path: null,
     started_at: startedAt.toISOString(),
     completed_at: null,
+    failure: null,
   };
 
   const report: RunReport = {
@@ -254,12 +256,21 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
       // The outage outlived its retries. Everything already flushed stands — the reader's own
       // still-in-flight run is the only thing ever rejoined, and it is rejoined from Blob.
       const detail = error instanceof Error ? error.message : String(error);
+      // A spent daily quota is the one failure a surface can offer a way past, so it is recorded
+      // rather than flattened into "the run stopped". What to do about it is nobody's decision
+      // here — the run is over either way.
+      const quota = dailyQuotaFailure(error, input.writerModel ?? WRITER_MODEL);
       await closeOut({
         repository,
         manifest,
         report,
         state,
         status: 'failed',
+        failure: {
+          detail,
+          quota_exhausted_for_today: quota !== null,
+          model: quota?.model ?? input.writerModel ?? null,
+        },
         startedAt,
         now,
       });
@@ -499,6 +510,7 @@ async function closeOut(input: {
   report: RunReport;
   state: RunState;
   status: 'complete' | 'failed';
+  failure?: EditionFailure | null;
   startedAt: Date;
   now: () => Date;
 }): Promise<{ manifest: EditionManifest; report: RunReport }> {
@@ -522,6 +534,7 @@ async function closeOut(input: {
   });
 
   manifest.status = input.status;
+  manifest.failure = input.failure ?? null;
   manifest.completed_at = completedAt.toISOString();
   manifest.world_model_path = editionWorldModelPath(manifest.run_id);
   manifest.discourse_path = editionDiscoursePath(manifest.run_id);

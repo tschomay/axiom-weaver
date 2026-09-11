@@ -3,7 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { DraftSceneView, DraftView } from '@/draft/draft-view';
 import type { DiffSummary } from '@/draft/working-draft';
+import type { QuotaOffer } from '@/writer/model-client';
 import { AuthorTokenField, useAuthorSession } from '../../author-token';
+import { QuotaPrompt } from '../../quota-prompt';
 
 interface CompileDiagnostic {
   code: string;
@@ -82,6 +84,11 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
   const [standIn, setStandIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [bulk, setBulk] = useState<{ outcomes: BulkOutcome[]; remaining: number } | null>(null);
+  const [quota, setQuota] = useState<{
+    offer: QuotaOffer;
+    /** Described rather than captured: a closure kept in state goes stale on the next refresh. */
+    retry: { kind: 'scene'; scene_id: string } | { kind: 'rest' };
+  } | null>(null);
   const [draftProse, setDraftProse] = useState<DraftScene[] | null>(null);
   // The compile view sits below a scene list that is as long as the story; a compile the author
   // has to go looking for is a compile they read late.
@@ -98,15 +105,30 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
 
   /** One compile, as the API answers it. Callers own what the screen does with the answer. */
   const compileOne = useCallback(
-    async (sceneId: string): Promise<CompileResponse | { error: string }> => {
+    async (
+      sceneId: string,
+      model?: string,
+    ): Promise<CompileResponse | { error: string; quota?: QuotaOffer }> => {
       try {
         const response = await fetch(`/api/stories/${storyId}/draft/compile`, {
           method: 'POST',
           headers: session.headers(),
-          body: JSON.stringify({ scene_id: sceneId, writer: standIn ? 'stand_in' : 'live' }),
+          body: JSON.stringify({
+            scene_id: sceneId,
+            writer: standIn ? 'stand_in' : 'live',
+            ...(model === undefined ? {} : { model }),
+          }),
         });
-        const body = (await response.json()) as CompileResponse & { error?: string };
-        if (!response.ok) return { error: body.error ?? `Compile failed (${response.status})` };
+        const body = (await response.json()) as CompileResponse & {
+          error?: string;
+          quota?: QuotaOffer;
+        };
+        if (!response.ok) {
+          return {
+            error: body.error ?? `Compile failed (${response.status})`,
+            ...(body.quota === undefined ? {} : { quota: body.quota }),
+          };
+        }
         return body;
       } catch {
         return { error: 'Network error — the compile may or may not have finished. Reload to see.' };
@@ -116,15 +138,24 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
   );
 
   const compile = useCallback(
-    async (sceneId: string) => {
+    async (sceneId: string, model?: string) => {
       setCompiling(sceneId);
       setError(null);
       setCompiled(null);
       setBulk(null);
+      setQuota(null);
       setResolutions({});
-      const result = await compileOne(sceneId);
-      if ('error' in result) setError(result.error);
-      else setCompiled(result);
+      const result = await compileOne(sceneId, model);
+      if ('error' in result) {
+        // A spent daily quota is not a dead end, so it is offered rather than only reported.
+        if (result.quota !== undefined) {
+          setQuota({ offer: result.quota, retry: { kind: 'scene', scene_id: sceneId } });
+        } else {
+          setError(result.error);
+        }
+      } else {
+        setCompiled(result);
+      }
       await refresh();
       setCompiling(null);
     },
@@ -142,19 +173,21 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
    * It stops at the first failure instead of pressing on: everything after a failed scene would be
    * compiled against a history that does not exist.
    */
-  const compileRest = useCallback(async () => {
+  const compileRest = useCallback(
+    async (model?: string) => {
     const pending = draft.scenes.filter((scene) => !scene.compiled);
     if (pending.length === 0) return;
 
     setError(null);
     setCompiled(null);
+    setQuota(null);
     setResolutions({});
     const outcomes: BulkOutcome[] = [];
     setBulk({ outcomes, remaining: pending.length });
 
     for (const [index, scene] of pending.entries()) {
       setCompiling(scene.scene_id);
-      const result = await compileOne(scene.scene_id);
+      const result = await compileOne(scene.scene_id, model);
 
       if ('error' in result) {
         outcomes.push({
@@ -167,7 +200,10 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
           failed: result.error,
         });
         setBulk({ outcomes: [...outcomes], remaining: 0 });
-        setError(`Stopped at ${scene.scene_id}: ${result.error}`);
+        // Picking the offer up resumes from here: the cards already built stay built, and the
+        // retry recomputes what is left from the refreshed draft rather than this stale list.
+        if (result.quota !== undefined) setQuota({ offer: result.quota, retry: { kind: 'rest' } });
+        else setError(`Stopped at ${scene.scene_id}: ${result.error}`);
         break;
       }
 
@@ -184,9 +220,11 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
       setCompiled(result);
     }
 
-    await refresh();
-    setCompiling(null);
-  }, [compileOne, draft.scenes, refresh]);
+      await refresh();
+      setCompiling(null);
+    },
+    [compileOne, draft.scenes, refresh],
+  );
 
   const readDraft = useCallback(async () => {
     if (draftProse !== null) {
@@ -243,6 +281,20 @@ export function WorkingDraftView({ storyId, initial }: { storyId: string; initia
     <>
       <AuthorTokenField session={session} />
       {error !== null && <p className="admin-error">{error}</p>}
+      {quota !== null && (
+        <QuotaPrompt
+          offer={quota.offer}
+          what={quota.retry.kind === 'rest' ? 'Compile the rest' : 'Compile'}
+          busy={compiling !== null}
+          onProceed={(model) => {
+            const retry = quota.retry;
+            setQuota(null);
+            if (retry.kind === 'rest') void compileRest(model);
+            else void compile(retry.scene_id, model);
+          }}
+          onDismiss={() => setQuota(null)}
+        />
+      )}
 
       <h2>Working Draft</h2>
       <p className="meta">

@@ -437,3 +437,27 @@ progress.run-progress {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
+/* A spent daily quota, and the choice it leaves open. */
+.panel.quota-prompt {
+  border-color: var(--warn);
+  background: var(--warn-soft);
+}
+
+.quota-prompt .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.quota-prompt summary {
+  cursor: pointer;
+}
+
+pre.quota-detail {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  max-height: 12rem;
+  margin: 0.5rem 0 0;
+}

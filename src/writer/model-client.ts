@@ -104,6 +104,75 @@ export const FALLBACK_MODEL = 'gemini-3.5-flash-lite';
 export const TESTING_WRITER_MODEL = FALLBACK_MODEL;
 
 /**
+ * The models a request may ask for by name.
+ *
+ * An allowlist rather than a free-text model field: a caller naming any model it likes would
+ * point the project's key at anything the API serves, and the three here are the only ones the
+ * project has a reason to run — the writer model, its same-price capacity fallback, and the
+ * request-headroom model an author opts into when the day's allowance is gone.
+ */
+export const SELECTABLE_WRITER_MODELS: readonly string[] = [
+  WRITER_MODEL,
+  WRITER_MODEL_FALLBACK,
+  TESTING_WRITER_MODEL,
+];
+
+export function isSelectableWriterModel(model: string): boolean {
+  return SELECTABLE_WRITER_MODELS.includes(model);
+}
+
+/**
+ * What a failed call says about the key's *daily* allowance, or `null` for any other failure.
+ *
+ * This is the one failure a caller can do something about beyond waiting. A per-minute allowance
+ * clears in a minute; a per-day one clears at midnight Pacific, and `GeminiClient` has already
+ * tried the capacity fallback by the time this is reachable — so the only way past it today is a
+ * model with its own, larger allowance.
+ *
+ * Reaching for that model is never this code's decision. A silent quality downgrade is worse than
+ * a rate limit (AGENTS.md), so this only reports the failure precisely enough for a surface to
+ * put the choice to the person reading the prose.
+ */
+export interface DailyQuotaFailure {
+  readonly detail: string;
+  /** The model that ran out — the last one the client tried. */
+  readonly model: string;
+  readonly retry_after_ms: number | null;
+}
+
+export function dailyQuotaFailure(error: unknown, model: string): DailyQuotaFailure | null {
+  if (!(error instanceof RetryableStatusError) || !error.exhaustedForToday) return null;
+  return { detail: error.message, model, retry_after_ms: error.retryAfterMs };
+}
+
+/**
+ * The same failure in the shape a surface renders: what ran out, and what could be asked instead.
+ *
+ * `retry_with_model` is `null` once the caller is already on the headroom model — there is nothing
+ * further to offer, and a surface that kept offering would be pretending otherwise. Built here so
+ * the author-time and read-time paths put the identical choice to a person.
+ */
+export interface QuotaOffer {
+  readonly model: string;
+  readonly detail: string;
+  readonly retry_after_ms: number | null;
+  readonly retry_with_model: string | null;
+}
+
+export function quotaOffer(
+  model: string,
+  detail: string,
+  retryAfterMs: number | null = null,
+): QuotaOffer {
+  return {
+    model,
+    detail,
+    retry_after_ms: retryAfterMs,
+    retry_with_model: model === TESTING_WRITER_MODEL ? null : TESTING_WRITER_MODEL,
+  };
+}
+
+/**
  * Which model the writer call should use: `AXIOM_WRITER_MODEL` if set, else `WRITER_MODEL`.
  *
  * Deliberately an override of the *request*, not a rewrite inside the client: a client that
