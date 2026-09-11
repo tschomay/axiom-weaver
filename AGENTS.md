@@ -8,6 +8,11 @@ Issues live as GitHub Issues on this repo, operated via the `gh` CLI. See `docs/
 
 Single-context layout — `CONTEXT.md` + `docs/adr/` at the repo root, created lazily as terms and decisions resolve. See `docs/agents/domain.md`.
 
+`README.md`'s "Why this exists" section and `GLOSSARY.md` are both derived from `CONTEXT.md`. When
+a term is introduced, renamed, or has its meaning changed in `CONTEXT.md` (or a new ADR), update
+both of them in the same change — the glossary is a quick-reference table over `CONTEXT.md`, not a
+separate source of truth, and it drifts silently if it isn't touched alongside it.
+
 ## The Gemini API key
 
 `GEMINI_API_KEY` in this project is a **free-tier** key, and the tier — not the code — is the
