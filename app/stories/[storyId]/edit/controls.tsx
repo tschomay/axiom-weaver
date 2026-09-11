@@ -252,6 +252,7 @@ export function StringListField({
   hint,
   placeholder,
   flagged,
+  multiline,
 }: {
   label: string;
   values: readonly string[];
@@ -259,22 +260,36 @@ export function StringListField({
   hint?: string;
   placeholder?: string;
   flagged?: boolean;
+  /** For entries that are sentences — a beat, an invariant — rather than phrases. */
+  multiline?: boolean;
 }) {
   return (
     <Field label={label} hint={hint} flagged={flagged} group>
       {values.map((entry, index) => (
         // Keyed by position, not value: the value is what the author is editing, and keying by
         // it would re-mount the input on every keystroke.
-        <div className="list-row" key={index}>
-          <input
-            type="text"
-            aria-label={`${label} ${index + 1}`}
-            value={entry}
-            placeholder={placeholder}
-            onChange={(event) =>
-              onChange(values.map((old, at) => (at === index ? event.target.value : old)))
-            }
-          />
+        <div className={multiline === true ? 'list-row tall' : 'list-row'} key={index}>
+          {multiline === true ? (
+            <textarea
+              aria-label={`${label} ${index + 1}`}
+              value={entry}
+              placeholder={placeholder}
+              rows={2}
+              onChange={(event) =>
+                onChange(values.map((old, at) => (at === index ? event.target.value : old)))
+              }
+            />
+          ) : (
+            <input
+              type="text"
+              aria-label={`${label} ${index + 1}`}
+              value={entry}
+              placeholder={placeholder}
+              onChange={(event) =>
+                onChange(values.map((old, at) => (at === index ? event.target.value : old)))
+              }
+            />
+          )}
           <button
             type="button"
             className="tiny"

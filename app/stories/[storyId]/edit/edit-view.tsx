@@ -59,12 +59,15 @@ export function EditView({
   initial,
   published,
   initialSection,
+  initialScene,
 }: {
   storyId: string;
   initial: ManuscriptPayload;
   published: boolean;
   /** `null` means the URL named no section: the drill-down list, on a narrow viewport. */
   initialSection: EditorSection | null;
+  /** The Scene Card the URL names, if any — the third level of the drill-down. */
+  initialScene: string | null;
 }) {
   const router = useRouter();
   const session = useAuthorSession();
@@ -76,6 +79,7 @@ export function EditView({
   const [save, setSave] = useState<SaveState>({ kind: 'clean' });
   const [section, setSection] = useState<EditorSection>(initialSection ?? 'story');
   const [atList, setAtList] = useState(initialSection === null);
+  const [openScene, setOpenScene] = useState<string | null>(initialScene);
   const [focusPath, setFocusPath] = useState<string | null>(null);
   const [dirty, setDirty] = useState(false);
 
@@ -96,9 +100,11 @@ export function EditView({
 
   useEffect(() => {
     const onPop = () => {
-      const param = new URLSearchParams(window.location.search).get('section');
+      const search = new URLSearchParams(window.location.search);
+      const param = search.get('section');
       setAtList(param === null);
       if (isEditorSection(param)) setSection(param);
+      setOpenScene(search.get('scene'));
     };
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
@@ -107,7 +113,20 @@ export function EditView({
   const openSection = useCallback((next: EditorSection) => {
     setSection(next);
     setAtList(false);
+    setOpenScene(null);
     window.history.pushState(null, '', `?section=${next}`);
+  }, []);
+
+  /**
+   * The third level of the drill-down: one Scene Card.
+   *
+   * Pushed rather than replaced, like the section above it, so the back gesture walks back out
+   * scene → scene list → section list rather than leaving the screen entirely.
+   */
+  const showScene = useCallback((sceneId: string | null) => {
+    setOpenScene(sceneId);
+    const search = sceneId === null ? '?section=scenes' : `?section=scenes&scene=${encodeURIComponent(sceneId)}`;
+    window.history.pushState(null, '', search);
   }, []);
 
   const backToList = useCallback(() => {
@@ -120,9 +139,14 @@ export function EditView({
   const showProblem = useCallback(
     (path: string) => {
       setFocusPath(path);
-      openSection(sectionForPath(path));
+      const target = sectionForPath(path);
+      openSection(target);
+      // A scene's problems are only navigable if following one opens the card: the section on
+      // its own is a list of twenty ids, which is where the author started.
+      const sceneId = target === 'scenes' ? (path.split('.')[1] ?? null) : null;
+      if (sceneId !== null) showScene(sceneId);
     },
-    [openSection],
+    [openSection, showScene],
   );
 
   // --- Lint, continuously -----------------------------------------------------------------
@@ -357,7 +381,14 @@ export function EditView({
             <WorldSection pkg={pkg} onChange={edit} flagged={flagged} focusPath={focusPath} />
           ) : null}
           {section === 'scenes' ? (
-            <ScenesSection storyId={storyId} pkg={pkg} problemsFor={problemsFor} />
+            <ScenesSection
+              pkg={pkg}
+              onChange={edit}
+              flagged={flagged}
+              problemsFor={problemsFor}
+              openSceneId={openScene}
+              onOpenScene={showScene}
+            />
           ) : null}
           {section === 'publish' ? (
             <PublishSection

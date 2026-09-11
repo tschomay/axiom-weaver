@@ -40,8 +40,10 @@ export default async function EditPage({
   // the author is looking at what the next publish produces, so that is what to check.
   // Read here as well as in the browser so a link to a section opens on that section, rather
   // than rendering the first one and then replacing it (ADR 0017 §7).
-  const section = (await searchParams)['section'];
+  const query = await searchParams;
+  const section = query['section'];
   const named = typeof section === 'string' && isEditorSection(section) ? section : null;
+  const scene = query['scene'];
 
   const nextVersion = await nextPackageVersion(repository, storyId);
   return (
@@ -49,6 +51,7 @@ export default async function EditPage({
       storyId={storyId}
       published={pkg !== null}
       initialSection={named}
+      initialScene={typeof scene === 'string' ? scene : null}
       initial={{
         ...manuscript,
         lint: lintPackage({ ...manuscript.package, package_version: nextVersion }),

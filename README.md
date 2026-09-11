@@ -215,12 +215,19 @@ filesystem under `.data/` (gitignored) at exactly the same pathnames. See `.env.
 | `/stories/{storyId}/runs` | The **run report**: every run aggregated by Scene Card — "this card degraded on 4 of 20 reads" — and the manual promotion of a completed, non-degraded run to Baked. |
 | `/stories/{storyId}/diff` | **Compare two tellings** of the same `package_version`: per scene, the Scene Digest fields that came out differently, the volitional proposals the two runs resolved differently, and both performances to read side by side. Never a line-level text diff of prose — two performances of one Scene Card share almost no words. |
 | `/stories/{storyId}/read` | The reader's three-way choice (ADR 0014 §3): the **Baked** edition, the **library** of tellings the author saved under names worth telling apart, or **generate a telling** — the whole compiler behind one button: a fresh run id, one writer call per scene in order, scene-count progress while it runs, and the finished edition as prose. Every completed telling stays readable and shareable by its own run id whether or not it is in the library. |
-| `/stories/{storyId}/edit` | The **Manuscript** (ADR 0017): metadata, the Voice Card, the World Model seed. Every edit autosaves into a per-story draft that nothing else can see, carrying the `updated_at` it was read at so a second tab is refused rather than silently discarded. The linter runs continuously beside it, and every problem is a link to the field that owns it. **Publish** names the `package_version` it is about to write and says that the bump will flag the Working Draft stale; **discard** drops the draft and returns the story to its published package. |
+| `/stories/{storyId}/edit` | The **Manuscript** (ADR 0017): metadata, the Voice Card, the World Model seed, and the Scene Cards. Every edit autosaves into a per-story draft that nothing else can see, carrying the `updated_at` it was read at so a second tab is refused rather than silently discarded. The linter runs continuously beside it, and every problem is a link to the field that owns it. **Publish** names the `package_version` it is about to write and says that the bump will flag the Working Draft stale; **discard** drops the draft and returns the story to its published package. |
 | `/stories/new` | Start a story **from scratch**, or **duplicate** any retained version of any story under a new `story_id` — which is what makes the five fixtures usable as templates: only the package travels, so the copy has no Working Draft, no runs and no editions. |
 
 An author never types an id: `pov`, `location_id`, relationship endpoints and every other entity
 reference is a picker over the World Model seed, because the errors hand-authoring actually
-produces are cross-reference errors and a picker cannot produce one. A `bag` is flat key/value
+produces are cross-reference errors and a picker cannot produce one. `entry_state` and `exit_state` are
+edited as rows — entity → column → value — with the column list read from `src/schema/tiers.ts`
+and each column's **P / E / V** tier shown in the picker, so asserting `goal` reads as the
+volitional assertion it is at the moment it is asserted. The reserved `_new_relationships` and
+`_new_character_knowledge` keys are "create a row this scene makes" buttons rather than keys to
+know about. A `pays_off` entry picks its plant from **earlier scenes only**, each labelled with
+whether it actually declares the fact, because ADR 0004 rejects the pair if it does not — and
+deleting a card that something plants at says so before the delete, not after. A `bag` is flat key/value
 rows whose value types are text, number, true/false, list and empty — Principle 4's "no nested
 objects" is enforced by the control having no way to express one, not by a rule the author has to
 remember. Desktop puts the section list and the editor side by side; a narrow viewport stacks them

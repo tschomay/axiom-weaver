@@ -73,12 +73,29 @@ const SEED_ARRAYS: Record<string, string> = {
   character_knowledge: 'character_knowledge',
 };
 
+/**
+ * Assemble a result, keeping one report per defect.
+ *
+ * This module composes passes that overlap on purpose — the Scene Card cross-reference pass and
+ * ADR 0004's plant walk both catch a plant that is not earlier than its payoff, and both are
+ * right. What an author gets from seeing it twice, in two phrasings, is the impression that two
+ * things are wrong. Same severity, same code, same path is the same defect; the first phrasing
+ * wins, and the duplicate is dropped rather than renamed, because a check firing where it should
+ * is not the thing to change.
+ */
 function result(problems: PackageProblem[]): LintResult {
-  const errors = problems.filter((problem) => problem.severity === 'error');
+  const seen = new Set<string>();
+  const deduplicated = problems.filter((problem) => {
+    const key = `${problem.severity}|${problem.code}|${problem.path}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  const errors = deduplicated.filter((problem) => problem.severity === 'error');
   return {
-    problems,
+    problems: deduplicated,
     errors,
-    warnings: problems.filter((problem) => problem.severity === 'warn'),
+    warnings: deduplicated.filter((problem) => problem.severity === 'warn'),
     publishable: errors.length === 0,
   };
 }
