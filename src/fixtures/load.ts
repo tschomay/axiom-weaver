@@ -22,7 +22,16 @@ import { columnAuthority } from '../schema/tiers';
 import { WorldModel } from '../world-model/world-model';
 import type { StoryRepository } from '../persistence/story-repository';
 
-export const FIXTURE_STORY_IDS = ['cinderella', 'a-christmas-carol'] as const;
+export const FIXTURE_STORY_IDS = [
+  'cinderella',
+  'a-christmas-carol',
+  // Three original short packages (3-5 scenes). The two public-domain fixtures are the scale
+  // test; these are the iteration loop — short enough that a whole live telling costs a handful
+  // of writer requests rather than a day's allowance (AGENTS.md, The Gemini API key).
+  'the-amber-cat',
+  'the-dragon-of-thistlewick',
+  'the-lamp-at-cairn-head',
+] as const;
 export type FixtureStoryId = (typeof FIXTURE_STORY_IDS)[number];
 
 export function fixturePath(fixture: string, root = process.cwd()): string {

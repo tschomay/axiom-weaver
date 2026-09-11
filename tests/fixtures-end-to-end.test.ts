@@ -58,6 +58,12 @@ const KNOWN_ENTRY_STATE_GAPS: Record<string, string[]> = {
     'scene_18_the_waking char_scrooge.location_id',
     'scene_20_the_office_next_morning char_bob_cratchit.location_id',
   ],
+  // The three short packages were authored after this check existed, against it — every scene's
+  // entry_state is what the scene before it leaves behind. An empty list is the assertion, not an
+  // omission: a future edit that breaks the chain fails here.
+  'the-amber-cat': [],
+  'the-dragon-of-thistlewick': [],
+  'the-lamp-at-cairn-head': [],
 };
 
 describe.each(FIXTURE_STORY_IDS)('%s, end to end', (fixture) => {

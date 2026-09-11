@@ -1,0 +1,226 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "the-dragon-of-thistlewick",
+  "_authoring_conventions": {
+    "note": "Same conventions as fixtures/cinderella — see fixtures/authoring-notes.md. This package is original, written for this repository; nothing in it is adapted from an existing work.",
+    "entry_state_and_exit_state": "{ <entity_id>: { <column>: <value>, ... }, ... } — one object per touched entity, naming only the core columns this scene asserts.",
+    "new_rows_in_exit_state": "Reserved keys _new_relationships / _new_character_knowledge, using the same row shape as world_model_seed.",
+    "why_this_fixture_exists": "The shortest package in the repository: three scenes, so a whole live telling costs three writer requests. It is the one to reach for when the question is whether the loop works, not whether the prose is good."
+  },
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_maudlin",
+        "name": "Maudlin",
+        "location_id": "loc_hive_yard",
+        "status": "alive",
+        "goal": "get through the clover flow without incident",
+        "bag": {
+          "species": "dragon",
+          "age": "four hundred and some",
+          "occupation": "keeps eleven hives on the south face of Barrow Hill",
+          "manner": "brisk, a little deaf, treats being slain as an item on an agenda"
+        }
+      },
+      {
+        "id": "char_pellow",
+        "name": "Sir Pellow",
+        "location_id": "loc_village_green",
+        "status": "alive",
+        "goal": null,
+        "bag": {
+          "age": 19,
+          "note": "knighted eleven days ago; the lance is borrowed and he has told nobody that",
+          "manner": "unfailingly polite, which is the whole of his problem"
+        }
+      },
+      {
+        "id": "char_brisk",
+        "name": "Alderwoman Brisk",
+        "location_id": "loc_village_green",
+        "status": "alive",
+        "goal": null,
+        "bag": { "office": "alderwoman of Thistlewick", "manner": "runs meetings the way weather runs" }
+      },
+      {
+        "id": "char_nan",
+        "name": "Nan Tolly",
+        "location_id": "loc_village_green",
+        "status": "alive",
+        "goal": null,
+        "bag": { "trade": "laundress", "grievance": "six weeks of grey washing" }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_village_green",
+        "name": "the green at Thistlewick",
+        "bag": { "description": "a duck pond, a notice-board, and every opinion in the village standing on it" }
+      },
+      {
+        "id": "loc_hill_path",
+        "name": "the path up Barrow Hill",
+        "bag": { "description": "steep, chalky, and smelling faintly of something sweet the higher you go" }
+      },
+      {
+        "id": "loc_hive_yard",
+        "name": "the hive yard",
+        "bag": { "description": "eleven white hives in a row on the south face, and a dragon-sized gap where a twelfth would go" }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_lance",
+        "name": "the lance",
+        "location_id": "loc_village_green",
+        "status": "borrowed",
+        "bag": { "note": "belongs to Sir Pellow's aunt, who wants it back by Thursday" }
+      },
+      {
+        "id": "obj_smoker",
+        "name": "the bee smoker",
+        "location_id": "loc_hive_yard",
+        "status": "lit",
+        "bag": { "description": "a bellows-and-canister rig the size of a butter churn, packed with dried clover" }
+      },
+      {
+        "id": "obj_honey",
+        "name": "the clover crock",
+        "location_id": "loc_hive_yard",
+        "status": "sealed",
+        "bag": { "description": "twenty pounds of the first clover honey of the year" }
+      },
+      {
+        "id": "obj_washing",
+        "name": "Nan Tolly's washing",
+        "location_id": "loc_village_green",
+        "status": "grey with smuts",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      { "id": "rel_001", "from_id": "char_brisk", "to_id": "char_pellow", "kind": "commissions", "sentiment": "hopeful", "bag": {} },
+      { "id": "rel_002", "from_id": "char_nan", "to_id": "char_maudlin", "kind": "complains_about", "sentiment": "aggrieved", "bag": {} }
+    ],
+    "character_knowledge": []
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_commission",
+      "order": 1,
+      "pov": "char_pellow",
+      "location_id": "loc_village_green",
+      "characters_present": ["char_pellow", "char_brisk", "char_nan"],
+      "dramatic_function": "Commission the knight, give the village a real and petty grievance, and lay down the detail that will turn the whole thing around — as a passing complaint, not a clue.",
+      "entry_state": { "char_pellow": { "location_id": "loc_village_green", "status": "alive" } },
+      "exit_state": {
+        "char_pellow": { "location_id": "loc_hill_path" },
+        "obj_lance": { "location_id": "loc_hill_path" }
+      },
+      "required_beats": [
+        "Alderwoman Brisk commissions Sir Pellow to deal with the dragon on Barrow Hill, in front of everybody, so that he cannot say no",
+        "Nan Tolly holds up six weeks of washing gone grey and says the smoke off that hill has ruined every wash day since the thaw",
+        "somebody in the crowd says the smoke does not even smell like smoke, it smells like clover, and is told to be quiet",
+        "Sir Pellow starts up the hill with a borrowed lance and no plan"
+      ],
+      "reader_must_learn": ["the_dragons_smoke_smells_of_clover"],
+      "tone": "village-meeting comedy; everyone certain, nobody informed",
+      "length_budget": 350,
+      "invariants": [
+        "nobody in the village has been up the hill to look",
+        "the clover remark is thrown away, not dwelt on"
+      ]
+    },
+    {
+      "id": "scene_02_the_hive_yard",
+      "order": 2,
+      "pov": "char_pellow",
+      "location_id": "loc_hive_yard",
+      "characters_present": ["char_pellow", "char_maudlin"],
+      "dramatic_function": "Collide the two genres: the knight arrives to slay a dragon and finds a beekeeper mid-inspection who treats him as an interruption.",
+      "entry_state": { "char_pellow": { "location_id": "loc_hill_path" } },
+      "exit_state": {
+        "char_pellow": { "location_id": "loc_hive_yard" },
+        "obj_lance": { "location_id": "loc_hive_yard", "status": "leant against a hive" },
+        "obj_honey": { "status": "opened" }
+      },
+      "required_beats": [
+        "Sir Pellow comes over the ridge with the lance up and finds Maudlin in a veil the size of a mainsail, halfway through an inspection",
+        "Maudlin asks him to either put the lance down or stand downwind of it, because the bees are having a difficult morning",
+        "she works while they talk, and he cannot find the moment to announce what he came for",
+        "she opens the clover crock and gives him a spoonful, and he forgets the moment entirely"
+      ],
+      "tone": "warm, absurd, and entirely sincere on both sides",
+      "length_budget": 400,
+      "invariants": [
+        "Maudlin never threatens Sir Pellow",
+        "Sir Pellow never actually says the word slay out loud",
+        "the lance ends the scene leaning against a hive"
+      ]
+    },
+    {
+      "id": "scene_03_the_bargain",
+      "order": 3,
+      "pov": "char_pellow",
+      "location_id": "loc_hive_yard",
+      "characters_present": ["char_pellow", "char_maudlin", "char_brisk", "char_nan"],
+      "dramatic_function": "Collect the clover plant: the ruinous smoke is the smoker, the grievance is a scheduling problem, and the settlement makes everyone slightly better off than the fight would have.",
+      "entry_state": {
+        "char_pellow": { "location_id": "loc_hive_yard" },
+        "obj_washing": { "status": "grey with smuts" }
+      },
+      "exit_state": {
+        "char_brisk": { "location_id": "loc_hive_yard" },
+        "char_nan": { "location_id": "loc_hive_yard" },
+        "obj_honey": { "location_id": "loc_village_green", "status": "broached on the green" },
+        "obj_washing": { "status": "hung out clean" },
+        "obj_smoker": { "status": "moved to the north face" },
+        "_new_relationships": [
+          {
+            "id": "rel_003",
+            "from_id": "char_maudlin",
+            "to_id": "char_nan",
+            "kind": "trades_with",
+            "sentiment": null,
+            "bag": { "terms": "honey down the hill, wash days on the calendar" }
+          }
+        ]
+      },
+      "required_beats": [
+        "Brisk and Nan Tolly come up the hill expecting a body and find the two of them sitting down",
+        "the smoke the village has been cursing turns out to be the smoker, clover-packed, and it only runs on inspection days",
+        "Maudlin agrees to work the north face and to send word down the hill before she lights it, so wash day can move",
+        "the crock goes down to the green and the village drinks to a slaying that did not happen"
+      ],
+      "pays_off": [{ "fact_ref": "the_dragons_smoke_smells_of_clover", "plant": "scene_01_the_commission" }],
+      "tone": "resolution as negotiation; the comedy is that it was always this easy",
+      "length_budget": 400,
+      "invariants": [
+        "nobody apologises in so many words",
+        "Sir Pellow returns the lance unbloodied and does not correct anyone's account of the day"
+      ]
+    }
+  ],
+  "voice_card": {
+    "style_preset": "whimsical_playful",
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "close on Pellow, with a narrator who finds him funny and is fond of him anyway",
+    "register": "light, dry, faintly rural; treats the extraordinary as a matter of parish administration",
+    "sentence_rhythm": "loose and conversational, with a short flat sentence dropped in to land a joke",
+    "imagery_palette": [
+      "clover and smoke",
+      "whitewashed hives in a row",
+      "laundry on a line",
+      "borrowed armour that does not fit"
+    ],
+    "dialogue_density": "high; the story is mostly people talking slightly past each other",
+    "style_exemplar": "The dragon had eleven hives, a bad ear, and no interest whatever in being the third item on the parish agenda."
+  },
+  "metadata": {
+    "title": "The Dragon of Thistlewick",
+    "source": "Original, written for this repository — no adapted material.",
+    "created_at": "2026-09-11T00:00:00Z"
+  }
+}

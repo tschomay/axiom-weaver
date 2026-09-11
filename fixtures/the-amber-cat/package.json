@@ -1,0 +1,388 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "the-amber-cat",
+  "_authoring_conventions": {
+    "note": "Same conventions as fixtures/cinderella — see fixtures/authoring-notes.md. This package is original, written for this repository; nothing in it is adapted from an existing work.",
+    "entry_state_and_exit_state": "{ <entity_id>: { <column>: <value>, ... }, ... } — one object per touched entity, naming only the core columns this scene asserts.",
+    "new_rows_in_exit_state": "Reserved keys _new_relationships / _new_character_knowledge, using the same row shape as world_model_seed.",
+    "why_this_fixture_exists": "Four scenes, so a whole live telling costs four writer requests rather than fourteen (AGENTS.md, The Gemini API key). It is deliberately short enough to read in one sitting and re-run after an edit.",
+    "volitional_assertion": "scene_02 asserts rel_003.sentiment, a V-tier column. The author asserting a volitional column goes through the same authority the engine does (ADR 0005), so at author-time it lands in the proposals queue rather than committing — which is what gives the scene compile view something real to resolve without a live model call.",
+    "characters_present_includes_the_absent": "scene_01 lists char_marchetti though she is not in the teahouse: characters_present is what the deterministic join reads, so a character a beat names but the list omits reaches the writer as a name with no World Model row behind it, which the compiler reports as missing_fact."
+  },
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_vess",
+        "name": "Vess Kalloway",
+        "location_id": "loc_teahouse",
+        "status": "alive",
+        "goal": "one clean score and out of the trade",
+        "bag": {
+          "trade": "thief",
+          "tell": "counts under her breath when the timing gets tight",
+          "cover": "presents as a buyer's agent from out of town"
+        }
+      },
+      {
+        "id": "char_dace",
+        "name": "Dace Orr",
+        "location_id": "loc_teahouse",
+        "status": "alive",
+        "goal": null,
+        "bag": {
+          "trade": "fence",
+          "note": "has brought Vess every job she has taken for nine years"
+        }
+      },
+      {
+        "id": "char_marchetti",
+        "name": "Ilsa Marchetti",
+        "location_id": "loc_gala_floor",
+        "status": "alive",
+        "goal": null,
+        "bag": {
+          "reputation": "buys provenance and burns it",
+          "note": "shows the collection once a year and never lends from it"
+        }
+      },
+      {
+        "id": "char_brannan",
+        "name": "Brannan",
+        "location_id": "loc_gala_floor",
+        "status": "alive",
+        "goal": null,
+        "bag": {
+          "role": "head of house security",
+          "note": "keeps the guard roster by the gallery clock because Marchetti told him to"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_teahouse",
+        "name": "the Empress teahouse",
+        "bag": {
+          "description": "back booth, bad light, the only room in the city where Dace will talk business"
+        }
+      },
+      {
+        "id": "loc_gala_floor",
+        "name": "the Marchetti gallery floor",
+        "bag": {
+          "description": "one long room of glass cases, loud with money once a year"
+        }
+      },
+      {
+        "id": "loc_vault_room",
+        "name": "the vault room",
+        "bag": {
+          "description": "behind the gallery, one door, one stand in the middle of it"
+        }
+      },
+      {
+        "id": "loc_service_stair",
+        "name": "the service stair",
+        "bag": {
+          "description": "runs from the vault-room landing down to the alley door"
+        }
+      },
+      {
+        "id": "loc_street",
+        "name": "Ferrier Street",
+        "bag": {
+          "description": "wet, empty, one block from the gallery's alley door"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_amber_cat",
+        "name": "the amber cat",
+        "location_id": "loc_vault_room",
+        "status": "on its stand",
+        "bag": {
+          "description": "a palm-sized cat of Baltic amber, seated, with one eye chipped away",
+          "chipped_eye": "left"
+        }
+      },
+      {
+        "id": "obj_forgery",
+        "name": "the resin cat",
+        "location_id": "loc_teahouse",
+        "status": "wrapped in a handkerchief",
+        "bag": {
+          "description": "Vess's copy, cast and tinted over five weeks",
+          "chipped_eye": "right"
+        }
+      },
+      {
+        "id": "obj_service_key",
+        "name": "the service-stair key",
+        "location_id": "loc_gala_floor",
+        "status": "on Brannan's belt",
+        "bag": {}
+      },
+      {
+        "id": "obj_gallery_clock",
+        "name": "the gallery clock",
+        "location_id": "loc_gala_floor",
+        "status": "running four minutes fast",
+        "bag": {
+          "note": "Marchetti's father set it; she will not have it touched"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_001",
+        "from_id": "char_dace",
+        "to_id": "char_vess",
+        "kind": "fence_for",
+        "sentiment": "fond",
+        "bag": {}
+      },
+      {
+        "id": "rel_002",
+        "from_id": "char_brannan",
+        "to_id": "char_marchetti",
+        "kind": "works_for",
+        "sentiment": "loyal",
+        "bag": {}
+      },
+      {
+        "id": "rel_003",
+        "from_id": "char_brannan",
+        "to_id": "char_vess",
+        "kind": "watches",
+        "sentiment": "indifferent",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": []
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_offer",
+      "order": 1,
+      "pov": "char_vess",
+      "location_id": "loc_teahouse",
+      "characters_present": [
+        "char_vess",
+        "char_dace",
+        "char_marchetti"
+      ],
+      "dramatic_function": "Set the job, the mark, and the one small fact the last scene will turn on — laid down flat, among other facts, so it does not announce itself.",
+      "entry_state": {
+        "char_vess": {
+          "location_id": "loc_teahouse",
+          "status": "alive"
+        }
+      },
+      "exit_state": {
+        "char_vess": {
+          "location_id": "loc_gala_floor"
+        },
+        "char_dace": {
+          "location_id": "loc_street"
+        },
+        "obj_forgery": {
+          "location_id": "loc_gala_floor",
+          "status": "in Vess's coat"
+        }
+      },
+      "required_beats": [
+        "Dace lays out the job: Ilsa Marchetti's amber cat, out of the vault room, on the one night a year the gallery is open",
+        "Vess has already made the copy and has it wrapped in her coat",
+        "Dace mentions in passing that the gallery clock has run four minutes fast since Marchetti's father set it, and that she will not have it touched",
+        "Vess takes the job and goes; Dace will wait on Ferrier Street"
+      ],
+      "reader_must_learn": [
+        "the_gallery_clock_runs_four_minutes_fast",
+        "marchetti_never_moves_the_amber_cat_from_the_vault_room"
+      ],
+      "tone": "low-lit and transactional; two people who have done this a dozen times and still like each other",
+      "length_budget": 350,
+      "invariants": [
+        "Vess never says out loud what the copy is for",
+        "the clock is mentioned as gossip about Marchetti, not as a plan"
+      ]
+    },
+    {
+      "id": "scene_02_the_gala",
+      "order": 2,
+      "pov": "char_vess",
+      "location_id": "loc_gala_floor",
+      "characters_present": [
+        "char_vess",
+        "char_marchetti",
+        "char_brannan"
+      ],
+      "dramatic_function": "Put Vess inside, get her the key, and start the clock on Brannan noticing her — the pressure the rest of the story runs on.",
+      "entry_state": {
+        "char_vess": {
+          "location_id": "loc_gala_floor"
+        },
+        "obj_service_key": {
+          "location_id": "loc_gala_floor",
+          "status": "on Brannan's belt"
+        }
+      },
+      "exit_state": {
+        "obj_service_key": {
+          "location_id": "loc_gala_floor",
+          "status": "in Vess's sleeve"
+        },
+        "rel_003": {
+          "sentiment": "suspicious"
+        },
+        "_new_character_knowledge": [
+          {
+            "id": "ck_brannan_agent",
+            "character_id": "char_brannan",
+            "fact_ref": "a_buyers_agent_asked_after_the_cat",
+            "learned_at_scene": "scene_02_the_gala",
+            "bag": {}
+          }
+        ]
+      },
+      "required_beats": [
+        "Vess works the room as a buyer's agent and gets Marchetti talking about the cat and the eye it is missing",
+        "Brannan looks at Vess twice, and the second time he does not look away first",
+        "Vess takes the service-stair key off Brannan's belt while he is turned toward the champagne, and counts under her breath doing it"
+      ],
+      "reader_must_learn": [
+        "brannan_has_started_watching_vess"
+      ],
+      "tone": "bright, crowded, teeth behind every smile",
+      "length_budget": 400,
+      "invariants": [
+        "Marchetti never leaves the gallery floor",
+        "nobody says the word steal"
+      ]
+    },
+    {
+      "id": "scene_03_the_swap",
+      "order": 3,
+      "pov": "char_vess",
+      "location_id": "loc_vault_room",
+      "characters_present": [
+        "char_vess"
+      ],
+      "dramatic_function": "The job itself, done clean and fast — and the flaw in it, which Vess sees and takes anyway.",
+      "entry_state": {
+        "char_vess": {
+          "location_id": "loc_gala_floor"
+        },
+        "obj_amber_cat": {
+          "location_id": "loc_vault_room",
+          "status": "on its stand"
+        }
+      },
+      "exit_state": {
+        "char_vess": {
+          "location_id": "loc_vault_room"
+        },
+        "obj_amber_cat": {
+          "location_id": "loc_vault_room",
+          "status": "in Vess's coat"
+        },
+        "obj_forgery": {
+          "location_id": "loc_vault_room",
+          "status": "on the stand"
+        }
+      },
+      "required_beats": [
+        "the service stair takes Vess up to the vault-room door with the gala still loud underneath her",
+        "she puts the resin cat on the stand and the amber cat in her coat, and it takes eleven seconds",
+        "the copy's chipped eye is on the right; the real one is chipped on the left, and there was never time to recast it"
+      ],
+      "reader_must_learn": [
+        "the_copys_chipped_eye_is_on_the_wrong_side"
+      ],
+      "tone": "quiet, procedural, one held breath",
+      "length_budget": 350,
+      "invariants": [
+        "Vess is alone in the vault room",
+        "she does not fix the eye and does not pretend to herself that it will pass a second look"
+      ]
+    },
+    {
+      "id": "scene_04_four_minutes",
+      "order": 4,
+      "pov": "char_vess",
+      "location_id": "loc_service_stair",
+      "characters_present": [
+        "char_vess",
+        "char_brannan",
+        "char_dace"
+      ],
+      "dramatic_function": "Collect both plants at once: the clock buys the gap she walks out through, and the eye sets the clock running on how long the score stays clean.",
+      "entry_state": {
+        "char_vess": {
+          "location_id": "loc_vault_room"
+        },
+        "obj_amber_cat": {
+          "status": "in Vess's coat"
+        }
+      },
+      "exit_state": {
+        "char_vess": {
+          "location_id": "loc_street"
+        },
+        "obj_amber_cat": {
+          "location_id": "loc_street",
+          "status": "in Vess's coat"
+        },
+        "obj_service_key": {
+          "status": "back on Brannan's belt"
+        },
+        "rel_001": {
+          "sentiment": "uneasy"
+        }
+      },
+      "required_beats": [
+        "the guard rotation comes four minutes early because Brannan keeps the roster by the gallery clock, and Vess is on the stair inside that gap",
+        "she passes Brannan on the landing and puts the key back on his belt going by, and he lets her pass because by his watch the stair is covered",
+        "on Ferrier Street Dace asks whether it is clean, and Vess tells him they have until somebody looks at the cat from the left"
+      ],
+      "pays_off": [
+        {
+          "fact_ref": "the_gallery_clock_runs_four_minutes_fast",
+          "plant": "scene_01_the_offer"
+        },
+        {
+          "fact_ref": "the_copys_chipped_eye_is_on_the_wrong_side",
+          "plant": "scene_03_the_swap"
+        }
+      ],
+      "tone": "fast, then flat; the win and the cost arriving in the same breath",
+      "length_budget": 400,
+      "invariants": [
+        "Brannan never sees the cat",
+        "the story ends on the street, not in the gallery"
+      ]
+    }
+  ],
+  "voice_card": {
+    "style_preset": "hardboiled_terse",
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "tight on Vess; the reader knows what she notices and nothing she does not",
+    "register": "flat, unsentimental, wry under pressure; competence described as work rather than flair",
+    "sentence_rhythm": "short sentences, hard stops, the occasional long one that runs when she is moving",
+    "imagery_palette": [
+      "wet streetlight and glass",
+      "amber and resin",
+      "clock faces and counted seconds",
+      "the weight of a coat pocket"
+    ],
+    "dialogue_density": "high; people say less than they mean and the narration does not explain it",
+    "style_exemplar": "The clock had been wrong for thirty years, and everybody in the building had built their evening around it."
+  },
+  "metadata": {
+    "title": "The Amber Cat",
+    "source": "Original, written for this repository — no adapted material.",
+    "created_at": "2026-09-11T00:00:00Z"
+  }
+}

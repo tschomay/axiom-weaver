@@ -10,6 +10,7 @@ import {
   plantInstruction,
   walkPlantObligations,
 } from '@/plants/obligation-walk';
+import { FIXTURE_STORY_IDS, readFixturePackage } from '@/fixtures/load';
 
 function pkg(scenes: unknown[], knowledge: unknown[] = []): StoryPackage {
   return StoryPackageSchema.parse({
@@ -168,5 +169,15 @@ describe('the plant-obligation walk (ADR 0004)', () => {
     ]);
     expect(payoffInstructionsFor(story.scene_cards[1]!)).toHaveLength(1);
     expect(payoffInstructionsFor(story.scene_cards[0]!)).toEqual([]);
+  });
+});
+
+describe('every fixture package walks clean', () => {
+  // ADR 0004 decision 4's errors are hard failures before generation, so a fixture that trips one
+  // cannot be compiled at all. Walking all five here means a mistyped plant scene id or a payoff
+  // whose plant never declares the fact fails in the suite rather than at the first compile.
+  it.each(FIXTURE_STORY_IDS)('%s', async (fixture) => {
+    const walk = walkPlantObligations(await readFixturePackage(fixture));
+    expect(walk.errors).toEqual([]);
   });
 });
