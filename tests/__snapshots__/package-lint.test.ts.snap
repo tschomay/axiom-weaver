@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`the fixtures > raises only warnings a reader of the fixtures would agree with 1`] = `
+[
+  "unpaid_fact",
+  "unused_seed_entity",
+]
+`;

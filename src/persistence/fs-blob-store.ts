@@ -6,7 +6,7 @@
  * which is what lets the fixture load run offline.
  */
 
-import { mkdir, readFile, readdir, writeFile, stat } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile, stat } from 'node:fs/promises';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { BlobConflictError, type BlobStore } from './blob-store';
 
@@ -56,6 +56,10 @@ export class FileSystemBlobStore implements BlobStore {
       if ((error as NodeJS.ErrnoException).code === 'ENOENT') return false;
       throw error;
     }
+  }
+
+  async remove(pathname: string): Promise<void> {
+    await rm(this.resolvePath(pathname), { force: true });
   }
 
   async list(prefix: string): Promise<string[]> {

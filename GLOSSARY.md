@@ -364,6 +364,39 @@ direct URL.
 **How:** Author saves/names/deletes entries; a reader picks from Baked / Library / "generate a new
 telling" on the read screen. See [ADR 0015](docs/adr/0015-compiled-editions-and-staleness.md).
 
+### Manuscript
+
+**What:** The author's mutable, unversioned working copy of a Story Package — at most one per
+story, and the only thing an edit ever writes.
+
+**Why:** A retained `package_version` is immutable because Compiled editions pin it and must
+dereference to the bytes they were compiled from forever. An author editing a scene produces a
+write every few seconds. The Manuscript is where those writes go, so the immutability invariant
+never has to bend and staleness never fires on a keystroke.
+
+**Not:** prose — it is the score being revised, not the performance. And not the **Working
+Draft**, which is the accumulating sequence of *compiled scenes*. The two are different objects
+with confusingly adjacent names; a story can have either, both, or neither.
+
+**How:** Seeded empty, from the story's current package, or duplicated from any retained version
+of any story. Parsed loosely; strict-parsed only at publish. See
+[ADR 0017](docs/adr/0017-the-manuscript-and-publishing.md).
+
+### Publish
+
+**What:** The single deliberate act that turns a Manuscript into the next retained
+`package_version`.
+
+**Why:** It concentrates into one moment three things that would otherwise be scattered across
+every save — the strict schema parse, the linter gate, and staleness propagation. ADR 0015's
+blunt staleness propagation assumed a version bump was a deliberate authorial act; publishing is
+what keeps that true now that editing is a screen.
+
+**How:** Strict-parse → lint → `package_version = max(retained) + 1` → retain → repoint. Any
+linter `error` blocks it; a `warn` never does. The Manuscript survives the publish, so the next
+edit continues where the author was; discarding is a separate action. See
+[ADR 0017](docs/adr/0017-the-manuscript-and-publishing.md).
+
 ### Working Draft
 
 **What:** The single per-story, author-time-only sequence of scenes built up via stepwise

@@ -30,6 +30,7 @@ import {
   type RunIndex,
 } from '../edition/edition';
 import { RunReportSchema, isPromotable, type RunReport } from '../edition/run-report';
+import { ManuscriptSchema, type Manuscript } from '../schema/manuscript';
 import {
   DraftManifestSchema,
   DraftSceneSchema,
@@ -50,6 +51,7 @@ import {
   editionWorldModelPath,
   packagePointerPath,
   packageVersionPath,
+  manuscriptPath,
   packageVersionPrefix,
   runIndexPath,
   runReportPath,
@@ -158,6 +160,48 @@ export class StoryRepository {
       if (match?.[1] !== undefined) ids.add(match[1]);
     }
     return [...ids].sort();
+  }
+
+  // --- The Manuscript ------------------------------------------------------------------------
+  //
+  // ADR 0017 §1. The author's mutable working copy, and the only thing an edit writes. Nothing
+  // else in the system reads these methods: the compiler, the Working Draft, the run loop and
+  // every edition keep resolving through `getCurrentPackage`, which is what makes leaving a
+  // half-finished edit lying around safe.
+
+  async getManuscript(storyId: string): Promise<Manuscript | null> {
+    const body = await this.store.get(manuscriptPath(storyId));
+    if (body === null) return null;
+    return ManuscriptSchema.parse(JSON.parse(body));
+  }
+
+  /**
+   * Save a Manuscript, stamping a fresh `updated_at`.
+   *
+   * `expectedUpdatedAt` is ADR 0017 §8's optimistic-concurrency precondition: pass the value the
+   * caller read, and a save whose stored copy has moved on since is refused rather than applied.
+   * Two tabs on one phone is the likely case, and silently discarding the other one's work is the
+   * outcome worth paying a precondition to avoid. Pass `null` only when creating.
+   */
+  async putManuscript(
+    manuscript: Manuscript,
+    expectedUpdatedAt: string | null,
+  ): Promise<Manuscript> {
+    const stored = await this.getManuscript(manuscript.story_id);
+    if (stored !== null && expectedUpdatedAt !== stored.updated_at) {
+      throw new ManuscriptConflictError(manuscript.story_id, stored.updated_at, expectedUpdatedAt);
+    }
+    if (stored === null && expectedUpdatedAt !== null) {
+      throw new ManuscriptConflictError(manuscript.story_id, null, expectedUpdatedAt);
+    }
+    const next = ManuscriptSchema.parse({ ...manuscript, updated_at: new Date().toISOString() });
+    await this.store.put(manuscriptPath(next.story_id), stringify(next), { allowOverwrite: true });
+    return next;
+  }
+
+  /** Discard: the story returns to its published package (ADR 0017 §9). Idempotent. */
+  async deleteManuscript(storyId: string): Promise<void> {
+    await this.store.remove(manuscriptPath(storyId));
   }
 
   // --- State-update commit logs ------------------------------------------------------------
@@ -469,6 +513,25 @@ export class StoryRepository {
 }
 
 /** Why a library write was refused. The library is the author's shortlist, not the run index. */
+/** A Manuscript save whose stored copy moved on since it was read (ADR 0017 §8). */
+export class ManuscriptConflictError extends Error {
+  readonly storyId: string;
+  /** What the store actually holds, so the caller can offer to reload rather than guess. */
+  readonly storedUpdatedAt: string | null;
+  readonly submittedUpdatedAt: string | null;
+
+  constructor(storyId: string, storedUpdatedAt: string | null, submittedUpdatedAt: string | null) {
+    super(
+      `the Manuscript for "${storyId}" changed elsewhere: it was last saved at ` +
+        `${storedUpdatedAt ?? 'never'}, and this save expected ${submittedUpdatedAt ?? 'never'}`,
+    );
+    this.name = 'ManuscriptConflictError';
+    this.storyId = storyId;
+    this.storedUpdatedAt = storedUpdatedAt;
+    this.submittedUpdatedAt = submittedUpdatedAt;
+  }
+}
+
 export class LibraryError extends Error {
   constructor(runId: string, reason: string) {
     super(`Cannot change the library entry for "${runId}": ${reason}`);

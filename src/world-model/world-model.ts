@@ -71,6 +71,21 @@ export class WorldModel {
    * envelope, and this is where it becomes part of the composite key.
    */
   static fromSeed(storyId: string, seed: WorldModelSeed): WorldModel {
+    const model = WorldModel.fromSeedUnchecked(storyId, seed);
+    model.assertReferentialIntegrity();
+    return model;
+  }
+
+  /**
+   * The same load without the integrity assertion — for callers whose job is to *report* broken
+   * references rather than refuse them.
+   *
+   * `fromSeed` throwing is right for the compiler, which must not run against a seed that does
+   * not resolve. It is wrong for the linter (ADR 0017 §4) and for `loadStory`, both of which
+   * collect `referenceProblems()` into a list for a human to act on and so must be able to build
+   * the model that produces that list.
+   */
+  static fromSeedUnchecked(storyId: string, seed: WorldModelSeed): WorldModel {
     const tables = emptyTables();
     const stamp = <T extends { id: string; story_id?: string | undefined }>(row: T): T => ({
       ...clone(row),
@@ -83,9 +98,7 @@ export class WorldModel {
     for (const row of seed.relationships) tables.relationship[row.id] = stamp(row);
     for (const row of seed.character_knowledge) tables.character_knowledge[row.id] = stamp(row);
 
-    const model = new WorldModel(storyId, tables);
-    model.assertReferentialIntegrity();
-    return model;
+    return new WorldModel(storyId, tables);
   }
 
   /** A deep, independent copy — replay and "as of scene N" never mutate a shared model. */
