@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { storyRepository } from '@/persistence';
-import { storyIdAvailable } from '@/authoring/manuscript';
+import { RESERVED_STORY_IDS, STORY_ID_PATTERN, storyIdAvailable } from '@/authoring/manuscript';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,8 +19,11 @@ export async function GET(request: Request) {
   if (id === null || id === '') {
     return NextResponse.json({ error: 'Expected ?id=' }, { status: 400 });
   }
+  // `valid` is reported separately from `available` so a screen can say *why* an id is refused:
+  // "already a story" and "not a usable id" are different mistakes with different next moves.
   return NextResponse.json({
     story_id: id,
+    valid: STORY_ID_PATTERN.test(id) && !RESERVED_STORY_IDS.has(id),
     available: await storyIdAvailable(storyRepository(), id),
   });
 }

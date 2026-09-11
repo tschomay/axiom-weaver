@@ -256,15 +256,34 @@ export function lintPackage(input: unknown): LintResult {
   const parsed = StoryPackageSchema.safeParse(input);
   if (!parsed.success) {
     return result(
-      parsed.error.issues.map((issue: z.core.$ZodIssue) => ({
-        severity: 'error' as const,
-        code: `schema.${issue.code}`,
-        path: readablePath(input, issue.path),
-        message: issue.message,
-      })),
+      parsed.error.issues.map((issue: z.core.$ZodIssue) => {
+        const path = readablePath(input, issue.path);
+        return {
+          severity: 'error' as const,
+          code: `schema.${issue.code}`,
+          path,
+          message: authorFacing(path, issue) ?? issue.message,
+        };
+      }),
     );
   }
   return lintStoryPackage(parsed.data);
+}
+
+/**
+ * The one schema message an author reads before they read any other.
+ *
+ * Zod's messages describe the schema ("Too small: expected array to have >=1 items"), which is
+ * the right register for a developer and the wrong one for the first thing a brand-new story
+ * says about itself. Only this case is rewritten, deliberately: every other schema failure is
+ * something a form should have prevented, so a generic message plus the path is the honest
+ * report, and a wall of hand-written translations would be a second schema to keep in sync.
+ */
+function authorFacing(path: string, issue: z.core.$ZodIssue): string | null {
+  if (path === 'scene_cards' && issue.code === 'too_small') {
+    return 'a package needs at least one Scene Card before it can publish';
+  }
+  return null;
 }
 
 /** Lint an already-parsed package: the cross-reference, plant-walk and craft passes. */
