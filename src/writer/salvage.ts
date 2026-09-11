@@ -88,6 +88,29 @@ export function salvageProse(buffer: string): ProseSalvage | null {
 }
 
 /**
+ * Repair prose whose paragraph breaks arrived as the two characters `\` `n` rather than newlines.
+ *
+ * A writer call can escape its own output once too often, and the result is a scene the reader
+ * sees as one wall of text with visible `\n\n` between every line of dialogue. It is worse than
+ * cosmetic: `finalParagraph` and the continuity pass's `openingParagraph` both split on `\n\n`,
+ * so on such prose they return the *whole scene* — which would let an opening-rewrite repair
+ * replace an entire scene with one paragraph, the thing ADR 0011 §5 explicitly forbids.
+ *
+ * Normalizing once, where prose enters the compiler, is cheaper than defending in every consumer.
+ * The guard is deliberate: only prose containing no real newline at all is touched, so a scene
+ * that legitimately writes a backslash is left exactly as the writer wrote it.
+ */
+export function normalizeProse(prose: string): string {
+  if (prose.includes('\n')) return prose;
+  if (!/\\[nrt]/.test(prose)) return prose;
+  return prose
+    .replace(/\\r\\n/g, '\n')
+    .replace(/\\n/g, '\n')
+    .replace(/\\r/g, '\n')
+    .replace(/\\t/g, '\t');
+}
+
+/**
  * The final paragraph of a scene's prose — the verbatim tail the next scene opens against
  * (ADR 0008 decision 3).
  *
@@ -99,7 +122,23 @@ export function finalParagraph(prose: string): string | null {
     .split(/\n\s*\n/)
     .map((part) => part.trim())
     .filter((part) => part !== '');
-  return paragraphs[paragraphs.length - 1] ?? null;
+  const last = paragraphs[paragraphs.length - 1] ?? null;
+  if (last === null) return null;
+  if (paragraphs.length > 1) return last;
+  // A scene that came back as one unbroken block (issue #73) has no final paragraph to speak of,
+  // and handing the whole scene forward would make the verbatim tail the most expensive thing in
+  // the volatile payload — then trim it from the front at the length backstop, so the next scene
+  // opens against a fragment starting mid-sentence. Its closing sentences are the honest answer.
+  return lastSentences(last);
+}
+
+/** The closing sentences of an unbroken block, up to a paragraph's worth. */
+const UNBROKEN_TAIL_SENTENCES = 3;
+
+function lastSentences(text: string): string {
+  const sentences = text.match(/[^.!?]+[.!?]+["'\u201d\u2019]?\s*/g);
+  if (sentences === null || sentences.length <= UNBROKEN_TAIL_SENTENCES) return text;
+  return sentences.slice(-UNBROKEN_TAIL_SENTENCES).join('').trim();
 }
 
 /** Word count against `length_budget`. ADR 0012 decision 4's band is 0.8x-1.3x, asymmetric. */

@@ -101,3 +101,29 @@ against a reader's eyes.
   "log-only, can't be un-shown" reasoning still holds now that read-time is confirmed batch
   pre-generation rather than live streaming to an active reader — flagged, not reopened here,
   since it belongs to issue #10's territory, not this ticket's.
+
+## Amendment (2026-09-11)
+
+Two implementation findings from the first live run that reached the pass (issues #58, #59). Both
+are refinements inside decisions 4–7, not reopenings of them.
+
+**A repair no longer asks for `closing_situation`.** Decision 4 *permits* a repair to touch it, and
+the implementation duly put it in the opening-rewrite response schema — but decision 5 confines an
+opening rewrite to the opening beat and says it "never regenerates the scene body", so a rewrite of
+how a scene picks up cannot legitimately move where it ends. Asking for the field only created a
+way to get it wrong, and it did: `repairPrompt` shows the model the **previous** scene's closing
+situation, because that is the seam being repaired against, and never the scene's own. The model
+echoed the previous one back, decision 4's field check passed it (the field was on the repairable
+list), and a scene's ending was overwritten with the one before it. `closing_situation` is now
+carried over verbatim on both repair shapes. Decision 4's permission is unchanged — nothing exercises
+it, which is the point.
+
+**Findings that repair the same words are repaired in one call.** Decision 5's two shapes are per
+*mode*; the implementation read that as per *finding*, so a scene with three `opening_rewrite`
+findings spent three calls each rewriting what the last one produced, each handed a `detail`
+describing an opening that no longer existed. Only the last survived, and the earlier seams were
+reported repaired without being. Every `opening_rewrite` finding on a scene now goes into one call
+that states all of them; `imagery_swap` stays one call per finding, since each names a distinct
+phrase in a distinct place — which is why decision 5 kept two shapes rather than one. Decision 7's
+per-scene bound is unchanged and is the reason this matters: a bound that scales with findings that
+all touch one paragraph is not a bound.

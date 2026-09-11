@@ -9,6 +9,12 @@ import {
   type SeamCheckInput,
 } from '@/continuity/continuity-pass';
 import { SceneDigestSchema, type SceneDigest } from '@/digest/scene-digest';
+import {
+  groupBySharedRepair,
+  repairPrompt,
+  repairResponseJsonSchema,
+} from '@/continuity/continuity-pass';
+import { normalizeProse } from '@/writer/salvage';
 import { ToldLedger } from '@/digest/told-ledger';
 import type { BandDecision } from '@/assembler/reanchoring';
 import type { ModelClient, ModelRequest, ModelResponse } from '@/writer/model-client';
@@ -239,7 +245,6 @@ describe('the two repair shapes (ADR 0011 §5)', () => {
       repair: {
         replacement: 'Still on the bench, Jim watched the gate.',
         original_phrase: null,
-        closing_situation: null,
         imagery_signature: null,
         reanchor_used: null,
       },
@@ -268,7 +273,6 @@ describe('the two repair shapes (ADR 0011 §5)', () => {
       repair: {
         replacement: 'Sleet on the sill',
         original_phrase: 'Rain on glass',
-        closing_situation: null,
         imagery_signature: null,
         reanchor_used: null,
       },
@@ -296,7 +300,6 @@ describe('the two repair shapes (ADR 0011 §5)', () => {
       repair: {
         replacement: 'sleet',
         original_phrase: 'a phrase that is not there',
-        closing_situation: null,
         imagery_signature: null,
         reanchor_used: null,
       },
@@ -401,5 +404,85 @@ describe('the pass end to end', () => {
     expect(result.findings).toEqual([]);
     expect(client.requests).toEqual([]);
     expect(result.prose).toBe('The body.');
+  });
+});
+
+describe('one repair per set of words, not per finding (ADR 0011 §5/§7)', () => {
+  const seam = (mode: 'cold_open' | 'told_ledger_miscalibration' | 'stale_imagery', subject: string) => ({
+    mode,
+    scene_id: 'scene_03',
+    scene_index: 3,
+    subject,
+    detail: `${subject} was pitched wrong`,
+  });
+
+  it('groups every opening rewrite into one call', () => {
+    const groups = groupBySharedRepair([
+      seam('told_ledger_miscalibration', 'char_brisk'),
+      seam('told_ledger_miscalibration', 'char_nan'),
+      seam('cold_open', 'char_pellow'),
+    ]);
+    expect(groups).toHaveLength(1);
+    expect(groups[0]).toHaveLength(3);
+  });
+
+  it('keeps imagery swaps one per finding — each names its own phrase in its own place', () => {
+    const groups = groupBySharedRepair([
+      seam('stale_imagery', 'hearth ash'),
+      seam('stale_imagery', 'rain on glass'),
+    ]);
+    expect(groups).toHaveLength(2);
+    expect(groups.every((group) => group.length === 1)).toBe(true);
+  });
+
+  it('splits a mixed scene into one opening call plus one call per image', () => {
+    const groups = groupBySharedRepair([
+      seam('cold_open', 'char_jim'),
+      seam('stale_imagery', 'rain on glass'),
+      seam('told_ledger_miscalibration', 'char_ada'),
+    ]);
+    expect(groups.map((group) => group.length)).toEqual([2, 1]);
+  });
+
+  it('states every grouped seam in the one prompt, so none is silently dropped', () => {
+    const prompt = repairPrompt({
+      findings: [
+        seam('told_ledger_miscalibration', 'char_brisk'),
+        seam('told_ledger_miscalibration', 'char_nan'),
+      ],
+      fragment: 'The opening paragraph.',
+      previousClosing: 'They were on the hill.',
+      toldLedgerLines: [],
+    });
+    expect(prompt).toContain('char_brisk was pitched wrong');
+    expect(prompt).toContain('char_nan was pitched wrong');
+  });
+
+  it('never asks a repair for closing_situation — an opening rewrite cannot move the ending', () => {
+    const schema = repairResponseJsonSchema('opening_rewrite');
+    expect(Object.keys(schema['properties'] as object)).not.toContain('closing_situation');
+  });
+});
+
+describe('prose whose paragraph breaks arrived escaped (issue #64)', () => {
+  const escaped = 'The ridge gave out. \\n\\n"Downwind," she said. \\n\\nHe put it down.';
+
+  it('turns literal \\n back into a paragraph break', () => {
+    expect(normalizeProse(escaped)).toBe(
+      'The ridge gave out. \n\n"Downwind," she said. \n\nHe put it down.',
+    );
+  });
+
+  it('leaves prose that already has real breaks alone, backslashes and all', () => {
+    const real = 'A line.\n\nAnd a path like C:\\names\\here.';
+    expect(normalizeProse(real)).toBe(real);
+  });
+
+  it('stops an opening rewrite from swallowing a scene with no paragraph break', () => {
+    // Before the fallback, this returned the whole string — so the "opening paragraph" a repair
+    // replaced was the entire scene.
+    const unbroken = 'She opened the hive. The bees were having a difficult morning.';
+    expect(openingParagraph(unbroken)).toBe('She opened the hive.');
+    expect(openingParagraph(unbroken).length).toBeLessThan(unbroken.length);
   });
 });
