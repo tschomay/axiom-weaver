@@ -71,6 +71,17 @@ export const DIAGNOSTIC_CODES = [
   'content_filtered',
   /** `WRITER_MODEL` was unavailable (a retryable HTTP status); `WRITER_MODEL_FALLBACK` answered. */
   'model_fallback',
+  /**
+   * The scene missed an invariant, was re-run once with the miss restated, and the retry did
+   * better (ADR 0004 §6, ADR 0005 §5, ADR 0006 §3). `info`: the miss was corrected, so there is
+   * nothing for anyone to act on — but the run report should still say a scene cost two calls.
+   */
+  'invariant_retry_accepted',
+  /**
+   * The same retry, discarded because it did no better. The original stands, and whatever it
+   * missed is already logged under its own code — this only records that the retry was spent.
+   */
+  'invariant_retry_discarded',
 
   // --- Continuity pass (ADR 0011) ------------------------------------------------------------
   //
@@ -128,6 +139,8 @@ const SEVERITY_BY_CODE: Record<DiagnosticCode, Severity> = {
   content_filtered: 'error',
   // `info`, not `error`: the call still fully succeeded, just from the fallback model.
   model_fallback: 'info',
+  invariant_retry_accepted: 'info',
+  invariant_retry_discarded: 'info',
   // `info`: a seam the pass caught and fixed on its own needed no live decision from anybody —
   // ADR 0016 §4's run-report-only category exactly.
   continuity_seam_repaired: 'info',

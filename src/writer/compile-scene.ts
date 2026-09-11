@@ -30,10 +30,19 @@ import {
   payoffInstructionsFor,
   type PlantWalk,
 } from '../plants/obligation-walk';
-import { checkVarianceContract, type VarianceFinding } from '../variance/variance-contract';
+import {
+  checkVarianceContract,
+  shouldRetry,
+  type VarianceFinding,
+} from '../variance/variance-contract';
 import { checkEntryState } from '../validator/state-update-authority';
 import { diagnostic, type Diagnostic } from '../validator/diagnostics';
-import { writerContract, fallbackPrompt, RETRY_INSTRUCTIONS } from './contract';
+import {
+  writerContract,
+  fallbackPrompt,
+  restateMissedInvariants,
+  RETRY_INSTRUCTIONS,
+} from './contract';
 import {
   FallbackResponseSchema,
   WriterResponseSchema,
@@ -355,19 +364,68 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
 
   // Normalize before anything reads the prose: the verbatim tail, the continuity pass's opening
   // paragraph, the word count and the reader all split on real newlines (issue #64).
-  const response: WriterResponse = { ...parsed, prose: normalizeProse(parsed.prose) };
+  let response: WriterResponse = { ...parsed, prose: normalizeProse(parsed.prose) };
 
   // --- Post-generation --------------------------------------------------------------------
+  const owedPlants = obligationsFor(input.plantWalk, scene).map((entry) => entry.fact_ref);
+  const check = (candidate: WriterResponse) =>
+    checkVarianceContract({
+      scene,
+      digest: candidate.scene_digest,
+      writerDiagnostics: candidate.diagnostics,
+      owedPlants,
+    });
+
+  let findings = check(response);
+
+  // --- The invariant retry ----------------------------------------------------------------
+  //
+  // ADR 0004 §6, ADR 0005 §5 and ADR 0006 §3 all specify the same thing for a scene that came
+  // back missing something its card required: one bounded retry with the miss restated, then
+  // accept-and-log. Every other retry in this function keys off `finishReason`, which is blind to
+  // a call that succeeded and simply did not do what it was asked — a dropped plant, a
+  // `reader_must_learn` fact that never reached `facts_revealed`.
+  //
+  // The budget is one *per scene*, shared with the finish-reason retry above (`calls.length` is
+  // the check), so no scene can cost more than two writer calls plus salvage. Author-time never
+  // retries: the author is present and can just fix the card (ADR 0006 §3).
+  if (
+    input.occasion === 'read_time' &&
+    calls.length === 1 &&
+    shouldRetry(findings, input.occasion)
+  ) {
+    const restated = restateMissedInvariants(
+      findings.filter((finding) => finding.correctable).map((finding) => finding.detail),
+    );
+    const retried = await input.client.generate({
+      ...request,
+      contents: `${request.contents}\n\n${restated}`,
+    });
+    calls.push(record(retried, 'writer_retry'));
+
+    const reparsed = parseWriterResponse(retried);
+    const candidate: WriterResponse | null =
+      reparsed === null ? null : { ...reparsed, prose: normalizeProse(reparsed.prose) };
+    const candidateFindings = candidate === null ? null : check(candidate);
+
+    if (candidate !== null && candidateFindings !== null && isBetter(candidateFindings, findings)) {
+      note(
+        'invariant_retry_accepted',
+        `${scene.id} missed ${describeMisses(findings)} on its first attempt; the retry satisfied ${findings.length - candidateFindings.length} more`,
+      );
+      response = candidate;
+      findings = candidateFindings;
+    } else {
+      note(
+        'invariant_retry_discarded',
+        `${scene.id} was retried for ${describeMisses(findings)} and the retry did no better; the first attempt stands`,
+      );
+    }
+  }
+
   for (const writerDiagnostic of response.diagnostics) {
     note(writerDiagnostic.type, writerDiagnostic.detail);
   }
-
-  const findings = checkVarianceContract({
-    scene,
-    digest: response.scene_digest,
-    writerDiagnostics: response.diagnostics,
-    owedPlants: obligationsFor(input.plantWalk, scene).map((entry) => entry.fact_ref),
-  });
   for (const finding of findings) {
     if (finding.code === 'beat_unsatisfied') continue; // already logged from the self-report
     note(finding.code, finding.detail);
@@ -393,6 +451,31 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
     calls,
     final_paragraph: finalParagraph(response.prose),
   };
+}
+
+/**
+ * Whether a retry's findings are an improvement on the first attempt's.
+ *
+ * Leaks are compared first and separately: a retry that fixed a dropped plant by putting a
+ * `must_stay_hidden` fact on the page is not an improvement at any count, and that finding is
+ * `correctable: false` precisely because nothing can take it back (ADR 0006 §4). Otherwise fewer
+ * misses wins, and a tie keeps the first attempt — a retry that did no better is not worth
+ * replacing prose the reader would have been given either way.
+ */
+function isBetter(
+  candidate: readonly VarianceFinding[],
+  original: readonly VarianceFinding[],
+): boolean {
+  const leaks = (findings: readonly VarianceFinding[]) =>
+    findings.filter((finding) => finding.code === 'must_stay_hidden_violation').length;
+  if (leaks(candidate) !== leaks(original)) return leaks(candidate) < leaks(original);
+  return candidate.length < original.length;
+}
+
+/** What the scene missed, named by code, for a diagnostic message. */
+function describeMisses(findings: readonly VarianceFinding[]): string {
+  const codes = [...new Set(findings.filter((f) => f.correctable).map((f) => f.code))];
+  return codes.length === 0 ? 'an invariant' : codes.join(', ');
 }
 
 /** Everything after the cached header, in payload order — the `contents` half of the request. */
