@@ -63,10 +63,9 @@ export async function POST(request: Request, { params }: { params: Promise<{ sto
   }
 
   // The stand-in composes every scene from its own Scene Card, which exercises the whole
-  // author-time path — validation, continuity pass, staleness — without spending one of a
-  // rate-limited key's requests. On the project's free-tier key a single telling exhausts the
-  // day's writer allowance (AGENTS.md, The Gemini API key), so an author proving the *mechanism*
-  // needs to be able to ask for it while a key is configured, not only by unsetting one.
+  // author-time path — validation, continuity pass, staleness — without spending a real writer
+  // call (AGENTS.md, The Gemini API key), so an author proving the *mechanism* needs to be able to
+  // ask for it while a key is configured, not only by unsetting one.
   //
   // It is a choice the caller makes and never one made for them: the writer that actually wrote
   // the scene is reported back either way, because a compile that does not say which model wrote

@@ -77,27 +77,38 @@ export interface ModelClient {
   generate(request: ModelRequest): Promise<ModelResponse>;
 }
 
-/** The models the research's §7 split recommends. */
-export const WRITER_MODEL = 'gemini-3.7-flash';
+/**
+ * The current flagship Flash (Gemini capabilities research §7's split, updated as newer
+ * generations launch). `gemini-3.8-flash` launched priced identically to `gemini-3.7-flash` and
+ * `gemini-3.6-flash` — same $0.75 / $0.075 cached / $3.75 per-1M input/cached/output through
+ * 2026-12-31, same $1.50/$0.15/$7.50 after — confirmed against the live pricing page on
+ * 2026-09-12, so there is no cost reason to stay on the previous generation.
+ */
+export const WRITER_MODEL = 'gemini-3.8-flash';
 /**
  * Same-price previous-generation Flash (Gemini capabilities research §7: *"watch for the
  * schema-constrained decode-loop report on this model; if the POC reproduces it,
  * `gemini-3.6-flash` is a same-price fallback"*). That reasoning generalizes past the one bug it
  * was named for: a different model is also a different capacity pool, so it is exactly what
  * `GeminiClient.generate` reaches for when `WRITER_MODEL` itself is unavailable (confirmed live —
- * `gemini-3.7-flash` returned `503 UNAVAILABLE` for several minutes straight during this session).
+ * `gemini-3.7-flash` returned `503 UNAVAILABLE` for several minutes straight during one session).
+ * Bumped to `gemini-3.7-flash` alongside `WRITER_MODEL` above, for the same reason: one generation
+ * back, same price, a different capacity pool.
  */
-export const WRITER_MODEL_FALLBACK = 'gemini-3.6-flash';
+export const WRITER_MODEL_FALLBACK = 'gemini-3.7-flash';
 export const FALLBACK_MODEL = 'gemini-3.5-flash-lite';
 
 /**
- * The model to reach for when what is scarce is *requests*, not quality.
+ * The model to reach for when what is being proven is connectivity or the loop's mechanism, not
+ * prose quality.
  *
- * On the project's free-tier key, `gemini-3.7-flash` and `gemini-3.6-flash` share a 20
- * requests/day ceiling — a single 14-scene telling exhausts it — while `gemini-3.5-flash-lite`
- * carries a much larger daily allowance. It is the wrong model to judge prose by and the right
- * one to prove a loop with, so it is opt-in only: nothing selects it automatically, because a
- * silent quality downgrade is worse than a rate limit. Set `AXIOM_WRITER_MODEL` to choose it (see
+ * Billing on the project's key removed the free tier's 20-requests/day ceiling that used to make
+ * this a *necessity* for a full run (see `AGENTS.md`'s "The Gemini API key" for what that ceiling
+ * used to be), but the reason to keep reaching for it deliberately hasn't gone away: it is far
+ * cheaper and faster than the writer model, so it stays the right way to prove a compile or a
+ * run-loop wiring change actually calls the API — before spending a real call on prose you intend
+ * to judge. It is opt-in only: nothing selects it automatically, because a silent quality
+ * downgrade is worse than a slower or costlier call. Set `AXIOM_WRITER_MODEL` to choose it (see
  * `AGENTS.md`), and the run report's per-call `model` field records what actually wrote each
  * scene.
  */
@@ -120,6 +131,38 @@ export const SELECTABLE_WRITER_MODELS: readonly string[] = [
 export function isSelectableWriterModel(model: string): boolean {
   return SELECTABLE_WRITER_MODELS.includes(model);
 }
+
+export interface ModelPrice {
+  /** USD per 1M uncached input tokens. */
+  readonly input_per_million: number;
+  /** USD per 1M cached input tokens (`usageMetadata.cachedContentTokenCount`). */
+  readonly cached_input_per_million: number;
+  /** USD per 1M output tokens — prose and thinking billed together (§2's headline finding 4). */
+  readonly output_per_million: number;
+}
+
+/**
+ * USD pricing for every model this project has ever called, Gemini Developer API / Agent
+ * Platform, Global endpoint, standard tier. Confirmed live against
+ * <https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing> on
+ * 2026-09-12: `gemini-3.8-flash`, `gemini-3.7-flash` and `gemini-3.6-flash` are priced
+ * identically, introductory pricing through 2026-12-31 and standard (exactly double) pricing
+ * from 2027-01-01 — this table carries the introductory figures and is **not date-aware**;
+ * revisit it once that date passes (`docs/research/gemini-capabilities.md` §6 flags the same
+ * cliff).
+ *
+ * Exists for the run report's cost tracker (`costForCalls`/`costForScenes` in
+ * `edition/run-report.ts`), computed after a run from the tokens it actually spent — never for
+ * the pre-generation estimate, which ADR 0014 §5 keeps wall-clock only. `gemini-3.6-flash` stays
+ * listed even though nothing selects it as of this bump, so a run report from before the bump
+ * still prices out rather than silently going "unpriced".
+ */
+export const MODEL_PRICING: Record<string, ModelPrice> = {
+  'gemini-3.8-flash': { input_per_million: 0.75, cached_input_per_million: 0.075, output_per_million: 3.75 },
+  'gemini-3.7-flash': { input_per_million: 0.75, cached_input_per_million: 0.075, output_per_million: 3.75 },
+  'gemini-3.6-flash': { input_per_million: 0.75, cached_input_per_million: 0.075, output_per_million: 3.75 },
+  'gemini-3.5-flash-lite': { input_per_million: 0.3, cached_input_per_million: 0.03, output_per_million: 2.5 },
+};
 
 /**
  * What a failed call says about the key's *daily* allowance, or `null` for any other failure.

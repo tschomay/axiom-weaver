@@ -12,14 +12,27 @@
  * second opinion about what a run report says.
  */
 
-import { aggregateByCard, isPromotable, type CardAggregate, type RunReport } from './run-report';
+import {
+  aggregateByCard,
+  costForScenes,
+  isPromotable,
+  type CardAggregate,
+  type RunCost,
+  type RunReport,
+} from './run-report';
 import type { StoryPackage } from '../schema/story-package';
 import type { StoryRepository } from '../persistence/story-repository';
 import type { BakedPointer } from './edition';
 
 const RULE = '='.repeat(78);
 
+/** `$0.0231`, `$1.20` — enough precision to be legible on a single scene, never fake precision. */
+function formatUsd(amount: number): string {
+  return `$${amount.toFixed(amount < 1 ? 4 : 2)}`;
+}
+
 export function renderRunReport(report: RunReport, options: { verbose?: boolean } = {}): string {
+  const cost = costForScenes(report.scenes);
   const lines = [
     RULE,
     `RUN REPORT — ${report.run_id}`,
@@ -38,6 +51,8 @@ export function renderRunReport(report: RunReport, options: { verbose?: boolean 
       `against an expected ${report.budget.expected_output_tokens}` +
       (report.budget.over_budget ? '  ** OVER BUDGET (logged, never enforced) **' : ''),
     `  prompt tokens    ${report.budget.prompt_tokens} (${report.budget.cached_tokens} cached)`,
+    `  cost             ${formatUsd(cost.total_usd)}` +
+      (cost.complete ? '' : '  (partial — some calls used a model with no listed price)'),
     '',
   ];
 
@@ -130,6 +145,8 @@ export interface RunSummaryView {
   readonly started_at: string;
   readonly completed_at: string | null;
   readonly budget: RunReport['budget'];
+  /** What the run's calls actually cost, from today's `MODEL_PRICING` — never a stored figure. */
+  readonly cost: RunCost;
   /** ADR 0014 §9: only a completed, non-degraded run may ever be promoted to Baked. */
   readonly promotable: boolean;
   readonly is_baked: boolean;
@@ -167,6 +184,7 @@ export async function buildRunReportView(
       started_at: report.started_at,
       completed_at: report.completed_at,
       budget: report.budget,
+      cost: costForScenes(report.scenes),
       promotable: isPromotable(report),
       is_baked: baked?.run_id === report.run_id,
     })),

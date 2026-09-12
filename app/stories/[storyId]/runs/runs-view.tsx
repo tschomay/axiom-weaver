@@ -8,6 +8,10 @@ function seconds(ms: number): string {
   return `${(ms / 1000).toFixed(1)}s`;
 }
 
+function usd(amount: number): string {
+  return `$${amount.toFixed(amount < 1 ? 4 : 2)}`;
+}
+
 export function RunReportView({
   storyId,
   initial,
@@ -160,7 +164,9 @@ function RunRow({
           {run.degraded_scene_count > 0 ? `, ${run.degraded_scene_count} to fallback` : ''} ·{' '}
           {seconds(run.duration_ms)} · {run.budget.output_tokens + run.budget.thoughts_tokens}{' '}
           output+thinking tokens against an expected {run.budget.expected_output_tokens}
-          {run.budget.over_budget ? ' (over budget — logged, never enforced)' : ''}
+          {run.budget.over_budget ? ' (over budget — logged, never enforced)' : ''} ·{' '}
+          {usd(run.cost.total_usd)}
+          {run.cost.complete ? '' : ' (partial)'}
         </span>
         <br />
         <a className="meta" href={`/api/tellings/${run.run_id}/report`}>

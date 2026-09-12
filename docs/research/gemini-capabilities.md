@@ -360,3 +360,31 @@ Both operate over **digests, never prose** — the map's standing constraint —
 4. **Interactions API status** — GA or beta. The doc corpus contradicts itself and it is absent from the published discovery document.
 5. **Whether `responseFormat` is honoured on `generateContent`** as well as on the Interactions API — the discovery doc lists it in `GenerationConfig`, which implies yes, but a one-line curl would settle it and settles §5's recommendation.
 6. **Streaming-chunk shape under a schema** — the doc's "valid partial JSON strings" claim deserves a 20-line spike before the reader UI is designed around it.
+
+---
+
+## Addendum, 2026-09-12: billing added; `gemini-3.8-flash` launched at the same price
+
+Two things changed since the original research above, both verified live rather than doc-only:
+
+1. **The project's `GEMINI_API_KEY` now has billing attached**, moving it off the free tier this
+   document's §6 table described and onto Tier 1. The free-tier numbers above (5 RPM / 20 RPD for
+   the writer models, 500 RPD for Flash-Lite) no longer bind — Tier 1 lifts requests-per-day by
+   orders of magnitude, per this same §6 and §7 recommendation. What still binds on Tier 1: RPM,
+   TPM, and a spend-based cap of $10 per rolling 10-minute window (§6, "Rate limits") — read
+   per-model RPM/TPM from AI Studio before assuming headroom for anything unusually large. See
+   `AGENTS.md`'s "The Gemini API key" for the day-to-day version of this.
+2. **`gemini-3.8-flash` is live** (`models.list` against the Gemini Developer API, confirmed with
+   an authenticated key on 2026-09-12) and **priced identically to `gemini-3.7-flash` and
+   `gemini-3.6-flash`** — confirmed against
+   <https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing> the same day:
+   $0.75 / $0.075 cached / $3.75 per 1M input/cached-input/output (Global, standard tier) through
+   2026-12-31, doubling to $1.50/$0.15/$7.50 from 2027-01-01, identically across all three models
+   and every tier (Priority, Flex/Batch). `src/writer/model-client.ts` now sets `WRITER_MODEL` to
+   `gemini-3.8-flash` and `WRITER_MODEL_FALLBACK` to `gemini-3.7-flash` on that basis — same-price
+   generations, so the newest one is the writer model and the one behind it is the capacity
+   fallback, per §7's original reasoning applied one generation further.
+
+Not re-verified: whether `gemini-3.8-flash` reproduces or fixes the schema-constrained decode-loop
+forum report §1 flags against `gemini-3.7-flash`. Nothing in this session's live checks (a
+`models.list` call and a pricing-page fetch) touched `generateContent` itself.
