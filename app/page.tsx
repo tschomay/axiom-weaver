@@ -71,6 +71,11 @@ export default async function Home() {
         view, the World &amp; Discourse inspector, and the run report.
       </p>
 
+      <p className="meta">
+        New here? Start with the <Link href="/guide/author">Author&apos;s Guide</Link> or the{' '}
+        <Link href="/guide/reader">Reader&apos;s Guide</Link>.
+      </p>
+
       <h2>Stories</h2>
       <p className="meta">
         <Link href="/stories/new">Start a story →</Link>
