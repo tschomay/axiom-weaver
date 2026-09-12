@@ -531,6 +531,13 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
  * built to leave, rather than inventing token counts that would put fiction into the same report
  * a live run writes real numbers into. Worth surfacing here because a stand-in telling reads as
  * placeholder text, and the reader should know that is the writer and not a failure.
+ *
+ * Only `writer`/`writer_retry` calls count as having written anything the reader sees. A
+ * `digest_fallback` call (ADR 0012 §5) runs on `gemini-3.5-flash-lite` by design, but only to
+ * reconstruct `scene_digest`/`state_updates` after a `MAX_TOKENS` cut landed *after* prose had
+ * already completed and streamed — the prose itself came from the writer call and is untouched.
+ * Counting it here would tell a reader the lite model wrote part of a scene it never touched a
+ * word of. `continuity_repair` and `digest_rollup` are the same story: neither one is prose.
  */
 async function provenanceOf(runId: string): Promise<string | null> {
   try {
@@ -538,10 +545,15 @@ async function provenanceOf(runId: string): Promise<string | null> {
     if (!response.ok) return null;
     const report = (await response.json()) as {
       budget?: { output_tokens: number };
-      scenes?: Array<{ calls: Array<{ model: string }> }>;
+      scenes?: Array<{ calls: Array<{ model: string; purpose: string }> }>;
     };
     const models = [
-      ...new Set((report.scenes ?? []).flatMap((scene) => scene.calls.map((call) => call.model))),
+      ...new Set(
+        (report.scenes ?? [])
+          .flatMap((scene) => scene.calls)
+          .filter((call) => call.purpose === 'writer' || call.purpose === 'writer_retry')
+          .map((call) => call.model),
+      ),
     ];
     if ((report.budget?.output_tokens ?? 0) === 0) {
       return 'written by the stand-in — every call reported zero tokens, so no model was called';
