@@ -25,7 +25,7 @@ import {
 } from '../validator/diagnostics';
 import { FINDING_MODES } from '../continuity/continuity-pass';
 import type { Occasion } from '../validator/state-update-authority';
-import { FINISH_REASONS } from '../writer/model-client';
+import { FINISH_REASONS, MODEL_PRICING } from '../writer/model-client';
 
 export const RUN_REPORT_SCHEMA_VERSION = '1.0';
 
@@ -169,6 +169,48 @@ export function sumBudget(scenes: readonly RunReportScene[], expected: number): 
     // so they count against the budget too — leaving them out would under-report every run.
     over_budget: totals.output_tokens + totals.thoughts_tokens > expected,
   };
+}
+
+// --- Cost, after the fact ----------------------------------------------------------------------
+
+export interface RunCost {
+  readonly total_usd: number;
+  /** False if any call's model has no listed price — `total_usd` is then a partial figure. */
+  readonly complete: boolean;
+}
+
+/**
+ * Dollar cost of a set of calls, from `MODEL_PRICING` and the same token counts the budget
+ * already carries. Computed at read time rather than stored on the report: unlike `duration_ms`,
+ * a call's actual cost was never a fact fixed at the moment it happened — it is a function of
+ * today's price list — so a persisted figure would silently go stale the day pricing changes. A
+ * model missing from the table (an old report, or an operator-set `AXIOM_WRITER_MODEL` outside
+ * the allowlist) is skipped rather than guessed at, and reported via `complete: false` so the
+ * total reads as partial, never as a false precision.
+ */
+export function costForCalls(calls: readonly CallRecordDocument[]): RunCost {
+  let total = 0;
+  let complete = true;
+
+  for (const call of calls) {
+    const price = MODEL_PRICING[call.model];
+    if (price === undefined) {
+      complete = false;
+      continue;
+    }
+    const uncachedInput = Math.max(0, call.prompt_tokens - call.cached_tokens);
+    total +=
+      (uncachedInput * price.input_per_million +
+        call.cached_tokens * price.cached_input_per_million +
+        (call.output_tokens + call.thoughts_tokens) * price.output_per_million) /
+      1_000_000;
+  }
+
+  return { total_usd: total, complete };
+}
+
+export function costForScenes(scenes: readonly RunReportScene[]): RunCost {
+  return costForCalls(scenes.flatMap((scene) => scene.calls));
 }
 
 // --- Aggregation across runs ------------------------------------------------------------------

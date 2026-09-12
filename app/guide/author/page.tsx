@@ -211,14 +211,15 @@ export default function AuthorGuidePage() {
         what staleness in the Working Draft is for.
       </p>
 
-      <h2>Mind the daily quota</h2>
+      <h2>Mind what a run costs</h2>
       <p>
-        The project&apos;s Gemini key is free-tier: twenty writer requests a day for the model whose
-        prose you should actually judge, five hundred for a much lighter stand-in model. A single
-        full telling of a 14-scene story spends the entire day&apos;s allowance on its own. Prove the
-        mechanism works with the stand-in writer or the light model first, and save the real model
-        for the run whose prose you actually intend to read. See <code>AGENTS.md</code> in the
-        repository for the exact limits and how to pace requests against them.
+        The project&apos;s Gemini key has billing attached, so a run is no longer rationed by a
+        free tier&apos;s daily request cap — but a writer call still costs real money, and a rate
+        or spend limit can still be hit under enough load. Prove the mechanism works with the
+        stand-in writer or the much cheaper light model first, and save the real writer model for
+        the run whose prose you actually intend to read. Every run report shows what it actually
+        cost afterward, on <code>/stories/{'{storyId}'}/runs</code>; see <code>AGENTS.md</code> in
+        the repository for the current tier&apos;s limits and how to pace requests against them.
       </p>
 
       <p className="meta">

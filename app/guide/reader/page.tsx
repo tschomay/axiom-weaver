@@ -87,12 +87,12 @@ export default function ReaderGuidePage() {
         the performance is yours to pass around.
       </p>
 
-      <h2>If the model&apos;s daily allowance runs out</h2>
+      <h2>If the model&apos;s allowance runs out</h2>
       <p>
-        The writer model behind these tellings runs on a rate-limited key, and once its daily
-        allowance is spent, no retry helps until it resets. Rather than fail outright, the read
-        screen will offer a lighter model with its own separate, much larger allowance — offered,
-        never switched to silently, because a quality change you didn&apos;t ask for is worse than a
+        The writer model behind these tellings runs on a rate-limited key, and once its allowance
+        for the moment is spent, no retry helps until it resets. Rather than fail outright, the
+        read screen will offer a lighter model with its own separate allowance — offered, never
+        switched to silently, because a quality change you didn&apos;t ask for is worse than a
         wait. Whatever wrote a scene is recorded as having written it.
       </p>
 

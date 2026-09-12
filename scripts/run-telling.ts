@@ -5,12 +5,13 @@
  *   npm run telling -- a-christmas-carol
  *   npm run telling -- cinderella --verbose
  *   npm run telling -- cinderella --promote    # promote the run to Baked afterwards
- *   npm run telling -- cinderella --model gemini-3.5-flash-lite   # trade prose for headroom
+ *   npm run telling -- cinderella --model gemini-3.5-flash-lite   # trade prose for a cheap call
  *
- * `--model` (or `AXIOM_WRITER_MODEL`) exists because the project's key is free-tier: the writer
- * model and its capacity fallback share 20 requests a day, which one 14-scene telling spends in
- * full. Flash-Lite has a far larger daily allowance and writes worse prose — the right trade for
- * proving the loop works, the wrong one for judging what it wrote. See `AGENTS.md`.
+ * `--model` (or `AXIOM_WRITER_MODEL`) exists to prove the loop actually reaches the API before
+ * spending a real call on prose you intend to judge: Flash-Lite is far cheaper and faster than the
+ * writer model, and writes worse prose — the right trade for proving the mechanism, the wrong one
+ * for judging what it wrote. The run report shows what a run actually cost either way. See
+ * `AGENTS.md`.
  *
  * This is what "pressing generate a new telling" does, minus the button (the author- and
  * reader-facing screens are ticket 4's). With `GEMINI_API_KEY` set every scene is a real writer

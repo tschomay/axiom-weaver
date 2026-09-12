@@ -15,47 +15,54 @@ separate source of truth, and it drifts silently if it isn't touched alongside i
 
 ## The Gemini API key
 
-`GEMINI_API_KEY` in this project is a **free-tier** key, and the tier — not the code — is the
-binding constraint on live work. Limits as of September 2026, reported by the repo owner
-(per-model figures are published in AI Studio rather than the docs, so read them live before
-trusting these):
+`GEMINI_API_KEY` in this project **has billing attached** (added September 2026). It was
+free-tier before that, and the free tier's own ceiling — 5 requests/minute and a hard **20
+requests/day** shared by `gemini-3.7-flash` and `gemini-3.6-flash`, 500/day for
+`gemini-3.5-flash-lite` — is why so much of this codebase's retry, fallback and pacing machinery
+exists (`WRITER_MODEL_FALLBACK`, `RequestPacer`, `dailyQuotaFailure`, the whole "day's allowance"
+narrative in older comments and commit history). None of that ceiling applies anymore: adding
+billing moves the key onto Tier 1, which lifts requests-per-day by orders of magnitude
+(`docs/research/gemini-capabilities.md` §6). **Don't trust a comment or doc line that still cites
+"20 requests/day" or "free-tier" as the project's current state** — those describe history, not
+today, unless they're explicitly framed as a measurement from a specific past run.
 
-| | `gemini-3.7-flash` / `gemini-3.6-flash` | `gemini-3.5-flash-lite` |
-| --- | --- | --- |
-| Requests per minute | 5 | 15 |
-| Requests per day | **20** | 500 |
-| Tokens per minute | 250,000 | 250,000 |
+A paid tier is not limit-free, though: RPM, TPM and a **spend-based** cap (Tier 1: $10 per
+rolling 10-minute window) still apply, and per-model RPM/TPM figures are published live in AI
+Studio rather than in the docs — read them there before assuming headroom for something unusually
+large (a novel-scale read, a burst of concurrent runs). The mechanisms that used to exist purely
+to survive the free tier — `AXIOM_REQUESTS_PER_MINUTE` pacing, the capacity-fallback swap, per-day
+quota detection — are still correct and still worth using; they just fire far less often now.
 
-**Requests are what run out; tokens are not.** A 14-scene telling is 14–28 writer calls, so one
-full live run of the Cinderella fixture spends a whole day's allowance on the writer models — and
-the first one did exactly that, dying at scene 8 on a `429`. TPM has never come close, which is
-why `maxOutputTokensFor` reserves generously rather than tightly: a cap is a ceiling, not a
-charge, and a second call costs 5% of the day.
+**The lite model, `gemini-3.5-flash-lite`, stays in deliberate use for testing — not because a
+quota forces it anymore, but because it is far cheaper and faster than the writer model, which
+makes it the right way to prove connectivity or a run-loop change actually reaches the API before
+spending a real call on prose you intend to judge.** Set `AXIOM_WRITER_MODEL=gemini-3.5-flash-lite`
+(`TESTING_WRITER_MODEL` in `src/writer/model-client.ts`), or `npm run telling -- <fixture> --model
+gemini-3.5-flash-lite`. It remains opt-in only and is never selected automatically — a silent
+quality downgrade is worse than a slower or costlier call, billing or no billing — and the run
+report's per-call `model` field always records what actually wrote each scene.
 
-Before spending live calls, know which you need:
+For judging prose, use `WRITER_MODEL` (currently `gemini-3.8-flash`, Flash's current generation —
+`gemini-3.7-flash` is the same-price capacity fallback). `gemini-3.8-flash` launched priced
+identically to `gemini-3.7-flash` and `gemini-3.6-flash` (confirmed live against the pricing page
+on 2026-09-12: `docs/research/gemini-capabilities.md` §6), so there is no cost reason to stay on
+an older generation.
 
-- **Proving the mechanism works** — use the stand-in writer (no key: `npm run telling` composes
-  every scene from its Scene Card) or, if the calls themselves matter,
-  `AXIOM_WRITER_MODEL=gemini-3.5-flash-lite` / `npm run telling -- <fixture> --model
-  gemini-3.5-flash-lite`. Twenty-five times the daily headroom, and prose you must not judge the
-  project by.
-- **Judging the prose** — that needs `gemini-3.7-flash`, and therefore needs the budget. Plan the
-  run, don't discover halfway through that it is gone.
+Two things that still make a call go further, billing or not:
 
-Two things that make a rate-limited key go further:
+- **`AXIOM_REQUESTS_PER_MINUTE`** paces requests client-side rather than discovering a per-minute
+  limit with a `429`. Set it to the key's own RPM.
+- **`models.countTokens` is not on the generate quota**, so it answers normally even if the
+  generate-content allowance for a window is briefly spent — useful for any question about prompt
+  size (schema cost, cache-prefix size, whether the payload has grown). `npm run cache-check --
+  <story> --count-tokens` is the ready-made version.
 
-- **`AXIOM_REQUESTS_PER_MINUTE`** paces requests client-side instead of discovering the per-minute
-  limit with a `429` that costs one of the day's 20. Set it to the key's own RPM.
-- **`models.countTokens` is not on the generate quota.** It answers normally on a key whose
-  `generateContent` allowance is spent, which makes any question about prompt size — schema cost,
-  cache-prefix size, whether the payload has grown — answerable on a day when nothing else is.
-  `npm run cache-check -- <story> --count-tokens` is the ready-made version.
-
-**If the rate limit is blocking real work, say so and ask the owner to add billing.** Tier 1 is
-instant on adding a billing account (`docs/research/gemini-capabilities.md` §6) and lifts these
-limits by orders of magnitude. Ask rather than working around it with a weaker model, and never
-degrade the writer model silently to dodge a quota — a run report that does not say which model
-wrote a scene is worse than a run that did not happen.
+Every run report now carries a dollar cost alongside its token counts (`src/edition/run-report.ts`,
+`costForCalls`/`costForScenes`), computed from `MODEL_PRICING` at read time so a pricing change is
+reflected in every report rather than needing a migration. If a genuine limit is still blocking
+real work after billing, say so and ask the owner rather than degrading the writer model silently
+to dodge it — a run report that does not say which model wrote a scene is worse than a run that
+did not happen.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

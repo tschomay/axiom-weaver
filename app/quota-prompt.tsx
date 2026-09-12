@@ -41,9 +41,9 @@ export function QuotaPrompt({
       {offer.retry_with_model === null ? (
         <p className="meta">
           That is already the model with the largest daily allowance this deployment will call, so
-          there is nothing further to offer. What is left is waiting for the reset, or raising the
-          key&apos;s tier — adding a billing account moves it to Tier 1 immediately and lifts these
-          limits by orders of magnitude.
+          there is nothing further to offer. This key already has billing attached; what is left
+          is waiting for the reset, or the limit rising further as cumulative spend moves the key
+          to a higher tier — neither of which anything here can do on the spot.
         </p>
       ) : (
         <>

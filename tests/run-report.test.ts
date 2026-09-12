@@ -4,16 +4,20 @@ import {
   DEGRADED_RUN_FRACTION,
   aggregateByCard,
   averageSceneDurationMs,
+  costForCalls,
+  costForScenes,
   estimateCompile,
   isPromotable,
   isRunDegraded,
   reportDiagnostic,
   sumBudget,
+  type CallRecordDocument,
   type RunReport,
   type RunReportScene,
 } from '@/edition/run-report';
 import { renderCardAggregates, renderRunReport } from '@/edition/report-view';
 import { diagnostic } from '@/validator/diagnostics';
+import { WRITER_MODEL } from '@/writer/model-client';
 
 function scene(overrides: Partial<RunReportScene> = {}): RunReportScene {
   return {
@@ -225,6 +229,57 @@ describe('the pre-generation estimate (ADR 0014 §5)', () => {
   it('shows wall-clock only — never a cost', () => {
     const estimate = estimateCompile(14, []);
     expect(JSON.stringify(estimate)).not.toMatch(/token|\$|cost/i);
+  });
+});
+
+describe('the cost tracker (after a run, never before one)', () => {
+  const call = (overrides: Partial<CallRecordDocument> = {}): CallRecordDocument => ({
+    model: WRITER_MODEL,
+    purpose: 'writer',
+    finish_reason: 'STOP',
+    prompt_tokens: 4_000,
+    output_tokens: 600,
+    cached_tokens: 3_000,
+    thoughts_tokens: 400,
+    ...overrides,
+  });
+
+  it('prices uncached input, cached input, and output+thinking separately', () => {
+    const cost = costForCalls([call()]);
+    // (4000 - 3000) uncached @ $0.75/M + 3000 cached @ $0.075/M + 1000 output+thinking @ $3.75/M
+    expect(cost.total_usd).toBeCloseTo(0.004725, 6);
+    expect(cost.complete).toBe(true);
+  });
+
+  it('sums across every call in every scene', () => {
+    const cost = costForScenes([
+      scene({ calls: [call(), call()] }),
+      scene({ scene_id: 'other', calls: [call()] }),
+    ]);
+    expect(cost.total_usd).toBeCloseTo(0.004725 * 3, 6);
+  });
+
+  it('flags a total as partial rather than silently under-counting an unpriced model', () => {
+    const cost = costForCalls([call(), call({ model: 'gemini-9-ultra' })]);
+    // Only the priced call counts, but the total is honest about being incomplete.
+    expect(cost.total_usd).toBeCloseTo(0.004725, 6);
+    expect(cost.complete).toBe(false);
+  });
+
+  it('is zero and complete for no calls at all', () => {
+    expect(costForCalls([])).toEqual({ total_usd: 0, complete: true });
+  });
+
+  it('shows up in the rendered run report', () => {
+    const rendered = renderRunReport(report({ scenes: [scene({ calls: [call()] })] }));
+    expect(rendered).toMatch(/cost\s+\$0\.0047/);
+  });
+
+  it('marks the rendered report partial when a call has no listed price', () => {
+    const rendered = renderRunReport(
+      report({ scenes: [scene({ calls: [call({ model: 'gemini-9-ultra' })] })] }),
+    );
+    expect(rendered).toContain('partial — some calls used a model with no listed price');
   });
 });
 
