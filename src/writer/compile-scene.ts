@@ -94,13 +94,27 @@ const THINKING_RESERVE_FRACTION = 0.4;
  */
 export const MIN_THINKING_RESERVE_TOKENS = 3000;
 
+/**
+ * Extra headroom on top of the sized budget above, added after `the-amber-cat` run showed the
+ * `digest_fallback` path (decision 5 below) firing more often than its "should be the exception,
+ * not the routine case" bar. That path is deliberately cheap by design — `gemini-3.5-flash-lite`
+ * reconstructing a digest from prose that already exists is a fine trade for cost — but it should
+ * still be rare, and a rate driven by the primary call running short on room is a budgeting
+ * problem, not something to paper over by leaning on the recovery path more. The same "reserving
+ * generously is close to free" reasoning above applies here too: nothing is billed for headroom
+ * that goes unused, so widening the ceiling is a strictly better trade than living with the
+ * truncations it exists to prevent.
+ */
+const OUTPUT_TOKEN_HEADROOM_MULTIPLIER = 1.5;
+
 export function maxOutputTokensFor(scene: SceneCard): number {
   const words = scene.length_budget ?? 500;
   const proseAndTail = Math.ceil(words * 2 * 1.4);
   const proportional = Math.ceil(
     proseAndTail * (THINKING_RESERVE_FRACTION / (1 - THINKING_RESERVE_FRACTION)),
   );
-  return proseAndTail + Math.max(proportional, MIN_THINKING_RESERVE_TOKENS);
+  const budget = proseAndTail + Math.max(proportional, MIN_THINKING_RESERVE_TOKENS);
+  return Math.ceil(budget * OUTPUT_TOKEN_HEADROOM_MULTIPLIER);
 }
 
 export interface CompileSceneInput {

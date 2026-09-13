@@ -204,6 +204,32 @@ lost. If every attempt is exhausted (both models down), `generate` still throws 
 finish-reason failure, there is no partial `ModelResponse` to salvage from at that point, so
 surfacing it loudly remains more honest than inventing a stub.
 
+## Amendment (2026-09-13)
+
+`the-amber-cat` surfaced `gemini-3.5-flash-lite` in a run's provenance, which read as the writer
+model failing back to lite for quality reasons — it hadn't. What actually happened was decision 5's
+digest-only fallback: `MAX_TOKENS` cut the tail after prose had already completed, and the recovery
+call that reconstructs `scene_digest`/`state_updates` runs on `gemini-3.5-flash-lite` unconditionally,
+by design, regardless of quota headroom (confirmed against the account's live RPM/TPM dashboard —
+plenty of room on every model at the time). Two things followed from that being the real story
+rather than a rate limit:
+
+1. The reader-facing provenance line (`app/stories/[storyId]/read/read-view.tsx`) counted every
+   model any call used, so it credited the lite model with writing prose it never touched. Fixed to
+   count `writer`/`writer_retry` calls only for "written by", with `digest_fallback` broken out into
+   its own clause ("N scene(s)' digest recovered by ... after a token cutoff — the prose itself is
+   unaffected") — present when it happens, never conflated with authorship.
+2. Decision 5 calls the fallback path "the exception, not the routine case," and a truncation this
+   ordinary a scene shouldn't be hitting it that often. `maxOutputTokensFor` (`src/writer/compile-scene.ts`)
+   now reserves 50% more headroom on top of the sized budget (`OUTPUT_TOKEN_HEADROOM_MULTIPLIER`) —
+   the same "reserving generously is close to free" reasoning decision 4's amendment already used,
+   applied again because a wider ceiling that goes unused costs nothing, while the truncations it
+   prevents cost a whole extra call.
+
+The fallback path itself (decision 5) is unchanged and is still the right trade once a truncation
+does happen — lite reconstructing a digest from prose that already exists is cheap for good reason.
+This amendment is about making it rarer and never mistaken for a prose-quality decision when it fires.
+
 ## Consequences
 
 - `docs/research/gemini-capabilities.md`'s five headline findings (structured

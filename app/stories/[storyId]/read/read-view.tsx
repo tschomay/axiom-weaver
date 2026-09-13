@@ -532,12 +532,14 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
  * a live run writes real numbers into. Worth surfacing here because a stand-in telling reads as
  * placeholder text, and the reader should know that is the writer and not a failure.
  *
- * Only `writer`/`writer_retry` calls count as having written anything the reader sees. A
- * `digest_fallback` call (ADR 0012 §5) runs on `gemini-3.5-flash-lite` by design, but only to
- * reconstruct `scene_digest`/`state_updates` after a `MAX_TOKENS` cut landed *after* prose had
- * already completed and streamed — the prose itself came from the writer call and is untouched.
- * Counting it here would tell a reader the lite model wrote part of a scene it never touched a
- * word of. `continuity_repair` and `digest_rollup` are the same story: neither one is prose.
+ * Only `writer`/`writer_retry` calls count toward "written by": those are the only calls that
+ * produce anything the reader sees. A `digest_fallback` call (ADR 0012 §5) runs on
+ * `gemini-3.5-flash-lite` by design, but only to reconstruct `scene_digest`/`state_updates` after
+ * a `MAX_TOKENS` cut landed *after* prose had already completed and streamed — the prose itself
+ * came from the writer call and is untouched. Folding it into "written by" would tell a reader the
+ * lite model wrote part of a scene it never touched a word of, so it gets its own clause instead:
+ * present when it happened, but never confused with authorship. `continuity_repair` and
+ * `digest_rollup` are the same story — neither is prose — and stay out of both clauses.
  */
 async function provenanceOf(runId: string): Promise<string | null> {
   try {
@@ -547,18 +549,30 @@ async function provenanceOf(runId: string): Promise<string | null> {
       budget?: { output_tokens: number };
       scenes?: Array<{ calls: Array<{ model: string; purpose: string }> }>;
     };
-    const models = [
+    if ((report.budget?.output_tokens ?? 0) === 0) {
+      return 'written by the stand-in — every call reported zero tokens, so no model was called';
+    }
+
+    const calls = (report.scenes ?? []).flatMap((scene) => scene.calls);
+    const writerModels = [
       ...new Set(
-        (report.scenes ?? [])
-          .flatMap((scene) => scene.calls)
+        calls
           .filter((call) => call.purpose === 'writer' || call.purpose === 'writer_retry')
           .map((call) => call.model),
       ),
     ];
-    if ((report.budget?.output_tokens ?? 0) === 0) {
-      return 'written by the stand-in — every call reported zero tokens, so no model was called';
-    }
-    return models.length === 0 ? null : `written by ${models.join(', ')}`;
+    if (writerModels.length === 0) return null;
+    const written = `written by ${writerModels.join(', ')}`;
+
+    const digestFallbackCalls = calls.filter((call) => call.purpose === 'digest_fallback');
+    if (digestFallbackCalls.length === 0) return written;
+
+    const digestFallbackModels = [...new Set(digestFallbackCalls.map((call) => call.model))];
+    const noun = digestFallbackCalls.length === 1 ? 'scene' : 'scenes';
+    return (
+      `${written} (${digestFallbackModels.join(', ')} recovered the digest on ` +
+      `${digestFallbackCalls.length} ${noun} after a token cutoff — the prose itself is unaffected)`
+    );
   } catch {
     return null;
   }
