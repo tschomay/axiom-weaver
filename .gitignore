@@ -16,3 +16,6 @@ next-env.d.ts
 
 .DS_Store
 npm-debug.log*
+
+# Agent-tool background worktrees (harness-internal, not repo content)
+.claude/worktrees/
