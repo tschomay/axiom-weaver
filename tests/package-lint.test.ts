@@ -215,6 +215,87 @@ describe('warnings never block', () => {
   });
 });
 
+describe('entry_state is chained against the previous scene', () => {
+  it('catches a column the previous scene left at a different value', async () => {
+    const pkg = structuredClone(await fixture('the-amber-cat'));
+    const scenes = [...pkg.scene_cards].sort((a, b) => a.order - b.order);
+    const character = pkg.world_model_seed.characters[0]!;
+    const location = pkg.world_model_seed.locations[0]!;
+    const elsewhere = pkg.world_model_seed.locations[1]!;
+
+    scenes[0]!.exit_state = { [character.id]: { location_id: location.id } };
+    scenes[1]!.entry_state = { [character.id]: { location_id: elsewhere.id } };
+
+    const result = lintStoryPackage(pkg);
+    expect(result.publishable).toBe(false);
+    expect(result.errors).toContainEqual(
+      expect.objectContaining({
+        code: 'entry_exit_contradiction',
+        path: `scene_cards.${scenes[1]!.id}.entry_state.${character.id}`,
+      }),
+    );
+  });
+
+  it('accepts a column the previous scene left at the same value', async () => {
+    const pkg = structuredClone(await fixture('the-amber-cat'));
+    const scenes = [...pkg.scene_cards].sort((a, b) => a.order - b.order);
+    const character = pkg.world_model_seed.characters[0]!;
+    const location = pkg.world_model_seed.locations[0]!;
+
+    scenes[0]!.exit_state = { [character.id]: { location_id: location.id } };
+    scenes[1]!.entry_state = { [character.id]: { location_id: location.id } };
+
+    expect(lintStoryPackage(pkg).errors).toEqual([]);
+  });
+
+  // The bound that keeps the rule sound. Across a gap the engine may legitimately have written a
+  // P/E column no card names (ADR 0005), so only adjacent scenes are comparable — a rule that
+  // carried the last asserted value forward would report authored contradictions that are none.
+  it('does not reach across a scene that stays silent about the column', async () => {
+    const pkg = structuredClone(await fixture('the-amber-cat'));
+    const scenes = [...pkg.scene_cards].sort((a, b) => a.order - b.order);
+    const character = pkg.world_model_seed.characters[0]!;
+    const location = pkg.world_model_seed.locations[0]!;
+    const elsewhere = pkg.world_model_seed.locations[1]!;
+
+    scenes[0]!.exit_state = { [character.id]: { location_id: location.id } };
+    scenes[1]!.entry_state = {};
+    scenes[1]!.exit_state = {};
+    scenes[2]!.entry_state = { [character.id]: { location_id: elsewhere.id } };
+
+    expect(lintStoryPackage(pkg).errors).toEqual([]);
+  });
+
+  // Only one side naming the column leaves the value resting on the seed or an earlier scene,
+  // which this pass cannot decide and must not guess at.
+  it('ignores a column only one side names', async () => {
+    const pkg = structuredClone(await fixture('the-amber-cat'));
+    const scenes = [...pkg.scene_cards].sort((a, b) => a.order - b.order);
+    const character = pkg.world_model_seed.characters[0]!;
+    const elsewhere = pkg.world_model_seed.locations[1]!;
+
+    scenes[0]!.exit_state = { [character.id]: { status: 'shaken' } };
+    scenes[1]!.entry_state = { [character.id]: { location_id: elsewhere.id } };
+
+    expect(lintStoryPackage(pkg).errors).toEqual([]);
+  });
+
+  it('names the offending column in the message', async () => {
+    const pkg = structuredClone(await fixture('the-amber-cat'));
+    const scenes = [...pkg.scene_cards].sort((a, b) => a.order - b.order);
+    const character = pkg.world_model_seed.characters[0]!;
+
+    scenes[0]!.exit_state = { [character.id]: { status: 'calm' } };
+    scenes[1]!.entry_state = { [character.id]: { status: 'panicked' } };
+
+    const error = lintStoryPackage(pkg).errors.find(
+      (problem) => problem.code === 'entry_exit_contradiction',
+    );
+    expect(error?.message).toContain('status');
+    expect(error?.message).toContain(scenes[0]!.id);
+  });
+});
+
 describe('every problem is navigable', () => {
   it('carries a non-empty path and message on every problem it can raise', async () => {
     const pkg = structuredClone(await fixture('cinderella'));

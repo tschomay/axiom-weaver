@@ -12,6 +12,12 @@
  * issues #18 and #16 measured that the errors hand-authoring actually produces are
  * cross-reference errors, not prose ones.
  *
+ * `stateChaining` is the one check owned here rather than composed, and it is not a second
+ * opinion either: it is ADR 0005's authority rules read statically over the authored cards, in a
+ * window (between two consecutive scenes) where no engine behaviour can intervene. The validator
+ * still owns the runtime judgment; this only moves the subset decidable on the package alone to
+ * the surface the author is already looking at.
+ *
  * Two severities, and only one of them blocks. An `error` is a defect that would otherwise fail
  * at compile time, more expensively and further from the field that caused it. A `warn` is a
  * judgment about craft or completeness an author is allowed to disagree with, or to publish
@@ -186,6 +192,63 @@ function isUntouchedPreset(voiceCard: Record<string, unknown>): boolean {
   });
 }
 
+/**
+ * The static half of the amnesia guard: a scene's `entry_state` against the previous scene's
+ * `exit_state`, on the columns both of them name.
+ *
+ * ADR 0005's `entry_state_mismatch` already compares a card's `entry_state` against the *actual*
+ * World Model — but only at compile time, scene by scene, once a replay exists to compare
+ * against. The same contradiction is visible in the authored package before a single token is
+ * generated, and this module's own rule for `error` says so: a defect that would otherwise fail
+ * at compile time, more expensively and further from the field that caused it.
+ *
+ * Two bounds make it sound, and both matter:
+ *
+ * - **Consecutive scenes only.** Nothing runs between scene N-1 and scene N, so the World Model
+ *   entering N is the World Model leaving N-1. Across a gap the engine may legitimately have
+ *   written a column no card names (ADR 0005 tiers P/E as engine-writable), so a
+ *   last-asserted-value comparison over non-adjacent scenes would report authored contradictions
+ *   that are nothing of the kind.
+ * - **Columns both sides name.** A column only one side asserts depends on the seed or on an
+ *   earlier scene, and is not statically decidable here.
+ *
+ * Within those bounds the engine cannot be the explanation: ADR 0005 rejects an update as
+ * `exit_state_contradiction` when its column is named in `exit_state` and the value contradicts
+ * it, so a column the previous card pinned is a column the writer was never free to move.
+ */
+function stateChaining(pkg: StoryPackage): PackageProblem[] {
+  const problems: PackageProblem[] = [];
+  const scenes = scenesInOrder(pkg);
+
+  for (let index = 1; index < scenes.length; index += 1) {
+    const previous = scenes[index - 1]!;
+    const scene = scenes[index]!;
+    const exited = new Map(entityAssertions(previous.exit_state));
+
+    for (const [entityId, entering] of entityAssertions(scene.entry_state)) {
+      const leaving = exited.get(entityId);
+      if (leaving === undefined) continue;
+
+      for (const [column, value] of Object.entries(entering)) {
+        if (!(column in leaving)) continue;
+        const left = leaving[column];
+        if (JSON.stringify(left) === JSON.stringify(value)) continue;
+
+        problems.push({
+          severity: 'error',
+          code: 'entry_exit_contradiction',
+          path: `scene_cards.${scene.id}.entry_state.${entityId}`,
+          message:
+            `asserts ${column} = ${JSON.stringify(value)}, but "${previous.id}" left it as ` +
+            `${JSON.stringify(left)} and nothing happens in between`,
+        });
+      }
+    }
+  }
+
+  return problems;
+}
+
 /** The craft-and-completeness half: never blocks a publish. */
 function warnings(pkg: StoryPackage, model: WorldModel): PackageProblem[] {
   const problems: PackageProblem[] = [];
@@ -324,6 +387,7 @@ export function lintStoryPackage(pkg: StoryPackage): LintResult {
       path: `scene_cards.${error.payoff_scene_id}.pays_off["${error.fact_ref}"]`,
       message: error.message,
     })),
+    ...stateChaining(pkg),
     ...warnings(pkg, model),
   ];
   return result(problems);
