@@ -408,33 +408,40 @@ November 1909; collected in *The Eternal Moment and Other Stories*, Sidgwick & J
 book publication predate 1930, so both clear the "published 1930 or earlier is PD in the US"
 rule by the same 95-years-from-publication basis already used above for Dickens (also a
 non-US-published-first author, so this is not a new exception to the rule, just another instance
-of it) *(search-verified: first publication in* The Oxford and Cambridge Review*, November 1909,
-and republication in* The Eternal Moment and Other Stories*, 1928 — corroborated across multiple
-independent search results; consistent with Project Gutenberg listing the collection as ebook
-#72890,* The eternal moment, and other stories*, though this session could not open
-gutenberg.org directly to read its `<dcterms:rights>` field the way earlier entries in this file
-did — same block as before)*. Forster himself lived until 1970, so this pick deliberately does
-**not** lean on a life-of-the-author analysis anywhere — it clears on the publication-date rule
-alone, with the same ~30-year-plus margin every other pick in this file has (1928 + 95 = 2023,
-already three years behind us).
+of it). This is now a **direct primary-source read**, not the search-verified corroboration the
+first pass of this section relied on. Project Gutenberg's own listing for the collection (ebook
+#72890, opened after a proxy-policy change — `gutenberg.org` was blocked on the first pass) gives
+the same `dcterms:rights` field the rest of this file's entries cite as the gold standard:
+`property="dcterms:rights">Public domain in the USA.`. Separately, `en.wikisource.org`'s edition
+of the text states "After initial publication in *The Oxford and Cambridge Review* (November
+1909), the story was republished in Forster's *The Eternal Moment and Other Stories* in 1928,"
+and "This work is in the public domain in the United States because it was published before
+January 1, 1931." Forster himself lived until 1970, so this
+pick deliberately does **not** lean on a life-of-the-author analysis anywhere — it clears on the
+publication-date rule alone, with the same ~30-year-plus margin every other pick in this file has
+(1928 + 95 = 2023, already three years behind us).
 
-Text existence and content were confirmed by reading matching excerpts of the actual 1909/1928
-text mirrored verbatim across multiple independent GitHub repositories (a plain-text corpus file,
-an EPUB source tree, an HTML anthology page, and others), rather than a single GITenberg mirror as
-in the rest of this file — `gutenberg.org`, `en.wikisource.org`, `standardebooks.org`,
-`archive.org`, `manybooks.net` and every general-summary page tried were all blocked by this
-session's egress proxy, so none of the earlier sections' single-canonical-mirror method was
-available. Where a repository's own framing (a summary, a game adaptation) rather than a direct
-quotation is the source, it is marked *(search-verified)* below and not relied on for anything
-load-bearing (rights, structure, or the axis argument).
+Text existence and content were first confirmed (on the pass done while `gutenberg.org`,
+`en.wikisource.org`, `standardebooks.org`, `archive.org` and `manybooks.net` were all blocked by
+this session's egress proxy) by reading matching excerpts of the actual 1909/1928 text mirrored
+verbatim across multiple independent GitHub repositories (a plain-text corpus file, an EPUB
+source tree, an HTML anthology page, and others), rather than a single canonical mirror as in the
+rest of this file. A later proxy-policy change opened `en.wikisource.org` and
+`standardebooks.org`, and both now corroborate this directly: `en.wikisource.org`'s edition
+confirms the title, author, and table of contents (**The Air Ship** / **The Mending Apparatus** /
+**The Homeless**) against a primary source rather than a mirror, and Standard Ebooks' own listing
+for its Forster short-fiction collection confirms the story's inclusion and the collection's CC0
+public-domain dedication. Where a repository's own framing (a summary, a game adaptation) rather
+than a direct quotation is the source, it is marked *(search-verified)* below and not relied on
+for anything load-bearing (rights, structure, or the axis argument).
 
-**Structure** (both parts of this are corroborated directly in the mirrored text, not just a
-summary): three parts — **I. The Air-Ship**, **II. The Mending Apparatus**, **III. The
-Homeless** — following the two principals, Vashti and her son Kuno, from Vashti's underground
+**Structure** (corroborated directly in both the mirrored text and, now, the primary source at
+`en.wikisource.org`): three parts — **I. The Air-Ship**, **II. The Mending Apparatus**, **III.
+The Homeless** — following the two principals, Vashti and her son Kuno, from Vashti's underground
 cell, through her air-ship journey to Kuno's cell and back, to the Machine's total collapse.
-**Approximate length: ~12,000–12,300 words** *(search-verified across several independent
-citations; not confirmed by a single word-count-bearing primary source, so treat as an estimate,
-not a fixed figure)* — above Cinderella (2,461 words), below *A Christmas Carol* (28,448 words),
+**Length: ~12,000 words**, per `en.wikisource.org`'s own description of the text ("a science
+fiction short story (of 12,000 words)") — no longer an estimate triangulated from secondary
+citations — above Cinderella (2,461 words), below *A Christmas Carol* (28,448 words),
 in the same band as *Theseus and the Minotaur* (9,908 words). That puts it comfortably inside
 "tractable, not novel-scale": the existing fixtures are 14 and 20 Scene Cards, and a ~12k-word text
 with a three-part structure is very unlikely to demand either a much finer or much coarser grain
@@ -509,23 +516,39 @@ axes at once would leave a low score with no way to tell which mechanism actuall
 
 ### Sources
 
-Search-verified for this section (this session's egress policy additionally blocked
-`en.wikisource.org`, `archive.org`, `manybooks.net`, `www.cs.ucdavis.edu`,
-`www.ncbi.nlm.nih.gov` and `mikekalil.com`, on top of the hosts already listed as blocked above):
+Original pass was search-verified (this session's egress policy at the time additionally blocked
+`gutenberg.org`/`www.gutenberg.org`, `en.wikisource.org`, `standardebooks.org`, `archive.org`,
+`manybooks.net`, `www.cs.ucdavis.edu`, `www.ncbi.nlm.nih.gov` and `mikekalil.com`, on top of the
+hosts already listed as blocked above). Two subsequent proxy-policy changes opened all of those
+except `manybooks.net`, whose site itself returns its own 403 independent of egress policy — the
+entries below have been upgraded to direct reads accordingly. Note the network egress proxy is a
+separate control from this session's WebFetch tool: WebFetch still refused `archive.org` and
+`en.wikisource.org` even once the proxy allowed them, so those two were read via `curl` instead.
 
-- First publication, *The Oxford and Cambridge Review*, November 1909, and collection in
-  *The Eternal Moment and Other Stories*, Sidgwick & Jackson, 1928 — corroborated by, among others,
+- **Direct primary-source read, `en.wikisource.org`'s edition of the text** (opened after the
+  proxy-policy change; read via `curl`, since the WebFetch tool separately still blocks this
+  host): confirms first publication in *The Oxford and Cambridge Review*, November 1909;
+  republication in *The Eternal Moment and Other Stories*, 1928; length "of 12,000 words"; the
+  three-part structure ("The Air Ship" / "The Mending Apparatus" / "The Homeless"); and the public
+  domain statement "in the public domain in the United States because it was published before
+  January 1, 1931."
+- **Direct read, Standard Ebooks' listing for its Forster short-fiction collection**
+  (`standardebooks.org`, opened after the same policy change): confirms "The Machine Stops" is
+  included, and that the collection is released under the CC0 1.0 Universal Public Domain
+  Dedication.
+- Also corroborated by, among others,
   [EDN, "The Machine Stops is published, November 1, 1909"](https://www.edn.com/the-machine-stops-is-published-november-1-1909/)
-  and [Christopher Roosen, "115 Years Ago, in 'The Machine Stops'..."](https://www.christopherroosen.com/blog/2024/11/4/e-m-forster-and-the-machine-stops).
-- Project Gutenberg listing for the collection, ebook #72890 — <https://www.gutenberg.org/ebooks/72890>
-  (not opened directly; existence and title corroborated via search).
-- Three-part structure ("The Air-Ship" / "The Mending Apparatus" / "The Homeless") and character
-  names (Vashti, Kuno) — directly confirmed by reading matching quoted excerpts of the source text
-  as mirrored in, among other repositories, `standardebooks/e-m-forster_short-fiction` (the EPUB
-  source for a Standard Ebooks edition) and `XXIIVV/oscean` (a plain-text corpus copy), via GitHub
-  code search.
-- Approximate word count (~12,000–12,300 words) — search-verified across multiple independent
-  citations; no single primary source with a word count was read directly.
+  and [Christopher Roosen, "115 Years Ago, in 'The Machine Stops'..."](https://www.christopherroosen.com/blog/2024/11/4/e-m-forster-and-the-machine-stops)
+  (search-verified, not re-checked directly).
+- **Direct read, Project Gutenberg ebook #72890** — <https://www.gutenberg.org/ebooks/72890>
+  (`gutenberg.org`/`www.gutenberg.org`, opened after a proxy-policy change): its `dcterms:rights`
+  field reads "Public domain in the USA" —
+  the same field format this file's other entries cite as the gold-standard rights source. Its
+  description also directly confirms the character names Vashti and Kuno and the "dystopian
+  future... vast Machine" premise, closing the one gap the `en.wikisource.org` table-of-contents
+  page (read above) didn't cover. Earlier corroboration of the names via GitHub-mirrored excerpts
+  (`standardebooks/e-m-forster_short-fiction`, `XXIIVV/oscean`) is superseded by this direct read
+  but left earlier in this entry for provenance.
 
 Also relevant, already in this file's earlier Sources list: the copyright-term rule and its
 sourcing (Duke CSPD, Internet Archive Public Domain Day 2026, Harvard OATP).
