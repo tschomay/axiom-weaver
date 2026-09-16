@@ -1,0 +1,191 @@
+{
+  "config": "free_text",
+  "model": "gemini-3.8-flash",
+  "calls": [
+    {
+      "stage": "arc",
+      "model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1318,
+      "output_tokens": 10432,
+      "thoughts_tokens": 22922,
+      "ms": 86641
+    }
+  ],
+  "initial_problems": [],
+  "repairs": [],
+  "remaining_problems": [],
+  "score": {
+    "story_id": "arc_free_text_1",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_waxed_mackinaw",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_gate_register",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_aniline_pencil",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_waxed_mackinaw",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_gate_register",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_aniline_pencil",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 6,
+      "reachable": 6,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 19,
+        "compared": 0
+      },
+      "vacuous": true,
+      "passed": true
+    },
+    "presence": {
+      "problems": [
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_05_interviewing_the_gatekeeper",
+          "message": "changes location_id of \"char_martha_callow\", who is not present"
+        },
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_11_gathering_the_fitting_evidence",
+          "message": "changes location_id of \"char_harlan_kemp\", who is not present"
+        },
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_11_gathering_the_fitting_evidence",
+          "message": "changes location_id of \"char_donald_pell\", who is not present"
+        },
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_15_retesting_the_residue",
+          "message": "changes location_id of \"char_donald_pell\", who is not present"
+        },
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_19_condemnation_of_the_works",
+          "message": "changes location_id of \"char_donald_pell\", who is not present"
+        },
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_19_condemnation_of_the_works",
+          "message": "changes location_id of \"char_orson_dunlow\", who is not present"
+        }
+      ],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 4,
+      "reachable": 4,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 20,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "jesse_sole_signatory_liability",
+          "payoff_event": "ev_01_discovery_in_the_cistern",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "mismatched_flange_bolts",
+          "payoff_event": "ev_12_accusing_the_lathe_machinist",
+          "plant_event": "ev_06_searching_the_fitting_shop",
+          "span": 6
+        },
+        {
+          "fact_ref": "paraffin_tallow_lubricant",
+          "payoff_event": "ev_15_retesting_the_residue",
+          "plant_event": "ev_08_examining_the_victim_effects",
+          "span": 7
+        },
+        {
+          "fact_ref": "torn_canvas_cuff_thread",
+          "payoff_event": "ev_16_dissecting_the_manifold_valve",
+          "plant_event": "ev_03_inspecting_the_foremans_locker",
+          "span": 13
+        },
+        {
+          "fact_ref": "toby_left_handed_grip",
+          "payoff_event": "ev_16_dissecting_the_manifold_valve",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "purple_aniline_ink_smudge",
+          "payoff_event": "ev_17_confronting_the_superintendent",
+          "plant_event": "ev_02_superintendents_ledger_inspection",
+          "span": 15
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "6": 1,
+          "7": 1,
+          "13": 1,
+          "15": 1
+        },
+        "seed_grounded": 2,
+        "edges": 6,
+        "mean": 10.25,
+        "median": 13,
+        "min": 6,
+        "max": 15,
+        "share_span_1": 0
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  }
+}

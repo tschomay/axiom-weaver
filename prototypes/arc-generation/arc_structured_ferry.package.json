@@ -1,0 +1,1021 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "arc_structured_ferry",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_renate_ward",
+        "name": "Renate Ward",
+        "location_id": "loc_wharf_office",
+        "status": "uninjured but exhausted",
+        "goal": "determine the true cause of the ferry sinking before the provincial inquiry names her",
+        "bag": {}
+      },
+      {
+        "id": "char_tomas_orlov",
+        "name": "Tomas Orlov",
+        "location_id": "loc_wharf_office",
+        "status": "nervous and demanding",
+        "goal": "keep the crossing open and deflect blame from municipal management",
+        "bag": {}
+      },
+      {
+        "id": "char_kester_finch",
+        "name": "Kester Finch",
+        "location_id": "loc_mudflat_banks",
+        "status": "wet and shivering",
+        "goal": "clear his name of negligence in the ferry sinking",
+        "bag": {}
+      },
+      {
+        "id": "char_gideon_pell",
+        "name": "Gideon Pell",
+        "location_id": "loc_municipal_inquiry_hall",
+        "status": "composed and severe",
+        "goal": "identify criminal culpability for the ferry sinking",
+        "bag": {}
+      },
+      {
+        "id": "char_barnaby_doolan",
+        "name": "Barnaby Doolan",
+        "location_id": "loc_doolan_timberyard",
+        "status": "defensive and smelling of pine pitch",
+        "goal": "protect his municipal repair contract and slipway license",
+        "bag": {}
+      },
+      {
+        "id": "char_briony_cole",
+        "name": "Briony Cole",
+        "location_id": "loc_mudflat_banks",
+        "status": "grieving and hostile",
+        "goal": "hold the district authorities accountable for her brother's drowning",
+        "bag": {}
+      },
+      {
+        "id": "char_marta_ward",
+        "name": "Marta Ward",
+        "location_id": "loc_renate_house",
+        "status": "infirm and bedridden",
+        "goal": "maintain household stability and protect Renate's employment",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_wharf_office",
+        "name": "Crossing Wharf Office",
+        "bag": {}
+      },
+      {
+        "id": "loc_mudflat_banks",
+        "name": "Mudflat Shallows",
+        "bag": {}
+      },
+      {
+        "id": "loc_municipal_inquiry_hall",
+        "name": "Municipal Inquiry Hall",
+        "bag": {}
+      },
+      {
+        "id": "loc_doolan_timberyard",
+        "name": "Doolan's Repair Timberyard",
+        "bag": {}
+      },
+      {
+        "id": "loc_renate_house",
+        "name": "Ward Riverside Cottage",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_inspection_logbook",
+        "name": "District Inspection Logbook",
+        "location_id": "loc_wharf_office",
+        "status": "signed and certified",
+        "bag": {}
+      },
+      {
+        "id": "obj_cargo_manifest_ledger",
+        "name": "Ferry Cargo Manifest",
+        "location_id": "loc_wharf_office",
+        "status": "filed with altered entries",
+        "bag": {}
+      },
+      {
+        "id": "obj_ferry_hull_wreckage",
+        "name": "The Wreck of The Oarman",
+        "location_id": "loc_mudflat_banks",
+        "status": "submerged in tidal silt",
+        "bag": {}
+      },
+      {
+        "id": "obj_unfiled_timber_receipt",
+        "name": "Timber Mill Invoice",
+        "location_id": "loc_doolan_timberyard",
+        "status": "tucked into scrap ledger",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_renate_ward",
+        "to_id": "char_marta_ward",
+        "kind": "sister",
+        "sentiment": "protective and financially burdened",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_marta_ward",
+        "to_id": "char_renate_ward",
+        "kind": "sister",
+        "sentiment": "dependent and anxious",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_tomas_orlov",
+        "to_id": "char_renate_ward",
+        "kind": "municipal superior",
+        "sentiment": "coercive and distrustful",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_renate_ward",
+        "to_id": "char_tomas_orlov",
+        "kind": "subordinate inspector",
+        "sentiment": "resentful and guarded",
+        "bag": {}
+      },
+      {
+        "id": "rel_05",
+        "from_id": "char_briony_cole",
+        "to_id": "char_renate_ward",
+        "kind": "claimant",
+        "sentiment": "bitter and accusatory",
+        "bag": {}
+      },
+      {
+        "id": "rel_06",
+        "from_id": "char_gideon_pell",
+        "to_id": "char_renate_ward",
+        "kind": "investigator",
+        "sentiment": "skeptical and unyielding",
+        "bag": {}
+      },
+      {
+        "id": "rel_07",
+        "from_id": "char_barnaby_doolan",
+        "to_id": "char_renate_ward",
+        "kind": "contractor",
+        "sentiment": "wary and evasive",
+        "bag": {}
+      },
+      {
+        "id": "rel_08",
+        "from_id": "char_kester_finch",
+        "to_id": "char_renate_ward",
+        "kind": "crewman",
+        "sentiment": "frightened and seeking defense",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_renate_pension",
+        "character_id": "char_renate_ward",
+        "fact_ref": "sister_dependent_pension",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_tomas_pension",
+        "character_id": "char_tomas_orlov",
+        "fact_ref": "sister_dependent_pension",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_renate_slipway",
+        "character_id": "char_renate_ward",
+        "fact_ref": "certified_fit_without_slipway",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_briony_protest",
+        "character_id": "char_briony_cole",
+        "fact_ref": "skipper_protested_rough_weather_load",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [],
+  "voice_card": {},
+  "metadata": {
+    "title": "The Low Water Mark",
+    "source": "original arc generated by src/arc (issue #119) (gemini-3.8-flash)",
+    "created_at": "2026-09-16T00:38:37.909Z"
+  },
+  "_fabula": {
+    "generator": "src/arc (issue #119)",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-16T00:38:37.909Z",
+    "brief": {
+      "story_id": "arc_structured_ferry",
+      "title": "The Low Water",
+      "premise": {
+        "logline": "A river ferry sinks in calm water, and the woman who signed off on its last inspection has to find out why before the inquiry does.",
+        "modules": {
+          "theme": "what a person will certify to keep a job that feeds other people",
+          "setting_time": "a drought summer, in a country with more paperwork than money",
+          "setting_place": "a river crossing town that exists because the ferry does",
+          "protagonist": "the district inspector who signed the ferry fit to sail",
+          "protagonist_want": "to find the real cause before the inquiry names her as it",
+          "antagonism": "the people who need the ferry running more than they need it safe",
+          "complication": "the cause turns out to be something she was told about and did not write down",
+          "ending_shape": "the truth is established and costs the person who established it"
+        }
+      },
+      "plot_shape": {
+        "id": "mystery",
+        "name": "Mystery",
+        "central_question": "What actually happened, and who is willing to say so?",
+        "phases": [
+          {
+            "name": "Disturbance",
+            "purpose": "A wrong surfaces and someone is obliged to look into it.",
+            "share": 0.2
+          },
+          {
+            "name": "Inquiry",
+            "purpose": "Evidence accumulates, most of it true and misread.",
+            "share": 0.35
+          },
+          {
+            "name": "Wrong turn",
+            "purpose": "A reading of the evidence that is coherent and wrong collapses.",
+            "share": 0.2
+          },
+          {
+            "name": "Solution",
+            "purpose": "The true account, assembled only from what the reader has already been shown.",
+            "share": 0.15
+          },
+          {
+            "name": "Cost",
+            "purpose": "What knowing costs the person who found out.",
+            "share": 0.1
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "investigator",
+            "purpose": "Carries the reader through the inquiry and pays its cost."
+          },
+          {
+            "role": "concealer",
+            "purpose": "Has a reason to keep the true account from being assembled."
+          },
+          {
+            "role": "witness",
+            "purpose": "Holds one true piece and misunderstands its meaning."
+          },
+          {
+            "role": "wronged party",
+            "purpose": "The reason the question matters at all."
+          }
+        ],
+        "obligatory_moves": [
+          "Every element of the true account is on the page before it is stated.",
+          "At least one true detail is shown early in a context that makes it look irrelevant.",
+          "The wrong reading is defensible on the evidence available when it is made."
+        ]
+      },
+      "event_count": 20,
+      "cast": {
+        "characters": 7,
+        "locations": 5,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 10
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "mystery",
+        "premise_preset": "ferry"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_ferry_sinking_report",
+        "sequence": 1,
+        "summary": "Renate arrives at the wharf office where Tomas announces the crossing barge sank in calm water and Skipper Cole drowned.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_wharf_office",
+        "characters_present": [
+          "char_renate_ward",
+          "char_tomas_orlov"
+        ],
+        "dramatic_function": "Disturbance phase begins; establishes the disaster and the institutional pressure on Renate's inspection sign-off.",
+        "beats": [
+          "Tomas informs Renate that The Oarman sank without warning three hundred yards out in slack current.",
+          "Tomas warns Renate that her inspection signature on the permit will be scrutinized by the provincial magistrates.",
+          "Renate commits to examining the site immediately before official auditors arrive."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [
+          "green_ash_timber_order"
+        ],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_02_mudflat_witness",
+        "sequence": 2,
+        "summary": "At the riverbank, deckhand Kester Finch insists that river water erupted through the bilge floorboards like an inward explosion.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_mudflat_banks",
+        "characters_present": [
+          "char_renate_ward",
+          "char_kester_finch",
+          "char_briony_cole"
+        ],
+        "dramatic_function": "Witness statement introduces the critical physical anomaly under a flawed interpretation.",
+        "beats": [
+          "Kester Finch describes pressurized river silt shooting upward through the bottom floorboards before the deck flooded.",
+          "Briony Cole confronts Renate, blaming district negligence for her brother's drowning.",
+          "Renate records Kester's conviction that the barge struck a sunken river snag that punctured the bottom."
+        ],
+        "caused_by": [
+          "ev_01_ferry_sinking_report"
+        ],
+        "reveals": [
+          "shrunken_seam_silt_blast"
+        ],
+        "conceals": [
+          "omitted_verbal_warning"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_mudflat_banks"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_prefect_arrival",
+        "sequence": 3,
+        "summary": "Prefect Gideon Pell arrives from the provincial capital to impound all crossing ledgers and initiate an inquiry.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_municipal_inquiry_hall",
+        "characters_present": [
+          "char_renate_ward",
+          "char_gideon_pell",
+          "char_tomas_orlov"
+        ],
+        "dramatic_function": "Introduces the antagonist investigator and raises the ticking clock stakes.",
+        "beats": [
+          "Gideon Pell announces he will hold formal hearings to assign individual criminal responsibility.",
+          "Pell demands all inspection certifications signed during the drought summer.",
+          "Tomas petitions Pell to let replacement freight boats operate, but Pell freezes all crossing licenses."
+        ],
+        "caused_by": [
+          "ev_01_ferry_sinking_report"
+        ],
+        "reveals": [],
+        "conceals": [
+          "falsified_cargo_weight"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_municipal_inquiry_hall"
+          },
+          {
+            "entity_id": "char_tomas_orlov",
+            "column": "location_id",
+            "value": "loc_municipal_inquiry_hall"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_logbook_scrutiny",
+        "sequence": 4,
+        "summary": "At home, Renate reviews her inspection copy and recalls an unrecorded remark by Barney Doolan about the hull repair.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_renate_house",
+        "characters_present": [
+          "char_renate_ward",
+          "char_marta_ward"
+        ],
+        "dramatic_function": "Disturbance concludes; protagonist realizes she omitted vital spoken information to protect her job.",
+        "beats": [
+          "Renate studies her stamped certificate and recalls Barney mentioning on inspection day that the repair patch needed shade.",
+          "Marta reminds Renate that losing the inspector's salary would leave them unable to pay for her tinctures.",
+          "Renate decides to find external operational faults to ensure the inspection itself is not blamed."
+        ],
+        "caused_by": [
+          "ev_03_prefect_arrival"
+        ],
+        "reveals": [
+          "omitted_verbal_warning"
+        ],
+        "conceals": [
+          "shrunken_seam_silt_blast"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_renate_house"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_inquiry_convened",
+        "sequence": 5,
+        "summary": "Pell formally examines Renate under oath regarding her decision to certify the ferry without requiring drydock slipway hauling.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_municipal_inquiry_hall",
+        "characters_present": [
+          "char_renate_ward",
+          "char_gideon_pell"
+        ],
+        "dramatic_function": "Inquiry phase begins; formal pressure on the protagonist's procedural shortcuts.",
+        "beats": [
+          "Pell questions Renate on why she signed off on The Oarman afloat rather than ordering it onto the drydock slipway.",
+          "Renate defends her afloat inspection by citing district budget directives and low river schedules.",
+          "Pell warns Renate that certifying craft without slipway inspection carries penal liability if structural flaws caused the sinking."
+        ],
+        "caused_by": [
+          "ev_03_prefect_arrival",
+          "ev_04_logbook_scrutiny"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "certified_fit_without_slipway",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_municipal_inquiry_hall"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_timberyard_inquiry",
+        "sequence": 6,
+        "summary": "Renate questions shipwright Barney Doolan, who grumbles about being forced to use unseasoned green ash for municipal repairs.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_doolan_timberyard",
+        "characters_present": [
+          "char_renate_ward",
+          "char_barnaby_doolan"
+        ],
+        "dramatic_function": "Plants the true material cause while framing it as everyday repair yard grievance.",
+        "beats": [
+          "Renate questions Barney regarding the hull strakes replaced during the recent overhaul.",
+          "Barney complains that the provincial timber cutbacks forced him to plank the barge with green ash instead of cured oak.",
+          "Barney insists green ash swells water-tight anyway and directs Renate to look at how Tomas loads the wagons."
+        ],
+        "caused_by": [
+          "ev_05_inquiry_convened"
+        ],
+        "reveals": [
+          "green_ash_timber_order"
+        ],
+        "conceals": [
+          "omitted_verbal_warning"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_doolan_timberyard"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_briony_deposition",
+        "sequence": 7,
+        "summary": "Briony Cole tells Renate that her brother loudly argued with Tomas against loading heavy ironstone wagons that morning.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_mudflat_banks",
+        "characters_present": [
+          "char_renate_ward",
+          "char_briony_cole"
+        ],
+        "dramatic_function": "Witness information guides the investigation toward the plausible overloading theory.",
+        "beats": [
+          "Briony reveals her brother refused to depart until Tomas threatened him with dismissal over the ironstone cargo.",
+          "Briony hands Renate her brother's tally card showing twice the permitted wagon count.",
+          "Renate realizes Tomas may have bypassed municipal cargo limits to pocket extra crossing tolls."
+        ],
+        "caused_by": [
+          "ev_02_mudflat_witness",
+          "ev_06_timberyard_inquiry"
+        ],
+        "reveals": [],
+        "conceals": [
+          "green_ash_timber_order"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "skipper_protested_rough_weather_load",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_mudflat_banks"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_wharf_records_search",
+        "sequence": 8,
+        "summary": "Renate searches the wharf office alone and finds carbon duplicates showing Tomas halved the reported weight of ironstone freight.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_wharf_office",
+        "characters_present": [
+          "char_renate_ward"
+        ],
+        "dramatic_function": "Uncovers hard documentary evidence supporting the incorrect overloading hypothesis.",
+        "beats": [
+          "Renate unseals the tollkeeper's lockbox in the wharf office.",
+          "She discovers scale receipts proving sixteen tons of crushed ironstone were loaded under an eight-ton manifest entry.",
+          "Renate pockets the carbon slips to build a case of catastrophic overloading against Tomas."
+        ],
+        "caused_by": [
+          "ev_07_briony_deposition"
+        ],
+        "reveals": [
+          "falsified_cargo_weight"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_wharf_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_tomas_blackmail",
+        "sequence": 9,
+        "summary": "Tomas catches Renate with the receipts and threatens to terminate the town medical stipend for her invalid sister.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_wharf_office",
+        "characters_present": [
+          "char_renate_ward",
+          "char_tomas_orlov"
+        ],
+        "dramatic_function": "Antagonist exerts direct coercion, highlighting the story's core dilemma between livelihood and truth.",
+        "beats": [
+          "Tomas intercepts Renate leaving the desk with the carbon records.",
+          "Tomas bluntly states that Marta's clinic stipend is drawn from crossing revenues he controls.",
+          "Renate refuses to surrender the slips, convinced the cargo fraud will exonerate her inspection."
+        ],
+        "caused_by": [
+          "ev_08_wharf_records_search"
+        ],
+        "reveals": [],
+        "conceals": [
+          "falsified_cargo_weight"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "sister_dependent_pension",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_tomas_orlov",
+            "column": "location_id",
+            "value": "loc_wharf_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_gravel_spit_survey",
+        "sequence": 10,
+        "summary": "Renate and Kester measure the river channel and confirm the gravel spit had four feet of water clearance at the time of sinking.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_mudflat_banks",
+        "characters_present": [
+          "char_renate_ward",
+          "char_kester_finch"
+        ],
+        "dramatic_function": "Collects hydrological data that sets up the eventual collapse of the grounding theory.",
+        "beats": [
+          "Renate uses a weighted sounding pole along the ferry's plotted track over the gravel spit.",
+          "The depth sounding shows four full feet of water over the gravel bar crest, ample for standard unladen draft.",
+          "Kester argues that sixteen tons of ironstone would have pushed the barge bottom straight onto the gravel ridge."
+        ],
+        "caused_by": [
+          "ev_08_wharf_records_search",
+          "ev_09_tomas_blackmail"
+        ],
+        "reveals": [
+          "charted_spit_depth_clearance"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_mudflat_banks"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_subpoena_served",
+        "sequence": 11,
+        "summary": "Gideon Pell orders an open court session to hear technical submissions, and Renate announces she has proof of the disaster's cause.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_municipal_inquiry_hall",
+        "characters_present": [
+          "char_renate_ward",
+          "char_gideon_pell",
+          "char_tomas_orlov"
+        ],
+        "dramatic_function": "Inquiry phase concludes; Renate commits fully to her mistaken thesis.",
+        "beats": [
+          "Pell gives formal notice that findings of criminal negligence will be entered within twenty-four hours.",
+          "Renate declares she possesses documentary proof that operational overloading caused the loss.",
+          "Tomas angrily protests that Renate is concocting excuses to protect her inspector badge."
+        ],
+        "caused_by": [
+          "ev_10_gravel_spit_survey"
+        ],
+        "reveals": [],
+        "conceals": [
+          "omitted_verbal_warning"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_municipal_inquiry_hall"
+          },
+          {
+            "entity_id": "char_tomas_orlov",
+            "column": "location_id",
+            "value": "loc_municipal_inquiry_hall"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_overload_accusation",
+        "sequence": 12,
+        "summary": "Before Magistrate Pell, Renate presents the doctored manifest and claims ironstone weight broke the barge on the gravel spit.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_municipal_inquiry_hall",
+        "characters_present": [
+          "char_renate_ward",
+          "char_gideon_pell",
+          "char_tomas_orlov"
+        ],
+        "dramatic_function": "Wrong turn phase begins; the coherent but incorrect reading is presented formally.",
+        "beats": [
+          "Renate submits the hidden weigh-station carbons proving sixteen tons of cargo on deck.",
+          "Renate argues that the excess weight grounded the vessel on the gravel spit, breaching the hull bottom.",
+          "Pell agrees the paper evidence is compelling but orders the hull winched from the river to verify bottom impact damage."
+        ],
+        "caused_by": [
+          "ev_11_subpoena_served"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "falsified_cargo_weight",
+            "plant": "ev_08_wharf_records_search"
+          }
+        ],
+        "state_changes": []
+      },
+      {
+        "id": "ev_13_tomas_counterattack",
+        "sequence": 13,
+        "summary": "Tomas calls Barney Doolan to testify that Renate's certified rating permitted twenty tons of deck weight if sound.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_municipal_inquiry_hall",
+        "characters_present": [
+          "char_renate_ward",
+          "char_tomas_orlov",
+          "char_barnaby_doolan"
+        ],
+        "dramatic_function": "Heightens tension in the wrong turn by exposing the vulnerability of Renate's argument.",
+        "beats": [
+          "Barney Doolan confirms under oath that Renate certified the framing for twenty tons capacity.",
+          "Tomas argues that sixteen tons should have sailed safely unless the inspector overlooked underlying rot.",
+          "Renate realizes her accusation hinges entirely on physical proof of a violent stone impact on the keel."
+        ],
+        "caused_by": [
+          "ev_12_overload_accusation"
+        ],
+        "reveals": [],
+        "conceals": [
+          "green_ash_timber_order"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_barnaby_doolan",
+            "column": "location_id",
+            "value": "loc_municipal_inquiry_hall"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_salvage_operation",
+        "sequence": 14,
+        "summary": "Municipal winches drag the waterlogged hull of The Oarman out of the tidal mud and onto the riverbank skids.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_mudflat_banks",
+        "characters_present": [
+          "char_renate_ward",
+          "char_kester_finch",
+          "char_briony_cole"
+        ],
+        "dramatic_function": "The physical body of the vessel is made accessible for inspection.",
+        "beats": [
+          "Capstans and draft horses drag the barge hull clear of the low-tide river mud.",
+          "Water pours out of the open hold while townsfolk gather to inspect the drowned craft.",
+          "Renate readies her scraper and lantern to locate the expected impact breach along the keel."
+        ],
+        "caused_by": [
+          "ev_12_overload_accusation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_mudflat_banks"
+          },
+          {
+            "entity_id": "obj_ferry_hull_wreckage",
+            "column": "status",
+            "value": "beached on mudflat"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_hull_contradiction",
+        "sequence": 15,
+        "summary": "Renate scrapes the raised hull bottom and finds the keel unbroken, proving the barge never struck the gravel spit.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_mudflat_banks",
+        "characters_present": [
+          "char_renate_ward",
+          "char_gideon_pell"
+        ],
+        "dramatic_function": "Collapse of the wrong turn; the overloading-impact hypothesis is completely disproven.",
+        "beats": [
+          "Renate scrapes silt from the entire length of the oak keel and finds zero gouges or splintering.",
+          "Pell notes that the four-foot channel clearance held true, meaning no ground collision ever happened.",
+          "Pell warns Renate that without collision damage, the vessel failed by spontaneous hull breach under her certification."
+        ],
+        "caused_by": [
+          "ev_14_salvage_operation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "charted_spit_depth_clearance",
+            "plant": "ev_10_gravel_spit_survey"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_gideon_pell",
+            "column": "location_id",
+            "value": "loc_mudflat_banks"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_shrinkage_discovery",
+        "sequence": 16,
+        "summary": "Renate discovers the starboard planks shrank and pulled from their spikes in the drought heat, creating the gaps that burst with silt.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_mudflat_banks",
+        "characters_present": [
+          "char_renate_ward",
+          "char_kester_finch"
+        ],
+        "dramatic_function": "Solution phase begins; the true physical mechanism is deduced from observed material facts.",
+        "beats": [
+          "Renate inspects the starboard strakes and finds wide open seams where planks checked and warped along the grain.",
+          "She realizes the unseasoned green wood baked in the triple-digit drought sun on the dock, shrinking away from fastenings.",
+          "When weighted with cargo, water pressure violently forced silt up through the shrunken seams, creating Kester's 'blast'."
+        ],
+        "caused_by": [
+          "ev_15_hull_contradiction"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "shrunken_seam_silt_blast",
+            "plant": "ev_02_mudflat_witness"
+          }
+        ],
+        "state_changes": []
+      },
+      {
+        "id": "ev_17_doolan_confrontation",
+        "sequence": 17,
+        "summary": "Renate confronts Barney Doolan at his timberyard, forcing him to admit he installed green ash and warned her about it.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_doolan_timberyard",
+        "characters_present": [
+          "char_renate_ward",
+          "char_barnaby_doolan"
+        ],
+        "dramatic_function": "Solution phase links the material failure to human culpability and Renate's omitted note.",
+        "beats": [
+          "Renate presents Barney with shrunken green ash splinters extracted from the open seam.",
+          "Barney admits he told her during inspection that green ash planks would check if left dry in the sun.",
+          "Barney reminds Renate that she deliberately omitted his warning from her official certificate to keep the crossing running."
+        ],
+        "caused_by": [
+          "ev_16_shrinkage_discovery"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "green_ash_timber_order",
+            "plant": "ev_06_timberyard_inquiry"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_doolan_timberyard"
+          },
+          {
+            "entity_id": "char_barnaby_doolan",
+            "column": "location_id",
+            "value": "loc_doolan_timberyard"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_marta_reckoning",
+        "sequence": 18,
+        "summary": "Renate returns home to tell Marta she will testify to the truth of her own negligence, knowing it will cost her job and pension.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_renate_house",
+        "characters_present": [
+          "char_renate_ward",
+          "char_marta_ward"
+        ],
+        "dramatic_function": "Solution phase concludes with the conscious ethical choice to accept devastating personal loss.",
+        "beats": [
+          "Renate confesses to Marta that she ignored Barney's warning about the green ash to ensure her inspector voucher cleared.",
+          "Marta tearfully accepts that staying silent would leave other green-patched district boats to drown more men.",
+          "Renate writes out her sworn statement admitting she certified the vessel knowing green timber had been fitted."
+        ],
+        "caused_by": [
+          "ev_17_doolan_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_renate_house"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_confession_testimony",
+        "sequence": 19,
+        "summary": "Before the full inquiry hall, Renate testifies under oath that she omitted the warning about green ash from her certification.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_municipal_inquiry_hall",
+        "characters_present": [
+          "char_renate_ward",
+          "char_gideon_pell",
+          "char_tomas_orlov"
+        ],
+        "dramatic_function": "Cost phase begins; the truth is formally established at the protagonist's direct expense.",
+        "beats": [
+          "Renate submits her revised testimony, admitting she received verbal warning about green ash and omitted it from the log.",
+          "She shows how drought heat shrank the unseasoned wood above the waterline until loading pulled the seams open.",
+          "Pell orders an emergency grounding and condemnation of every municipal craft patched with green ash."
+        ],
+        "caused_by": [
+          "ev_18_marta_reckoning"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "omitted_verbal_warning",
+            "plant": "ev_04_logbook_scrutiny"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_renate_ward",
+            "column": "location_id",
+            "value": "loc_municipal_inquiry_hall"
+          },
+          {
+            "entity_id": "char_gideon_pell",
+            "column": "location_id",
+            "value": "loc_municipal_inquiry_hall"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_inquiry_judgment",
+        "sequence": 20,
+        "summary": "Pell strips Renate of her inspector's seal and binds her over for trial, while Briony acknowledges the truth of her brother's drowning.",
+        "pov": "char_renate_ward",
+        "location_id": "loc_municipal_inquiry_hall",
+        "characters_present": [
+          "char_renate_ward",
+          "char_gideon_pell",
+          "char_briony_cole"
+        ],
+        "dramatic_function": "Cost phase concludes; protagonist bears the consequences of her confession while justice is recorded.",
+        "beats": [
+          "Pell revokes Renate's inspector credential, strips her of all salary and medical allowances, and orders her held for trial.",
+          "Briony Cole speaks to Renate outside the rail, recognizing that Renate told the truth when she could have blamed the dead skipper.",
+          "Renate watches the crossing shuttered and silent, knowing she saved the river crews even as she ruined her own family."
+        ],
+        "caused_by": [
+          "ev_19_confession_testimony"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "sister_dependent_pension",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_briony_cole",
+            "column": "location_id",
+            "value": "loc_municipal_inquiry_hall"
+          },
+          {
+            "entity_id": "char_renate_ward",
+            "column": "status",
+            "value": "disgraced and facing trial"
+          },
+          {
+            "entity_id": "char_renate_ward",
+            "column": "goal",
+            "value": "survive the penal trial and secure Marta's welfare"
+          }
+        ]
+      }
+    ]
+  }
+}

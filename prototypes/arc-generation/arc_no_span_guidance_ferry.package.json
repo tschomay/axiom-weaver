@@ -1,0 +1,1105 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "arc_no_span_guidance_ferry",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_alix_karr",
+        "name": "Alix Karr",
+        "location_id": "loc_low_pier",
+        "status": "unsettled",
+        "goal": "clear her inspection certificate before the inquiry panel convenes",
+        "bag": {}
+      },
+      {
+        "id": "char_harte_vane",
+        "name": "Harte Vane",
+        "location_id": "loc_low_pier",
+        "status": "defensive",
+        "goal": "protect the crossing concession from being shut down",
+        "bag": {}
+      },
+      {
+        "id": "char_joram_finch",
+        "name": "Joram Finch",
+        "location_id": "loc_low_pier",
+        "status": "waterlogged",
+        "goal": "avoid being blamed for the deck handling",
+        "bag": {}
+      },
+      {
+        "id": "char_vesper_tallow",
+        "name": "Vesper Tallow",
+        "location_id": "loc_tallow_coopery",
+        "status": "grieving",
+        "goal": "hold the district inspector accountable for Tomas's death",
+        "bag": {}
+      },
+      {
+        "id": "char_briony_karr",
+        "name": "Briony Karr",
+        "location_id": "loc_inspectors_office",
+        "status": "feverish",
+        "goal": "keep their household solvent through the drought",
+        "bag": {}
+      },
+      {
+        "id": "char_orlo_ren",
+        "name": "Magistrate Orlo Ren",
+        "location_id": "loc_town_hall",
+        "status": "impatient",
+        "goal": "close the inquiry quickly by naming an inspector at fault",
+        "bag": {}
+      },
+      {
+        "id": "char_kest_mallow",
+        "name": "Kest Mallow",
+        "location_id": "loc_dry_dock",
+        "status": "guarded",
+        "goal": "shield his repair yard from liability",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_low_pier",
+        "name": "Low Pier Slipway",
+        "bag": {}
+      },
+      {
+        "id": "loc_inspectors_office",
+        "name": "District Navigation Office",
+        "bag": {}
+      },
+      {
+        "id": "loc_tallow_coopery",
+        "name": "Tallow Cooperage",
+        "bag": {}
+      },
+      {
+        "id": "loc_dry_dock",
+        "name": "Downstream Careening Yard",
+        "bag": {}
+      },
+      {
+        "id": "loc_town_hall",
+        "name": "Prefecture Chamber",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_ferry_hull",
+        "name": "Ferry Osprey Wreck",
+        "location_id": "loc_low_pier",
+        "status": "submerged_in_shoals",
+        "bag": {}
+      },
+      {
+        "id": "obj_inspection_logbook",
+        "name": "District Certificate Ledger",
+        "location_id": "loc_inspectors_office",
+        "status": "signed_and_sealed",
+        "bag": {}
+      },
+      {
+        "id": "obj_bilge_plug_assembly",
+        "name": "Stern Drain Plug and Flange",
+        "location_id": "loc_low_pier",
+        "status": "jammed_in_seat",
+        "bag": {}
+      },
+      {
+        "id": "obj_grain_freight_ledger",
+        "name": "Low Pier Cargo Manifest",
+        "location_id": "loc_low_pier",
+        "status": "falsified",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_alix_briony",
+        "from_id": "char_alix_karr",
+        "to_id": "char_briony_karr",
+        "kind": "sister",
+        "sentiment": "protective",
+        "bag": {}
+      },
+      {
+        "id": "rel_briony_alix",
+        "from_id": "char_briony_karr",
+        "to_id": "char_alix_karr",
+        "kind": "sister",
+        "sentiment": "dependent",
+        "bag": {}
+      },
+      {
+        "id": "rel_vesper_alix",
+        "from_id": "char_vesper_tallow",
+        "to_id": "char_alix_karr",
+        "kind": "adversary",
+        "sentiment": "vengeful",
+        "bag": {}
+      },
+      {
+        "id": "rel_orlo_alix",
+        "from_id": "char_orlo_ren",
+        "to_id": "char_alix_karr",
+        "kind": "superior",
+        "sentiment": "suspicious",
+        "bag": {}
+      },
+      {
+        "id": "rel_harte_alix",
+        "from_id": "char_harte_vane",
+        "to_id": "char_alix_karr",
+        "kind": "patron",
+        "sentiment": "pressuring",
+        "bag": {}
+      },
+      {
+        "id": "rel_kest_harte",
+        "from_id": "char_kest_mallow",
+        "to_id": "char_harte_vane",
+        "kind": "contractor",
+        "sentiment": "resentful",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_alix_cert",
+        "character_id": "char_alix_karr",
+        "fact_ref": "ferry_passed_inspection",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_vesper_loss",
+        "character_id": "char_vesper_tallow",
+        "fact_ref": "tomas_drowned_in_crossing",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_briony_wage",
+        "character_id": "char_briony_karr",
+        "fact_ref": "alix_salary_buys_tincture",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_orlo_blame",
+        "character_id": "char_orlo_ren",
+        "fact_ref": "district_requires_culprit",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_harte_toll",
+        "character_id": "char_harte_vane",
+        "fact_ref": "harte_controls_wharf_trade",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [],
+  "voice_card": {},
+  "metadata": {
+    "title": "The Low Water Mark",
+    "source": "original arc generated by src/arc (issue #119) (gemini-3.8-flash)",
+    "created_at": "2026-09-16T00:46:23.963Z"
+  },
+  "_fabula": {
+    "generator": "src/arc (issue #119)",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-16T00:46:23.963Z",
+    "brief": {
+      "story_id": "arc_no_span_guidance_ferry",
+      "title": "The Low Water",
+      "premise": {
+        "logline": "A river ferry sinks in calm water, and the woman who signed off on its last inspection has to find out why before the inquiry does.",
+        "modules": {
+          "theme": "what a person will certify to keep a job that feeds other people",
+          "setting_time": "a drought summer, in a country with more paperwork than money",
+          "setting_place": "a river crossing town that exists because the ferry does",
+          "protagonist": "the district inspector who signed the ferry fit to sail",
+          "protagonist_want": "to find the real cause before the inquiry names her as it",
+          "antagonism": "the people who need the ferry running more than they need it safe",
+          "complication": "the cause turns out to be something she was told about and did not write down",
+          "ending_shape": "the truth is established and costs the person who established it"
+        }
+      },
+      "plot_shape": {
+        "id": "mystery",
+        "name": "Mystery",
+        "central_question": "What actually happened, and who is willing to say so?",
+        "phases": [
+          {
+            "name": "Disturbance",
+            "purpose": "A wrong surfaces and someone is obliged to look into it.",
+            "share": 0.2
+          },
+          {
+            "name": "Inquiry",
+            "purpose": "Evidence accumulates, most of it true and misread.",
+            "share": 0.35
+          },
+          {
+            "name": "Wrong turn",
+            "purpose": "A reading of the evidence that is coherent and wrong collapses.",
+            "share": 0.2
+          },
+          {
+            "name": "Solution",
+            "purpose": "The true account, assembled only from what the reader has already been shown.",
+            "share": 0.15
+          },
+          {
+            "name": "Cost",
+            "purpose": "What knowing costs the person who found out.",
+            "share": 0.1
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "investigator",
+            "purpose": "Carries the reader through the inquiry and pays its cost."
+          },
+          {
+            "role": "concealer",
+            "purpose": "Has a reason to keep the true account from being assembled."
+          },
+          {
+            "role": "witness",
+            "purpose": "Holds one true piece and misunderstands its meaning."
+          },
+          {
+            "role": "wronged party",
+            "purpose": "The reason the question matters at all."
+          }
+        ],
+        "obligatory_moves": [
+          "Every element of the true account is on the page before it is stated.",
+          "At least one true detail is shown early in a context that makes it look irrelevant.",
+          "The wrong reading is defensible on the evidence available when it is made."
+        ]
+      },
+      "event_count": 20,
+      "cast": {
+        "characters": 7,
+        "locations": 5,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 10
+      },
+      "span_guidance": false,
+      "based_on": {
+        "plot_shape_preset": "mystery",
+        "premise_preset": "ferry"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_the_calm_water_sinking",
+        "sequence": 1,
+        "summary": "Alix Karr arrives at Low Pier as the sunken ferry settles into the riverbed, where Vesper Tallow publicly accuses her of certifying a death trap.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_low_pier",
+        "characters_present": [
+          "char_alix_karr",
+          "char_harte_vane",
+          "char_vesper_tallow"
+        ],
+        "dramatic_function": "Establishes the inciting catastrophe, the stakes of the drowning, and the protagonist's direct professional jeopardy.",
+        "beats": [
+          "Alix watches the ferry Osprey settle upright on the river bottom in glassy, drought-slack water.",
+          "Vesper confronts Alix over his brother Tomas, who was trapped under freight wagons and drowned.",
+          "Harte shouts over the onlookers that the vessel held an official certificate signed by Alix."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [
+          "unrecorded_draft_rubbing"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "ferry_passed_inspection",
+            "plant": null
+          },
+          {
+            "fact_ref": "tomas_drowned_in_crossing",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_vesper_tallow",
+            "column": "location_id",
+            "value": "loc_low_pier"
+          },
+          {
+            "entity_id": "obj_ferry_hull",
+            "column": "status",
+            "value": "settled_on_bottom"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_deckhands_account",
+        "sequence": 2,
+        "summary": "Alix questions deckhand Joram Finch, who mentions that the hull scraped the river bottom gravel bar lightly on the morning run.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_low_pier",
+        "characters_present": [
+          "char_alix_karr",
+          "char_joram_finch"
+        ],
+        "dramatic_function": "Plants a crucial mechanical detail in an innocuous conversation where it appears to be harmless drought routine.",
+        "beats": [
+          "Joram shivers on the pier steps, insisting the crossing was calm until water surged into the stern bilge.",
+          "He casually mentions the keel brushed the mid-channel gravel bar earlier, as it had done every drought morning.",
+          "Alix points out that soft silt brushing could never split sound bottom planking."
+        ],
+        "caused_by": [
+          "ev_01_the_calm_water_sinking"
+        ],
+        "reveals": [
+          "unrecorded_draft_rubbing"
+        ],
+        "conceals": [
+          "unregistered_grain_sacks"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "goal",
+            "value": "determine why the hull breached in calm drought water"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_sister_and_salary",
+        "sequence": 3,
+        "summary": "Alix returns to her office to check the registry and doses Briony with bark tincture, mindful that suspension will stop their income.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_inspectors_office",
+        "characters_present": [
+          "char_alix_karr",
+          "char_briony_karr"
+        ],
+        "dramatic_function": "Establishes the personal urgency behind holding the inspector post to feed and medicate her sister.",
+        "beats": [
+          "Alix measures the remaining draughts of fever bark for Briony in their back room.",
+          "Briony reminds her that losing the district post means losing access to the apothecary ration.",
+          "Alix opens the sealed inspection ledger to review the certificate she granted to Harte."
+        ],
+        "caused_by": [
+          "ev_01_the_calm_water_sinking"
+        ],
+        "reveals": [],
+        "conceals": [
+          "borer_free_hull_planking"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_inspectors_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_wharf_search",
+        "sequence": 4,
+        "summary": "Alix searches the Low Pier freight shed and discovers sacks of unmanifested grain soaked through with river water.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_low_pier",
+        "characters_present": [
+          "char_alix_karr",
+          "char_harte_vane"
+        ],
+        "dramatic_function": "Uncovers material evidence of illicit loading that shifts suspicion toward commercial greed.",
+        "beats": [
+          "Alix inspects the freight house and finds wet grain sacks concealed beneath canvas awnings.",
+          "She notes private mill markings missing from the official wharf ledger.",
+          "Harte catches her in the shed and claims the sacks arrived on a separate overland wagon."
+        ],
+        "caused_by": [
+          "ev_02_deckhands_account"
+        ],
+        "reveals": [
+          "unregistered_grain_sacks"
+        ],
+        "conceals": [
+          "harte_controls_wharf_trade"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_low_pier"
+          },
+          {
+            "entity_id": "obj_grain_freight_ledger",
+            "column": "status",
+            "value": "discrepancy_discovered"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_inquiry_convened",
+        "sequence": 5,
+        "summary": "Magistrate Orlo Ren opens the inquiry in the town hall and warns Alix that provincial authorities require a culprit by week's end.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_town_hall",
+        "characters_present": [
+          "char_alix_karr",
+          "char_orlo_ren"
+        ],
+        "dramatic_function": "The formal institutional timer starts, tightening pressure on the protagonist.",
+        "beats": [
+          "Orlo sets out the formal inquiry papers and quotes the ministry edict demanding rapid closure.",
+          "He warns Alix that an inspector's signature on a sunken vessel makes her the default target.",
+          "Alix requests forty-eight hours to complete a low-tide inspection of the sunken hull."
+        ],
+        "caused_by": [
+          "ev_01_the_calm_water_sinking"
+        ],
+        "reveals": [],
+        "conceals": [
+          "borer_free_hull_planking"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "district_requires_culprit",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_town_hall"
+          },
+          {
+            "entity_id": "char_orlo_ren",
+            "column": "status",
+            "value": "inquiring"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_hull_inspection",
+        "sequence": 6,
+        "summary": "At evening low tide, Alix wades out to the exposed hull strakes and discovers the bottom planking is sound and completely free of rot.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_low_pier",
+        "characters_present": [
+          "char_alix_karr",
+          "char_harte_vane"
+        ],
+        "dramatic_function": "Eliminates simple structural decay or shipworm rot as the source of the catastrophe.",
+        "beats": [
+          "Alix wades through thigh-deep silt to probe the exposed lower timbers with a carpenter's awl.",
+          "She confirms the oak planking is solid heartwood with no softness or shipworm tunnels.",
+          "Harte warns her from the pierhead that tampering with the wreck risks shifting the shoals."
+        ],
+        "caused_by": [
+          "ev_05_inquiry_convened"
+        ],
+        "reveals": [
+          "borer_free_hull_planking"
+        ],
+        "conceals": [
+          "sheared_brass_bung_threads"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_low_pier"
+          },
+          {
+            "entity_id": "obj_ferry_hull",
+            "column": "status",
+            "value": "partially_exposed"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_coopers_warning",
+        "sequence": 7,
+        "summary": "Vesper Tallow confronts Alix outside his cooperage, showing her freight splinters and threatening retribution if she shields the ferry master.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_tallow_coopery",
+        "characters_present": [
+          "char_alix_karr",
+          "char_vesper_tallow"
+        ],
+        "dramatic_function": "Escalates personal danger and reinforces the moral weight of Tomas's death.",
+        "beats": [
+          "Vesper drops crushed barrel hoops and cart timber at Alix's feet.",
+          "He accuses her of taking bribes from Harte to certify an unseaworthy scow.",
+          "Alix promises him that the physical failure of the hull will be uncovered without favor."
+        ],
+        "caused_by": [
+          "ev_04_wharf_search"
+        ],
+        "reveals": [],
+        "conceals": [
+          "sheared_brass_bung_threads"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_tallow_coopery"
+          },
+          {
+            "entity_id": "char_vesper_tallow",
+            "column": "location_id",
+            "value": "loc_tallow_coopery"
+          },
+          {
+            "entity_id": "char_vesper_tallow",
+            "column": "status",
+            "value": "hostile"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_valve_recovery",
+        "sequence": 8,
+        "summary": "Alix dives beneath the stern counter at dead low water and wrenches out the bilge plug assembly, finding stripped brass threads.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_low_pier",
+        "characters_present": [
+          "char_alix_karr",
+          "char_joram_finch"
+        ],
+        "dramatic_function": "Recovers the key physical artifact containing the mechanical defect.",
+        "beats": [
+          "Alix uses a spanner under the water line while Joram keeps watch on the pier.",
+          "She unseats the bronze drainage sleeve and finds its female screw threads stripped flat.",
+          "She notices a carved wooden wedge jammed into the stripped metal casing."
+        ],
+        "caused_by": [
+          "ev_06_hull_inspection"
+        ],
+        "reveals": [
+          "sheared_brass_bung_threads"
+        ],
+        "conceals": [
+          "kests_casual_verbal_warning"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_low_pier"
+          },
+          {
+            "entity_id": "char_joram_finch",
+            "column": "location_id",
+            "value": "loc_low_pier"
+          },
+          {
+            "entity_id": "obj_bilge_plug_assembly",
+            "column": "status",
+            "value": "recovered_stripped"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_confronting_the_warden",
+        "sequence": 9,
+        "summary": "Alix confronts Harte Vane with the stripped valve, but he reminds her whose trade revenue pays the town dispensary.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_low_pier",
+        "characters_present": [
+          "char_alix_karr",
+          "char_harte_vane"
+        ],
+        "dramatic_function": "The concealer leverages the town's economic survival against the investigator.",
+        "beats": [
+          "Alix displays the damaged bronze fitting and demands to know who seated it.",
+          "Harte retorts that without ferry revenue, the district dispensary loses its subsidy.",
+          "He reminds her that her sister's fever bark travels on his trade permits."
+        ],
+        "caused_by": [
+          "ev_08_valve_recovery"
+        ],
+        "reveals": [],
+        "conceals": [
+          "kests_casual_verbal_warning"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_harte_vane",
+            "column": "status",
+            "value": "intimidating"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_boatwright_interview",
+        "sequence": 10,
+        "summary": "Alix questions Kest Mallow at the dry dock, where he reveals he warned her during the inspection that he used green willow wedging on the bung.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_dry_dock",
+        "characters_present": [
+          "char_alix_karr",
+          "char_kest_mallow"
+        ],
+        "dramatic_function": "Plants the complication: Alix was verbally told of the makeshift repair and failed to record it.",
+        "beats": [
+          "Alix confronts Kest with the wooden core extracted from the brass drainage collar.",
+          "Kest snaps that he told her on the slipway he had driven unseasoned willow as a stopgap.",
+          "Alix suffers a sickening pang of memory, recalling his comment as she signed the certificate."
+        ],
+        "caused_by": [
+          "ev_08_valve_recovery"
+        ],
+        "reveals": [
+          "kests_casual_verbal_warning"
+        ],
+        "conceals": [
+          "harte_controls_wharf_trade"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_dry_dock"
+          },
+          {
+            "entity_id": "char_kest_mallow",
+            "column": "status",
+            "value": "defensive"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_the_wardens_monopoly",
+        "sequence": 11,
+        "summary": "In her office, Alix cross-checks the district freight books and confirms Harte holds a complete monopoly over crossing manifests.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_inspectors_office",
+        "characters_present": [
+          "char_alix_karr",
+          "char_harte_vane"
+        ],
+        "dramatic_function": "Builds the plausible foundation for the wrong hypothesis of deliberate corporate overloading.",
+        "beats": [
+          "Alix cross-references the crossing permits and finds Harte's stamp on every cargo contract.",
+          "Harte arrives to demand she close her investigation and blame riverbed shifts.",
+          "Alix realizes the volume of illicit grain moving under Harte's personal authority."
+        ],
+        "caused_by": [
+          "ev_09_confronting_the_warden"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "harte_controls_wharf_trade",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_inspectors_office"
+          },
+          {
+            "entity_id": "char_harte_vane",
+            "column": "location_id",
+            "value": "loc_inspectors_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_the_fraud_hypothesis",
+        "sequence": 12,
+        "summary": "Alix constructs a coherent theory that Harte overloaded the ferry with illicit grain to the point of catastrophic bottom failure.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_inspectors_office",
+        "characters_present": [
+          "char_alix_karr",
+          "char_briony_karr"
+        ],
+        "dramatic_function": "The wrong turn: Alix commits to a defensible but mistaken interpretation of the evidence.",
+        "beats": [
+          "Alix tallies the tonnage of unregistered flour against the Osprey's maximum displacement.",
+          "She concludes that Harte's greed caused excessive weight that stove in the hull timbers.",
+          "Briony urges caution, noting that Harte has political allies across the province."
+        ],
+        "caused_by": [
+          "ev_11_the_wardens_monopoly"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "unregistered_grain_sacks",
+            "plant": "ev_04_wharf_search"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "goal",
+            "value": "prove Harte's excess grain cargo caused the hull collapse"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_accusing_the_warden",
+        "sequence": 13,
+        "summary": "Alix publicly accuses Harte Vane on the wharf of overloading the ferry deck and causing the structural failure.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_low_pier",
+        "characters_present": [
+          "char_alix_karr",
+          "char_harte_vane",
+          "char_vesper_tallow"
+        ],
+        "dramatic_function": "Public confrontation based on the wrong theory, creating dramatic escalation.",
+        "beats": [
+          "Alix displays the cargo tallies and waterlogged flour before assembled townsfolk.",
+          "She declares Harte loaded twice the permitted draught, sinking the boat under weight.",
+          "Vesper joins the crowd, demanding Harte be bound over for trial."
+        ],
+        "caused_by": [
+          "ev_12_the_fraud_hypothesis"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_low_pier"
+          },
+          {
+            "entity_id": "char_harte_vane",
+            "column": "location_id",
+            "value": "loc_low_pier"
+          },
+          {
+            "entity_id": "char_vesper_tallow",
+            "column": "location_id",
+            "value": "loc_low_pier"
+          },
+          {
+            "entity_id": "char_harte_vane",
+            "column": "status",
+            "value": "cornered"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_the_timber_contradiction",
+        "sequence": 14,
+        "summary": "Kest Mallow intervenes on the wharf, proving the unrotted oak planking showed zero flex strain or cracked ribs from weight.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_low_pier",
+        "characters_present": [
+          "char_alix_karr",
+          "char_kest_mallow",
+          "char_vesper_tallow"
+        ],
+        "dramatic_function": "The wrong turn collapses under physical evidence, discrediting the protagonist.",
+        "beats": [
+          "Kest displays measuring gauges taken from the exposed wreck.",
+          "He shows that the oak frame timbers sustained no load cracking or structural distortion.",
+          "Alix's accusation of simple overloading collapse crumbles before the magistrate's clerks."
+        ],
+        "caused_by": [
+          "ev_13_accusing_the_warden"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "borer_free_hull_planking",
+            "plant": "ev_06_hull_inspection"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_kest_mallow",
+            "column": "location_id",
+            "value": "loc_low_pier"
+          },
+          {
+            "entity_id": "char_alix_karr",
+            "column": "status",
+            "value": "discredited"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_the_inquirys_ultimatum",
+        "sequence": 15,
+        "summary": "Magistrate Orlo Ren reprimands Alix on the pier, warning her that her certification makes her solely liable at tomorrow's hearing.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_low_pier",
+        "characters_present": [
+          "char_alix_karr",
+          "char_orlo_ren"
+        ],
+        "dramatic_function": "The lowest point; stripped of her false theory, Alix faces immediate disgrace.",
+        "beats": [
+          "Orlo censures Alix for making baseless claims of structural overloading.",
+          "He reminds her that her signature on the certificate leaves her without defense.",
+          "He gives her until sunrise to present verified physical mechanics or be arrested."
+        ],
+        "caused_by": [
+          "ev_14_the_timber_contradiction"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_orlo_ren",
+            "column": "location_id",
+            "value": "loc_low_pier"
+          },
+          {
+            "entity_id": "char_alix_karr",
+            "column": "goal",
+            "value": "reconstruct the exact chain of failure before dawn"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_synthesizing_the_depth",
+        "sequence": 16,
+        "summary": "Reviewing soundings in her office, Alix realizes that Joram's gravel rubbing caused the lowered stern valve to strike the shoal directly.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_inspectors_office",
+        "characters_present": [
+          "char_alix_karr",
+          "char_briony_karr"
+        ],
+        "dramatic_function": "First step of the solution: connecting the drought water depth to the protrusion of the drain valve.",
+        "beats": [
+          "Alix plots the low-water soundings against the keel profile of the ferry.",
+          "She connects Joram's mention of light bottom contact with the lowest point under the stern.",
+          "She recognizes that the hull cleared the gravel bar, but the protruding drain collar struck it."
+        ],
+        "caused_by": [
+          "ev_15_the_inquirys_ultimatum"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "unrecorded_draft_rubbing",
+            "plant": "ev_02_deckhands_account"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_inspectors_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_17_the_bungs_failure",
+        "sequence": 17,
+        "summary": "Under lamplight, Alix analyzes the stripped threads and realizes the upward impact pushed the loose wooden bung directly into the hull.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_inspectors_office",
+        "characters_present": [
+          "char_alix_karr"
+        ],
+        "dramatic_function": "Second step of the solution: identifying the mechanical failure that produced the sudden sinking.",
+        "beats": [
+          "Alix examines the sheared brass threads on the salvaged discharge flange.",
+          "She sees indentation marks showing the wooden plug was shoved upward into the bilge by bottom contact.",
+          "She realizes the boat took water not through split wood, but because the unthreaded bung popped out entirely."
+        ],
+        "caused_by": [
+          "ev_16_synthesizing_the_depth"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "sheared_brass_bung_threads",
+            "plant": "ev_08_valve_recovery"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_bilge_plug_assembly",
+            "column": "status",
+            "value": "analyzed"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_the_inspectors_confession",
+        "sequence": 18,
+        "summary": "Alix confronts her own culpability, remembering Kest's verbal warning about the green willow fitting that she deliberately omitted from the ledger.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_inspectors_office",
+        "characters_present": [
+          "char_alix_karr",
+          "char_briony_karr"
+        ],
+        "dramatic_function": "The complication pays off; the investigator admits her own compromise in certifying the boat.",
+        "beats": [
+          "Alix recalls Kest warning her three weeks ago that the temporary willow bung would shrink and loosen if bumped.",
+          "She confesses to Briony that she omitted the fitting from the register so the crossing wouldn't be closed.",
+          "She decides to bring her own fraudulent certification before the inquiry."
+        ],
+        "caused_by": [
+          "ev_17_the_bungs_failure"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "kests_casual_verbal_warning",
+            "plant": "ev_10_boatwright_interview"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "goal",
+            "value": "testify truthfully before the magistrate regardless of personal cost"
+          },
+          {
+            "entity_id": "obj_inspection_logbook",
+            "column": "status",
+            "value": "falsification_admitted"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_the_hearing_at_town_hall",
+        "sequence": 19,
+        "summary": "At the inquiry, Alix testifies to the complete sequence of events, admitting her own omission and exposing Harte's excess freight.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_town_hall",
+        "characters_present": [
+          "char_alix_karr",
+          "char_orlo_ren",
+          "char_harte_vane",
+          "char_vesper_tallow"
+        ],
+        "dramatic_function": "Resolution of the mystery; establishing the truth before all parties.",
+        "beats": [
+          "Alix presents the sheared flange and the unseasoned wooden core to Magistrate Ren.",
+          "She explains that Harte's extra grain lowered the draft just enough for the gravel bar to knock the loose bung loose.",
+          "She publicly confesses that she certified the ferry fit to sail while knowing the fitting was unapproved."
+        ],
+        "caused_by": [
+          "ev_18_the_inspectors_confession"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_town_hall"
+          },
+          {
+            "entity_id": "char_orlo_ren",
+            "column": "location_id",
+            "value": "loc_town_hall"
+          },
+          {
+            "entity_id": "char_harte_vane",
+            "column": "location_id",
+            "value": "loc_town_hall"
+          },
+          {
+            "entity_id": "char_vesper_tallow",
+            "column": "location_id",
+            "value": "loc_town_hall"
+          },
+          {
+            "entity_id": "char_harte_vane",
+            "column": "status",
+            "value": "indicted"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_the_price_of_truth",
+        "sequence": 20,
+        "summary": "Magistrate Ren revokes Alix's inspector license and salary, leaving her with no way to buy Briony's medicine as the inquiry closes.",
+        "pov": "char_alix_karr",
+        "location_id": "loc_inspectors_office",
+        "characters_present": [
+          "char_alix_karr",
+          "char_briony_karr"
+        ],
+        "dramatic_function": "The cost of truth; establishes the final consequence for the protagonist.",
+        "beats": [
+          "Alix surrenders her district seal and inspection calipers on the office desk.",
+          "She counts out the last teaspoon of fever tincture into a cup for Briony.",
+          "Briony takes the medicine, acknowledging that the truth has cost them their livelihood."
+        ],
+        "caused_by": [
+          "ev_19_the_hearing_at_town_hall"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "alix_salary_buys_tincture",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_alix_karr",
+            "column": "location_id",
+            "value": "loc_inspectors_office"
+          },
+          {
+            "entity_id": "char_alix_karr",
+            "column": "status",
+            "value": "discharged"
+          },
+          {
+            "entity_id": "char_briony_karr",
+            "column": "status",
+            "value": "unmedicated"
+          }
+        ]
+      }
+    ]
+  }
+}

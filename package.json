@@ -16,7 +16,9 @@
     "telling": "tsx scripts/run-telling.ts",
     "run-report": "tsx scripts/run-report.ts",
     "compare": "tsx scripts/compare.ts",
-    "cache-check": "tsx scripts/cache-check.ts"
+    "cache-check": "tsx scripts/cache-check.ts",
+    "generate-arc": "tsx scripts/generate-arc.ts",
+    "score-arc": "tsx scripts/score-arc.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",

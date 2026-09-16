@@ -1,0 +1,214 @@
+{
+  "config": "free_text",
+  "model": "gemini-3.8-flash",
+  "calls": [
+    {
+      "stage": "arc",
+      "model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1318,
+      "output_tokens": 10147,
+      "thoughts_tokens": 15725,
+      "ms": 67370
+    },
+    {
+      "stage": "repair",
+      "model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2389,
+      "output_tokens": 116,
+      "thoughts_tokens": 3840,
+      "ms": 11583
+    }
+  ],
+  "initial_problems": [
+    {
+      "code": "unknown_entity",
+      "path": "world_model_seed.characters.char_stoddard.location_id",
+      "message": "references unknown row \"loc_constable_office\""
+    }
+  ],
+  "repairs": [
+    "model | seed_fact: \"loc_constable_office\" seeded as known by char_stoddard"
+  ],
+  "remaining_problems": [
+    {
+      "code": "unknown_entity",
+      "path": "world_model_seed.characters.char_stoddard.location_id",
+      "message": "references unknown row \"loc_constable_office\""
+    }
+  ],
+  "score": {
+    "story_id": "arc_free_text_2",
+    "events": 20,
+    "g0": {
+      "passed": false,
+      "lint": {
+        "problems": [
+          {
+            "severity": "error",
+            "code": "unknown_entity",
+            "path": "world_model_seed.characters.char_stoddard.location_id",
+            "message": "references unknown row \"loc_constable_office\""
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_safety_ledger",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_scale_logbook",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [
+          {
+            "severity": "error",
+            "code": "unknown_entity",
+            "path": "world_model_seed.characters.char_stoddard.location_id",
+            "message": "references unknown row \"loc_constable_office\""
+          }
+        ],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_safety_ledger",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_scale_logbook",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": false
+      }
+    },
+    "payoff_reachability": {
+      "total": 9,
+      "reachable": 9,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 19,
+        "compared": 0
+      },
+      "vacuous": true,
+      "passed": true
+    },
+    "presence": {
+      "problems": [
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_04_the_signed_safety_log",
+          "message": "changes location_id of \"char_pete\", who is not present"
+        },
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_15_the_rebound_on_jesse",
+          "message": "changes location_id of \"char_declan\", who is not present"
+        }
+      ],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 5,
+      "reachable": 5,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 20,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "jesse_signed_safety_log",
+          "payoff_event": "ev_04_the_signed_safety_log",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "callum_worked_graveyard_shift",
+          "payoff_event": "ev_05_hettie_in_the_rail_yard",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "declan_threatened_strike_sabotage",
+          "payoff_event": "ev_12_the_arrest_of_declan",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "unregistered_freight_manifest",
+          "payoff_event": "ev_13_manifest_clears_the_railcars",
+          "plant_event": "ev_09_the_crumpled_manifest",
+          "span": 4
+        },
+        {
+          "fact_ref": "callum_bent_pocketknife",
+          "payoff_event": "ev_14_the_knife_fails_the_test",
+          "plant_event": "ev_06_declan_displays_the_knife",
+          "span": 8
+        },
+        {
+          "fact_ref": "gault_inked_sleeve",
+          "payoff_event": "ev_16_connecting_the_purple_ink",
+          "plant_event": "ev_03_management_descends",
+          "span": 13
+        },
+        {
+          "fact_ref": "bleached_twine_fibers",
+          "payoff_event": "ev_17_the_twine_bypass_revealed",
+          "plant_event": "ev_02_clearing_the_sprocket",
+          "span": 15
+        },
+        {
+          "fact_ref": "tripper_remote_fuse_blown",
+          "payoff_event": "ev_18_the_substation_confrontation",
+          "plant_event": "ev_08_blown_fuse_in_the_substation",
+          "span": 10
+        },
+        {
+          "fact_ref": "jesse_signed_safety_log",
+          "payoff_event": "ev_19_the_arrest_and_the_counter_stroke",
+          "plant_event": null,
+          "span": null
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "4": 1,
+          "8": 1,
+          "10": 1,
+          "13": 1,
+          "15": 1
+        },
+        "seed_grounded": 4,
+        "edges": 9,
+        "mean": 10,
+        "median": 10,
+        "min": 4,
+        "max": 15,
+        "share_span_1": 0
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": false
+  }
+}

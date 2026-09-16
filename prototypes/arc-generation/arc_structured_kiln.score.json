@@ -1,0 +1,163 @@
+{
+  "config": "structured",
+  "model": "gemini-3.8-flash",
+  "calls": [
+    {
+      "stage": "arc",
+      "model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1464,
+      "output_tokens": 11178,
+      "thoughts_tokens": 21430,
+      "ms": 85649
+    }
+  ],
+  "initial_problems": [],
+  "repairs": [],
+  "remaining_problems": [],
+  "score": {
+    "story_id": "arc_structured_kiln",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_supervisor_coat",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_supervisor_coat",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 9,
+      "reachable": 9,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 19,
+        "compared": 0
+      },
+      "vacuous": true,
+      "passed": true
+    },
+    "presence": {
+      "problems": [
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_01_early_opening",
+          "message": "changes status of \"char_derry\", who is not present"
+        }
+      ],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 5,
+      "reachable": 5,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 20,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "only_supervisor_holds_interlock_key",
+          "payoff_event": "ev_01_early_opening",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "maren_suffered_exhaustion_blackout",
+          "payoff_event": "ev_02_coat_inspection",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "plant_facing_contract_cancellation",
+          "payoff_event": "ev_04_union_warning",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "derry_threatened_grievance_over_short_shift",
+          "payoff_event": "ev_04_union_warning",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "missing_brass_scale_counterweight",
+          "payoff_event": "ev_12_the_weight_discovered",
+          "plant_event": "ev_05_batch_house_inventory",
+          "span": 7
+        },
+        {
+          "fact_ref": "falsified_gas_meter_log",
+          "payoff_event": "ev_14_the_gas_drop_contradiction",
+          "plant_event": "ev_09_weighbridge_records",
+          "span": 5
+        },
+        {
+          "fact_ref": "purple_twine_on_brams_cuffs",
+          "payoff_event": "ev_16_the_oilskin_cuffs",
+          "plant_event": "ev_02_coat_inspection",
+          "span": 14
+        },
+        {
+          "fact_ref": "bram_fresh_arc_burns",
+          "payoff_event": "ev_17_the_arc_burn_confession",
+          "plant_event": "ev_07_maintenance_bay_search",
+          "span": 10
+        },
+        {
+          "fact_ref": "roof_exhaust_damper_propped_open",
+          "payoff_event": "ev_18_the_damper_truth",
+          "plant_event": "ev_03_catwalk_inspection",
+          "span": 15
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "5": 1,
+          "7": 1,
+          "10": 1,
+          "14": 1,
+          "15": 1
+        },
+        "seed_grounded": 4,
+        "edges": 9,
+        "mean": 10.2,
+        "median": 10,
+        "min": 5,
+        "max": 15,
+        "share_span_1": 0
+      }
+    },
+    "lexical_canary": [
+      "whisper"
+    ],
+    "all_gates_passed": true
+  }
+}

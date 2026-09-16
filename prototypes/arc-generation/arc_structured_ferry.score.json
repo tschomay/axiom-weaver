@@ -1,0 +1,179 @@
+{
+  "config": "structured",
+  "model": "gemini-3.8-flash",
+  "calls": [
+    {
+      "stage": "arc",
+      "model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1471,
+      "output_tokens": 9143,
+      "thoughts_tokens": 19281,
+      "ms": 78506
+    }
+  ],
+  "initial_problems": [],
+  "repairs": [],
+  "remaining_problems": [],
+  "score": {
+    "story_id": "arc_structured_ferry",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_inspection_logbook",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_cargo_manifest_ledger",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_unfiled_timber_receipt",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_inspection_logbook",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_cargo_manifest_ledger",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_unfiled_timber_receipt",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 9,
+      "reachable": 9,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 19,
+        "compared": 0
+      },
+      "vacuous": true,
+      "passed": true
+    },
+    "presence": {
+      "problems": [],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 5,
+      "reachable": 5,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 20,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "certified_fit_without_slipway",
+          "payoff_event": "ev_05_inquiry_convened",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "skipper_protested_rough_weather_load",
+          "payoff_event": "ev_07_briony_deposition",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "sister_dependent_pension",
+          "payoff_event": "ev_09_tomas_blackmail",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "falsified_cargo_weight",
+          "payoff_event": "ev_12_overload_accusation",
+          "plant_event": "ev_08_wharf_records_search",
+          "span": 4
+        },
+        {
+          "fact_ref": "charted_spit_depth_clearance",
+          "payoff_event": "ev_15_hull_contradiction",
+          "plant_event": "ev_10_gravel_spit_survey",
+          "span": 5
+        },
+        {
+          "fact_ref": "shrunken_seam_silt_blast",
+          "payoff_event": "ev_16_shrinkage_discovery",
+          "plant_event": "ev_02_mudflat_witness",
+          "span": 14
+        },
+        {
+          "fact_ref": "green_ash_timber_order",
+          "payoff_event": "ev_17_doolan_confrontation",
+          "plant_event": "ev_06_timberyard_inquiry",
+          "span": 11
+        },
+        {
+          "fact_ref": "omitted_verbal_warning",
+          "payoff_event": "ev_19_confession_testimony",
+          "plant_event": "ev_04_logbook_scrutiny",
+          "span": 15
+        },
+        {
+          "fact_ref": "sister_dependent_pension",
+          "payoff_event": "ev_20_inquiry_judgment",
+          "plant_event": null,
+          "span": null
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "4": 1,
+          "5": 1,
+          "11": 1,
+          "14": 1,
+          "15": 1
+        },
+        "seed_grounded": 4,
+        "edges": 9,
+        "mean": 9.8,
+        "median": 11,
+        "min": 4,
+        "max": 15,
+        "share_span_1": 0
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  }
+}

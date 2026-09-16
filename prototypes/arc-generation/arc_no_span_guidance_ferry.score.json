@@ -1,0 +1,145 @@
+{
+  "config": "no_span_guidance",
+  "model": "gemini-3.8-flash",
+  "calls": [
+    {
+      "stage": "arc",
+      "model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1363,
+      "output_tokens": 9821,
+      "thoughts_tokens": 15684,
+      "ms": 66902
+    }
+  ],
+  "initial_problems": [],
+  "repairs": [],
+  "remaining_problems": [],
+  "score": {
+    "story_id": "arc_no_span_guidance_ferry",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [],
+        "errors": [],
+        "warnings": [],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 10,
+      "reachable": 10,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 19,
+        "compared": 0
+      },
+      "vacuous": true,
+      "passed": true
+    },
+    "presence": {
+      "problems": [],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 5,
+      "reachable": 5,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 20,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "ferry_passed_inspection",
+          "payoff_event": "ev_01_the_calm_water_sinking",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "tomas_drowned_in_crossing",
+          "payoff_event": "ev_01_the_calm_water_sinking",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "district_requires_culprit",
+          "payoff_event": "ev_05_inquiry_convened",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "harte_controls_wharf_trade",
+          "payoff_event": "ev_11_the_wardens_monopoly",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "unregistered_grain_sacks",
+          "payoff_event": "ev_12_the_fraud_hypothesis",
+          "plant_event": "ev_04_wharf_search",
+          "span": 8
+        },
+        {
+          "fact_ref": "borer_free_hull_planking",
+          "payoff_event": "ev_14_the_timber_contradiction",
+          "plant_event": "ev_06_hull_inspection",
+          "span": 8
+        },
+        {
+          "fact_ref": "unrecorded_draft_rubbing",
+          "payoff_event": "ev_16_synthesizing_the_depth",
+          "plant_event": "ev_02_deckhands_account",
+          "span": 14
+        },
+        {
+          "fact_ref": "sheared_brass_bung_threads",
+          "payoff_event": "ev_17_the_bungs_failure",
+          "plant_event": "ev_08_valve_recovery",
+          "span": 9
+        },
+        {
+          "fact_ref": "kests_casual_verbal_warning",
+          "payoff_event": "ev_18_the_inspectors_confession",
+          "plant_event": "ev_10_boatwright_interview",
+          "span": 8
+        },
+        {
+          "fact_ref": "alix_salary_buys_tincture",
+          "payoff_event": "ev_20_the_price_of_truth",
+          "plant_event": null,
+          "span": null
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "8": 3,
+          "9": 1,
+          "14": 1
+        },
+        "seed_grounded": 5,
+        "edges": 10,
+        "mean": 9.4,
+        "median": 8,
+        "min": 8,
+        "max": 14,
+        "share_span_1": 0
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  }
+}
