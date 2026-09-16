@@ -71,6 +71,8 @@ export interface PlantPair {
   readonly plant: string | null;
   readonly payoff: string;
   readonly why: string;
+  /** One of `FORESHADOW_TYPES`, or `''` for an edge carried forward from the Fabula layer. */
+  readonly type: string;
 }
 
 const PLANT_SLUG = /^[a-z0-9]+(_[a-z0-9]+)*$/;
@@ -83,18 +85,40 @@ const ProposalSchema = z.object({
         plant_scene: z.string().default(''),
         payoff_scene: z.string().default(''),
         what_is_planted: z.string().default(''),
+        type: z.string().default(''),
       }),
     )
     .default([]),
 });
 
+/**
+ * The five foreshadow types CFPG's dataset actually found, with their measured shares
+ * (`narrative-extraction-prior-art.md` §4.6: object 48.2%, event 35.3%, speech-act 9.7%, rule
+ * 5.1%, symbol 1.7%).
+ *
+ * In the prompt as a *checklist*, not a label to collect: the first pass over Cinderella proposed
+ * two object-type pairs and missed the story's central rule-type plant (the godmother's midnight
+ * condition), which is the tail of that distribution behaving exactly as the distribution says it
+ * will. Naming all five is a prior-art-grounded widening of the search, not a hint aimed at a
+ * fixture — nothing here names a story, a scene or a fact.
+ */
+export const FORESHADOW_TYPES = ['object', 'event', 'speech_act', 'rule', 'symbol'] as const;
+
 const PROPOSE_SYSTEM = `You are finding PLANT / PAYOFF pairs in a story that is already broken
 into scenes.
 
 A plant/payoff pair is one specific fact the story ESTABLISHES in an earlier scene and COLLECTS in
-a later one — a condition stated and later broken, an object acquired and later produced, a remark
-made and later thrown back. The distance matters: the reader has to have met the fact before the
-later scene uses it.
+a later one. The distance matters: the reader has to have met the fact before the later scene uses
+it.
+
+Work through all five kinds before answering. The first two are the most common and the last three
+are the ones that get missed:
+
+- object — a thing acquired, given or noticed, produced again later.
+- event — something that happens and is later returned to.
+- speech_act — a promise, a boast, a refusal or a remark, later thrown back.
+- rule — a condition, a warning or a limit stated by someone, later tested or broken.
+- symbol — an image or a motif that recurs and means more the second time.
 
 For each pair, give:
 - "fact_ref": a short lower_snake_case slug naming the fact itself, descriptive enough to act on
@@ -102,6 +126,7 @@ For each pair, give:
 - "plant_scene": the scene id where the reader first learns it. MUST be a scene id from the list.
 - "payoff_scene": the scene id where the story collects it. MUST be a LATER scene id.
 - "what_is_planted": one clause saying what the reader takes away from the plant scene.
+- "type": one of object, event, speech_act, rule, symbol.
 
 Rules:
 - The plant scene must come STRICTLY BEFORE the payoff scene.
@@ -124,9 +149,16 @@ function proposalJsonSchema(): Record<string, unknown> {
             plant_scene: { type: 'string' },
             payoff_scene: { type: 'string' },
             what_is_planted: { type: 'string' },
+            type: { type: 'string', enum: [...FORESHADOW_TYPES] },
           },
-          required: ['fact_ref', 'plant_scene', 'payoff_scene', 'what_is_planted'],
-          propertyOrdering: ['fact_ref', 'plant_scene', 'payoff_scene', 'what_is_planted'],
+          required: ['fact_ref', 'plant_scene', 'payoff_scene', 'what_is_planted', 'type'],
+          propertyOrdering: [
+            'fact_ref',
+            'plant_scene',
+            'payoff_scene',
+            'what_is_planted',
+            'type',
+          ],
         },
       },
     },
@@ -366,7 +398,13 @@ export async function proposePairs(
         const key = `${factRef}|${plant}|${payoff}`;
         if (seen.has(key)) continue;
         seen.add(key);
-        pairs.push({ fact_ref: factRef, plant, payoff, why: raw.what_is_planted });
+        pairs.push({
+          fact_ref: factRef,
+          plant,
+          payoff,
+          why: raw.what_is_planted,
+          type: raw.type,
+        });
       }
     } catch (error) {
       if (!(error instanceof ExtractionCallError)) throw error;

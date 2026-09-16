@@ -131,6 +131,20 @@ export interface CoverageScore {
   readonly coverage: number | null;
   /** Unassigned stretches, longest first — §3.5 asks where they fall, not only how much. */
   readonly gaps: ReadonlyArray<{ start: number; end: number; chars: number }>;
+  /**
+   * The part of this number segmentation is actually responsible for.
+   *
+   * §3.5 reads source coverage as a segmentation defect — "a segmentation that quietly drops a
+   * stretch of the middle still scores well on the boundaries it did produce". That reading holds
+   * only for a pipeline that reads the source itself. This one never sees prose: it can only
+   * assign the events it was handed, so an uncovered stretch is a stretch the *upstream* event
+   * list never reached. `events_assigned` versus `events_supplied` is the check that separates the
+   * two, and anything below 1.0 there is segmentation losing events, which is the real defect this
+   * metric is looking for.
+   */
+  readonly events_supplied: number;
+  readonly events_assigned: number;
+  readonly assignment_rate: number | null;
 }
 
 export interface RevealOrderScore {
@@ -353,6 +367,10 @@ function coverageScore(
   spanOf: ReadonlyMap<string, CandidateEventSpan>,
   sourceChars: number | null,
 ): CoverageScore {
+  const assigned = new Set(sceneBlock.flatMap((scene) => [...scene.event_ids]));
+  const supplied = spanOf.size;
+  const assignedWithSpans = [...assigned].filter((id) => spanOf.has(id)).length;
+
   if (sourceChars === null || spanOf.size === 0) {
     return {
       bar: '≥ 0.95 (§3.5)',
@@ -360,6 +378,9 @@ function coverageScore(
       covered_chars: null,
       coverage: null,
       gaps: [],
+      events_supplied: supplied,
+      events_assigned: assignedWithSpans,
+      assignment_rate: supplied === 0 ? null : assignedWithSpans / supplied,
     };
   }
 
@@ -403,6 +424,9 @@ function coverageScore(
     covered_chars: covered,
     coverage: sourceChars === 0 ? null : covered / sourceChars,
     gaps: gaps.slice(0, 10),
+    events_supplied: supplied,
+    events_assigned: assignedWithSpans,
+    assignment_rate: supplied === 0 ? null : assignedWithSpans / supplied,
   };
 }
 

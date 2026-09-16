@@ -350,6 +350,7 @@ export async function describeScenes(
     failed_batches: failed.length,
     pov_fallbacks: povFallbacks,
     location_fallbacks: locationFallbacks,
+    location_inherited: drafts.filter((draft) => draft.location_inherited).length,
     beat_fallbacks: beatFallbacks,
     function_fallbacks: functionFallbacks,
   };
