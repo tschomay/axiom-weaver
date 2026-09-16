@@ -24,6 +24,11 @@ fixed script.
 > **Avoid**: using "Syuzhet" for prose generation. Under this model the engine never
 > touches arrangement. If you mean the words, say **Performance**.
 
+Fabula can now be produced on its own, ahead of Syuzhet, by extraction or generation
+pipelines upstream of authoring proper — see **Fabula-only package** below. It is still
+never authored piecemeal by hand; a human author still gets both layers at once via the
+World Model seed and Scene Cards.
+
 ## Core objects
 
 - **Story Package** — everything the author ships: World Model seed, the ordered Scene
@@ -42,6 +47,18 @@ fixed script.
   editing a preset later can't silently change a story already told in it. A Scene Card's
   `tone` never edits the Voice Card — it's a separate instruction, layered alongside it,
   that governs imagery selection and emphasis for that scene only. See ADR 0007.
+- **Fabula-only package** — a Story Package with `world_model_seed` populated but
+  `scene_cards` still empty: Fabula produced ahead of Syuzhet, by extraction or original
+  generation, before segmentation draws scene boundaries. Its event list rides in a
+  `_fabula` extra block rather than a schema field. Not directly checkable by the linter
+  (`scene_cards` is required there) — see **Fabula projection**. See ADR 0019.
+- **Fabula projection** — the one-event-to-one-provisional-Scene-Card mapping that lets
+  the real linter (World Model references, the plant-obligation walk) validate a
+  Fabula-only package before Scene Cards exist, via `lintFabulaArc`. A measuring
+  instrument, never a deliverable — segmentation still produces the real Scene Cards. A
+  field the projection can't recover (a Syuzhet-only property like POV) gets a
+  deterministic substitution, counted and reported rather than silently guessed. See
+  ADR 0019.
 
 ## The two memories
 
