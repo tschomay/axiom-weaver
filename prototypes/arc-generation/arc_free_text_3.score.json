@@ -1,0 +1,165 @@
+{
+  "config": "free_text",
+  "model": "gemini-3.8-flash",
+  "calls": [
+    {
+      "stage": "arc",
+      "model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1318,
+      "output_tokens": 8764,
+      "thoughts_tokens": 17573,
+      "ms": 71648
+    }
+  ],
+  "initial_problems": [],
+  "repairs": [],
+  "remaining_problems": [],
+  "score": {
+    "story_id": "arc_free_text_3",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_switch_manifest",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_tallow_lantern",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_sheepskin_coat",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_coupling_pin",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_switch_manifest",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_tallow_lantern",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_sheepskin_coat",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_coupling_pin",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 5,
+      "reachable": 5,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 19,
+        "compared": 0
+      },
+      "vacuous": true,
+      "passed": true
+    },
+    "presence": {
+      "problems": [],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 4,
+      "reachable": 4,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 20,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "dan_responsible_for_night_manifest",
+          "payoff_event": "ev_05_crane_lays_blame",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "torn_sheepskin_on_switch_lever",
+          "payoff_event": "ev_13_jonah_alibi_confirmed",
+          "plant_event": "ev_07_inspecting_the_switch_stand",
+          "span": 6
+        },
+        {
+          "fact_ref": "white_lead_flake_in_skull_fracture",
+          "payoff_event": "ev_15_inspecting_the_catwalk",
+          "plant_event": "ev_09_examining_the_corpse",
+          "span": 6
+        },
+        {
+          "fact_ref": "mutton_tallow_in_switch_lantern",
+          "payoff_event": "ev_16_reconstructing_the_crime",
+          "plant_event": "ev_02_body_in_hopper",
+          "span": 14
+        },
+        {
+          "fact_ref": "unslaked_marl_in_hopper_four",
+          "payoff_event": "ev_17_confronting_the_foreman",
+          "plant_event": "ev_04_crane_threatens_investigation",
+          "span": 13
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "6": 2,
+          "13": 1,
+          "14": 1
+        },
+        "seed_grounded": 1,
+        "edges": 5,
+        "mean": 9.75,
+        "median": 13,
+        "min": 6,
+        "max": 14,
+        "share_span_1": 0
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "config": "no_span_guidance",
+  "model": "gemini-3.8-flash",
+  "calls": [
+    {
+      "stage": "arc",
+      "model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1356,
+      "output_tokens": 9928,
+      "thoughts_tokens": 19210,
+      "ms": 79489
+    }
+  ],
+  "initial_problems": [],
+  "repairs": [],
+  "remaining_problems": [],
+  "score": {
+    "story_id": "arc_no_span_guidance_kiln",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_shift_log",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_shift_log",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 16,
+      "reachable": 16,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 19,
+        "compared": 0
+      },
+      "vacuous": true,
+      "passed": true
+    },
+    "presence": {
+      "problems": [],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 12,
+      "reachable": 12,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 20,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "single_key_custody",
+          "payoff_event": "ev_01_handover_demand",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "maren_double_shift_fatigue",
+          "payoff_event": "ev_01_handover_demand",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "dockyard_contract_penalty",
+          "payoff_event": "ev_02_kiln_unsealed",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "single_key_custody",
+          "payoff_event": "ev_03_the_accusation",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "gabe_body_in_kiln",
+          "payoff_event": "ev_04_suspension_order",
+          "plant_event": "ev_02_kiln_unsealed",
+          "span": 2
+        },
+        {
+          "fact_ref": "logbook_entry_signed_two_am",
+          "payoff_event": "ev_07_logbook_inspection",
+          "plant_event": "ev_03_the_accusation",
+          "span": 4
+        },
+        {
+          "fact_ref": "cone_indicates_delayed_heat",
+          "payoff_event": "ev_12_maren_false_reconstruction",
+          "plant_event": "ev_06_nel_cone_analysis",
+          "span": 6
+        },
+        {
+          "fact_ref": "hidden_barograph_chart",
+          "payoff_event": "ev_12_maren_false_reconstruction",
+          "plant_event": "ev_11_barograph_found",
+          "span": 1
+        },
+        {
+          "fact_ref": "red_slip_on_brass_key",
+          "payoff_event": "ev_15_orde_red_stains",
+          "plant_event": "ev_09_key_residue",
+          "span": 6
+        },
+        {
+          "fact_ref": "flue_hammering_at_two",
+          "payoff_event": "ev_17_reconstructing_the_theft",
+          "plant_event": "ev_05_foster_alibi",
+          "span": 12
+        },
+        {
+          "fact_ref": "tilda_saw_maren_blackout",
+          "payoff_event": "ev_17_reconstructing_the_theft",
+          "plant_event": "ev_08_tilda_sighting",
+          "span": 9
+        },
+        {
+          "fact_ref": "orde_hurrying_inspection",
+          "payoff_event": "ev_18_confronting_orde",
+          "plant_event": "ev_01_handover_demand",
+          "span": 17
+        },
+        {
+          "fact_ref": "orde_red_slip_stains",
+          "payoff_event": "ev_18_confronting_orde",
+          "plant_event": "ev_15_orde_red_stains",
+          "span": 3
+        },
+        {
+          "fact_ref": "tilda_saw_gabe_at_three",
+          "payoff_event": "ev_18_confronting_orde",
+          "plant_event": "ev_16_tilda_full_testimony",
+          "span": 2
+        },
+        {
+          "fact_ref": "union_sacrificing_supervisor",
+          "payoff_event": "ev_19_board_coverup",
+          "plant_event": "ev_10_union_warning",
+          "span": 9
+        },
+        {
+          "fact_ref": "orde_took_key_while_maren_slept",
+          "payoff_event": "ev_20_the_blacklisting",
+          "plant_event": "ev_17_reconstructing_the_theft",
+          "span": 3
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "1": 1,
+          "2": 2,
+          "3": 2,
+          "4": 1,
+          "6": 2,
+          "9": 2,
+          "12": 1,
+          "17": 1
+        },
+        "seed_grounded": 4,
+        "edges": 16,
+        "mean": 6.166666666666667,
+        "median": 6,
+        "min": 1,
+        "max": 17,
+        "share_span_1": 0.08333333333333333
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  }
+}

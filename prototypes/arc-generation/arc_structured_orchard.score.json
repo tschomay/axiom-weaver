@@ -1,0 +1,185 @@
+{
+  "config": "structured",
+  "model": "gemini-3.8-flash",
+  "calls": [
+    {
+      "stage": "arc",
+      "model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1462,
+      "output_tokens": 9127,
+      "thoughts_tokens": 20850,
+      "ms": 76204
+    }
+  ],
+  "initial_problems": [],
+  "repairs": [],
+  "remaining_problems": [],
+  "score": {
+    "story_id": "arc_structured_orchard",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_warden_journal",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_copper_notch_knife",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_calder_agreement",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_orris_chainsaw",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_warden_journal",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_copper_notch_knife",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_calder_agreement",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_orris_chainsaw",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 8,
+      "reachable": 8,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 19,
+        "compared": 0
+      },
+      "vacuous": true,
+      "passed": true
+    },
+    "presence": {
+      "problems": [],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 5,
+      "reachable": 5,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 20,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "ash_warden_unregistered_status",
+          "payoff_event": "ev_01_felled_terrace",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "kemp_boundary_soil_dispute",
+          "payoff_event": "ev_04_ledger_dispute",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "orris_chainsaw_blue_oil",
+          "payoff_event": "ev_10_sawdust_test",
+          "plant_event": "ev_05_packing_barn_search",
+          "span": 5
+        },
+        {
+          "fact_ref": "gervais_undisclosed_bonus_claim",
+          "payoff_event": "ev_13_gervais_collapse",
+          "plant_event": "ev_04_ledger_dispute",
+          "span": 9
+        },
+        {
+          "fact_ref": "calder_penalty_clause_mention",
+          "payoff_event": "ev_14_clause_14b_revealed",
+          "plant_event": "ev_03_calder_confrontation",
+          "span": 11
+        },
+        {
+          "fact_ref": "linseed_scent_on_cut_wood",
+          "payoff_event": "ev_16_cellar_discovery",
+          "plant_event": "ev_02_stump_inspection",
+          "span": 14
+        },
+        {
+          "fact_ref": "midnight_lantern_at_shed",
+          "payoff_event": "ev_17_robin_confession",
+          "plant_event": "ev_07_helen_recollection",
+          "span": 10
+        },
+        {
+          "fact_ref": "robin_access_to_calder_drafts",
+          "payoff_event": "ev_17_robin_confession",
+          "plant_event": null,
+          "span": null
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "5": 1,
+          "9": 1,
+          "10": 1,
+          "11": 1,
+          "14": 1
+        },
+        "seed_grounded": 3,
+        "edges": 8,
+        "mean": 9.8,
+        "median": 10,
+        "min": 5,
+        "max": 14,
+        "share_span_1": 0
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  }
+}

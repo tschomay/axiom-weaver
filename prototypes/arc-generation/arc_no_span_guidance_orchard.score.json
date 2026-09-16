@@ -1,0 +1,180 @@
+{
+  "config": "no_span_guidance",
+  "model": "gemini-3.8-flash",
+  "calls": [
+    {
+      "stage": "arc",
+      "model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1354,
+      "output_tokens": 10066,
+      "thoughts_tokens": 16554,
+      "ms": 69210
+    }
+  ],
+  "initial_problems": [],
+  "repairs": [],
+  "remaining_problems": [],
+  "score": {
+    "story_id": "arc_no_span_guidance_orchard",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_coop_covenant_ledger",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_diesel_saw",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_coop_covenant_ledger",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_diesel_saw",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 11,
+      "reachable": 11,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 19,
+        "compared": 0
+      },
+      "vacuous": true,
+      "passed": true
+    },
+    "presence": {
+      "problems": [],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 7,
+      "reachable": 7,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 20,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "russet_pear_unregistered",
+          "payoff_event": "ev_02_buyout_inventory_threat",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "agdev_buyout_bonus",
+          "payoff_event": "ev_04_confronting_gorse_homestead",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "clean_cambium_girdling",
+          "payoff_event": "ev_06_auditing_shared_tools",
+          "plant_event": "ev_01_discovery_on_high_terrace",
+          "span": 5
+        },
+        {
+          "fact_ref": "coop_founding_covenant",
+          "payoff_event": "ev_11_the_old_covenant_warning",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "gorse_secret_patent_draft",
+          "payoff_event": "ev_13_the_shed_confrontation",
+          "plant_event": "ev_07_gorse_draft_patent_found",
+          "span": 6
+        },
+        {
+          "fact_ref": "corin_alibi_breakdown",
+          "payoff_event": "ev_14_collapse_of_the_allegation",
+          "plant_event": "ev_10_arthurs_defence_of_corin",
+          "span": 4
+        },
+        {
+          "fact_ref": "blue_chalk_traces",
+          "payoff_event": "ev_16_the_evidence_in_the_workshop",
+          "plant_event": "ev_03_inspecting_boundary_gate",
+          "span": 13
+        },
+        {
+          "fact_ref": "missing_copper_knife",
+          "payoff_event": "ev_16_the_evidence_in_the_workshop",
+          "plant_event": "ev_05_missing_grafting_knife",
+          "span": 11
+        },
+        {
+          "fact_ref": "ledger_indemnity_clause",
+          "payoff_event": "ev_17_tomas_confession",
+          "plant_event": "ev_12_discovering_indemnity_clause",
+          "span": 5
+        },
+        {
+          "fact_ref": "hidden_scion_cache",
+          "payoff_event": "ev_18_the_grafters_choice",
+          "plant_event": "ev_15_confiding_the_secret_scions",
+          "span": 3
+        },
+        {
+          "fact_ref": "knife_notch_mark",
+          "payoff_event": "ev_19_presenting_the_authorship_proof",
+          "plant_event": null,
+          "span": null
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "3": 1,
+          "4": 1,
+          "5": 2,
+          "6": 1,
+          "11": 1,
+          "13": 1
+        },
+        "seed_grounded": 4,
+        "edges": 11,
+        "mean": 6.714285714285714,
+        "median": 5,
+        "min": 3,
+        "max": 13,
+        "share_span_1": 0
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  }
+}

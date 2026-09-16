@@ -1,0 +1,440 @@
+{
+  "generated_at": "2026-09-16T00:48:52.726Z",
+  "model": "gemini-3.8-flash",
+  "event_count": 20,
+  "runs": [
+    {
+      "config": "structured",
+      "arcs": [
+        {
+          "story_id": "arc_structured_ferry",
+          "model": "gemini-3.8-flash",
+          "event_count": {
+            "requested": 20,
+            "returned": 20
+          },
+          "gates_passed": true,
+          "initial_problems": [],
+          "remaining_problems": [],
+          "repairs": [],
+          "histogram": {
+            "counts": {
+              "4": 1,
+              "5": 1,
+              "11": 1,
+              "14": 1,
+              "15": 1
+            },
+            "seed_grounded": 4,
+            "edges": 9,
+            "mean": 9.8,
+            "median": 11,
+            "min": 4,
+            "max": 15,
+            "share_span_1": 0
+          },
+          "lexical_canary": [],
+          "calls": [
+            {
+              "stage": "arc",
+              "model": "gemini-3.8-flash",
+              "finish_reason": "STOP",
+              "prompt_tokens": 1471,
+              "output_tokens": 9143,
+              "thoughts_tokens": 19281,
+              "ms": 78506
+            }
+          ]
+        },
+        {
+          "story_id": "arc_structured_orchard",
+          "model": "gemini-3.8-flash",
+          "event_count": {
+            "requested": 20,
+            "returned": 20
+          },
+          "gates_passed": true,
+          "initial_problems": [],
+          "remaining_problems": [],
+          "repairs": [],
+          "histogram": {
+            "counts": {
+              "5": 1,
+              "9": 1,
+              "10": 1,
+              "11": 1,
+              "14": 1
+            },
+            "seed_grounded": 3,
+            "edges": 8,
+            "mean": 9.8,
+            "median": 10,
+            "min": 5,
+            "max": 14,
+            "share_span_1": 0
+          },
+          "lexical_canary": [],
+          "calls": [
+            {
+              "stage": "arc",
+              "model": "gemini-3.8-flash",
+              "finish_reason": "STOP",
+              "prompt_tokens": 1462,
+              "output_tokens": 9127,
+              "thoughts_tokens": 20850,
+              "ms": 76204
+            }
+          ]
+        },
+        {
+          "story_id": "arc_structured_kiln",
+          "model": "gemini-3.8-flash",
+          "event_count": {
+            "requested": 20,
+            "returned": 20
+          },
+          "gates_passed": true,
+          "initial_problems": [],
+          "remaining_problems": [],
+          "repairs": [],
+          "histogram": {
+            "counts": {
+              "5": 1,
+              "7": 1,
+              "10": 1,
+              "14": 1,
+              "15": 1
+            },
+            "seed_grounded": 4,
+            "edges": 9,
+            "mean": 10.2,
+            "median": 10,
+            "min": 5,
+            "max": 15,
+            "share_span_1": 0
+          },
+          "lexical_canary": [
+            "whisper"
+          ],
+          "calls": [
+            {
+              "stage": "arc",
+              "model": "gemini-3.8-flash",
+              "finish_reason": "STOP",
+              "prompt_tokens": 1464,
+              "output_tokens": 11178,
+              "thoughts_tokens": 21430,
+              "ms": 85649
+            }
+          ]
+        }
+      ],
+      "diversity": {
+        "arcs": 3,
+        "mean_pairwise_overlap": 0.08975388242154485,
+        "mean_name_overlap": 0.025185185185185185,
+        "shared_names": [
+          "cottage",
+          "finch",
+          "hall",
+          "office"
+        ]
+      }
+    },
+    {
+      "config": "free_text",
+      "arcs": [
+        {
+          "story_id": "arc_free_text_1",
+          "model": "gemini-3.8-flash",
+          "event_count": {
+            "requested": 20,
+            "returned": 20
+          },
+          "gates_passed": true,
+          "initial_problems": [],
+          "remaining_problems": [],
+          "repairs": [],
+          "histogram": {
+            "counts": {
+              "6": 1,
+              "7": 1,
+              "13": 1,
+              "15": 1
+            },
+            "seed_grounded": 2,
+            "edges": 6,
+            "mean": 10.25,
+            "median": 13,
+            "min": 6,
+            "max": 15,
+            "share_span_1": 0
+          },
+          "lexical_canary": [],
+          "calls": [
+            {
+              "stage": "arc",
+              "model": "gemini-3.8-flash",
+              "finish_reason": "STOP",
+              "prompt_tokens": 1318,
+              "output_tokens": 10432,
+              "thoughts_tokens": 22922,
+              "ms": 86641
+            }
+          ]
+        },
+        {
+          "story_id": "arc_free_text_2",
+          "model": "gemini-3.8-flash",
+          "event_count": {
+            "requested": 20,
+            "returned": 20
+          },
+          "gates_passed": false,
+          "initial_problems": [
+            "unknown_entity"
+          ],
+          "remaining_problems": [
+            "unknown_entity"
+          ],
+          "repairs": [
+            "model | seed_fact: \"loc_constable_office\" seeded as known by char_stoddard"
+          ],
+          "histogram": {
+            "counts": {
+              "4": 1,
+              "8": 1,
+              "10": 1,
+              "13": 1,
+              "15": 1
+            },
+            "seed_grounded": 4,
+            "edges": 9,
+            "mean": 10,
+            "median": 10,
+            "min": 4,
+            "max": 15,
+            "share_span_1": 0
+          },
+          "lexical_canary": [],
+          "calls": [
+            {
+              "stage": "arc",
+              "model": "gemini-3.8-flash",
+              "finish_reason": "STOP",
+              "prompt_tokens": 1318,
+              "output_tokens": 10147,
+              "thoughts_tokens": 15725,
+              "ms": 67370
+            },
+            {
+              "stage": "repair",
+              "model": "gemini-3.8-flash",
+              "finish_reason": "STOP",
+              "prompt_tokens": 2389,
+              "output_tokens": 116,
+              "thoughts_tokens": 3840,
+              "ms": 11583
+            }
+          ]
+        },
+        {
+          "story_id": "arc_free_text_3",
+          "model": "gemini-3.8-flash",
+          "event_count": {
+            "requested": 20,
+            "returned": 20
+          },
+          "gates_passed": true,
+          "initial_problems": [],
+          "remaining_problems": [],
+          "repairs": [],
+          "histogram": {
+            "counts": {
+              "6": 2,
+              "13": 1,
+              "14": 1
+            },
+            "seed_grounded": 1,
+            "edges": 5,
+            "mean": 9.75,
+            "median": 13,
+            "min": 6,
+            "max": 14,
+            "share_span_1": 0
+          },
+          "lexical_canary": [],
+          "calls": [
+            {
+              "stage": "arc",
+              "model": "gemini-3.8-flash",
+              "finish_reason": "STOP",
+              "prompt_tokens": 1318,
+              "output_tokens": 8764,
+              "thoughts_tokens": 17573,
+              "ms": 71648
+            }
+          ]
+        }
+      ],
+      "diversity": {
+        "arcs": 3,
+        "mean_pairwise_overlap": 0.14338309964970067,
+        "mean_name_overlap": 0.09125211348441838,
+        "shared_names": [
+          "gault",
+          "house",
+          "jesse",
+          "martha",
+          "office",
+          "orson",
+          "rail",
+          "siding",
+          "toby",
+          "vane",
+          "yard"
+        ]
+      }
+    },
+    {
+      "config": "no_span_guidance",
+      "arcs": [
+        {
+          "story_id": "arc_no_span_guidance_ferry",
+          "model": "gemini-3.8-flash",
+          "event_count": {
+            "requested": 20,
+            "returned": 20
+          },
+          "gates_passed": true,
+          "initial_problems": [],
+          "remaining_problems": [],
+          "repairs": [],
+          "histogram": {
+            "counts": {
+              "8": 3,
+              "9": 1,
+              "14": 1
+            },
+            "seed_grounded": 5,
+            "edges": 10,
+            "mean": 9.4,
+            "median": 8,
+            "min": 8,
+            "max": 14,
+            "share_span_1": 0
+          },
+          "lexical_canary": [],
+          "calls": [
+            {
+              "stage": "arc",
+              "model": "gemini-3.8-flash",
+              "finish_reason": "STOP",
+              "prompt_tokens": 1363,
+              "output_tokens": 9821,
+              "thoughts_tokens": 15684,
+              "ms": 66902
+            }
+          ]
+        },
+        {
+          "story_id": "arc_no_span_guidance_orchard",
+          "model": "gemini-3.8-flash",
+          "event_count": {
+            "requested": 20,
+            "returned": 20
+          },
+          "gates_passed": true,
+          "initial_problems": [],
+          "remaining_problems": [],
+          "repairs": [],
+          "histogram": {
+            "counts": {
+              "3": 1,
+              "4": 1,
+              "5": 2,
+              "6": 1,
+              "11": 1,
+              "13": 1
+            },
+            "seed_grounded": 4,
+            "edges": 11,
+            "mean": 6.714285714285714,
+            "median": 5,
+            "min": 3,
+            "max": 13,
+            "share_span_1": 0
+          },
+          "lexical_canary": [],
+          "calls": [
+            {
+              "stage": "arc",
+              "model": "gemini-3.8-flash",
+              "finish_reason": "STOP",
+              "prompt_tokens": 1354,
+              "output_tokens": 10066,
+              "thoughts_tokens": 16554,
+              "ms": 69210
+            }
+          ]
+        },
+        {
+          "story_id": "arc_no_span_guidance_kiln",
+          "model": "gemini-3.8-flash",
+          "event_count": {
+            "requested": 20,
+            "returned": 20
+          },
+          "gates_passed": true,
+          "initial_problems": [],
+          "remaining_problems": [],
+          "repairs": [],
+          "histogram": {
+            "counts": {
+              "1": 1,
+              "2": 2,
+              "3": 2,
+              "4": 1,
+              "6": 2,
+              "9": 2,
+              "12": 1,
+              "17": 1
+            },
+            "seed_grounded": 4,
+            "edges": 16,
+            "mean": 6.166666666666667,
+            "median": 6,
+            "min": 1,
+            "max": 17,
+            "share_span_1": 0.08333333333333333
+          },
+          "lexical_canary": [],
+          "calls": [
+            {
+              "stage": "arc",
+              "model": "gemini-3.8-flash",
+              "finish_reason": "STOP",
+              "prompt_tokens": 1356,
+              "output_tokens": 9928,
+              "thoughts_tokens": 19210,
+              "ms": 79489
+            }
+          ]
+        }
+      ],
+      "diversity": {
+        "arcs": 3,
+        "mean_pairwise_overlap": 0.0975045277506803,
+        "mean_name_overlap": 0.03595014472207455,
+        "shared_names": [
+          "and",
+          "arthur",
+          "callow",
+          "office",
+          "vane",
+          "yard"
+        ]
+      }
+    }
+  ]
+}

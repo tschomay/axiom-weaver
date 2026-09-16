@@ -1,0 +1,1207 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "arc_free_text_2",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_jesse",
+        "name": "Jesse Vane",
+        "location_id": "loc_elevator_pit",
+        "status": "uninjured",
+        "goal": "inspect morning conveyor boot",
+        "bag": {
+          "role": "investigator",
+          "title": "Maintenance Foreman"
+        }
+      },
+      {
+        "id": "char_stoddard",
+        "name": "Frank Stoddard",
+        "location_id": "loc_constable_office",
+        "status": "uninjured",
+        "goal": "maintain order and avoid mill shutdown",
+        "bag": {
+          "title": "Town Constable"
+        }
+      },
+      {
+        "id": "char_gault",
+        "name": "Orson Gault",
+        "location_id": "loc_mill_office",
+        "status": "uninjured",
+        "goal": "cover up illicit grain siphoning",
+        "bag": {
+          "role": "concealer",
+          "title": "Mill Superintendent"
+        }
+      },
+      {
+        "id": "char_hettie",
+        "name": "Hettie Ward",
+        "location_id": "loc_rail_yard",
+        "status": "distressed",
+        "goal": "find Callum after he missed his night shift return",
+        "bag": {
+          "role": "wronged party"
+        }
+      },
+      {
+        "id": "char_maybelle",
+        "name": "Maybelle Reed",
+        "location_id": "loc_scale_house",
+        "status": "anxious",
+        "goal": "balance midnight weigh-bills",
+        "bag": {
+          "role": "witness",
+          "title": "Scale-House Weigh-Master"
+        }
+      },
+      {
+        "id": "char_declan",
+        "name": "Declan Boyd",
+        "location_id": "loc_rail_yard",
+        "status": "defiant",
+        "goal": "protect union yard workers from company blame",
+        "bag": {
+          "title": "Rail Siding Loader"
+        }
+      },
+      {
+        "id": "char_pete",
+        "name": "Pete Noonan",
+        "location_id": "loc_substation",
+        "status": "weary",
+        "goal": "keep elevator motors running without tripping breakers",
+        "bag": {
+          "title": "Yard Greaser"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_elevator_pit",
+        "name": "Elevator Leg Boot Pit",
+        "bag": {}
+      },
+      {
+        "id": "loc_mill_office",
+        "name": "Terminal Superintendent Office",
+        "bag": {}
+      },
+      {
+        "id": "loc_scale_house",
+        "name": "Wagon & Rail Scale House",
+        "bag": {}
+      },
+      {
+        "id": "loc_rail_yard",
+        "name": "Lower Siding Rail Yard",
+        "bag": {}
+      },
+      {
+        "id": "loc_substation",
+        "name": "Terminal Electrical Substation",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_safety_ledger",
+        "name": "Elevator Shift Safety Ledger",
+        "location_id": "loc_elevator_pit",
+        "status": "signed_by_jesse",
+        "bag": {}
+      },
+      {
+        "id": "obj_pocketknife",
+        "name": "Callum Ward's Horn-Handled Pocketknife",
+        "location_id": "loc_rail_yard",
+        "status": "grease_stained",
+        "bag": {}
+      },
+      {
+        "id": "obj_sisal_twine",
+        "name": "Loop of Bleached Sisal Twine",
+        "location_id": "loc_elevator_pit",
+        "status": "snagged_in_sprocket",
+        "bag": {}
+      },
+      {
+        "id": "obj_scale_logbook",
+        "name": "Official Midnight Scale Logbook",
+        "location_id": "loc_scale_house",
+        "status": "stamped_with_transfer_ink",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_jesse",
+        "to_id": "char_gault",
+        "kind": "subordinate",
+        "sentiment": "distrustful",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_stoddard",
+        "to_id": "char_jesse",
+        "kind": "authority",
+        "sentiment": "suspicious",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_hettie",
+        "to_id": "char_jesse",
+        "kind": "accuser",
+        "sentiment": "hostile",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_gault",
+        "to_id": "char_jesse",
+        "kind": "employer",
+        "sentiment": "threatening",
+        "bag": {}
+      },
+      {
+        "id": "rel_05",
+        "from_id": "char_declan",
+        "to_id": "char_stoddard",
+        "kind": "adversary",
+        "sentiment": "contemptuous",
+        "bag": {}
+      },
+      {
+        "id": "rel_06",
+        "from_id": "char_hettie",
+        "to_id": "char_declan",
+        "kind": "acquaintance",
+        "sentiment": "sympathetic",
+        "bag": {}
+      },
+      {
+        "id": "rel_07",
+        "from_id": "char_pete",
+        "to_id": "char_jesse",
+        "kind": "coworker",
+        "sentiment": "loyal",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_jesse",
+        "fact_ref": "jesse_signed_safety_log",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_stoddard",
+        "fact_ref": "jesse_signed_safety_log",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_declan",
+        "fact_ref": "declan_threatened_strike_sabotage",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_stoddard",
+        "fact_ref": "declan_threatened_strike_sabotage",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_05",
+        "character_id": "char_hettie",
+        "fact_ref": "callum_worked_graveyard_shift",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_06",
+        "character_id": "char_jesse",
+        "fact_ref": "callum_worked_graveyard_shift",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_loc_constable_office",
+        "character_id": "char_stoddard",
+        "fact_ref": "loc_constable_office",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [],
+  "voice_card": {},
+  "metadata": {
+    "title": "The Choke in the Boot Pit",
+    "source": "original arc generated by src/arc (issue #119) (gemini-3.8-flash)",
+    "created_at": "2026-09-16T00:44:05.398Z"
+  },
+  "_fabula": {
+    "generator": "src/arc (issue #119)",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-16T00:44:05.398Z",
+    "brief": {
+      "story_id": "arc_free_text_2",
+      "title": "Free-text run 2",
+      "premise": {
+        "logline": "A mystery in a working town, where the person who has to find out what happened is also the person who will be blamed for it.",
+        "modules": null
+      },
+      "plot_shape": {
+        "id": "mystery",
+        "name": "Mystery",
+        "central_question": "What actually happened, and who is willing to say so?",
+        "phases": [
+          {
+            "name": "Disturbance",
+            "purpose": "A wrong surfaces and someone is obliged to look into it.",
+            "share": 0.2
+          },
+          {
+            "name": "Inquiry",
+            "purpose": "Evidence accumulates, most of it true and misread.",
+            "share": 0.35
+          },
+          {
+            "name": "Wrong turn",
+            "purpose": "A reading of the evidence that is coherent and wrong collapses.",
+            "share": 0.2
+          },
+          {
+            "name": "Solution",
+            "purpose": "The true account, assembled only from what the reader has already been shown.",
+            "share": 0.15
+          },
+          {
+            "name": "Cost",
+            "purpose": "What knowing costs the person who found out.",
+            "share": 0.1
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "investigator",
+            "purpose": "Carries the reader through the inquiry and pays its cost."
+          },
+          {
+            "role": "concealer",
+            "purpose": "Has a reason to keep the true account from being assembled."
+          },
+          {
+            "role": "witness",
+            "purpose": "Holds one true piece and misunderstands its meaning."
+          },
+          {
+            "role": "wronged party",
+            "purpose": "The reason the question matters at all."
+          }
+        ],
+        "obligatory_moves": [
+          "Every element of the true account is on the page before it is stated.",
+          "At least one true detail is shown early in a context that makes it look irrelevant.",
+          "The wrong reading is defensible on the evidence available when it is made."
+        ]
+      },
+      "event_count": 20,
+      "cast": {
+        "characters": 7,
+        "locations": 5,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 10
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "mystery",
+        "premise_preset": "free_text"
+      }
+    },
+    "repairs": [
+      "model | seed_fact: \"loc_constable_office\" seeded as known by char_stoddard"
+    ],
+    "events": [
+      {
+        "id": "ev_01_body_found_in_boot",
+        "sequence": 1,
+        "summary": "Jesse climbs down into the boot pit to clear an elevator choke and finds the body of young Callum Ward trapped under the jammed bucket intake.",
+        "pov": "char_jesse",
+        "location_id": "loc_elevator_pit",
+        "characters_present": [
+          "char_jesse"
+        ],
+        "dramatic_function": "Disturbance: Establishes the fatal incident and traps Jesse at the center of the physical site.",
+        "beats": [
+          "Jesse descends into the dark, grain-choked boot pit expecting a broken pulley.",
+          "Jesse digs through cracked corn to find Callum Ward crushed beneath the intake mouth.",
+          "Jesse recognizes that the conveyor was running when Callum entered the hopper."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [
+          "callum_murdered_deliberately"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "status",
+            "value": "shaken"
+          },
+          {
+            "entity_id": "char_jesse",
+            "column": "goal",
+            "value": "unclog elevator boot and free Callum"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_clearing_the_sprocket",
+        "sequence": 2,
+        "summary": "Pete joins Jesse in the pit to lever the jammed pulley free, where Jesse pulls an oiled loop of bleached sisal twine from the gears and discards it as refuse.",
+        "pov": "char_jesse",
+        "location_id": "loc_elevator_pit",
+        "characters_present": [
+          "char_jesse",
+          "char_pete"
+        ],
+        "dramatic_function": "Disturbance: Plants the mechanical evidence of the bypassed hopper lock under the mundane guise of cleaning machine wreckage.",
+        "beats": [
+          "Pete arrives with crowbars to help pry the crushed elevator bucket away.",
+          "Jesse disentangles a knotted loop of bleached sisal twine from the teeth of the bottom idler sprocket.",
+          "Jesse tosses the twine on the rubble pile, assuming it is packing debris from grain car unloading."
+        ],
+        "caused_by": [
+          "ev_01_body_found_in_boot"
+        ],
+        "reveals": [
+          "bleached_twine_fibers"
+        ],
+        "conceals": [
+          "twine_used_to_bypass_hopper_lock"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_pete",
+            "column": "location_id",
+            "value": "loc_elevator_pit"
+          },
+          {
+            "entity_id": "obj_sisal_twine",
+            "column": "status",
+            "value": "discarded_in_rubble"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_management_descends",
+        "sequence": 3,
+        "summary": "Superintendent Gault and Constable Stoddard enter the pit, with Gault furiously berating Jesse for the halt while smearing purple transfer ink from his starched sleeve onto the ladder rail.",
+        "pov": "char_jesse",
+        "location_id": "loc_elevator_pit",
+        "characters_present": [
+          "char_jesse",
+          "char_pete",
+          "char_gault",
+          "char_stoddard"
+        ],
+        "dramatic_function": "Disturbance: Introduces the concealer and plants the transfer-ink stain while establishing supervisory hostility.",
+        "beats": [
+          "Gault rushes down the iron ladder shouting about shipping contracts and dead cargo.",
+          "Jesse spots fresh purple weigh-station transfer ink smeared wet across Gault's right shirt cuff.",
+          "Gault asserts that Callum must have wandered into the pit drunk or reckless during the graveyard run."
+        ],
+        "caused_by": [
+          "ev_02_clearing_the_sprocket"
+        ],
+        "reveals": [
+          "gault_inked_sleeve"
+        ],
+        "conceals": [
+          "gault_forged_scale_ledger"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_gault",
+            "column": "location_id",
+            "value": "loc_elevator_pit"
+          },
+          {
+            "entity_id": "char_stoddard",
+            "column": "location_id",
+            "value": "loc_elevator_pit"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_the_signed_safety_log",
+        "sequence": 4,
+        "summary": "Constable Stoddard confiscates the shift safety ledger and informs Jesse that his pre-shift signature on the clean inspection sheet makes him legally liable for Callum's death.",
+        "pov": "char_jesse",
+        "location_id": "loc_elevator_pit",
+        "characters_present": [
+          "char_jesse",
+          "char_stoddard",
+          "char_gault"
+        ],
+        "dramatic_function": "Disturbance: Seals the trap around Jesse, mandating that he solve the death to save himself from criminal negligence charges.",
+        "beats": [
+          "Stoddard pulls Jesse's pre-signed morning safety sheet from the clipboard on the pit wall.",
+          "Stoddard points out that Jesse certified all safety interlocks on Leg #4 as fully functional.",
+          "Stoddard warns Jesse that without proof of third-party sabotage, Jesse faces manslaughter charges."
+        ],
+        "caused_by": [
+          "ev_03_management_descends"
+        ],
+        "reveals": [],
+        "conceals": [
+          "gault_tampered_with_boot_feeder"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "jesse_signed_safety_log",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_pete",
+            "column": "location_id",
+            "value": "loc_substation"
+          },
+          {
+            "entity_id": "char_jesse",
+            "column": "goal",
+            "value": "prove boot failure was not maintenance negligence"
+          },
+          {
+            "entity_id": "char_stoddard",
+            "column": "goal",
+            "value": "hold jesse accountable for safety inspection"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_hettie_in_the_rail_yard",
+        "sequence": 5,
+        "summary": "Jesse climbs into the rail yard and meets Callum's sister Hettie, who accuses Jesse of running unsafe machines and reveals Callum feared something in the yard during his graveyard shift.",
+        "pov": "char_jesse",
+        "location_id": "loc_rail_yard",
+        "characters_present": [
+          "char_jesse",
+          "char_hettie"
+        ],
+        "dramatic_function": "Inquiry: Establishes the human cost of the death and Callum's state of mind prior to entering the boot.",
+        "beats": [
+          "Jesse breaks the news of Callum's death to Hettie beside the coal trestle.",
+          "Hettie furiously rebukes Jesse for running dangerous high-speed machinery without spotters.",
+          "Hettie reveals Callum had stayed late after midnight to watch for an illicit shipment on the siding."
+        ],
+        "caused_by": [
+          "ev_04_the_signed_safety_log"
+        ],
+        "reveals": [],
+        "conceals": [
+          "callum_found_spoiled_grain"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "callum_worked_graveyard_shift",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_rail_yard"
+          },
+          {
+            "entity_id": "char_hettie",
+            "column": "status",
+            "value": "grief_stricken"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_declan_displays_the_knife",
+        "sequence": 6,
+        "summary": "Union yard loader Declan Boyd confronts Jesse on the siding, brandishing Callum's horn-handled pocketknife which Declan claims Callum lent him to cut grain-car seals.",
+        "pov": "char_jesse",
+        "location_id": "loc_rail_yard",
+        "characters_present": [
+          "char_jesse",
+          "char_hettie",
+          "char_declan"
+        ],
+        "dramatic_function": "Inquiry: Introduces the prime red-herring suspect and plants Callum's bent knife.",
+        "beats": [
+          "Declan steps between Jesse and Hettie, warning Jesse not to shift management blame onto workers.",
+          "Jesse sees Callum's recognizable horn-handled pocketknife sticking out of Declan's bib pocket.",
+          "Declan snaps open the bent, greasy blade and insists Callum gave it to him before midnight to pop boxcar seals."
+        ],
+        "caused_by": [
+          "ev_05_hettie_in_the_rail_yard"
+        ],
+        "reveals": [
+          "callum_bent_pocketknife"
+        ],
+        "conceals": [
+          "knife_borrowed_for_boxcar_latches"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_declan",
+            "column": "status",
+            "value": "defensive"
+          },
+          {
+            "entity_id": "obj_pocketknife",
+            "column": "status",
+            "value": "revealed_to_jesse"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_questioning_maybelle",
+        "sequence": 7,
+        "summary": "Jesse enters the scale house to question Maybelle, who admits she heard heavy iron latch banging near midnight and saw a cloaked figure running toward the rail siding.",
+        "pov": "char_jesse",
+        "location_id": "loc_scale_house",
+        "characters_present": [
+          "char_jesse",
+          "char_maybelle"
+        ],
+        "dramatic_function": "Inquiry: Adds witness testimony that seems to support the theory of an outside saboteur.",
+        "beats": [
+          "Jesse finds Maybelle shaking at her desk, trying to align the weigh-scale tallies.",
+          "Maybelle recounts hearing metallic clatter by the outside chute shortly before the elevator stalled.",
+          "She reports seeing a hooded shape in work boots slip through the yard shadows toward the boxcars."
+        ],
+        "caused_by": [
+          "ev_06_declan_displays_the_knife"
+        ],
+        "reveals": [],
+        "conceals": [
+          "maybelle_mistook_gault_for_prowler"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_scale_house"
+          },
+          {
+            "entity_id": "char_maybelle",
+            "column": "status",
+            "value": "frightened"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_blown_fuse_in_the_substation",
+        "sequence": 8,
+        "summary": "Jesse checks the terminal electrical substation with Pete, discovering that the master remote control fuse for the Leg #4 tripper car blew out at midnight and was routinely swapped.",
+        "pov": "char_jesse",
+        "location_id": "loc_substation",
+        "characters_present": [
+          "char_jesse",
+          "char_pete"
+        ],
+        "dramatic_function": "Inquiry: Plants the technical anomaly of the master switchboard remote trigger.",
+        "beats": [
+          "Jesse inspects the high-voltage switchbank to determine if an electrical short halted the conveyor.",
+          "Pete shows Jesse a scorched copper fuse plug removed from the remote tripper circuit.",
+          "Pete notes that someone tripped the circuit from the overhead console rather than the floor switch."
+        ],
+        "caused_by": [
+          "ev_07_questioning_maybelle"
+        ],
+        "reveals": [
+          "tripper_remote_fuse_blown"
+        ],
+        "conceals": [
+          "fuse_blown_by_manual_override"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_substation"
+          },
+          {
+            "entity_id": "char_pete",
+            "column": "goal",
+            "value": "prevent electrical fire in tripper motor"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_the_crumpled_manifest",
+        "sequence": 9,
+        "summary": "Returning to the scale house, Jesse sifts through the waste bin and uncovers a crumpled, unnumbered freight slip detailing an unrecorded midnight grain loading.",
+        "pov": "char_jesse",
+        "location_id": "loc_scale_house",
+        "characters_present": [
+          "char_jesse",
+          "char_maybelle"
+        ],
+        "dramatic_function": "Inquiry: Plants the paper trail for off-book terminal commerce.",
+        "beats": [
+          "Jesse searches Maybelle's wastepaper basket while she handles an incoming truck horn.",
+          "He smooths out a carbon slip recording forty tons of feed grain released without lot numbers.",
+          "The ticket bears a stamped time of 11:45 PM and an indecipherable clerk mark."
+        ],
+        "caused_by": [
+          "ev_08_blown_fuse_in_the_substation"
+        ],
+        "reveals": [
+          "unregistered_freight_manifest"
+        ],
+        "conceals": [
+          "gault_sold_condemned_grain"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_scale_house"
+          },
+          {
+            "entity_id": "char_jesse",
+            "column": "goal",
+            "value": "identify midnight grain receiver"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_stoddard_circles_declan",
+        "sequence": 10,
+        "summary": "In the rail yard, Constable Stoddard finds Declan loitering near the siding and begins interrogating him about his whereabouts when the elevator jammed.",
+        "pov": "char_jesse",
+        "location_id": "loc_rail_yard",
+        "characters_present": [
+          "char_jesse",
+          "char_stoddard",
+          "char_declan"
+        ],
+        "dramatic_function": "Inquiry: Heightens suspicion on the red-herring suspect as law enforcement focuses on Declan.",
+        "beats": [
+          "Stoddard spots Declan wiping coal grease from his palms by the track switch.",
+          "Declan claims he worked the outer boxcars alone all night without an overseer.",
+          "Stoddard notes that Declan's work jacket matches the hooded silhouette described by Maybelle."
+        ],
+        "caused_by": [
+          "ev_06_declan_displays_the_knife",
+          "ev_09_the_crumpled_manifest"
+        ],
+        "reveals": [],
+        "conceals": [
+          "declan_alibi_confirmed_by_switchman"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_rail_yard"
+          },
+          {
+            "entity_id": "char_stoddard",
+            "column": "location_id",
+            "value": "loc_rail_yard"
+          },
+          {
+            "entity_id": "char_stoddard",
+            "column": "goal",
+            "value": "interrogate declan over sabotage"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_gault_demands_a_scapegoat",
+        "sequence": 11,
+        "summary": "Jesse takes the unnumbered manifest to Gault's office, where Gault flatly denies running any night freight and warns Jesse that pointing fingers will ensure Jesse hangs alone for criminal neglect.",
+        "pov": "char_jesse",
+        "location_id": "loc_mill_office",
+        "characters_present": [
+          "char_jesse",
+          "char_gault"
+        ],
+        "dramatic_function": "Inquiry: Establishes the concealer actively attempting to suppress evidence and intimidate the investigator.",
+        "beats": [
+          "Jesse lays the crumpled midnight slip on Gault's mahogany desk.",
+          "Gault calls the paper a discarded mistake from last autumn and locks it in his desk drawer.",
+          "Gault reminds Jesse that the coroner will accept the signed maintenance sheet unless an outside culprit is jailed."
+        ],
+        "caused_by": [
+          "ev_10_stoddard_circles_declan"
+        ],
+        "reveals": [],
+        "conceals": [
+          "gault_scheduled_midnight_truck"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_mill_office"
+          },
+          {
+            "entity_id": "char_gault",
+            "column": "location_id",
+            "value": "loc_mill_office"
+          },
+          {
+            "entity_id": "char_gault",
+            "column": "goal",
+            "value": "coerce jesse into taking the fall"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_the_arrest_of_declan",
+        "sequence": 12,
+        "summary": "Constable Stoddard intercepts Declan in the rail yard and arrests him, citing Declan's earlier union strike threats and Maybelle's midnight sighting as proof of deliberate sabotage.",
+        "pov": "char_jesse",
+        "location_id": "loc_rail_yard",
+        "characters_present": [
+          "char_jesse",
+          "char_stoddard",
+          "char_declan"
+        ],
+        "dramatic_function": "Wrong Turn: The coherent, defensible wrong theory peaks as law enforcement moves to close the case on Declan.",
+        "beats": [
+          "Stoddard brandishes the union grievance letters where Declan swore the elevator would grind to a halt.",
+          "Stoddard seizes Callum's pocketknife from Declan's coat, calling it a stolen murder weapon.",
+          "Declan shouts that he was framed and demands that Jesse look at the physical locks."
+        ],
+        "caused_by": [
+          "ev_10_stoddard_circles_declan",
+          "ev_11_gault_demands_a_scapegoat"
+        ],
+        "reveals": [],
+        "conceals": [
+          "declan_knife_unable_to_cut_steel"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "declan_threatened_strike_sabotage",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_rail_yard"
+          },
+          {
+            "entity_id": "char_declan",
+            "column": "status",
+            "value": "under_arrest"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_manifest_clears_the_railcars",
+        "sequence": 13,
+        "summary": "Jesse studies the duplicate slip numbers against the yard switch-list and demonstrates to Stoddard that the midnight shipment was a highway flatbed, not Declan's rail cars.",
+        "pov": "char_jesse",
+        "location_id": "loc_rail_yard",
+        "characters_present": [
+          "char_jesse",
+          "char_stoddard",
+          "char_declan"
+        ],
+        "dramatic_function": "Wrong Turn: Begins cracking the wrong theory by divorcing the midnight movement from the rail union.",
+        "beats": [
+          "Jesse compares the unnumbered manifest tare weights with the empty siding boxcars.",
+          "Jesse shows Stoddard that the wheel-weights record tandem rubber tires, not iron rail bogies.",
+          "Stoddard realizes the grain moved outside Declan's union siding completely."
+        ],
+        "caused_by": [
+          "ev_12_the_arrest_of_declan"
+        ],
+        "reveals": [],
+        "conceals": [
+          "truck_hired_directly_by_gault"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "unregistered_freight_manifest",
+            "plant": "ev_09_the_crumpled_manifest"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_stoddard",
+            "column": "status",
+            "value": "frustrated"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_the_knife_fails_the_test",
+        "sequence": 14,
+        "summary": "In the boot pit, Stoddard attempts to fit Callum's bent knife blade into the forced emergency chute latch, but the soft brass blade cannot match the deep tool gouges.",
+        "pov": "char_jesse",
+        "location_id": "loc_elevator_pit",
+        "characters_present": [
+          "char_jesse",
+          "char_stoddard",
+          "char_declan"
+        ],
+        "dramatic_function": "Wrong Turn: Collapses the wrong theory completely as the physical evidence refutes Declan's involvement.",
+        "beats": [
+          "Stoddard presses the blade of Callum's knife against the scraped iron latch plate.",
+          "The soft horn-and-tin handle bends, showing the strike marks were gouged by heavy hardened alloy.",
+          "Stoddard admits the knife could never have forced the hardened hopper gate."
+        ],
+        "caused_by": [
+          "ev_13_manifest_clears_the_railcars"
+        ],
+        "reveals": [],
+        "conceals": [
+          "latch_forced_by_iron_prybar"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "callum_bent_pocketknife",
+            "plant": "ev_06_declan_displays_the_knife"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_elevator_pit"
+          },
+          {
+            "entity_id": "char_stoddard",
+            "column": "location_id",
+            "value": "loc_elevator_pit"
+          },
+          {
+            "entity_id": "char_declan",
+            "column": "location_id",
+            "value": "loc_elevator_pit"
+          },
+          {
+            "entity_id": "char_declan",
+            "column": "status",
+            "value": "cleared_of_sabotage"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_the_rebound_on_jesse",
+        "sequence": 15,
+        "summary": "With Declan exonerated, Stoddard orders Declan released and informs Jesse that he is drafting the formal negligence warrant against Jesse as the solely liable party.",
+        "pov": "char_jesse",
+        "location_id": "loc_elevator_pit",
+        "characters_present": [
+          "char_jesse",
+          "char_stoddard"
+        ],
+        "dramatic_function": "Wrong Turn: Resolves the collapse of the false lead by turning all institutional force directly back onto the investigator.",
+        "beats": [
+          "Stoddard removes Declan's restraints and orders him out of the pit.",
+          "Stoddard tells Jesse that absent sabotage, mechanical neglect under Jesse's signature is the only charge left.",
+          "Jesse is given until sundown before the arrest warrant is filed with the county magistrate."
+        ],
+        "caused_by": [
+          "ev_14_the_knife_fails_the_test"
+        ],
+        "reveals": [],
+        "conceals": [
+          "gault_master_panel_controls"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_declan",
+            "column": "location_id",
+            "value": "loc_rail_yard"
+          },
+          {
+            "entity_id": "char_jesse",
+            "column": "status",
+            "value": "cornered"
+          },
+          {
+            "entity_id": "char_stoddard",
+            "column": "goal",
+            "value": "prepare criminal negligence warrant for jesse"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_connecting_the_purple_ink",
+        "sequence": 16,
+        "summary": "Jesse inspects the midnight logbook in the scale house and connects the purple transfer ink on Maybelle's stamp pad to the fresh stain he saw on Gault's cuff.",
+        "pov": "char_jesse",
+        "location_id": "loc_scale_house",
+        "characters_present": [
+          "char_jesse",
+          "char_maybelle"
+        ],
+        "dramatic_function": "Solution: Assembles the first piece of the true account by proving the superintendent altered records in person.",
+        "beats": [
+          "Jesse examines the purple indelible transfer ink used only on official gross-weight stamps.",
+          "Maybelle admits she left the stamp desk unattended for ten minutes at midnight to check the track whistle.",
+          "Jesse realizes Gault's stained shirt sleeve proves Gault stamped the midnight manifest himself."
+        ],
+        "caused_by": [
+          "ev_15_the_rebound_on_jesse"
+        ],
+        "reveals": [],
+        "conceals": [
+          "exact_mechanism_of_hopper_trap"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "gault_inked_sleeve",
+            "plant": "ev_03_management_descends"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_scale_house"
+          },
+          {
+            "entity_id": "char_jesse",
+            "column": "goal",
+            "value": "expose gault as the midnight intruder"
+          }
+        ]
+      },
+      {
+        "id": "ev_17_the_twine_bypass_revealed",
+        "sequence": 17,
+        "summary": "In the boot pit, Jesse retrieves the discarded loop of bleached twine and demonstrates to Pete how it had been rigged to hold open the emergency grain bypass chute.",
+        "pov": "char_jesse",
+        "location_id": "loc_elevator_pit",
+        "characters_present": [
+          "char_jesse",
+          "char_pete"
+        ],
+        "dramatic_function": "Solution: Assembles the physical mechanics of the murder from early evidence.",
+        "beats": [
+          "Jesse picks the loop of bleached twine out of the pit rubble.",
+          "He hooks the looped knot over the bypass gate lever, proving it held the gate open against safety springs.",
+          "Pete realizes someone deliberately routed twenty tons of spoiled top-bin grain straight down into the boot where Callum was inspecting."
+        ],
+        "caused_by": [
+          "ev_16_connecting_the_purple_ink"
+        ],
+        "reveals": [],
+        "conceals": [
+          "gault_presence_at_substation"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "bleached_twine_fibers",
+            "plant": "ev_02_clearing_the_sprocket"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_elevator_pit"
+          },
+          {
+            "entity_id": "char_pete",
+            "column": "location_id",
+            "value": "loc_elevator_pit"
+          },
+          {
+            "entity_id": "char_pete",
+            "column": "status",
+            "value": "horrified"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_the_substation_confrontation",
+        "sequence": 18,
+        "summary": "Jesse summons Stoddard and Gault to the electrical substation, proving from the blown midnight remote fuse that the tripper was switched on from Gault's private overhead console.",
+        "pov": "char_jesse",
+        "location_id": "loc_substation",
+        "characters_present": [
+          "char_jesse",
+          "char_gault",
+          "char_stoddard",
+          "char_pete"
+        ],
+        "dramatic_function": "Solution: Completes the true account and corners the concealer before legal authority.",
+        "beats": [
+          "Jesse points out that the blown tripper fuse only completes a circuit when the master supervisory switch is closed.",
+          "Jesse demonstrates that the overhead switch is locked inside Gault's private keybox.",
+          "Stoddard checks Gault's brass key ring and finds the supervisory key on his chain."
+        ],
+        "caused_by": [
+          "ev_17_the_twine_bypass_revealed"
+        ],
+        "reveals": [],
+        "conceals": [
+          "administrative_repercussions"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "tripper_remote_fuse_blown",
+            "plant": "ev_08_blown_fuse_in_the_substation"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_substation"
+          },
+          {
+            "entity_id": "char_pete",
+            "column": "location_id",
+            "value": "loc_substation"
+          },
+          {
+            "entity_id": "char_stoddard",
+            "column": "location_id",
+            "value": "loc_substation"
+          },
+          {
+            "entity_id": "char_gault",
+            "column": "location_id",
+            "value": "loc_substation"
+          },
+          {
+            "entity_id": "char_gault",
+            "column": "status",
+            "value": "unmasked"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_the_arrest_and_the_counter_stroke",
+        "sequence": 19,
+        "summary": "In the mill office, Stoddard snaps irons on Gault for Callum's murder, but Gault uses Jesse's pre-signed morning safety sheet to legally force Jesse's immediate firing and blacklisting.",
+        "pov": "char_jesse",
+        "location_id": "loc_mill_office",
+        "characters_present": [
+          "char_jesse",
+          "char_stoddard",
+          "char_gault"
+        ],
+        "dramatic_function": "Cost: The truth is established, but the formal violation committed by the investigator extracts its legal penalty.",
+        "beats": [
+          "Stoddard reads Gault his rights and secures the forged midnight manifests from the wall safe.",
+          "Gault spitefully enters Jesse's pre-signed safety log into the county record, documenting regulatory fraud.",
+          "Stoddard confirms that under terminal law, signing an uninspected safety ledger terminates Jesse's license forever."
+        ],
+        "caused_by": [
+          "ev_18_the_substation_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "jesse_signed_safety_log",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_mill_office"
+          },
+          {
+            "entity_id": "char_stoddard",
+            "column": "location_id",
+            "value": "loc_mill_office"
+          },
+          {
+            "entity_id": "char_gault",
+            "column": "location_id",
+            "value": "loc_mill_office"
+          },
+          {
+            "entity_id": "char_gault",
+            "column": "status",
+            "value": "under_arrest"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_leaving_the_terminal",
+        "sequence": 20,
+        "summary": "Jesse surrenders his terminal keys at the siding gate and receives Hettie's quiet acknowledgment before walking out of the terminal blacklisted and jobless.",
+        "pov": "char_jesse",
+        "location_id": "loc_rail_yard",
+        "characters_present": [
+          "char_jesse",
+          "char_hettie"
+        ],
+        "dramatic_function": "Cost: Closes the arc on the investigator paying the personal cost of bringing the truth to light.",
+        "beats": [
+          "Jesse lays his brass foreman keys on the yard gate pedestal.",
+          "Hettie stops him at the tracks, acknowledging that Jesse risked prison to name Callum's true killer.",
+          "Jesse walks past the idle grain elevators into town with his trade gone and his conscience clear."
+        ],
+        "caused_by": [
+          "ev_19_the_arrest_and_the_counter_stroke"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse",
+            "column": "location_id",
+            "value": "loc_rail_yard"
+          },
+          {
+            "entity_id": "char_jesse",
+            "column": "status",
+            "value": "disgraced_and_cleared"
+          },
+          {
+            "entity_id": "char_jesse",
+            "column": "goal",
+            "value": "leave town with conscience intact"
+          }
+        ]
+      }
+    ]
+  }
+}
