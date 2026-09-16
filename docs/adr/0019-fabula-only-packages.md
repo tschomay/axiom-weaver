@@ -86,6 +86,34 @@ shape — worth formalizing as the sanctioned mechanism rather than three more t
    a run with zero substitutions and a run with fifty are different results even at the same
    pass/fail outcome.
 
+5. **`lintFabulaArc` is structurally incapable of being mistaken for a publish-readiness check,
+   in two independent ways — not just by convention.**
+
+   - **It never touches the publish path.** `publishManuscript`
+     (`src/authoring/manuscript.ts:310`) calls `lintPackage(candidate)` directly on the actual
+     Manuscript, and `candidate` is never a projection — it's the real package or it doesn't
+     exist. `lintFabulaArc` has no caller anywhere near publish, export, or compile; its only
+     legitimate callers are extraction/generation pipelines scoring their own output before that
+     output has scenes at all. This ADR does not add a way to publish a Fabula-only package, and
+     none should ever be added — the moment #118 turns one into real Scene Cards, it's validated
+     and published exactly like any other package, through the one existing gate.
+   - **Even if it were wired in by mistake, it would still fail.** A Fabula-only package has
+     `scene_cards: []` by construction. `StoryPackageSchema.scene_cards.min(1)` means
+     `lintPackage` — the real one, the only one `publishManuscript` calls — rejects it on schema
+     shape alone, unconditionally, regardless of anything `lintFabulaArc` ever reported. The
+     projection's cleanliness and the real package's publishability are checking two different
+     objects and cannot be confused for each other by any code path that exists or is planned.
+
+   And the result type makes the distinction impossible to paper over at a glance: `lintFabulaArc`
+   returns a `FabulaProjectionLintResult`, never a `LintResult`, with no `publishable` field at
+   all (only `LintResult` has one, and only `lintPackage` produces a `LintResult`) plus a
+   mandatory `note` string every caller must surface alongside the problem list — fixed to *"This
+   is a projection of Fabula-only content onto provisional scenes. It is not a Story Package and
+   has not been checked for publish-readiness — Scene Cards, the Voice Card, and everything the
+   real linter checks about them still do not exist."* Any script or UI reporting a
+   `FabulaProjectionLintResult` prints that note; there is no clean/short output path that omits
+   it.
+
 ## Consequences
 
 - `src/arc/fabula.ts`'s `FabulaEventSchema`, `FabulaArcSchema`, `FABULA_BLOCK`, and

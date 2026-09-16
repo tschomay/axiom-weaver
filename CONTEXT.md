@@ -57,8 +57,11 @@ World Model seed and Scene Cards.
   Fabula-only package before Scene Cards exist, via `lintFabulaArc`. A measuring
   instrument, never a deliverable — segmentation still produces the real Scene Cards. A
   field the projection can't recover (a Syuzhet-only property like POV) gets a
-  deterministic substitution, counted and reported rather than silently guessed. See
-  ADR 0019.
+  deterministic substitution, counted and reported rather than silently guessed.
+  **Never a publish-readiness check and never wired into one**: it returns its own
+  result type with no `publishable` field, and the actual publish gate only ever
+  lints the real package, which a Fabula-only package fails outright (`scene_cards`
+  is empty) whether or not the projection was ever run. See ADR 0019.
 
 ## The two memories
 
