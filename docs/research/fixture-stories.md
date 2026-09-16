@@ -373,6 +373,165 @@ the least certain of any candidate.
    different tale but a finer carding of scenes 5–9 (the godmother and the two balls split
    naturally into 18).
 
+## Category 3 — the hard fixture (phase 1 of #132)
+
+Research for [issue #132](https://github.com/tschomay/axiom-weaver/issues/132), part of
+[issue #113](https://github.com/tschomay/axiom-weaver/issues/113). This is **phase 1 only**:
+picking the source and the single axis of difficulty it stresses. Authoring
+`fixtures/<story>/package.json` and the corresponding notes in `fixtures/authoring-notes.md` is
+phase 2, and #132 blocks that phase on #117 producing its first scored extraction run — picking
+the hard axis before seeing where extraction actually fails would be a guess, not an observation.
+Nothing below is a Scene Card breakdown; the "expected shape" note is sizing only, to confirm
+tractability, not a scene-by-scene commitment.
+
+### Why a third fixture at all
+
+`docs/agents/story-authoring-eval.md` §2 states the limit plainly: the extraction rubric's only
+ground truth today is Cinderella and *A Christmas Carol* — two short, linear, realist
+19th-century texts, the easy end of what extraction has to survive.
+[`narrative-extraction-prior-art.md`](narrative-extraction-prior-art.md) §5 (verified in #126)
+gives the specific reason this matters rather than being a vague worry: NoCha found model
+performance on book-length reasoning "substantially worse on speculative fiction with extensive
+world-building" than on realist prose, and §2.2's BookCoref numbers show *why* — coreference on
+long documents fails by welding distinct entities into one cluster (MUC 94.30 against B³ 55.30,
+CEAFe 33.45), and that failure gets worse the further a text's cast and ontology sit from what
+coreference systems were trained on (§2.1: BookNLP/LitBank's training data is realist prose
+excerpts). A rubric that only ever scores against realist prose cannot tell you whether a
+pipeline survived the easy end or the whole range.
+
+### Pick: *The Machine Stops* — E. M. Forster (1909)
+
+**Edition to use**: "The Machine Stops", first published in *The Oxford and Cambridge Review*,
+November 1909; collected in *The Eternal Moment and Other Stories*, Sidgwick & Jackson, 1928.
+
+**Rights basis — same rule this file already established.** Both the first (periodical) and the
+book publication predate 1930, so both clear the "published 1930 or earlier is PD in the US"
+rule by the same 95-years-from-publication basis already used above for Dickens (also a
+non-US-published-first author, so this is not a new exception to the rule, just another instance
+of it) *(search-verified: first publication in* The Oxford and Cambridge Review*, November 1909,
+and republication in* The Eternal Moment and Other Stories*, 1928 — corroborated across multiple
+independent search results; consistent with Project Gutenberg listing the collection as ebook
+#72890,* The eternal moment, and other stories*, though this session could not open
+gutenberg.org directly to read its `<dcterms:rights>` field the way earlier entries in this file
+did — same block as before)*. Forster himself lived until 1970, so this pick deliberately does
+**not** lean on a life-of-the-author analysis anywhere — it clears on the publication-date rule
+alone, with the same ~30-year-plus margin every other pick in this file has (1928 + 95 = 2023,
+already three years behind us).
+
+Text existence and content were confirmed by reading matching excerpts of the actual 1909/1928
+text mirrored verbatim across multiple independent GitHub repositories (a plain-text corpus file,
+an EPUB source tree, an HTML anthology page, and others), rather than a single GITenberg mirror as
+in the rest of this file — `gutenberg.org`, `en.wikisource.org`, `standardebooks.org`,
+`archive.org`, `manybooks.net` and every general-summary page tried were all blocked by this
+session's egress proxy, so none of the earlier sections' single-canonical-mirror method was
+available. Where a repository's own framing (a summary, a game adaptation) rather than a direct
+quotation is the source, it is marked *(search-verified)* below and not relied on for anything
+load-bearing (rights, structure, or the axis argument).
+
+**Structure** (both parts of this are corroborated directly in the mirrored text, not just a
+summary): three parts — **I. The Air-Ship**, **II. The Mending Apparatus**, **III. The
+Homeless** — following the two principals, Vashti and her son Kuno, from Vashti's underground
+cell, through her air-ship journey to Kuno's cell and back, to the Machine's total collapse.
+**Approximate length: ~12,000–12,300 words** *(search-verified across several independent
+citations; not confirmed by a single word-count-bearing primary source, so treat as an estimate,
+not a fixed figure)* — above Cinderella (2,461 words), below *A Christmas Carol* (28,448 words),
+in the same band as *Theseus and the Minotaur* (9,908 words). That puts it comfortably inside
+"tractable, not novel-scale": the existing fixtures are 14 and 20 Scene Cards, and a ~12k-word text
+with a three-part structure is very unlikely to demand either a much finer or much coarser grain
+than that band.
+
+### The axis: an invented world, coined terms, non-standard entities
+
+This is the one axis of the four named in #132 that has **direct, measured evidence** behind it
+rather than an inference from an adjacent finding — NoCha's result (§5 above) is a measurement of
+extraction-adjacent reasoning specifically on speculative, heavily-world-built fiction, not a
+generalization from a different failure mode. Concretely, this story's world is built entirely
+out of the two things §2 of the prior-art doc says extraction handles worst:
+
+- **A non-standard ontology that doesn't map onto ordinary character/location/object rows.** "the
+  Machine" is simultaneously environment, governing system, and (functionally) antagonist; "the
+  Book" is an object with the standing of scripture; "the Mending Apparatus" is a subsystem that
+  itself becomes a plot-relevant actor when it fails; "Homelessness" is not a place or a person but
+  a *punishment status* ("Punish that man with Homelessness"). None of these fit cleanly as a
+  `character`, a `location`, or an ordinary tiered attribute — they are exactly the case the World
+  Model's open `bag` column exists for, and extraction has to *decide* that, not just fill in a
+  template.
+- **Coined terminology with no real-world referent to fall back on.** A pipeline extracting
+  Cinderella can lean on "pumpkin" and "glass slipper" meaning what they always mean; nothing here
+  carries that shortcut. "The Mending Apparatus," "Homelessness," and the Machine's own vocabulary
+  have to be extracted as first introduced, not recognized.
+
+Both of those stress exactly the two things #132 names for this axis — entity extraction and the
+open key-value bag — and both are stressed by *invention*, not by *quantity* or *ambiguity* of
+names (that would be the large-cast axis, see below). Two principal named characters (Vashti,
+Kuno) keeps this a small, controlled test of ontology novelty rather than a coreference-volume
+test at the same time — which is the point: one axis, isolated.
+
+### Why not the other three
+
+- **Large cast with ambiguous naming.** Rejected because it is too close to the axis just picked,
+  not too far from it. Both axes ultimately stress the same downstream failure — entity
+  resolution, and specifically the over-merge error §2.2 documents as the one ADR 0001's slug
+  identity cannot recover from — just via two different mechanisms (volume/ambiguity of ordinary
+  names, versus novelty of the ontology itself). Picking both at once would test one failure mode
+  twice under two labels, not two failure modes. A large-cast fixture is a legitimate second hard
+  fixture later; it should not be blended into this one.
+- **Non-chronological telling.** Already partially covered: `story-authoring-eval.md` §3.3 and
+  this file's own *A Christmas Carol* entry note that the *Carol* is "almost entirely flashback and
+  flash-forward," so the fixture pair already exercises the ordering metric on real narrative, not
+  a synthetic case. Going meaningfully further than the *Carol* (a frame narrative, a
+  double-timeline novel) tends to arrive at texts that are *also* heavily filtered through a single
+  narrator's retrospective judgment — which drifts straight into the unreliable-narrator axis
+  rather than staying a clean, separate test of ordering alone. Given #132's instruction to isolate
+  one axis, and that the marginal ordering-difficulty this axis would add over the *Carol* is hard
+  to get without also picking up a second axis for free, it was rejected in favor of the axis with
+  a cleaner, already-isolated stress case.
+- **Unreliable or limited narrator.** The one #132 itself flags as having "no prior art at all,"
+  and `narrative-extraction-prior-art.md` §4 confirms this in full: not a sparse literature, an
+  empty one, for the reveal-order/told-ledger problem this axis would stress hardest. That absence
+  of prior art cuts against it for *phase 1* specifically, even though it may be the most valuable
+  axis long-term: the eval rubric's §3.5/§3.6 reveal-order and `must_stay_hidden` metrics are
+  already built for the ordinary case of an omniscient narrative withholding a fact from the reader
+  (the *Carol*'s Stave IV, Cinderella's recount scene); an unreliable narrator adds a second,
+  distinct question — whether the *narrator's own beliefs* diverge from World Model truth, on top
+  of what the reader is told — that the current schema's told-ledger/`character_knowledge` split
+  was not built to represent (`narrative-extraction-prior-art.md` §4.5 makes exactly this
+  distinction: character/narrator knowledge and reader knowledge are different axes, and only the
+  latter has a schema home today). Picking it now would risk grading a schema gap as an extraction
+  failure, or vice versa, with no way to tell which — the opposite of the diagnostic clarity phase
+  1 exists to produce. It is also the axis this file rejected once before for a POC fixture (The
+  Tell-Tale Heart, "Category 2", above) for a related reason — multi-POV/unreliable narration being
+  out-of-scope fog for that map at the time. Whether that fog has since cleared is a schema
+  question for a future ticket, not something to resolve as a side effect of picking a fixture.
+
+Rejecting three axes to keep exactly one is the point, not a hedge: a fixture hard along several
+axes at once would leave a low score with no way to tell which mechanism actually broke.
+
+### Sources
+
+Search-verified for this section (this session's egress policy additionally blocked
+`en.wikisource.org`, `archive.org`, `manybooks.net`, `www.cs.ucdavis.edu`,
+`www.ncbi.nlm.nih.gov` and `mikekalil.com`, on top of the hosts already listed as blocked above):
+
+- First publication, *The Oxford and Cambridge Review*, November 1909, and collection in
+  *The Eternal Moment and Other Stories*, Sidgwick & Jackson, 1928 — corroborated by, among others,
+  [EDN, "The Machine Stops is published, November 1, 1909"](https://www.edn.com/the-machine-stops-is-published-november-1-1909/)
+  and [Christopher Roosen, "115 Years Ago, in 'The Machine Stops'..."](https://www.christopherroosen.com/blog/2024/11/4/e-m-forster-and-the-machine-stops).
+- Project Gutenberg listing for the collection, ebook #72890 — <https://www.gutenberg.org/ebooks/72890>
+  (not opened directly; existence and title corroborated via search).
+- Three-part structure ("The Air-Ship" / "The Mending Apparatus" / "The Homeless") and character
+  names (Vashti, Kuno) — directly confirmed by reading matching quoted excerpts of the source text
+  as mirrored in, among other repositories, `standardebooks/e-m-forster_short-fiction` (the EPUB
+  source for a Standard Ebooks edition) and `XXIIVV/oscean` (a plain-text corpus copy), via GitHub
+  code search.
+- Approximate word count (~12,000–12,300 words) — search-verified across multiple independent
+  citations; no single primary source with a word count was read directly.
+
+Also relevant, already in this file's earlier Sources list: the copyright-term rule and its
+sourcing (Duke CSPD, Internet Archive Public Domain Day 2026, Harvard OATP).
+
+---
+
 ## Sources
 
 Texts read (canonical URL, then the GITenberg mirror actually read):
