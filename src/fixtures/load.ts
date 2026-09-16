@@ -26,6 +26,11 @@ export {
 export const FIXTURE_STORY_IDS = [
   'cinderella',
   'a-christmas-carol',
+  // The hard fixture (#132 phase 2): invented world / coined terms / non-standard entities,
+  // stressing entity extraction and the World Model's open bag in a way the two realist
+  // fixtures above cannot. See docs/research/fixture-stories.md, "Category 3", and
+  // fixtures/authoring-notes.md for the judgment calls this package required.
+  'the-machine-stops',
   // Three original short packages (3-5 scenes). The two public-domain fixtures are the scale
   // test; these are the iteration loop — short enough that a whole live telling costs a handful
   // of writer requests rather than a day's allowance (AGENTS.md, The Gemini API key).

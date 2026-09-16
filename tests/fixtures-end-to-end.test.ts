@@ -58,6 +58,10 @@ const KNOWN_ENTRY_STATE_GAPS: Record<string, string[]> = {
     'scene_18_the_waking char_scrooge.location_id',
     'scene_20_the_office_next_morning char_bob_cratchit.location_id',
   ],
+  // Authored after this check existed, against it, same as the three short packages below —
+  // every scene's entry_state is what the scene before it leaves behind. An empty list is the
+  // assertion, not an omission: a future edit that breaks the chain fails here.
+  'the-machine-stops': [],
   // The three short packages were authored after this check existed, against it — every scene's
   // entry_state is what the scene before it leaves behind. An empty list is the assertion, not an
   // omission: a future edit that breaks the chain fails here.

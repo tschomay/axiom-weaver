@@ -228,3 +228,205 @@ for a story this size, but **a schema-conformance linter (the plant-obligation w
 validators, plus reference-existence checks on `pov`/`location_id`/`characters_present`/
 `entry_state`/`exit_state`) is not optional tooling — it's load-bearing for author-time authoring at
 any scale beyond a short story**, and should probably ship alongside whatever picks up issue #16.
+
+---
+
+## Authoring notes: *The Machine Stops* (#132 phase 2)
+
+Written while producing [`fixtures/the-machine-stops/package.json`](./the-machine-stops/package.json)
+for [issue #132](https://github.com/tschomay/axiom-weaver/issues/132), phase 2, under
+[the map](https://github.com/tschomay/axiom-weaver/issues/113). Source and axis selection are
+[`docs/research/fixture-stories.md`](../docs/research/fixture-stories.md), "Category 3 — the hard
+fixture"; the rubric this package exists to give real numbers to is
+[`docs/agents/story-authoring-eval.md`](../docs/agents/story-authoring-eval.md).
+
+### Rechecking the phase-1 axis against #117's evidence, before writing a word of this package
+
+Phase 1 picked the axis (invented world / coined terms / non-standard entities) before #117's
+extraction pipeline had produced a single scored run. #132's own instructions treat that ordering
+as a real risk, not a formality, so before authoring anything this session read #117's closing
+comment and PR #136 in full, including the underlying score files
+(`fixtures/extraction/runs/{cinderella,a-christmas-carol}/score.json`), and checked the actual
+failures against the axis rather than assuming the phase-1 reasoning still held.
+
+**Conclusion: the axis stands, and the evidence is corroborating rather than neutral.** The
+dominant measured failures — character/location/object precision far below bar (0.06–0.40 against
+a 0.75–0.85 bar, from deliberate over-extraction), the *Carol*'s chronology-bucketing at 0.58
+(Stave IV's conditional future narrated in the present tense), and event recall of 0.38–0.53
+(speech acts systematically under-extracted) — are all measured on the two *realist* fixtures and
+are largely axis-agnostic: they are about extraction volume and tense-vs-story-time tracking, not
+about whether an entity fits a schema table. Nothing in them argues *for* a different axis (large
+cast, non-chronological telling, unreliable narration) over the one already picked; they would
+plausibly recur on a third fixture regardless of which axis it stressed. The one finding that does
+speak to this specific axis is corroborating: PR #136 reports that reusing `provisionalPackage` for
+G0 gating "immediately caught 25/76 `wrong_entity_table` errors (objects/locations extracted into
+`participants`)" on the two *realist* fixtures — a table-classification failure, on ordinary
+characters and objects with no ontological ambiguity at all. An entity that is *genuinely*
+ambiguous between table categories (a governing system that is also an environment that is also,
+once it fails, an antagonist) is exactly the harder version of a failure mode the pipeline already
+exhibits on easy material. That is evidence the axis will produce a meaningful, diagnostic signal,
+not evidence it was mis-picked. This reasoning is recorded in full, and folded into the rubric
+itself, in `docs/agents/story-authoring-eval.md` §2 (this PR also amends that section, per #132's
+own requirement).
+
+### Shape
+
+16 Scene Cards across the text's own three parts — 4 for "The Air-Ship," 5 for "The Mending
+Apparatus," 7 for "The Homeless" — against a 12,000-word source, in the same band as Cinderella
+(14 cards / 2,461 words) and the *Carol* (20 cards / 28,448 words). Two principal named characters
+(Vashti, Kuno), deliberately kept small per the axis's own isolation argument (`fixture-stories.md`
+rejects pairing this axis with a large-cast axis for exactly this reason) — the World Model's
+seven characters, six locations, and three objects are otherwise mostly institutional or
+single-purpose, not a large ordinary cast. Sourced from `en.wikisource.org`'s direct primary-source
+text (all three chapters read in full, not summarized), cross-checked against the length and
+structure claims already verified in `fixture-stories.md`.
+
+### Where the schema didn't fit — the non-standard ontology
+
+This is the fixture's whole reason for existing, so it gets the most space, ranked by how much
+judgment it actually cost.
+
+#### 1. "The Machine" and "the Mending Apparatus": institution, environment, and antagonist in one entity
+
+The ticket's own framing names this as the sharpest case, and building the package didn't soften
+it. "The Machine" is, in the same page of prose, the thing that supplies light, food, music, and
+correspondence (environment); the thing "the Central Committee" administers and the thing later
+generations openly worship (institution/deity); and, once its own repair subsystem starts failing,
+the thing whose collapse kills nearly everyone in the story (antagonist). None of `character`,
+`location`, or `object` fits all three uses, and Principle 4 (bag values are flat scalars, promote
+to a column the moment structure is needed) doesn't resolve *which* table to promote into.
+
+The deciding factor, in the end, was mechanical rather than thematic: the one fact about the
+Machine that Scene Cards actually need to read and write across the story is a **single-valued,
+changing status** — functioning, then failing, then stopped — and ADR 0001's own governing rule
+(single-valued facts are columns) points straight at the `object` table, since `object.status` is
+exactly a P-tier column built for "intact / broken / lost"-shaped values. `obj_the_machine` and
+`obj_mending_apparatus` are both modeled as objects for this reason, each carrying a `bag.note`
+that names the mismatch explicitly rather than letting the choice look more settled than it is.
+The alternative seriously considered — modeling the Machine as a `location` that every scene's
+`location_id` is implicitly inside — was rejected because it would have meant either giving every
+Scene Card a location no narrated action is ever "in" the way it's "in" Vashti's cell, or leaving
+the Machine's degrading status with no column to live on at all. **A future schema iteration that
+wanted a first-class "the environment itself is stateful and can fail" concept would need a fifth
+shape this ADR doesn't have** — this package works around that with a documented substitution, not
+a fix.
+
+The Mending Apparatus gets its own row, not a shared one with the Machine, for a narrower but
+firmer reason: it *acts* independently in Part II (the "worms" that capture Kuno) with its own
+separate failure arc in Part III ("the Committee of the Mending Apparatus... confessed that the
+Mending Apparatus was itself in need of repair") — two distinct plot-relevant state changes on two
+distinct timelines, which is precisely the "single-valued fact" test pointing at two rows, not one.
+
+#### 2. "Homelessness": the one non-standard entity that gets no row at all
+
+Unlike the Machine and the Mending Apparatus, "Homelessness" resists every table, including
+`object`. It isn't a place (despite the name's irony — it's the *loss* of the underground home, not
+a home of its own), it isn't a character, it isn't a physical thing with a status. What it actually
+is, textually, is a **threatened punishment** — a `kind` a `relationship` row can carry
+(`threatens_with_homelessness`, seeded from `char_central_committee` to `char_kuno`) — and,
+separately, a *definition* the narrator supplies once, in plain prose ("Homelessness means death.
+The victim is exposed to the air, which kills him"), which this package carries as a
+`reader_must_learn` fact rather than as any kind of entity attribute. No character in this story is
+ever actually punished with Homelessness on-page, so the natural extension — a `character.status`
+value of `"homeless"` — was never forced into existence; it's named here as the obvious next step if
+a future harder-fixture pass ever cards a story where someone *is* extruded onto the surface as a
+punishment rather than merely threatened with it. **This is the cleanest finding of the whole
+package**: a non-standard entity doesn't always need a workaround row at all — sometimes the honest
+answer is that it was never an entity, only a threat and a definition, and the schema already has
+homes for both of those without stretching anything.
+
+#### 3. Institutional "characters" with no body
+
+"The Central Committee" and "the Committee of the Mending Apparatus" are both modeled as
+`character` rows (`location_id: null`, `status: null`, matching the convention the *Carol* already
+established for its Ghosts) despite being collective, diffuse bodies rather than individuals. The
+judgment call was whether they earn rows at all, and the two were decided differently on purpose:
+the Committee of the Mending Apparatus has direct, attributed quoted dialogue in the source text
+("`No personal complaints are received by the Central Committee,' the Committee of the Mending
+Apparatus replied") — a speaking party in a scene is a character by any reasonable reading, seeded
+or not. The Central Committee never speaks in propria persona anywhere in the text; it only *rules*
+(banning the sun-racing aeroplanes, refusing Kuno's request to father a child, threatening him with
+Homelessness). It still got a row, carrying the seeded `threatens_with_homelessness` relationship
+that Part II's central reveal depends on — but it is the one character in this package that no
+Scene Card ever names directly (an accepted `unused_seed_entity` warning, not an error), because
+there was never a scene where it was narratively present rather than merely invoked. Recorded here
+as a real, if minor, extension of the *Carol*'s Ghost precedent: "no body" turns out to admit
+degrees — present-but-bodiless (the Ghosts, speaking directly to a POV character) versus
+referenced-but-never-present (the Central Committee, ruling from entirely offstage).
+
+#### 4. An epistemic structure the schema handles, but that neither existing fixture needed: everything is already true
+
+Cinderella's irony gap is character-scoped (the sisters don't know; the reader does). The *Carol*'s
+is reader-scoped (the reader doesn't know; the World Model does). *The Machine Stops* is
+structurally different from both: almost the entire first two-thirds of the story (Kuno's
+threatened Homelessness, his climb, the woman he loved and lost) is Kuno recounting events that are
+*already true before the story's first scene opens* — the story's engine is Vashti (and the reader)
+catching up to facts that have been settled the whole time, not new events happening on-page. The
+schema's existing machinery for this — `character_knowledge` rows with `learned_at_scene: null`,
+`pays_off` entries with `plant: null`, exactly the shape ADR 0004 built for Marley's chain — turned
+out to fit this story's *entire* backstory, not just one fact the way the *Carol* uses it once. The
+package seeds `char_kuno`'s knowledge of his own Homelessness threat this way, and seeds
+`char_unnamed_woman` as already dead and the `loved` relationship as already true, rather than
+creating either mid-story via `_new_relationships` — because, read literally, neither event happens
+during any Scene Card; both predate `scene_01`. **This is a positive finding, not a gap**: a
+schema built around one worked example (a single seed-grounded payoff) generalized cleanly to a
+story whose whole shape is seed-grounded revelation, with no new mechanism needed. The visible cost
+is that this package uses zero `_new_relationships`/`_new_character_knowledge` blocks anywhere,
+which is worth naming so a future reader doesn't mistake the convention's absence for it having
+been forgotten.
+
+#### 5. A third epistemic mode: known, but doubted — not hidden
+
+`reader_must_learn` / `must_stay_hidden` assume a fact the reader does or doesn't yet know. This
+story has a fact that doesn't fit either state cleanly: Kuno's claim, in `scene_09_vashtis_verdict`,
+that a woman on the surface helped him and was killed — the reader learns this in the same breath
+Vashti does, so it is not *hidden*, but its truth is left genuinely unconfirmed (the narrator never
+corroborates it, and Vashti's own verdict is that Kuno "was mad"). It is only reinforced, not newly
+revealed, in `scene_16_reunion_in_the_dark`, when Kuno reasserts it with his dying breath and the
+package treats that as the payoff. `must_stay_hidden` would have been the wrong tool here — nothing
+is being withheld from the reader between those two scenes, the reader's *belief* in an already-told
+fact is what's unresolved, which the told-ledger fields have no vocabulary for at all. This package
+doesn't invent a workaround field for it (one data point, same discipline the *Carol* package used
+for the character-scoped-irony-gap finding) — it's recorded here as a third shape alongside
+Cinderella's character-ignorance and the *Carol*'s reader-withholding, in case a future fixture
+makes a second data point.
+
+#### 6. `location_id` has no way to distinguish "set here" from "about there"
+
+Almost all of Part II is Kuno *recounting*, in dialogue, events that happened in a ventilation
+shaft and a Wessex hollow — but the two people having that conversation never leave Kuno's cell.
+Every Scene Card in Part II (`scene_05` through `scene_09`) therefore sets `location_id` to
+`loc_kunos_cell`, the physically true location, rather than to the narrated ones — unlike the
+*Carol*'s ghost-vision Staves, where Scrooge is genuinely transported and `location_id` tracks
+where the vision is set. `loc_wessex_hollow` exists in the World Model seed only as a value
+(`char_unnamed_woman.location_id`), never as a Scene Card's own location, and is flagged as an
+`unused_seed_entity` warning as a result. The alternative — giving each of those scenes the
+narrated location instead — was rejected because it would have conflated "the scene is set here"
+with "the scene is *about* here," which are different facts about a first-person oral account that
+`location_id` has no second field to hold apart. Worth naming for a future schema pass if a harder
+fixture ever needs frame narration (a story told *about* a place by someone who was never
+physically there) to be more than an authorial workaround.
+
+### Entry/exit chaining and `FIXTURE_STORY_IDS`
+
+This package was written against `tests/fixtures-end-to-end.test.ts`'s strict entry/exit chaining
+check from the start, the same way the three short packages were (`docs/schema/fixture-conformance-
+findings.md`) — every scene's `entry_state` is exactly what the previous scene naming that
+entity/column left behind, with zero `entry_state_mismatch` gaps, unlike the two research fixtures'
+two documented, pre-existing gaps. `the-machine-stops` was added to `FIXTURE_STORY_IDS`
+(`src/fixtures/load.ts`) and to `KNOWN_ENTRY_STATE_GAPS` (as `[]`, an assertion, per the same file's
+own convention) so every test that already iterates the fixture list — schema parse, World Model
+load, package lint, the plant-obligation walk, scene-editor round-trip, cache-prefix, package
+transfer, and the end-to-end dry compile — covers this package automatically rather than needing a
+parallel set of tests written for it. `npx vitest run` passes at 652/652 with this fixture included,
+and the existing warning-code snapshot (`unpaid_fact`, `unused_seed_entity`) needed no update — this
+package's warnings are both already-accepted codes, just more instances of them: one
+`reader_must_learn` fact defined and revealed in the same scene rather than paid off by a later one
+(`homelessness_means_death` — it is a definition, not a plant), and five `unused_seed_entity`
+warnings (`char_central_committee` and `char_unnamed_woman`, per findings 2–3 above;
+`loc_wessex_hollow`, per finding 6; `loc_kunos_second_cell`, named only as a column *value* on
+`char_kuno` and never itself a Scene Card's own `location_id`; and `obj_book_of_the_machine`, present
+throughout the prose in `required_beats` but never structurally referenced in any `entry_state` /
+`exit_state` block — the same "what not to model structurally" restraint the first two fixtures'
+notes describe, applied to a prop whose journey through the story is thematic rather than
+plot-mechanical).

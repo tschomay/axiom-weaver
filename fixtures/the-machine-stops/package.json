@@ -1,0 +1,409 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "the-machine-stops",
+  "_authoring_conventions": {
+    "note": "Not part of the schema; documents the JSON shape this package chose where docs/schema/story-package.md leaves entry_state/exit_state as opaque JSON. See fixtures/authoring-notes.md for why.",
+    "entry_state_and_exit_state": "{ <entity_id>: { <column>: <value>, ... }, ... } — one object per touched entity, naming only the core columns this scene asserts. Untouched entities are omitted, not restated.",
+    "new_rows_in_exit_state": "A scene that creates a new relationship or character_knowledge row (not just updates an existing entity's column) lists it under reserved keys _new_relationships / _new_character_knowledge inside exit_state, using the same row shape as world_model_seed.relationships / character_knowledge. Unused by this package — every relationship and knowledge row this story needs is already true before scene_01 opens, so all of them are seeded rather than created mid-story; see fixtures/authoring-notes.md.",
+    "non_standard_entities": "\"the Machine\", \"the Mending Apparatus\", and \"Homelessness\" do not sit cleanly in character / location / object. The first two are modeled as `object` rows so their degrading `status` column can drive the plot; \"Homelessness\" is modeled only as a relationship `kind` (a threatened punishment) and never gets an entity row of its own. All three judgment calls, and why the alternatives were rejected, are written up in fixtures/authoring-notes.md."
+  },
+  "world_model_seed": {
+    "characters": [
+      { "id": "char_vashti", "name": "Vashti", "location_id": "loc_vashtis_cell", "status": "alive", "goal": null, "bag": { "occupation": "lecturer on music", "temperament": "brisk, easily irritated by interruption, content in isolation", "creed": "an advanced thinker: holds that direct experience is vulgar and that the Machine is not to be blasphemed, though she would deny worshipping it" } },
+      { "id": "char_kuno", "name": "Kuno", "location_id": "loc_kunos_cell", "status": "alive", "goal": "recover mankind's lost sense of space and touch by reaching the surface of the earth on his own feet, not through the Machine", "bag": { "relation": "Vashti's son", "note": "unusually muscular for his generation — a trait the Machine treats as a demerit" } },
+      { "id": "char_central_committee", "name": "the Central Committee", "location_id": null, "status": null, "goal": null, "bag": { "nature": "the body that administers the Machine and issues its rulings (banning the racing aeroplanes, refusing Kuno's request to father a child, threatening him with Homelessness); never appears in person, only through its rulings and the Committee of the Mending Apparatus", "note": "modeled as a character row despite having no body or location — see fixtures/authoring-notes.md" } },
+      { "id": "char_committee_mending_apparatus", "name": "the Committee of the Mending Apparatus", "location_id": null, "status": null, "goal": null, "bag": { "nature": "the sub-committee that fields personal complaints on the Central Committee's behalf, and which — in the story's late going — confesses that the Mending Apparatus itself is in need of mending" } },
+      { "id": "char_unnamed_woman", "name": "a woman Kuno met on the surface", "location_id": "loc_wessex_hollow", "status": "dead", "goal": null, "bag": { "note": "already dead before scene_01 opens — killed by the Mending Apparatus during Kuno's escapade, years before the story's present; see fixtures/authoring-notes.md on why this is a seed-time fact rather than a mid-story event" } },
+      { "id": "char_attendant", "name": "the air-ship attendant", "location_id": "loc_air_ship", "status": "alive", "goal": null, "bag": { "role": "tends the air-ship's passengers; her direct duties have made her a little rougher and more original than most people of her age" } },
+      { "id": "char_lecturer", "name": "the lecturer", "location_id": null, "status": "alive", "goal": null, "bag": { "role": "a celebrated advanced thinker whose lecture on 'second-hand ideas' gets the abolition of respirators and the re-establishment of religion both moving", "note": "delivers his lectures from his own room over the Machine, like every other speaker in this story; never physically located anywhere the plot visits" } }
+    ],
+    "locations": [
+      { "id": "loc_vashtis_cell", "name": "Vashti's cell", "bag": { "description": "a small hexagonal room underground, in the southern hemisphere; windowless and lampless but filled with a soft radiance, and studded with buttons for food, music, clothing, baths, literature, and correspondence" } },
+      { "id": "loc_kunos_cell", "name": "Kuno's cell", "bag": { "description": "exactly resembles Vashti's room, in the northern hemisphere; the identical furnishing is itself part of the story's point" } },
+      { "id": "loc_kunos_second_cell", "name": "Kuno's second cell", "bag": { "description": "the room Kuno is transferred to in the years after his escapade, in the southern hemisphere, not far from Vashti's own" } },
+      { "id": "loc_air_ship", "name": "the air-ship", "bag": { "description": "one of the old air-ship line's vessels, running far below capacity; cabins, a revolving platform, and metal blinds over every skylight" } },
+      { "id": "loc_wessex_hollow", "name": "a fern-edged hollow in Wessex", "bag": { "description": "on the surface of the earth, reached through a disused ventilation shaft; the site of Kuno's escape and of the unnamed woman's death — never itself the setting of a Scene Card, only spoken of; see fixtures/authoring-notes.md" } },
+      { "id": "loc_the_tunnel", "name": "the tunnel outside the cells", "bag": { "description": "the communication tunnel and platform every cell opens onto; harmless and unremarkable until the collapse, when it becomes the place where thousands die" } }
+    ],
+    "objects": [
+      { "id": "obj_book_of_the_machine", "name": "the Book of the Machine", "location_id": null, "status": "intact", "bag": { "description": "Vashti's own copy of the single volume every cell keeps by its reading-desk, giving instructions against every contingency; kissed and pressed to the forehead as an act of worship, three times, in a fixed private ritual", "note": "every room has its own copy; only Vashti's is tracked here, since it is the copy her own scenes carry through the story — see fixtures/authoring-notes.md" } },
+      { "id": "obj_the_machine", "name": "the Machine", "location_id": null, "status": "functioning", "bag": { "role": "governs every physical and social fact of life underground: food, light, music, correspondence, birth, death; worshipped as divine by the story's later years, though nominally still 'the creation and the implement of man'", "note": "simultaneously environment, governing institution, and (once it starts failing) the story's antagonist — no single World Model table fits it cleanly; modeled as an object so its degrading `status` column can carry the plot mechanically. See fixtures/authoring-notes.md." } },
+      { "id": "obj_mending_apparatus", "name": "the Mending Apparatus", "location_id": null, "status": "functioning", "bag": { "role": "the subsystem that repairs breaches in the Machine's tunnels; physically manifests as blind white worm-like probes that search and seal any gap", "note": "an infrastructure subsystem that is also, in Part II, a pursuing antagonist with no dialogue of its own — deliberately not modeled as a `character`, since it never speaks or is addressed; its `status` column is what actually matters to the plot (functioning, then itself broken)." } }
+    ],
+    "relationships": [
+      { "id": "rel_001", "from_id": "char_vashti", "to_id": "char_kuno", "kind": "mother_of", "sentiment": "conflicted", "bag": {} },
+      { "id": "rel_002", "from_id": "char_central_committee", "to_id": "char_kuno", "kind": "threatens_with_homelessness", "sentiment": null, "bag": { "note": "the seed-grounded fact behind Part II's central withholding — true before scene_01 opens, known to Kuno from the start, revealed to Vashti and the reader only at scene_05_threatened_with_homelessness" } },
+      { "id": "rel_003", "from_id": "char_kuno", "to_id": "char_unnamed_woman", "kind": "loved", "sentiment": "grieves", "bag": {} },
+      { "id": "rel_004", "from_id": "char_vashti", "to_id": "obj_book_of_the_machine", "kind": "possesses", "sentiment": null, "bag": {} }
+    ],
+    "character_knowledge": [
+      { "id": "ck_seed_001", "character_id": "char_kuno", "fact_ref": "kuno_threatened_with_homelessness", "learned_at_scene": null, "bag": { "note": "grounds scene_05's plant:null payoff — Kuno already knows this when the story opens; Vashti and the reader do not" } }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_call",
+      "order": 1,
+      "pov": "char_vashti",
+      "location_id": "loc_vashtis_cell",
+      "characters_present": ["char_vashti", "char_kuno"],
+      "dramatic_function": "Establish the world's texture (the cell, the Machine, isolation-by-choice) and the central relationship's friction: Kuno wants direct contact, Vashti finds the request faintly blasphemous.",
+      "entry_state": { "char_vashti": { "location_id": "loc_vashtis_cell", "status": "alive" }, "char_kuno": { "location_id": "loc_kunos_cell", "status": "alive" } },
+      "exit_state": {},
+      "required_beats": [
+        "an electric bell interrupts Vashti's music; she isolates herself to take the call",
+        "Kuno asks her to come and see him, not through the Machine — to meet face to face",
+        "Vashti is vaguely shocked and refuses, calling the request contrary to the spirit of the age",
+        "Kuno describes an idea the stars gave him from the air-ship — four big stars like shoulders and knees, three like a belt, three hanging like a sword, 'like a man' — and says he wants to see them from the surface of the earth itself",
+        "his image fades in the blue plate; he has isolated himself, and for a moment Vashti feels lonely"
+      ],
+      "tone": "brisk, faintly ominous beneath the comedy",
+      "length_budget": 500,
+      "invariants": [
+        "Vashti never says outright that she loves or dislikes her son — the relationship is carried entirely through irritation and reluctant attention",
+        "the Machine is never directly criticized by Vashti; she deflects Kuno's blasphemy rather than engaging it"
+      ]
+    },
+    {
+      "id": "scene_02_the_book_of_the_machine",
+      "order": 2,
+      "pov": "char_vashti",
+      "location_id": "loc_vashtis_cell",
+      "characters_present": ["char_vashti"],
+      "dramatic_function": "Show the Machine as religion, not just infrastructure, before the plot needs it to be — the worship ritual is introduced with no dramatic pressure on it at all, which is what makes its later collapse land.",
+      "entry_state": { "char_vashti": { "location_id": "loc_vashtis_cell" } },
+      "exit_state": {},
+      "required_beats": [
+        "Vashti's room is cataloged: buttons for food, music, clothing, hot and cold baths, literature, correspondence — the room, though it holds nothing, is in touch with everything she cares for",
+        "she fields a burst of correspondence and delivers her lecture on 'Music during the Australian Period' to an audience that never leaves its own armchairs",
+        "in bed, she takes up the Book of the Machine and performs her private ritual: she kisses it three times, inclines her head three times, and murmurs 'O Machine! O Machine!'",
+        "she recalls the Book's own line: 'Parents, duties of, cease at the moment of birth' — and reflects that there was always something special about Kuno, and about all her children"
+      ],
+      "tone": "hushed, reverent, quietly unsettling in how ordinary the reverence is",
+      "length_budget": 450,
+      "invariants": [
+        "the worship ritual is played completely straight — no character in the scene treats it as strange"
+      ]
+    },
+    {
+      "id": "scene_03_the_decision_to_travel",
+      "order": 3,
+      "pov": "char_vashti",
+      "location_id": "loc_vashtis_cell",
+      "characters_present": ["char_vashti", "char_kuno"],
+      "dramatic_function": "Vashti's terror of direct experience gets its first real test and fails, then succeeds — the scene that finally moves her physically toward the plot.",
+      "entry_state": { "char_vashti": { "location_id": "loc_vashtis_cell", "status": "alive" } },
+      "exit_state": { "char_vashti": { "location_id": "loc_air_ship" } },
+      "required_beats": [
+        "Kuno refuses to speak further until she comes; she presses an unfamiliar button and the wall swings open onto the tunnel — and she shrinks back into the room, seized by 'the terrors of direct experience'",
+        "she tells Kuno she cannot come, she is not well; an apparatus descends from the ceiling and a doctor is summoned through the Machine before she has even finished the sentence",
+        "Kuno says only that something tremendous may happen, and that he will not say what through the Machine",
+        "reconsidering — there was always something special about Kuno — she presses the button a second time and this time does not retreat: she takes up the Book, boards the car, and the journey to the northern hemisphere begins"
+      ],
+      "tone": "anxious, then quietly resolute",
+      "length_budget": 550,
+      "invariants": [
+        "the medical apparatus is described as ordinary and unremarkable to Vashti, never alarming to her, even though it is played as alarming to the reader"
+      ]
+    },
+    {
+      "id": "scene_04_the_air_ship_journey",
+      "order": 4,
+      "pov": "char_vashti",
+      "location_id": "loc_air_ship",
+      "characters_present": ["char_vashti", "char_attendant"],
+      "dramatic_function": "Widen the world beyond the two cells: the decline of travel, the abandoned old competitions with the sun, and the first plain mention of Homelessness as a punishment — planted without its meaning yet explained.",
+      "entry_state": { "char_vashti": { "location_id": "loc_air_ship" } },
+      "exit_state": { "char_vashti": { "location_id": "loc_kunos_cell" } },
+      "required_beats": [
+        "the air-ship service is described as a relic kept running past its usefulness, since travel itself has become nearly pointless — the earth is exactly alike everywhere now",
+        "the narrator recalls the old civilization's races to 'keep pace with the sun', ended when the Committee declared the pursuit illegal, unmechanical, and punishable by Homelessness — 'of Homelessness more will be said later'",
+        "the attendant, made a little rough by her direct duties, steadies Vashti with her hand when sunlight nearly touches her; Vashti is scandalized at being touched at all",
+        "Vashti watches the Himalayas, the Caucasus, and Greece pass below and orders each hidden behind a metal blind in turn, murmuring 'No ideas here'",
+        "she arrives, by vestibule, lift, and sliding door, at her son's room — which exactly resembles her own"
+      ],
+      "reader_must_learn": ["homelessness_punishment_named"],
+      "tone": "expansive, wry, faintly melancholy under the travelogue",
+      "length_budget": 500,
+      "invariants": [
+        "no character in this scene explains what Homelessness actually is — the narrator's promise ('more will be said later') is the only gloss the reader gets"
+      ]
+    },
+    {
+      "id": "scene_05_threatened_with_homelessness",
+      "order": 5,
+      "pov": "char_kuno",
+      "location_id": "loc_kunos_cell",
+      "characters_present": ["char_vashti", "char_kuno"],
+      "dramatic_function": "The threat named in scene 4 gets its full weight, and Kuno's account of his escapade begins. Pays off the story's first plant and its seed-grounded second.",
+      "entry_state": { "char_vashti": { "location_id": "loc_kunos_cell" }, "char_kuno": { "location_id": "loc_kunos_cell", "status": "alive" } },
+      "exit_state": {},
+      "required_beats": [
+        "Vashti complains of the journey's cost to her time and her soul; Kuno tells her flatly that he has been threatened with Homelessness",
+        "the narrator states plainly what Vashti and the reader now both learn: Homelessness means death — the victim is exposed to the outer air, which kills them",
+        "Kuno explains that any infant who promises undue physical strength is destroyed at birth as a demerit; he alone was let live, and it is exactly that strength that let him do what follows",
+        "he describes recovering 'the sense of space' by walking the platforms outside his room until he could measure Near and Far by his own feet again, not by how quickly a train could carry him"
+      ],
+      "reader_must_learn": ["homelessness_means_death", "kuno_threatened_with_homelessness"],
+      "pays_off": [
+        { "fact_ref": "homelessness_punishment_named", "plant": "scene_04_the_air_ship_journey" },
+        { "fact_ref": "kuno_threatened_with_homelessness", "plant": null }
+      ],
+      "tone": "grave, confessional",
+      "length_budget": 500,
+      "invariants": [
+        "Kuno states the threat as simple fact, without self-pity — the horror is left entirely to the narrator's definition and to Vashti's reaction"
+      ]
+    },
+    {
+      "id": "scene_06_the_climb",
+      "order": 6,
+      "pov": "char_kuno",
+      "location_id": "loc_kunos_cell",
+      "characters_present": ["char_vashti", "char_kuno"],
+      "dramatic_function": "Kuno's account moves from recovered instinct to trespass: finding the old ventilation shaft and physically forcing his way toward the surface.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "walking every platform in turn, Kuno reasons that the topmost storey, nearest the earth's surface, is the one place a workmen's ventilation shaft from before the Machine might still survive",
+        "he finds a gap in the tiles of a railway tunnel, widens it by hand over repeated visits, and eventually finds a primeval metal ladder leading straight up into darkness",
+        "he trains his arms for weeks in secret, then climbs — cutting his hands on the rungs, moving past the light of the railway into a silence that 'pierced his ears like a sword'",
+        "he reaches a smooth pneumatic stopper sealing the shaft's top, finds a handle by feel alone, and jumps, trusting a voice in the dark that tells him it is worth it whether or not the handle holds"
+      ],
+      "tone": "tense, physical, quietly awed",
+      "length_budget": 550,
+      "invariants": [
+        "Kuno never frames the climb as directed against Vashti personally — his account stays about the Machine and about space, not about his mother"
+      ]
+    },
+    {
+      "id": "scene_07_the_hills_of_wessex",
+      "order": 7,
+      "pov": "char_kuno",
+      "location_id": "loc_kunos_cell",
+      "characters_present": ["char_vashti", "char_kuno"],
+      "dramatic_function": "The climax of Kuno's account as pure wonder, before the danger returns — his one true experience of the outer world, and his clearest statement of the story's thesis.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "the stopper is blown out from under him and he is thrown onto the grass of a fern-edged hollow in Wessex, blood pouring from his nose and ears, the escaping artificial air roaring around him",
+        "he sips the leaking air to recover, watches his respirator bob away out of reach overhead, and waits as the hollow slowly fills with breathable air like a bowl filling with water",
+        "climbing to the hollow's rim at evening, he sees the low hills of Wessex and feels that they are alive, sleeping, and that people once loved them",
+        "he tells Vashti directly that it is humanity, not the surface, that is dying — that the Machine 'develops, but not on our lines' and has narrowed love itself to a carnal act"
+      ],
+      "tone": "rapturous, then bitter and urgent",
+      "length_budget": 500,
+      "invariants": [
+        "the hills are described entirely through Kuno's own feeling — no outside authority (a lecturer, the Book) is allowed to corroborate or contradict what he says he saw"
+      ]
+    },
+    {
+      "id": "scene_08_the_worms",
+      "order": 8,
+      "pov": "char_kuno",
+      "location_id": "loc_kunos_cell",
+      "characters_present": ["char_vashti", "char_kuno"],
+      "dramatic_function": "The account turns to horror: the Mending Apparatus is revealed for what it physically is, and Kuno's escapade ends in capture, not escape.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno's respirator falls and is lost; too late, he realizes the gap he widened has been sealed again — the Mending Apparatus has come for him",
+        "a long white worm-like thing crawls out of the shaft in the moonlight and winds itself around his ankle; more follow, denuding the hollow of everything movable",
+        "he is dragged, fighting, back down the shaft and into darkness, striking his head on the ladder before he wakes again in his own room, the worms gone, his friends asking down the speaking-tubes whether he has had any new ideas lately"
+      ],
+      "reader_must_learn": ["mending_apparatus_is_the_worms"],
+      "tone": "nightmarish, then flatly anticlimactic on the return to ordinary life",
+      "length_budget": 500,
+      "invariants": [
+        "the worms are never named as 'the Mending Apparatus' by Kuno mid-struggle — the connection is only made once the danger is past, in his own retrospective narration"
+      ]
+    },
+    {
+      "id": "scene_09_vashtis_verdict",
+      "order": 9,
+      "pov": "char_vashti",
+      "location_id": "loc_kunos_cell",
+      "characters_present": ["char_vashti", "char_kuno"],
+      "dramatic_function": "Close Part II on Vashti's flat rejection of everything just heard, and on the one claim of Kuno's that the story will not let her — or the reader — simply dismiss.",
+      "entry_state": {},
+      "exit_state": { "char_vashti": { "location_id": "loc_vashtis_cell" } },
+      "required_beats": [
+        "Vashti tells Kuno it will end in Homelessness; he says he wishes it would, and that he prefers the mercy of God to the mercy of the Machine",
+        "she asks whether he has ever seen the bones of those extruded onto the surface after the Great Rebellion, and states as settled fact that the surface supports life no longer",
+        "pressed for why he still believes otherwise, Kuno says: because he has seen her — a woman who came to his aid when the worms took him, was entangled as he was, and was killed, luckier than him, by one piercing her throat",
+        "the narrator states plainly that Vashti departed, and that in the troubles that followed she never saw her son's face again — judging privately that he was mad"
+      ],
+      "reader_must_learn": ["homeless_survivors_exist"],
+      "tone": "cold, final, with one crack of grief showing through Kuno's last lines",
+      "length_budget": 450,
+      "invariants": [
+        "Vashti never directly addresses the claim about the woman — she leaves in silence, which is itself her answer",
+        "the woman is named only as 'her' — the package tracks her as char_unnamed_woman precisely because the text never gives her a name either"
+      ]
+    },
+    {
+      "id": "scene_10_two_developments",
+      "order": 10,
+      "pov": "char_vashti",
+      "location_id": "loc_vashtis_cell",
+      "characters_present": ["char_vashti", "char_lecturer"],
+      "dramatic_function": "Open Part III with the years passing and the world hardening around Vashti's own values — respirators abolished, the Machine formally worshipped — so the coming collapse has a whole civilization's complacency to fall through.",
+      "entry_state": { "char_vashti": { "location_id": "loc_vashtis_cell" } },
+      "exit_state": {},
+      "required_beats": [
+        "respirators are abolished as vulgar and unproductive of ideas; visiting the earth's surface becomes something only a few complaining lecturers still want to do",
+        "the lecturer's celebrated speech on 'second-hand ideas' argues that first-hand experience is worthless, and that a future generation should learn events only through ever-longer chains of other people's opinions",
+        "the same speech's reverent closing tone tips into open religion: people begin openly worshipping the Machine, the Book's ritual formulas swell into prayer, and heresy against 'undenominational Mechanism' now risks Homelessness",
+        "the narrator is explicit that no one on the Central Committee understands the Machine as a whole any longer — each person masters only a fragment of it, and calls that progress"
+      ],
+      "tone": "dryly satirical, tightening toward dread",
+      "length_budget": 500,
+      "invariants": [
+        "Vashti is presented as an ordinary, representative believer in this scene, not an exceptional one — the point is how unremarkable her faith has become"
+      ]
+    },
+    {
+      "id": "scene_11_vashtis_years",
+      "order": 11,
+      "pov": "char_vashti",
+      "location_id": "loc_vashtis_cell",
+      "characters_present": ["char_vashti"],
+      "dramatic_function": "A short breath before the trouble starts: Vashti's ordinary, peaceful routine, including the one detail that quietly indicts the whole system.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "her days settle back into their old rhythm: dark to sleep, light to wake, lectures given and attended, ideas exchanged with innumerable friends",
+        "from time to time a friend is granted Euthanasia and leaves their room for good; after a poorly received lecture, Vashti sometimes asks for it herself, and is refused, since the death-rate may never exceed the birth-rate"
+      ],
+      "tone": "placid, with one chilling detail let pass without comment",
+      "length_budget": 250,
+      "invariants": []
+    },
+    {
+      "id": "scene_12_the_machine_stops",
+      "order": 12,
+      "pov": "char_vashti",
+      "location_id": "loc_vashtis_cell",
+      "characters_present": ["char_vashti", "char_kuno"],
+      "dramatic_function": "The title event is spoken aloud for the first time, as a claim Vashti finds simply ridiculous — the story's central plant, delivered with maximum dramatic irony.",
+      "entry_state": { "char_kuno": { "location_id": "loc_kunos_cell" } },
+      "exit_state": { "char_kuno": { "location_id": "loc_kunos_second_cell" } },
+      "required_beats": [
+        "Vashti learns, almost as an aside, that Kuno has been transferred from the northern hemisphere to a room in the southern, not far from her own",
+        "he refuses to show his face on the plate and says only, with solemnity: 'The Machine stops'",
+        "Vashti laughs in his face; to a friend afterward she calls it impious if it were not mad, and the friend finds the phrase meaningless",
+        "she notes, with irritation rather than alarm, that the music has lately taken to a curious gasping sigh, like someone in pain — and privately can't quite forget the coincidence"
+      ],
+      "reader_must_learn": ["kuno_predicted_the_stop"],
+      "tone": "brittle comedy curdling at the edges",
+      "length_budget": 400,
+      "invariants": [
+        "Vashti's dismissal of Kuno is played as entirely reasonable by the standards the story has established for her — she is not being obtuse, she is being consistent"
+      ]
+    },
+    {
+      "id": "scene_13_the_mending_apparatus_in_need_of_repair",
+      "order": 13,
+      "pov": "char_vashti",
+      "location_id": "loc_vashtis_cell",
+      "characters_present": ["char_vashti", "char_committee_mending_apparatus"],
+      "dramatic_function": "Small defects accumulate and are absorbed without complaint, until the one failure — sleep itself — that cannot be shrugged off, and the story's grimmest irony lands: the thing built to fix the Machine is itself broken.",
+      "entry_state": { "char_vashti": { "location_id": "loc_vashtis_cell" } },
+      "exit_state": { "obj_mending_apparatus": { "status": "confessed_broken" }, "obj_the_machine": { "status": "failing" } },
+      "required_beats": [
+        "Vashti's complaints about the music are routed, as always, from the Central Committee to the Committee of the Mending Apparatus, who promise only that the defect 'shall be remedied shortly'",
+        "the mouldy fruit, the stinking bath water, the jarring noises are all bitterly complained of at first, then quietly accepted as part of how things are — humanity proving endlessly adaptable to the Machine's decline",
+        "the beds fail to appear on summons, all over the world, on the same day — the first stoppage too serious to simply absorb, and crowds begin crying 'Punish that man with Homelessness!' at an imagined saboteur",
+        "the Committee of the Mending Apparatus comes forward and confesses, to calm the panic, that the Mending Apparatus itself is in need of repair"
+      ],
+      "pays_off": [{ "fact_ref": "mending_apparatus_is_the_worms", "plant": "scene_08_the_worms" }],
+      "tone": "creeping dread under a veneer of reasonable patience",
+      "length_budget": 500,
+      "invariants": [
+        "no character in this scene connects the Mending Apparatus's own failure to what Kuno described in Part II — that connection is left entirely to the reader"
+      ]
+    },
+    {
+      "id": "scene_14_twilight",
+      "order": 14,
+      "pov": "char_vashti",
+      "location_id": "loc_vashtis_cell",
+      "characters_present": ["char_vashti", "char_lecturer"],
+      "dramatic_function": "The literal stopping of the Machine, foretold three scenes ago and now paid off without ceremony — the story's largest single event delivered in one flat sentence.",
+      "entry_state": { "obj_the_machine": { "status": "failing" } },
+      "exit_state": { "obj_the_machine": { "status": "stopped" } },
+      "required_beats": [
+        "light dims across the world, the air turns foul, and reading becomes difficult; the lecturer cries 'Courage! courage! What matter so long as the Machine goes on? To it the darkness and the light are one'",
+        "rumors of hope and collapse alternate — the Mending Apparatus almost mended, new 'nerve-centres' evolving — while people spend their strength praying to their Books",
+        "then, without the slightest warning, the entire communication-system breaks down at once, everywhere, and the world as they understood it ends"
+      ],
+      "pays_off": [{ "fact_ref": "kuno_predicted_the_stop", "plant": "scene_12_the_machine_stops" }],
+      "tone": "mounting dread, then sudden total silence",
+      "length_budget": 450,
+      "invariants": [
+        "the collapse itself is narrated with no warning inside the scene — no character sees it coming, mirroring the text's own 'without the slightest warning'"
+      ]
+    },
+    {
+      "id": "scene_15_the_silence",
+      "order": 15,
+      "pov": "char_vashti",
+      "location_id": "loc_vashtis_cell",
+      "characters_present": ["char_vashti"],
+      "dramatic_function": "Vashti's own cell comes apart around her, and the horror of true silence — a thing she has never once experienced — drives her out into the tunnel she has spent the whole story refusing to enter.",
+      "entry_state": { "char_vashti": { "location_id": "loc_vashtis_cell" }, "obj_the_machine": { "status": "stopped" } },
+      "exit_state": { "char_vashti": { "location_id": "loc_the_tunnel" }, "char_kuno": { "location_id": "loc_the_tunnel" } },
+      "required_beats": [
+        "the hum Vashti has heard since birth stops, and silence itself very nearly kills her — she stumbles to the door hoping the Machine has been mended, and finds the tunnel outside full of people crawling, screaming, dying against the live rail",
+        "she shuts herself back in, and her own room disintegrates around her: the medical apparatus ruptures from the ceiling, the floor heaves, the light and air fail in turn",
+        "with the whole Machine breaking apart everywhere at once, Kuno too is driven from his own nearby cell into the same tunnel, though Vashti does not yet know this",
+        "in the last of the light, she strikes the door switch by chance and is thrown back out into the tunnel among the dying, screaming and praying, the Book still in her bleeding hands"
+      ],
+      "tone": "apocalyptic, physical, terrified",
+      "length_budget": 550,
+      "invariants": [
+        "the Book of the Machine is explicitly shown to save her from nothing — she clutches it exactly as before, to no effect"
+      ]
+    },
+    {
+      "id": "scene_16_reunion_in_the_dark",
+      "order": 16,
+      "pov": "char_kuno",
+      "location_id": "loc_the_tunnel",
+      "characters_present": ["char_vashti", "char_kuno"],
+      "dramatic_function": "The story's one unmediated human contact, the long-range payoff of scene 9's dismissed claim, and the ending — hope and annihilation delivered in the same breath.",
+      "entry_state": { "char_vashti": { "location_id": "loc_the_tunnel" }, "char_kuno": { "location_id": "loc_the_tunnel", "status": "alive" } },
+      "exit_state": { "char_vashti": { "status": "dead" }, "char_kuno": { "status": "dead" } },
+      "required_beats": [
+        "Vashti crawls toward Kuno's voice over the bodies of the dead, and for the first time in the story they touch — not through the Machine",
+        "dying, Kuno tells her plainly: he has seen the Homeless, spoken to them, loved them — they are real, and they are hiding in the mist and the ferns, waiting for civilization to stop",
+        "Vashti, still hoping this is not the end, asks if tomorrow someone will simply start the Machine again; Kuno answers 'Never. Humanity has learnt its lesson'",
+        "an air-ship crashes through the vomitory into the ruined city as they speak, and for one moment they glimpse the nations of the dead, and scraps of the untainted sky, before they join them"
+      ],
+      "pays_off": [{ "fact_ref": "homeless_survivors_exist", "plant": "scene_09_vashtis_verdict" }],
+      "tone": "tender, terrible, and — in Kuno's last words only — hopeful",
+      "length_budget": 500,
+      "invariants": [
+        "this is the only scene in the whole package where Vashti and Kuno are physically in the same place",
+        "Kuno's claim about the Homeless is never independently confirmed by anything outside his own testimony — the story ends on his word, not on proof"
+      ]
+    }
+  ],
+  "voice_card": {
+    "style_preset": "essayistic dystopia",
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "intrusive and essayistic — the narrator steps outside any single character to generalize about the civilization, then drops back into close third on Vashti or Kuno without warning",
+    "register": "dry, aphoristic, faux-anthropological; describes the horrifying as reasonable and the reasonable as horrifying, in the same flat tone",
+    "sentence_rhythm": "short declarative openers building into long qualified sentences full of parenthetical asides and rhetorical questions ('Man is the measure. That was my first lesson.'); catalog-like lists of buttons, committees, and small abandoned comforts",
+    "imagery_palette": ["the hum felt in the blood rather than heard", "buttons, switches, and blue plates", "worms and tubes as the Machine's only visible anatomy", "hills and ferns as a lost, bodily world", "light thinning into dark as a physical, not metaphorical, event"],
+    "dialogue_density": "moderate, and pointedly asymmetric — Vashti's side of a conversation is brisk and transactional, Kuno's swells into long unbroken narration once he starts, and the Machine itself never has a voice of its own to answer either of them",
+    "style_exemplar": "The room held nothing, and so it held everything she cared for; it was the last honest thing the Machine ever built, a box that loved her back exactly as much as she pressed its buttons."
+  },
+  "metadata": {
+    "title": "The Machine Stops",
+    "source": "E. M. Forster, first published in The Oxford and Cambridge Review, November 1909; collected in The Eternal Moment and Other Stories, Sidgwick & Jackson, 1928 (Project Gutenberg #72890; public domain in the USA — see docs/research/fixture-stories.md, 'Category 3 — the hard fixture')",
+    "created_at": "2026-09-16T00:00:00Z"
+  }
+}
