@@ -16,7 +16,7 @@ import { repairOrder } from '@/extraction/pass-chronology';
 import { dedupeBySpan } from '@/extraction/pass-events';
 import { foldProposals, isSuspiciousMerge, reconcile } from '@/extraction/pass-reconcile';
 import { gateG0 } from '@/extraction/scoring/gates';
-import { FABULA_BLOCK } from '@/arc/fabula';
+import { FABULA_BLOCK } from '@/schema/fabula';
 import { importSummary } from '@/authoring/transfer';
 import { loadGroundTruth, narratedOutOfOrder } from '@/extraction/scoring/ground-truth';
 import { groundingReport, normalizeWhitespace, resolveQuote } from '@/extraction/spans';

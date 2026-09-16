@@ -27,7 +27,8 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 import { briefsFor, CONFIG_IDS, type ConfigId } from '../src/arc/premises';
-import { FABULA_BLOCK, FabulaArcSchema, draftPackage } from '../src/arc/fabula';
+import { draftPackage } from '../src/arc/fabula';
+import { readFabulaArc, storyIdOf } from '../src/schema/fabula';
 import { generateArc, liveClient } from '../src/arc/generator';
 import { scoreDiversity, scoreMechanical } from '../src/arc/rubric';
 import { TESTING_WRITER_MODEL, writerModelFromEnv } from '../src/writer/model-client';
@@ -174,13 +175,8 @@ async function rescore(outDir: string): Promise<void> {
   const summaries = [];
   for (const file of files) {
     const envelope = JSON.parse(await readFile(join(outDir, file), 'utf8')) as Record<string, unknown>;
-    const block = envelope[FABULA_BLOCK] as { events?: unknown; model?: string } | undefined;
-    const storyId = String(envelope['story_id'] ?? 'unknown');
-    const arc = FabulaArcSchema.parse({
-      title: (envelope['metadata'] as { title?: string } | undefined)?.title ?? 'untitled',
-      world_model_seed: envelope['world_model_seed'],
-      events: block?.events ?? [],
-    });
+    const storyId = storyIdOf(envelope, 'unknown');
+    const { arc } = readFabulaArc(envelope);
     const score = scoreMechanical(arc, storyId);
     const scorePath = join(outDir, `${storyId}.score.json`);
     let previous: Record<string, unknown> = {};

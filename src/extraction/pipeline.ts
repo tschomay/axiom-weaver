@@ -58,7 +58,7 @@
  * `fields_not_recovered` rather than filled with a plausible guess. See `fabulaBlock` below.
  */
 
-import { FABULA_BLOCK } from '../arc/fabula';
+import { FABULA_BLOCK } from '../schema/fabula';
 import { DraftStoryPackageSchema, type DraftStoryPackage } from '../schema/manuscript';
 import type { ModelClient } from '../writer/model-client';
 import { ExtractionModel, type CallRecord } from './call';

@@ -21,13 +21,9 @@ import {
   materializePlotShape,
   plantPolicyFor,
 } from '../src/arc/brief';
-import {
-  FABULA_BLOCK,
-  FabulaArcSchema,
-  draftPackage,
-  provisionalPackage,
-  type FabulaArc,
-} from '../src/arc/fabula';
+import { draftPackage } from '../src/arc/fabula';
+import { provisionalPackage } from '../src/authoring/lint-fabula';
+import { FABULA_BLOCK, FabulaArcSchema, type FabulaArc } from '../src/schema/fabula';
 import { presenceProblems, stateChainingProblems } from '../src/arc/chaining';
 import { applyEdits, mechanicalRepairs, repairTargets } from '../src/arc/repair';
 import { scoreDiversity, scoreMechanical, spanHistogram } from '../src/arc/rubric';

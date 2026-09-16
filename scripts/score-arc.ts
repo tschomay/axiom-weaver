@@ -22,7 +22,8 @@ try {
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-import { FabulaArcSchema, provisionalPackage, FABULA_BLOCK } from '../src/arc/fabula';
+import { provisionalPackage } from '../src/authoring/lint-fabula';
+import { readFabulaArc, storyIdOf } from '../src/schema/fabula';
 import { judgePackage, type JudgeScore } from '../src/arc/judge';
 import { liveClient } from '../src/arc/generator';
 import { plantSpans, spanHistogram } from '../src/arc/rubric';
@@ -54,15 +55,9 @@ function line(score: JudgeScore): string {
 
 /** Load a generated deliverable back into a package the judge and the span scorer can read. */
 async function loadGenerated(path: string): Promise<{ label: string; pkg: StoryPackage }> {
-  const raw: unknown = JSON.parse(await readFile(path, 'utf8'));
-  const envelope = raw as Record<string, unknown>;
-  const block = envelope[FABULA_BLOCK] as { events?: unknown } | undefined;
-  const arc = FabulaArcSchema.parse({
-    title: (envelope['metadata'] as { title?: string } | undefined)?.title ?? 'untitled',
-    world_model_seed: envelope['world_model_seed'],
-    events: block?.events ?? [],
-  });
-  const storyId = String(envelope['story_id'] ?? 'unknown');
+  const envelope: unknown = JSON.parse(await readFile(path, 'utf8'));
+  const { arc } = readFabulaArc(envelope);
+  const storyId = storyIdOf(envelope, 'unknown');
   return { label: storyId, pkg: provisionalPackage(arc, storyId) };
 }
 

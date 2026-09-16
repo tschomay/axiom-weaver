@@ -1,0 +1,829 @@
+{
+  "story_id": "cinderella",
+  "generator": "segmentation pipeline (#118)",
+  "models_used": [
+    "gemini-3.8-flash"
+  ],
+  "requested_model": "gemini-3.8-flash",
+  "segmented_at": "2026-09-16T11:18:44.414Z",
+  "cost_usd": 0.02598675,
+  "calls": [
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 0 (0–24)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2117,
+      "output_tokens": 1105,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0057315,
+      "ms": 7679,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 1 (18–42)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2039,
+      "output_tokens": 1144,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00581925,
+      "ms": 3283,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 2 (36–44)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 946,
+      "output_tokens": 402,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002217,
+      "ms": 2500,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 924,
+      "output_tokens": 500,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002568,
+      "ms": 2337,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 761,
+      "output_tokens": 551,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002637,
+      "ms": 2167,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 9–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 775,
+      "output_tokens": 527,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0025575,
+      "ms": 3065,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 1–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1185,
+      "output_tokens": 272,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00190875,
+      "ms": 1422,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_verification",
+      "label": "pairs 1–3",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 680,
+      "output_tokens": 228,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.001365,
+      "ms": 1318,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 1–2",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1202,
+      "output_tokens": 75,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00118275,
+      "ms": 4019,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "events": 44,
+  "scenes": 12,
+  "events_per_scene": 3.6666666666666665,
+  "signals_available": {
+    "pov": false,
+    "dramatic_function": false,
+    "caused_by": false,
+    "story_time": true,
+    "narrated_index": true,
+    "location": true
+  },
+  "boundaries": {
+    "windows": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 24
+      },
+      {
+        "index": 1,
+        "start": 18,
+        "end": 42
+      },
+      {
+        "index": 2,
+        "start": 36,
+        "end": 44
+      }
+    ],
+    "window_problems": [],
+    "failed_windows": [],
+    "fell_back_to_signals": 0,
+    "disagreements": 0,
+    "judged_adjacencies": 43,
+    "self_consistency": 1,
+    "decisions": [
+      {
+        "index": 0,
+        "after_event_id": "ev_0002",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time jumps forward and focus shifts to the royal ball announcement.",
+        "from_signals": false
+      },
+      {
+        "index": 1,
+        "after_event_id": "ev_0003",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time jumps to the day of the ball as the sisters depart.",
+        "from_signals": false
+      },
+      {
+        "index": 2,
+        "after_event_id": "ev_0004",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Focus shifts to Cinderella weeping alone after the departure.",
+        "from_signals": false
+      },
+      {
+        "index": 3,
+        "after_event_id": "ev_0005",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The fairy godmother arrives to console weeping Cinderella.",
+        "from_signals": false
+      },
+      {
+        "index": 4,
+        "after_event_id": "ev_0006",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous errand and interaction preparing Cinderella for the ball.",
+        "from_signals": false
+      },
+      {
+        "index": 5,
+        "after_event_id": "ev_0007",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous errand fetching items for the godmother.",
+        "from_signals": false
+      },
+      {
+        "index": 6,
+        "after_event_id": "ev_0008",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate continuation of transforming the pumpkin.",
+        "from_signals": false
+      },
+      {
+        "index": 7,
+        "after_event_id": "ev_0011",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous sequence of magical preparations.",
+        "from_signals": false
+      },
+      {
+        "index": 8,
+        "after_event_id": "ev_0012",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous magical transformation of mice to horses.",
+        "from_signals": false
+      },
+      {
+        "index": 9,
+        "after_event_id": "ev_0013",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous preparation sequence.",
+        "from_signals": false
+      },
+      {
+        "index": 10,
+        "after_event_id": "ev_0014",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous magical transformation of rat to coachman.",
+        "from_signals": false
+      },
+      {
+        "index": 11,
+        "after_event_id": "ev_0015",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous preparation sequence fetching lizards.",
+        "from_signals": false
+      },
+      {
+        "index": 12,
+        "after_event_id": "ev_0016",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous magical transformation of lizards to footmen.",
+        "from_signals": false
+      },
+      {
+        "index": 13,
+        "after_event_id": "ev_0017",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous sequence transforming Cinderella's clothes.",
+        "from_signals": false
+      },
+      {
+        "index": 14,
+        "after_event_id": "ev_0018",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous gift of the glass slippers.",
+        "from_signals": false
+      },
+      {
+        "index": 15,
+        "after_event_id": "ev_0019",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Departure instructions given directly before leaving.",
+        "from_signals": false
+      },
+      {
+        "index": 16,
+        "after_event_id": "ev_0020",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Cinderella promises and departs to conclude the scene.",
+        "from_signals": false
+      },
+      {
+        "index": 17,
+        "after_event_id": "ev_0021",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cut to Cinderella arriving at the ball.",
+        "from_signals": false
+      },
+      {
+        "index": 18,
+        "after_event_id": "ev_0022",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous sweep of the ongoing ball.",
+        "from_signals": false
+      },
+      {
+        "index": 19,
+        "after_event_id": "ev_0023",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Ongoing events within the ball.",
+        "from_signals": false
+      },
+      {
+        "index": 20,
+        "after_event_id": "ev_0024",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Still inside the ball interacting with sisters.",
+        "from_signals": false
+      },
+      {
+        "index": 21,
+        "after_event_id": "ev_0025",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Concluding action of the ball sequence as Cinderella leaves.",
+        "from_signals": false
+      },
+      {
+        "index": 22,
+        "after_event_id": "ev_0026",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Cut to Cinderella back home speaking with her godmother.",
+        "from_signals": false
+      },
+      {
+        "index": 23,
+        "after_event_id": "ev_0027",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action at home as the sisters return.",
+        "from_signals": false
+      },
+      {
+        "index": 24,
+        "after_event_id": "ev_0029",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation at home.",
+        "from_signals": false
+      },
+      {
+        "index": 25,
+        "after_event_id": "ev_0030",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time skip to the second ball the next day.",
+        "from_signals": false
+      },
+      {
+        "index": 26,
+        "after_event_id": "ev_0031",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Midnight strikes at the second ball.",
+        "from_signals": false
+      },
+      {
+        "index": 27,
+        "after_event_id": "ev_0032",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate chase through the palace.",
+        "from_signals": false
+      },
+      {
+        "index": 28,
+        "after_event_id": "ev_0033",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The Prince retrieves the dropped slipper during the escape.",
+        "from_signals": false
+      },
+      {
+        "index": 29,
+        "after_event_id": "ev_0034",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cinderella arrives back at home.",
+        "from_signals": false
+      },
+      {
+        "index": 30,
+        "after_event_id": "ev_0035",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time skip of a few days to the royal proclamation.",
+        "from_signals": false
+      },
+      {
+        "index": 31,
+        "after_event_id": "ev_0036",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Montage of slipper trials across the realm.",
+        "from_signals": false
+      },
+      {
+        "index": 32,
+        "after_event_id": "ev_0037",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "The slipper trial arrives at Cinderella's house.",
+        "from_signals": false
+      },
+      {
+        "index": 33,
+        "after_event_id": "ev_0038",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous shoe-fitting scene at home.",
+        "from_signals": false
+      },
+      {
+        "index": 34,
+        "after_event_id": "ev_0039",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action as Cinderella tries on the slipper.",
+        "from_signals": false
+      },
+      {
+        "index": 35,
+        "after_event_id": "ev_0040",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Godmother appears in the same continuous room.",
+        "from_signals": false
+      },
+      {
+        "index": 36,
+        "after_event_id": "ev_0043",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Sisters' reaction in the same room.",
+        "from_signals": false
+      },
+      {
+        "index": 37,
+        "after_event_id": "ev_0041",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Sisters beg for forgiveness in the same room.",
+        "from_signals": false
+      },
+      {
+        "index": 38,
+        "after_event_id": "ev_0042",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Cinderella embraces and forgives them.",
+        "from_signals": false
+      },
+      {
+        "index": 39,
+        "after_event_id": "ev_0045",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Redundant/continuous forgiving moment.",
+        "from_signals": false
+      },
+      {
+        "index": 40,
+        "after_event_id": "ev_0046",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Cinderella is taken to meet the Prince.",
+        "from_signals": false
+      },
+      {
+        "index": 41,
+        "after_event_id": "ev_0047",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time jump of a few days to the wedding.",
+        "from_signals": false
+      },
+      {
+        "index": 42,
+        "after_event_id": "ev_0048",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Part of the concluding wedding day epilogue summary.",
+        "from_signals": false
+      }
+    ]
+  },
+  "grouping": {
+    "judged_boundaries": 11,
+    "forced_by_plant_span": 0,
+    "forced_by_size": 0,
+    "unseparable_plant_spans": []
+  },
+  "scene_properties": {
+    "failed_batches": 0,
+    "pov_fallbacks": 0,
+    "location_fallbacks": 0,
+    "beat_fallbacks": 0,
+    "function_fallbacks": 0
+  },
+  "substitutions": {
+    "pov_from_seed": 0,
+    "location_from_seed": 0,
+    "pov_from_candidates": 0,
+    "location_from_candidates": 0,
+    "beats_from_events": 0
+  },
+  "state": {
+    "dropped_unknown_entity": 0,
+    "dropped_entity_ids": [],
+    "dropped_unknown_column": 0
+  },
+  "plants": {
+    "carried_from_fabula": 0,
+    "dangling_plants": 0,
+    "proposed": 3,
+    "rejected_malformed": 0,
+    "verified": 2,
+    "rejected_by_verifier": 1,
+    "unverified_dropped": 0,
+    "seed_grounded_unrepresentable": 0,
+    "failed_batches": 0,
+    "accepted": [
+      {
+        "fact_ref": "lost_glass_slipper",
+        "plant": "scene_07_the_lost_slipper",
+        "payoff": "scene_10_the_slipper_fits",
+        "why": "Cinderella drops one of her glass slippers during her flight, which the Prince recovers."
+      },
+      {
+        "fact_ref": "proclamation_to_marry_owner",
+        "plant": "scene_09_the_proclamation",
+        "payoff": "scene_12_the_royal_wedding",
+        "why": "The Prince proclaims he will marry whoever fits the lost glass slipper."
+      }
+    ]
+  },
+  "told_ledger": {
+    "facts": 2,
+    "withheld_scene_entries": 0,
+    "rejected_out_of_range": 0,
+    "failed_batches": 0
+  },
+  "lint": {
+    "problems": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_mademoiselle_de_la_poche",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_gentlemans_first_wife",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_tire_woman",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_guards",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_garden",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_madams_chamber",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_chimney_corner",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_palace_gate",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_pumpkin",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_wand",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_red_velvet_suit",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_gold_flowered_manteau",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_diamond_stomacher",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_glass_slippers",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_mouse_trap",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_rat_trap",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_watering_pot",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_clothes",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_oranges_and_citrons",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_yellow_suit",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_mademoiselle_de_la_poche",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_gentlemans_first_wife",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_tire_woman",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_guards",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_garden",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_madams_chamber",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_chimney_corner",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_palace_gate",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_pumpkin",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_wand",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_red_velvet_suit",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_gold_flowered_manteau",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_diamond_stomacher",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_glass_slippers",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_mouse_trap",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_rat_trap",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_watering_pot",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_clothes",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_oranges_and_citrons",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_yellow_suit",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "publishable": true
+  },
+  "vacuous_checks": [
+    "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+    "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+    "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+  ]
+}
