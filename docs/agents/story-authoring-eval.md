@@ -109,27 +109,63 @@ be **granularity-tolerant** and to separate three different kinds of disagreemen
 Collapsing the third into the second is the single most likely way to make this rubric produce
 confident, meaningless numbers.
 
-### The second limit: both fixtures are the easy end
+### The second limit: two of the three fixtures are the easy end
 
-Every number this rubric produces comes from two short, linear, realist nineteenth-century
-stories. That is not a representative sample of what extraction has to survive. Book-length
-reasoning degrades **further on speculative fiction with heavy world-building** than on realist
-prose — invented entities, coined terms and non-standard ontologies are exactly what a
-coreference and attribute-extraction pass handles worst (NoCha, via
+[`fixtures/cinderella`](../../fixtures/cinderella/package.json) and
+[`fixtures/a-christmas-carol`](../../fixtures/a-christmas-carol/package.json) are two short,
+linear, realist nineteenth-century stories. That is not a representative sample of what
+extraction has to survive. Book-length reasoning degrades **further on speculative fiction with
+heavy world-building** than on realist prose — invented entities, coined terms and non-standard
+ontologies are exactly what a coreference and attribute-extraction pass handles worst (NoCha, via
 [`narrative-extraction-prior-art.md`](../research/narrative-extraction-prior-art.md) §5).
 
-So a pipeline scoring at bar on Cinderella and the *Carol* has cleared the easy end of the range,
-not the range. Two consequences, both binding:
+[`fixtures/the-machine-stops`](../../fixtures/the-machine-stops/package.json) (#132) is the third
+fixture, and it exists specifically to stop this rubric's numbers from describing only the easy
+end. It is **hard along exactly one axis, chosen deliberately, not several at once**: an invented
+world with coined terms and non-standard entities (E. M. Forster, 1909/1928 — "the Machine," "the
+Book," "the Mending Apparatus," "Homelessness" as a punishment status, none of which map cleanly
+onto `character`/`location`/`object`). It is *not* harder on cast size (two principal named
+characters, deliberately kept small so ontology novelty is isolated from coreference volume),
+narrative order (told straightforwardly, start to finish), or narrator reliability (a plain
+third-person narrator throughout). See `docs/research/fixture-stories.md`, "Category 3 — the hard
+fixture," for the full axis selection and the three axes rejected alongside it, and
+`fixtures/authoring-notes.md`'s entry for this package for how the non-standard entities were
+actually modeled against the fixed World Model tables.
+
+That axis pick was made in phase 1 of #132, *before* #117's first scored extraction run existed —
+and was rechecked against that run's actual results before phase 2 authored this package. #117's
+dominant measured failures (both realist fixtures: character/location/object precision far below
+bar from deliberate over-extraction; the *Carol*'s chronology-bucketing at 0.58 on Stave IV's
+conditional future; event recall 0.38–0.53 from under-extracted speech acts) are largely
+axis-agnostic — they stress extraction volume and tense-vs-story-time, not ontology fit, and
+would likely recur on any third fixture regardless of axis. The one finding that *does* bear
+directly on this axis is `wrong_entity_table` (PR #136): 25 of 76 gate errors on the realist
+fixtures were objects or locations extracted into the character table — a table-classification
+failure, which is exactly the mechanism an entity that generically resists classification (a
+governing system that is also an environment that is also an antagonist) is chosen to stress
+harder. That is corroborating evidence for the axis, not evidence against it, so the phase-1 pick
+stood without revision.
+
+So a pipeline scoring at bar on Cinderella and the *Carol* alone has cleared the easy end of the
+range, not the range — the three consequences that follow are unchanged whether one or two hard
+fixtures exist:
 
 - **Say so in the result.** A score reported without naming the fixture it came from overstates
   what was measured. §3.8 already requires the fixture and `package_version`; this is why.
 - **Do not raise a bar on fixture evidence alone.** Passing here licenses proceeding to a harder
-  source, not a conclusion that extraction works. The first ticket that runs a genuinely harder
-  text — invented world, non-linear telling, unreliable narrator — should expect lower numbers
-  and should not treat that as a regression.
+  source, not a conclusion that extraction works. A run against *The Machine Stops* should expect
+  lower numbers than the two realist fixtures produce, and that is not, by itself, a regression.
+- **A low score against the hard fixture still needs the same discipline §2's three-way split
+  above asks for.** A candidate that models "the Machine" as a `location` rather than an `object`
+  is a different-valid-framing disagreement, not a miss, unless it also gets the Machine's
+  changing operational status wrong — the alignment pass (§3.1) has to be read especially
+  carefully against this fixture's non-standard entities before any precision/recall number here
+  is trusted.
 
-The fix is a harder fixture, not a softer rubric. Adding one is out of scope here and worth its
-own ticket when a prototype is far enough along for the numbers to mean something.
+A second hard fixture — large cast with ambiguous naming, non-chronological telling, or an
+unreliable narrator, the three axes `fixture-stories.md` rejected alongside this one to keep this
+fixture a single-axis test — is out of scope here and worth its own ticket once this fixture's own
+numbers are in.
 
 ---
 
