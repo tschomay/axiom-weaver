@@ -218,8 +218,14 @@ function printScore(report: Awaited<ReturnType<typeof scoreExtraction>>): void {
     lines.push(
       `      ${table.table.padEnd(11)} recall ${pct(table.recall).padStart(6)} ` +
         `(${table.aligned}/${table.fixture_rows})   precision ${pct(table.precision).padStart(6)} ` +
+        `(${table.aligned}/${table.load_bearing_rows})   flat ${pct(table.precision_flat)} ` +
         `(${table.aligned}/${table.candidate_rows})`,
     );
+    if (table.over_extracted > 0) {
+      lines.push(
+        `                  over-extracted: ${table.over_extracted} rows no event references`,
+      );
+    }
   }
   lines.push(
     `      relationships recall ${pct(report.world_model.relationship_recall)} ` +

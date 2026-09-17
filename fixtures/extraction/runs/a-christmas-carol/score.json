@@ -1111,7 +1111,7 @@
         "candidate_rows": 155,
         "aligned": 20,
         "recall": 1,
-        "precision": 0.12903225806451613,
+        "precision": 0.20202020202020202,
         "misses": [],
         "inventions": [
           "Marley",
@@ -1249,7 +1249,38 @@
           "Joe Miller",
           "poulterer's man",
           "niece by marriage"
-        ]
+        ],
+        "precision_flat": 0.12903225806451613,
+        "load_bearing_rows": 99,
+        "over_extracted": 56,
+        "over_extracted_examples": [
+          "nephew",
+          "gentlemen",
+          "Saint Dunstan",
+          "Evil Spirit",
+          "the Ghost",
+          "Jacob",
+          "Three Spirits",
+          "Wise Men",
+          "one old ghost",
+          "wretched woman",
+          "infant",
+          "Ghost",
+          "lonely boy",
+          "shaggy ponies",
+          "Fowls",
+          "Ali Baba",
+          "Valentine",
+          "Orson",
+          "Sultan's Groom",
+          "Genii"
+        ],
+        "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
+        "correction": {
+          "ticket": 151,
+          "was": 0.12903225806451613,
+          "method": "recomputed from this run's own package and alignment file, not a re-run"
+        }
       },
       {
         "table": "locations",
@@ -1257,7 +1288,7 @@
         "candidate_rows": 64,
         "aligned": 13,
         "recall": 0.9285714285714286,
-        "precision": 0.203125,
+        "precision": 0.26,
         "misses": [
           "far and lonely places"
         ],
@@ -1313,7 +1344,32 @@
           "Bob Cratchit's house",
           "the room above",
           "dining-room"
-        ]
+        ],
+        "precision_flat": 0.203125,
+        "load_bearing_rows": 50,
+        "over_extracted": 14,
+        "over_extracted_examples": [
+          "Warehouse",
+          "Tank",
+          "city of London",
+          "wine-merchant's cellars",
+          "lumber-room",
+          "the room",
+          "market-town",
+          "Gate of Damascus",
+          "the back-shop",
+          "The poulterers' shops",
+          "the fruiterers'",
+          "a baker's doorway",
+          "back-yard",
+          "the Porch"
+        ],
+        "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
+        "correction": {
+          "ticket": 151,
+          "was": 0.203125,
+          "method": "recomputed from this run's own package and alignment file, not a re-run"
+        }
       },
       {
         "table": "objects",
@@ -1413,7 +1469,17 @@
           "cab",
           "footstool",
           "coal-scuttle"
-        ]
+        ],
+        "precision_flat": 0.06315789473684211,
+        "load_bearing_rows": 95,
+        "over_extracted": 0,
+        "over_extracted_examples": [],
+        "denominator": "all candidate rows — the load-bearing rule is not applied to this table (see #154)",
+        "correction": {
+          "ticket": 151,
+          "was": 0.06315789473684211,
+          "method": "recomputed from this run's own package and alignment file, not a re-run"
+        }
       }
     ],
     "relationship_recall": 0.2727272727272727,

@@ -37,6 +37,55 @@ import {
   type SupportJudgment,
 } from './judge';
 
+/**
+ * Every entity id some event actually refers to — the operative form of §2's "different valid
+ * grain is not an error."
+ *
+ * A row is **load-bearing** when an event names it: in `participants`, as the event's
+ * `location_id`, or as a `state_updates` entity or location value. A row nothing references is a
+ * modeling-grain disagreement with the fixture, not a fidelity failure, and §2 says so directly.
+ * It is the same opinion the linter already ships as `unused_seed_entity`, read one layer earlier.
+ *
+ * Deliberately a *reference* test and not a judgment: it needs no judge, no gold data and no new
+ * field, so two runs are comparable without an alignment decision in the middle of the metric.
+ *
+ * **It is necessary, not sufficient, and the numbers say so.** At this threshold Cinderella lands
+ * close to the fixture's grain (16 character rows against a 9-row target, versus 20 flat) while
+ * *A Christmas Carol* still carries 99 against a 23-row target. The residue is #143's merge and
+ * #144's under-extracted events, both of which change this input — which is why no second rule is
+ * stacked here before those land.
+ */
+export function eventReferencedIds(
+  events: ExtractionResult['sidecar']['events'],
+): Set<string> {
+  const referenced = new Set<string>();
+  for (const event of events) {
+    for (const participant of event.participants) referenced.add(participant);
+    if (event.location_id !== null) referenced.add(event.location_id);
+    for (const update of event.state_updates) {
+      referenced.add(update.entity_id);
+      if (update.column === 'location_id' && typeof update.value === 'string') {
+        referenced.add(update.value);
+      }
+    }
+  }
+  return referenced;
+}
+
+/**
+ * Objects are exempt, and the exemption is measured rather than assumed.
+ *
+ * Not one object row on either fixture is referenced by any event — 95 on *A Christmas Carol*, 12
+ * on Cinderella, zero references between them — because no Fabula field can name one:
+ * `participants` is characters-only by design, `location_id` is a `loc_` id, and every extracted
+ * `state_updates.entity_id` on both fixtures is a character. Applying the rule here would empty
+ * the table and report precision over a denominator of zero.
+ *
+ * That orphaning is #154's to fix. Until it lands, objects score on the flat denominator and the
+ * result says which denominator it used, rather than quietly scoring one table a different way.
+ */
+const RULE_EXEMPT_TABLES: ReadonlySet<string> = new Set(['objects']);
+
 export interface SpanGroundingScore {
   readonly bar: string;
   readonly claims: number;
@@ -72,7 +121,26 @@ export interface TableScore {
   readonly candidate_rows: number;
   readonly aligned: number;
   readonly recall: number;
+  /**
+   * §3.3 precision over **load-bearing** rows — see `eventReferencedIds`.
+   *
+   * §2 splits disagreement three ways and says a *different valid grain* — a row the fixture chose
+   * not to model — is "**not** an error; excluded from the denominator where the rule below says
+   * so." No rule below ever said so, and this was `aligned / candidate_rows` flat, which measures
+   * agreement with one author's grain rather than fidelity to the source. Cinderella is the proof:
+   * it has no duplicate entities at all and still scored 0.40, on twelve unaligned rows that are
+   * all entities the source names and the fixture folded away (`six mice`, `The King`, `coachman`).
+   */
   readonly precision: number;
+  /** The old flat number, published alongside so the change is auditable rather than silent. */
+  readonly precision_flat: number;
+  /** Rows in the precision denominator: referenced by some event, or aligned to the fixture. */
+  readonly load_bearing_rows: number;
+  /** Rows no event references — reported, never silently forgiven. */
+  readonly over_extracted: number;
+  readonly over_extracted_examples: readonly string[];
+  /** Whether the load-bearing rule was applied to this table, and why not when it wasn't. */
+  readonly denominator: string;
   readonly misses: readonly string[];
   readonly inventions: readonly string[];
 }
@@ -207,6 +275,8 @@ export async function scoreExtraction(
   };
 
   const tables: TableScore[] = [];
+  // §2's grain rule, computed once: which seed rows any event actually refers to.
+  const referenced = eventReferencedIds(result.sidecar.events);
   const alignedByFixtureId = new Map<string, string>();
 
   for (const table of ['characters', 'locations', 'objects'] as const) {
@@ -265,13 +335,29 @@ export async function scoreExtraction(
     }
 
     const aligned = fixtureRows.filter((row) => alignedByFixtureId.has(row.id)).length;
+    const ruleApplies = !RULE_EXEMPT_TABLES.has(table);
+    // An aligned row is load-bearing whatever the events did: the fixture itself vouched for it,
+    // and dropping one would let precision exceed 1 by shrinking the denominator under its own
+    // numerator.
+    const loadBearing = ruleApplies
+      ? candidateRows.filter((row) => referenced.has(row.id) || used.has(row.id))
+      : candidateRows;
+    const overExtracted = candidateRows.filter((row) => !loadBearing.includes(row));
+    const flat = candidateRows.length === 0 ? 0 : aligned / candidateRows.length;
     tables.push({
       table,
       fixture_rows: fixtureRows.length,
       candidate_rows: candidateRows.length,
       aligned,
       recall: fixtureRows.length === 0 ? 1 : aligned / fixtureRows.length,
-      precision: candidateRows.length === 0 ? 0 : aligned / candidateRows.length,
+      precision: loadBearing.length === 0 ? 0 : aligned / loadBearing.length,
+      precision_flat: flat,
+      load_bearing_rows: loadBearing.length,
+      over_extracted: overExtracted.length,
+      over_extracted_examples: overExtracted.slice(0, 20).map((row) => row.name),
+      denominator: ruleApplies
+        ? 'load-bearing rows (§2: referenced by some event, or aligned)'
+        : 'all candidate rows — the load-bearing rule is not applied to this table (see #154)',
       misses: fixtureRows.filter((row) => !alignedByFixtureId.has(row.id)).map((row) => row.name),
       inventions: candidateRows.filter((row) => !used.has(row.id)).map((row) => row.name),
     });
