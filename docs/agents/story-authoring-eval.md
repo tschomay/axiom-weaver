@@ -459,8 +459,36 @@ These cannot be mechanized and should not be faked with a proxy metric:
 
 | Criterion | What's asked | How scored |
 | --- | --- | --- |
-| **Causal follow-through** | Does each scene's outcome actually cause what follows, or merely precede it? | Per consecutive pair: `causes` / `merely follows` / `contradicts`. Bar: ≥ 0.70 `causes`, **0** `contradicts`. |
-| **Non-genericity** | Does the arc reduce to a stock shape with names substituted? | Judge names the closest stock shape and rates adherence 1–5; ≤ 3 passes. Deliberately not "is it original" — every arc resembles something; the failure is when nothing but the labels differ. |
+| **Causal follow-through** | Does each scene's outcome actually cause what follows, or merely precede it? | Per consecutive pair: `causes` / `merely follows` / `contradicts`, **plus a separate `story_time_jump` flag**. Bar: ≥ 0.70 `causes` over the pairs that are *not* jumps, and **0** `contradicts` over **all** pairs. |
+| **Non-genericity** | Does the arc reduce to a stock shape with names substituted? | Judge picks a shape from a **fixed inventory** (`STOCK_SHAPES`), rates adherence 1–5, **and lists the particulars the label does not predict**, marking which are load-bearing. Passes on adherence ≤ 3 **or** ≥ 2 load-bearing particulars. Deliberately not "is it original" — every arc resembles something; the failure is when nothing but the labels differ. |
+
+**Why both were rebuilt (#147), because the old forms failed §4.3 on material that works.**
+
+*Non-genericity was circular.* It asked the judge to name the closest stock shape **it could** and then
+rate adherence to that self-supplied label — so adherence was maximal for any clean instance of
+anything nameable. The judge labelled Cinderella "Cinderella-type rags-to-recognition" and scored
+5/5; nine generated arcs drew genre labels nothing can fully adhere to and scored 2–3. It measured
+how specific a label the judge happened to choose. A closed inventory restores the comparison, and
+the particulars question asks what the criterion was always for. It now works as intended on the
+hardest case: Cinderella still draws **5/5 adherence** to "rags to recognition" and **passes**, on
+three load-bearing particulars, because being the canonical instance of a shape and being generic
+are not the same thing.
+
+*Causal follow-through punished Syuzhet structure* — and the fix is not the obvious one. A fourth
+`discontinuity` verdict was tried first and made the *Carol* worse, 0.63 → 0.38, reproducibly
+(three repeat runs, judge variance ±0.08). The reason: **a seam can be both a story-time jump and
+genuinely causal** — the Ghost showing Scrooge his past is a jump of decades *and* the cause of
+everything that follows — so a competing verdict got spent on pairs the judge had rated `causes`.
+Recording the jump *beside* the verdict instead takes Cinderella to 0.85 and *The Machine Stops*
+to 0.85, both clearing the bar.
+
+> **A finding that contradicts the ticket that asked for this, and is worth keeping.** The *Carol*
+> still fails, at 0.58 — and **its jump seams are more causal (0.71) than its continuous ones
+> (0.58)**, the opposite of the flashback hypothesis. Every non-causal continuous pair is a seam in
+> one of the Ghosts' guided **tours** ("the spirit continues a tour", "moves onward", "takes
+> Scrooge from the pawnshop to the deathbed"). What depresses this number is *montage* — juxtaposed
+> vignettes — not non-chronological telling. Whether a montage seam should count as a causal
+> failure is a live question this file does not yet answer; see #159.
 | **Payoff earned-ness** | Is each payoff *set up*, versus merely *linked*? | Per pair: `earned` / `linked only`. ≥ 0.70 `earned`. This is the one that separates a valid `pays_off` graph from a good one, and §4.1 cannot see it. |
 | **Thematic coherence** | Does the arc hold one recognizable concern end to end? | 1–5, ≥ 3. |
 | **Engagement** | Would a reader keep going? | 1–5, ≥ 3. The softest number here; weight it last. |

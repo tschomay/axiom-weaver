@@ -31,7 +31,10 @@ import { parseStoryPackage, type StoryPackage } from '../src/schema/story-packag
 import { TESTING_WRITER_MODEL, writerModelFromEnv } from '../src/writer/model-client';
 
 const DEFAULT_DIR = 'prototypes/arc-generation';
-const FIXTURES = ['cinderella', 'a-christmas-carol'] as const;
+// All three human-authored fixtures. `the-machine-stops` joined the calibration set with #147:
+// §4.3's whole claim is that a judge which cannot rate material that demonstrably works is
+// miscalibrated, and a third fixture makes that test harder to pass by accident.
+const FIXTURES = ['cinderella', 'a-christmas-carol', 'the-machine-stops'] as const;
 
 function flag(name: string): boolean {
   return process.argv.includes(`--${name}`);
@@ -46,9 +49,12 @@ function line(score: JudgeScore): string {
   const pct = (value: number | null) => (value === null ? ' n/a ' : `${(value * 100).toFixed(0)}%`);
   return (
     `${score.label.padEnd(28)} ` +
-    `causes ${pct(score.causal.causes_share)} (contradicts ${score.causal.contradicts}) | ` +
+    `causes ${pct(score.causal.continuous.share)} of ${score.causal.continuous.pairs} cont ` +
+    `(all ${pct(score.causal.causes_share)}, ${score.causal.story_time_jumps} jumps, ` +
+    `contradicts ${score.causal.contradicts}) | ` +
     `earned ${pct(score.payoff_earned.earned_share)} of ${score.payoff_earned.pairs} | ` +
-    `stock ${score.non_genericity.adherence}/5 (${score.non_genericity.closest_stock_shape}) | ` +
+    `stock ${score.non_genericity.adherence}/5 +${score.non_genericity.load_bearing_particulars}lb ` +
+    `${score.non_genericity.passed ? 'PASS' : 'FAIL'} | ` +
     `theme ${score.thematic_coherence.score}/5 | engage ${score.engagement.score}/5`
   );
 }

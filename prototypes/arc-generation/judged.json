@@ -1,5 +1,5 @@
 {
-  "judged_at": "2026-09-16T00:52:07.048Z",
+  "judged_at": "2026-09-17T23:12:54.096Z",
   "judge_model": "gemini-3.8-flash",
   "scores": [
     {
@@ -7,10 +7,16 @@
       "judge_model": "gemini-3.8-flash",
       "causal": {
         "pairs": 13,
-        "causes": 10,
-        "merely_follows": 3,
+        "causes": 11,
+        "merely_follows": 2,
         "contradicts": 0,
-        "causes_share": 0.7692307692307693,
+        "causes_share": 0.8461538461538461,
+        "story_time_jumps": 0,
+        "continuous": {
+          "pairs": 13,
+          "causes": 11,
+          "share": 0.8461538461538461
+        },
         "passed": true
       },
       "payoff_earned": {
@@ -21,104 +27,141 @@
         "passed": false
       },
       "non_genericity": {
-        "closest_stock_shape": "Cinderella-type rags-to-recognition",
+        "closest_stock_shape": "rags to recognition — a slighted figure is raised by a test they alone can pass",
         "adherence": 5,
-        "passed": false
-      },
-      "thematic_coherence": {
-        "score": 5,
+        "load_bearing_particulars": 3,
+        "particulars": 4,
         "passed": true
       },
-      "engagement": {
+      "thematic_coherence": {
         "score": 4,
         "passed": true
       },
-      "notes": "A faithful, beat-for-beat reproduction of the classical Perrault fairy tale. Every piece of machinery—from dramatic irony to the midnight ticking clock—is cleanly assembled and executed.",
+      "engagement": {
+        "score": 3,
+        "passed": true
+      },
+      "notes": "The outline is an exceptionally faithful transcription of Perrault's classic fairy tale, executing every canonical beat with mechanical precision. Because it hews exactly to the cultural ur-text, it provides zero narrative surprise while remaining structurally airtight.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "merely_follows",
-            "why": "The Prince's ball is an independent royal decree, not caused by the household remarriage or Cinderella's demotion."
+            "story_time_jump": false,
+            "why": "The King's ball is announced independently of Cinderella's domestic demotion, though her new status governs how the invitation treats her."
           },
           {
             "pair": "E02→E03",
             "verdict": "causes",
-            "why": "The ball invitation directly causes the sisters to prepare their finery and enlist Cinderella to dress their hair."
+            "story_time_jump": false,
+            "why": "The sisters' preparations for the ball directly cause Cinderella to dress their hair and endure their mockery."
           },
           {
             "pair": "E03→E04",
             "verdict": "causes",
-            "why": "The cruel mockery and departure of the sisters leave Cinderella alone in the emotional state that prompts her weeping."
+            "story_time_jump": false,
+            "why": "The mockery and the departure of the sisters for the ball leave Cinderella isolated and weeping."
           },
           {
             "pair": "E04→E05",
             "verdict": "causes",
-            "why": "Cinderella's solitary weeping directly summons the godmother to intervene and transform her."
+            "story_time_jump": false,
+            "why": "Cinderella's weeping alone directly summons the godmother, who intervenes to answer her tears."
           },
           {
             "pair": "E05→E06",
             "verdict": "causes",
-            "why": "The godmother's magical provision of coach, gown, and slippers enables Cinderella to arrive at the ball and stun the court."
+            "story_time_jump": false,
+            "why": "The magical coach, gown, and slippers enable Cinderella to travel to the palace and captivate the court."
           },
           {
             "pair": "E06→E07",
             "verdict": "causes",
-            "why": "Her successful reception at the ball flows directly into mingling with the court and her sisters before departing before midnight."
+            "story_time_jump": false,
+            "why": "Her successful reception and the Prince's favors allow her to sit with her sisters undetected and exit comfortably before midnight."
           },
           {
             "pair": "E07→E08",
             "verdict": "causes",
-            "why": "Her safe, timely return allows her to thank her godmother and request permission to attend the following night."
+            "story_time_jump": false,
+            "why": "Her safe, delightful return prompts her to thank her godmother and request permission to attend the next night."
           },
           {
             "pair": "E08→E09",
             "verdict": "causes",
-            "why": "Cinderella's return from the ball before her sisters sets up the household interaction where they unknowingly describe her to her face."
+            "story_time_jump": false,
+            "why": "Returning home before her family enables Cinderella to be waiting when her sisters return to boast about the mystery princess."
           },
           {
             "pair": "E09→E10",
-            "verdict": "merely_follows",
-            "why": "The second ball was already arranged with the godmother in E08; the daytime conversation in E09 does not cause the ball or Cinderella's attendance."
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "The godmother's granted permission leads Cinderella back to the second ball, where her heightened joy leads to missing the midnight deadline."
           },
           {
             "pair": "E10→E11",
             "verdict": "causes",
-            "why": "The stroke of midnight and the sudden reversion of the magic directly force Cinderella to trek home on foot in rags."
+            "story_time_jump": false,
+            "why": "The midnight reversion forces Cinderella to flee on foot in rags, retaining only the single surviving slipper."
           },
           {
             "pair": "E11→E12",
             "verdict": "merely_follows",
-            "why": "The Prince launches the kingdom-wide search because of the lost slipper left at the palace in E10, not because Cinderella concealed the second slipper in her pocket in E11."
+            "story_time_jump": false,
+            "why": "The Prince's kingdom-wide proclamation is caused by finding the lost slipper in E10, not by Cinderella pocketing the second slipper in E11."
           },
           {
             "pair": "E12→E13",
             "verdict": "causes",
-            "why": "The systematic house-to-house search by the gentleman-in-waiting brings the trial to Cinderella's household."
+            "story_time_jump": false,
+            "why": "The systematic house-to-house shoe test brings the gentleman-in-waiting to Cinderella's household to conduct the fitting."
           },
           {
             "pair": "E13→E14",
             "verdict": "causes",
-            "why": "The incontrovertible proof of Cinderella's identity directly causes the sisters' repentance and her marriage to the Prince."
+            "story_time_jump": false,
+            "why": "The irrefutable proof of Cinderella's identity reverses the household hierarchy, leading to the sisters' plea for pardon and her royal wedding."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "midnight_condition",
             "verdict": "earned",
-            "why": "The strict midnight deadline is established as an explicit rule, tested safely on night one to establish routine, and then detonated when Cinderella loses track of time on night two."
+            "why": "The rule is strictly laid down, respected during the first night, and then forgotten in the protagonist's delight on the second night, driving the crisis."
           },
           {
             "fact_ref": "cinderella_kept_second_slipper",
             "verdict": "linked_only",
-            "why": "The remaining slipper is noted in E11 purely to serve as a matching prop for the fitting in E13, performing no other narrative work in the interim."
+            "why": "The detail is noted strictly so it can be produced two scenes later; it performs no independent dramatic or emotional function in the interim."
           }
         ],
-        "closest_stock_shape": "Cinderella-type rags-to-recognition",
+        "closest_stock_shape": "rags to recognition — a slighted figure is raised by a test they alone can pass",
         "stock_adherence": 5,
-        "thematic_coherence": 5,
-        "engagement": 4,
-        "notes": "A faithful, beat-for-beat reproduction of the classical Perrault fairy tale. Every piece of machinery—from dramatic irony to the midnight ticking clock—is cleanly assembled and executed."
+        "particulars": [
+          {
+            "element": "The strict midnight curfew causing all magical accoutrements to instantly revert to raw vermin and vegetables",
+            "load_bearing": true,
+            "why": "Her flight from the clock striking twelve causes the slipper to fall off on the steps and strand her in rags."
+          },
+          {
+            "element": "A kingdom-wide physical fitting test using a lost glass shoe",
+            "load_bearing": true,
+            "why": "The search mechanic brings the royal representative directly to Cinderella's home and provides the means of her vindication."
+          },
+          {
+            "element": "The protagonist retains and produces the matching twin slipper from her apron pocket",
+            "load_bearing": true,
+            "why": "It serves as conclusive physical corroboration before the godmother even reappears to restore her finery."
+          },
+          {
+            "element": "The protagonist shares royal gifts with and forgives her tormentors, arranging court marriages for them",
+            "load_bearing": false,
+            "why": "It illustrates her moral character and graciousness, but removing it leaves the central recognition and marriage intact."
+          }
+        ],
+        "thematic_coherence": 4,
+        "engagement": 3,
+        "notes": "The outline is an exceptionally faithful transcription of Perrault's classic fairy tale, executing every canonical beat with mechanical precision. Because it hews exactly to the cultural ur-text, it provides zero narrative surprise while remaining structurally airtight."
       }
     },
     {
@@ -130,6 +173,12 @@
         "merely_follows": 7,
         "contradicts": 0,
         "causes_share": 0.631578947368421,
+        "story_time_jumps": 7,
+        "continuous": {
+          "pairs": 12,
+          "causes": 7,
+          "share": 0.5833333333333334
+        },
         "passed": false
       },
       "payoff_earned": {
@@ -140,9 +189,11 @@
         "passed": true
       },
       "non_genericity": {
-        "closest_stock_shape": "redemption via supernatural visitation",
-        "adherence": 5,
-        "passed": false
+        "closest_stock_shape": "redemption — a hardened figure is confronted with themselves and changes",
+        "adherence": 2,
+        "load_bearing_particulars": 4,
+        "particulars": 5,
+        "passed": true
       },
       "thematic_coherence": {
         "score": 5,
@@ -152,127 +203,367 @@
         "score": 5,
         "passed": true
       },
-      "notes": "The structure is the definitive archetype of moral reform through visionary horror and empathy. Every setup in the opening Stave finds an exact, inverted mirror in the closing resolution.",
+      "notes": "A pristine model of thematic architecture where every single event directly tests, mirrors, or inverts the opening thesis of selfish isolation versus social responsibility.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "causes",
-            "why": "Scrooge's obstinate greed and callous isolation in the opening scene directly precipitate Marley's ghostly intervention to warn him away from the same fate."
+            "story_time_jump": false,
+            "why": "Scrooge's hardened, selfish conduct in E01 prompts Marley's ghostly intervention to offer him a warning and chance of escape."
           },
           {
             "pair": "E02→E03",
             "verdict": "causes",
-            "why": "Marley explicitly warns Scrooge that the first spirit will appear when the bell tolls one, which directly triggers the Ghost of Christmas Past's arrival."
+            "story_time_jump": false,
+            "why": "Marley explicitly announced that the first spirit would arrive when the bell tolls one, which brings about E03."
           },
           {
             "pair": "E03→E04",
             "verdict": "causes",
-            "why": "The Spirit physically takes Scrooge by the hand through the wall into his childhood, directly initiating the schoolroom vision."
+            "story_time_jump": true,
+            "why": "The Spirit takes Scrooge's hand to begin the journey into his past, jumping story time back to his childhood schoolroom."
           },
           {
             "pair": "E04→E05",
             "verdict": "merely_follows",
-            "why": "The transition from the schoolroom to Fezziwig's party is guided by the Spirit's curated chronological tour of Scrooge's memories, not caused by the outcome of the schoolroom scene."
+            "story_time_jump": true,
+            "why": "The Spirit transitions Scrooge sequentially to a later chapter of his youth (apprenticeship) as an illustrative tour rather than E04 causing E05."
           },
           {
             "pair": "E05→E06",
             "verdict": "merely_follows",
-            "why": "The shift from Fezziwig's warehouse to Belle breaking the engagement is the next stage in the Spirit's historical sequence rather than a direct result of Scrooge's reflection on Fezziwig."
+            "story_time_jump": true,
+            "why": "The Spirit continues the chronological guided tour of Scrooge's past, moving forward to his courtship and breakup."
           },
           {
             "pair": "E06→E07",
             "verdict": "causes",
-            "why": "Scrooge extinguishes the first Spirit in anguish and collapses back into sleep, setting up his scheduled awakening to meet the second Spirit."
+            "story_time_jump": true,
+            "why": "Scrooge extinguishes the first ghost in emotional exhaustion, returning to his bed where the second promised spirit appears."
           },
           {
             "pair": "E07→E08",
             "verdict": "causes",
-            "why": "The Ghost of Christmas Present leads Scrooge out into the city specifically to observe present Christmas celebrations, bringing him directly to the Cratchit home."
+            "story_time_jump": false,
+            "why": "The Ghost of Christmas Present takes Scrooge out to observe Christmas day, leading directly into the visit to Bob Cratchit's house."
           },
           {
             "pair": "E08→E09",
             "verdict": "merely_follows",
-            "why": "The Spirit transports Scrooge to bleak and remote locations to expand the vision's scope, which follows the Cratchit dinner without being triggered by it."
+            "story_time_jump": false,
+            "why": "The spirit continues a tour of Christmas present across remote locations, not directly caused by the Cratchit dinner."
           },
           {
             "pair": "E09→E10",
             "verdict": "merely_follows",
-            "why": "The movement from distant ships and lighthouses to Fred's drawing-room is another curated stop on the Spirit's itinerary."
+            "story_time_jump": false,
+            "why": "The tour of Christmas Present moves onward from remote wilderness to Fred's London gathering."
           },
           {
             "pair": "E10→E11",
             "verdict": "causes",
-            "why": "The passage of time during the night's tour brings the Spirit to midnight and the end of its lifespan, causing it to age, reveal Ignorance and Want, and depart."
+            "story_time_jump": false,
+            "why": "As the night of Christmas Present draws to its close, the spirit's lifespan expires, culminating in the final confrontation with Ignorance and Want and the arrival of the next spirit."
           },
           {
             "pair": "E11→E12",
             "verdict": "causes",
-            "why": "The vanishing of the second Spirit at midnight immediately summons the approaching Ghost of Christmas Yet to Come, who leads Scrooge to the Exchange."
+            "story_time_jump": true,
+            "why": "The arrival of the third spirit initiates the journey into the future, jumping time forward to observe reactions to an impending death."
           },
           {
             "pair": "E12→E13",
             "verdict": "merely_follows",
-            "why": "The move from the Royal Exchange to Old Joe's shop is part of the third Spirit's episodic demonstration of the dead man's reputation."
+            "story_time_jump": false,
+            "why": "The spirit leads Scrooge to another vantage point showing indifferent and predatory reactions to the same death."
           },
           {
             "pair": "E13→E14",
             "verdict": "merely_follows",
-            "why": "The Spirit continues its sequential revelation by taking Scrooge from the thieves fencing the dead man's goods to the dark room where the plundered body lies."
+            "story_time_jump": false,
+            "why": "The spirit takes Scrooge from the pawnshop to the actual deathbed to view the plunder in context."
           },
           {
             "pair": "E14→E15",
             "verdict": "causes",
-            "why": "Scrooge's inability to uncover the face and his plea to see any tenderness connected with death directly prompts the Spirit to show Caroline's household."
+            "story_time_jump": false,
+            "why": "Scrooge begs the spirit to show tenderness associated with death, causing the spirit to display the debtor couple's relief."
           },
           {
             "pair": "E15→E16",
             "verdict": "merely_follows",
-            "why": "The Spirit transitions from the relieved debtor couple to the Cratchit family mourning Tiny Tim to present a contrasting picture of genuine grief."
+            "story_time_jump": false,
+            "why": "The spirit takes Scrooge to view genuine grief over death at the Cratchit house, continuing the thematic demonstration."
           },
           {
             "pair": "E16→E17",
             "verdict": "causes",
-            "why": "Scrooge's mounting distress over these shadowy deaths impels him to demand whose fate he has been watching, prompting the Spirit to guide him to the churchyard grave."
+            "story_time_jump": false,
+            "why": "Scrooge demands to know who the dead man was, prompting the spirit to bring him to the churchyard and reveal the gravestone."
           },
           {
             "pair": "E17→E18",
             "verdict": "causes",
-            "why": "Scrooge's complete moral capitulation and desperate vows at his own gravestone cause him to awaken transformed in his own chambers on Christmas morning."
+            "story_time_jump": true,
+            "why": "Scrooge's desperate vow to reform ends the nightmare vision, returning him to Christmas morning in his own bedroom eager to act."
           },
           {
             "pair": "E18→E19",
             "verdict": "causes",
-            "why": "Scrooge's ecstatic commitment to live differently immediately drives him into the street to make restitution to the charity solicitor and reconcile with Fred."
+            "story_time_jump": false,
+            "why": "Having sent the turkey and dressed for the day, Scrooge heads out into the street to actively rectify his past interactions with charity and Fred."
           },
           {
             "pair": "E19→E20",
             "verdict": "causes",
-            "why": "The momentum of Scrooge's Christmas Day transformation directly carries into the counting-house the next morning to permanently alter his relationship with Bob Cratchit."
+            "story_time_jump": true,
+            "why": "Following his Christmas transformation, Scrooge arrives at work Boxing Day morning to enact the permanent change in his treatment of Bob Cratchit."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "surplus_population_remark",
             "verdict": "earned",
-            "why": "The callous line spoken casually in E01 as an ideological dismissal is weaponized by the Spirit in E08 against Tiny Tim, delivering a sharp moral and emotional reckoning."
+            "why": "Scrooge's cruel, callous remark in E01 is weaponized directly against him in E08 by the Spirit when Tiny Tim's fragile life is at stake, shattering his moral detachment."
           },
           {
             "fact_ref": "tiny_tims_fate_uncertain",
             "verdict": "earned",
-            "why": "The conditional warning of Tim's death in E08 is dramatically realized in E16, raising the emotional stakes of Scrooge's impending choice."
+            "why": "The condition stated in E08—that Tim will die unless shadows are altered—is realized in E16's bleak future, cementing the stakes of Scrooge's impending choice."
           },
           {
             "fact_ref": "corpse_is_scrooge",
             "verdict": "earned",
-            "why": "The mystery established at the outset of Stave IV sustains dramatic irony across five scenes of escalating revulsion before resolving definitively on the headstone in E17."
+            "why": "The identity withheld throughout the Stave IV vignettes accumulates dramatic irony and mounting dread before landing with decisive emotional force at the headstone in E17."
           }
         ],
-        "closest_stock_shape": "redemption via supernatural visitation",
-        "stock_adherence": 5,
+        "closest_stock_shape": "redemption — a hardened figure is confronted with themselves and changes",
+        "stock_adherence": 2,
+        "particulars": [
+          {
+            "element": "The visitation is partitioned strictly among three Spirits representing Past, Present, and Yet to Come, each operating under specific structural and temporal rules.",
+            "load_bearing": true,
+            "why": "The distinct temporal domains structure the protagonist's gradual psychological dismantling and allow the prospective future to be presented as alterable."
+          },
+          {
+            "element": "Tiny Tim's health and survival are causally tied to Scrooge's economic and personal reform.",
+            "load_bearing": true,
+            "why": "Scrooge's cruelty is made specific through Tim's fate, providing the critical moral leverage that moves him to change his actions."
+          },
+          {
+            "element": "Marley's chain forged in life out of cash-boxes, ledgers, and keys.",
+            "load_bearing": true,
+            "why": "It establishes the physical and metaphysical penalty of avarice, terrifying Scrooge into taking the visions seriously."
+          },
+          {
+            "element": "The personifications of Ignorance and Want sheltered beneath the Spirit's robes.",
+            "load_bearing": false,
+            "why": "While a powerful rhetorical and thematic rebuke, the narrative arc of Scrooge's personal redemption proceeds from the personal stakes."
+          },
+          {
+            "element": "A structured dramatic withholding in the future where Scrooge observes the plunder and mockery of an unnamed corpse before discovering his own name on the headstone.",
+            "load_bearing": true,
+            "why": "The misapprehension and eventual shock in the churchyard directly precipitate Scrooge's collapse, surrender, and vow to alter his life."
+          }
+        ],
         "thematic_coherence": 5,
         "engagement": 5,
-        "notes": "The structure is the definitive archetype of moral reform through visionary horror and empathy. Every setup in the opening Stave finds an exact, inverted mirror in the closing resolution."
+        "notes": "A pristine model of thematic architecture where every single event directly tests, mirrors, or inverts the opening thesis of selfish isolation versus social responsibility."
+      }
+    },
+    {
+      "label": "fixture:the-machine-stops",
+      "judge_model": "gemini-3.8-flash",
+      "causal": {
+        "pairs": 15,
+        "causes": 11,
+        "merely_follows": 4,
+        "contradicts": 0,
+        "causes_share": 0.7333333333333333,
+        "story_time_jumps": 2,
+        "continuous": {
+          "pairs": 13,
+          "causes": 11,
+          "share": 0.8461538461538461
+        },
+        "passed": true
+      },
+      "payoff_earned": {
+        "pairs": 5,
+        "earned": 2,
+        "linked_only": 3,
+        "earned_share": 0.4,
+        "passed": false
+      },
+      "non_genericity": {
+        "closest_stock_shape": "tragedy — a flaw carries a figure to a ruin the story makes inevitable",
+        "adherence": 2,
+        "load_bearing_particulars": 5,
+        "particulars": 5,
+        "passed": true
+      },
+      "thematic_coherence": {
+        "score": 5,
+        "passed": true
+      },
+      "engagement": {
+        "score": 4,
+        "passed": true
+      },
+      "notes": "The story rigorously tracks the philosophical and physical collapse of a society addicted to unmediated mediation. Its middle section relies heavily on nested exposition via Kuno's monologue, but the subsequent decay and catastrophic ending land with immense dramatic force.",
+      "raw": {
+        "causal_pairs": [
+          {
+            "pair": "E01→E02",
+            "verdict": "merely_follows",
+            "story_time_jump": false,
+            "why": "Vashti returns to her ordinary routine of lectures and private devotions after Kuno terminates the call; the scene builds world texture rather than being triggered by E01's outcome."
+          },
+          {
+            "pair": "E02→E03",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Vashti's lingering reflection on Kuno being special primes her to overcome her terror of direct experience and board the air-ship when he insists."
+          },
+          {
+            "pair": "E03→E04",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Vashti boarding the transit car directly initiates the transit journey across the hemispheres described in E04."
+          },
+          {
+            "pair": "E04→E05",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Vashti's arrival at Kuno's cell allows the face-to-face confrontation and Kuno's disclosure of his escapade to begin."
+          },
+          {
+            "pair": "E05→E06",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Kuno's narrative of recovering physical capacity naturally proceeds into his account of discovering and forcing the ventilation shaft."
+          },
+          {
+            "pair": "E06→E07",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Reaching and dislodging the pneumatic stopper propels Kuno directly onto the surface hollow in Wessex."
+          },
+          {
+            "pair": "E07→E08",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Breaching the shaft and losing the respirator alerts the Mending Apparatus, which emerges to retrieve him."
+          },
+          {
+            "pair": "E08→E09",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "The conclusion of Kuno's capture prompts Vashti's horrified rejection of his claims and her immediate departure."
+          },
+          {
+            "pair": "E09→E10",
+            "verdict": "merely_follows",
+            "story_time_jump": true,
+            "why": "The narrative skips forward several years to show the general civilizational drift toward formal Machine worship, which occurs independently of Vashti's private departure."
+          },
+          {
+            "pair": "E10→E11",
+            "verdict": "merely_follows",
+            "story_time_jump": false,
+            "why": "Vashti's daily routine settles into the cultural baseline established by the societal changes of E10 without a specific causal incident."
+          },
+          {
+            "pair": "E11→E12",
+            "verdict": "merely_follows",
+            "story_time_jump": true,
+            "why": "Kuno's transfer to the southern hemisphere and his sudden warning that the Machine stops occur after an unstated interval of ordinary routine."
+          },
+          {
+            "pair": "E12→E13",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "The minor defect in the music noted in E12 initiates the routing of complaints that exposes the breakdown of the Mending Apparatus."
+          },
+          {
+            "pair": "E13→E14",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Because the Mending Apparatus is itself broken and unrepaired, the compounding system failures culminate in the total cessation of the Machine."
+          },
+          {
+            "pair": "E14→E15",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "The total failure of life support and communication destroys Vashti's cell, forcing her out into the tunnels."
+          },
+          {
+            "pair": "E15→E16",
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Both characters being driven into the same ruined transit tunnel enables their final physical meeting and shared death."
+          }
+        ],
+        "payoffs": [
+          {
+            "fact_ref": "homelessness_punishment_named",
+            "verdict": "linked_only",
+            "why": "The term is introduced in E04 with an explicit narrator note that it will be explained later, and is defined in E05 immediately upon arrival."
+          },
+          {
+            "fact_ref": "kuno_threatened_with_homelessness",
+            "verdict": "linked_only",
+            "why": "The threat is declared as background context before the story begins and simply revealed in conversation in E05 without intervening narrative buildup."
+          },
+          {
+            "fact_ref": "mending_apparatus_is_the_worms",
+            "verdict": "earned",
+            "why": "The visceral horror of the white worm-like apparatus in Kuno's flashback creates genuine dramatic weight when the Committee later admits this exact system is failing."
+          },
+          {
+            "fact_ref": "kuno_predicted_the_stop",
+            "verdict": "linked_only",
+            "why": "Kuno's cryptic statement in E12 is directly and literally fulfilled two scenes later with no intervening complication or redirection."
+          },
+          {
+            "fact_ref": "homeless_survivors_exist",
+            "verdict": "earned",
+            "why": "Kuno's dismissed testimony about the surface woman who died helping him pays off as the sole enduring seed of human continuity as the underground civilization dies."
+          }
+        ],
+        "closest_stock_shape": "tragedy — a flaw carries a figure to a ruin the story makes inevitable",
+        "stock_adherence": 2,
+        "particulars": [
+          {
+            "element": "The Mending Apparatus physically takes the form of predatory, white worm-like mechanical tendrils.",
+            "load_bearing": true,
+            "why": "Its horrifying physical intervention terminates Kuno's surface expedition, and its eventual failure triggers the collapse of the entire infrastructure."
+          },
+          {
+            "element": "Infants demonstrating unusual physical strength are systematically culled at birth as a societal demerit.",
+            "load_bearing": true,
+            "why": "Kuno surviving this cull is explicitly what gives him the manual strength required to force the ventilation shaft tiles and climb the primeval ladder."
+          },
+          {
+            "element": "The Book of the Machine serves as a liturgical holy text complete with formalized physical rituals.",
+            "load_bearing": true,
+            "why": "This religious dogmatism prevents the population and the Central Committee from understanding or repairing the physical mechanisms as they decay."
+          },
+          {
+            "element": "Direct physical touch and unmediated natural light are societal taboos considered scandalous and vulgar.",
+            "load_bearing": true,
+            "why": "This conditioning governs Vashti's paralysis, delays her journey to Kuno, and makes their final physical contact in the tunnel climactic."
+          },
+          {
+            "element": "The Mending Apparatus itself breaks down, leaving the Machine with no mechanism to repair compounding errors.",
+            "load_bearing": true,
+            "why": "This systemic recursion is the precise operational reason why the civilization cannot halt its descent into total stoppage."
+          }
+        ],
+        "thematic_coherence": 5,
+        "engagement": 4,
+        "notes": "The story rigorously tracks the philosophical and physical collapse of a society addicted to unmediated mediation. Its middle section relies heavily on nested exposition via Kuno's monologue, but the subsequent decay and catastrophic ending land with immense dramatic force."
       }
     },
     {
@@ -280,22 +571,30 @@
       "judge_model": "gemini-3.8-flash",
       "causal": {
         "pairs": 19,
-        "causes": 18,
-        "merely_follows": 1,
+        "causes": 16,
+        "merely_follows": 3,
         "contradicts": 0,
-        "causes_share": 0.9473684210526315,
+        "causes_share": 0.8421052631578947,
+        "story_time_jumps": 0,
+        "continuous": {
+          "pairs": 19,
+          "causes": 16,
+          "share": 0.8421052631578947
+        },
         "passed": true
       },
       "payoff_earned": {
         "pairs": 6,
-        "earned": 4,
-        "linked_only": 2,
-        "earned_share": 0.6666666666666666,
-        "passed": false
+        "earned": 5,
+        "linked_only": 1,
+        "earned_share": 0.8333333333333334,
+        "passed": true
       },
       "non_genericity": {
-        "closest_stock_shape": "wrong-man industrial procedural whodunnit",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "adherence": 3,
+        "load_bearing_particulars": 6,
+        "particulars": 6,
         "passed": true
       },
       "thematic_coherence": {
@@ -303,145 +602,196 @@
         "passed": true
       },
       "engagement": {
-        "score": 4,
+        "score": 5,
         "passed": true
       },
-      "notes": "The mechanical mystery and false-hypothesis pivot are tightly constructed. The ending lands with powerful thematic bite by demonstrating how clearing an individual's name can economically devastate the community.",
+      "notes": "An exceptionally tight industrial mystery where forensic mechanics drive every investigative beat. The bleak, pyrrhic ending elevates the story above genre formula by showing that proving the truth destroys the very community the investigator sought to protect.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "causes",
-            "why": "Pell's threat of manslaughter charges and Dunlow's demand for immediate clearance force Jesse to pull the night access logs."
+            "story_time_jump": false,
+            "why": "Pell's legal threat and Dunlow's inspection demand compel Jesse to seek the night access registers in Dunlow's office."
           },
           {
             "pair": "E02→E03",
             "verdict": "causes",
-            "why": "Dunlow's refusal to grant valve logs and insistence on apprentice error compels Jesse to return to his shack to gather his own physical inspection gauges."
+            "story_time_jump": false,
+            "why": "Dunlow's threat forces Jesse to prepare his own mechanical inspection tools from his shack to determine the true rupture source."
           },
           {
             "pair": "E03→E04",
             "verdict": "merely_follows",
-            "why": "Jesse heading out into the yard is intercepted by Martha; her arrival at the gatehouse is driven by news of Toby's death, not by Jesse's tool collection."
+            "story_time_jump": false,
+            "why": "Jesse heading out into the yard brings him across Martha's path, but her arrival and confrontation were triggered by Toby's death rather than Jesse's gear check."
           },
           {
             "pair": "E04→E05",
             "verdict": "causes",
-            "why": "Clara's warning about affidavits based on fog sightings prompts Jesse to examine her gate turnstile register directly."
+            "story_time_jump": false,
+            "why": "Clara's warning about Pell's affidavit prompts Jesse to immediately inspect Clara's gatehouse register to see who logged in."
           },
           {
             "pair": "E05→E06",
-            "verdict": "causes",
-            "why": "Clara's revelation that his coat was seen at the sub-vault drives Jesse to investigate who fabricated the boiler fittings to find the real culprit."
+            "verdict": "merely_follows",
+            "story_time_jump": false,
+            "why": "Clara's accusation about the coat focuses on identity, but Jesse pivots to examining shop fabrication records in the machine shop."
           },
           {
             "pair": "E06→E07",
             "verdict": "causes",
-            "why": "Jesse's presence in the machine shop and Clara's earlier statement lead Pell to track Jesse down there and issue a two-hour arrest ultimatum."
+            "story_time_jump": false,
+            "why": "Pell catches up with Jesse in the machine shop to act on Clara's identification and impose a strict deadline."
           },
           {
             "pair": "E07→E08",
-            "verdict": "causes",
-            "why": "Under Pell's two-hour deadline to uncover proof of an intruder or third-party interference, Jesse inspects Toby's recovered personal kit."
+            "verdict": "merely_follows",
+            "story_time_jump": false,
+            "why": "Inventorying Toby's tool pouch to return it to Martha is a separate task Jesse undertakes rather than a direct consequence of Pell's ultimatum."
           },
           {
             "pair": "E08→E09",
             "verdict": "causes",
-            "why": "Finding anomalies on Toby's gauntlets sends Jesse back down to L01 to trace the physical origin of the over-pressurization."
+            "story_time_jump": false,
+            "why": "Martha's accusations and the strange grease residues push Jesse directly down into the crawlspace to inspect the fracture source."
           },
           {
             "pair": "E09→E10",
             "verdict": "causes",
-            "why": "Discovering an over-pressurized auxiliary branch leads Jesse to report the mechanical bypass finding to Superintendent Dunlow."
+            "story_time_jump": false,
+            "why": "Discovering that auxiliary steam burst the header leads Jesse straight back to Dunlow to report the abnormal pressure surge."
           },
           {
             "pair": "E10→E11",
             "verdict": "causes",
-            "why": "Dunlow's deflection accusing union machinists of running pirate castings sends Jesse back to Harlan's bench to measure the suspect bolts."
+            "story_time_jump": false,
+            "why": "Dunlow's deflection regarding pirate union metal directs Jesse to test Harlan's flange bolts against the sheared studs."
           },
           {
             "pair": "E11→E12",
             "verdict": "causes",
-            "why": "Matching the thread count convinces Jesse he has solved the sabotage, prompting him to publicly confront Harlan before Pell."
+            "story_time_jump": false,
+            "why": "The matching thread pitch convinces Jesse he has solved the case, leading him to stage a public accusation before Pell."
           },
           {
             "pair": "E12→E13",
             "verdict": "causes",
-            "why": "The public accusation in front of Pell forces Clara to step forward with Harlan's lockup alibi, shattering Jesse's case."
+            "story_time_jump": false,
+            "why": "Jesse's public accusation against Harlan forces Clara to intervene with the lockup register to defend him."
           },
           {
             "pair": "E13→E14",
             "verdict": "causes",
-            "why": "The collapse of Jesse's false frame-up causes Pell to immediately draw up an arrest warrant and confine Jesse under guard."
+            "story_time_jump": false,
+            "why": "The collapse of Jesse's false theory prompts Pell to execute the arrest warrant and place Jesse under guard in the shack."
           },
           {
             "pair": "E14→E15",
             "verdict": "causes",
-            "why": "Trapped in the shack awaiting dawn transport, Jesse is forced to re-examine the physical evidence at hand, testing Toby's glove scrapings."
+            "story_time_jump": false,
+            "why": "Being locked in the shack awaiting dawn transport gives Jesse the desperate, quiet opportunity to re-test the grease scrapings over his burner."
           },
           {
             "pair": "E15→E16",
             "verdict": "causes",
-            "why": "Identifying the obsolete tallow packing directs Jesse to the 1880 bypass hidden behind the boiler bricking to find the actual valve."
+            "story_time_jump": false,
+            "why": "Deducing the use of the 1880 bypass sends Jesse back down into the sub-vault bricking to inspect the bypass valve."
           },
           {
             "pair": "E16→E17",
             "verdict": "causes",
-            "why": "Securing the bypass tag, thread, and mechanical proof leads Jesse directly to Dunlow's office to confront the superintendent."
+            "story_time_jump": false,
+            "why": "Gathering the physical threads, handedness proof, and forged bypass tag gives Jesse the complete case to corner Dunlow."
           },
           {
             "pair": "E17→E18",
             "verdict": "causes",
-            "why": "Jesse's confrontation in L02 moves to the public yard/gatehouse to formally break Dunlow's denials in front of Pell and the community."
+            "story_time_jump": false,
+            "why": "Dunlow's cornered denial leads Jesse to expose his burns publicly at the gatehouse in front of Pell and the crowd."
           },
           {
             "pair": "E18→E19",
             "verdict": "causes",
-            "why": "Dunlow's confession and arrest for structural fraud prompt the incoming railway auditor to immediately condemn and shutter the entire facility."
+            "story_time_jump": false,
+            "why": "Dunlow's unmasking and arrest reveal systemic structural fraud, prompting the auditor to immediately shutter the works."
           },
           {
             "pair": "E19→E20",
             "verdict": "causes",
-            "why": "The shuttering of the plant and the town's resulting hostility leave Jesse completely unemployable and forced into exile."
+            "story_time_jump": false,
+            "why": "The closure of the facility and resulting community hostility leave Jesse unemployable and force his departure from the valley."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "jesse_sole_signatory_liability",
             "verdict": "linked_only",
-            "why": "Introduced as a seed condition and claimed as paid off in the very first event, functioning merely as opening expository stake-setting."
+            "why": "The liability condition is established in the seed world and claimed in the very first scene as immediate exposition rather than an earned thematic payoff."
           },
           {
             "fact_ref": "mismatched_flange_bolts",
             "verdict": "earned",
-            "why": "Planted as suspicious contraband in E06, measured in E11, and paid off as the crux of the investigator's disastrous wrong turn in E12."
+            "why": "The bolts are planted during a workshop search, misdirect the investigation through thread measurement, and trigger the pivotal false accusation."
           },
           {
             "fact_ref": "paraffin_tallow_lubricant",
             "verdict": "earned",
-            "why": "Observed in E08 during an emotional confrontation, it sits idle until Jesse tests its thermal properties in E15 to unlock the true bypass mechanism."
+            "why": "Noticed casually on Toby's gauntlets early on, the unusual animal grease becomes the mechanical key that unlocks the existence of the obsolete bypass line."
           },
           {
             "fact_ref": "torn_canvas_cuff_thread",
             "verdict": "earned",
-            "why": "Noticed casually in E03 as yard-hand carelessness, it serves as critical forensic linkage in E16 to prove who operated the bypass petcock."
+            "why": "Planted as a throwaway domestic annoyance in the foreman's shack, the yellow threads re-emerge at the scene to physically tie the intruder to Jesse's coat."
           },
           {
             "fact_ref": "toby_left_handed_grip",
-            "verdict": "linked_only",
-            "why": "Kept entirely in seed backstory without any mid-story demonstration or recall until E16, where it functions as a sudden deductive trump card."
+            "verdict": "earned",
+            "why": "Held quietly from the background seed until the climax, Toby's missing fingers conclusively eliminate him as the person who pulled the heavy bypass cheater bar."
           },
           {
             "fact_ref": "purple_aniline_ink_smudge",
             "verdict": "earned",
-            "why": "Planted organically in E02 during Dunlow's administrative agitation, then decisively ties Dunlow to the forged valve tag in E17."
+            "why": "The pencil detail is planted during an unrelated administrative dispute in E02 and provides the decisive forensic match on the forged valve tag in E17."
           }
         ],
-        "closest_stock_shape": "wrong-man industrial procedural whodunnit",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "stock_adherence": 3,
+        "particulars": [
+          {
+            "element": "Condemned 1880 bypass line sealed with archaic animal tallow",
+            "load_bearing": true,
+            "why": "It provides the unique mechanical mechanism of the crime and the material clue that breaks the case."
+          },
+          {
+            "element": "Toby's missing right fingers requiring left-handed lever operation",
+            "load_bearing": true,
+            "why": "This anatomical constraint physically exonerates Toby from having forced the bypass valve."
+          },
+          {
+            "element": "Dunlow's German purple aniline copying pencil",
+            "load_bearing": true,
+            "why": "Its distinct indelible dust provides the physical link tying Dunlow to the forged bypass authorization tag."
+          },
+          {
+            "element": "Stolen yellow-waxed mackinaw coat leaving threads on the petcock",
+            "load_bearing": true,
+            "why": "It acts as both the frame job against Jesse and the forensic evidence pinning the crime on the coat's user."
+          },
+          {
+            "element": "Harlan's overnight lockup receipt stamped by the desk sergeant",
+            "load_bearing": true,
+            "why": "It decisively shatters the investigator's wrong turn and triggers Jesse's impending arrest."
+          },
+          {
+            "element": "Immediate closure of the industrial works following the unmasking",
+            "load_bearing": true,
+            "why": "It turns the detective's legal victory into a pyrrhic disaster that dooms the town and drives him into exile."
+          }
+        ],
         "thematic_coherence": 5,
-        "engagement": 4,
-        "notes": "The mechanical mystery and false-hypothesis pivot are tightly constructed. The ending lands with powerful thematic bite by demonstrating how clearing an individual's name can economically devastate the community."
+        "engagement": 5,
+        "notes": "An exceptionally tight industrial mystery where forensic mechanics drive every investigative beat. The bleak, pyrrhic ending elevates the story above genre formula by showing that proving the truth destroys the very community the investigator sought to protect."
       }
     },
     {
@@ -449,22 +799,30 @@
       "judge_model": "gemini-3.8-flash",
       "causal": {
         "pairs": 19,
-        "causes": 14,
-        "merely_follows": 5,
+        "causes": 11,
+        "merely_follows": 8,
         "contradicts": 0,
-        "causes_share": 0.7368421052631579,
-        "passed": true
+        "causes_share": 0.5789473684210527,
+        "story_time_jumps": 0,
+        "continuous": {
+          "pairs": 19,
+          "causes": 11,
+          "share": 0.5789473684210527
+        },
+        "passed": false
       },
       "payoff_earned": {
         "pairs": 9,
-        "earned": 7,
-        "linked_only": 2,
-        "earned_share": 0.7777777777777778,
+        "earned": 8,
+        "linked_only": 1,
+        "earned_share": 0.8888888888888888,
         "passed": true
       },
       "non_genericity": {
-        "closest_stock_shape": "industrial accident whodunnit with framed investigator",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "adherence": 3,
+        "load_bearing_particulars": 5,
+        "particulars": 5,
         "passed": true
       },
       "thematic_coherence": {
@@ -475,157 +833,203 @@
         "score": 4,
         "passed": true
       },
-      "notes": "The technical cluing around grain elevator machinery is tight, grounded, and rewarding to follow. The ending delivers thematic weight by refusing to waive the investigator's own procedural shortcut.",
+      "notes": "A crisp, tightly constructed industrial whodunnit where physical mechanical details (tare weights, twine, fuse panels) carry the narrative weight. The ending cleanly enforces accountability on both the murderer and the corner-cutting protagonist.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "causes",
-            "why": "Jesse discovering Callum crushed inside the intake hopper necessitates Pete bringing tools to pry the elevator bucket away to recover the body and clear the wreckage."
+            "story_time_jump": false,
+            "why": "Jesse's discovery of Callum crushed under the machinery causes Pete to come with crowbars to pry the elevator bucket off."
           },
           {
             "pair": "E02→E03",
-            "verdict": "causes",
-            "why": "The machinery breakdown and emergency recovery in the boot pit draw Gault down from the office in a panic over stalled shipping contracts."
+            "verdict": "merely_follows",
+            "story_time_jump": false,
+            "why": "Gault rushing down to bluster about shipping contracts and dead cargo happens in response to the overall terminal shutdown/incident, not specifically caused by the twine being cleared."
           },
           {
             "pair": "E03→E04",
-            "verdict": "causes",
-            "why": "Gault attempting to write Callum's death off as reckless worker negligence prompts Stoddard to pull the pit's physical safety ledger and hold Jesse accountable."
+            "verdict": "merely_follows",
+            "story_time_jump": false,
+            "why": "Stoddard checking the safety clipboard to hold Jesse accountable is triggered by Callum's death in the pit rather than Gault's comments or sleeve."
           },
           {
             "pair": "E04→E05",
             "verdict": "causes",
-            "why": "Facing impending manslaughter charges unless third-party sabotage is proved, Jesse seeks out Callum's next of kin to establish Callum's actions before the death."
+            "story_time_jump": false,
+            "why": "Stoddard threatening Jesse with manslaughter unless he proves third-party sabotage drives Jesse to begin investigating and question Callum's widow."
           },
           {
             "pair": "E05→E06",
             "verdict": "causes",
-            "why": "Jesse questioning Hettie about Callum's graveyard movements provokes Declan to step in defensively to guard union workers from company blame."
+            "story_time_jump": false,
+            "why": "Jesse questioning Hettie draws Declan over to intervene and defend her against mill management."
           },
           {
             "pair": "E06→E07",
             "verdict": "merely_follows",
-            "why": "Jesse's shift to the scale house to question Maybelle is a standard procedural next step rather than an action compelled by the encounter with Declan."
+            "story_time_jump": false,
+            "why": "Jesse continuing his investigation by moving to the scale house follows chronologically, but is not directly caused by Declan having the knife."
           },
           {
             "pair": "E07→E08",
-            "verdict": "causes",
-            "why": "Maybelle's account of metallic clatter immediately before the stall prompts Jesse to examine the electrical substation to test for an electrical failure."
+            "verdict": "merely_follows",
+            "story_time_jump": false,
+            "why": "Moving to the substation to check the electrical failure is a parallel investigative step rather than a direct outcome of Maybelle's testimony."
           },
           {
             "pair": "E08→E09",
             "verdict": "merely_follows",
-            "why": "Finding the blown remote fuse does not trigger Jesse searching Maybelle's trash for paper manifests; it is an unrelated thread of inquiry."
+            "story_time_jump": false,
+            "why": "Returning to the scale house to search Maybelle's wastepaper follows Jesse's broader search, not the electrical fuse inspection."
           },
           {
             "pair": "E09→E10",
             "verdict": "merely_follows",
-            "why": "Stoddard interrogating Declan at the lower siding is driven by Maybelle's earlier description of a hooded yard prowler, not by Jesse's discovery of the manifest."
+            "story_time_jump": false,
+            "why": "Stoddard targeting Declan based on Maybelle's description happens independently of Jesse finding the off-book manifest slip."
           },
           {
             "pair": "E10→E11",
             "verdict": "merely_follows",
-            "why": "Jesse confronting Gault with the discarded carbon slip occurs parallel to Stoddard's focus on Declan, rather than being caused by Declan's interrogation."
+            "story_time_jump": false,
+            "why": "Jesse bringing the midnight slip to Gault's office is prompted by discovering the slip in E09 rather than Stoddard questioning Declan in the rail yard."
           },
           {
             "pair": "E11→E12",
             "verdict": "merely_follows",
-            "why": "Stoddard moving in to arrest Declan with grievance letters and the knife follows his own line of suspicion, unaffected by Jesse's closed-door exchange with Gault."
+            "story_time_jump": false,
+            "why": "Stoddard arresting Declan on the basis of union grievances and the knife develops from E10, not from Gault locking the slip in his desk."
           },
           {
             "pair": "E12→E13",
             "verdict": "causes",
-            "why": "Declan's accusation of being framed and his plea to examine the mechanics drives Jesse to audit the manifest's axle weights against the yard's railcars."
+            "story_time_jump": false,
+            "why": "Declan's protestations and demand to examine the physical locks prompts Jesse to analyze the manifest tare weights to test Declan's rail involvement."
           },
           {
             "pair": "E13→E14",
             "verdict": "causes",
-            "why": "Disproving rail involvement by showing truck tare weights leads Stoddard and Jesse to physically test Callum's pocketknife against the scratched latch plate."
+            "story_time_jump": false,
+            "why": "Disproving rail involvement leads directly to Stoddard testing Callum's pocketknife against the lock marks in the pit to verify the physical tampering tool."
           },
           {
             "pair": "E14→E15",
             "verdict": "causes",
-            "why": "The knife failing to match the pry marks completely collapses the sabotage case against Declan, leaving Stoddard to redirect full culpability back onto Jesse's negligence."
+            "story_time_jump": false,
+            "why": "The complete collapse of the case against Declan forces Stoddard to release Declan and put the criminal liability back onto Jesse's signed ledger."
           },
           {
             "pair": "E15→E16",
             "verdict": "causes",
-            "why": "Stoddard's sundown deadline forces Jesse to immediately verify who actually stamped the illicit midnight document."
+            "story_time_jump": false,
+            "why": "Given a sundown deadline to prove someone else was responsible, Jesse aggressively re-examines the gross-weight transfer ink to identify who stamped the ticket."
           },
           {
             "pair": "E16→E17",
             "verdict": "causes",
-            "why": "Proving Gault forged the midnight transfer leads Jesse back down to the pit to deduce how Gault physically engineered the fatal grain dump."
+            "story_time_jump": false,
+            "why": "Connecting Gault to the forged scale slip leads Jesse back to the pit to determine the physical mechanism of the grain flood that killed Callum."
           },
           {
             "pair": "E17→E18",
             "verdict": "causes",
-            "why": "Uncovering the bypassed hopper gate mechanism sends Jesse and Pete to the master switchbank to prove who remotely triggered the flow."
+            "story_time_jump": false,
+            "why": "Knowing the bypass gate was held open by twine, Jesse goes to the electrical substation to prove how the tripper was triggered to run the conveyor, pinning it to Gault's key."
           },
           {
             "pair": "E18→E19",
             "verdict": "causes",
-            "why": "Catching Gault with the exclusive supervisory key provides Stoddard the proof needed to arrest Gault, triggering Gault's vindictive submission of Jesse's log."
+            "story_time_jump": false,
+            "why": "Proving Gault committed the murder leads Stoddard to arrest Gault, triggering Gault's spiteful submission of Jesse's pre-signed safety log into county records."
           },
           {
             "pair": "E19→E20",
             "verdict": "causes",
-            "why": "The statutory revocation of Jesse's license causes him to surrender his keys and leave the elevator grounds."
+            "story_time_jump": false,
+            "why": "The permanent loss of Jesse's operating license leads directly to Jesse surrendering his keys and leaving the facility."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "jesse_signed_safety_log",
-            "verdict": "linked_only",
-            "why": "In E04, this seed premise merely establishes the initial threat and protagonist stakes rather than paying off an established setup."
+            "verdict": "earned",
+            "why": "Established in the world seed, this signature immediately becomes the legal vice tightening around Jesse in E04, motivating the entire investigation."
           },
           {
             "fact_ref": "callum_worked_graveyard_shift",
             "verdict": "linked_only",
-            "why": "Callum working late is basic background framing confirmed in conversation rather than an earned revelation."
+            "why": "Callum working graveyard was already established by finding his body in E01; Hettie merely reiterates it as exposition before explaining why he stayed late."
           },
           {
             "fact_ref": "declan_threatened_strike_sabotage",
             "verdict": "earned",
-            "why": "Planted before opening, the prior threat gives Stoddard plausible motive to construct a compelling false case against Declan in E12."
+            "why": "Declan's prior threats give Stoddard substantive justification to build a plausible wrong theory and arrest Declan as the prime saboteur."
           },
           {
             "fact_ref": "unregistered_freight_manifest",
             "verdict": "earned",
-            "why": "Introduced in E09 and suppressed in E11, the manifest's specific technical data (tare weights) is leveraged in E13 to dismantle the rail sabotage theory."
+            "why": "Discovered in the trash in E09 and concealed in E11, it is re-examined in E13 to prove the cargo moved via rubber truck tires rather than rail cars, breaking the false suspect's case."
           },
           {
             "fact_ref": "callum_bent_pocketknife",
             "verdict": "earned",
-            "why": "Noticed in E06 as an incriminating object on Declan, it serves as the key physical test in E14 whose soft material exonerates him."
+            "why": "Observed in E06 as an apparent weapon/tampering tool, it is mechanically tested in E14 to show its soft metal could never have scratched the hopper latch."
           },
           {
             "fact_ref": "gault_inked_sleeve",
             "verdict": "earned",
-            "why": "Planted in E03 as a throwaway character detail during pit chaos, it becomes the forensic proof in E16 that Gault handled the midnight stamp."
+            "why": "Planted as a subtle visual detail in E03, it forms the crucial forensic link in E16 demonstrating Gault personally used the midnight stamp desk."
           },
           {
             "fact_ref": "bleached_twine_fibers",
             "verdict": "earned",
-            "why": "Tossed aside as mundane debris in E02, the twine returns in E17 as the exact mechanical instrument used to lash the bypass gate open."
+            "why": "Discarded as ordinary car rubbish in E02, Jesse recovers the twine in E17 to demonstrate the physical bypass rigging of the gate spring."
           },
           {
             "fact_ref": "tripper_remote_fuse_blown",
             "verdict": "earned",
-            "why": "Discovered in E08 during electrical inspection, its overhead circuit provenance in E18 directly links the crime to Gault's locked supervisory keybox."
+            "why": "Identified in E08 as an anomalous blown fuse, it connects in E18 to Gault's exclusive physical access to the overhead supervisory keybox."
           },
           {
             "fact_ref": "jesse_signed_safety_log",
             "verdict": "earned",
-            "why": "Having hovered over Jesse as an existential threat since E04, the violation extracts its full administrative toll in E19 despite Jesse solving the crime."
+            "why": "The initial regulatory corner-cutting that trapped Jesse is collected at the story's climax, ensuring his moral victory does not spare him the administrative penalty."
           }
         ],
-        "closest_stock_shape": "industrial accident whodunnit with framed investigator",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "stock_adherence": 3,
+        "particulars": [
+          {
+            "element": "The investigator is framed not by planting of false evidence, but by his own pre-signed safety log certifying uninspected machinery.",
+            "load_bearing": true,
+            "why": "Jesse's signature on Leg #4 makes him legally culpable for manslaughter from E04 onwards and extracts his license in E19."
+          },
+          {
+            "element": "Bleached sisal twine used to tie back the spring-loaded hopper bypass gate.",
+            "load_bearing": true,
+            "why": "The twine proves the grain deluge was mechanically rigged rather than an accidental machinery failure or electrical surge."
+          },
+          {
+            "element": "Manifest tire wheel-weights distinguishing tandem rubber truck tires from iron railway bogies.",
+            "load_bearing": true,
+            "why": "This mathematical discrepancy in the weigh-slip dismantles the rail-union sabotage theory against Declan."
+          },
+          {
+            "element": "Indelible purple transfer ink on official gross-weight stamps staining Gault's cuff.",
+            "load_bearing": true,
+            "why": "It links the terminal superintendent directly to the off-book midnight transaction during Maybelle's absence."
+          },
+          {
+            "element": "Remote tripper circuit fuse accessible solely through an overhead console locked by Gault's private brass key.",
+            "load_bearing": true,
+            "why": "This forensic mechanical detail definitively pins the activation of the conveyor to Gault, closing the investigation."
+          }
+        ],
         "thematic_coherence": 4,
         "engagement": 4,
-        "notes": "The technical cluing around grain elevator machinery is tight, grounded, and rewarding to follow. The ending delivers thematic weight by refusing to waive the investigator's own procedural shortcut."
+        "notes": "A crisp, tightly constructed industrial whodunnit where physical mechanical details (tare weights, twine, fuse panels) carry the narrative weight. The ending cleanly enforces accountability on both the murderer and the corner-cutting protagonist."
       }
     },
     {
@@ -633,10 +1037,16 @@
       "judge_model": "gemini-3.8-flash",
       "causal": {
         "pairs": 19,
-        "causes": 15,
-        "merely_follows": 4,
+        "causes": 17,
+        "merely_follows": 2,
         "contradicts": 0,
-        "causes_share": 0.7894736842105263,
+        "causes_share": 0.8947368421052632,
+        "story_time_jumps": 0,
+        "continuous": {
+          "pairs": 19,
+          "causes": 17,
+          "share": 0.8947368421052632
+        },
         "passed": true
       },
       "payoff_earned": {
@@ -647,149 +1057,197 @@
         "passed": true
       },
       "non_genericity": {
-        "closest_stock_shape": "industrial noir whodunnit / framed scapegoat procedural",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "adherence": 3,
+        "load_bearing_particulars": 5,
+        "particulars": 5,
         "passed": true
       },
       "thematic_coherence": {
-        "score": 5,
+        "score": 4,
         "passed": true
       },
       "engagement": {
         "score": 4,
         "passed": true
       },
-      "notes": "The mystery is constructed with rigorous physical and procedural logic, allowing clues like the paint flake and mutton tallow to do double duty. The ending cleanly enforces the noir premise by ensuring institutional self-preservation trumps individual justice.",
+      "notes": "The whodunnit structure is tightly engineered with rigorous clue-and-deduction mechanics. The bleak industrial resolution, where solving the crime still results in institutional ruin for the working-class protagonist, elevates the thematic bite.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "causes",
-            "why": "Dan responding immediately to Vance's report of a loose car brings him directly to the spur where Toby's body is discovered under the hopper."
+            "story_time_jump": false,
+            "why": "Vance's report of a loose car sends Dan rushing to the line with wrench and lantern, directly resulting in him discovering Toby Gault's body under the wheel flange at the spur."
           },
           {
             "pair": "E02→E03",
             "verdict": "causes",
-            "why": "Discovering Toby crushed under the hopper car prompts Dan to examine the depot tokens and shift records to see why Toby was on the spur."
+            "story_time_jump": false,
+            "why": "Recovering the body at the spur causes Dan to return to the depot and verify the shift tokens to understand why Toby was there."
           },
           {
             "pair": "E03→E04",
-            "verdict": "merely_follows",
-            "why": "Crane's confrontation is triggered by the derailment itself rather than Dan's private realization about Toby's off-duty status."
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Realizing Toby's presence was irregular leads Dan into an encounter with Alderman Crane, who confronts him regarding liability for the runaway car."
           },
           {
             "pair": "E04→E05",
             "verdict": "causes",
-            "why": "Crane's statutory threat of manslaughter formalizes Dan's legal peril, locking him into investigating the derailment to clear himself."
+            "story_time_jump": false,
+            "why": "Crane following up on his initial threat serves Dan with formal notice of indictment based on Dan's signature on the shift manifest."
           },
           {
             "pair": "E05→E06",
             "verdict": "causes",
-            "why": "Dan's urgent need to uncover what happened leads him to question canteen witnesses, uncovering the Gault brothers' dispute."
+            "story_time_jump": false,
+            "why": "Facing personal prosecution for the death, Dan begins actively investigating alternative causes, seeking witnesses at the Creek Canteen where Martha reveals the fight."
           },
           {
             "pair": "E06→E07",
             "verdict": "causes",
-            "why": "Martha's testimony that Jonah stormed toward the kilns in a sheepskin coat directs Dan to inspect the kiln switch for physical traces."
+            "story_time_jump": false,
+            "why": "Hearing Martha's testimony that Jonah stormed toward the kilns in a sheepskin coat prompts Dan to inspect the manual switch handle at Kiln Spur for physical trace evidence."
           },
           {
             "pair": "E07→E08",
             "verdict": "causes",
-            "why": "Finding sheepskin fibers caught in the switch latch compels Dan to track down Jonah and confront him."
+            "story_time_jump": false,
+            "why": "Finding sheepskin fleece on the switch handle sends Dan to locate and confront Jonah directly."
           },
           {
             "pair": "E08→E09",
             "verdict": "merely_follows",
-            "why": "Jonah's flight into the canal sheds does not cause Dan's visit to the mortuary or Hollis's autopsy discovery."
+            "story_time_jump": false,
+            "why": "Jonah's flight into the canal sheds does not cause Dr. Hollis to perform the autopsy or extract the paint flake from Toby's skull; it proceeds independently as part of the mortuary examination."
           },
           {
             "pair": "E09→E10",
             "verdict": "merely_follows",
-            "why": "Searching Jonah's boarding house room follows the trail of Jonah's flight rather than the paint chip found at the morgue."
+            "story_time_jump": false,
+            "why": "The mortuary finding does not drive the search of Jonah's room; Dan is pursuing Jonah as the prime suspect following Jonah's earlier flight and Martha's account."
           },
           {
             "pair": "E10→E11",
             "verdict": "causes",
-            "why": "Recovering Toby's bloody handkerchief provides the physical evidence Crane needs to approve Jonah's arrest warrant."
+            "story_time_jump": false,
+            "why": "Finding the bloody neckerchief in Jonah's room provides the physical evidence Dan brings to Crane to secure Jonah's arrest warrant."
           },
           {
             "pair": "E11→E12",
             "verdict": "causes",
-            "why": "The signed warrant leads directly to Jonah being captured, locked in the yard holding cell, and interrogated."
+            "story_time_jump": false,
+            "why": "The signed warrant leads to Jonah being arrested and placed in the depot holding cell, where Dan hears his alibi."
           },
           {
             "pair": "E12→E13",
             "verdict": "causes",
-            "why": "Jonah's desperate claim about losing his coat prompts Martha to bring the coat forward, collapsing the fleece evidence."
+            "story_time_jump": false,
+            "why": "Jonah's claim of having lost his coat in the tavern leads Martha to produce the coat from the porch peg, proving the fleece on the switch was not from Jonah's tear."
           },
           {
             "pair": "E13→E14",
             "verdict": "causes",
-            "why": "Exonerating Jonah forces Dan to re-examine the physical switch mechanism, proving only someone with a management key could have thrown it."
+            "story_time_jump": false,
+            "why": "The collapse of the case against Jonah forces Dan to re-examine the physical mechanics of the derailer switch teeth."
           },
           {
             "pair": "E14→E15",
             "verdict": "causes",
-            "why": "Recognizing kiln management's involvement points Dan toward the kiln gantry, where he looks for the source of the white lead paint."
+            "story_time_jump": false,
+            "why": "Discovering the car was unlocked with a management key leads Dan up onto the kiln gantry structure, where he matches the lead paint gouge to the morgue clue."
           },
           {
             "pair": "E15→E16",
-            "verdict": "merely_follows",
-            "why": "Finding the impact gouge on the gantry confirms the murder site, but checking the canteen's tallow crocks is a separate deductive step."
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Knowing Toby was struck on the gantry and framed with a stolen coat prompts Dan to locate the source of the mutton tallow lantern used at the scene."
           },
           {
             "pair": "E16→E17",
             "verdict": "causes",
-            "why": "Connecting the domestic tallow and coat theft to the derailment allows Dan to assemble the full case and confront Vance directly."
+            "story_time_jump": false,
+            "why": "Piecing together the full staging with the marl deliveries allows Dan to directly confront Vance at the spur."
           },
           {
             "pair": "E17→E18",
             "verdict": "causes",
-            "why": "Dan's confrontation and presentation of the physical vouchers and coupling pin forces Vance's full confession."
+            "story_time_jump": false,
+            "why": "Dan's confrontation and exposure of the marl fraud forces Vance into Crane's office to deliver a formal confession before the authorities."
           },
           {
             "pair": "E18→E19",
             "verdict": "causes",
-            "why": "Vance's confession exposes the marl fraud, prompting Crane to enact corrupt damage control by stripping Dan's license and hushing up the trial."
+            "story_time_jump": false,
+            "why": "Vance's confession threatens to expose Crane's lime syndicate fraud in open court, causing Crane to silence the scandal by quietly jailing Vance and blacklisting Dan."
           },
           {
             "pair": "E19→E20",
             "verdict": "causes",
-            "why": "Being blacklisted and stripped of his railway credentials leaves Dan with no choice but to surrender his keys and leave Scarrow Creek."
+            "story_time_jump": false,
+            "why": "Having his license revoked by Crane forces Dan to surrender his depot keys and leave town on the night platform."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "dan_responsible_for_night_manifest",
             "verdict": "earned",
-            "why": "Dan's routine statutory responsibility established in the world setup becomes the exact leverage Crane uses to trap him with a manslaughter indictment."
+            "why": "Established as Dan's initial professional burden and role, which Crane directly weaponizes in E05 to pin the runaway car and manslaughter on him, driving the whole investigation."
           },
           {
             "fact_ref": "torn_sheepskin_on_switch_lever",
             "verdict": "earned",
-            "why": "The fleece functions convincingly as damning physical evidence driving the false case against Jonah before its greaseless age disproves the frame-up."
+            "why": "Discovered in E07 as false incrimination against Jonah, it sits through the investigation and arrest before its discrepancy (greaseless, old tear) collapses the false theory in E13."
           },
           {
             "fact_ref": "white_lead_flake_in_skull_fracture",
             "verdict": "earned",
-            "why": "Discovered during the medical examination, the paint chip lies dormant while the investigation pursues Jonah, later paying off to pinpoint the gantry murder site."
+            "why": "Retrieved in E09 as an anomalous forensic detail during Toby's autopsy, it resurfaces in E15 when Dan connects it to the gouged white-lead handrail on the high gantry."
           },
           {
             "fact_ref": "mutton_tallow_in_switch_lantern",
             "verdict": "earned",
-            "why": "Noticed purely as an odd sensory detail during the chaotic recovery of the body in E02, it resurfaces much later to prove the killer raided the canteen porch."
+            "why": "Noticed by Dan in E02 simply as an odd-smelling extinguished tallow lantern amidst post-accident chaos; it pays off in E16 when Dan traces its domestic kitchen scent to Martha's wash-tubs, proving the lantern was stolen from the porch to frame Jonah."
           },
           {
             "fact_ref": "unslaked_marl_in_hopper_four",
             "verdict": "earned",
-            "why": "Spotted as background commercial paperwork during Crane's threat, it returns as the economic motive underlying Toby's murder and the cover-up."
+            "why": "Noticed in passing in E04 on shipping vouchers during Crane's threat, it pays off in E17 as the foundational economic motive explaining why Toby was murdered."
           }
         ],
-        "closest_stock_shape": "industrial noir whodunnit / framed scapegoat procedural",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "stock_adherence": 3,
-        "thematic_coherence": 5,
+        "particulars": [
+          {
+            "element": "The investigator is personally targeted with statutory manslaughter liability based on his shift sign-off.",
+            "load_bearing": true,
+            "why": "It forces an otherwise routine night yardmaster to investigate Toby's death to protect his own freedom."
+          },
+          {
+            "element": "Industrial substitution of unslaked marl for kiln limestone.",
+            "load_bearing": true,
+            "why": "This fraudulent voucher provides the core financial motive for Vance's murder of Toby and the staged derailment."
+          },
+          {
+            "element": "Mutton tallow kitchen fat used in a railway lantern.",
+            "load_bearing": true,
+            "why": "The smell links the derailer switch lantern to Martha's canteen wash-tubs, proving the equipment was opportunistic and staged."
+          },
+          {
+            "element": "White lead paint flake embedded in the cracked skull.",
+            "load_bearing": true,
+            "why": "It disproves crushing by railcar wheels and places the murder scene up on the kiln gantry handrail."
+          },
+          {
+            "element": "The corrupt alderman suppresses the truth by blacklisting the innocent investigator even after the killer confesses.",
+            "load_bearing": true,
+            "why": "It causes Dan's eviction from the rail yard and departure in E19-E20."
+          }
+        ],
+        "thematic_coherence": 4,
         "engagement": 4,
-        "notes": "The mystery is constructed with rigorous physical and procedural logic, allowing clues like the paint flake and mutton tallow to do double duty. The ending cleanly enforces the noir premise by ensuring institutional self-preservation trumps individual justice."
+        "notes": "The whodunnit structure is tightly engineered with rigorous clue-and-deduction mechanics. The bleak industrial resolution, where solving the crime still results in institutional ruin for the working-class protagonist, elevates the thematic bite."
       }
     },
     {
@@ -797,22 +1255,30 @@
       "judge_model": "gemini-3.8-flash",
       "causal": {
         "pairs": 19,
-        "causes": 16,
-        "merely_follows": 3,
+        "causes": 14,
+        "merely_follows": 5,
         "contradicts": 0,
-        "causes_share": 0.8421052631578947,
+        "causes_share": 0.7368421052631579,
+        "story_time_jumps": 0,
+        "continuous": {
+          "pairs": 19,
+          "causes": 14,
+          "share": 0.7368421052631579
+        },
         "passed": true
       },
       "payoff_earned": {
         "pairs": 10,
-        "earned": 8,
-        "linked_only": 2,
-        "earned_share": 0.8,
+        "earned": 7,
+        "linked_only": 3,
+        "earned_share": 0.7,
         "passed": true
       },
       "non_genericity": {
-        "closest_stock_shape": "investigator-culpability procedural",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "adherence": 2,
+        "load_bearing_particulars": 4,
+        "particulars": 4,
         "passed": true
       },
       "thematic_coherence": {
@@ -823,162 +1289,203 @@
         "score": 4,
         "passed": true
       },
-      "notes": "The mechanical detective work integrates tightly with the personal dilemma, making the technical mystery and the ethical failure mutually dependent. The wrong turn in E12-E14 is especially well constructed from earlier material evidence.",
+      "notes": "A tight procedural mystery that subverts standard investigator infallibility by making Alix's own corner-cutting an integral part of the mechanical failure. The causal progression is rigorous, especially after the false hypothesis collapses.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "causes",
-            "why": "The sinking and the immediate threat to Alix's certification push her to question the deckhand on the pier steps to determine the initial conditions of the crossing."
+            "story_time_jump": false,
+            "why": "The sinking and public accusation immediately lead Alix to interrogate the deckhand who survived at the pier."
           },
           {
             "pair": "E02→E03",
             "verdict": "merely_follows",
-            "why": "Alix's return to her quarters to administer her sister's medicine and check the ledger is a routine domestic and administrative return rather than an action forced by the conversation with Joram."
+            "story_time_jump": false,
+            "why": "Alix returning home to medicate her sister and check the ledger follows her pier discussion, but is driven by the opening crisis rather than Joram's remark."
           },
           {
             "pair": "E03→E04",
-            "verdict": "causes",
-            "why": "Reviewing the official ledger entry causes Alix to physically inspect the freight house to verify what was loaded against what was certified."
+            "verdict": "merely_follows",
+            "story_time_jump": false,
+            "why": "Reviewing the ledger at home prompts an inspection of the freight house, but the sequence is an ordinary investigative progression."
           },
           {
             "pair": "E04→E05",
             "verdict": "merely_follows",
-            "why": "Orlo convening the prefecture chamber and asserting the ministry timeline occurs on the district's schedule, independent of Harte confronting Alix in the shed."
+            "story_time_jump": false,
+            "why": "The formal inquiry meeting with Magistrate Ren was already scheduled and is not triggered by Harte catching her in the shed."
           },
           {
             "pair": "E05→E06",
             "verdict": "causes",
-            "why": "Securing forty-eight hours from Orlo enables Alix to conduct the low-tide physical examination of the hull timbers."
+            "story_time_jump": false,
+            "why": "Ren's ticking clock and demand for evidence compel Alix to conduct the immediate low-tide timber inspection."
           },
           {
             "pair": "E06→E07",
             "verdict": "merely_follows",
-            "why": "Vesper's grief-fueled confrontation at the cooperage is driven by his brother's death and general outrage rather than the results of Alix's awl test."
+            "story_time_jump": false,
+            "why": "Vesper's hostile confrontation at the cooperage happens independently of her finding sound heartwood on the hull."
           },
           {
             "pair": "E07→E08",
-            "verdict": "causes",
-            "why": "Alix's pledge to Vesper to find the exact mechanical cause drives her to dive the wreck with tools to extract underwater fittings."
+            "verdict": "merely_follows",
+            "story_time_jump": false,
+            "why": "Vesper's accusation of bribery motivates her to clear herself, but diving for the drain fitting is a continuation of the physical hull search."
           },
           {
             "pair": "E08→E09",
             "verdict": "causes",
-            "why": "Finding stripped bronze threads and an improvised plug prompts Alix to confront Harte with the physical component."
+            "story_time_jump": false,
+            "why": "Pulling the stripped fitting from the water allows Alix to immediately confront Harte with the physical defect."
           },
           {
             "pair": "E09→E10",
             "verdict": "causes",
-            "why": "Harte's deflection and threats lead Alix to the careening yard to confront Kest, the contractor who seated the fitting."
+            "story_time_jump": false,
+            "why": "Harte's refusal to name who seated the fitting drives Alix directly to Kest's repair yard to identify the work."
           },
           {
             "pair": "E10→E11",
             "verdict": "causes",
-            "why": "Kest's revelation of a slipway conversation prompts Alix to cross-reference Harte's broader permit records to explain why the vessel was pushed into service."
+            "story_time_jump": false,
+            "why": "Shaken by Kest's revelation of her own oversight, Alix returns to the permits to verify the commercial chain of custody."
           },
           {
             "pair": "E11→E12",
             "verdict": "causes",
-            "why": "Mapping Harte's massive volume of illicit cargo against displacement leads Alix to formulate her erroneous overload-collapse hypothesis."
+            "story_time_jump": false,
+            "why": "Calculating Harte's illicit cargo tallies directly leads Alix to formulate her erroneous catastrophic overloading hypothesis."
           },
           {
             "pair": "E12→E13",
             "verdict": "causes",
-            "why": "Alix's conviction that structural overloading sank the ferry leads directly to her public denunciation of Harte before the townsfolk."
+            "story_time_jump": false,
+            "why": "Alix's conviction that excessive weight stove in the hull leads directly to her public denunciation of Harte."
           },
           {
             "pair": "E13→E14",
             "verdict": "causes",
-            "why": "Alix's public accusation provokes Kest to bring hull gauges to the wreck and formally disprove structural failure."
+            "story_time_jump": false,
+            "why": "The public denunciation prompts Kest to bring hull-measuring gauges to refute her claim before the magistrate's clerks."
           },
           {
             "pair": "E14→E15",
             "verdict": "causes",
-            "why": "The public collapse of Alix's theory leaves her discredited, prompting Magistrate Ren to issue an ultimatum of immediate arrest."
+            "story_time_jump": false,
+            "why": "The total collapse of her overloading theory causes Orlo to censure her and issue the sunrise arrest ultimatum."
           },
           {
             "pair": "E15→E16",
             "verdict": "causes",
-            "why": "Facing arrest by sunrise, Alix is forced to abandon her bias and recalculate the low-water soundings against Joram's testimony."
+            "story_time_jump": false,
+            "why": "Facing arrest by dawn, Alix is forced to re-evaluate the data and plot bottom depths against the lowest protrusion."
           },
           {
             "pair": "E16→E17",
             "verdict": "causes",
-            "why": "Realizing the drain fitting was the lowest protruding point directs her attention back to the stripped brass flange to understand how it failed."
+            "story_time_jump": false,
+            "why": "Realizing the protruding fitting caught the bar directs her attention to the indentation marks and sheared bung threads."
           },
           {
             "pair": "E17→E18",
             "verdict": "causes",
-            "why": "Understanding the physical failure forces Alix to acknowledge the consequences of Kest's unheeded warning and her own complicit certification."
+            "story_time_jump": false,
+            "why": "Recognizing that the plug popped inward directly forces Alix to face her own deliberate omission of Kest's warning."
           },
           {
             "pair": "E18→E19",
             "verdict": "causes",
-            "why": "Her decision to confess her negligence leads her directly to the inquiry chamber to present the complete physical chain of events."
+            "story_time_jump": false,
+            "why": "Her decision to confess her fraudulent certification leads directly to her testimony before Magistrate Ren."
           },
           {
             "pair": "E19→E20",
             "verdict": "causes",
-            "why": "Her formal confession at the inquiry results in the immediate forfeiture of her office and her sister's medical stipend."
+            "story_time_jump": false,
+            "why": "Her public admission of certification fraud results in the loss of her inspector post and the household medicine subsidy."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "ferry_passed_inspection",
             "verdict": "linked_only",
-            "why": "It acts purely as introductory exposition in the opening event to establish the premise, without prior planting or payoff work."
+            "why": "Used merely as introductory exposition in the opening scene rather than an earned dramatic payoff."
           },
           {
             "fact_ref": "tomas_drowned_in_crossing",
             "verdict": "linked_only",
-            "why": "Like the inspection record, this is seed exposition stating the initial catastrophe that launches the scene."
+            "why": "Introduced in the opening beat as immediate baseline stakes rather than collected from prior story action."
           },
           {
             "fact_ref": "district_requires_culprit",
-            "verdict": "earned",
-            "why": "The political mandate declared in the seed sits in tension through early local investigations until Orlo formally leverages it to corner Alix."
-          },
-          {
-            "fact_ref": "unrecorded_draft_rubbing",
-            "verdict": "earned",
-            "why": "Joram's casual mention in E02 seems like ordinary background texture until Alix re-evaluates clearance soundings in E16."
-          },
-          {
-            "fact_ref": "unregistered_grain_sacks",
-            "verdict": "earned",
-            "why": "Discovered in E04, the illicit cargo serves as the plausible foundation that tempts Alix into her mistaken overloading hypothesis in E12."
+            "verdict": "linked_only",
+            "why": "Stated as institutional background context and delivered straightforwardly when Orlo enters the narrative."
           },
           {
             "fact_ref": "harte_controls_wharf_trade",
             "verdict": "earned",
-            "why": "Harte's pervasive control, established in the seed, pays off when Alix realizes he systematically monopolizes the crossing permits."
+            "why": "Planted in background setup and reinforced across wharf interactions before becoming concrete through cargo permit tallies."
+          },
+          {
+            "fact_ref": "unregistered_grain_sacks",
+            "verdict": "earned",
+            "why": "Found in E04 and misapplied in E12 to construct a plausible but mistaken theory of overloading."
           },
           {
             "fact_ref": "borer_free_hull_planking",
             "verdict": "earned",
-            "why": "Confirmed during the dive in E06, this negative finding reappears to dismantle Alix's false theory when Kest measures the rigid frame."
+            "why": "Established as proof of sound wood in E06, which later boomerangs in E14 to disprove her own overloading hypothesis."
+          },
+          {
+            "fact_ref": "unrecorded_draft_rubbing",
+            "verdict": "earned",
+            "why": "Mentioned as routine river bottom contact in E02, returning crucially in E16 as the physical impact that popped the bung."
           },
           {
             "fact_ref": "sheared_brass_bung_threads",
             "verdict": "earned",
-            "why": "Retrieved in E08, the artifact is initially treated as shoddy maintenance before its impact marks unlock the true hydro-mechanical cause in E17."
+            "why": "Recovered from the wreck in E08 and later re-examined in E17 to decipher the exact mechanics of bilge flooding."
           },
           {
             "fact_ref": "kests_casual_verbal_warning",
             "verdict": "earned",
-            "why": "Revealed in E10, the memory festers through Alix's public failure until she accepts personal moral culpability in E18."
+            "why": "Revealed uncomfortably in E10, forcing the final moral turning point in E18 where Alix confesses her own culpability."
           },
           {
             "fact_ref": "alix_salary_buys_tincture",
             "verdict": "earned",
-            "why": "The financial and medical stakes established at the start land heavily in E20 when Alix measures the final ration after losing her post."
+            "why": "Established early as the moral dilemma and collected in the final scene as the explicit, painful cost of telling the truth."
           }
         ],
-        "closest_stock_shape": "investigator-culpability procedural",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "stock_adherence": 2,
+        "particulars": [
+          {
+            "element": "The disaster is caused not by foul play or rot, but an unseasoned willow plug driven into stripped bronze threads catching a shallow gravel bar.",
+            "load_bearing": true,
+            "why": "The entire second half turns on this specific hydro-mechanical interaction disproving the overloading claim."
+          },
+          {
+            "element": "The investigator is personally complicit in the disaster, having knowingly omitted an unapproved stopgap repair to protect local transit.",
+            "load_bearing": true,
+            "why": "Alix's guilt in E10 and confession in E18-E19 resolve the inquiry at the cost of her own career."
+          },
+          {
+            "element": "Carpenter frame gauges disprove hull collapse, actively dismantling the protagonist's red-herring hypothesis in public.",
+            "load_bearing": true,
+            "why": "This forces the climax of E14-E15 where Alix is completely discredited and backed against a sunrise deadline."
+          },
+          {
+            "element": "The inspector's post provides access to an apothecary ration needed to treat her sister's chronic fever.",
+            "load_bearing": true,
+            "why": "Provides the personal motive for her original regulatory compromise and measures the severity of her final sacrifice."
+          }
+        ],
         "thematic_coherence": 5,
         "engagement": 4,
-        "notes": "The mechanical detective work integrates tightly with the personal dilemma, making the technical mystery and the ethical failure mutually dependent. The wrong turn in E12-E14 is especially well constructed from earlier material evidence."
+        "notes": "A tight procedural mystery that subverts standard investigator infallibility by making Alix's own corner-cutting an integral part of the mechanical failure. The causal progression is rigorous, especially after the false hypothesis collapses."
       }
     },
     {
@@ -986,22 +1493,30 @@
       "judge_model": "gemini-3.8-flash",
       "causal": {
         "pairs": 19,
-        "causes": 16,
-        "merely_follows": 3,
+        "causes": 17,
+        "merely_follows": 2,
         "contradicts": 0,
-        "causes_share": 0.8421052631578947,
+        "causes_share": 0.8947368421052632,
+        "story_time_jumps": 0,
+        "continuous": {
+          "pairs": 19,
+          "causes": 17,
+          "share": 0.8947368421052632
+        },
         "passed": true
       },
       "payoff_earned": {
         "pairs": 16,
-        "earned": 10,
-        "linked_only": 6,
-        "earned_share": 0.625,
+        "earned": 11,
+        "linked_only": 5,
+        "earned_share": 0.6875,
         "passed": false
       },
       "non_genericity": {
-        "closest_stock_shape": "locked-room whodunnit subverted by industrial noir corruption",
-        "adherence": 2,
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
+        "adherence": 3,
+        "load_bearing_particulars": 6,
+        "particulars": 6,
         "passed": true
       },
       "thematic_coherence": {
@@ -1012,192 +1527,243 @@
         "score": 4,
         "passed": true
       },
-      "notes": "The technical mystery mechanics (slip, barographs, cones) integrate cleanly with the labor theme. Even when the locked-room puzzle is solved completely, the corrupt institutional hierarchy ensures the solver is crushed anyway.",
+      "notes": "An exceptionally tight industrial locked-room mystery where the physical clues double as mechanics of workplace exploitation. The wrong turn is genuinely earned by the protagonist's exhaustion and the technical data.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "causes",
-            "why": "Orde's demand to unseal Kiln 4 immediately leads directly to Maren opening the muffle doors where the body is found."
+            "story_time_jump": false,
+            "why": "Orde's insistence on unsealing Kiln 4 immediately leads directly to unlocking the muffle door and discovering Gabe's body."
           },
           {
             "pair": "E02→E03",
             "verdict": "causes",
-            "why": "The discovery of Gabe's corpse inside a locked chamber causes Orde to immediately question Maren, who holds the only key."
+            "story_time_jump": false,
+            "why": "Finding Gabe dead inside the locked chamber causes Orde to immediately interrogate Maren about her sole custody of the key."
           },
           {
             "pair": "E03→E04",
             "verdict": "causes",
-            "why": "Having established that Maren signed the log and held the key, Orde moves to confiscate her badge and frame her before the coroner arrives."
+            "story_time_jump": false,
+            "why": "Orde's formal framing of Maren as solely responsible leads to confiscating her badge and threatening her with criminal inquest."
           },
           {
             "pair": "E04→E05",
             "verdict": "causes",
-            "why": "Facing gross negligence charges and an institutional frame-up, Maren begins her illicit investigation by questioning Foster about noises in the night."
+            "story_time_jump": false,
+            "why": "Being threatened with negligence charges forces Maren into an unsanctioned investigation, seeking out Foster to verify what she heard."
           },
           {
             "pair": "E05→E06",
             "verdict": "merely_follows",
-            "why": "Speaking to Foster does not lead Maren to Nel; inspecting the pyrometric cones is an independent investigative check."
+            "story_time_jump": false,
+            "why": "Foster's explanation of flue noise does not directly cause Maren to consult Nel about pyrometric cone heat calibration."
           },
           {
             "pair": "E06→E07",
             "verdict": "causes",
-            "why": "Nel's finding that the firing was delayed prompts Maren to return to the supervisor office to cross-reference the physical logbooks."
+            "story_time_jump": false,
+            "why": "Nel's revelation that the firing was delayed by hours prompts Maren to return to the supervisor office to verify her written log entry."
           },
           {
             "pair": "E07→E08",
             "verdict": "causes",
-            "why": "Confronted by her own handwriting and Gabe's tally tag, Maren seeks out Tilda to find out what happened while she was on shift."
+            "story_time_jump": false,
+            "why": "Finding Gabe's brass tally tag on her desk deepens her panic and drives her to question Tilda about what happened during the night."
           },
           {
             "pair": "E08→E09",
-            "verdict": "merely_follows",
-            "why": "Tilda's revelation that Maren was asleep does not cause Maren to test the key for forced ward marks; it is another parallel forensic inquiry."
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Tilda's testimony that Maren was totally unconscious prompts Maren to have Nel inspect the master key for signs of illicit handling."
           },
           {
             "pair": "E09→E10",
             "verdict": "merely_follows",
-            "why": "Moran ambushing Maren in the canteen to advise taking a fall is driven by union politics, not by her finding slip on the key."
+            "story_time_jump": false,
+            "why": "Nel discovering red slip on the key does not trigger Moran intercepting Maren at the tea urn; the union committee had already met."
           },
           {
             "pair": "E10→E11",
             "verdict": "causes",
-            "why": "The union's pressure to surrender pushes Maren to dig deeper for mechanical proof before she is railroaded."
+            "story_time_jump": false,
+            "why": "Moran's announcement that the union will abandon her forces Maren to urgently search the office for mechanical records before she is dismissed."
           },
           {
             "pair": "E11→E12",
             "verdict": "causes",
-            "why": "Finding the 03:45 gas barograph spike matches Nel's cone delay, driving Maren into the false conclusion that she restarted the kiln in a delirium."
+            "story_time_jump": false,
+            "why": "Synthesizing the newly found 03:45 pressure spike with the pyrometric cone delay directly leads Maren to deduce that she herself turned the gas valve while delirious."
           },
           {
             "pair": "E12→E13",
             "verdict": "causes",
-            "why": "Believing herself guilty of manslaughter, Maren confesses to Moran and offers to step down."
+            "story_time_jump": false,
+            "why": "Believing she accidentally killed Gabe, Maren confesses to Moran in the canteen."
           },
           {
             "pair": "E13→E14",
             "verdict": "causes",
-            "why": "Moran escorts Maren directly to Orde's office so she can formally sign the admission of guilt."
+            "story_time_jump": false,
+            "why": "Moran takes Maren straight to Orde's office to sign the voluntary resignation statement based on her confession."
           },
           {
             "pair": "E14→E15",
             "verdict": "causes",
-            "why": "Being handed the pen at Orde's desk puts Maren in visual proximity to Orde's sleeve and desk organizer, revealing the red slip and docket."
+            "story_time_jump": false,
+            "why": "Reaching across the desk to sign Orde's statement puts Maren close enough to spot the red slip on his cuff and the 03:30 docket in his organizer."
           },
           {
             "pair": "E15→E16",
             "verdict": "causes",
-            "why": "Discovering Orde was active at 03:30 gives Maren the specific leverage needed to break Tilda's silence in the lab."
+            "story_time_jump": false,
+            "why": "Realizing Orde's presence on the floor gives Maren the factual leverage needed to break Tilda's silence in the laboratory."
           },
           {
             "pair": "E16→E17",
             "verdict": "causes",
-            "why": "Tilda's revelation that Orde sent Gabe back into the kiln allows the witnesses to reconstruct the exact timeline of key theft and burner ignition."
+            "story_time_jump": false,
+            "why": "Tilda's revelation that Orde ordered Gabe into the kiln at 03:20 supplies the crucial missing piece, allowing Maren and Nel to assemble the full reconstruction."
           },
           {
             "pair": "E17→E18",
             "verdict": "causes",
-            "why": "Armed with the fully reconstructed sequence and witness corroboration, Maren confronts Orde directly in front of the union representative."
+            "story_time_jump": false,
+            "why": "Having pieced together the exact sequence, Maren presents the complete physical and testimonial proof before Orde and Moran."
           },
           {
             "pair": "E18→E19",
             "verdict": "causes",
-            "why": "Orde's confession of reckless endangerment causes Orde and Moran to strike a closed-door institutional bargain to shield the company from police and shutdown."
+            "story_time_jump": false,
+            "why": "Orde's cornered admission forces management and the union into an institutional deal to prevent public criminal charges."
           },
           {
             "pair": "E19→E20",
             "verdict": "causes",
-            "why": "The institutional bargain dissolves the night shift and informally blacklists Maren, leading directly to her clearing her locker and departing."
+            "story_time_jump": false,
+            "why": "The institutional agreement dissolves the shift and casts Maren as toxic, leaving her blacklisted and forced to clear her locker."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "single_key_custody",
             "verdict": "earned",
-            "why": "Planted in world state, checked in E01, and establishes the strict physical locked-room premise that Orde weaponizes against Maren in E03."
+            "why": "The world rule establishes the locked-room constraint that immediately frames Maren in E01 and E03."
           },
           {
             "fact_ref": "maren_double_shift_fatigue",
             "verdict": "earned",
-            "why": "Planted in world state and emphasized in E01, setting up both her vulnerability to gaslighting and her plausible self-doubt during the investigation."
+            "why": "Established as a seed condition, her physical exhaustion actively enables both Orde's key theft and her plausible self-deception."
           },
           {
             "fact_ref": "dockyard_contract_penalty",
-            "verdict": "linked_only",
-            "why": "Used in E01 and E02 simply as the immediate excuse to open the kiln door; it does not function as a dramatic setup paying out."
+            "verdict": "earned",
+            "why": "The seed contract penalty provides Orde's primary motive to open the kiln early in E02 and rush the firing in secret."
           },
           {
             "fact_ref": "single_key_custody",
             "verdict": "earned",
-            "why": "Forms the central vise of the narrative trap when Orde corners her in E03."
+            "why": "The seed fact is actively weaponized by Orde in E03 to accuse Maren."
           },
           {
             "fact_ref": "gabe_body_in_kiln",
             "verdict": "linked_only",
-            "why": "The corpse in E02 is the basic inciting discovery of the story, so its mention in E04 is continuity rather than a satisfying plant-and-payoff."
+            "why": "Planted just two beats prior in E02, it is simply the immediate inciting incident being acknowledged in E04 rather than an earned setup."
           },
           {
             "fact_ref": "logbook_entry_signed_two_am",
             "verdict": "earned",
-            "why": "Asserted by Orde in E03 and verified in E07 with the added gut punch of finding Gabe's tally tag on the desk."
+            "why": "Orde's verbal claim in E03 is verified by physical inspection in E07, providing a substantial twist of self-implication."
           },
           {
             "fact_ref": "cone_indicates_delayed_heat",
             "verdict": "earned",
-            "why": "Uncovered in E06 as an objective scientific discrepancy, it combines with the gas chart in E12 to lead Maren to a disastrous false deduction."
+            "why": "Nel's technical finding in E06 sits as dormant physical data until combined with the barograph chart in E12."
           },
           {
             "fact_ref": "hidden_barograph_chart",
-            "verdict": "earned",
-            "why": "Found through effort in E11 and immediately utilized in E12 to supply the specific timing that triggers Maren's conviction of her own guilt."
+            "verdict": "linked_only",
+            "why": "Found in E11 and immediately interpreted in E12 with no intervening narrative work."
           },
           {
             "fact_ref": "red_slip_on_brass_key",
             "verdict": "earned",
-            "why": "Introduced in E09 as an anomalous physical detail on the key, paying off critically in E15 when Maren spots the matching slip on Orde's cuff."
+            "why": "Examined forensically in E09 as an anomalous material detail, it pays off climactically when spotted on Orde's cuff in E15."
           },
           {
             "fact_ref": "flue_hammering_at_two",
             "verdict": "earned",
-            "why": "Planted in E05 as canteen grumbling, it provides the missing acoustic cover in E17 explaining why Gabe's presence was obscured."
+            "why": "Introduced in E05 as canteen banter explaining night sounds, it pays off in E17 by confirming Maren's timeline and state of mind."
           },
           {
             "fact_ref": "tilda_saw_maren_blackout",
             "verdict": "earned",
-            "why": "Planted in E08 as evidence of Maren's incapacity, paying off in E17 to explain the exact window during which Orde lifted the master key."
+            "why": "Tilda's initial guilty admission in E08 explains the window of opportunity required to complete the puzzle in E17."
           },
           {
             "fact_ref": "orde_hurrying_inspection",
-            "verdict": "linked_only",
-            "why": "Orde's haste in E01 is baseline character behavior rather than a latent plant that earns a cathartic payout in E18."
+            "verdict": "earned",
+            "why": "The opening behavior in E01 is revealed in E18 to be part of Orde's scramble to cover his unauthorized midnight rush firing."
           },
           {
             "fact_ref": "orde_red_slip_stains",
             "verdict": "linked_only",
-            "why": "Spotted in E15 and used in E18 only three beats later as direct conversational evidence."
+            "why": "Noticed in E15 and immediately used in the confrontation in E18."
           },
           {
             "fact_ref": "tilda_saw_gabe_at_three",
             "verdict": "linked_only",
-            "why": "Elicited in E16 and used immediately in E18 to close the trap on Orde without having sat as a latent thread."
+            "why": "Obtained in E16 and instantly redeployed in E18."
           },
           {
             "fact_ref": "union_sacrificing_supervisor",
             "verdict": "earned",
-            "why": "Moran's warning in E10 pays out cynically in E19 when the union trades Maren's livelihood away to protect the plant."
+            "why": "Moran's warning in E10 culminates in the corrupt institutional settlement in E19."
           },
           {
             "fact_ref": "orde_took_key_while_maren_slept",
             "verdict": "linked_only",
-            "why": "This is the mystery's solution in E17; citing it as paid off in E20 is just referring to the aftermath rather than an earned narrative debt."
+            "why": "Formulated in the synthesis beat of E17, its payoff in E20 is merely the overarching case outcome rather than a distinct setup."
           }
         ],
-        "closest_stock_shape": "locked-room whodunnit subverted by industrial noir corruption",
-        "stock_adherence": 2,
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
+        "stock_adherence": 3,
+        "particulars": [
+          {
+            "element": "Orton pyrometric cones measuring firing heat curve",
+            "load_bearing": true,
+            "why": "The delayed bending of Cone 04 provides the physical proof that the firing sequence did not begin at 02:00."
+          },
+          {
+            "element": "Gas pressure barograph chart hidden beneath office furniture",
+            "load_bearing": true,
+            "why": "The recorded 03:45 pressure spike pinpoints the exact minute the burners ignited, enabling both Maren's false conclusion and the true solution."
+          },
+          {
+            "element": "Red iron oxide slip on key bow matching Orde's cuff",
+            "load_bearing": true,
+            "why": "The chemical trace ties the master key directly to Orde's handling during the unauthorized rush docket run."
+          },
+          {
+            "element": "Protagonist's sleep-deprived delirium leading to an evidence-based false confession",
+            "load_bearing": true,
+            "why": "The technical clues logically support Maren's belief in her own guilt, driving the story to the verge of a signed confession."
+          },
+          {
+            "element": "Union leadership sacrificing a junior supervisor to protect seasonal jobs",
+            "load_bearing": true,
+            "why": "Moran's collusion with management prevents legal justice and forces the grim outcome where Maren is cleared but blacklisted."
+          },
+          {
+            "element": "Victim trapped resetting fallen saggers in muffle kiln",
+            "load_bearing": true,
+            "why": "Explains why Gabe entered the chamber after hours without lighting, providing the physical mechanism of the tragedy."
+          }
+        ],
         "thematic_coherence": 5,
         "engagement": 4,
-        "notes": "The technical mystery mechanics (slip, barographs, cones) integrate cleanly with the labor theme. Even when the locked-room puzzle is solved completely, the corrupt institutional hierarchy ensures the solver is crushed anyway."
+        "notes": "An exceptionally tight industrial locked-room mystery where the physical clues double as mechanics of workplace exploitation. The wrong turn is genuinely earned by the protagonist's exhaustion and the technical data."
       }
     },
     {
@@ -1205,22 +1771,30 @@
       "judge_model": "gemini-3.8-flash",
       "causal": {
         "pairs": 19,
-        "causes": 17,
-        "merely_follows": 2,
+        "causes": 18,
+        "merely_follows": 1,
         "contradicts": 0,
-        "causes_share": 0.8947368421052632,
+        "causes_share": 0.9473684210526315,
+        "story_time_jumps": 0,
+        "continuous": {
+          "pairs": 19,
+          "causes": 18,
+          "share": 0.9473684210526315
+        },
         "passed": true
       },
       "payoff_earned": {
         "pairs": 11,
-        "earned": 7,
-        "linked_only": 4,
-        "earned_share": 0.6363636363636364,
-        "passed": false
+        "earned": 8,
+        "linked_only": 3,
+        "earned_share": 0.7272727272727273,
+        "passed": true
       },
       "non_genericity": {
-        "closest_stock_shape": "whodunnit with protective loved-one culprit",
-        "adherence": 3,
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
+        "adherence": 2,
+        "load_bearing_particulars": 5,
+        "particulars": 5,
         "passed": true
       },
       "thematic_coherence": {
@@ -1231,167 +1805,213 @@
         "score": 4,
         "passed": true
       },
-      "notes": "The mystery is tightly constructed around agricultural forensics and legal bylaws, culminating in a genuinely pyrrhic victory where authorship eclipses material self-preservation.",
+      "notes": "The mystery mechanics are exceptionally clean, with botanical and cooperative legalities functioning as rigorous plot turnstiles. The ending lands with genuine tragic weight as Martha accepts eviction simply to keep the historical reality of her craft acknowledged.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "causes",
-            "why": "Discovering the destroyed pear trees in E01 compels Martha to report the felling to the cooperative committee in E02."
+            "story_time_jump": false,
+            "why": "Discovering her felled mother trees causes Martha to report the destruction to the cooperative committee."
           },
           {
             "pair": "E02→E03",
             "verdict": "causes",
-            "why": "Having her legal claim dismissed due to lack of registration in E02, Martha returns to the orchard site to gather physical evidence of who committed the destruction."
+            "story_time_jump": false,
+            "why": "Having her ownership dismissed due to lack of registration spurs Martha to return to the terrace to search for physical evidence."
           },
           {
             "pair": "E03→E04",
             "verdict": "causes",
-            "why": "Judith's testimony pointing toward Corin and Julian in E03 leads Martha directly to confront Julian at his farmhouse in E04."
+            "story_time_jump": false,
+            "why": "Judith's accusation and the truck ruts prompt Martha to confront Julian directly about ordering the felling."
           },
           {
             "pair": "E04→E05",
             "verdict": "causes",
-            "why": "Julian's refusal to halt the buyout in E04 sends Martha back to her workshop to gather sampling tools to prove the rootstock's lineage."
+            "story_time_jump": false,
+            "why": "Julian's stonewalling leads Martha back to her workshop to gather root-sampling tools."
           },
           {
             "pair": "E05→E06",
-            "verdict": "merely_follows",
-            "why": "Failing to find her copper knife in E05 does not trigger the inspection of the chainsaw; examining the cooperative machinery is an independent investigative step."
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Unable to find her grafting knife and suspecting mechanical felling, Martha goes to test the cooperative chainsaw."
           },
           {
             "pair": "E06→E07",
             "verdict": "causes",
-            "why": "Ruling out the cooperative chainsaw pushes Martha to seek documentary evidence in Julian's office regarding his alternate motives."
+            "story_time_jump": false,
+            "why": "Disproving the chainsaw's involvement while in the machinery bay leads Martha to slip into Julian's adjacent office for documentary evidence."
           },
           {
             "pair": "E07→E08",
             "verdict": "merely_follows",
-            "why": "Finding Julian's patent draft does not causally motivate returning to the terrace to re-inspect fence grease with Judith."
+            "story_time_jump": false,
+            "why": "Finding the patent draft does not prompt Martha to re-examine the terrace boundary fence with Judith; she simply resumes inspecting physical traces."
           },
           {
             "pair": "E08→E09",
             "verdict": "causes",
-            "why": "Judith's identification of Corin's truck at the boundary causes Martha to seek out and confront Corin at the gravel yard."
+            "story_time_jump": false,
+            "why": "Judith's claim that Corin was paid to clear the grove prompts Martha to track down Corin at the gravel yard."
           },
           {
             "pair": "E09→E10",
             "verdict": "causes",
-            "why": "Julian silencing Corin prompts Martha to question Corin's father Arthur to ascertain Corin's true midnight whereabouts."
+            "story_time_jump": false,
+            "why": "Julian silencing Corin forces Martha to go to Corin's father, Arthur, to learn the truth about the midnight truck run."
           },
           {
             "pair": "E10→E11",
             "verdict": "causes",
-            "why": "Arthur's alibi and cryptic warning about orchard enmities push Martha to demand why Wren's Russet threatens the valley."
+            "story_time_jump": false,
+            "why": "Arthur's warning that Martha is misreading old enmities prompts her to press him on why the variety is being silenced."
           },
           {
             "pair": "E11→E12",
             "verdict": "causes",
-            "why": "Arthur's disclosure of the 1972 founding covenant leads Martha to inspect the parish lockbox ledger herself."
+            "story_time_jump": false,
+            "why": "Arthur invoking the 1972 charter leads Martha to inspect the vellum ledger in the parish lockbox."
           },
           {
             "pair": "E12→E13",
             "verdict": "causes",
-            "why": "Synthesizing the patent draft and the punitive indemnity clause leads Martha to publicly accuse Julian of sabotage."
+            "story_time_jump": false,
+            "why": "Reading clause 14 convinces Martha that Julian is extorting her, driving her to publicly confront him with the draft patent."
           },
           {
             "pair": "E13→E14",
             "verdict": "causes",
-            "why": "Martha's formal accusation forces Julian and Corin to present authenticated alibi manifests, demolishing her working hypothesis."
+            "story_time_jump": false,
+            "why": "Martha's formal accusation forces Corin and Beatrice to produce the verified delivery manifests."
           },
           {
             "pair": "E14→E15",
             "verdict": "causes",
-            "why": "The complete collapse of her case leaves Martha defeated, driving her to retreat home and reveal her secret backup scions to Tomas."
+            "story_time_jump": false,
+            "why": "The complete collapse of her accusation sends Martha retreating to her workshop in defeat, where she reveals her secret scion cache to Tomas."
           },
           {
             "pair": "E15→E16",
             "verdict": "causes",
-            "why": "Tomas's panicked reaction to the scions prompts Martha to scrutinize him, noticing the chalk on his coat and searching his kit."
+            "story_time_jump": false,
+            "why": "Tomas's panicked reaction to the living wood draws Martha's scrutiny to his coat and tool crate, revealing the physical evidence."
           },
           {
             "pair": "E16→E17",
             "verdict": "causes",
-            "why": "Confronted with the copper knife and lumber chalk, Tomas confesses his protective felling of the trees."
+            "story_time_jump": false,
+            "why": "Being confronted with the knife and blue chalk compels Tomas to confess his protective motive."
           },
           {
             "pair": "E17→E18",
             "verdict": "causes",
-            "why": "Tomas's plea to destroy the variety forces Martha into an active moral choice to preserve authorship over personal safety."
+            "story_time_jump": false,
+            "why": "Tomas's plea to destroy the scions forces Martha to choose between her financial security and claiming her life's breeding work."
           },
           {
             "pair": "E18→E19",
             "verdict": "causes",
-            "why": "Martha packing the scions and knife directly results in her presenting them at the buyout ratification hearing."
+            "story_time_jump": false,
+            "why": "Martha's refusal to let her work be erased leads her directly to the ratification meeting to present the scions and matching knife."
           },
           {
             "pair": "E19→E20",
             "verdict": "causes",
-            "why": "Martha's conclusive proof of unauthorized cultivation forces Beatrice to invoke clause 14, stripping Martha of her cottage and land."
+            "story_time_jump": false,
+            "why": "Martha's conclusive demonstration of unauthorized private breeding gives Beatrice the exact legal grounds to forfeit her cottage and equity under clause 14."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "russet_pear_unregistered",
             "verdict": "linked_only",
-            "why": "Introduced in the seed and directly declared in E02 to establish the obstacle; it does not sit and build narrative weight before paying off."
+            "why": "It is introduced as world premise and instantly cited in E02 to reject her claim without intermediate story work."
           },
           {
             "fact_ref": "agdev_buyout_bonus",
             "verdict": "linked_only",
-            "why": "A background seed fact that is simply verbalized by Julian in dialogue during E04 to provide standard antagonistic motive."
+            "why": "Julian simply confirms his seeded bonus motive in conversation rather than the detail being uncovered through narrative progression."
           },
           {
             "fact_ref": "clean_cambium_girdling",
             "verdict": "earned",
-            "why": "The precise nature of the cut observed in E01 pays off effectively in E06 when Martha uses it to eliminate the cooperative chainsaw."
+            "why": "The specific nature of the cut observed in E01 is actively tested against the cooperative chainsaw in E06 to eliminate a mechanical tool."
           },
           {
             "fact_ref": "coop_founding_covenant",
             "verdict": "linked_only",
-            "why": "Mentioned in the seed and then brought into play in E11 purely by exposition from Arthur."
+            "why": "Arthur simply recites the seeded fact in dialogue to explain cooperative hostility."
           },
           {
             "fact_ref": "gorse_secret_patent_draft",
             "verdict": "earned",
-            "why": "Found covertly in E07, it becomes the false cornerstone of Martha's dramatic public accusation in E13."
+            "why": "Recovered from Julian's locked files in E07, it becomes the physical centerpiece of Martha's false confrontation in E13."
           },
           {
             "fact_ref": "corin_alibi_breakdown",
             "verdict": "earned",
-            "why": "Discovered privately in E10, this evidence returns in E14 to fully shatter Martha's theory in front of the buyer."
+            "why": "Arthur's initial report of receipts in E10 is verified with stamped manifests in E14 to dismantle Martha's entire working theory."
           },
           {
             "fact_ref": "blue_chalk_traces",
             "verdict": "earned",
-            "why": "Planted early as a subtle perimeter clue in E03, it returns decisively in E16 to incriminate Tomas."
+            "why": "Noticed as an unexplained trace at the gate in E03, it returns in E16 on Tomas's work coat to pinpoint the culprit."
           },
           {
             "fact_ref": "missing_copper_knife",
             "verdict": "earned",
-            "why": "Planted in E05 during an ordinary domestic scene, its discovery in Tomas's crate completes the physical puzzle in E16."
+            "why": "Noticed missing during an ordinary workshop errand in E05, it reappears in E16 as the murder weapon hidden in Tomas's crate."
           },
           {
             "fact_ref": "ledger_indemnity_clause",
             "verdict": "earned",
-            "why": "Planted in E12 as Julian's presumed weapon, it recontextualizes entirely in E17 as Tomas's desperate protective motive."
+            "why": "The dog-eared clause Martha misapplied to Julian in E12 proves in E17 to be the exact panic trigger that motivated Tomas to girdle the trees."
           },
           {
             "fact_ref": "hidden_scion_cache",
-            "verdict": "linked_only",
-            "why": "Introduced in E15 and immediately carried to the meeting in E18 without sufficient narrative gestation."
+            "verdict": "earned",
+            "why": "Revealed in E15 to Tomas, it becomes Martha's decisive instrument of proof in E18 and E19."
           },
           {
             "fact_ref": "knife_notch_mark",
             "verdict": "earned",
-            "why": "Seeded as physical trait, it provides the decisive forensic match between the stumps and the knife at the climax in E19."
+            "why": "The seeded physical quirk of the knife is matched against the stump wounds before Beatrice to definitively settle authorship and the felling."
           }
         ],
-        "closest_stock_shape": "whodunnit with protective loved-one culprit",
-        "stock_adherence": 3,
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
+        "stock_adherence": 2,
+        "particulars": [
+          {
+            "element": "The 1972 cooperative charter clause 14 forfeiting land and home for private cultivar breeding on co-op rootstock",
+            "load_bearing": true,
+            "why": "It supplies Tomas's panic-driven motive to cut the trees and provides the legal mechanism for Martha's ruin in the resolution."
+          },
+          {
+            "element": "Paraffin-dipped scion cache preserved in the root cellar before the felling",
+            "load_bearing": true,
+            "why": "It allows the variety to survive physical destruction and provides the biological evidence Martha presents to AgDev."
+          },
+          {
+            "element": "The culprit is the devoted nephew acting purely out of protective panic rather than greed or malice",
+            "load_bearing": true,
+            "why": "It flips the investigation from corporate sabotage to familial tragedy and drives Martha's dilemma in E18."
+          },
+          {
+            "element": "Softwood sawdust on the chainsaw teeth disproving its use on hardwood pear trees",
+            "load_bearing": true,
+            "why": "It eliminates Corin's mechanical involvement and shifts the investigation toward manual hand tools."
+          },
+          {
+            "element": "Blue lumber chalk used by Tomas on the gate latch matching powder on his coat hem",
+            "load_bearing": true,
+            "why": "It provides the physical link connecting the crime scene gate to Tomas in E16."
+          }
+        ],
         "thematic_coherence": 5,
         "engagement": 4,
-        "notes": "The mystery is tightly constructed around agricultural forensics and legal bylaws, culminating in a genuinely pyrrhic victory where authorship eclipses material self-preservation."
+        "notes": "The mystery mechanics are exceptionally clean, with botanical and cooperative legalities functioning as rigorous plot turnstiles. The ending lands with genuine tragic weight as Martha accepts eviction simply to keep the historical reality of her craft acknowledged."
       }
     },
     {
@@ -1399,22 +2019,30 @@
       "judge_model": "gemini-3.8-flash",
       "causal": {
         "pairs": 19,
-        "causes": 16,
-        "merely_follows": 3,
+        "causes": 18,
+        "merely_follows": 1,
         "contradicts": 0,
-        "causes_share": 0.8421052631578947,
+        "causes_share": 0.9473684210526315,
+        "story_time_jumps": 0,
+        "continuous": {
+          "pairs": 19,
+          "causes": 18,
+          "share": 0.9473684210526315
+        },
         "passed": true
       },
       "payoff_earned": {
         "pairs": 9,
-        "earned": 7,
-        "linked_only": 2,
-        "earned_share": 0.7777777777777778,
+        "earned": 9,
+        "linked_only": 0,
+        "earned_share": 1,
         "passed": true
       },
       "non_genericity": {
-        "closest_stock_shape": "industrial accident inquiry whodunnit",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "adherence": 2,
+        "load_bearing_particulars": 5,
+        "particulars": 5,
         "passed": true
       },
       "thematic_coherence": {
@@ -1425,157 +2053,203 @@
         "score": 4,
         "passed": true
       },
-      "notes": "The investigative chain is exceptionally solid, turning what could have been a simple corruption tale into an intricate engineering puzzle where the protagonist's plausible scapegoat theory collapses under physical evidence. The ethical core—trading family welfare for public truth—is rigorously tested and concluded.",
+      "notes": "The technical grounding of the mystery—involving green timber shrinkage, hydrological soundings, and municipal procedural corruption—is exceptionally tight. Renate discovering that her own ethical compromise is the true culprit elevates the arc beyond a routine procedural.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "causes",
-            "why": "Tomas's warning regarding scrutiny of Renate's sign-off directly compels her to examine the disaster site and interview witnesses at the mudflats."
+            "story_time_jump": false,
+            "why": "Renate commits to examining the site immediately before auditors arrive, leading directly to her inspecting the shallows and interviewing Kester Finch."
           },
           {
             "pair": "E02→E03",
             "verdict": "merely_follows",
-            "why": "Pell convenes formal hearings as part of his regional prosecutorial mandate, not because of Renate's mudflat interviews."
+            "story_time_jump": false,
+            "why": "Gideon Pell's announcement of formal inquiry hearings into the disaster happens according to his institutional role, independent of Renate's talk with Finch."
           },
           {
             "pair": "E03→E04",
             "verdict": "causes",
-            "why": "Pell's demand for inspection certificates prompts Renate to re-examine her own paperwork and confront what she omitted."
+            "story_time_jump": false,
+            "why": "Pell's demand for drought-summer inspection certifications spurs Renate to review her stamped certificate and reassess her vulnerability at home."
           },
           {
             "pair": "E04→E05",
-            "verdict": "merely_follows",
-            "why": "Pell's line of questioning regarding slipway inspections follows his independent inquiry plan rather than Renate's private domestic realization."
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Renate's attempt to deflect attention from the inspection itself puts her directly in the crosshairs of Pell's questioning regarding the afloat certification."
           },
           {
             "pair": "E05→E06",
             "verdict": "causes",
-            "why": "Pell's threat of penal liability over structural defects pushes Renate to question Barney about his timber overhaul."
+            "story_time_jump": false,
+            "why": "Under threat of penal liability for structural flaws, Renate seeks out the repair timberyard contractor who overhauled the strakes."
           },
           {
             "pair": "E06→E07",
-            "verdict": "merely_follows",
-            "why": "Barney's deflection toward Tomas's loading practices is followed by Briony approaching Renate with her brother's tally card, which Briony possessed independently."
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Barney points Renate toward how Tomas loaded the wagons, sending her back to the claimants and witnesses on the shore to pursue cargo loading."
           },
           {
             "pair": "E07→E08",
             "verdict": "causes",
-            "why": "Briony's tally card gives Renate specific cause to break into the tollkeeper's lockbox to find the official weigh slips."
+            "story_time_jump": false,
+            "why": "Receiving the dead skipper's tally card gives Renate specific cause to break into the tollkeeper's lockbox in the wharf office."
           },
           {
             "pair": "E08→E09",
             "verdict": "causes",
-            "why": "Renate removing the carbon slips from the wharf desk triggers Tomas's immediate physical interception and threat."
+            "story_time_jump": false,
+            "why": "Renate taking the carbon receipts immediately prompts Tomas to intercept her at the office door to protect his fraud."
           },
           {
             "pair": "E09→E10",
             "verdict": "causes",
-            "why": "Defying Tomas's blackmail, Renate proceeds to measure channel depths to prove her overloading-grounding hypothesis."
+            "story_time_jump": false,
+            "why": "Having secured evidence of cargo fraud, Renate goes to sound the crossing channel to prove the excess weight grounded the vessel on the bar."
           },
           {
             "pair": "E10→E11",
             "verdict": "causes",
-            "why": "Armed with depth soundings that seem compatible with an overloaded bottoming-out, Renate commits to presenting her thesis before Pell's deadline."
+            "story_time_jump": false,
+            "why": "Her survey work and Finch's assessment lead her directly to the inquiry hall to present her findings before Pell enters findings."
           },
           {
             "pair": "E11→E12",
             "verdict": "causes",
-            "why": "Renate's formal declaration in E11 leads immediately to submitting the weigh carbons and presenting the grounding argument in E12."
+            "story_time_jump": false,
+            "why": "Renate's claim of documentary proof leads directly into her submitting the carbon slips and articulating the grounding theory to Pell."
           },
           {
             "pair": "E12→E13",
             "verdict": "causes",
-            "why": "Renate's formal claim in E12 triggers Barney and Tomas's cross-examination regarding hull capacity in E13."
+            "story_time_jump": false,
+            "why": "Submitting the weight records forces Tomas and Barney to mount their defense in the inquiry, highlighting that the framing was certified for twenty tons."
           },
           {
             "pair": "E13→E14",
             "verdict": "causes",
-            "why": "The realization that her accusation hinges on impact evidence leads directly to inspecting the winched hull in E14."
+            "story_time_jump": false,
+            "why": "Because Renate's theory hinges on bottom impact damage, Pell orders the hull winched out of the mud for physical inspection."
           },
           {
             "pair": "E14→E15",
             "verdict": "causes",
-            "why": "Scraping the raised hull reveals an intact keel, directly disproving the grounding thesis."
+            "story_time_jump": false,
+            "why": "With the hull winched out of the river mud, Renate scrapes the keel and discovers the impact breach does not exist."
           },
           {
             "pair": "E15→E16",
             "verdict": "causes",
-            "why": "The total refutation of the keel strike forces Renate to examine other areas of the hull, discovering the warped strakes."
+            "story_time_jump": false,
+            "why": "The refutation of the grounding hypothesis forces Renate to examine the rest of the exposed hull, finding the shrunken green ash strakes."
           },
           {
             "pair": "E16→E17",
             "verdict": "causes",
-            "why": "Identifying shrunken green wood drives Renate to confront Barney with physical timber samples."
+            "story_time_jump": false,
+            "why": "Finding the warped strakes and identifying the silt mechanism causes Renate to confront Barney with physical splinters from the hull."
           },
           {
             "pair": "E17→E18",
             "verdict": "causes",
-            "why": "Barney's reminder of her complicity compels Renate to confess to Marta and choose self-incrimination over silence."
+            "story_time_jump": false,
+            "why": "Barney confronting Renate with her deliberate omission of his warning drives her to confess to Marta and choose full disclosure."
           },
           {
             "pair": "E18→E19",
             "verdict": "causes",
-            "why": "Writing her confession leads directly to submitting it formally to Pell's tribunal."
+            "story_time_jump": false,
+            "why": "Renate's written admission leads directly to her submitting revised sworn testimony at the inquiry hall."
           },
           {
             "pair": "E19→E20",
             "verdict": "causes",
-            "why": "Renate's sworn confession causes Pell to strip her credentials, revoke allowances, and order her trial."
+            "story_time_jump": false,
+            "why": "Renate's confession of malfeasance and the grounding of the green-patched boats results in her formal stripping of rank, salary, and pending criminal trial."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "certified_fit_without_slipway",
-            "verdict": "linked_only",
-            "why": "The fact is stated in the backstory seed and cited directly by Pell in E05 without any prior narrative work or indirect payoff setup."
+            "verdict": "earned",
+            "why": "This background procedural corner-cutting is actively challenged under legal scrutiny in E05, raising the initial stakes of Renate's liability."
           },
           {
             "fact_ref": "skipper_protested_rough_weather_load",
-            "verdict": "linked_only",
-            "why": "The seed fact is introduced directly via Briony's exposition in E07 rather than doing prior narrative work."
+            "verdict": "earned",
+            "why": "Planted before opening, this fact provides the critical testimonial bridge in E07 that directs Renate toward the weigh slips and the false overloading theory."
           },
           {
             "fact_ref": "sister_dependent_pension",
             "verdict": "earned",
-            "why": "Planted in SEED and reinforced in E04, this vulnerability is actively weaponized as blackmail by Tomas in E09."
+            "why": "Planted in the seed, Tomas weaponizes Marta's municipal medical allowance in E09 as explicit extortion against Renate's investigation."
           },
           {
             "fact_ref": "falsified_cargo_weight",
             "verdict": "earned",
-            "why": "Planted through the lockbox theft in E08 and contested in E09, it forms the substantive evidence for Renate's mistaken formal charge in E12."
+            "why": "Discovered in E08, the carbon slips serve as the central centerpiece of Renate's mistaken formal case before Pell in E12."
           },
           {
             "fact_ref": "charted_spit_depth_clearance",
             "verdict": "earned",
-            "why": "The sounding measurement taken in E10 is repurposed in E15 by Pell to demonstrate that the hull could not have grounded."
+            "why": "The sounding data collected in E10 is paid off in E15 when Pell uses it alongside the unblemished keel to decisively dismantle the grounding theory."
           },
           {
             "fact_ref": "shrunken_seam_silt_blast",
             "verdict": "earned",
-            "why": "Kester's anomalous sensory detail from E02 sits unexplained until Renate connects it to hydrodynamic pressure through shrunken planks in E16."
+            "why": "The anomaly introduced in E02 as an unexplained jet of silt is finally resolved mechanistically in E16 as drought-shrunk seams admitting pressurized silt."
           },
           {
             "fact_ref": "green_ash_timber_order",
             "verdict": "earned",
-            "why": "Barney's defensive remark in E06 about material cutbacks pays off when physical shrunken splinters are extracted and presented in E17."
+            "why": "Barney's grumbling in E06 about provincial budget cuts pays off in E17 when Renate extracts green ash splinters to pin down the material failure."
           },
           {
             "fact_ref": "omitted_verbal_warning",
             "verdict": "earned",
-            "why": "Renate's guilty secret from E04 escalates through Barney's confrontation in E17 to her full public confession in E19."
+            "why": "Renate's hidden guilt admitted to herself in E04 matures into a full public confession in E19, anchoring her moral choice."
           },
           {
             "fact_ref": "sister_dependent_pension",
             "verdict": "earned",
-            "why": "The household's financial dependency, established early, pays out its tragic cost in E20 when Renate is stripped of her livelihood."
+            "why": "The family's financial lifeline established in the seed is definitively lost in E20 when Renate's stripped allowances manifest the cost of her confession."
           }
         ],
-        "closest_stock_shape": "industrial accident inquiry whodunnit",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "stock_adherence": 2,
+        "particulars": [
+          {
+            "element": "The protagonist investigator is herself criminally liable due to cutting inspection corners for job security.",
+            "load_bearing": true,
+            "why": "Her initial omission of Barney's warning and fear of losing her salary drives her to pursue a false alternative culprit."
+          },
+          {
+            "element": "Green ash wood shrinking under intense drought heat rather than rotting or suffering physical collision.",
+            "load_bearing": true,
+            "why": "The mechanical cause of the sinking turns specifically on unseasoned timber checking and opening seams above the waterline in drought conditions."
+          },
+          {
+            "element": "Pressurized river silt blasting upward through floorboards instead of ordinary water ingress.",
+            "load_bearing": true,
+            "why": "This specific physical clue misleads the crew into suspecting a snag, but later verifies the gaping bottom seams."
+          },
+          {
+            "element": "Municipal toll fraud (16 tons loaded on an 8-ton ticket) serving as a structurally sound red herring.",
+            "load_bearing": true,
+            "why": "The overloading is real crime and fraud, but functionally failed to ground or sink the barge because the frame was rated for twenty tons."
+          },
+          {
+            "element": "The protagonist's sister's medical stipend being tied directly to municipal crossing revenue.",
+            "load_bearing": true,
+            "why": "It enables Tomas's blackmail and forces the final moral price of Renate's confession to destroy her own family's welfare."
+          }
+        ],
         "thematic_coherence": 5,
         "engagement": 4,
-        "notes": "The investigative chain is exceptionally solid, turning what could have been a simple corruption tale into an intricate engineering puzzle where the protagonist's plausible scapegoat theory collapses under physical evidence. The ethical core—trading family welfare for public truth—is rigorously tested and concluded."
+        "notes": "The technical grounding of the mystery—involving green timber shrinkage, hydrological soundings, and municipal procedural corruption—is exceptionally tight. Renate discovering that her own ethical compromise is the true culprit elevates the arc beyond a routine procedural."
       }
     },
     {
@@ -1583,22 +2257,30 @@
       "judge_model": "gemini-3.8-flash",
       "causal": {
         "pairs": 19,
-        "causes": 15,
-        "merely_follows": 4,
+        "causes": 16,
+        "merely_follows": 3,
         "contradicts": 0,
-        "causes_share": 0.7894736842105263,
+        "causes_share": 0.8421052631578947,
+        "story_time_jumps": 0,
+        "continuous": {
+          "pairs": 19,
+          "causes": 16,
+          "share": 0.8421052631578947
+        },
         "passed": true
       },
       "payoff_earned": {
         "pairs": 9,
-        "earned": 5,
-        "linked_only": 4,
-        "earned_share": 0.5555555555555556,
-        "passed": false
+        "earned": 8,
+        "linked_only": 1,
+        "earned_share": 0.8888888888888888,
+        "passed": true
       },
       "non_genericity": {
-        "closest_stock_shape": "framed innocent worker procedural",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "adherence": 3,
+        "load_bearing_particulars": 6,
+        "particulars": 6,
         "passed": true
       },
       "thematic_coherence": {
@@ -1609,157 +2291,208 @@
         "score": 4,
         "passed": true
       },
-      "notes": "The mystery is exceptionally well constructed with distinct industrial clues that pay off mechanically and logically. It achieves emotional resonance by ending on a Pyrrhic victory where uncovering the truth completely alienates the protagonist from her community.",
+      "notes": "An exceptionally tight industrial mystery where physical plant mechanisms serve both as forensic clues and instruments of corporate coercion. The bleak resolution ensures that exposing the truth carries a genuine systemic cost rather than an easy victory.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "causes",
-            "why": "The discovery of Derry's body inside the padlocked kiln directly triggers Arthur's confrontation and seizure of Maren's interlock key."
+            "story_time_jump": false,
+            "why": "Derry's body being found inside the locked kiln immediately leads Arthur to accuse Maren, who holds the key."
           },
           {
             "pair": "E02→E03",
             "verdict": "causes",
-            "why": "Being accused of criminal negligence causes Maren to immediately retrace her perimeter rounds to figure out what happened."
+            "story_time_jump": false,
+            "why": "Arthur seizing her key and accusing her prompts Maren to retrace her perimeter rounds to find physical clues."
           },
           {
             "pair": "E03→E04",
             "verdict": "merely_follows",
-            "why": "Tessa arriving to discuss Arthur's call to marine insurers and contract penalties follows chronologically, but is not caused by Maren finding the propped damper."
+            "story_time_jump": false,
+            "why": "Tessa's arrival to report on Arthur's calls to marine insurers and contract liabilities is independent of Maren finding the rebar."
           },
           {
             "pair": "E04→E05",
             "verdict": "causes",
-            "why": "Realizing the factory is seeking a scapegoat and that she has an unexplained memory gap spurs Maren to verify Derry's actual timeline at the batch house."
+            "story_time_jump": false,
+            "why": "Realizing the existential threat and her own blackout, Maren begins an active timeline investigation starting at the batch house."
           },
           {
             "pair": "E05→E06",
             "verdict": "causes",
-            "why": "Nora's claim that Derry left before 02:30 sends Maren to question Orson about when the wicket lock was secured."
+            "story_time_jump": false,
+            "why": "Nora's evasion about Derry leaving before 02:30 sends Maren to question Orson about when the wicket was actually locked."
           },
           {
             "pair": "E06→E07",
             "verdict": "causes",
-            "why": "Orson's testimony that someone used a key at the lock bar prompts Maren to search Bram's maintenance workshop for duplicate keys and picks."
+            "story_time_jump": false,
+            "why": "Orson's testimony that he saw Maren prompts her to check Bram's pegboard for duplicate keys or lock picks."
           },
           {
             "pair": "E07→E08",
             "verdict": "merely_follows",
-            "why": "Arthur calling Maren into his office to present the initialed ledger is part of his independent framing timeline, not caused by her workshop search."
+            "story_time_jump": false,
+            "why": "Arthur confronting Maren with the forged ledger in his office is part of his ongoing frame-up, not a reaction to her speaking to Bram."
           },
           {
             "pair": "E08→E09",
             "verdict": "causes",
-            "why": "Arthur's document showing a 04:00 gas valve check drives Maren to inspect the continuous pipeline manometer tapes to test its veracity."
+            "story_time_jump": false,
+            "why": "Faced with the initialed 04:00 log check, Maren sneaks into the weighbridge to verify the continuous manometer tapes."
           },
           {
             "pair": "E09→E10",
             "verdict": "merely_follows",
-            "why": "Tessa convening the shift workers near Kiln 4 to discuss crew safety is scheduled by the union, not caused by Maren catching Nora falsifying logs."
+            "story_time_jump": false,
+            "why": "Tessa convening the floor crew and Orson's public accusation happen independently of Maren's quiet confrontation with Nora."
           },
           {
             "pair": "E10→E11",
             "verdict": "causes",
-            "why": "Arthur exploits the crew's hostility and Maren's isolation to spring the locker search in front of the yard committee."
+            "story_time_jump": false,
+            "why": "The shift crew's hostility gives Arthur the leverage and audience to demand Maren open her locker."
           },
           {
             "pair": "E11→E12",
             "verdict": "causes",
-            "why": "Maren unlocking her locker directly allows Arthur to reach in and reveal the planted scale counterweight."
+            "story_time_jump": false,
+            "why": "Opening the locker allows Arthur to pull out the planted counterweight."
           },
           {
             "pair": "E12→E13",
             "verdict": "causes",
-            "why": "The discovery of the planted murder weapon in her locker leads directly to Arthur cornering her in the manager's office to force an involuntary manslaughter confession."
+            "story_time_jump": false,
+            "why": "The discovery of the counterweight leaves Maren completely defenseless and brings her to the brink of signing a confession."
           },
           {
             "pair": "E13→E14",
-            "verdict": "merely_follows",
-            "why": "Nora entering with the rewritten gas report is routine paperwork delivery that interrupts the interrogation, rather than an outcome of Arthur coercing Maren."
+            "verdict": "causes",
+            "story_time_jump": false,
+            "why": "Arthur's ongoing coercion is interrupted by Nora bringing the gas report, which gives Maren the timeline contradiction she needs to fight back."
           },
           {
             "pair": "E14→E15",
             "verdict": "causes",
-            "why": "Catching Arthur in a timeline contradiction regarding the gas drop gives Maren the leverage to go re-examine Orson's witness account at Kiln 4."
+            "story_time_jump": false,
+            "why": "Breaking Arthur's firing timeline allows Maren to immediately re-examine and challenge Orson's 03:45 eyewitness sighting."
           },
           {
             "pair": "E15→E16",
             "verdict": "causes",
-            "why": "Orson's mention of purple thread on the cuffs sends Maren straight to Bram's shop to confront him about the coat."
+            "story_time_jump": false,
+            "why": "Orson specifying purple mending thread on the cuffs leads Maren straight to Bram's shop to seize his coat."
           },
           {
             "pair": "E16→E17",
             "verdict": "causes",
-            "why": "Bram's partial breakdown causes Arthur to intervene, prompting Maren to force Bram to expose his burns."
+            "story_time_jump": false,
+            "why": "Bram's partial breakdown and Arthur's arrival prompt Maren to expose Bram's arc burns to reveal the illegal repair."
           },
           {
             "pair": "E17→E18",
             "verdict": "causes",
-            "why": "Bram's revelation about Derry welding the burner baffle allows Maren to assemble the final explanation of the propped roof damper and automated firing."
+            "story_time_jump": false,
+            "why": "Learning Derry was in the muffle flue allows Maren to integrate the propped exhaust damper and assemble the full sequence of events."
           },
           {
             "pair": "E18→E19",
             "verdict": "causes",
-            "why": "Maren exposing Arthur's sabotage and securing Bram's witness statement leads directly to Arthur's arrest and the board's emergency lockout."
+            "story_time_jump": false,
+            "why": "Maren handing the assembled proof and statement to the police triggers Arthur's arrest and the emergency factory lockout."
           },
           {
             "pair": "E19→E20",
             "verdict": "causes",
-            "why": "The institutional lockout and Arthur's arrest directly lead to the permanent closure of the kilns and the community ostracizing Maren."
+            "story_time_jump": false,
+            "why": "The indefinite factory closure turns the entire workforce against Maren, sealing her total blacklisting."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "only_supervisor_holds_interlock_key",
-            "verdict": "linked_only",
-            "why": "This seed premise is immediately used in E01 as basic procedural exposition without building dramatic tension first."
+            "verdict": "earned",
+            "why": "The key constraint establishes the mechanical impossibility that frames Maren from the opening minute."
           },
           {
             "fact_ref": "maren_suffered_exhaustion_blackout",
-            "verdict": "linked_only",
-            "why": "It serves merely as background justification for Maren's vulnerability in E02 rather than an earned thematic or narrative payout."
+            "verdict": "earned",
+            "why": "Her memory gap makes her internal self-doubt plausible and enables Arthur to nearly coerce a confession."
           },
           {
             "fact_ref": "plant_facing_contract_cancellation",
-            "verdict": "linked_only",
-            "why": "Delivered strictly as expository dialogue in E04 to clarify the financial stakes."
+            "verdict": "earned",
+            "why": "Provides management's financial motive for cutting corners on the repair and scapegoating an individual rather than reporting an industrial failure."
           },
           {
             "fact_ref": "derry_threatened_grievance_over_short_shift",
             "verdict": "linked_only",
-            "why": "Used in E04 merely to provide motive for management's dispute rather than completing an established narrative loop."
+            "why": "It is mentioned as background in E04 but does not causally alter the scene or resolve any narrative problem."
           },
           {
             "fact_ref": "missing_brass_scale_counterweight",
             "verdict": "earned",
-            "why": "Planted in E05 as an incidental missing object during the timeline investigation, it pays off in E12 when revealed as the planted framing device."
+            "why": "Noticed as an incidental missing item in the weighbridge in E05, it returns with devastating effect as planted physical evidence in E12."
           },
           {
             "fact_ref": "falsified_gas_meter_log",
             "verdict": "earned",
-            "why": "Discovered in E09 during weighbridge snooping, the 03:10 drop pays off decisively in E14 to puncture Arthur's 04:00 timeline."
+            "why": "Discovered during Nora's scrubbing in E09, it becomes the logical wedge that breaks Arthur's manufactured timeline in E14."
           },
           {
             "fact_ref": "purple_twine_on_brams_cuffs",
             "verdict": "earned",
-            "why": "Casually noticed on a wall coat in E02, it later serves as the crucial physical bridge between Orson's testimony in E15 and Bram's confession in E16."
+            "why": "Observed on a coat cuff in E02, it enables Maren to disprove Orson's mistaken identification in E15 and corner Bram in E16."
           },
           {
             "fact_ref": "bram_fresh_arc_burns",
             "verdict": "earned",
-            "why": "Observed in E07 when searching for duplicate keys, it returns in E17 to conclusively tie maintenance to the clandestine live-burner repair."
+            "why": "Seen as unexplained injuries in E07, they match the high-voltage ignition line in E17 to confirm the illicit flue repair."
           },
           {
             "fact_ref": "roof_exhaust_damper_propped_open",
             "verdict": "earned",
-            "why": "Planted early in E03 as apparent floor disorder, it resolves the mechanical mystery in E18 as Derry's improvised life support."
+            "why": "Planted as shift disorder in E03, it supplies the crucial detail in E18 explaining how Derry survived inside the crawlway before the automated firing."
           }
         ],
-        "closest_stock_shape": "framed innocent worker procedural",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "stock_adherence": 3,
+        "particulars": [
+          {
+            "element": "Two-pound balance counterweight planted in locker as a murder weapon",
+            "load_bearing": true,
+            "why": "Provides Arthur with physical evidence that turns the union against Maren and drives her to the brink of confession."
+          },
+          {
+            "element": "Continuous pipeline manometer tapes showing pressure drop at 03:10",
+            "load_bearing": true,
+            "why": "Exposes an irreconcilable timeline contradiction that shatters management's fabricated confession narrative."
+          },
+          {
+            "element": "Purple nylon twine mended cuffs on a supervisor coat",
+            "load_bearing": true,
+            "why": "Dismantles eyewitness testimony and directly links the maintenance mechanic to the locked wicket door."
+          },
+          {
+            "element": "Scrap rebar jamming open the high roof exhaust damper",
+            "load_bearing": true,
+            "why": "Proves Derry was deliberately sent into the flue crawlway with an improvised air supply rather than wandering into the kiln."
+          },
+          {
+            "element": "High-voltage burner electrode arc burns on mechanic's forearms",
+            "load_bearing": true,
+            "why": "Forces Bram to confess to the fifty-pound clandestine baffle repair order from management."
+          },
+          {
+            "element": "Factory lockout and community blacklisting resulting from the exoneration",
+            "load_bearing": true,
+            "why": "Ensures the resolution exacts an irreversible social cost, turning justice into personal exile."
+          }
+        ],
         "thematic_coherence": 5,
         "engagement": 4,
-        "notes": "The mystery is exceptionally well constructed with distinct industrial clues that pay off mechanically and logically. It achieves emotional resonance by ending on a Pyrrhic victory where uncovering the truth completely alienates the protagonist from her community."
+        "notes": "An exceptionally tight industrial mystery where physical plant mechanisms serve both as forensic clues and instruments of corporate coercion. The bleak resolution ensures that exposing the truth carries a genuine systemic cost rather than an easy victory."
       }
     },
     {
@@ -1771,18 +2504,26 @@
         "merely_follows": 1,
         "contradicts": 0,
         "causes_share": 0.9473684210526315,
+        "story_time_jumps": 0,
+        "continuous": {
+          "pairs": 19,
+          "causes": 18,
+          "share": 0.9473684210526315
+        },
         "passed": true
       },
       "payoff_earned": {
         "pairs": 8,
-        "earned": 7,
-        "linked_only": 1,
-        "earned_share": 0.875,
+        "earned": 6,
+        "linked_only": 2,
+        "earned_share": 0.75,
         "passed": true
       },
       "non_genericity": {
-        "closest_stock_shape": "fair-play whodunnit with protective culprit",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "adherence": 3,
+        "load_bearing_particulars": 4,
+        "particulars": 4,
         "passed": true
       },
       "thematic_coherence": {
@@ -1790,155 +2531,196 @@
         "passed": true
       },
       "engagement": {
-        "score": 4,
+        "score": 5,
         "passed": true
       },
-      "notes": "The mystery mechanics are exceptionally clean, relying on botany and contract law rather than violent contrivance. The thematic collision between legal title to timber and intellectual authorship of a cultivar provides a satisfying, costly resolution.",
+      "notes": "An exceptionally tight, clockwork mystery arc that organically grounds its clues and motives in pomological law, plant genetics, and cooperative economics. The reversal of the motive in E13–E14 is logically sound and emotionally resonant.",
       "raw": {
         "causal_pairs": [
           {
             "pair": "E01→E02",
             "verdict": "causes",
-            "why": "Aletha's discovery of the felled orchard brings Robin out to the terrace with clearing tools to inspect the damage."
+            "story_time_jump": false,
+            "why": "Aletha's discovery of the felled terrace brings Robin up with tools to investigate and inspect the damage."
           },
           {
             "pair": "E02→E03",
             "verdict": "causes",
-            "why": "Robin's deliberate deflection toward Gervais and the boundary dispute sends an enraged Aletha directly to the weigh station to confront him."
+            "story_time_jump": false,
+            "why": "Robin's suggestion pointing suspicion toward Gervais prompts Aletha to storm the weigh station and confront him."
           },
           {
             "pair": "E03→E04",
             "verdict": "causes",
-            "why": "The public argument over ownership prompts Milo to pull the historical boundary maps and reveal Gervais's pending bonus claim."
+            "story_time_jump": false,
+            "why": "The public dispute between Aletha and Gervais prompts Milo to unroll boundary maps and reveal Gervais's bonus filing to clarify the conflict."
           },
           {
             "pair": "E04→E05",
             "verdict": "causes",
-            "why": "Having established Gervais's apparent financial motive, Aletha conducts an unauthorized search of his packing barn."
+            "story_time_jump": false,
+            "why": "Believing Gervais acted out of financial greed, Aletha infiltrates the Orris barn under false pretenses to search for evidence."
           },
           {
             "pair": "E05→E06",
             "verdict": "causes",
-            "why": "Gervais ejecting Aletha from the barn creates the opportunity for Beth to intercept her privately outside."
+            "story_time_jump": false,
+            "why": "Gervais ejecting Aletha from the barn prompts Beth to intercept her outside to privately warn her of Gervais's debts."
           },
           {
             "pair": "E06→E07",
             "verdict": "merely_follows",
-            "why": "Beth's disclosure about Gervais's debt leads Aletha into broad inquiries, but Helen's testimony about pasture history occurs as general background rather than being directly triggered by Beth's words."
+            "story_time_jump": false,
+            "why": "Aletha visits Helen Fenn to ask about historical boundary agreements, rather than being sent there directly by Beth's warning."
           },
           {
             "pair": "E07→E08",
             "verdict": "causes",
-            "why": "Believing the lantern sighting confirms Gervais's nighttime presence, Aletha returns to the cooperative office to verify his formal filings."
+            "story_time_jump": false,
+            "why": "Helen's testimony pushes Aletha back to the weigh station records to pin down Gervais's paper trail."
           },
           {
             "pair": "E08→E09",
             "verdict": "causes",
-            "why": "Examining Gervais's petition to claim the variety brings Calder into the conversation to explain the legal rules governing cultivar payouts."
+            "story_time_jump": false,
+            "why": "While examining Gervais's petition at the weigh station, Calder reviews the inventory rules with Aletha, raising a botanical contradiction."
           },
           {
             "pair": "E09→E10",
             "verdict": "causes",
-            "why": "Calder's rule that dead wood pays nothing creates an anomaly that drives Aletha back to the stumps to forensically examine the cuts."
+            "story_time_jump": false,
+            "why": "Calder's rule that dead wood yields no payout drives Aletha back to the stumps to forensically recheck the physical cut."
           },
           {
             "pair": "E10→E11",
             "verdict": "causes",
-            "why": "The absence of blue oil on the stumps forces Aletha to confront Gervais's household regarding his exact timeline and alibi."
+            "story_time_jump": false,
+            "why": "Failing to find blue oil on the stumps pushes Aletha to confront Beth directly on Gervais's alibi to test the saw discrepancy."
           },
           {
             "pair": "E11→E12",
             "verdict": "causes",
-            "why": "Refusing to accept Gervais's freight receipt alibi, Aletha doubles down and brings a formal accusation of hired sabotage to the board."
+            "story_time_jump": false,
+            "why": "Refusing to accept Gervais's signed receipt alibi, Aletha escalates the matter into a formal board accusation against him."
           },
           {
             "pair": "E12→E13",
             "verdict": "causes",
-            "why": "Aletha's formal accusation before the buyers compels Gervais to lay out his personal finances and confess the living tree bounty."
+            "story_time_jump": false,
+            "why": "Aletha's public accusation forces Gervais to expose his foreclosure papers and the bounty condition that destroyed trees ruin him."
           },
           {
             "pair": "E13→E14",
             "verdict": "causes",
-            "why": "The collapse of Gervais's motive prompts Calder to disclose the actual punitive terms in Clause 14B."
+            "story_time_jump": false,
+            "why": "The collapse of Gervais's financial motive leads Calder to reveal Clause 14B, which introduces the true protective motive."
           },
           {
             "pair": "E14→E15",
             "verdict": "causes",
-            "why": "Realizing the felling was meant to avert the Clause 14B fine, Aletha immediately checks who had read the confidential draft."
+            "story_time_jump": false,
+            "why": "Learning that Clause 14B penalizes the breeder causes Aletha to demand who read the draft before the felling."
           },
           {
             "pair": "E15→E16",
             "verdict": "causes",
-            "why": "Discovering Robin signed out the contract draft leads Aletha straight to Robin's workspace in the nursery shed."
+            "story_time_jump": false,
+            "why": "Discovering Robin signed out the draft points Aletha directly to search his nursery shed bench."
           },
           {
             "pair": "E16→E17",
             "verdict": "causes",
-            "why": "Finding the pull-saw, scions, and wax in the shed enables Aletha to directly confront Robin the moment he walks in."
+            "story_time_jump": false,
+            "why": "Aletha uncovering the pull-saw and scions precipitates the confrontation when Robin walks into the shed."
           },
           {
             "pair": "E17→E18",
             "verdict": "causes",
-            "why": "Robin's confession and explanation of scion legality force Aletha to examine the cut wood and grapple with the legal dilemma."
+            "story_time_jump": false,
+            "why": "Robin's confession of why he cut the trees leads into examining the scions and confronting the legal dilemma of standing wood versus scion genetics."
           },
           {
             "pair": "E18→E19",
             "verdict": "causes",
-            "why": "To establish variety authorship and defeat the penalty, Aletha takes her breeding journal to Calder, which exposes Robin's crime to the cooperative."
+            "story_time_jump": false,
+            "why": "To establish her breeding authorship without forfeiting the scions to Calder, Aletha brings her breeding journal before the board."
           },
           {
             "pair": "E19→E20",
             "verdict": "causes",
-            "why": "The restitution demands by Gervais and Milo force Aletha to surrender her buyout payment to protect Robin from prosecution."
+            "story_time_jump": false,
+            "why": "The cooperative's threat of criminal timber prosecution against Robin forces Aletha to sign over her entire buyout share to settle damages."
           }
         ],
         "payoffs": [
           {
             "fact_ref": "ash_warden_unregistered_status",
             "verdict": "linked_only",
-            "why": "This seed fact functions as immediate expository context in E01 rather than an earned dramatized setup."
+            "why": "It serves as an opening premise for the initial discovery in E01 rather than an earned payoff from preceding narrative tension."
           },
           {
             "fact_ref": "kemp_boundary_soil_dispute",
-            "verdict": "earned",
-            "why": "Planted in the seed world, surfaced in E02, and fully deployed in E04 as the foundational justification for Aletha's defensible wrong turn."
+            "verdict": "linked_only",
+            "why": "The boundary dispute is pulled from background setup as immediate red-herring exposition in E04 without having done prior work."
           },
           {
             "fact_ref": "orris_chainsaw_blue_oil",
             "verdict": "earned",
-            "why": "Spotted casually in E05, the oil serves as a classic fair-play negative clue when the stump kerf test in E10 disproves Gervais's involvement."
+            "why": "The blue bar oil observed on Gervais's bench in E05 pays off in E10 when chemical inspection of the stump kerf marks shows no trace of oil."
           },
           {
             "fact_ref": "gervais_undisclosed_bonus_claim",
             "verdict": "earned",
-            "why": "Framed in E04 as a hostile land-grab motive, it is inverted in E13 to prove Gervais desperately needed the trees left standing."
+            "why": "The confidential bonus filing introduced in E04 is completely inverted in E13 when Gervais reveals it required live standing trees."
           },
           {
             "fact_ref": "calder_penalty_clause_mention",
             "verdict": "earned",
-            "why": "Calder's vague corporate threat in E03 pays off in E14 when Clause 14B reveals the protective nature of the saboteur's crime."
+            "why": "Calder's vague warning about audit penalties in E03 is fully articulated in E14 as Clause 14B, which shifts the motive from malice to protection."
           },
           {
             "fact_ref": "linseed_scent_on_cut_wood",
             "verdict": "earned",
-            "why": "Noted quietly as an atmospheric sensory detail at the crime scene in E02, it conclusively ties Robin's shed bench to the felling in E16."
+            "why": "The distinct cold linseed wax scent noted on the fresh stumps in E02 pays off quietly in E16 when Aletha finds Robin's wax tin."
           },
           {
             "fact_ref": "midnight_lantern_at_shed",
             "verdict": "earned",
-            "why": "Misattributed by Aletha in E07 to Gervais, this witness detail cleanly resolves in E17 to lock down Robin's path and timing."
+            "why": "Helen's seemingly incidental sighting of a lantern descending toward the nursery shed in E07 pays off when Aletha pieces together Robin's nighttime movement in E17."
           },
           {
             "fact_ref": "robin_access_to_calder_drafts",
             "verdict": "earned",
-            "why": "A quiet seed fact that becomes the pivotal forensic pivot in E15 and E17, explaining why Robin alone acted on Clause 14B."
+            "why": "Established in the world seed and investigated via Milo's logs in E15, this fact pays off in E17 when Aletha confronts Robin with his early knowledge of Clause 14B."
           }
         ],
-        "closest_stock_shape": "fair-play whodunnit with protective culprit",
+        "closest_stock_shape": "whodunnit — a wrong is uncovered by investigation, and the culprit revealed",
         "stock_adherence": 3,
+        "particulars": [
+          {
+            "element": "Clause 14B penalty inversion: unregistered varieties on coop land incur retroactive nursery fines on the breeder, turning timber destruction into an act of rescue.",
+            "load_bearing": true,
+            "why": "It reverses the motive from corporate greed or spite to an apprentice protecting his mentor from ruin."
+          },
+          {
+            "element": "Distinction between corporate ownership of standing grove wood versus breeder ownership of severed scions.",
+            "load_bearing": true,
+            "why": "It explains why Robin felled the trees while carefully wrapping three live scions in damp moss."
+          },
+          {
+            "element": "Kerf mark sawdust analysis distinguishing blue synthetic chainsaw oil from clean Japanese pull-saw cuts.",
+            "load_bearing": true,
+            "why": "It provides the forensic anomaly that breaks Aletha's conviction that Gervais felled the trees."
+          },
+          {
+            "element": "Aletha surrendering her personal forty-thousand-dollar cooperative buyout share to indemnify Robin against criminal timber charges.",
+            "load_bearing": true,
+            "why": "It provides the climax resolution and cost, ensuring the culprit escapes prosecution while the protagonist ends up landless and broke."
+          }
+        ],
         "thematic_coherence": 5,
-        "engagement": 4,
-        "notes": "The mystery mechanics are exceptionally clean, relying on botany and contract law rather than violent contrivance. The thematic collision between legal title to timber and intellectual authorship of a cultivar provides a satisfying, costly resolution."
+        "engagement": 5,
+        "notes": "An exceptionally tight, clockwork mystery arc that organically grounds its clues and motives in pomological law, plant genetics, and cooperative economics. The reversal of the motive in E13–E14 is logically sound and emotionally resonant."
       }
     }
   ]
