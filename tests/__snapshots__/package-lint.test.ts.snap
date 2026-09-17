@@ -2,6 +2,7 @@
 
 exports[`the fixtures > raises only warnings a reader of the fixtures would agree with 1`] = `
 [
+  "short_range_payoff",
   "unpaid_fact",
   "unused_seed_entity",
 ]
