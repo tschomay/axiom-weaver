@@ -32,7 +32,13 @@ import {
   scoreMechanicalPackage,
   spanHistogram,
 } from '../src/arc/rubric';
-import { blindArcView, summarize } from '../src/arc/judge';
+import {
+  blindArcView,
+  judgeResponseJsonSchema,
+  summarize,
+  STOCK_SHAPES,
+  type JudgeResponse,
+} from '../src/arc/judge';
 import { briefsFor } from '../src/arc/premises';
 import { renderArcPrompt, arcResponseJsonSchema } from '../src/arc/prompt';
 import cinderella from '../fixtures/cinderella/package.json';
@@ -433,12 +439,13 @@ describe('the judge', () => {
     const score = summarize(
       {
         causal_pairs: [
-          { pair: 'E01→E02', verdict: 'causes', why: '' },
-          { pair: 'E02→E03', verdict: 'contradicts', why: '' },
+          { pair: 'E01→E02', verdict: 'causes', story_time_jump: false, why: '' },
+          { pair: 'E02→E03', verdict: 'contradicts', story_time_jump: false, why: '' },
         ],
         payoffs: [{ fact_ref: 'f', verdict: 'earned', why: '' }],
         closest_stock_shape: 'whodunnit',
         stock_adherence: 2,
+        particulars: [],
         thematic_coherence: 5,
         engagement: 5,
         notes: '',
@@ -501,5 +508,99 @@ describe('plant-span layer is carried, not inferred (#149)', () => {
     const asProjection = spanHistogram(pkg, 'fabula_projection');
     const asScenes = spanHistogram(pkg, 'segmented_scenes');
     expect({ ...asProjection, layer: null }).toEqual({ ...asScenes, layer: null });
+  });
+});
+
+describe('the two rebuilt §4.2 criteria (#147)', () => {
+  const base = {
+    causal_pairs: [] as JudgeResponse['causal_pairs'],
+    payoffs: [] as JudgeResponse['payoffs'],
+    closest_stock_shape: STOCK_SHAPES[0],
+    stock_adherence: 3,
+    particulars: [] as JudgeResponse['particulars'],
+    thematic_coherence: 4,
+    engagement: 4,
+    notes: '',
+  };
+  const judge = (over: Partial<JudgeResponse>) =>
+    summarize({ ...base, ...over } as JudgeResponse, 'test', 'gemini-3.8-flash');
+
+  it('keeps a causal verdict on a seam that also jumps story time', () => {
+    // The finding that produced this design. A first attempt made `discontinuity` a fourth
+    // verdict; the judge then spent it on pairs it had rated `causes`, and the Carol fell 0.63 ->
+    // 0.38 across three reproducible runs. A Stave seam is a jump of decades AND the cause of
+    // everything that follows, so the jump is recorded beside the verdict, never instead of it.
+    const score = judge({
+      causal_pairs: [
+        { pair: 'E01→E02', verdict: 'causes', story_time_jump: true, why: 'the vision begins' },
+        { pair: 'E02→E03', verdict: 'causes', story_time_jump: false, why: '' },
+        { pair: 'E03→E04', verdict: 'merely_follows', story_time_jump: true, why: '' },
+      ],
+    });
+    expect(score.causal.pairs).toBe(3);
+    expect(score.causal.causes).toBe(2);
+    expect(score.causal.story_time_jumps).toBe(2);
+    // The bar reads the continuous pairs only: one pair, one `causes`.
+    expect(score.causal.continuous).toEqual({ pairs: 1, causes: 1, share: 1 });
+    expect(score.causal.passed).toBe(true);
+  });
+
+  it('still fails on a contradiction that sits on a jump seam', () => {
+    // contradicts is scored over every pair, jumps included: the reader meets those two scenes
+    // back to back whatever the chronology, so the zero-tolerance half must not be excludable.
+    const score = judge({
+      causal_pairs: [
+        { pair: 'E01→E02', verdict: 'causes', story_time_jump: false, why: '' },
+        { pair: 'E02→E03', verdict: 'contradicts', story_time_jump: true, why: '' },
+      ],
+    });
+    expect(score.causal.contradicts).toBe(1);
+    expect(score.causal.passed).toBe(false);
+  });
+
+  it('reports a null continuous share rather than 0 when every pair is a jump', () => {
+    const score = judge({
+      causal_pairs: [{ pair: 'E01→E02', verdict: 'causes', story_time_jump: true, why: '' }],
+    });
+    expect(score.causal.continuous.share).toBeNull();
+    expect(score.causal.causes_share).toBe(1);
+    expect(score.causal.passed).toBe(false);
+  });
+
+  it('passes a canonical instance that carries load-bearing particulars', () => {
+    // Cinderella: a 5/5 fit to "rags to recognition" that is not generic, because the irony gap
+    // and the midnight condition are its own and the plot turns on them. The old single number
+    // scored this 5/5 and failed it.
+    const score = judge({
+      stock_adherence: 5,
+      particulars: [
+        { element: 'the midnight condition', load_bearing: true, why: 'the plot turns on it' },
+        { element: 'the irony gap at the ball', load_bearing: true, why: 'drives the recognition' },
+        { element: 'the pumpkin coach', load_bearing: false, why: 'colour' },
+      ],
+    });
+    expect(score.non_genericity.load_bearing_particulars).toBe(2);
+    expect(score.non_genericity.passed).toBe(true);
+  });
+
+  it('fails a close fit with nothing load-bearing of its own', () => {
+    const score = judge({
+      stock_adherence: 5,
+      particulars: [{ element: 'a rainy opening', load_bearing: false, why: 'decoration' }],
+    });
+    expect(score.non_genericity.load_bearing_particulars).toBe(0);
+    expect(score.non_genericity.passed).toBe(false);
+  });
+
+  it('still passes a loose fit regardless of particulars', () => {
+    expect(judge({ stock_adherence: 2, particulars: [] }).non_genericity.passed).toBe(true);
+  });
+
+  it('offers the judge a closed inventory it cannot tailor', () => {
+    // The circularity being fixed: a judge that names its own label always finds a close fit.
+    expect(STOCK_SHAPES).toContain('none of these — the arc does not reduce to any shape on this list');
+    expect(judgeResponseJsonSchema()).toMatchObject({
+      properties: { closest_stock_shape: { enum: [...STOCK_SHAPES] } },
+    });
   });
 });
