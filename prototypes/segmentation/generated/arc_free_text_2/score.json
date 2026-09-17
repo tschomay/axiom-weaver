@@ -1,5 +1,5 @@
 {
-  "story_id": "arc_structured_ferry",
+  "story_id": "arc_free_text_2",
   "segmenter_models": [
     "gemini-3.8-flash"
   ],
@@ -18,58 +18,59 @@
     "location": true
   },
   "mechanical": {
-    "story_id": "arc_structured_ferry",
+    "story_id": "arc_free_text_2",
     "events": 20,
     "g0": {
-      "passed": true,
+      "passed": false,
       "lint": {
         "problems": [
           {
+            "severity": "error",
+            "code": "unknown_entity",
+            "path": "world_model_seed.characters.char_stoddard.location_id",
+            "message": "references unknown row \"loc_constable_office\""
+          },
+          {
             "severity": "warn",
             "code": "unused_seed_entity",
-            "path": "world_model_seed.objects.obj_inspection_logbook",
+            "path": "world_model_seed.objects.obj_safety_ledger",
             "message": "is in the seed but no Scene Card ever names it"
           },
           {
             "severity": "warn",
             "code": "unused_seed_entity",
-            "path": "world_model_seed.objects.obj_cargo_manifest_ledger",
-            "message": "is in the seed but no Scene Card ever names it"
-          },
-          {
-            "severity": "warn",
-            "code": "unused_seed_entity",
-            "path": "world_model_seed.objects.obj_unfiled_timber_receipt",
+            "path": "world_model_seed.objects.obj_scale_logbook",
             "message": "is in the seed but no Scene Card ever names it"
           }
         ],
-        "errors": [],
+        "errors": [
+          {
+            "severity": "error",
+            "code": "unknown_entity",
+            "path": "world_model_seed.characters.char_stoddard.location_id",
+            "message": "references unknown row \"loc_constable_office\""
+          }
+        ],
         "warnings": [
           {
             "severity": "warn",
             "code": "unused_seed_entity",
-            "path": "world_model_seed.objects.obj_inspection_logbook",
+            "path": "world_model_seed.objects.obj_safety_ledger",
             "message": "is in the seed but no Scene Card ever names it"
           },
           {
             "severity": "warn",
             "code": "unused_seed_entity",
-            "path": "world_model_seed.objects.obj_cargo_manifest_ledger",
-            "message": "is in the seed but no Scene Card ever names it"
-          },
-          {
-            "severity": "warn",
-            "code": "unused_seed_entity",
-            "path": "world_model_seed.objects.obj_unfiled_timber_receipt",
+            "path": "world_model_seed.objects.obj_scale_logbook",
             "message": "is in the seed but no Scene Card ever names it"
           }
         ],
-        "publishable": true
+        "publishable": false
       }
     },
     "payoff_reachability": {
-      "total": 10,
-      "reachable": 10,
+      "total": 11,
+      "reachable": 11,
       "passed": true
     },
     "state_chaining": {
@@ -82,13 +83,24 @@
       "passed": true
     },
     "presence": {
-      "problems": [],
+      "problems": [
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_04_the_signed_safety_log",
+          "message": "changes location_id of \"char_pete\", who is not present"
+        },
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_15_the_rebound_on_jesse",
+          "message": "changes location_id of \"char_declan\", who is not present"
+        }
+      ],
       "gated": 0,
       "passed": true
     },
     "causal_reachability": {
-      "total": 6,
-      "reachable": 6,
+      "total": 7,
+      "reachable": 7,
       "unreachable": [],
       "passed": true
     },
@@ -104,62 +116,68 @@
     "plant_spans": {
       "rows": [
         {
-          "fact_ref": "certified_fit_without_slipway",
-          "payoff_event": "scene_05_the_formal_examination",
+          "fact_ref": "jesse_signed_safety_log",
+          "payoff_event": "scene_01_the_boot_pit",
           "plant_event": null,
           "span": null
         },
         {
-          "fact_ref": "skipper_protested_rough_weather_load",
-          "payoff_event": "scene_07_the_tally_card",
+          "fact_ref": "callum_worked_graveyard_shift",
+          "payoff_event": "scene_02_confronting_the_siding",
           "plant_event": null,
           "span": null
         },
         {
-          "fact_ref": "sister_dependent_pension",
-          "payoff_event": "scene_08_the_toll_records",
-          "plant_event": null,
-          "span": null
+          "fact_ref": "cloaked_figure_silhouette",
+          "payoff_event": "scene_06_questioning_declan",
+          "plant_event": "scene_03_the_scale_house",
+          "span": 3
         },
         {
-          "fact_ref": "falsified_cargo_weight",
-          "payoff_event": "scene_10_the_inquiry_opens",
-          "plant_event": "scene_08_the_toll_records",
+          "fact_ref": "unnumbered_midnight_slip",
+          "payoff_event": "scene_07_gaults_threat",
+          "plant_event": "scene_05_the_midnight_slip",
           "span": 2
         },
         {
-          "fact_ref": "charted_spit_depth_clearance",
-          "payoff_event": "scene_11_raising_the_hull",
-          "plant_event": "scene_09_sounding_the_spit",
-          "span": 2
+          "fact_ref": "declan_threatened_strike_sabotage",
+          "payoff_event": "scene_08_declans_arrest",
+          "plant_event": null,
+          "span": null
         },
         {
-          "fact_ref": "shrunken_seam_silt_blast",
-          "payoff_event": "scene_11_raising_the_hull",
-          "plant_event": "scene_02_mudflat_testimonies",
+          "fact_ref": "unregistered_freight_manifest",
+          "payoff_event": "scene_08_declans_arrest",
+          "plant_event": "scene_05_the_midnight_slip",
+          "span": 3
+        },
+        {
+          "fact_ref": "callum_bent_pocketknife",
+          "payoff_event": "scene_09_the_bent_blade",
+          "plant_event": "scene_02_confronting_the_siding",
+          "span": 7
+        },
+        {
+          "fact_ref": "gault_inked_sleeve",
+          "payoff_event": "scene_10_purple_transfer_ink",
+          "plant_event": "scene_01_the_boot_pit",
           "span": 9
         },
         {
-          "fact_ref": "submerged_snag_collision_theory",
-          "payoff_event": "scene_11_raising_the_hull",
-          "plant_event": "scene_02_mudflat_testimonies",
-          "span": 9
-        },
-        {
-          "fact_ref": "green_ash_timber_order",
-          "payoff_event": "scene_12_doolans_yard_confrontation",
-          "plant_event": "scene_06_the_timberyard_inquiry",
-          "span": 6
-        },
-        {
-          "fact_ref": "omitted_verbal_warning",
-          "payoff_event": "scene_14_the_reckoning",
-          "plant_event": "scene_04_reviewing_the_permit",
+          "fact_ref": "bleached_twine_fibers",
+          "payoff_event": "scene_11_the_rigged_twine",
+          "plant_event": "scene_01_the_boot_pit",
           "span": 10
         },
         {
-          "fact_ref": "sister_dependent_pension",
-          "payoff_event": "scene_14_the_reckoning",
+          "fact_ref": "tripper_remote_fuse_blown",
+          "payoff_event": "scene_12_the_blown_fuse",
+          "plant_event": "scene_04_blown_tripper_fuse",
+          "span": 8
+        },
+        {
+          "fact_ref": "jesse_signed_safety_log",
+          "payoff_event": "scene_13_gaults_retribution",
           "plant_event": null,
           "span": null
         }
@@ -167,46 +185,50 @@
       "histogram": {
         "layer": "segmented_scenes",
         "counts": {
-          "2": 2,
-          "6": 1,
-          "9": 2,
+          "2": 1,
+          "3": 2,
+          "7": 1,
+          "8": 1,
+          "9": 1,
           "10": 1
         },
         "seed_grounded": 4,
-        "edges": 10,
-        "mean": 6.333333333333333,
-        "median": 9,
+        "edges": 11,
+        "mean": 6,
+        "median": 7,
         "min": 2,
         "max": 10,
         "share_span_1": 0
       }
     },
     "lexical_canary": [],
-    "all_gates_passed": true
+    "all_gates_passed": false
   },
-  "generator_all_gates_passed": true,
+  "generator_all_gates_passed": false,
   "plant_edges": {
     "authored_by_generator": 9,
     "authored_seed_grounded": 4,
     "carried_onto_scenes": 9,
     "dangling": 0,
-    "proposed_by_segmentation": 3,
-    "verified": 1,
+    "proposed_by_segmentation": 2,
+    "verified": 2,
     "unrepresentable": 0,
-    "on_scene_cards": 10
+    "on_scene_cards": 11
   },
   "span_histogram_after": {
     "layer": "segmented_scenes",
     "counts": {
-      "2": 2,
-      "6": 1,
-      "9": 2,
+      "2": 1,
+      "3": 2,
+      "7": 1,
+      "8": 1,
+      "9": 1,
       "10": 1
     },
     "seed_grounded": 4,
-    "edges": 10,
-    "mean": 6.333333333333333,
-    "median": 9,
+    "edges": 11,
+    "mean": 6,
+    "median": 7,
     "min": 2,
     "max": 10,
     "share_span_1": 0

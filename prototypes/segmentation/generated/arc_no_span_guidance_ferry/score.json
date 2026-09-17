@@ -1,11 +1,11 @@
 {
-  "story_id": "arc_structured_kiln",
+  "story_id": "arc_no_span_guidance_ferry",
   "segmenter_models": [
     "gemini-3.8-flash"
   ],
   "events": 20,
-  "scenes": 17,
-  "events_per_scene": 1.1764705882352942,
+  "scenes": 13,
+  "events_per_scene": 1.5384615384615385,
   "telling_order_basis": "fabula_sequence",
   "telling_order_displaced": 0,
   "self_consistency": null,
@@ -18,64 +18,44 @@
     "location": true
   },
   "mechanical": {
-    "story_id": "arc_structured_kiln",
+    "story_id": "arc_no_span_guidance_ferry",
     "events": 20,
     "g0": {
       "passed": true,
       "lint": {
-        "problems": [
-          {
-            "severity": "warn",
-            "code": "unused_seed_entity",
-            "path": "world_model_seed.objects.obj_supervisor_coat",
-            "message": "is in the seed but no Scene Card ever names it"
-          }
-        ],
+        "problems": [],
         "errors": [],
-        "warnings": [
-          {
-            "severity": "warn",
-            "code": "unused_seed_entity",
-            "path": "world_model_seed.objects.obj_supervisor_coat",
-            "message": "is in the seed but no Scene Card ever names it"
-          }
-        ],
+        "warnings": [],
         "publishable": true
       }
     },
     "payoff_reachability": {
-      "total": 10,
-      "reachable": 10,
+      "total": 12,
+      "reachable": 12,
       "passed": true
     },
     "state_chaining": {
       "problems": [],
       "coverage": {
-        "pairs": 16,
-        "compared": 15
+        "pairs": 12,
+        "compared": 11
       },
       "vacuous": false,
       "passed": true
     },
     "presence": {
-      "problems": [
-        {
-          "code": "state_change_for_absentee",
-          "event_id": "ev_01_early_opening",
-          "message": "changes status of \"char_derry\", who is not present"
-        }
-      ],
+      "problems": [],
       "gated": 0,
       "passed": true
     },
     "causal_reachability": {
-      "total": 6,
-      "reachable": 6,
+      "total": 7,
+      "reachable": 7,
       "unreachable": [],
       "passed": true
     },
     "required_beats": {
-      "scenes": 17,
+      "scenes": 13,
       "empty": [],
       "passed": true
     },
@@ -86,113 +66,125 @@
     "plant_spans": {
       "rows": [
         {
-          "fact_ref": "only_supervisor_holds_interlock_key",
-          "payoff_event": "scene_01_the_kiln_breach",
+          "fact_ref": "ferry_passed_inspection",
+          "payoff_event": "scene_01_the_sunken_ferry",
           "plant_event": null,
           "span": null
         },
         {
-          "fact_ref": "maren_suffered_exhaustion_blackout",
-          "payoff_event": "scene_02_keys_and_twine",
+          "fact_ref": "tomas_drowned_in_crossing",
+          "payoff_event": "scene_01_the_sunken_ferry",
           "plant_event": null,
           "span": null
         },
         {
-          "fact_ref": "plant_facing_contract_cancellation",
-          "payoff_event": "scene_04_the_framing_warning",
+          "fact_ref": "district_requires_culprit",
+          "payoff_event": "scene_04_the_inquiry_opening",
           "plant_event": null,
           "span": null
         },
         {
-          "fact_ref": "derry_threatened_grievance_over_short_shift",
-          "payoff_event": "scene_04_the_framing_warning",
+          "fact_ref": "harte_controls_wharf_trade",
+          "payoff_event": "scene_09_the_tonnage_tally",
           "plant_event": null,
           "span": null
         },
         {
-          "fact_ref": "missing_brass_scale_counterweight",
-          "payoff_event": "scene_11_the_locker_search",
-          "plant_event": "scene_05_missing_weight",
+          "fact_ref": "unregistered_grain_sacks",
+          "payoff_event": "scene_09_the_tonnage_tally",
+          "plant_event": "scene_03_freight_shed_discovery",
           "span": 6
         },
         {
-          "fact_ref": "falsified_gas_meter_log",
-          "payoff_event": "scene_12_the_broken_timeline",
-          "plant_event": "scene_09_the_falsified_sheet",
+          "fact_ref": "borer_free_hull_planking",
+          "payoff_event": "scene_10_the_public_accusation",
+          "plant_event": "scene_05_the_sound_hull",
+          "span": 5
+        },
+        {
+          "fact_ref": "unrecorded_draft_rubbing",
+          "payoff_event": "scene_11_the_sheared_valve",
+          "plant_event": "scene_01_the_sunken_ferry",
+          "span": 10
+        },
+        {
+          "fact_ref": "sheared_brass_bung_threads",
+          "payoff_event": "scene_11_the_sheared_valve",
+          "plant_event": "scene_07_the_stripped_plug",
+          "span": 4
+        },
+        {
+          "fact_ref": "kests_casual_verbal_warning",
+          "payoff_event": "scene_11_the_sheared_valve",
+          "plant_event": "scene_08_the_willow_wedge",
           "span": 3
         },
         {
-          "fact_ref": "yellow_oilskin_coat_eyewitness",
-          "payoff_event": "scene_13_the_steam_test",
-          "plant_event": "scene_06_orsons_testimony",
-          "span": 7
+          "fact_ref": "gravel_bar_scrape_report",
+          "payoff_event": "scene_11_the_sheared_valve",
+          "plant_event": "scene_01_the_sunken_ferry",
+          "span": 10
         },
         {
-          "fact_ref": "purple_twine_on_brams_cuffs",
-          "payoff_event": "scene_14_mended_cuffs",
-          "plant_event": "scene_02_keys_and_twine",
-          "span": 12
+          "fact_ref": "stripped_sleeve_and_wedge_recovered",
+          "payoff_event": "scene_12_the_inquiry_confession",
+          "plant_event": "scene_07_the_stripped_plug",
+          "span": 5
         },
         {
-          "fact_ref": "bram_fresh_arc_burns",
-          "payoff_event": "scene_14_mended_cuffs",
-          "plant_event": "scene_07_arc_burns",
-          "span": 7
-        },
-        {
-          "fact_ref": "roof_exhaust_damper_propped_open",
-          "payoff_event": "scene_15_the_propped_damper",
-          "plant_event": "scene_03_the_jammed_damper",
-          "span": 12
+          "fact_ref": "alix_salary_buys_tincture",
+          "payoff_event": "scene_13_license_revoked",
+          "plant_event": null,
+          "span": null
         }
       ],
       "histogram": {
         "layer": "segmented_scenes",
         "counts": {
           "3": 1,
+          "4": 1,
+          "5": 2,
           "6": 1,
-          "7": 2,
-          "12": 2
+          "10": 2
         },
-        "seed_grounded": 4,
-        "edges": 10,
-        "mean": 7.833333333333333,
-        "median": 7,
+        "seed_grounded": 5,
+        "edges": 12,
+        "mean": 6.142857142857143,
+        "median": 5,
         "min": 3,
-        "max": 12,
+        "max": 10,
         "share_span_1": 0
       }
     },
-    "lexical_canary": [
-      "whisper"
-    ],
+    "lexical_canary": [],
     "all_gates_passed": true
   },
   "generator_all_gates_passed": true,
   "plant_edges": {
-    "authored_by_generator": 9,
-    "authored_seed_grounded": 4,
-    "carried_onto_scenes": 9,
+    "authored_by_generator": 10,
+    "authored_seed_grounded": 5,
+    "carried_onto_scenes": 10,
     "dangling": 0,
-    "proposed_by_segmentation": 1,
-    "verified": 1,
+    "proposed_by_segmentation": 3,
+    "verified": 2,
     "unrepresentable": 0,
-    "on_scene_cards": 10
+    "on_scene_cards": 12
   },
   "span_histogram_after": {
     "layer": "segmented_scenes",
     "counts": {
       "3": 1,
+      "4": 1,
+      "5": 2,
       "6": 1,
-      "7": 2,
-      "12": 2
+      "10": 2
     },
-    "seed_grounded": 4,
-    "edges": 10,
-    "mean": 7.833333333333333,
-    "median": 7,
+    "seed_grounded": 5,
+    "edges": 12,
+    "mean": 6.142857142857143,
+    "median": 5,
     "min": 3,
-    "max": 12,
+    "max": 10,
     "share_span_1": 0
   },
   "unscoreable": {

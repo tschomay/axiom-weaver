@@ -184,6 +184,7 @@
         }
       ],
       "histogram": {
+        "layer": "segmented_scenes",
         "counts": {
           "5": 1,
           "6": 1,
@@ -215,6 +216,7 @@
     "on_scene_cards": 8
   },
   "span_histogram_after": {
+    "layer": "segmented_scenes",
     "counts": {
       "5": 1,
       "6": 1,

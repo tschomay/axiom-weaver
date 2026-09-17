@@ -317,9 +317,9 @@ describe('§4.1 mechanical scoring', () => {
    */
   it('scores a real package and the projection through the same code', () => {
     const arc = sampleArc();
-    expect(scoreMechanicalPackage(provisionalPackage(arc, 'arc_test'), arc, 'arc_test')).toEqual(
-      scoreMechanical(arc, 'arc_test'),
-    );
+    expect(
+      scoreMechanicalPackage(provisionalPackage(arc, 'arc_test'), arc, 'arc_test', 'fabula_projection'),
+    ).toEqual(scoreMechanical(arc, 'arc_test'));
     expect(scoreMechanical(arc, 'arc_test').events).toBe(arc.events.length);
   });
 
@@ -388,7 +388,7 @@ describe('§4.1 mechanical scoring', () => {
 
   it('scores the human-authored fixtures with the same instruments', () => {
     const pkg = parseStoryPackage(cinderella);
-    const histogram = spanHistogram(pkg);
+    const histogram = spanHistogram(pkg, 'segmented_scenes');
     // The measured human baseline: 2 edges across 14 scenes, spans 5 and 2.
     expect(histogram.edges).toBe(2);
     expect(histogram.max).toBe(5);
@@ -479,5 +479,27 @@ describe('the response schema', () => {
     expect(order.indexOf('reveals')).toBeLessThan(order.indexOf('pays_off'));
     // The seed comes back before the events that reference it.
     expect(schema['propertyOrdering']).toEqual(['title', 'world_model_seed', 'events']);
+  });
+});
+
+describe('plant-span layer is carried, not inferred (#149)', () => {
+  it('labels the projection path fabula_projection', () => {
+    const arc = sampleArc();
+    expect(scoreMechanical(arc, 'arc_test').plant_spans.histogram.layer).toBe('fabula_projection');
+  });
+
+  it('labels a real segmented package segmented_scenes', () => {
+    const pkg = parseStoryPackage(cinderella);
+    expect(spanHistogram(pkg, 'segmented_scenes').layer).toBe('segmented_scenes');
+  });
+
+  it('is the only thing that differs between the two layers on the projection', () => {
+    // The layer label must not change any measured value — #120 asserts the projection and the
+    // package path agree, and that has to stay true or #119's published numbers stop comparing.
+    const arc = sampleArc();
+    const pkg = provisionalPackage(arc, 'arc_test');
+    const asProjection = spanHistogram(pkg, 'fabula_projection');
+    const asScenes = spanHistogram(pkg, 'segmented_scenes');
+    expect({ ...asProjection, layer: null }).toEqual({ ...asScenes, layer: null });
   });
 });

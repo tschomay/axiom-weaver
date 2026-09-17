@@ -1,0 +1,1671 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "arc_structured_orchard",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_aletha_kemp",
+        "name": "Aletha Kemp",
+        "location_id": "loc_kemp_orchard_terrace",
+        "status": "watchful",
+        "goal": "harvest and prove the Ash Warden pear before the buyout completes",
+        "bag": {}
+      },
+      {
+        "id": "char_robin_vale",
+        "name": "Robin Vale",
+        "location_id": "loc_nursery_shed",
+        "status": "anxious",
+        "goal": "protect Aletha from legal ruin during the cooperative acquisition",
+        "bag": {}
+      },
+      {
+        "id": "char_gervais_orris",
+        "name": "Gervais Orris",
+        "location_id": "loc_orris_packing_barn",
+        "status": "insolvent",
+        "goal": "secure the corporate variety bounty to pay down farm mortgages",
+        "bag": {}
+      },
+      {
+        "id": "char_milo_carr",
+        "name": "Milo Carr",
+        "location_id": "loc_coop_weigh_station",
+        "status": "composed",
+        "goal": "finalize the cooperative boundary survey without legal disputes",
+        "bag": {}
+      },
+      {
+        "id": "char_helen_fenn",
+        "name": "Helen Fenn",
+        "location_id": "loc_fenn_cottage",
+        "status": "frail",
+        "goal": "preserve the cooperative's historical memory before dissolution",
+        "bag": {}
+      },
+      {
+        "id": "char_matthew_calder",
+        "name": "Matthew Calder",
+        "location_id": "loc_coop_weigh_station",
+        "status": "impatient",
+        "goal": "audit cooperative assets and acquire proprietary crop genetics",
+        "bag": {}
+      },
+      {
+        "id": "char_beth_orris",
+        "name": "Beth Orris",
+        "location_id": "loc_orris_packing_barn",
+        "status": "exhausted",
+        "goal": "complete seasonal pruning contracts before the land title transfers",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_kemp_orchard_terrace",
+        "name": "Kemp High Terrace",
+        "bag": {}
+      },
+      {
+        "id": "loc_nursery_shed",
+        "name": "Kemp Nursery Shed",
+        "bag": {}
+      },
+      {
+        "id": "loc_orris_packing_barn",
+        "name": "Orris Packing Barn",
+        "bag": {}
+      },
+      {
+        "id": "loc_coop_weigh_station",
+        "name": "Coldbarrow Cooperative Weigh Station",
+        "bag": {}
+      },
+      {
+        "id": "loc_fenn_cottage",
+        "name": "Fenn Ridge Cottage",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_warden_journal",
+        "name": "Ash Warden Breeding Journal",
+        "location_id": "loc_nursery_shed",
+        "status": "intact",
+        "bag": {}
+      },
+      {
+        "id": "obj_copper_notch_knife",
+        "name": "Notched Grafting Knife",
+        "location_id": "loc_nursery_shed",
+        "status": "sharp",
+        "bag": {}
+      },
+      {
+        "id": "obj_calder_agreement",
+        "name": "Calder Acquisition Draft",
+        "location_id": "loc_coop_weigh_station",
+        "status": "pending_signature",
+        "bag": {}
+      },
+      {
+        "id": "obj_orris_chainsaw",
+        "name": "Petrol Pruning Saw",
+        "location_id": "loc_orris_packing_barn",
+        "status": "leaking",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_aletha_kemp",
+        "to_id": "char_robin_vale",
+        "kind": "mentor_and_kin",
+        "sentiment": "protective",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_robin_vale",
+        "to_id": "char_aletha_kemp",
+        "kind": "apprentice_and_kin",
+        "sentiment": "devoted",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_aletha_kemp",
+        "to_id": "char_gervais_orris",
+        "kind": "neighbor",
+        "sentiment": "suspicious",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_gervais_orris",
+        "to_id": "char_aletha_kemp",
+        "kind": "neighbor",
+        "sentiment": "resentful",
+        "bag": {}
+      },
+      {
+        "id": "rel_05",
+        "from_id": "char_matthew_calder",
+        "to_id": "char_gervais_orris",
+        "kind": "buyer_and_vendor",
+        "sentiment": "exacting",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_aletha_kemp",
+        "fact_ref": "ash_warden_unregistered_status",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_gervais_orris",
+        "fact_ref": "kemp_boundary_soil_dispute",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_robin_vale",
+        "fact_ref": "robin_access_to_calder_drafts",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_felled_terrace",
+      "order": 1,
+      "pov": "char_aletha_kemp",
+      "location_id": "loc_kemp_orchard_terrace",
+      "characters_present": [
+        "char_aletha_kemp",
+        "char_robin_vale"
+      ],
+      "dramatic_function": "Establishes the destruction of Aletha's Ash Warden pear trees and sets her pursuit of the culprit in motion.",
+      "entry_state": {
+        "char_aletha_kemp": {
+          "status": "watchful",
+          "goal": "harvest and prove the Ash Warden pear before the buyout completes"
+        },
+        "char_robin_vale": {
+          "location_id": "loc_nursery_shed",
+          "status": "anxious"
+        }
+      },
+      "exit_state": {
+        "char_aletha_kemp": {
+          "status": "grieving",
+          "goal": "identify who destroyed the Ash Warden trees"
+        },
+        "char_robin_vale": {
+          "location_id": "loc_kemp_orchard_terrace",
+          "status": "agitated"
+        }
+      },
+      "required_beats": [
+        "Aletha climbs to the terrace at dawn and finds her twenty Ash Warden pear trees sawed down and their crowns taken.",
+        "Aletha realizes the loss jeopardizes her variety claim before the impending buyout deadline.",
+        "Robin inspects the stumps with Aletha, steering suspicion toward Gervais Orris over the contested fence line.",
+        "Aletha detects the scent of cold linseed grafting wax on the freshly cut stumps."
+      ],
+      "reader_must_learn": [
+        "linseed_scent_on_cut_wood"
+      ],
+      "must_stay_hidden": [
+        "identity_of_feller",
+        "robin_felling_role"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "ash_warden_unregistered_status",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_confrontation_at_weigh_station",
+      "order": 2,
+      "pov": "char_aletha_kemp",
+      "location_id": "loc_coop_weigh_station",
+      "characters_present": [
+        "char_aletha_kemp",
+        "char_gervais_orris",
+        "char_matthew_calder",
+        "char_milo_carr"
+      ],
+      "dramatic_function": "Deepens the conflict between Aletha and Gervais while introducing financial stakes and corporate pressure.",
+      "entry_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_kemp_orchard_terrace",
+          "goal": "identify who destroyed the Ash Warden trees"
+        },
+        "char_gervais_orris": {
+          "location_id": "loc_orris_packing_barn"
+        }
+      },
+      "exit_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_coop_weigh_station",
+          "goal": "prove Gervais destroyed the Ash Warden trees to secure his buyout bonus"
+        },
+        "char_gervais_orris": {
+          "location_id": "loc_coop_weigh_station"
+        }
+      },
+      "required_beats": [
+        "Aletha confronts Gervais at the weigh station over the felled trees, prompting Gervais to argue unregistered crops on shared soil belong to the cooperative.",
+        "Calder warns that conflicting cultivar claims will trigger strict contractual audit penalties.",
+        "Milo shows Aletha the contested boundary maps and reveals Gervais filed for an unlisted buyout bonus.",
+        "Aletha concludes Gervais destroyed the trees to secure his buyout payout."
+      ],
+      "reader_must_learn": [
+        "calder_penalty_clause_mention",
+        "gervais_undisclosed_bonus_claim"
+      ],
+      "must_stay_hidden": [
+        "calder_bounty_amount",
+        "bonus_qualification_rules",
+        "clause_14b_uncertified_fines"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "kemp_boundary_soil_dispute",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_03_in_the_barn",
+      "order": 3,
+      "pov": "char_aletha_kemp",
+      "location_id": "loc_orris_packing_barn",
+      "characters_present": [
+        "char_aletha_kemp",
+        "char_gervais_orris",
+        "char_beth_orris"
+      ],
+      "dramatic_function": "Provides Aletha with physical evidence and insider testimony that seem to confirm Gervais's guilt.",
+      "entry_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_coop_weigh_station"
+        },
+        "char_gervais_orris": {
+          "location_id": "loc_coop_weigh_station"
+        },
+        "char_beth_orris": {
+          "status": "exhausted"
+        }
+      },
+      "exit_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_orris_packing_barn"
+        },
+        "char_gervais_orris": {
+          "location_id": "loc_orris_packing_barn"
+        },
+        "char_beth_orris": {
+          "status": "uneasy"
+        }
+      },
+      "required_beats": [
+        "Aletha visits the Orris barn under a pretext and spots Gervais's chainsaw leaking blue synthetic bar oil before he ejects her.",
+        "Beth intercepts Aletha outside to confess Gervais had her survey the terrace yield and spacing days earlier.",
+        "Beth reveals Gervais is desperate for cash to settle farm liens before the buyout closes."
+      ],
+      "reader_must_learn": [
+        "orris_chainsaw_blue_oil"
+      ],
+      "must_stay_hidden": [
+        "chainsaw_blade_tooth_count",
+        "beth_overnight_alibi"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_a_midnight_lantern",
+      "order": 4,
+      "pov": "char_aletha_kemp",
+      "location_id": "loc_fenn_cottage",
+      "characters_present": [
+        "char_aletha_kemp",
+        "char_helen_fenn"
+      ],
+      "dramatic_function": "Introduces an eyewitness clue about the night of the felling that misdirects Aletha's focus.",
+      "entry_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_orris_packing_barn"
+        }
+      },
+      "exit_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_fenn_cottage"
+        }
+      },
+      "required_beats": [
+        "Helen explains the history of unwritten ridge boundary exchanges to Aletha.",
+        "Helen reveals she saw a lone lantern move from the terrace toward the nursery shed at midnight on the night of the felling.",
+        "Aletha assumes the nocturnal lantern bearer was Gervais escaping along the lower path."
+      ],
+      "reader_must_learn": [
+        "midnight_lantern_at_shed"
+      ],
+      "must_stay_hidden": [
+        "lantern_carrier_identity"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_bounty_terms",
+      "order": 5,
+      "pov": "char_aletha_kemp",
+      "location_id": "loc_coop_weigh_station",
+      "characters_present": [
+        "char_aletha_kemp",
+        "char_milo_carr",
+        "char_matthew_calder"
+      ],
+      "dramatic_function": "Undermines Aletha's assumption that Gervais destroyed the trees for profit by revealing that Calder pays bounties only on living wood.",
+      "entry_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_fenn_cottage"
+        },
+        "char_matthew_calder": {
+          "status": "impatient"
+        }
+      },
+      "exit_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_coop_weigh_station"
+        },
+        "char_matthew_calder": {
+          "status": "curt"
+        }
+      },
+      "required_beats": [
+        "Milo and Aletha search the cooperative safe and find Gervais's petition claiming the Ash Warden variety as communal property.",
+        "Matthew Calder informs Aletha that corporate variety bounties require living scion buds and documented parentage.",
+        "Aletha realizes that destroying the trees would have cost Gervais the very payout he sought."
+      ],
+      "reader_must_learn": [
+        "bounty_requires_living_scion_buds"
+      ],
+      "must_stay_hidden": [
+        "gervais_debt_details",
+        "calder_legal_threat_intent"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_the_sawdust_test",
+      "order": 6,
+      "pov": "char_aletha_kemp",
+      "location_id": "loc_kemp_orchard_terrace",
+      "characters_present": [
+        "char_aletha_kemp",
+        "char_robin_vale"
+      ],
+      "dramatic_function": "Discredits the theory of a chainsaw attack and introduces Robin's unease with the ongoing investigation.",
+      "entry_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_coop_weigh_station"
+        },
+        "char_robin_vale": {
+          "status": "agitated"
+        }
+      },
+      "exit_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_kemp_orchard_terrace"
+        },
+        "char_robin_vale": {
+          "status": "defensive"
+        }
+      },
+      "required_beats": [
+        "Aletha inspects the stump sawdust on the terrace and finds no trace of petroleum or blue chain oil.",
+        "Robin anxiously urges Aletha to stop investigating and accept the loss of the trees."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "robin_hand_saw_use"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "orris_chainsaw_blue_oil",
+          "plant": "scene_03_in_the_barn"
+        }
+      ]
+    },
+    {
+      "id": "scene_07_an_airtight_alibi",
+      "order": 7,
+      "pov": "char_aletha_kemp",
+      "location_id": "loc_orris_packing_barn",
+      "characters_present": [
+        "char_aletha_kemp",
+        "char_beth_orris"
+      ],
+      "dramatic_function": "Eliminates Gervais as the physical perpetrator, forcing Aletha to construct a more desperate theory.",
+      "entry_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_kemp_orchard_terrace"
+        }
+      },
+      "exit_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_orris_packing_barn"
+        }
+      },
+      "required_beats": [
+        "Aletha confronts Beth Orris over Gervais's whereabouts during the night of the felling.",
+        "Beth produces a stamped valley depot receipt proving Gervais was away at the time of the destruction.",
+        "Aletha refuses to concede Gervais's innocence, suspecting he hired someone else to do the cut."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "contract_clause_14b_text"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_the_hidden_fine",
+      "order": 8,
+      "pov": "char_aletha_kemp",
+      "location_id": "loc_coop_weigh_station",
+      "characters_present": [
+        "char_aletha_kemp",
+        "char_gervais_orris",
+        "char_milo_carr",
+        "char_matthew_calder"
+      ],
+      "dramatic_function": "Reverses Aletha's understanding of the sabotage by revealing that the destruction averted ruinous contractual penalties.",
+      "entry_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_orris_packing_barn",
+          "status": "grieving",
+          "goal": "prove Gervais destroyed the Ash Warden trees to secure his buyout bonus"
+        },
+        "char_gervais_orris": {
+          "location_id": "loc_orris_packing_barn",
+          "status": "insolvent"
+        }
+      },
+      "exit_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_coop_weigh_station",
+          "status": "determined",
+          "goal": "discover who knew about Clause 14B and felled the trees to protect her"
+        },
+        "char_gervais_orris": {
+          "location_id": "loc_coop_weigh_station",
+          "status": "broken"
+        }
+      },
+      "required_beats": [
+        "Aletha formally accuses Gervais before the cooperative board of hiring a saboteur.",
+        "Gervais reveals his debts and proves that the loss of the living trees ruins his chance at a vital bonus.",
+        "Calder reveals Clause 14B, showing that uncertified varieties carried ruinous propagation fines for the breeder.",
+        "Aletha realizes the trees were destroyed to protect her from financial ruin.",
+        "Milo reveals log records showing Robin Vale studied the contract drafts prior to the felling."
+      ],
+      "reader_must_learn": [
+        "clause_14b_uncertified_fines"
+      ],
+      "must_stay_hidden": [
+        "gervais_real_reaction",
+        "clause_14b_fine_structure",
+        "who_read_clause_14b",
+        "robin_cellar_cache"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "gervais_undisclosed_bonus_claim",
+          "plant": "scene_02_confrontation_at_weigh_station"
+        },
+        {
+          "fact_ref": "calder_penalty_clause_mention",
+          "plant": "scene_02_confrontation_at_weigh_station"
+        },
+        {
+          "fact_ref": "bounty_requires_living_scion_buds",
+          "plant": "scene_05_the_bounty_terms"
+        }
+      ]
+    },
+    {
+      "id": "scene_09_the_living_scions",
+      "order": 9,
+      "pov": "char_aletha_kemp",
+      "location_id": "loc_nursery_shed",
+      "characters_present": [
+        "char_aletha_kemp",
+        "char_robin_vale"
+      ],
+      "dramatic_function": "To reveal Robin as the culprit who destroyed the grove to protect Aletha, presenting her with the dilemma of saving her variety at the cost of exposing his crime.",
+      "entry_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_coop_weigh_station",
+          "goal": "discover who knew about Clause 14B and felled the trees to protect her"
+        },
+        "char_robin_vale": {
+          "location_id": "loc_kemp_orchard_terrace",
+          "status": "defensive"
+        }
+      },
+      "exit_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_nursery_shed",
+          "goal": "establish her authorship of the Ash Warden while protecting Robin from prison"
+        },
+        "char_robin_vale": {
+          "location_id": "loc_nursery_shed",
+          "status": "remorseful"
+        }
+      },
+      "required_beats": [
+        "Aletha discovers the wax, pull-saw, and three hidden living scions beneath the nursery shed floorboards.",
+        "Robin enters and confesses that he felled the standing trees to shield Aletha from Calder's contract fines.",
+        "Aletha realizes Robin used her grafting knife to salvage the scions, meaning she can only prove her authorship by implicating him in the illegal felling."
+      ],
+      "reader_must_learn": [
+        "hidden_salvaged_living_scions"
+      ],
+      "must_stay_hidden": [
+        "robin_confession_speech",
+        "grafting_knife_mark_detail",
+        "aletha_settlement_choice"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "linseed_scent_on_cut_wood",
+          "plant": "scene_01_the_felled_terrace"
+        },
+        {
+          "fact_ref": "midnight_lantern_at_shed",
+          "plant": "scene_04_a_midnight_lantern"
+        },
+        {
+          "fact_ref": "robin_access_to_calder_drafts",
+          "plant": null
+        },
+        {
+          "fact_ref": "clause_14b_uncertified_fines",
+          "plant": "scene_08_the_hidden_fine"
+        }
+      ]
+    },
+    {
+      "id": "scene_10_the_final_surrender",
+      "order": 10,
+      "pov": "char_aletha_kemp",
+      "location_id": "loc_coop_weigh_station",
+      "characters_present": [
+        "char_aletha_kemp",
+        "char_matthew_calder",
+        "char_gervais_orris",
+        "char_milo_carr",
+        "char_robin_vale"
+      ],
+      "dramatic_function": "To resolve the ownership dispute as Aletha sacrifices her financial future and land to shield Robin, preserving only the genetic wood of her pear variety.",
+      "entry_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_nursery_shed",
+          "status": "determined",
+          "goal": "establish her authorship of the Ash Warden while protecting Robin from prison"
+        },
+        "char_matthew_calder": {
+          "status": "curt"
+        },
+        "char_robin_vale": {
+          "location_id": "loc_nursery_shed",
+          "status": "remorseful"
+        }
+      },
+      "exit_state": {
+        "char_aletha_kemp": {
+          "location_id": "loc_coop_weigh_station",
+          "status": "penniless_but_free",
+          "goal": "replant the Ash Warden scions on independent soil"
+        },
+        "char_matthew_calder": {
+          "status": "conceding"
+        },
+        "char_robin_vale": {
+          "location_id": "loc_coop_weigh_station",
+          "status": "absolved"
+        }
+      },
+      "required_beats": [
+        "Aletha presents her breeding journal to Calder, establishing sole creation of the Ash Warden pear while Robin's destruction of the timber is exposed.",
+        "Calder concedes her claim, but Gervais and Milo demand prosecution and damages for Robin's felling.",
+        "Aletha signs over her entire forty-thousand-dollar buyout dividend to cover the cooperative's losses and clear Robin.",
+        "Calder completes the land transfer, leaving Aletha and Robin to depart with only the scions and breeding journal."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "indemnity_terms"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "hidden_salvaged_living_scions",
+          "plant": "scene_09_the_living_scions"
+        }
+      ]
+    }
+  ],
+  "voice_card": {},
+  "metadata": {
+    "title": "The Ash Warden",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-17T22:57:51.892Z"
+  },
+  "_fabula": {
+    "generator": "src/arc (issue #119)",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-16T00:39:54.124Z",
+    "brief": {
+      "story_id": "arc_structured_orchard",
+      "title": "Grafting Season",
+      "premise": {
+        "logline": "An orchard loses a whole variety of pear overnight, and the grafter who bred it has to work out which of her neighbours did it and why.",
+        "modules": {
+          "theme": "the difference between owning work and having made it",
+          "setting_time": "the last autumn before a cooperative is bought out",
+          "setting_place": "a hill orchard shared by four families who no longer speak",
+          "protagonist": "a grafter in her sixties who bred the lost variety and never registered it",
+          "protagonist_want": "to prove the variety was hers before the sale closes",
+          "antagonism": "a neighbour with a legitimate claim and a bad motive",
+          "complication": "the person who destroyed the trees did it to protect her",
+          "ending_shape": "the truth is established and costs the person who established it"
+        }
+      },
+      "plot_shape": {
+        "id": "mystery",
+        "name": "Mystery",
+        "central_question": "What actually happened, and who is willing to say so?",
+        "phases": [
+          {
+            "name": "Disturbance",
+            "purpose": "A wrong surfaces and someone is obliged to look into it.",
+            "share": 0.2
+          },
+          {
+            "name": "Inquiry",
+            "purpose": "Evidence accumulates, most of it true and misread.",
+            "share": 0.35
+          },
+          {
+            "name": "Wrong turn",
+            "purpose": "A reading of the evidence that is coherent and wrong collapses.",
+            "share": 0.2
+          },
+          {
+            "name": "Solution",
+            "purpose": "The true account, assembled only from what the reader has already been shown.",
+            "share": 0.15
+          },
+          {
+            "name": "Cost",
+            "purpose": "What knowing costs the person who found out.",
+            "share": 0.1
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "investigator",
+            "purpose": "Carries the reader through the inquiry and pays its cost."
+          },
+          {
+            "role": "concealer",
+            "purpose": "Has a reason to keep the true account from being assembled."
+          },
+          {
+            "role": "witness",
+            "purpose": "Holds one true piece and misunderstands its meaning."
+          },
+          {
+            "role": "wronged party",
+            "purpose": "The reason the question matters at all."
+          }
+        ],
+        "obligatory_moves": [
+          "Every element of the true account is on the page before it is stated.",
+          "At least one true detail is shown early in a context that makes it look irrelevant.",
+          "The wrong reading is defensible on the evidence available when it is made."
+        ]
+      },
+      "event_count": 20,
+      "cast": {
+        "characters": 7,
+        "locations": 5,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 10
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "mystery",
+        "premise_preset": "orchard"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_felled_terrace",
+        "sequence": 1,
+        "summary": "Aletha Kemp climbs up to her hillside terrace at dawn and finds all twenty Ash Warden pear trees sawed down to the graft roots.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_kemp_orchard_terrace",
+        "characters_present": [
+          "char_aletha_kemp"
+        ],
+        "dramatic_function": "Disturbance phase begins; the protagonist discovers the complete physical destruction of her life's breeding work.",
+        "beats": [
+          "Aletha climbs the limestone steps carrying picking baskets for the morning harvest.",
+          "She discovers the twenty Ash Warden trees clean-cut at stump level with the crowns carried away.",
+          "She realizes the felling destroys her proof of the variety before the buyout deadline."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [
+          "identity_of_feller"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "ash_warden_unregistered_status",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "status",
+            "value": "grieving"
+          },
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "goal",
+            "value": "identify who destroyed the Ash Warden trees"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_stump_inspection",
+        "sequence": 2,
+        "summary": "Robin Vale joins Aletha on the terrace to inspect the clean stumps, where Aletha notices an odor of linseed grafting wax on the cuts.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_kemp_orchard_terrace",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_robin_vale"
+        ],
+        "dramatic_function": "Establish Robin's ostensible support while unobtrusively planting the physical scent signature of the cut.",
+        "beats": [
+          "Robin arrives with clearing tools and helps examine the felled tree rows.",
+          "Robin directs Aletha's suspicion toward Gervais Orris and the contested terrace fence line.",
+          "Aletha kneels by the low stumps and detects a distinct smell of cold linseed grafting wax."
+        ],
+        "caused_by": [
+          "ev_01_felled_terrace"
+        ],
+        "reveals": [
+          "linseed_scent_on_cut_wood"
+        ],
+        "conceals": [
+          "robin_felling_role"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_robin_vale",
+            "column": "location_id",
+            "value": "loc_kemp_orchard_terrace"
+          },
+          {
+            "entity_id": "char_robin_vale",
+            "column": "status",
+            "value": "agitated"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_calder_confrontation",
+        "sequence": 3,
+        "summary": "Aletha confronts Gervais Orris at the cooperative weigh station before corporate agent Matthew Calder, who warns about cultivar penalties.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_coop_weigh_station",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_gervais_orris",
+          "char_matthew_calder",
+          "char_milo_carr"
+        ],
+        "dramatic_function": "Introduce the commercial buyout pressure and plant the threat of contractual penalties against uncertified varieties.",
+        "beats": [
+          "Aletha storms into the weigh station and accuses Gervais of clearing the high terrace trees.",
+          "Gervais denies the accusation and argues that unregistered crops on shared soil are cooperative property.",
+          "Calder warns the room that conflicting cultivar claims will invoke harsh contractual audit penalties against growers."
+        ],
+        "caused_by": [
+          "ev_01_felled_terrace",
+          "ev_02_stump_inspection"
+        ],
+        "reveals": [
+          "calder_penalty_clause_mention"
+        ],
+        "conceals": [
+          "calder_bounty_amount"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "location_id",
+            "value": "loc_coop_weigh_station"
+          },
+          {
+            "entity_id": "char_gervais_orris",
+            "column": "location_id",
+            "value": "loc_coop_weigh_station"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_ledger_dispute",
+        "sequence": 4,
+        "summary": "Milo Carr shows Aletha the boundary survey maps and mentions that Gervais recently filed for an unlisted buyout bonus.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_coop_weigh_station",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_milo_carr"
+        ],
+        "dramatic_function": "Conclude the Disturbance phase by giving the investigator an apparent motive pointing straight at Gervais.",
+        "beats": [
+          "Milo unrolls the old parchment parcel maps showing the long-standing boundary line dispute with the Orris family.",
+          "Milo reveals that Gervais submitted a confidential claim requesting an advance on an unlisted corporate bonus.",
+          "Aletha concludes Gervais destroyed her trees to force the buyout through without her competing claim."
+        ],
+        "caused_by": [
+          "ev_03_calder_confrontation"
+        ],
+        "reveals": [
+          "gervais_undisclosed_bonus_claim"
+        ],
+        "conceals": [
+          "bonus_qualification_rules"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "kemp_boundary_soil_dispute",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "goal",
+            "value": "prove Gervais destroyed the Ash Warden trees to secure his buyout bonus"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_packing_barn_search",
+        "sequence": 5,
+        "summary": "Aletha visits the Orris packing barn under pretense of borrowing crates and notes Gervais's chainsaw dripping blue mineral oil.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_orris_packing_barn",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_gervais_orris"
+        ],
+        "dramatic_function": "Inquiry phase begins; plant the distinctive synthetic blue bar oil used on Gervais's saw.",
+        "beats": [
+          "Aletha enters the Orris barn under the excuse of returning empty picking lugs.",
+          "Gervais orders her out of the barn, declaring he will not tolerate her baseless accusations.",
+          "Aletha spots Gervais's petrol saw on the workbench leaking bright blue synthetic bar oil onto a rag."
+        ],
+        "caused_by": [
+          "ev_04_ledger_dispute"
+        ],
+        "reveals": [
+          "orris_chainsaw_blue_oil"
+        ],
+        "conceals": [
+          "chainsaw_blade_tooth_count"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "location_id",
+            "value": "loc_orris_packing_barn"
+          },
+          {
+            "entity_id": "char_gervais_orris",
+            "column": "location_id",
+            "value": "loc_orris_packing_barn"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_beth_testimony",
+        "sequence": 6,
+        "summary": "Beth Orris intercepts Aletha outside the barn and admits her father ordered her to measure the Ash Warden terrace days earlier.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_orris_packing_barn",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_beth_orris"
+        ],
+        "dramatic_function": "Deepen the defensible wrong turn by adding corroborating witness testimony about Gervais's interest in the trees.",
+        "beats": [
+          "Beth pulls Aletha beside the exterior haystacks to speak quietly.",
+          "Beth admits Gervais made her survey tree spacing and estimated yield on the terrace three days before.",
+          "Beth warns Aletha that Gervais is desperate for funds to settle farm liens before the sale closes."
+        ],
+        "caused_by": [
+          "ev_05_packing_barn_search"
+        ],
+        "reveals": [],
+        "conceals": [
+          "beth_overnight_alibi"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_beth_orris",
+            "column": "status",
+            "value": "uneasy"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_helen_recollection",
+        "sequence": 7,
+        "summary": "Aletha visits Helen Fenn, who recalls past boundary trades and mentions seeing a lone lantern moving to the nursery shed at midnight.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_fenn_cottage",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_helen_fenn"
+        ],
+        "dramatic_function": "Plant an overlooked witness detail regarding midnight movement between the terrace and the nursery.",
+        "beats": [
+          "Helen explains the historical unwritten pasture exchanges between the ridge families.",
+          "Helen remarks that on the night of the felling, she saw a single lantern moving down from the terrace into the nursery shed.",
+          "Aletha mistakenly assumes the lantern belonged to Gervais fleeing through the lower path."
+        ],
+        "caused_by": [
+          "ev_04_ledger_dispute"
+        ],
+        "reveals": [
+          "midnight_lantern_at_shed"
+        ],
+        "conceals": [
+          "lantern_carrier_identity"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "location_id",
+            "value": "loc_fenn_cottage"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_safe_petition_found",
+        "sequence": 8,
+        "summary": "Aletha and Milo search the safe and find Gervais's petition claiming the Ash Warden variety as cooperative communal property.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_coop_weigh_station",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_milo_carr"
+        ],
+        "dramatic_function": "Solidify the paper trail indicating Gervais's hostile takeover attempt of the variety.",
+        "beats": [
+          "Milo unlocks the records cabinet to inspect recent formal filings.",
+          "Aletha finds Gervais's petition asking Calder to credit the terrace variety to cooperative collective assets.",
+          "Aletha becomes convinced Gervais intended to extinguish her personal breeding claim."
+        ],
+        "caused_by": [
+          "ev_04_ledger_dispute",
+          "ev_07_helen_recollection"
+        ],
+        "reveals": [],
+        "conceals": [
+          "gervais_debt_details"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "location_id",
+            "value": "loc_coop_weigh_station"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_calder_terms",
+        "sequence": 9,
+        "summary": "Matthew Calder tells Aletha that Calder Holdings only pays variety bounties for viable, living genetic wood.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_coop_weigh_station",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_matthew_calder"
+        ],
+        "dramatic_function": "Introduce the botanical rule that dead wood yields no corporate payout, raising a contradiction in the case.",
+        "beats": [
+          "Calder reviews the inventory schedule across from Aletha at the weigh desk.",
+          "Calder explains that corporate bounties require live scion buds and documented parentage.",
+          "Aletha is left wondering why Gervais would fell the trees if only living wood could earn the money."
+        ],
+        "caused_by": [
+          "ev_03_calder_confrontation",
+          "ev_08_safe_petition_found"
+        ],
+        "reveals": [],
+        "conceals": [
+          "calder_legal_threat_intent"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_matthew_calder",
+            "column": "status",
+            "value": "curt"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_sawdust_test",
+        "sequence": 10,
+        "summary": "Aletha collects stump sawdust on the terrace with Robin and discovers the cuts contain zero petroleum or blue chain oil.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_kemp_orchard_terrace",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_robin_vale"
+        ],
+        "dramatic_function": "Pay off the blue oil plant and produce the first physical discrepancy in the theory against Gervais.",
+        "beats": [
+          "Aletha gathers sawdust samples from the terrace stumps using a pocket lens.",
+          "She finds the fine kerf marks completely free of petroleum residue or blue bar oil.",
+          "Robin anxiously suggests she give up chemical testing and accept the trees are gone."
+        ],
+        "caused_by": [
+          "ev_05_packing_barn_search",
+          "ev_09_calder_terms"
+        ],
+        "reveals": [],
+        "conceals": [
+          "robin_hand_saw_use"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "orris_chainsaw_blue_oil",
+            "plant": "ev_05_packing_barn_search"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "location_id",
+            "value": "loc_kemp_orchard_terrace"
+          },
+          {
+            "entity_id": "char_robin_vale",
+            "column": "status",
+            "value": "defensive"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_alibi_confirmed",
+        "sequence": 11,
+        "summary": "Aletha confronts Beth Orris again, but Beth produces a stamped depot receipt establishing Gervais was in the valley all night.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_orris_packing_barn",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_beth_orris"
+        ],
+        "dramatic_function": "Inquiry concludes with Gervais's alibi intact, setting up Aletha's obstinate Wrong Turn accusation.",
+        "beats": [
+          "Aletha returns to the packing yard demanding Beth state where Gervais was at midnight.",
+          "Beth produces a dated freight receipt from the valley press bearing Gervais's signature at 1:15 AM.",
+          "Aletha assumes Gervais hired a contract worker rather than accepting his innocence."
+        ],
+        "caused_by": [
+          "ev_06_beth_testimony",
+          "ev_10_sawdust_test"
+        ],
+        "reveals": [],
+        "conceals": [
+          "contract_clause_14b_text"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "location_id",
+            "value": "loc_orris_packing_barn"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_accusation_meeting",
+        "sequence": 12,
+        "summary": "Aletha convenes an emergency meeting at the weigh station and formally accuses Gervais of hiring saboteurs to fell the trees.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_coop_weigh_station",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_gervais_orris",
+          "char_milo_carr",
+          "char_matthew_calder"
+        ],
+        "dramatic_function": "Wrong Turn phase peaks as the investigator pushes her defensible but false hypothesis before all parties.",
+        "beats": [
+          "Aletha presents the boundary dispute and Gervais's bonus filing before the board.",
+          "She formally accuses Gervais of paying a saboteur to ruin the crop out of spite.",
+          "Milo and Calder demand Gervais respond to the accusation before contracts are signed."
+        ],
+        "caused_by": [
+          "ev_08_safe_petition_found",
+          "ev_11_alibi_confirmed"
+        ],
+        "reveals": [],
+        "conceals": [
+          "gervais_real_reaction"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "location_id",
+            "value": "loc_coop_weigh_station"
+          },
+          {
+            "entity_id": "char_gervais_orris",
+            "column": "location_id",
+            "value": "loc_coop_weigh_station"
+          },
+          {
+            "entity_id": "char_gervais_orris",
+            "column": "status",
+            "value": "furious"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_gervais_collapse",
+        "sequence": 13,
+        "summary": "Gervais erupts and reveals his debt ledger, proving he needed the Ash Warden trees alive to secure a fifty-thousand-dollar bonus.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_coop_weigh_station",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_gervais_orris",
+          "char_matthew_calder"
+        ],
+        "dramatic_function": "Collapse of the wrong turn reading: the suspect's economic survival depended on preserving the trees, not destroying them.",
+        "beats": [
+          "Gervais slams his bank foreclosure notices onto the scale table.",
+          "He reveals that Calder promised him fifty thousand dollars if the living Ash Warden variety was delivered.",
+          "Gervais breaks down, lamenting that the felling of the trees completely ruins him financially."
+        ],
+        "caused_by": [
+          "ev_12_accusation_meeting"
+        ],
+        "reveals": [],
+        "conceals": [
+          "clause_14b_fine_structure"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "gervais_undisclosed_bonus_claim",
+            "plant": "ev_04_ledger_dispute"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_gervais_orris",
+            "column": "status",
+            "value": "broken"
+          },
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "status",
+            "value": "disoriented"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_clause_14b_revealed",
+        "sequence": 14,
+        "summary": "Calder produces the acquisition contract and reads Clause 14B, which imposes ruinous unlicensed propagation fines on breeders.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_coop_weigh_station",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_matthew_calder"
+        ],
+        "dramatic_function": "Pay off the penalty plant and establish the real motive: someone destroyed the trees to shield the breeder from ruin.",
+        "beats": [
+          "Calder displays Clause 14B of the acquisition draft.",
+          "He reads the term: any unregistered variety on cooperative land incurs a thirty-thousand-dollar retroactive nursery fine on the breeder.",
+          "Aletha realizes that whoever cut the trees acted to protect her from total financial ruin."
+        ],
+        "caused_by": [
+          "ev_13_gervais_collapse"
+        ],
+        "reveals": [],
+        "conceals": [
+          "who_read_clause_14b"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "calder_penalty_clause_mention",
+            "plant": "ev_03_calder_confrontation"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "goal",
+            "value": "discover who knew about Clause 14B and felled the trees to protect her"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_sign_in_sheet",
+        "sequence": 15,
+        "summary": "Milo checks the weigh station log and tells Aletha that Robin Vale spent two hours reading the contract drafts before the felling.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_coop_weigh_station",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_milo_carr"
+        ],
+        "dramatic_function": "Pivot from the collapsed wrong turn directly toward the true concealer.",
+        "beats": [
+          "Aletha asks Milo who had access to the Calder draft agreements prior to the felling.",
+          "Milo checks the sign-in register and shows that Robin signed out the contract folder on Tuesday afternoon.",
+          "Aletha realizes Robin knew the full text of Clause 14B before anyone else."
+        ],
+        "caused_by": [
+          "ev_14_clause_14b_revealed"
+        ],
+        "reveals": [],
+        "conceals": [
+          "robin_cellar_cache"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "status",
+            "value": "determined"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_cellar_discovery",
+        "sequence": 16,
+        "summary": "Aletha searches the nursery shed, matching the linseed wax to Robin's bench and finding three living Ash Warden scions hidden in burlap.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_nursery_shed",
+        "characters_present": [
+          "char_aletha_kemp"
+        ],
+        "dramatic_function": "Solution phase begins; assemble the physical clues planted earlier to establish what really took place.",
+        "beats": [
+          "Aletha searches Robin's workspace in the nursery shed.",
+          "She opens an unsealed tin on his bench and recognizes the exact linseed wax scent from the terrace stumps.",
+          "Beneath the floorboards, she finds Robin's Japanese pull-saw and three living scions wrapped in damp moss."
+        ],
+        "caused_by": [
+          "ev_10_sawdust_test",
+          "ev_15_sign_in_sheet"
+        ],
+        "reveals": [],
+        "conceals": [
+          "robin_confession_speech"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "linseed_scent_on_cut_wood",
+            "plant": "ev_02_stump_inspection"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "location_id",
+            "value": "loc_nursery_shed"
+          }
+        ]
+      },
+      {
+        "id": "ev_17_robin_confession",
+        "sequence": 17,
+        "summary": "Robin enters the shed and confesses that he felled the trees after midnight to prevent Calder from seizing the variety and fining Aletha.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_nursery_shed",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_robin_vale"
+        ],
+        "dramatic_function": "Collect the midnight lantern plant and character knowledge, laying bare the true protective motive.",
+        "beats": [
+          "Robin enters the nursery shed and stops short upon seeing Aletha holding the scions and pull-saw.",
+          "Aletha confronts him with Helen's midnight lantern sighting and his contract review.",
+          "Robin confesses he cut the twenty trees to protect her from Clause 14B's fines and save the genetic wood."
+        ],
+        "caused_by": [
+          "ev_16_cellar_discovery"
+        ],
+        "reveals": [],
+        "conceals": [
+          "grafting_knife_mark_detail"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "midnight_lantern_at_shed",
+            "plant": "ev_07_helen_recollection"
+          },
+          {
+            "fact_ref": "robin_access_to_calder_drafts",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_robin_vale",
+            "column": "location_id",
+            "value": "loc_nursery_shed"
+          },
+          {
+            "entity_id": "char_robin_vale",
+            "column": "status",
+            "value": "remorseful"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_scion_revelation",
+        "sequence": 18,
+        "summary": "Aletha examines the severed scions and realizes Robin used her notched knife to salvage the variety while eradicating the standing grove.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_nursery_shed",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_robin_vale"
+        ],
+        "dramatic_function": "Crystallize the core theme: owning the standing grove versus having created the variety itself.",
+        "beats": [
+          "Aletha checks the cut scion ends and notes the angled notches made by her own grafting knife.",
+          "Robin explains that standing trees on coop land belonged to Calder, but the severed scions belong to her alone.",
+          "Aletha recognizes that to defend her authorship, she will be forced to expose Robin's unlawful felling."
+        ],
+        "caused_by": [
+          "ev_17_robin_confession"
+        ],
+        "reveals": [],
+        "conceals": [
+          "aletha_settlement_choice"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "goal",
+            "value": "establish her authorship of the Ash Warden while protecting Robin from prison"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_board_hearing",
+        "sequence": 19,
+        "summary": "Aletha brings her breeding journal and the scions to the weigh station, proving she made the pear while admitting Robin felled the grove.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_coop_weigh_station",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_matthew_calder",
+          "char_gervais_orris",
+          "char_milo_carr"
+        ],
+        "dramatic_function": "Cost phase begins; the truth is formally established, separating creation from ownership, but creating immediate legal liability.",
+        "beats": [
+          "Aletha presents her twenty-year breeding journal to Calder, proving her sole creation of the Ash Warden pear.",
+          "Calder concedes the variety was bred by Aletha, rendering Clause 14B moot because no commercial crop stands on the land.",
+          "Gervais and Milo demand restitution, noting that Robin's destruction of cooperative timber is a prosecutable crime."
+        ],
+        "caused_by": [
+          "ev_14_clause_14b_revealed",
+          "ev_18_scion_revelation"
+        ],
+        "reveals": [],
+        "conceals": [
+          "indemnity_terms"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "location_id",
+            "value": "loc_coop_weigh_station"
+          },
+          {
+            "entity_id": "char_matthew_calder",
+            "column": "status",
+            "value": "conceding"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_cost_and_surrender",
+        "sequence": 20,
+        "summary": "Aletha surrenders her entire buyout dividend to indemnify the cooperative and clear Robin, walking away with nothing but her scions.",
+        "pov": "char_aletha_kemp",
+        "location_id": "loc_coop_weigh_station",
+        "characters_present": [
+          "char_aletha_kemp",
+          "char_robin_vale",
+          "char_matthew_calder",
+          "char_gervais_orris"
+        ],
+        "dramatic_function": "Complete the ending shape: truth is established and exacts a severe financial cost on the investigator.",
+        "beats": [
+          "Aletha signs over her forty-thousand-dollar cooperative buyout share to cover the timber damages and release Robin from charges.",
+          "Calder executes the deed transfer for the bare land, leaving Aletha with her journal and three dormant scion sticks.",
+          "Aletha and Robin step outside into the autumn twilight with no land or money, but holding the variety they made."
+        ],
+        "caused_by": [
+          "ev_19_board_hearing"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_robin_vale",
+            "column": "location_id",
+            "value": "loc_coop_weigh_station"
+          },
+          {
+            "entity_id": "char_robin_vale",
+            "column": "status",
+            "value": "absolved"
+          },
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "status",
+            "value": "penniless_but_free"
+          },
+          {
+            "entity_id": "char_aletha_kemp",
+            "column": "goal",
+            "value": "replant the Ash Warden scions on independent soil"
+          }
+        ]
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-17T22:57:51.892Z",
+    "started_at": "2026-09-17T22:57:31.394Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_felled_terrace",
+        "order": 1,
+        "event_ids": [
+          "ev_01_felled_terrace",
+          "ev_02_stump_inspection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_confrontation_at_weigh_station",
+        "order": 2,
+        "event_ids": [
+          "ev_03_calder_confrontation",
+          "ev_04_ledger_dispute"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_in_the_barn",
+        "order": 3,
+        "event_ids": [
+          "ev_05_packing_barn_search",
+          "ev_06_beth_testimony"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_a_midnight_lantern",
+        "order": 4,
+        "event_ids": [
+          "ev_07_helen_recollection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_bounty_terms",
+        "order": 5,
+        "event_ids": [
+          "ev_08_safe_petition_found",
+          "ev_09_calder_terms"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_sawdust_test",
+        "order": 6,
+        "event_ids": [
+          "ev_10_sawdust_test"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_an_airtight_alibi",
+        "order": 7,
+        "event_ids": [
+          "ev_11_alibi_confirmed"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_the_hidden_fine",
+        "order": 8,
+        "event_ids": [
+          "ev_12_accusation_meeting",
+          "ev_13_gervais_collapse",
+          "ev_14_clause_14b_revealed",
+          "ev_15_sign_in_sheet"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_living_scions",
+        "order": 9,
+        "event_ids": [
+          "ev_16_cellar_discovery",
+          "ev_17_robin_confession",
+          "ev_18_scion_revelation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_final_surrender",
+        "order": 10,
+        "event_ids": [
+          "ev_19_board_hearing",
+          "ev_20_cost_and_surrender"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+    ]
+  }
+}

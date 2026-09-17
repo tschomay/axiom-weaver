@@ -47,6 +47,12 @@
             "code": "unused_seed_entity",
             "path": "world_model_seed.objects.obj_coupling_pin",
             "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.scene_11_the_warrant_signed.pays_off",
+            "message": "pays off \"bloody_red_neckerchief\" from \"scene_10_bunkhouse_search\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
           }
         ],
         "errors": [],
@@ -74,6 +80,12 @@
             "code": "unused_seed_entity",
             "path": "world_model_seed.objects.obj_coupling_pin",
             "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.scene_11_the_warrant_signed.pays_off",
+            "message": "pays off \"bloody_red_neckerchief\" from \"scene_10_bunkhouse_search\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
           }
         ],
         "publishable": true
@@ -153,6 +165,7 @@
         }
       ],
       "histogram": {
+        "layer": "segmented_scenes",
         "counts": {
           "1": 1,
           "4": 1,
@@ -184,6 +197,7 @@
     "on_scene_cards": 6
   },
   "span_histogram_after": {
+    "layer": "segmented_scenes",
     "counts": {
       "1": 1,
       "4": 1,

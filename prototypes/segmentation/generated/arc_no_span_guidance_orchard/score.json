@@ -35,6 +35,18 @@
             "code": "unused_seed_entity",
             "path": "world_model_seed.objects.obj_diesel_saw",
             "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.scene_10_the_packing_confrontation.pays_off",
+            "message": "pays off \"corin_alibi_breakdown\" from \"scene_09_the_archive_charter\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.scene_12_tomas_s_confession.pays_off",
+            "message": "pays off \"hidden_scion_cache\" from \"scene_11_the_hidden_knife\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
           }
         ],
         "errors": [],
@@ -50,6 +62,18 @@
             "code": "unused_seed_entity",
             "path": "world_model_seed.objects.obj_diesel_saw",
             "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.scene_10_the_packing_confrontation.pays_off",
+            "message": "pays off \"corin_alibi_breakdown\" from \"scene_09_the_archive_charter\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.scene_12_tomas_s_confession.pays_off",
+            "message": "pays off \"hidden_scion_cache\" from \"scene_11_the_hidden_knife\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
           }
         ],
         "publishable": true
@@ -159,6 +183,7 @@
         }
       ],
       "histogram": {
+        "layer": "segmented_scenes",
         "counts": {
           "1": 2,
           "3": 1,
@@ -191,6 +216,7 @@
     "on_scene_cards": 11
   },
   "span_histogram_after": {
+    "layer": "segmented_scenes",
     "counts": {
       "1": 2,
       "3": 1,

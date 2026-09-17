@@ -1,0 +1,494 @@
+{
+  "story_id": "arc_free_text_2",
+  "generator": "segmentation pipeline (#118)",
+  "models_used": [
+    "gemini-3.8-flash"
+  ],
+  "requested_model": "gemini-3.8-flash",
+  "segmented_at": "2026-09-17T22:57:05.514Z",
+  "cost_usd": 0.023058000000000002,
+  "calls": [
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 0 (0–20)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 3050,
+      "output_tokens": 1138,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.006555,
+      "ms": 3140,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1351,
+      "output_tokens": 590,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00322575,
+      "ms": 2308,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1039,
+      "output_tokens": 612,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00307425,
+      "ms": 2658,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 9–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1061,
+      "output_tokens": 603,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.003057,
+      "ms": 2536,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 13–14",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 643,
+      "output_tokens": 301,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.001611,
+      "ms": 3113,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 1–14",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2026,
+      "output_tokens": 205,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00228825,
+      "ms": 1229,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_verification",
+      "label": "pairs 1–2",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 486,
+      "output_tokens": 162,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.000972,
+      "ms": 2988,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 611,
+      "output_tokens": 137,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.000972,
+      "ms": 809,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 5–7",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1217,
+      "output_tokens": 104,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00130275,
+      "ms": 1038,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "events": 20,
+  "scenes": 14,
+  "events_per_scene": 1.4285714285714286,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "telling_order": {
+    "basis": "fabula_sequence",
+    "displaced": 0
+  },
+  "boundaries": {
+    "windows": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 20
+      }
+    ],
+    "window_problems": [],
+    "failed_windows": [],
+    "fell_back_to_signals": 0,
+    "disagreements": 0,
+    "judged_adjacencies": 19,
+    "self_consistency": null,
+    "decisions": [
+      {
+        "index": 0,
+        "after_event_id": "ev_02_clearing_the_sprocket",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Pete joins Jesse continuously in the elevator pit as they work on the jammed intake.",
+        "from_signals": false
+      },
+      {
+        "index": 1,
+        "after_event_id": "ev_03_management_descends",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Gault and Stoddard arrive down in the pit in immediate continuation of the scene.",
+        "from_signals": false
+      },
+      {
+        "index": 2,
+        "after_event_id": "ev_04_the_signed_safety_log",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The confrontation and ledger inspection continue without interruption in the pit.",
+        "from_signals": false
+      },
+      {
+        "index": 3,
+        "after_event_id": "ev_05_hettie_in_the_rail_yard",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse leaves the pit and meets Hettie out in the rail yard.",
+        "from_signals": false
+      },
+      {
+        "index": 4,
+        "after_event_id": "ev_06_declan_displays_the_knife",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Declan interrupts the rail yard discussion on the siding.",
+        "from_signals": false
+      },
+      {
+        "index": 5,
+        "after_event_id": "ev_07_questioning_maybelle",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse moves inside to the scale house to question Maybelle.",
+        "from_signals": false
+      },
+      {
+        "index": 6,
+        "after_event_id": "ev_08_blown_fuse_in_the_substation",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse moves with Pete to check the electrical substation.",
+        "from_signals": false
+      },
+      {
+        "index": 7,
+        "after_event_id": "ev_09_the_crumpled_manifest",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse returns to the scale house to search the waste bin.",
+        "from_signals": false
+      },
+      {
+        "index": 8,
+        "after_event_id": "ev_10_stoddard_circles_declan",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "The action shifts back to the rail yard where Stoddard interrogates Declan.",
+        "from_signals": false
+      },
+      {
+        "index": 9,
+        "after_event_id": "ev_11_gault_demands_a_scapegoat",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse takes the manifest to Gault's office for a confrontation.",
+        "from_signals": false
+      },
+      {
+        "index": 10,
+        "after_event_id": "ev_12_the_arrest_of_declan",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Scene cuts to the rail yard where Stoddard intercepts and arrests Declan.",
+        "from_signals": false
+      },
+      {
+        "index": 11,
+        "after_event_id": "ev_13_manifest_clears_the_railcars",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Jesse intervenes directly in Declan's arrest in the rail yard.",
+        "from_signals": false
+      },
+      {
+        "index": 12,
+        "after_event_id": "ev_14_the_knife_fails_the_test",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "The group moves down into the boot pit to test the knife.",
+        "from_signals": false
+      },
+      {
+        "index": 13,
+        "after_event_id": "ev_15_the_rebound_on_jesse",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The immediate confrontation between Stoddard and Jesse continues in the pit.",
+        "from_signals": false
+      },
+      {
+        "index": 14,
+        "after_event_id": "ev_16_connecting_the_purple_ink",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse moves to the scale house to examine the midnight logbook.",
+        "from_signals": false
+      },
+      {
+        "index": 15,
+        "after_event_id": "ev_17_the_twine_bypass_revealed",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse returns to the elevator pit with Pete to examine the twine.",
+        "from_signals": false
+      },
+      {
+        "index": 16,
+        "after_event_id": "ev_18_the_substation_confrontation",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse gathers the parties at the electrical substation.",
+        "from_signals": false
+      },
+      {
+        "index": 17,
+        "after_event_id": "ev_19_the_arrest_and_the_counter_stroke",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "The action relocates to the mill office for Gault's arrest.",
+        "from_signals": false
+      },
+      {
+        "index": 18,
+        "after_event_id": "ev_20_leaving_the_terminal",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse departs the facility through the rail yard gate.",
+        "from_signals": false
+      }
+    ]
+  },
+  "grouping": {
+    "judged_boundaries": 13,
+    "forced_by_plant_span": 0,
+    "forced_by_size": 0,
+    "unseparable_plant_spans": []
+  },
+  "scene_properties": {
+    "failed_batches": 0,
+    "pov_fallbacks": 0,
+    "location_fallbacks": 0,
+    "location_inherited": 0,
+    "beat_fallbacks": 0,
+    "function_fallbacks": 0
+  },
+  "substitutions": {
+    "pov_from_seed": 0,
+    "location_from_seed": 0,
+    "pov_from_candidates": 0,
+    "location_from_candidates": 0,
+    "beats_from_events": 0
+  },
+  "state": {
+    "dropped_unknown_entity": 0,
+    "dropped_entity_ids": [],
+    "dropped_unknown_column": 0
+  },
+  "plants": {
+    "carried_from_fabula": 9,
+    "dangling_plants": 0,
+    "proposed": 2,
+    "rejected_malformed": 0,
+    "verified": 2,
+    "rejected_by_verifier": 0,
+    "unverified_dropped": 0,
+    "seed_grounded_unrepresentable": 0,
+    "failed_batches": 0,
+    "accepted": [
+      {
+        "fact_ref": "jesse_signed_safety_log",
+        "plant": null,
+        "payoff": "scene_01_the_boot_pit",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "callum_worked_graveyard_shift",
+        "plant": null,
+        "payoff": "scene_02_confronting_the_siding",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "declan_threatened_strike_sabotage",
+        "plant": null,
+        "payoff": "scene_08_declans_arrest",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "unregistered_freight_manifest",
+        "plant": "scene_05_the_midnight_slip",
+        "payoff": "scene_08_declans_arrest",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "callum_bent_pocketknife",
+        "plant": "scene_02_confronting_the_siding",
+        "payoff": "scene_09_the_bent_blade",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "gault_inked_sleeve",
+        "plant": "scene_01_the_boot_pit",
+        "payoff": "scene_10_purple_transfer_ink",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "bleached_twine_fibers",
+        "plant": "scene_01_the_boot_pit",
+        "payoff": "scene_11_the_rigged_twine",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "tripper_remote_fuse_blown",
+        "plant": "scene_04_blown_tripper_fuse",
+        "payoff": "scene_12_the_blown_fuse",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "jesse_signed_safety_log",
+        "plant": null,
+        "payoff": "scene_13_gaults_retribution",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "cloaked_figure_silhouette",
+        "plant": "scene_03_the_scale_house",
+        "payoff": "scene_06_questioning_declan",
+        "why": "Maybelle reports seeing a cloaked figure fleeing toward the rail siding near midnight.",
+        "type": "event"
+      },
+      {
+        "fact_ref": "unnumbered_midnight_slip",
+        "plant": "scene_05_the_midnight_slip",
+        "payoff": "scene_07_gaults_threat",
+        "why": "Jesse finds a crumpled, unnumbered slip detailing an untracked midnight release of forty tons of feed grain.",
+        "type": "object"
+      }
+    ]
+  },
+  "told_ledger": {
+    "facts": 7,
+    "withheld_scene_entries": 0,
+    "rejected_out_of_range": 0,
+    "failed_batches": 0
+  },
+  "lint": {
+    "problems": [
+      {
+        "severity": "error",
+        "code": "unknown_entity",
+        "path": "world_model_seed.characters.char_stoddard.location_id",
+        "message": "references unknown row \"loc_constable_office\""
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_safety_ledger",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_scale_logbook",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "errors": [
+      {
+        "severity": "error",
+        "code": "unknown_entity",
+        "path": "world_model_seed.characters.char_stoddard.location_id",
+        "message": "references unknown row \"loc_constable_office\""
+      }
+    ],
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_safety_ledger",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_scale_logbook",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "publishable": false
+  },
+  "vacuous_checks": [
+    "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+    "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+    "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+  ]
+}

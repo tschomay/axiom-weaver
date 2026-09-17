@@ -1,0 +1,269 @@
+{
+  "story_id": "arc_structured_orchard",
+  "segmenter_models": [
+    "gemini-3.8-flash"
+  ],
+  "events": 20,
+  "scenes": 10,
+  "events_per_scene": 2,
+  "telling_order_basis": "fabula_sequence",
+  "telling_order_displaced": 0,
+  "self_consistency": null,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "mechanical": {
+    "story_id": "arc_structured_orchard",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_warden_journal",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_copper_notch_knife",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_calder_agreement",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_orris_chainsaw",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.scene_09_the_living_scions.pays_off",
+            "message": "pays off \"clause_14b_uncertified_fines\" from \"scene_08_the_hidden_fine\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.scene_10_the_final_surrender.pays_off",
+            "message": "pays off \"hidden_salvaged_living_scions\" from \"scene_09_the_living_scions\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_warden_journal",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_copper_notch_knife",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_calder_agreement",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_orris_chainsaw",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.scene_09_the_living_scions.pays_off",
+            "message": "pays off \"clause_14b_uncertified_fines\" from \"scene_08_the_hidden_fine\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.scene_10_the_final_surrender.pays_off",
+            "message": "pays off \"hidden_salvaged_living_scions\" from \"scene_09_the_living_scions\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 11,
+      "reachable": 11,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 9,
+        "compared": 9
+      },
+      "vacuous": false,
+      "passed": true
+    },
+    "presence": {
+      "problems": [],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 8,
+      "reachable": 8,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 10,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "ash_warden_unregistered_status",
+          "payoff_event": "scene_01_the_felled_terrace",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "kemp_boundary_soil_dispute",
+          "payoff_event": "scene_02_confrontation_at_weigh_station",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "orris_chainsaw_blue_oil",
+          "payoff_event": "scene_06_the_sawdust_test",
+          "plant_event": "scene_03_in_the_barn",
+          "span": 3
+        },
+        {
+          "fact_ref": "gervais_undisclosed_bonus_claim",
+          "payoff_event": "scene_08_the_hidden_fine",
+          "plant_event": "scene_02_confrontation_at_weigh_station",
+          "span": 6
+        },
+        {
+          "fact_ref": "calder_penalty_clause_mention",
+          "payoff_event": "scene_08_the_hidden_fine",
+          "plant_event": "scene_02_confrontation_at_weigh_station",
+          "span": 6
+        },
+        {
+          "fact_ref": "bounty_requires_living_scion_buds",
+          "payoff_event": "scene_08_the_hidden_fine",
+          "plant_event": "scene_05_the_bounty_terms",
+          "span": 3
+        },
+        {
+          "fact_ref": "linseed_scent_on_cut_wood",
+          "payoff_event": "scene_09_the_living_scions",
+          "plant_event": "scene_01_the_felled_terrace",
+          "span": 8
+        },
+        {
+          "fact_ref": "midnight_lantern_at_shed",
+          "payoff_event": "scene_09_the_living_scions",
+          "plant_event": "scene_04_a_midnight_lantern",
+          "span": 5
+        },
+        {
+          "fact_ref": "robin_access_to_calder_drafts",
+          "payoff_event": "scene_09_the_living_scions",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "clause_14b_uncertified_fines",
+          "payoff_event": "scene_09_the_living_scions",
+          "plant_event": "scene_08_the_hidden_fine",
+          "span": 1
+        },
+        {
+          "fact_ref": "hidden_salvaged_living_scions",
+          "payoff_event": "scene_10_the_final_surrender",
+          "plant_event": "scene_09_the_living_scions",
+          "span": 1
+        }
+      ],
+      "histogram": {
+        "layer": "segmented_scenes",
+        "counts": {
+          "1": 2,
+          "3": 2,
+          "5": 1,
+          "6": 2,
+          "8": 1
+        },
+        "seed_grounded": 3,
+        "edges": 11,
+        "mean": 4.125,
+        "median": 5,
+        "min": 1,
+        "max": 8,
+        "share_span_1": 0.25
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  },
+  "generator_all_gates_passed": true,
+  "plant_edges": {
+    "authored_by_generator": 8,
+    "authored_seed_grounded": 3,
+    "carried_onto_scenes": 8,
+    "dangling": 0,
+    "proposed_by_segmentation": 3,
+    "verified": 3,
+    "unrepresentable": 0,
+    "on_scene_cards": 11
+  },
+  "span_histogram_after": {
+    "layer": "segmented_scenes",
+    "counts": {
+      "1": 2,
+      "3": 2,
+      "5": 1,
+      "6": 2,
+      "8": 1
+    },
+    "seed_grounded": 3,
+    "edges": 11,
+    "mean": 4.125,
+    "median": 5,
+    "min": 1,
+    "max": 8,
+    "share_span_1": 0.25
+  },
+  "unscoreable": {
+    "boundary precision/recall (§3.5)": "needs a fixture segmentation of the same story and source offsets to place it in; a generated arc is the only authoring of itself and has no source text",
+    "required_beats coverage (§3.5)": "judged against a fixture scene's beats; there is no fixture scene",
+    "beat invention rate (§3.5)": "judged against the source the beat claims to come from; there is no source",
+    "pov/location accuracy (§3.5)": "agreement with a fixture; there is no fixture",
+    "source coverage (§3.5)": "the fraction of a source text assigned to a scene; there is no source",
+    "reveal-order fidelity (§3.6)": "pairwise against the fixture order; there is no fixture order",
+    "premature reveal count (§3.6)": "a reveal is premature relative to where the source discloses it; there is no source",
+    "must_stay_hidden recall (§3.6)": "recall against the fixture's withholding; there is no fixture",
+    "plant/payoff pair recall (§3.7)": "against the fixture's graph — but see pairs_from_generator below, which is the same question asked against the generator's own authored graph, and is answerable"
+  }
+}
