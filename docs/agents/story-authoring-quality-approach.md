@@ -30,11 +30,19 @@ tickets read as a baseline.
 | #149 | the plant-span histogram read pre-segmentation | *(correct as written — the one instrument ticket whose diagnosis holds)* | [4.2](#42-149--the-plant-span-layer) |
 | #148 | generated arcs seed-ground 37% vs the fixtures' 20% | a 5-edge fixture sample with no power to distinguish those rates | [4.7](#47-148--seed-grounded-payoffs) |
 
-And one instrument fault that **no child ticket owns at all** — §5.
-
 The remaining three (#144 events, #145 story-time, #146 segmentation) are genuine pipeline faults.
 Two of them are also the upstream of everything else, which is what makes the ordering below fall
 out almost automatically.
+
+**And the map is missing three failures no child ticket owns.** All three were found by
+recomputing rather than by reading the tickets, and all three are instrument questions before they
+are pipeline questions:
+
+| What | Where it stands | § |
+| --- | --- | --- |
+| Fabricated events, a zero-tolerance row | 13 on the *Carol* against a bar of 0 — and mismeasured | [5](#5-the-first-gap-fabricated-events) |
+| Plant/payoff pair recall, §3.7 | **0.00** on the *Carol*, 0.50 on Cinderella, against a 0.70 bar — on a 5-pair denominator | [5a](#5a-the-second-gap-plantpayoff-recall-is-failing-and-unreadable) |
+| Objects are orphaned from the Fabula | not one object row on either fixture is referenced by any event | [5b](#5b-the-third-gap-objects-are-extracted-and-orphaned) |
 
 ---
 
@@ -61,13 +69,15 @@ scores is a revision that was fitted to the result.
 WAVE 1 — instruments only, no pipeline change
   #147  judge bars (non-genericity, causal follow-through)
   #149  plant-span at the scene layer
-  §4.3a entity-precision denominator      (rubric PR, currently inside #143)
-  §5    fabricated-event definition       (unowned — proposed as a new child)
+  #151  entity-precision denominator      (split out of #143 — §4.3a)
+  #152  fabricated-event definition       (§5)
+  #153  plant/payoff ground truth sidecar (§5a)
 
 WAVE 2 — upstream pipeline causes
   #144  speech acts as events          ─┐ same prompt, same file, one measurement pass:
   #145  conditional-future story-time  ─┘ do them together (§4.5)
-  #143  entity modeling policy + merge   (needs §4.3a's denominator to score against)
+  #154  objects orphaned from the Fabula (§5b — same pass as #144/#145)
+  #143  entity merge                     (needs #151's denominator to score against)
 
 WAVE 3 — downstream, re-measured through wave 1 and 2
   #146  segmentation                     (re-measure first; fix only the residue)
@@ -75,8 +85,12 @@ WAVE 3 — downstream, re-measured through wave 1 and 2
 ```
 
 Waves 1 and 2 are independent of each other and can run in parallel; wave 3 depends on both.
-Within wave 1 the four items are fully independent. Within wave 2, #144 and #145 are one piece of
-work (§4.5) and #143 is separate.
+Within wave 1 the five items are fully independent. Within wave 2, #144, #145 and #154 are one
+piece of work over `pass-events.ts` and #143 is separate.
+
+#151 exists because #143 otherwise straddles two waves: its denominator half is an instrument fix
+and its merge half is a pipeline fix, and landing them in one PR would make the before/after
+unreadable — which is the rule in §2 applied to the ticket that motivated it.
 
 **What "wave 1 is done" means:** `docs/agents/story-authoring-eval.md` carries the revised
 criteria, the scoring code implements them, and the two fixtures have been re-scored through the
@@ -205,23 +219,43 @@ The same arithmetic on the other tables: locations need ≤ 17 rows (candidate: 
 
 *Approach — split the ticket in two, and do (a) first.*
 
-**(a) The denominator.** §2 of the rubric states the three-way split between contradiction,
-omission/invention, and different-valid-grain, and says grain differences are "excluded from the
-denominator where the rule below says so" — but §3.3 never states that rule, and
+**(a) The denominator — now #151.** §2 of the rubric states the three-way split between
+contradiction, omission/invention, and different-valid-grain, and says grain differences are
+"excluded from the denominator where the rule below says so" — but §3.3 never states that rule, and
 `src/extraction/scoring/score.ts` computes `precision = aligned / candidate_rows` flat. The stated
-principle has no operative form. This is a rubric PR under §5 and belongs in wave 1:
+principle has no operative form.
 
-- Define what earns a World Model row, as a rule the scorer can apply. The fixtures already encode
-  one — `fixtures/authoring-notes.md`'s `merge_policy` and its "deciding what *not* to model was
-  real effort, and is invisible in the output." Candidates: an entity that some event's
-  `state_updates` writes to, that appears in more than one event, or that a Scene Card would name.
-  An entity mentioned once in a simile or inside a character's remembered reading earns no row.
-- Rows failing that rule leave the precision denominator and are **reported as a separate
-  over-extraction count** — visible, unignorable, and not conflated with welding two people into
-  one. Over-extraction is still a cost (190 `unused_seed_entity` warnings on the *Carol*'s
-  segmented package is what it looks like downstream); it is just not the same defect.
-- Keep the bars where they are. Changing the denominator without changing the bar is the honest
-  move: it makes the bar mean what §2 already says it means.
+**The rule, decided:** a candidate row is **load-bearing** when some extracted event references it
+— in `characters_present`, as the event's `location_id`, or as a `state_changes` entity or
+location value. Rows nothing references leave the precision denominator and are reported as a
+separate `over_extracted` count. It needs no judge, no gold data and no new field, and it reuses
+the opinion the linter already ships as `unused_seed_entity`.
+
+It was chosen by measurement, not by argument, and the measurement is the reason it is scoped the
+way it is:
+
+| | rows | ref ≥1 | ref ≥2 | ref ≥3 | rows needed to reach bar |
+| --- | --- | --- | --- | --- | --- |
+| *Carol* characters | 155 | 97 | 71 | 53 | **23** |
+| *Carol* locations | 64 | 50 | 46 | 39 | **17** |
+| Cinderella characters | 20 | 16 | **8** | 6 | **9** |
+| Cinderella locations | 10 | 6 | **5** | 4 | **5** |
+| objects, both fixtures | 95 / 12 | **0** | 0 | 0 | 8 / 4 |
+
+Three things follow, and the third is the one that matters:
+
+- **Adopt it at ≥1 for characters and locations.** It is necessary but not sufficient: at ≥2 it
+  lands Cinderella almost exactly on the fixture's grain (8 characters against a 9-row target,
+  5 locations against 5), and it does not close the *Carol*, which still carries 53 characters at
+  ≥3 against a 23-row target. Take the cut, re-measure after wave 2, and do not stack a second
+  rule on top now — #143's merge and #144's event tuning both move this number, and a rule tuned
+  before them is a rule tuned against the wrong input.
+- **Keep the bars where they are.** Changing the denominator without changing the bar is the
+  honest move: it makes the bar mean what §2 already says it means.
+- **Do not apply it to objects** — see §5b. Not one object row on either fixture is referenced by
+  any event, so the rule would delete the whole table. Objects stay on the flat denominator until
+  #154 gives them an attachment point, and the score file says so rather than quietly scoring them
+  a different way.
 
 **(b) The merge.** Then do the ticket's own fix, scored against the metric that is actually
 sensitive to it: **confirmed weld/split count** (§3.3, zero-tolerance) and the POV-agreement number
@@ -366,7 +400,7 @@ artifact of judge calibration and should close — that outcome is a result, not
 
 ---
 
-## 5. The gap in the map: fabricated events
+## 5. The first gap: fabricated events
 
 **No child ticket owns a zero-tolerance rubric row that is currently failing.**
 `fixtures/extraction/runs/a-christmas-carol/score.json` reports `fabricated: 13` against §3.4's bar
@@ -383,12 +417,93 @@ fail loudly — but it is *already* reported, as `quote_resolution_rate` 0.968 a
 claims. Counting it a second time under "invention" conflates a transcription failure with a
 hallucination and makes a zero-tolerance row unreadable.
 
-*Proposed as an eighth child of #142*, in wave 1: restrict `fabricated` to the judged
-`contradicts` verdicts (invention proper), keep ungroundable quotes reported under §3.2 where they
-already live, and re-read the resulting count. If it is nonzero, extraction has a hallucination
-problem and that is a new ticket with real teeth; if it is zero, a zero-tolerance row goes from
-failing to passing without a line of pipeline code changing, which is the clearest possible
-demonstration of why §2's rule comes first.
+**Filed as #152**, in wave 1, rather than folded into #144: it is a scoring change in
+`score.ts` and #144 is a prompt change in `pass-events.ts`, so landing them together would put an
+instrument fix and a pipeline fix in one PR and make the before/after unreadable — §2's rule,
+applied to itself.
+
+**And the corrected count is already known: zero, on both fixtures.** The *Carol*'s single
+`contradicts` verdict is on a `state_update` (`char_charwoman.location_id` — "the location is Old
+Joe's parlour, not Belle's parlour"), not on an event; Cinderella has no `contradicts` verdict at
+all. So restricting `fabricated` to judged-contradicts events takes a failing zero-tolerance row to
+passing with no pipeline code changed, which is the clearest available demonstration of why §2
+comes first.
+
+Two things the fix must carry, or it trades one overstated number for another:
+
+- **The 13 do not disappear, they move.** Unresolvable quotes are a real defect and stay reported
+  under §3.2, where `quote_resolution_rate` 0.968 already counts them. The change is which row
+  owns them.
+- **State the denominator.** The judge saw 60 of 1054 claims on the *Carol* and 45 on Cinderella,
+  so the honest result is "0 of 60 judged," never a bare 0. A zero-tolerance row reported without
+  its sample size is exactly the overstatement §6 is about.
+
+---
+
+## 5a. The second gap: plant/payoff recall is failing, and unreadable
+
+§3.7's plant/payoff pair recall **is** being scored today — `prototypes/segmentation/*/score.json`
+computes it on every segmentation run — and it is failing on both fixtures with no child ticket
+owning it:
+
+| | fixture pairs | candidate pairs | matched | recall | bar |
+| --- | --- | --- | --- | --- | --- |
+| *A Christmas Carol* | 3 | 4 | 0 | **0.00** | ≥ 0.70 |
+| Cinderella | 2 | 4 | 1 | **0.50** | ≥ 0.70 |
+
+The *Carol*'s row is the interesting one: segmentation produced four plant/payoff pairs and matched
+none of the fixture's three. At a denominator of five pairs across both fixtures, that number
+cannot distinguish "segmentation does not recover plants" from "the fixture declared three of the
+thirty pairs a reader would name, and the candidate found four different ones." It is the same
+ten-edge problem §6 describes, showing up as a bar that is failing for reasons nobody can read.
+
+*Approach — #153, wave 1, and it is an instrument, not a fixture edit.* Annotate the **implicit**
+plant/payoff structure of the three fixtures as a **sidecar**, not as new `pays_off` edges on the
+packages:
+
+- `fixtures/<story>/plants.annotation.json`, keyed by `fact_ref` plus plant and payoff scene id.
+  This is the precedent §3.2 already set for spans — "a sidecar keyed by `fact_ref` and scene id,
+  not a Scene Card field," because "the rubric has no authority to change the schema."
+- The packages are not touched, so §4.4 holds: nothing re-authors the answer key, the fixtures'
+  own `pays_off` graphs and their lint status are unchanged, and ADR 0020 is not relitigated —
+  recording pairs a reader would name is not adding a trigger term.
+- Build it **from the source, blind to candidate output**, and record the inclusion rule in the
+  file, the way §3.1 requires of an alignment file. An annotation built by reading the candidate is
+  not ground truth.
+- §3.7 then scores against the sidecar when one exists and against the declared graph when it does
+  not, and the result says which.
+
+*Falsification.* If recall on a 30-pair denominator lands near the 0.70 bar, the current 0.00 was a
+denominator artifact. If it stays near zero, segmentation genuinely is not recovering the source's
+plant structure — and that is a real, newly-legible failure worth its own pipeline ticket.
+
+---
+
+## 5b. The third gap: objects are extracted and orphaned
+
+**Not one object row on either fixture is referenced by any event** — 95 object rows on the
+*Carol*, 12 on Cinderella, zero references between them. No Fabula field can name one:
+`characters_present` is characters-only by design, `location_id` is a `loc_` id, and every
+`state_changes.entity_id` in both committed packages is a character.
+
+That makes `pass-events.ts`'s own justification for dropping object participants false in practice.
+Its header argues the model "is answering a question the schema does not ask, and their involvement
+is already carried by `state_updates` and `location_id`" — 25 such participants were dropped on
+Cinderella alone. The involvement is not carried. It is discarded, and the object table is left as
+rows nothing downstream consumes, which is why objects are the worst number in the whole extraction
+report (precision 0.063 on the *Carol*, 0.25 on Cinderella, recall 0.43).
+
+*Approach — #154, wave 2, in the same pass as #144 and #145.* The events prompt already permits
+`object.status` / `object.location_id` / `object.name` writes in `COLUMNS_BY_KIND`; the extractor
+simply never produces them. Prompt for them explicitly — an object that a scene moves, breaks,
+hides or transfers earns a `state_changes` row — and re-measure object precision and recall
+together. Then, and only then, bring objects under #151's load-bearing denominator.
+
+*Two cautions.* The fix must not become "restore object participants": `characters_present` is
+characters-only for a reason the cross-reference pass enforces (`wrong_entity_table`), and PR #136
+measured 25 of 76 gate errors as objects and locations extracted into the character table. And
+object recall is 0.43 on Cinderella — the table is under-extracted as well as over-extracted, so
+watch both directions, as §4.5 asks for events.
 
 ---
 
@@ -422,12 +537,16 @@ around that — and inflating the fixtures to get a denominator would be re-auth
 3. **Treat a fixture payoff rate as a sanity screen, never a bar** — the same status §3.3 already
    gives entity-count sanity and the merge signature.
 
-A fourth option exists and should be named rather than assumed away: annotate the *implicit*
-plant/payoff structure in the existing fixtures, which is far denser than the declared graph
-(Cinderella's slipper, the *Carol*'s "surplus population" line — §3.7 already cites the latter as
-the case long-range pair recall exists for). That is fixture work with a real cost and a real
-judgment call about what counts as a declared plant, so it is a ticket of its own, not a step
-inside one of these seven.
+A fourth option exists, and the evidence promoted it from "worth naming" to **decided and filed
+as #153**: annotate the *implicit* plant/payoff structure in the existing fixtures, which is far
+denser than the declared graph (Cinderella's slipper, the *Carol*'s "surplus population" line —
+§3.7 already cites the latter as the case long-range pair recall exists for).
+
+The argument for deferring it was that nothing consumes it yet. That was wrong: §5a shows §3.7 is
+scored on every segmentation run today and is failing on both fixtures, so the denominator is live
+and unreadable right now. The two objections that remained both dissolve once it is a **sidecar**
+rather than fixture edits — no re-authored answer key, no schema change, no ADR 0020
+relitigation. §5a has the shape.
 
 ---
 
@@ -444,17 +563,31 @@ inside one of these seven.
 - **Nothing at the Performance layer.** Every ticket here is Fabula/Syuzhet; the seam-failure
   rubric in `CONTEXT.md` owns prose.
 
-## 8. Open questions for the owner
+## 8. Decisions taken
 
-Three decisions this file deliberately does not make, because they are calls about what the project
-wants rather than readings of the evidence:
+The three questions this file originally left open are closed, each by a measurement rather than a
+preference. They are recorded here with what settled them, so a later ticket can reopen one on
+evidence instead of taste.
 
-1. **What earns a World Model row** (§4.3a). The rule is writable several ways and the choice sets
-   what extraction is *for*: a package that models every walk-on is more faithful and much more
-   expensive to author against. The fixtures' implicit answer is the narrow one.
-2. **Whether the eighth child (§5) gets filed**, or whether the fabricated-event definition is
-   folded into #144 as part of the same events-pass work. Filing it separately keeps a
-   zero-tolerance row visible; folding it in is one fewer ticket.
-3. **Whether the implicit-plant fixture annotation (§6)** is worth its cost now or after the
-   generation path has more arcs to measure. It is the only thing that would give the payoff
-   metrics real ground truth, and it is the most expensive item named anywhere in this file.
+1. **What earns a World Model row** → an event references it (§4.3a, now #151). Adopted for
+   characters and locations, excluded for objects until #154, and explicitly *not* sufficient on
+   its own: it leaves the *Carol* at 53 characters against a 23-row target. The measurement table
+   in §4.3a is the reason it is scoped that way, and the reason no second rule is stacked on it
+   before wave 2 lands.
+2. **The fabricated-event fix is its own child** (§5, now #152), not folded into #144 — an
+   instrument fix and a pipeline fix in one PR is unreadable. The corrected count is already known
+   to be 0 of 60 judged on the *Carol* and 0 of 45 on Cinderella.
+3. **The implicit-plant annotation happens now**, as a sidecar (§5a/§6, now #153). The deferral
+   argument was that nothing consumed it; §3.7 is scored on every segmentation run and is failing
+   at 0.00/0.50 on a five-pair denominator, so it is consumed today.
+
+And the map grew two children it did not have: **#153** (§5a) and **#154** (§5b), both found by
+recomputation rather than by reading the tickets.
+
+One thing is deliberately still open, and it is a question for after wave 2, not now: **what to do
+about the *Carol*'s residual over-extraction** once #151's denominator, #143's merge and #144's
+event tuning have all landed. If 53 characters against a 23-row target survives all three, the
+remaining gap is a modeling-policy question the fixtures answer only implicitly, and it will want
+an explicit answer — possibly an ADR, since it bears on what a World Model seed is *for*. Nothing
+in this file pre-empts that, and nothing should until the number is measured through fixed
+instruments.
