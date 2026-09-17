@@ -31,7 +31,8 @@
 import { z } from 'zod';
 
 import { lintPackage } from '../authoring/lint';
-import { eventsInOrder, provisionalPackage, type FabulaArc, type FabulaEvent } from './fabula';
+import { provisionalPackage } from '../authoring/lint-fabula';
+import { eventsInOrder, type FabulaArc, type FabulaEvent } from '../schema/fabula';
 
 /** A defect worth repairing: lint errors, plus the two warnings §4.1 promotes for generated arcs. */
 export interface RepairTarget {

@@ -27,7 +27,8 @@ import {
   type ChainingProblem,
   type PresenceProblem,
 } from './chaining';
-import { eventsInOrder, provisionalPackage, type FabulaArc } from './fabula';
+import { provisionalPackage } from '../authoring/lint-fabula';
+import { eventsInOrder, type FabulaArc } from '../schema/fabula';
 
 /**
  * The lexical mode-collapse canary (`llm-arc-generation-prior-art.md` §8).

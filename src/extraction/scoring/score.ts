@@ -11,11 +11,13 @@
  * because it needs no ground truth and no judge and it is what separates "read the source" from
  * "produced plausible-looking output". Everything after it assumes it.
  *
- * §3.4 (segmentation), §3.5 (reveal order) and §3.6 (plant/payoff) are **not scored**. They are
- * defined over Scene Cards, this pipeline stops before segmentation by design (#113's boundary,
- * #118's ticket), and a number computed over an empty `scene_cards` array would be a zero that
- * means "not attempted" while looking like a zero that means "failed". They are reported as
- * out-of-scope with that reason attached.
+ * §3.5 (segmentation), §3.6 (reveal order) and §3.7 (plant/payoff) are **not scored here**. They
+ * are defined over Scene Cards, this pipeline stops before segmentation by design (#113's
+ * boundary, #118's ticket), and a number computed over an empty `scene_cards` array would be a
+ * zero that means "not attempted" while looking like a zero that means "failed". They are reported
+ * as out-of-scope with that reason attached, and `src/segmentation/scoring/score.ts` is what
+ * scores them once segmentation has drawn the cards. (The section numbers above previously read
+ * §3.4/§3.5/§3.6, one off from the rubric's own numbering.)
  */
 
 import type { ExtractionModel } from '../call';
@@ -304,19 +306,20 @@ export async function scoreExtraction(
     events: events.score,
     not_scored: [
       {
-        section: '§3.4 Scene segmentation',
+        section: '§3.5 Scene segmentation',
         reason:
           'this pipeline stops before segmentation by design (#113 boundary; #118 owns it), so ' +
-          'scene_cards is empty and every §3.4 metric has an empty denominator',
+          'scene_cards is empty and every §3.5 metric has an empty denominator. Scored by ' +
+          'src/segmentation/scoring/score.ts once #118 has drawn the cards.',
       },
       {
-        section: '§3.5 Reveal order',
+        section: '§3.6 Reveal order',
         reason:
           'reader_must_learn / must_stay_hidden are Scene Card fields; §4.7 of the research is ' +
           'explicit that the told-ledger is derived from those, not extracted from prose',
       },
       {
-        section: '§3.6 Plant/payoff graph',
+        section: '§3.7 Plant/payoff graph',
         reason: 'pays_off names scene ids, and no Scene Card exists at this stage',
       },
     ],

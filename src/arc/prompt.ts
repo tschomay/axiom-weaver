@@ -25,7 +25,7 @@
  */
 
 import type { ArcBrief } from './brief';
-import { EVENT_STATE_COLUMNS } from './fabula';
+import { EVENT_STATE_COLUMNS } from '../schema/fabula';
 
 /** The system header: what the model is authoring, and in whose vocabulary. */
 export const ARC_SYSTEM_INSTRUCTION = `You are authoring the FABULA of an original story: the world it happens in, and everything that happens in it, in CHRONOLOGICAL order.
