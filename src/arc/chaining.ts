@@ -31,7 +31,7 @@ import {
   scenesInOrder,
   type StoryPackage,
 } from '../schema/story-package';
-import { eventsInOrder, type FabulaArc } from './fabula';
+import { eventsInOrder, type FabulaArc } from '../schema/fabula';
 
 export interface ChainingProblem {
   readonly severity: 'error' | 'warn';
@@ -141,7 +141,12 @@ export function presenceProblems(arc: FabulaArc): PresenceProblem[] {
         .map((change) => change.entity_id),
     );
 
-    if (!event.characters_present.includes(event.pov)) {
+    // `pov` and `location_id` are optional at the Fabula layer (ADR 0019 decision 2): extraction
+    // leaves them for segmentation to fill. An event that names neither is not an `absent_pov`
+    // defect and cannot be checked for teleportation — there is no claim to contradict. The
+    // generator's own parse (`GeneratedFabulaArcSchema`) is what holds a *generated* arc to
+    // supplying both, so nothing is lost on the path this replay was written for.
+    if (event.pov !== undefined && !event.characters_present.includes(event.pov)) {
       problems.push({
         code: 'absent_pov',
         event_id: event.id,
@@ -150,6 +155,7 @@ export function presenceProblems(arc: FabulaArc): PresenceProblem[] {
     }
 
     for (const id of event.characters_present) {
+      if (event.location_id === null) continue;
       const at = location.get(id);
       if (at === undefined || at === null) continue;
       if (at === event.location_id || movedHere.has(id)) continue;
@@ -178,7 +184,9 @@ export function presenceProblems(arc: FabulaArc): PresenceProblem[] {
     // Everyone on stage is now here, including anyone just reported as teleported. Accepting the
     // arc's implicit assertion is what keeps one misplacement from being re-reported at every
     // subsequent event — the defect is where it happened, not everywhere downstream of it.
-    for (const id of event.characters_present) location.set(id, event.location_id);
+    if (event.location_id !== null) {
+      for (const id of event.characters_present) location.set(id, event.location_id);
+    }
   }
 
   return problems;

@@ -9,7 +9,8 @@
  */
 
 import { GeminiClient, type ModelClient } from '../writer/model-client';
-import { FabulaArcSchema, type FabulaArc } from './fabula';
+import type { FabulaArc } from '../schema/fabula';
+import { GeneratedFabulaArcSchema } from './fabula';
 import { ARC_SYSTEM_INSTRUCTION, arcResponseJsonSchema, renderArcPrompt } from './prompt';
 import {
   ArcRepairResponseSchema,
@@ -88,7 +89,7 @@ function denseSequences(arc: FabulaArc): FabulaArc {
 
 function parseArc(text: string): FabulaArc {
   const parsed: unknown = JSON.parse(stripFences(text));
-  return denseSequences(FabulaArcSchema.parse(parsed));
+  return denseSequences(GeneratedFabulaArcSchema.parse(parsed));
 }
 
 export interface GenerateOptions {

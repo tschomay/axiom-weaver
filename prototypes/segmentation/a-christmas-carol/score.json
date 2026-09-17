@@ -1,0 +1,423 @@
+{
+  "story_id": "a-christmas-carol",
+  "scored_at": "2026-09-16T11:35:58.641Z",
+  "fixture_package_version": 1,
+  "segmenter_models": [
+    "gemini-3.8-flash"
+  ],
+  "judge_model": "gemini-3.8-flash",
+  "judge_cost_usd": 0.1786395,
+  "g0": {
+    "bar": "publishable === true (§1)",
+    "publishable": true,
+    "errors": [],
+    "warning_counts": {
+      "unused_seed_entity": 190
+    }
+  },
+  "scene_count": {
+    "fixture": 20,
+    "candidate": 47,
+    "ratio": 2.35,
+    "trustworthy_band": false
+  },
+  "scene_alignment": [
+    {
+      "fixture_scene": "scene_01_counting_house",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 5,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_02_the_haunting_begins",
+      "candidate_scene": "scene_08_marleys_departure",
+      "aligned_beats": 2,
+      "fixture_beats": 5,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_03_the_first_spirit",
+      "candidate_scene": "scene_09_first_spirit_arrives",
+      "aligned_beats": 1,
+      "fixture_beats": 2,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_04_the_lonely_school",
+      "candidate_scene": "scene_10_the_solitary_schoolboy",
+      "aligned_beats": 1,
+      "fixture_beats": 3,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_05_fezziwigs_ball",
+      "candidate_scene": "scene_17_fezziwigs_ball",
+      "aligned_beats": 1,
+      "fixture_beats": 3,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_06_belle_then_and_now",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 4,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_07_the_second_spirit",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 2,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_08_the_cratchits",
+      "candidate_scene": "scene_24_the_cratchit_feast",
+      "aligned_beats": 4,
+      "fixture_beats": 5,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_09_the_spirits_tour",
+      "candidate_scene": "scene_26_the_miners_hut",
+      "aligned_beats": 1,
+      "fixture_beats": 3,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_10_freds_party",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 3,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_11_ignorance_and_want",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 4,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_12_the_exchange",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 3,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_13_old_joes_shop",
+      "candidate_scene": "scene_34_old_joes_shop",
+      "aligned_beats": 2,
+      "fixture_beats": 3,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_14_the_unwatched_corpse",
+      "candidate_scene": "scene_35_the_covered_corpse",
+      "aligned_beats": 2,
+      "fixture_beats": 3,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_15_the_relieved_debtors",
+      "candidate_scene": "scene_36_a_debtors_relief",
+      "aligned_beats": 1,
+      "fixture_beats": 3,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_16_the_cratchits_after_tim",
+      "candidate_scene": "scene_39_tiny_tim_mourned",
+      "aligned_beats": 1,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_17_the_name_on_the_stone",
+      "candidate_scene": "scene_41_the_neglected_grave",
+      "aligned_beats": 2,
+      "fixture_beats": 5,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_18_the_waking",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 4,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_19_the_street_and_freds_dinner",
+      "candidate_scene": "scene_45_freds_dinner",
+      "aligned_beats": 2,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_20_the_office_next_morning",
+      "candidate_scene": "scene_46_cratchits_raise",
+      "aligned_beats": 2,
+      "fixture_beats": 5,
+      "how": "majority_of_aligned_beats"
+    }
+  ],
+  "boundaries": {
+    "bar": "≥ 0.70 precision and recall (§3.5)",
+    "window_chars": 3155,
+    "fixture_boundaries": 13,
+    "candidate_boundaries": 46,
+    "matched": 12,
+    "precision": 0.2608695652173913,
+    "recall": 0.9230769230769231,
+    "note": "fixture boundaries are located at the earliest source offset among the candidate events #117's alignment assigned to that fixture scene; the fixtures carry no offsets of their own"
+  },
+  "beats": {
+    "coverage_bar": "≥ 0.80 mean, no aligned scene below 0.5 (§3.5)",
+    "invention_bar": "≤ 0.10 (§3.5)",
+    "scored_scenes": 13,
+    "mean_coverage": 0.5230769230769231,
+    "worst_scene": {
+      "scene": "scene_04_the_lonely_school",
+      "coverage": 0.3333333333333333
+    },
+    "scenes_below_half": [
+      "scene_02_the_haunting_begins",
+      "scene_04_the_lonely_school",
+      "scene_05_fezziwigs_ball",
+      "scene_08_the_cratchits",
+      "scene_09_the_spirits_tour",
+      "scene_13_old_joes_shop",
+      "scene_20_the_office_next_morning"
+    ],
+    "sampled_beats": 30,
+    "supported": 30,
+    "insufficient": 0,
+    "contradicted": 0,
+    "invention_rate": 0
+  },
+  "pov_location": {
+    "bar": "≥ 0.95, read as agreement with the fixture rather than against the source (§3.5)",
+    "scored": 13,
+    "pov_agreements": 0,
+    "location_agreements": 7,
+    "pov_accuracy": 0,
+    "location_accuracy": 0.5384615384615384,
+    "disagreements": [
+      {
+        "fixture_scene": "scene_02_the_haunting_begins",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_03_the_first_spirit",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_03_the_first_spirit",
+        "field": "location_id",
+        "fixture": "loc_scrooges_chambers → loc_scrooge_s_rooms",
+        "candidate": "loc_bedroom"
+      },
+      {
+        "fixture_scene": "scene_04_the_lonely_school",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_04_the_lonely_school",
+        "field": "location_id",
+        "fixture": "loc_school → loc_the_school",
+        "candidate": "loc_the_schoolroom"
+      },
+      {
+        "fixture_scene": "scene_05_fezziwigs_ball",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_08_the_cratchits",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_09_the_spirits_tour",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_09_the_spirits_tour",
+        "field": "location_id",
+        "fixture": "loc_world_tour (unaligned)",
+        "candidate": "loc_hut"
+      },
+      {
+        "fixture_scene": "scene_13_old_joes_shop",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_14_the_unwatched_corpse",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_15_the_relieved_debtors",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_caroline"
+      },
+      {
+        "fixture_scene": "scene_16_the_cratchits_after_tim",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_16_the_cratchits_after_tim",
+        "field": "location_id",
+        "fixture": "loc_cratchit_flat → loc_bob_cratchit_s_dwelling",
+        "candidate": "loc_bob_cratchit_s_house"
+      },
+      {
+        "fixture_scene": "scene_17_the_name_on_the_stone",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_19_the_street_and_freds_dinner",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_19_the_street_and_freds_dinner",
+        "field": "location_id",
+        "fixture": "loc_london_streets → loc_city_streets",
+        "candidate": "loc_dining_room"
+      },
+      {
+        "fixture_scene": "scene_20_the_office_next_morning",
+        "field": "pov",
+        "fixture": "char_scrooge → char_ebenezer_scrooge",
+        "candidate": "char_scrooge"
+      },
+      {
+        "fixture_scene": "scene_20_the_office_next_morning",
+        "field": "location_id",
+        "fixture": "loc_counting_house → loc_scrooge_marley_office",
+        "candidate": "loc_scrooge_s_office"
+      }
+    ]
+  },
+  "source_coverage": {
+    "bar": "≥ 0.95 (§3.5)",
+    "source_chars": 157754,
+    "covered_chars": 141333,
+    "coverage": 0.8959075522649188,
+    "gaps": [
+      {
+        "start": 1238,
+        "end": 4120,
+        "chars": 2882
+      },
+      {
+        "start": 139571,
+        "end": 141410,
+        "chars": 1839
+      },
+      {
+        "start": 13163,
+        "end": 14365,
+        "chars": 1202
+      },
+      {
+        "start": 101036,
+        "end": 101954,
+        "chars": 918
+      },
+      {
+        "start": 122223,
+        "end": 123099,
+        "chars": 876
+      },
+      {
+        "start": 156884,
+        "end": 157754,
+        "chars": 870
+      },
+      {
+        "start": 135198,
+        "end": 135906,
+        "chars": 708
+      },
+      {
+        "start": 49595,
+        "end": 50061,
+        "chars": 466
+      },
+      {
+        "start": 156345,
+        "end": 156762,
+        "chars": 417
+      },
+      {
+        "start": 50939,
+        "end": 51312,
+        "chars": 373
+      }
+    ],
+    "events_supplied": 428,
+    "events_assigned": 428,
+    "assignment_rate": 1
+  },
+  "reveal_order": {
+    "order_bar": "≥ 0.90 pairwise (§3.6)",
+    "premature_bar": "0 (§3.6)",
+    "hidden_bar": "≥ 0.80 recall (§3.6)",
+    "fixture_facts": 3,
+    "candidate_facts": 4,
+    "aligned_facts": 1,
+    "pairwise_total": 0,
+    "pairwise_correct": 0,
+    "pairwise_accuracy": null,
+    "premature": [],
+    "fixture_hidden_facts": 1,
+    "hidden_recovered": 0,
+    "hidden_recall": 0
+  },
+  "plants": {
+    "pair_bar": "≥ 0.70 recall (§3.7)",
+    "long_range_bar": "≥ 0.60 recall (§3.7)",
+    "fixture_pairs": 3,
+    "candidate_pairs": 4,
+    "matched": 0,
+    "recall": 0,
+    "long_range_fixture_pairs": 2,
+    "long_range_matched": 0,
+    "long_range_recall": 0,
+    "misattributed": 0,
+    "orphans": [],
+    "plant_walk_errors": [],
+    "span_histogram": {
+      "5+": 4
+    }
+  },
+  "caveats": [
+    "§2: the fixtures are one valid authoring, not the unique correct one — a deviation is not automatically an error, and both fixtures sit at the easy end of the difficulty range.",
+    "The scene alignment is derived from #117's frozen event alignment; a fixture scene whose beats went unaligned there is unscoreable here and is listed with candidate_scene: null.",
+    "§3.5 POV/location is agreement with the fixture, not a judgment against the source.",
+    "Beat invention is judged against the source window the scene's own spans cover, so a beat supported elsewhere in the story reads as \"insufficient\" rather than \"contradicts\" — the two are reported separately for that reason."
+  ]
+}
