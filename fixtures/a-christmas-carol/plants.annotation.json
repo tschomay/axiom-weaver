@@ -1,0 +1,122 @@
+{
+  "schema": "plants.annotation/1",
+  "story_id": "a-christmas-carol",
+  "fixture_package_version": 1,
+  "built_for": "https://github.com/tschomay/axiom-weaver/issues/153",
+  "provenance": {
+    "built_from": "the source text only — Dickens, A Christmas Carol (PG #46), as sliced by src/extraction/sources.ts. Line numbers below are into that slice.",
+    "blind_to": "candidate output. No segmentation or extraction run was consulted while building this file, per §3.1's rule that an alignment decision is recorded, not reverse-engineered.",
+    "author": "hand-annotated"
+  },
+  "inclusion_rule": {
+    "included_when": [
+      "the source states something concrete at the plant scene — an object, a rule, a promise, a capability or a relationship, not a mood",
+      "a later scene depends on it, such that removing the plant would change how that later scene reads",
+      "a reader could name both ends without being shown this file"
+    ],
+    "excluded": [
+      "ordinary continuity — a character still being where the last scene left them",
+      "facts the story asserts and never collects",
+      "pairs whose plant and payoff fall in the same scene"
+    ],
+    "note": "This records pairs a reader would name. It is NOT a claim about ADR 0020's trigger term, and it adds no pays_off edges to the package. Several plants pay off more than once; each payoff is its own row, because §3.7 scores {fact_ref, plant, payoff} triples."
+  },
+  "declared_in_package": [
+    { "fact_ref": "surplus_population_remark", "plant": "scene_01_counting_house", "payoff": "scene_08_the_cratchits" },
+    { "fact_ref": "tiny_tims_fate_uncertain", "plant": "scene_08_the_cratchits", "payoff": "scene_16_the_cratchits_after_tim" },
+    { "fact_ref": "corpse_is_scrooge", "plant": null, "payoff": "scene_17_the_name_on_the_stone" }
+  ],
+  "implicit": [
+    {
+      "fact_ref": "are_there_no_prisons",
+      "plant": "scene_01_counting_house",
+      "payoff": "scene_11_ignorance_and_want",
+      "why": "\"Are there no prisons?\" asked Scrooge (l.287); the Spirit turns the same words on him at Ignorance and Want (l.2736). The longest-range verbatim callback in the story.",
+      "span_note": "10 scenes — the long-range case §3.7's second bar exists for."
+    },
+    {
+      "fact_ref": "marley_foretells_three_spirits",
+      "plant": "scene_02_the_haunting_begins",
+      "payoff": "scene_03_the_first_spirit",
+      "why": "\"You will be haunted... by Three Spirits\" (l.861) is the promise the entire middle of the book discharges; the first arrival is its first collection."
+    },
+    {
+      "fact_ref": "marley_foretells_three_spirits",
+      "plant": "scene_02_the_haunting_begins",
+      "payoff": "scene_12_the_exchange",
+      "why": "The third spirit arrives as foretold. Same plant, a second payoff — the structure §3.7 scores per triple."
+    },
+    {
+      "fact_ref": "marleys_chain_forged_in_life",
+      "plant": "scene_02_the_haunting_begins",
+      "payoff": "scene_17_the_name_on_the_stone",
+      "why": "\"I wear the chain I forged in life\" (l.740), made \"of my own free will\" (l.742). The grave is what Scrooge's own chain has been earning, and why he can still refuse it."
+    },
+    {
+      "fact_ref": "fred_invites_scrooge_to_dinner",
+      "plant": "scene_01_counting_house",
+      "payoff": "scene_19_the_street_and_freds_dinner",
+      "why": "The invitation refused in the first scene is the invitation accepted in the second-to-last. The reform is measured against it."
+    },
+    {
+      "fact_ref": "portly_gentlemen_solicit_subscription",
+      "plant": "scene_01_counting_house",
+      "payoff": "scene_19_the_street_and_freds_dinner",
+      "why": "Scrooge meets the same gentleman, apologises, and whispers a sum — the refusal in scene 1 is what makes the whisper land."
+    },
+    {
+      "fact_ref": "bob_cratchit_underpaid_and_grudged_his_day",
+      "plant": "scene_01_counting_house",
+      "payoff": "scene_20_the_office_next_morning",
+      "why": "\"I'll raise your salary\" (l.3781) collects the fifteen shillings and the grudged Christmas Day from the opening scene."
+    },
+    {
+      "fact_ref": "crutch_without_an_owner",
+      "plant": "scene_08_the_cratchits",
+      "payoff": "scene_16_the_cratchits_after_tim",
+      "why": "The Spirit's \"a crutch without an owner, carefully preserved\" (l.2229) is the exact image the later Cratchit scene realises. Distinct from tiny_tims_fate_uncertain: this is the object, not the prognosis."
+    },
+    {
+      "fact_ref": "fezziwig_made_them_happy_at_little_cost",
+      "plant": "scene_05_fezziwigs_ball",
+      "payoff": "scene_20_the_office_next_morning",
+      "why": "Scrooge's own argument that the power to make people happy or unhappy \"costs so little\" is the model he becomes as a master."
+    },
+    {
+      "fact_ref": "scrooge_wishes_he_could_speak_to_his_clerk",
+      "plant": "scene_05_fezziwigs_ball",
+      "payoff": "scene_20_the_office_next_morning",
+      "why": "\"I should like to be able to say a word or two to my clerk just now\" (l.1520) — said watching Fezziwig, collected across fifteen scenes in the office."
+    },
+    {
+      "fact_ref": "another_idol_has_displaced_me",
+      "plant": "scene_06_belle_then_and_now",
+      "payoff": "scene_17_the_name_on_the_stone",
+      "why": "Belle's \"Another idol has displaced me\" (l.1543) names the gain that the neglected grave is the end state of."
+    },
+    {
+      "fact_ref": "yes_and_no_names_uncle_scrooge",
+      "plant": "scene_10_freds_party",
+      "payoff": "scene_19_the_street_and_freds_dinner",
+      "why": "The disagreeable animal is Uncle Scrooge (l.2642), guessed by a party he is not at; the payoff is his arriving at that same party in person."
+    },
+    {
+      "fact_ref": "the_dead_mans_goods_are_plundered",
+      "plant": "scene_13_old_joes_shop",
+      "payoff": "scene_14_the_unwatched_corpse",
+      "why": "The bed-curtains, blankets and shirt sold at Old Joe's are what the bare, plundered room is missing. The shop scene is what makes the empty room legible."
+    },
+    {
+      "fact_ref": "his_death_relieves_his_debtors",
+      "plant": "scene_15_the_relieved_debtors",
+      "payoff": "scene_17_the_name_on_the_stone",
+      "why": "Scrooge asks the Spirit for any tenderness connected with a death; the relief of Caroline and her husband is the answer, and the stone is where it lands."
+    },
+    {
+      "fact_ref": "doom_is_written_on_the_brow",
+      "plant": "scene_11_ignorance_and_want",
+      "payoff": "scene_17_the_name_on_the_stone",
+      "why": "\"Doom\" written on Ignorance's brow, unless the writing be erased, is the conditional the whole Stave IV sequence tests and the graveyard states."
+    }
+  ]
+}

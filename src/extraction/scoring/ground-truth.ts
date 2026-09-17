@@ -32,12 +32,45 @@ export interface GroundTruthEvent {
   readonly confidence: Confidence;
 }
 
+/**
+ * A plant/payoff pair a reader would name, recorded outside the package (#153).
+ *
+ * §3.7 scores plant/payoff recall against the fixture's *declared* `pays_off` graph, and that
+ * graph is tiny — 2, 3 and 5 edges across the three fixtures. At that denominator the metric
+ * cannot distinguish "segmentation does not recover plants" from "the fixture declared three of
+ * the thirty pairs a reader would name, and the candidate found four different ones."
+ *
+ * The fix is a sidecar rather than new `pays_off` edges, following the precedent §3.2 set for
+ * spans: "a sidecar keyed by `fact_ref` and scene id, not a Scene Card field," because the rubric
+ * has no authority to change the schema. The packages stay exactly as authored — their own graphs,
+ * their lint status and their publishability are untouched — and ADR 0020 is not relitigated,
+ * because recording a pair a reader would name is not adding a trigger term.
+ */
+export interface PlantAnnotationPair {
+  readonly fact_ref: string;
+  readonly plant: string | null;
+  readonly payoff: string;
+  readonly why: string;
+}
+
+export interface PlantAnnotation {
+  readonly story_id: string;
+  /** Pairs the package already declares. Kept for provenance; not re-scored from here. */
+  readonly declared: readonly PlantAnnotationPair[];
+  /** Pairs the source supports that the package's own graph does not declare. */
+  readonly implicit: readonly PlantAnnotationPair[];
+  readonly inclusion_rule: unknown;
+  readonly provenance: unknown;
+}
+
 export interface GroundTruth {
   readonly story_id: string;
   readonly package: StoryPackage;
   readonly package_version: number;
   readonly events: readonly GroundTruthEvent[];
   readonly notes: readonly string[];
+  /** Present when `fixtures/<story>/plants.annotation.json` exists. See `PlantAnnotation`. */
+  readonly plant_annotation: PlantAnnotation | null;
 }
 
 interface ChronologyFile {
@@ -47,6 +80,31 @@ interface ChronologyFile {
 export async function loadGroundTruth(storyId: string, repoRoot = process.cwd()): Promise<GroundTruth> {
   const packagePath = path.join(repoRoot, 'fixtures', storyId, 'package.json');
   const pkg = parseStoryPackage(JSON.parse(await readFile(packagePath, 'utf8')) as unknown);
+
+  const annotationPath = path.join(repoRoot, 'fixtures', storyId, 'plants.annotation.json');
+  let plantAnnotation: PlantAnnotation | null = null;
+  try {
+    const raw = JSON.parse(await readFile(annotationPath, 'utf8')) as Record<string, unknown>;
+    const pairs = (value: unknown): PlantAnnotationPair[] =>
+      (Array.isArray(value) ? value : []).map((row) => {
+        const entry = row as Record<string, unknown>;
+        return {
+          fact_ref: String(entry['fact_ref'] ?? ''),
+          plant: entry['plant'] === null || entry['plant'] === undefined ? null : String(entry['plant']),
+          payoff: String(entry['payoff'] ?? ''),
+          why: String(entry['why'] ?? ''),
+        };
+      });
+    plantAnnotation = {
+      story_id: storyId,
+      declared: pairs(raw['declared_in_package']),
+      implicit: pairs(raw['implicit']),
+      inclusion_rule: raw['inclusion_rule'] ?? null,
+      provenance: raw['provenance'] ?? null,
+    };
+  } catch {
+    // No sidecar for this fixture. §3.7 then scores the declared graph alone and says so.
+  }
 
   const chronologyPath = path.join(repoRoot, 'fixtures', 'extraction', 'chronology.json');
   const chronology = JSON.parse(await readFile(chronologyPath, 'utf8')) as ChronologyFile;
@@ -87,6 +145,7 @@ export async function loadGroundTruth(storyId: string, repoRoot = process.cwd())
     package_version: pkg.package_version,
     events,
     notes: entry.notes ?? [],
+    plant_annotation: plantAnnotation,
   };
 }
 

@@ -1,12 +1,12 @@
 {
   "story_id": "cinderella",
-  "scored_at": "2026-09-17T16:14:47.952Z",
+  "scored_at": "2026-09-17T23:21:18.736Z",
   "fixture_package_version": 1,
   "segmenter_models": [
     "gemini-3.8-flash"
   ],
   "judge_model": "gemini-3.8-flash",
-  "judge_cost_usd": 0.057853499999999995,
+  "judge_cost_usd": 0.0653115,
   "g0": {
     "bar": "publishable === true (§1)",
     "publishable": true,
@@ -315,13 +315,18 @@
   "plants": {
     "pair_bar": "≥ 0.70 recall (§3.7)",
     "long_range_bar": "≥ 0.60 recall (§3.7)",
-    "fixture_pairs": 2,
+    "fixture_pairs": 13,
+    "fixture_pairs_source": "annotation_sidecar",
+    "fixture_pairs_declared": 2,
+    "fixture_pairs_annotated": 11,
+    "matched_declared": 1,
+    "matched_annotated": 0,
     "candidate_pairs": 4,
     "matched": 1,
-    "recall": 0.5,
-    "long_range_fixture_pairs": 1,
+    "recall": 0.07692307692307693,
+    "long_range_fixture_pairs": 6,
     "long_range_matched": 1,
-    "long_range_recall": 1,
+    "long_range_recall": 0.16666666666666666,
     "misattributed": 0,
     "orphans": [],
     "plant_walk_errors": [],

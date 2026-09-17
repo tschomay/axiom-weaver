@@ -1,12 +1,12 @@
 {
   "story_id": "a-christmas-carol",
-  "scored_at": "2026-09-16T11:35:58.641Z",
+  "scored_at": "2026-09-17T23:23:24.574Z",
   "fixture_package_version": 1,
   "segmenter_models": [
     "gemini-3.8-flash"
   ],
   "judge_model": "gemini-3.8-flash",
-  "judge_cost_usd": 0.1786395,
+  "judge_cost_usd": 0.19384874999999996,
   "g0": {
     "bar": "publishable === true (§1)",
     "publishable": true,
@@ -177,10 +177,10 @@
     "coverage_bar": "≥ 0.80 mean, no aligned scene below 0.5 (§3.5)",
     "invention_bar": "≤ 0.10 (§3.5)",
     "scored_scenes": 13,
-    "mean_coverage": 0.5230769230769231,
+    "mean_coverage": 0.4923076923076923,
     "worst_scene": {
-      "scene": "scene_04_the_lonely_school",
-      "coverage": 0.3333333333333333
+      "scene": "scene_20_the_office_next_morning",
+      "coverage": 0
     },
     "scenes_below_half": [
       "scene_02_the_haunting_begins",
@@ -192,10 +192,10 @@
       "scene_20_the_office_next_morning"
     ],
     "sampled_beats": 30,
-    "supported": 30,
-    "insufficient": 0,
+    "supported": 26,
+    "insufficient": 4,
     "contradicted": 0,
-    "invention_rate": 0
+    "invention_rate": 0.13333333333333333
   },
   "pov_location": {
     "bar": "≥ 0.95, read as agreement with the fixture rather than against the source (§3.5)",
@@ -400,14 +400,19 @@
   "plants": {
     "pair_bar": "≥ 0.70 recall (§3.7)",
     "long_range_bar": "≥ 0.60 recall (§3.7)",
-    "fixture_pairs": 3,
+    "fixture_pairs": 18,
+    "fixture_pairs_source": "annotation_sidecar",
+    "fixture_pairs_declared": 3,
+    "fixture_pairs_annotated": 15,
+    "matched_declared": 0,
+    "matched_annotated": 0,
     "candidate_pairs": 4,
     "matched": 0,
     "recall": 0,
-    "long_range_fixture_pairs": 2,
+    "long_range_fixture_pairs": 14,
     "long_range_matched": 0,
     "long_range_recall": 0,
-    "misattributed": 0,
+    "misattributed": 2,
     "orphans": [],
     "plant_walk_errors": [],
     "span_histogram": {

@@ -1,0 +1,96 @@
+{
+  "schema": "plants.annotation/1",
+  "story_id": "cinderella",
+  "fixture_package_version": 1,
+  "built_for": "https://github.com/tschomay/axiom-weaver/issues/153",
+  "provenance": {
+    "built_from": "the source text only — Lang, The Blue Fairy Book (PG #503), as sliced by src/extraction/sources.ts",
+    "blind_to": "candidate output. No segmentation or extraction run was consulted while building this file, per §3.1's rule that an alignment decision is recorded, not reverse-engineered.",
+    "author": "hand-annotated"
+  },
+  "inclusion_rule": {
+    "included_when": [
+      "the source states something concrete at the plant scene — an object, a rule, a promise, a capability or a relationship, not a mood",
+      "a later scene depends on it, such that removing the plant would change how that later scene reads",
+      "a reader could name both ends without being shown this file"
+    ],
+    "excluded": [
+      "ordinary continuity — a character still being where the last scene left them",
+      "facts the story asserts and never collects",
+      "pairs whose plant and payoff fall in the same scene"
+    ],
+    "note": "This records pairs a reader would name. It is NOT a claim about ADR 0020's trigger term, and it adds no pays_off edges to the package."
+  },
+  "declared_in_package": [
+    { "fact_ref": "midnight_condition", "plant": "scene_05_godmother", "payoff": "scene_10_second_ball_the_flight" },
+    { "fact_ref": "cinderella_kept_second_slipper", "plant": "scene_11_the_kept_slipper", "payoff": "scene_13_the_fitting" }
+  ],
+  "implicit": [
+    {
+      "fact_ref": "godmother_gave_glass_slippers",
+      "plant": "scene_05_godmother",
+      "payoff": "scene_12_the_proclamation",
+      "why": "\"she gave her a pair of glass slippers, the prettiest in the whole world\" — the proclamation rests on the slipper being unique enough to identify one woman."
+    },
+    {
+      "fact_ref": "cinderella_has_excellent_taste",
+      "plant": "scene_03_dressing_the_sisters",
+      "payoff": "scene_06_first_ball_arrival",
+      "why": "\"she had excellent notions, and advised them always for the best\" pays off when every lady at the ball wants her clothes and headdress copied."
+    },
+    {
+      "fact_ref": "sisters_ill_usage_of_cinderella",
+      "plant": "scene_01_remarriage",
+      "payoff": "scene_14_forgiveness_and_marriage",
+      "why": "The meanest work, the sorry garret and the straw bed are what the sisters beg pardon for at the end. Without the opening the forgiveness collects nothing."
+    },
+    {
+      "fact_ref": "oranges_and_citrons_shared_with_sisters",
+      "plant": "scene_07_first_ball_departure",
+      "payoff": "scene_09_the_sisters_recount",
+      "why": "She gives them the Prince's oranges and citrons; they then describe receiving them from a princess they cannot name. The irony gap is the payoff."
+    },
+    {
+      "fact_ref": "charlotte_refused_the_yellow_suit",
+      "plant": "scene_09_the_sisters_recount",
+      "payoff": "scene_10_second_ball_the_flight",
+      "why": "\"lend my clothes to such a dirty Cinderwench\" — refused, and Cinderella \"was very glad of the refusal\", then appears at the second ball dressed more magnificently than before."
+    },
+    {
+      "fact_ref": "godmother_will_come_when_needed",
+      "plant": "scene_05_godmother",
+      "payoff": "scene_13_the_fitting",
+      "why": "The godmother appears unbidden at the fitting and makes her clothes richer than any before — the same agency, collected at the recognition."
+    },
+    {
+      "fact_ref": "guards_saw_only_a_poor_country_wench",
+      "plant": "scene_11_the_kept_slipper",
+      "payoff": "scene_13_the_fitting",
+      "why": "The guards saw \"nobody go out but a young girl, very meanly dressed\". The fitting is that girl turning out to be the princess."
+    },
+    {
+      "fact_ref": "prince_in_love_with_the_slippers_owner",
+      "plant": "scene_11_the_kept_slipper",
+      "payoff": "scene_12_the_proclamation",
+      "why": "The sisters report he \"was very much in love with the beautiful person who owned the glass slipper\"; the proclamation is that resolve acted on."
+    },
+    {
+      "fact_ref": "sisters_do_not_recognise_the_lady",
+      "plant": "scene_07_first_ball_departure",
+      "payoff": "scene_14_forgiveness_and_marriage",
+      "why": "\"they did not know her\" — held across seven scenes, and collected when they find her to be that fine, beautiful lady."
+    },
+    {
+      "fact_ref": "cinderella_bore_it_patiently",
+      "plant": "scene_01_remarriage",
+      "payoff": "scene_14_forgiveness_and_marriage",
+      "why": "\"The poor girl bore all patiently\" is what makes the forgiveness in character rather than merely convenient, and it is why she lodges them in the palace."
+    },
+    {
+      "fact_ref": "ball_open_to_all_persons_of_fashion",
+      "plant": "scene_02_the_ball_proclaimed",
+      "payoff": "scene_06_first_ball_arrival",
+      "why": "The invitation's breadth is what lets an unknown princess be received without question."
+    }
+  ]
+}
