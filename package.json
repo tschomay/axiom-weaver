@@ -20,7 +20,8 @@
     "generate-arc": "tsx scripts/generate-arc.ts",
     "score-arc": "tsx scripts/score-arc.ts",
     "extract": "tsx scripts/extract-story.ts",
-    "segment": "tsx scripts/segment-story.ts"
+    "segment": "tsx scripts/segment-story.ts",
+    "segment-arcs": "tsx scripts/segment-arcs.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",

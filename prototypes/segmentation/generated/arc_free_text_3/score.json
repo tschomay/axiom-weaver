@@ -1,0 +1,213 @@
+{
+  "story_id": "arc_free_text_3",
+  "segmenter_models": [
+    "gemini-3.8-flash"
+  ],
+  "events": 20,
+  "scenes": 17,
+  "events_per_scene": 1.1764705882352942,
+  "telling_order_basis": "fabula_sequence",
+  "telling_order_displaced": 0,
+  "self_consistency": null,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "mechanical": {
+    "story_id": "arc_free_text_3",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_switch_manifest",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_tallow_lantern",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_sheepskin_coat",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_coupling_pin",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_switch_manifest",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_tallow_lantern",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_sheepskin_coat",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_coupling_pin",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 6,
+      "reachable": 6,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 16,
+        "compared": 16
+      },
+      "vacuous": false,
+      "passed": true
+    },
+    "presence": {
+      "problems": [],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 5,
+      "reachable": 5,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 17,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "dan_responsible_for_night_manifest",
+          "payoff_event": "scene_05_the_yard_log",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "bloody_red_neckerchief",
+          "payoff_event": "scene_11_the_warrant_signed",
+          "plant_event": "scene_10_bunkhouse_search",
+          "span": 1
+        },
+        {
+          "fact_ref": "torn_sheepskin_on_switch_lever",
+          "payoff_event": "scene_12_the_depot_lockup",
+          "plant_event": "scene_07_the_switch_fleece",
+          "span": 5
+        },
+        {
+          "fact_ref": "white_lead_flake_in_skull_fracture",
+          "payoff_event": "scene_13_the_gantry_evidence",
+          "plant_event": "scene_09_the_mortuary_exam",
+          "span": 4
+        },
+        {
+          "fact_ref": "mutton_tallow_in_switch_lantern",
+          "payoff_event": "scene_14_the_canteen_porch",
+          "plant_event": "scene_02_under_the_hopper",
+          "span": 12
+        },
+        {
+          "fact_ref": "unslaked_marl_in_hopper_four",
+          "payoff_event": "scene_15_confronting_vance",
+          "plant_event": "scene_04_cranes_threat",
+          "span": 11
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "1": 1,
+          "4": 1,
+          "5": 1,
+          "11": 1,
+          "12": 1
+        },
+        "seed_grounded": 1,
+        "edges": 6,
+        "mean": 6.6,
+        "median": 5,
+        "min": 1,
+        "max": 12,
+        "share_span_1": 0.2
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  },
+  "generator_all_gates_passed": true,
+  "plant_edges": {
+    "authored_by_generator": 5,
+    "authored_seed_grounded": 1,
+    "carried_onto_scenes": 5,
+    "dangling": 0,
+    "proposed_by_segmentation": 2,
+    "verified": 1,
+    "unrepresentable": 0,
+    "on_scene_cards": 6
+  },
+  "span_histogram_after": {
+    "counts": {
+      "1": 1,
+      "4": 1,
+      "5": 1,
+      "11": 1,
+      "12": 1
+    },
+    "seed_grounded": 1,
+    "edges": 6,
+    "mean": 6.6,
+    "median": 5,
+    "min": 1,
+    "max": 12,
+    "share_span_1": 0.2
+  },
+  "unscoreable": {
+    "boundary precision/recall (§3.5)": "needs a fixture segmentation of the same story and source offsets to place it in; a generated arc is the only authoring of itself and has no source text",
+    "required_beats coverage (§3.5)": "judged against a fixture scene's beats; there is no fixture scene",
+    "beat invention rate (§3.5)": "judged against the source the beat claims to come from; there is no source",
+    "pov/location accuracy (§3.5)": "agreement with a fixture; there is no fixture",
+    "source coverage (§3.5)": "the fraction of a source text assigned to a scene; there is no source",
+    "reveal-order fidelity (§3.6)": "pairwise against the fixture order; there is no fixture order",
+    "premature reveal count (§3.6)": "a reveal is premature relative to where the source discloses it; there is no source",
+    "must_stay_hidden recall (§3.6)": "recall against the fixture's withholding; there is no fixture",
+    "plant/payoff pair recall (§3.7)": "against the fixture's graph — but see pairs_from_generator below, which is the same question asked against the generator's own authored graph, and is answerable"
+  }
+}

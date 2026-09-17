@@ -1,0 +1,2051 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "arc_no_span_guidance_kiln",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_maren",
+        "name": "Maren Pike",
+        "location_id": "loc_shift_office",
+        "status": "exhausted and disoriented",
+        "goal": "complete shift handover and go home to sleep",
+        "bag": {}
+      },
+      {
+        "id": "char_orde",
+        "name": "Arthur Orde",
+        "location_id": "loc_shift_office",
+        "status": "tense and impatient",
+        "goal": "inspect the rush dockyard glaze batch immediately",
+        "bag": {}
+      },
+      {
+        "id": "char_gabe",
+        "name": "Gabe Callow",
+        "location_id": "loc_kiln_house",
+        "status": "deceased",
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_tilda",
+        "name": "Tilda Keel",
+        "location_id": "loc_kiln_house",
+        "status": "nervous and evasive",
+        "goal": "avoid getting drawn into management trouble",
+        "bag": {}
+      },
+      {
+        "id": "char_foster",
+        "name": "Foster Vance",
+        "location_id": "loc_canteen",
+        "status": "weary and uncooperative",
+        "goal": "finish his maintenance tea break in peace",
+        "bag": {}
+      },
+      {
+        "id": "char_nel",
+        "name": "Nel Scurlock",
+        "location_id": "loc_glaze_lab",
+        "status": "detached and clinical",
+        "goal": "verify pyrometric cone firing calibrations",
+        "bag": {}
+      },
+      {
+        "id": "char_moran",
+        "name": "Moran Teague",
+        "location_id": "loc_canteen",
+        "status": "calculating and guarded",
+        "goal": "shield union members from disciplinary action",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_shift_office",
+        "name": "Shift Supervisor's Office",
+        "bag": {}
+      },
+      {
+        "id": "loc_kiln_house",
+        "name": "Kiln House No. 4",
+        "bag": {}
+      },
+      {
+        "id": "loc_glaze_lab",
+        "name": "Glaze Preparation Laboratory",
+        "bag": {}
+      },
+      {
+        "id": "loc_works_office",
+        "name": "Works Management Office",
+        "bag": {}
+      },
+      {
+        "id": "loc_canteen",
+        "name": "Mill Canteen and Locker Hall",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_master_key",
+        "name": "Brass Kiln Master Key",
+        "location_id": "loc_shift_office",
+        "status": "hanging on Maren's lanyard",
+        "bag": {}
+      },
+      {
+        "id": "obj_shift_log",
+        "name": "Night Shift Logbook",
+        "location_id": "loc_shift_office",
+        "status": "bound in blue cloth on desk",
+        "bag": {}
+      },
+      {
+        "id": "obj_pyrometric_cones",
+        "name": "Orton Pyrometric Cones",
+        "location_id": "loc_kiln_house",
+        "status": "mounted inside kiln sight-hole",
+        "bag": {}
+      },
+      {
+        "id": "obj_barograph_chart",
+        "name": "Gas Pressure Barograph Chart",
+        "location_id": "loc_shift_office",
+        "status": "folded beneath filing cabinet",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_maren",
+        "to_id": "char_orde",
+        "kind": "subordinate",
+        "sentiment": "distrustful",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_orde",
+        "to_id": "char_maren",
+        "kind": "supervisor",
+        "sentiment": "contemptuous",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_tilda",
+        "to_id": "char_gabe",
+        "kind": "coworker",
+        "sentiment": "protective",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_moran",
+        "to_id": "char_maren",
+        "kind": "union representative",
+        "sentiment": "transactional",
+        "bag": {}
+      },
+      {
+        "id": "rel_05",
+        "from_id": "char_foster",
+        "to_id": "char_orde",
+        "kind": "employee",
+        "sentiment": "fearful",
+        "bag": {}
+      },
+      {
+        "id": "rel_06",
+        "from_id": "char_nel",
+        "to_id": "char_maren",
+        "kind": "colleague",
+        "sentiment": "neutral",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_maren",
+        "fact_ref": "single_key_custody",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_orde",
+        "fact_ref": "single_key_custody",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_maren",
+        "fact_ref": "maren_double_shift_fatigue",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_orde",
+        "fact_ref": "dockyard_contract_penalty",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_05",
+        "character_id": "char_maren",
+        "fact_ref": "dockyard_contract_penalty",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_early_opening",
+      "order": 1,
+      "pov": "char_maren",
+      "location_id": "loc_shift_office",
+      "characters_present": [
+        "char_maren",
+        "char_orde"
+      ],
+      "dramatic_function": "Establishes Maren's exhaustion and sole custody of the kiln key before Orde forces an irregular early opening.",
+      "entry_state": {
+        "char_maren": {
+          "goal": "complete shift handover and go home to sleep"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "goal": "account for the night shift to Orde"
+        }
+      },
+      "required_beats": [
+        "Orde interrupts Maren at the end of her double shift to demand Kiln 4 be opened early for a naval order.",
+        "Maren verifies she holds the sole brass master key."
+      ],
+      "reader_must_learn": [
+        "orde_hurrying_inspection"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "single_key_custody",
+          "plant": null
+        },
+        {
+          "fact_ref": "maren_double_shift_fatigue",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_body_in_kiln",
+      "order": 2,
+      "pov": "char_maren",
+      "location_id": "loc_kiln_house",
+      "characters_present": [
+        "char_maren",
+        "char_orde",
+        "char_tilda",
+        "char_gabe"
+      ],
+      "dramatic_function": "Turns the narrative by revealing Gabe Callow dead in the kiln and pinning the blame squarely on Maren's signed custody.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_shift_office"
+        },
+        "char_orde": {
+          "location_id": "loc_shift_office",
+          "goal": "inspect the rush dockyard glaze batch immediately"
+        },
+        "obj_master_key": {
+          "location_id": "loc_shift_office"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_house"
+        },
+        "char_orde": {
+          "location_id": "loc_kiln_house",
+          "goal": "pin responsibility for Gabe's death on Maren"
+        },
+        "obj_master_key": {
+          "location_id": "loc_kiln_house"
+        }
+      },
+      "required_beats": [
+        "Maren and Tilda unseal and open Kiln 4 under Orde's orders, discovering Gabe Callow dead inside.",
+        "Orde raises the alarm and bars Tilda from approaching.",
+        "Orde accuses an exhausted Maren of locking Gabe in, pointing to her exclusive key possession and signed shift log."
+      ],
+      "reader_must_learn": [
+        "gabe_body_in_kiln",
+        "logbook_entry_signed_two_am"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "dockyard_contract_penalty",
+          "plant": null
+        },
+        {
+          "fact_ref": "single_key_custody",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_03_suspension_and_blame",
+      "order": 3,
+      "pov": "char_maren",
+      "location_id": "loc_works_office",
+      "characters_present": [
+        "char_maren",
+        "char_orde"
+      ],
+      "dramatic_function": "Deepens Maren's jeopardy by stripping her of authority and framing her fatigue as personal negligence.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_house",
+          "status": "exhausted and disoriented",
+          "goal": "account for the night shift to Orde"
+        },
+        "char_orde": {
+          "location_id": "loc_kiln_house"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_works_office",
+          "status": "suspended from duty",
+          "goal": "reconstruct the night shift timeline to clear herself"
+        },
+        "char_orde": {
+          "location_id": "loc_works_office"
+        }
+      },
+      "required_beats": [
+        "Orde suspends Maren and orders her off the grounds before the coroner arrives.",
+        "Maren contests her memory of locking the door while Gabe was unaccounted for.",
+        "Orde warns that the board will view her fatigue as gross personal negligence."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "gabe_body_in_kiln",
+          "plant": "scene_02_body_in_kiln"
+        }
+      ]
+    },
+    {
+      "id": "scene_04_questioning_foster",
+      "order": 4,
+      "pov": "char_maren",
+      "location_id": "loc_canteen",
+      "characters_present": [
+        "char_maren",
+        "char_foster"
+      ],
+      "dramatic_function": "Introduces an alternative explanation for the sounds of the night, prompting doubt about Maren's assumed guilt.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_works_office"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_canteen"
+        }
+      },
+      "required_beats": [
+        "Maren confronts Foster Vance in the mill canteen about metallic noises heard during the night.",
+        "Foster explains he was hammering a jammed damper lever on the flue catwalk at two in the morning, blaming poor maintenance for the vibration."
+      ],
+      "reader_must_learn": [
+        "flue_hammering_at_two"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_test_cones",
+      "order": 5,
+      "pov": "char_maren",
+      "location_id": "loc_glaze_lab",
+      "characters_present": [
+        "char_maren",
+        "char_nel"
+      ],
+      "dramatic_function": "To establish that the kiln firing cycle was deliberately altered and delayed hours past the logged time.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_canteen"
+        },
+        "obj_pyrometric_cones": {
+          "location_id": "loc_kiln_house"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_glaze_lab"
+        },
+        "obj_pyrometric_cones": {
+          "location_id": "loc_glaze_lab"
+        }
+      },
+      "required_beats": [
+        "Maren inspects the pyrometric cones from Kiln 4 with Nel in the laboratory.",
+        "Nel reveals that the delayed deformation proves someone altered the automated gas cycle."
+      ],
+      "reader_must_learn": [
+        "cone_indicates_delayed_heat"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_the_tally_tag",
+      "order": 6,
+      "pov": "char_maren",
+      "location_id": "loc_shift_office",
+      "characters_present": [
+        "char_maren"
+      ],
+      "dramatic_function": "To confront Maren with physical evidence that implicates her own actions in the night's events.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_glaze_lab"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_shift_office"
+        }
+      },
+      "required_beats": [
+        "Maren checks the shift logbook and confirms her own handwriting recorded Kiln 4 as sealed at two in the morning.",
+        "Maren discovers Gabe's brass tally tag sitting on her blotter."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "logbook_entry_signed_two_am",
+          "plant": "scene_02_body_in_kiln"
+        }
+      ]
+    },
+    {
+      "id": "scene_07_tildas_confession",
+      "order": 7,
+      "pov": "char_maren",
+      "location_id": "loc_kiln_house",
+      "characters_present": [
+        "char_maren",
+        "char_tilda"
+      ],
+      "dramatic_function": "To shatter Maren's certainty about her own timeline by revealing an unaccounted lapse in consciousness.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_shift_office"
+        },
+        "char_tilda": {
+          "status": "nervous and evasive"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_house"
+        },
+        "char_tilda": {
+          "status": "panicked and cornered"
+        }
+      },
+      "required_beats": [
+        "Maren corners Tilda on the cooling floor to demand what she saw during the shift.",
+        "Tilda admits she saw Maren unconscious at her desk at three in the morning, then clamors up out of fear of Orde."
+      ],
+      "reader_must_learn": [
+        "tilda_saw_maren_blackout"
+      ],
+      "must_stay_hidden": [
+        "tilda_saw_gabe_at_three"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_the_red_slip",
+      "order": 8,
+      "pov": "char_maren",
+      "location_id": "loc_glaze_lab",
+      "characters_present": [
+        "char_maren",
+        "char_nel"
+      ],
+      "dramatic_function": "To uncover physical trace evidence on the key that points toward an unexpected project and suspect.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_house"
+        },
+        "obj_master_key": {
+          "location_id": "loc_kiln_house"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_glaze_lab"
+        },
+        "obj_master_key": {
+          "location_id": "loc_glaze_lab"
+        }
+      },
+      "required_beats": [
+        "Maren brings the master key to Nel to check for signs of tampering.",
+        "Nel identifies red iron oxide slip on the key's bow and notes it belongs to an experimental dockyard project Gabe did not mix."
+      ],
+      "reader_must_learn": [
+        "red_slip_on_brass_key"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_the_union_warning",
+      "order": 9,
+      "pov": "char_maren",
+      "location_id": "loc_canteen",
+      "characters_present": [
+        "char_maren",
+        "char_moran"
+      ],
+      "dramatic_function": "To isolate Maren by revealing that the union intends to sacrifice her to protect floor jobs.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_glaze_lab"
+        },
+        "char_moran": {
+          "goal": "shield union members from disciplinary action"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_canteen"
+        },
+        "char_moran": {
+          "goal": "force Maren to accept individual fault"
+        }
+      },
+      "required_beats": [
+        "Moran intercepts Maren in the canteen to share the informal outcome of the union committee meeting.",
+        "Moran explains management's deal to preserve seasonal jobs in exchange for ruling the death a supervisory error.",
+        "Moran urges Maren to take administrative dismissal to avoid a criminal inquest."
+      ],
+      "reader_must_learn": [
+        "union_sacrificing_supervisor",
+        "moran_administrative_dismissal_deal"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_10_the_hidden_chart",
+      "order": 10,
+      "pov": "char_maren",
+      "location_id": "loc_shift_office",
+      "characters_present": [
+        "char_maren"
+      ],
+      "dramatic_function": "To uncover physical evidence of the exact timing of the fatal gas surge.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_canteen"
+        },
+        "obj_barograph_chart": {
+          "status": "folded beneath filing cabinet"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_shift_office"
+        },
+        "obj_barograph_chart": {
+          "status": "recovered and unfolded"
+        }
+      },
+      "required_beats": [
+        "Maren searches the supervisor's office and discovers a concealed barograph chart under a cabinet.",
+        "Maren examines the chart and finds an abrupt high-pressure gas spike recorded at 03:45."
+      ],
+      "reader_must_learn": [
+        "hidden_barograph_chart"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_11_delirious_conclusion",
+      "order": 11,
+      "pov": "char_maren",
+      "location_id": "loc_shift_office",
+      "characters_present": [
+        "char_maren"
+      ],
+      "dramatic_function": "To push Maren into total despair as she convinces herself that she is personally responsible for Gabe's death.",
+      "entry_state": {
+        "char_maren": {
+          "goal": "reconstruct the night shift timeline to clear herself",
+          "status": "suspended from duty"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "goal": "face the reality of her own fatal mistake",
+          "status": "shattered by false guilt"
+        }
+      },
+      "required_beats": [
+        "Maren links the 03:45 gas surge with the pyrometric cone delay and her own memory lapse.",
+        "Maren concludes in horror that she operated the valve and relocked the kiln in a sleep-deprived daze, causing Gabe's death."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "cone_indicates_delayed_heat",
+          "plant": "scene_05_the_test_cones"
+        },
+        {
+          "fact_ref": "hidden_barograph_chart",
+          "plant": "scene_10_the_hidden_chart"
+        }
+      ]
+    },
+    {
+      "id": "scene_12_urged_resignation",
+      "order": 12,
+      "pov": "char_maren",
+      "location_id": "loc_canteen",
+      "characters_present": [
+        "char_maren",
+        "char_moran"
+      ],
+      "dramatic_function": "To exploit Maren's guilt so the union can swiftly close the inquiry before outside authorities intervene.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_shift_office"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_canteen"
+        }
+      },
+      "required_beats": [
+        "Maren confesses her belief that she fired the kiln while half-asleep to Moran.",
+        "Moran presses Maren to sign an immediate internal resignation to avoid criminal charges.",
+        "Moran leads Maren toward the management office to settle the matter."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "moran_administrative_dismissal_deal",
+          "plant": "scene_09_the_union_warning"
+        }
+      ]
+    },
+    {
+      "id": "scene_13_the_signing",
+      "order": 13,
+      "pov": "char_maren",
+      "location_id": "loc_works_office",
+      "characters_present": [
+        "char_maren",
+        "char_orde"
+      ],
+      "dramatic_function": "Maren discovers proof of Orde's involvement before signing away her responsibility, breaking the illusion of her guilt.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_canteen",
+          "goal": "face the reality of her own fatal mistake"
+        },
+        "char_orde": {
+          "goal": "pin responsibility for Gabe's death on Maren"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_works_office",
+          "goal": "prove Orde entered the kiln after she fell asleep"
+        },
+        "char_orde": {
+          "goal": "secure Maren's signed confession before the board convenes"
+        }
+      },
+      "required_beats": [
+        "Orde presents Maren with the drafted indemnity statement offering a pension for Gabe's family in exchange for her confession.",
+        "Maren spots dried red slip on Orde's cuff alongside a rush docket timed for the early morning.",
+        "Maren drops the pen, realizing Orde handled the stained key rather than her."
+      ],
+      "reader_must_learn": [
+        "orde_red_slip_stains",
+        "rush_docket_for_early_firing"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "red_slip_on_brass_key",
+          "plant": "scene_08_the_red_slip"
+        }
+      ]
+    },
+    {
+      "id": "scene_14_tildas_confession",
+      "order": 14,
+      "pov": "char_maren",
+      "location_id": "loc_glaze_lab",
+      "characters_present": [
+        "char_maren",
+        "char_nel",
+        "char_tilda"
+      ],
+      "dramatic_function": "Maren and Nel break Tilda's silence to establish Gabe was alive and acting under Orde's orders.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_works_office"
+        },
+        "char_tilda": {
+          "location_id": "loc_kiln_house",
+          "goal": "avoid getting drawn into management trouble"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_glaze_lab"
+        },
+        "char_tilda": {
+          "location_id": "loc_glaze_lab",
+          "goal": "tell the truth about Gabe's final orders"
+        }
+      },
+      "required_beats": [
+        "Maren and Nel confront Tilda in the lab with the chemical evidence and docket.",
+        "Tilda admits to having tea with Gabe at 03:15.",
+        "Tilda reveals that Orde ordered Gabe back into Kiln 4 to reset saggers for the rush fire."
+      ],
+      "reader_must_learn": [
+        "tilda_saw_gabe_at_three"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "rush_docket_for_early_firing",
+          "plant": "scene_13_the_signing"
+        }
+      ]
+    },
+    {
+      "id": "scene_15_reconstructing_the_theft",
+      "order": 15,
+      "pov": "char_maren",
+      "location_id": "loc_shift_office",
+      "characters_present": [
+        "char_maren",
+        "char_nel",
+        "char_foster"
+      ],
+      "dramatic_function": "Maren, Foster, and Nel assemble the chronological sequence of how Orde locked Gabe in the kiln while framing Maren.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_glaze_lab"
+        },
+        "char_nel": {
+          "location_id": "loc_glaze_lab"
+        },
+        "char_foster": {
+          "location_id": "loc_canteen"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_shift_office"
+        },
+        "char_nel": {
+          "location_id": "loc_shift_office"
+        },
+        "char_foster": {
+          "location_id": "loc_shift_office"
+        }
+      },
+      "required_beats": [
+        "Foster confirms Maren's deep exhaustion during his earlier damper repair.",
+        "Maren deduces that Orde took the key from her coat while she slept in the office to access Kiln 4.",
+        "Nel establishes that Orde ignited the gas unaware Gabe remained inside and then planted the key back on Maren."
+      ],
+      "reader_must_learn": [
+        "orde_took_key_while_maren_slept"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "flue_hammering_at_two",
+          "plant": "scene_04_questioning_foster"
+        },
+        {
+          "fact_ref": "tilda_saw_maren_blackout",
+          "plant": "scene_07_tildas_confession"
+        }
+      ]
+    },
+    {
+      "id": "scene_16_the_settlement",
+      "order": 16,
+      "pov": "char_maren",
+      "location_id": "loc_works_office",
+      "characters_present": [
+        "char_maren",
+        "char_orde",
+        "char_moran",
+        "char_nel"
+      ],
+      "dramatic_function": "The confrontation extracts Orde's confession, only for the institution to bury the truth and disband the night shift.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_shift_office"
+        },
+        "char_moran": {
+          "location_id": "loc_canteen",
+          "goal": "force Maren to accept individual fault"
+        },
+        "char_nel": {
+          "location_id": "loc_shift_office"
+        },
+        "char_orde": {
+          "status": "tense and impatient"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_works_office"
+        },
+        "char_moran": {
+          "location_id": "loc_works_office",
+          "goal": "seal the institutional compromise to keep the plant open"
+        },
+        "char_nel": {
+          "location_id": "loc_works_office"
+        },
+        "char_orde": {
+          "status": "quietly dismissed with pension"
+        }
+      },
+      "required_beats": [
+        "Maren, Nel, and Moran confront Orde with the compiled timeline, physical traces, and witness statements.",
+        "Cornered by the evidence, Orde confesses to latching the kiln under the assumption that Gabe had left via the wicket.",
+        "Moran and Orde negotiate a quiet settlement granting Orde medical retirement and classifying Gabe's death as an industrial accident.",
+        "Moran reveals that the night shift roster is permanently dissolved to appease the underwriters."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "orde_hurrying_inspection",
+          "plant": "scene_01_the_early_opening"
+        },
+        {
+          "fact_ref": "orde_red_slip_stains",
+          "plant": "scene_13_the_signing"
+        },
+        {
+          "fact_ref": "tilda_saw_gabe_at_three",
+          "plant": "scene_14_tildas_confession"
+        },
+        {
+          "fact_ref": "union_sacrificing_supervisor",
+          "plant": "scene_09_the_union_warning"
+        }
+      ]
+    },
+    {
+      "id": "scene_17_the_final_locker",
+      "order": 17,
+      "pov": "char_maren",
+      "location_id": "loc_canteen",
+      "characters_present": [
+        "char_maren",
+        "char_tilda"
+      ],
+      "dramatic_function": "To deliver the cost of Maren's victory by demonstrating that clearing her name has cost her entire trade livelihood.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_works_office",
+          "status": "shattered by false guilt",
+          "goal": "prove Orde entered the kiln after she fell asleep"
+        },
+        "char_tilda": {
+          "location_id": "loc_glaze_lab"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_canteen",
+          "status": "blacklisted and unemployed",
+          "goal": "leave the port town with her name intact"
+        },
+        "char_tilda": {
+          "location_id": "loc_canteen"
+        }
+      },
+      "required_beats": [
+        "Maren clears her locker in the canteen while an ashamed Tilda looks on.",
+        "Tilda reveals that Maren has already been blacklisted by every port manufacturer.",
+        "Maren leaves the works into the winter dusk with her livelihood destroyed despite proving the truth."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "orde_took_key_while_maren_slept",
+          "plant": "scene_15_reconstructing_the_theft"
+        }
+      ]
+    }
+  ],
+  "voice_card": {},
+  "metadata": {
+    "title": "The Cooling Floor",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-17T16:54:59.916Z"
+  },
+  "_fabula": {
+    "generator": "src/arc (issue #119)",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-16T00:48:52.714Z",
+    "brief": {
+      "story_id": "arc_no_span_guidance_kiln",
+      "title": "Firing Two",
+      "premise": {
+        "logline": "A glaze factory kiln is opened a day early and a worker is found inside, and the shift supervisor who holds the only key has to account for a night she cannot remember clearly.",
+        "modules": {
+          "theme": "how a workplace decides in advance who will be blamed",
+          "setting_time": "a winter of short shifts and a failing order book",
+          "setting_place": "a glaze works on the edge of a port town",
+          "protagonist": "the night shift supervisor, recently promoted from the floor",
+          "protagonist_want": "to reconstruct a night she spent too tired to remember properly",
+          "antagonism": "a management that has already chosen its account of events",
+          "complication": "her own reconstruction keeps producing a version that convicts her",
+          "ending_shape": "the truth is established and costs the person who established it"
+        }
+      },
+      "plot_shape": {
+        "id": "mystery",
+        "name": "Mystery",
+        "central_question": "What actually happened, and who is willing to say so?",
+        "phases": [
+          {
+            "name": "Disturbance",
+            "purpose": "A wrong surfaces and someone is obliged to look into it.",
+            "share": 0.2
+          },
+          {
+            "name": "Inquiry",
+            "purpose": "Evidence accumulates, most of it true and misread.",
+            "share": 0.35
+          },
+          {
+            "name": "Wrong turn",
+            "purpose": "A reading of the evidence that is coherent and wrong collapses.",
+            "share": 0.2
+          },
+          {
+            "name": "Solution",
+            "purpose": "The true account, assembled only from what the reader has already been shown.",
+            "share": 0.15
+          },
+          {
+            "name": "Cost",
+            "purpose": "What knowing costs the person who found out.",
+            "share": 0.1
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "investigator",
+            "purpose": "Carries the reader through the inquiry and pays its cost."
+          },
+          {
+            "role": "concealer",
+            "purpose": "Has a reason to keep the true account from being assembled."
+          },
+          {
+            "role": "witness",
+            "purpose": "Holds one true piece and misunderstands its meaning."
+          },
+          {
+            "role": "wronged party",
+            "purpose": "The reason the question matters at all."
+          }
+        ],
+        "obligatory_moves": [
+          "Every element of the true account is on the page before it is stated.",
+          "At least one true detail is shown early in a context that makes it look irrelevant.",
+          "The wrong reading is defensible on the evidence available when it is made."
+        ]
+      },
+      "event_count": 20,
+      "cast": {
+        "characters": 7,
+        "locations": 5,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 10
+      },
+      "span_guidance": false,
+      "based_on": {
+        "plot_shape_preset": "mystery",
+        "premise_preset": "kiln"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_handover_demand",
+        "sequence": 1,
+        "summary": "Works manager Arthur Orde arrives at dawn demanding the early opening of Kiln 4 to salvage the dockyard order.",
+        "pov": "char_maren",
+        "location_id": "loc_shift_office",
+        "characters_present": [
+          "char_maren",
+          "char_orde"
+        ],
+        "dramatic_function": "Establish the protagonist's exhaustion, the management pressure, and the early kiln opening.",
+        "beats": [
+          "Orde interrupts Maren as she attempts to sign out after a grueling sixteen-hour double shift.",
+          "Orde insists that Kiln 4 must be unsealed twenty-four hours early because the naval dockyard order will be canceled if not shipped today.",
+          "Maren checks her pocket and confirms the single brass master key is in her sole possession."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "orde_hurrying_inspection"
+        ],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "single_key_custody",
+            "plant": null
+          },
+          {
+            "fact_ref": "maren_double_shift_fatigue",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "goal",
+            "value": "account for the night shift to Orde"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_kiln_unsealed",
+        "sequence": 2,
+        "summary": "Maren unlocks Kiln 4 on Orde's orders and discovers the body of kiln loader Gabe Callow inside.",
+        "pov": "char_maren",
+        "location_id": "loc_kiln_house",
+        "characters_present": [
+          "char_maren",
+          "char_orde",
+          "char_tilda",
+          "char_gabe"
+        ],
+        "dramatic_function": "The inciting disturbance: an impossible workplace fatality inside a locked chamber.",
+        "beats": [
+          "Maren unlocks the heavy muffle door clamps using the brass master key while Tilda assists with the winch.",
+          "The kiln door swings outward, revealing Gabe Callow collapsed lifelessly across the lower tier of glaze plaques.",
+          "Orde immediately blocks Tilda from approaching the chamber and shouts for the factory alarm."
+        ],
+        "caused_by": [
+          "ev_01_handover_demand"
+        ],
+        "reveals": [
+          "gabe_body_in_kiln"
+        ],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "dockyard_contract_penalty",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_kiln_house"
+          },
+          {
+            "entity_id": "char_orde",
+            "column": "location_id",
+            "value": "loc_kiln_house"
+          },
+          {
+            "entity_id": "obj_master_key",
+            "column": "location_id",
+            "value": "loc_kiln_house"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_the_accusation",
+        "sequence": 3,
+        "summary": "Orde publicly blames Maren for locking the kiln without checking the interior, citing her sole key custody.",
+        "pov": "char_maren",
+        "location_id": "loc_kiln_house",
+        "characters_present": [
+          "char_maren",
+          "char_orde",
+          "char_tilda"
+        ],
+        "dramatic_function": "Establish the management narrative: pinning the death onto the exhausted junior supervisor.",
+        "beats": [
+          "Orde demands to know how a man was locked inside a muffle kiln when Maren carries the only key.",
+          "Maren struggles through a fog of exhaustion to recall sealing the door at two in the morning.",
+          "Tilda watches silently as Orde announces that the shift log records Maren's own signature sealing the chamber."
+        ],
+        "caused_by": [
+          "ev_02_kiln_unsealed"
+        ],
+        "reveals": [
+          "logbook_entry_signed_two_am"
+        ],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "single_key_custody",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_orde",
+            "column": "goal",
+            "value": "pin responsibility for Gabe's death on Maren"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_suspension_order",
+        "sequence": 4,
+        "summary": "In the works office, Orde suspends Maren and prepares an official negligence report against her.",
+        "pov": "char_maren",
+        "location_id": "loc_works_office",
+        "characters_present": [
+          "char_maren",
+          "char_orde"
+        ],
+        "dramatic_function": "Lock the protagonist into the investigator role by threatening her freedom and career.",
+        "beats": [
+          "Orde confiscates Maren's supervisor badge and instructs her to leave the premises before the town coroner arrives.",
+          "Maren objects that she cannot remember turning the bolt while Gabe was missing from the floor.",
+          "Orde warns her that the board will treat her fatigue as gross personal negligence rather than an institutional failure."
+        ],
+        "caused_by": [
+          "ev_03_the_accusation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "gabe_body_in_kiln",
+            "plant": "ev_02_kiln_unsealed"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_works_office"
+          },
+          {
+            "entity_id": "char_orde",
+            "column": "location_id",
+            "value": "loc_works_office"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "status",
+            "value": "suspended from duty"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "goal",
+            "value": "reconstruct the night shift timeline to clear herself"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_foster_alibi",
+        "sequence": 5,
+        "summary": "Maren questions yardman Foster Vance about the metallic pounding she vaguely remembers hearing during the night.",
+        "pov": "char_maren",
+        "location_id": "loc_canteen",
+        "characters_present": [
+          "char_maren",
+          "char_foster"
+        ],
+        "dramatic_function": "Plant the explanation for the noise Maren mistook for Gabe banging from inside the kiln.",
+        "beats": [
+          "Maren slips into the mill canteen and confronts Foster over his tea.",
+          "Foster admits he was up on the flue catwalk at two in the morning hammering out a jammed damper lever.",
+          "Foster complains that the plant's cut-rate maintenance has left every flue vibrating like an iron drum."
+        ],
+        "caused_by": [
+          "ev_04_suspension_order"
+        ],
+        "reveals": [
+          "flue_hammering_at_two"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_canteen"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_nel_cone_analysis",
+        "sequence": 6,
+        "summary": "Chemist Nel Scurlock shows Maren that the pyrometric cones from Kiln 4 did not deform until hours after two in the morning.",
+        "pov": "char_maren",
+        "location_id": "loc_glaze_lab",
+        "characters_present": [
+          "char_maren",
+          "char_nel"
+        ],
+        "dramatic_function": "Introduce physical evidence proving the firing cycle did not begin when Maren supposedly sealed the kiln.",
+        "beats": [
+          "Maren visits Nel in the glaze laboratory to inspect the test cones pulled from Kiln 4's sight-hole.",
+          "Nel demonstrates that Cone 04 did not bend until four in the morning, indicating the heat rise was delayed by hours.",
+          "Nel observes dispassionately that someone altered the normal automated gas cycle."
+        ],
+        "caused_by": [
+          "ev_04_suspension_order"
+        ],
+        "reveals": [
+          "cone_indicates_delayed_heat"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_glaze_lab"
+          },
+          {
+            "entity_id": "obj_pyrometric_cones",
+            "column": "location_id",
+            "value": "loc_glaze_lab"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_logbook_inspection",
+        "sequence": 7,
+        "summary": "Maren returns to the shift office to examine her blue logbook and finds Gabe's personal brass tally tag pinned to her desk.",
+        "pov": "char_maren",
+        "location_id": "loc_shift_office",
+        "characters_present": [
+          "char_maren"
+        ],
+        "dramatic_function": "Deepen Maren's internal doubt by showing physical traces that suggest she was present during Gabe's check-in.",
+        "beats": [
+          "Maren re-enters the vacant supervisor office and inspects the blue hardbound shift log.",
+          "She confirms the 02:00 entry reading 'Kiln 4 sealed and dog-latched' is unmistakably in her own handwriting.",
+          "Beside the logbook, she finds Gabe's numbered brass tally tag resting on her blotter, where only she could have placed it."
+        ],
+        "caused_by": [
+          "ev_04_suspension_order"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "logbook_entry_signed_two_am",
+            "plant": "ev_03_the_accusation"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_shift_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_tilda_sighting",
+        "sequence": 8,
+        "summary": "Maren corners Tilda Keel, who admits she saw Maren slumped completely unconscious in the office around three in the morning.",
+        "pov": "char_maren",
+        "location_id": "loc_kiln_house",
+        "characters_present": [
+          "char_maren",
+          "char_tilda"
+        ],
+        "dramatic_function": "Plant the witness testimony establishing Maren's period of total blackout.",
+        "beats": [
+          "Maren finds Tilda sweeping spilled grog on the cooling floor and presses her for what she saw during the night.",
+          "Tilda tearfully admits she looked through the office window at 03:00 and saw Maren dead asleep across her desk.",
+          "Tilda refuses to speak further, terrified that Orde will revoke her seasonal contract."
+        ],
+        "caused_by": [
+          "ev_07_logbook_inspection"
+        ],
+        "reveals": [
+          "tilda_saw_maren_blackout"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_kiln_house"
+          },
+          {
+            "entity_id": "char_tilda",
+            "column": "status",
+            "value": "panicked and cornered"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_key_residue",
+        "sequence": 9,
+        "summary": "Nel helps Maren examine the brass master key under magnification and identifies wet red iron oxide slip on the handle.",
+        "pov": "char_maren",
+        "location_id": "loc_glaze_lab",
+        "characters_present": [
+          "char_maren",
+          "char_nel"
+        ],
+        "dramatic_function": "Plant an obscure forensic detail that will later connect Orde to the key theft.",
+        "beats": [
+          "Maren brings the brass master key to the lab for Nel to inspect for forced ward marks.",
+          "Nel finds no scratches on the wards but discovers a dried smear of red iron oxide slip on the brass bow.",
+          "Nel remarks that the red slip was only used for the experimental dockyard plaques, which Gabe was not assigned to mix."
+        ],
+        "caused_by": [
+          "ev_06_nel_cone_analysis",
+          "ev_08_tilda_sighting"
+        ],
+        "reveals": [
+          "red_slip_on_brass_key"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_glaze_lab"
+          },
+          {
+            "entity_id": "obj_master_key",
+            "column": "location_id",
+            "value": "loc_glaze_lab"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_union_warning",
+        "sequence": 10,
+        "summary": "Union steward Moran Teague warns Maren that the union will not defend a junior supervisor if it risks floor workers' jobs.",
+        "pov": "char_maren",
+        "location_id": "loc_canteen",
+        "characters_present": [
+          "char_maren",
+          "char_moran"
+        ],
+        "dramatic_function": "Reinforce the theme: the workplace closing ranks against the appointed scapegoat.",
+        "beats": [
+          "Moran stops Maren by the tea urn and tells her the union committee met informally.",
+          "Moran explains that management has offered to protect seasonal shop jobs if the fatality is logged as supervisory error.",
+          "He bluntly advises Maren to accept an administrative dismissal rather than trigger a criminal inquest."
+        ],
+        "caused_by": [
+          "ev_04_suspension_order"
+        ],
+        "reveals": [
+          "union_sacrificing_supervisor"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_canteen"
+          },
+          {
+            "entity_id": "char_moran",
+            "column": "goal",
+            "value": "force Maren to accept individual fault"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_barograph_found",
+        "sequence": 11,
+        "summary": "Maren discovers the gas pressure barograph chart stuffed beneath the filing cabinet in the supervisor's office.",
+        "pov": "char_maren",
+        "location_id": "loc_shift_office",
+        "characters_present": [
+          "char_maren"
+        ],
+        "dramatic_function": "Uncover the instrument record documenting the exact time the kiln burners ignited.",
+        "beats": [
+          "Maren searches the supervisor office for mechanical records and spots paper wedged under the cabinet base.",
+          "She retrieves the circular barograph chart recording gas pressure for Kiln 4.",
+          "The inked needle shows pressure remained flat until 03:45, when an abrupt high-pressure spike was initiated."
+        ],
+        "caused_by": [
+          "ev_07_logbook_inspection"
+        ],
+        "reveals": [
+          "hidden_barograph_chart"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_shift_office"
+          },
+          {
+            "entity_id": "obj_barograph_chart",
+            "column": "status",
+            "value": "recovered and unfolded"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_maren_false_reconstruction",
+        "sequence": 12,
+        "summary": "Combining the barograph spike with her memory gaps, Maren concludes she sleepwalked or woke delirious at 03:45 and fired the kiln herself.",
+        "pov": "char_maren",
+        "location_id": "loc_shift_office",
+        "characters_present": [
+          "char_maren"
+        ],
+        "dramatic_function": "The Wrong Turn: a coherent, defensible reading of the evidence that convinces Maren of her own guilt.",
+        "beats": [
+          "Maren correlates the pyrometric cone delay with the 03:45 barograph gas surge.",
+          "She assumes that in her severe exhaustion, she must have woken confused, seen the low flame, turned the valve, and relocked the door.",
+          "Overcome with horror, Maren concludes that she herself killed Gabe through sleep-deprived delirium."
+        ],
+        "caused_by": [
+          "ev_06_nel_cone_analysis",
+          "ev_11_barograph_found"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "cone_indicates_delayed_heat",
+            "plant": "ev_06_nel_cone_analysis"
+          },
+          {
+            "fact_ref": "hidden_barograph_chart",
+            "plant": "ev_11_barograph_found"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "goal",
+            "value": "face the reality of her own fatal mistake"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "status",
+            "value": "shattered by false guilt"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_moran_confession_prep",
+        "sequence": 13,
+        "summary": "Maren confides her self-incriminating deduction to Moran, who urges her to sign an internal resignation before the police board arrives.",
+        "pov": "char_maren",
+        "location_id": "loc_canteen",
+        "characters_present": [
+          "char_maren",
+          "char_moran"
+        ],
+        "dramatic_function": "Deepen the trap by showing the union eager to validate Maren's false confession.",
+        "beats": [
+          "Maren tells Moran in the canteen that she believes she relit the burners at 03:45 while half-asleep.",
+          "Moran seizes on her admission, telling her that signing a voluntary resignation will keep the matter out of the assize courts.",
+          "He escorts her directly toward the management office to put an end to the inquiry."
+        ],
+        "caused_by": [
+          "ev_12_maren_false_reconstruction"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_canteen"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_confession_meeting",
+        "sequence": 14,
+        "summary": "Maren meets Orde in the works office to sign the indemnity statement, but hesitates over the exact wording.",
+        "pov": "char_maren",
+        "location_id": "loc_works_office",
+        "characters_present": [
+          "char_maren",
+          "char_orde"
+        ],
+        "dramatic_function": "Bring the protagonist to the brink of formal self-destruction before the truth breaks.",
+        "beats": [
+          "Orde places a drafted statement on the mahogany desk admitting total supervisor oversight.",
+          "He hands Maren a fountain pen, assuring her that the firm will quietly settle Gabe's family pension.",
+          "Maren leans forward to sign, her pen hovering over the paper."
+        ],
+        "caused_by": [
+          "ev_13_moran_confession_prep"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_works_office"
+          },
+          {
+            "entity_id": "char_orde",
+            "column": "goal",
+            "value": "secure Maren's signed confession before the board convenes"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_orde_red_stains",
+        "sequence": 15,
+        "summary": "Maren spots red slip on Orde's sleeve and a 03:30 dockyard rush docket on his desk, shattering her false confession.",
+        "pov": "char_maren",
+        "location_id": "loc_works_office",
+        "characters_present": [
+          "char_maren",
+          "char_orde"
+        ],
+        "dramatic_function": "The collapse of the Wrong Turn: Maren recognizes that Orde handled the red slip and was on the floor at 03:30.",
+        "beats": [
+          "As Maren reaches for the paper, she notices a smear of dried red iron oxide slip on Orde's right shirt cuff.",
+          "She sees an internal dockyard rush docket dated 03:30 in Orde's desk organizer, approving high-fire cure.",
+          "Maren drops the pen, realizing that the red slip on her key matches Orde's cuff, not her own hands."
+        ],
+        "caused_by": [
+          "ev_14_confession_meeting"
+        ],
+        "reveals": [
+          "orde_red_slip_stains"
+        ],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "red_slip_on_brass_key",
+            "plant": "ev_09_key_residue"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "goal",
+            "value": "prove Orde entered the kiln after she fell asleep"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_tilda_full_testimony",
+        "sequence": 16,
+        "summary": "Maren confronts Tilda in the glaze lab alongside Nel, forcing Tilda to admit that Gabe was alive at 03:15 when Orde ordered him into the kiln.",
+        "pov": "char_maren",
+        "location_id": "loc_glaze_lab",
+        "characters_present": [
+          "char_maren",
+          "char_nel",
+          "char_tilda"
+        ],
+        "dramatic_function": "Provide the vital witness breakthrough of the Solution phase.",
+        "beats": [
+          "Maren brings Tilda into the lab and confronts her with the chemical evidence and the 03:30 docket.",
+          "Under Nel's quiet scrutiny, Tilda breaks down and confesses she was having tea with Gabe at 03:15.",
+          "Tilda reveals that Orde entered the canteen at 03:20 and ordered Gabe back into Kiln 4 to reset fallen saggers before the rush fire."
+        ],
+        "caused_by": [
+          "ev_15_orde_red_stains"
+        ],
+        "reveals": [
+          "tilda_saw_gabe_at_three"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_glaze_lab"
+          },
+          {
+            "entity_id": "char_tilda",
+            "column": "location_id",
+            "value": "loc_glaze_lab"
+          },
+          {
+            "entity_id": "char_tilda",
+            "column": "goal",
+            "value": "tell the truth about Gabe's final orders"
+          }
+        ]
+      },
+      {
+        "id": "ev_17_reconstructing_the_theft",
+        "sequence": 17,
+        "summary": "In the shift office, Maren reconstructs how Orde stole the key from her pocket while she slept, locked Gabe inside, and returned the key.",
+        "pov": "char_maren",
+        "location_id": "loc_shift_office",
+        "characters_present": [
+          "char_maren",
+          "char_nel",
+          "char_foster"
+        ],
+        "dramatic_function": "The synthesis beat of the Solution phase: assembling the full true sequence of events.",
+        "beats": [
+          "Foster confirms that while he was repairing the damper at 02:15, Maren was already stumbling with exhaustion.",
+          "Maren pieces together how Orde entered the office while she was unconscious at 03:30, slipped the key from her coat, and went to Kiln 4.",
+          "Nel notes that Orde must have started the high-pressure gas at 03:45 without realizing Gabe was still in the back flue, then returned the key to Maren's pocket."
+        ],
+        "caused_by": [
+          "ev_15_orde_red_stains",
+          "ev_16_tilda_full_testimony"
+        ],
+        "reveals": [
+          "orde_took_key_while_maren_slept"
+        ],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "flue_hammering_at_two",
+            "plant": "ev_05_foster_alibi"
+          },
+          {
+            "fact_ref": "tilda_saw_maren_blackout",
+            "plant": "ev_08_tilda_sighting"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_shift_office"
+          },
+          {
+            "entity_id": "char_nel",
+            "column": "location_id",
+            "value": "loc_shift_office"
+          },
+          {
+            "entity_id": "char_foster",
+            "column": "location_id",
+            "value": "loc_shift_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_confronting_orde",
+        "sequence": 18,
+        "summary": "Maren, Nel, and Moran confront Orde in his office with the timeline, the red slip stains, and the pyrometric evidence.",
+        "pov": "char_maren",
+        "location_id": "loc_works_office",
+        "characters_present": [
+          "char_maren",
+          "char_orde",
+          "char_moran",
+          "char_nel"
+        ],
+        "dramatic_function": "Deliver the climax of the Solution phase: the truth is demonstrated beyond dispute.",
+        "beats": [
+          "Maren presents the red slip traces, the 03:30 rush docket, and Tilda's statement directly before Moran.",
+          "Nel confirms that the thermal delay matches the gas barograph spike initiated under Orde's dockyard authority.",
+          "Cornered by the evidence, Orde breaks his silence and admits he locked the dog-latch thinking Gabe had already exited through the side wicket."
+        ],
+        "caused_by": [
+          "ev_17_reconstructing_the_theft"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "orde_hurrying_inspection",
+            "plant": "ev_01_handover_demand"
+          },
+          {
+            "fact_ref": "orde_red_slip_stains",
+            "plant": "ev_15_orde_red_stains"
+          },
+          {
+            "fact_ref": "tilda_saw_gabe_at_three",
+            "plant": "ev_16_tilda_full_testimony"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_works_office"
+          },
+          {
+            "entity_id": "char_moran",
+            "column": "location_id",
+            "value": "loc_works_office"
+          },
+          {
+            "entity_id": "char_nel",
+            "column": "location_id",
+            "value": "loc_works_office"
+          },
+          {
+            "entity_id": "char_orde",
+            "column": "status",
+            "value": "cornered and disgraced"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_board_coverup",
+        "sequence": 19,
+        "summary": "The works management and the union agree to a quiet settlement: Orde is granted early retirement while the night shift is permanently eliminated.",
+        "pov": "char_maren",
+        "location_id": "loc_works_office",
+        "characters_present": [
+          "char_maren",
+          "char_orde",
+          "char_moran"
+        ],
+        "dramatic_function": "The Cost phase begins: institutional power realigns to protect the institution rather than justice.",
+        "beats": [
+          "Moran and Orde negotiate an institutional compromise behind closed doors to prevent police charges that would close the works.",
+          "Orde is permitted to resign with full pension on medical grounds, logging Gabe's death as an unavoidable industrial accident.",
+          "Moran announces that to satisfy the board's insurance underwriters, the entire night shift roster will be dissolved."
+        ],
+        "caused_by": [
+          "ev_18_confronting_orde"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "union_sacrificing_supervisor",
+            "plant": "ev_10_union_warning"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_orde",
+            "column": "status",
+            "value": "quietly dismissed with pension"
+          },
+          {
+            "entity_id": "char_moran",
+            "column": "goal",
+            "value": "seal the institutional compromise to keep the plant open"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_the_blacklisting",
+        "sequence": 20,
+        "summary": "Maren collects her coat from the canteen, knowing she has established the truth but is permanently blacklisted from the port's glaze works.",
+        "pov": "char_maren",
+        "location_id": "loc_canteen",
+        "characters_present": [
+          "char_maren",
+          "char_tilda"
+        ],
+        "dramatic_function": "The final Cost: the whistleblower is cleared of manslaughter but stripped of her livelihood and community.",
+        "beats": [
+          "Maren cleans out her locker while Tilda watches from the doorway in ashamed silence.",
+          "Tilda tells Maren that word has already spread among the port manufacturers that Maren is dangerous to employ.",
+          "Maren walks out into the port town winter dusk, her name legally clear and her working life over."
+        ],
+        "caused_by": [
+          "ev_19_board_coverup"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "orde_took_key_while_maren_slept",
+            "plant": "ev_17_reconstructing_the_theft"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_canteen"
+          },
+          {
+            "entity_id": "char_tilda",
+            "column": "location_id",
+            "value": "loc_canteen"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "status",
+            "value": "blacklisted and unemployed"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "goal",
+            "value": "leave the port town with her name intact"
+          }
+        ]
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-17T16:54:59.916Z",
+    "started_at": "2026-09-17T16:53:52.577Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_early_opening",
+        "order": 1,
+        "event_ids": [
+          "ev_01_handover_demand"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_body_in_kiln",
+        "order": 2,
+        "event_ids": [
+          "ev_02_kiln_unsealed",
+          "ev_03_the_accusation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_suspension_and_blame",
+        "order": 3,
+        "event_ids": [
+          "ev_04_suspension_order"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_questioning_foster",
+        "order": 4,
+        "event_ids": [
+          "ev_05_foster_alibi"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_test_cones",
+        "order": 5,
+        "event_ids": [
+          "ev_06_nel_cone_analysis"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_tally_tag",
+        "order": 6,
+        "event_ids": [
+          "ev_07_logbook_inspection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_tildas_confession",
+        "order": 7,
+        "event_ids": [
+          "ev_08_tilda_sighting"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_the_red_slip",
+        "order": 8,
+        "event_ids": [
+          "ev_09_key_residue"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_union_warning",
+        "order": 9,
+        "event_ids": [
+          "ev_10_union_warning"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_hidden_chart",
+        "order": 10,
+        "event_ids": [
+          "ev_11_barograph_found"
+        ],
+        "forced_by_plant_span": true,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_delirious_conclusion",
+        "order": 11,
+        "event_ids": [
+          "ev_12_maren_false_reconstruction"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_urged_resignation",
+        "order": 12,
+        "event_ids": [
+          "ev_13_moran_confession_prep"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_signing",
+        "order": 13,
+        "event_ids": [
+          "ev_14_confession_meeting",
+          "ev_15_orde_red_stains"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_14_tildas_confession",
+        "order": 14,
+        "event_ids": [
+          "ev_16_tilda_full_testimony"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_15_reconstructing_the_theft",
+        "order": 15,
+        "event_ids": [
+          "ev_17_reconstructing_the_theft"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_16_the_settlement",
+        "order": 16,
+        "event_ids": [
+          "ev_18_confronting_orde",
+          "ev_19_board_coverup"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_17_the_final_locker",
+        "order": 17,
+        "event_ids": [
+          "ev_20_the_blacklisting"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+    ]
+  }
+}

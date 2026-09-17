@@ -338,11 +338,33 @@ export interface ProposalResult {
  * window's payoff candidates come with their beats, while everything before them is compressed to
  * one line each. A pair that spans the whole story is still reachable, and the call size grows
  * linearly in scene count rather than in event count.
+ *
+ * ## `known`, and why a `fact_ref` set could not do this job (#120)
+ *
+ * An entry point that authored its own plant graph — generation does, extraction emits
+ * `pays_off: []` on every event — hands its edges in here so they are not proposed a second time.
+ * `segment.ts` originally filtered the *answers* against the carried `fact_ref`s instead, which
+ * reads as equivalent and is not: the carried slug is the generator's name for the fact and the
+ * proposed slug is this call's name for it, so the two never collide and the filter was a no-op
+ * wherever it could fire at all. Measured on #119's arcs before this changed: every arc came back
+ * with 4–5 "new" pairs sitting on the scene pairs the generator had already authored, under names
+ * like `damper_propped_open` beside the arc's own `roof_exhaust_damper_propped_open`, and two runs
+ * over one arc produced two different sets of those aliases. The package still passed G0 and every
+ * §4.1 gate, because a duplicate edge is internally valid — which is exactly why this had to be
+ * fixed at the point where the names are chosen rather than caught downstream.
+ *
+ * The instruction rides in the block rather than in `PROPOSE_SYSTEM`, so an entry point that carries
+ * no graph sends a byte-identical call — same system instruction, same contents — and #118's
+ * extraction-side numbers still describe the code that is here.
  */
 export async function proposePairs(
   model: ExtractionModel,
   sketches: readonly SceneSketch[],
-  options: { windowScenes?: number; onProgress?: (message: string) => void } = {},
+  options: {
+    windowScenes?: number;
+    known?: readonly PlantPair[];
+    onProgress?: (message: string) => void;
+  } = {},
 ): Promise<ProposalResult> {
   const windowScenes = options.windowScenes ?? PLANT_WINDOW_SCENES;
   const progress = options.onProgress ?? ((): void => {});
@@ -352,12 +374,28 @@ export async function proposePairs(
   let failed = 0;
   let malformed = 0;
 
+  const known = options.known ?? [];
+  const knownBlock =
+    known.length === 0
+      ? ''
+      : [
+          'ALREADY RECORDED — the story already declares these pairs. Every one of them is settled.',
+          'Do not report the same fact again under a different slug, and do not report a different',
+          'aspect of one. Report only pairs genuinely absent from this list:',
+          ...known.map(
+            (pair) =>
+              `  ${pair.fact_ref} — ${pair.plant === null ? 'known before the story opens' : pair.plant} → ${pair.payoff}`,
+          ),
+          '',
+        ].join('\n');
+
   for (let start = 0; start < sketches.length; start += windowScenes) {
     const window = sketches.slice(start, start + windowScenes);
     const earlier = sketches.slice(0, start);
     progress(`plant proposals for scenes ${start + 1}–${start + window.length}`);
 
     const contents = [
+      knownBlock,
       earlier.length === 0
         ? ''
         : ['EARLIER SCENES (available as plants):', ...earlier.map((s) => renderSketch(s, false)), ''].join(

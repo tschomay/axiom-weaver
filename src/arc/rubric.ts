@@ -74,6 +74,7 @@ export interface SpanHistogram {
 
 export interface MechanicalScore {
   readonly story_id: string;
+  /** Fabula events, not scenes. They coincide on the projection and diverge after segmentation. */
   readonly events: number;
   readonly g0: { passed: boolean; lint: LintResult };
   readonly payoff_reachability: { total: number; reachable: number; passed: boolean };
@@ -220,7 +221,29 @@ function canaryHits(arc: FabulaArc): string[] {
 
 /** Score an arc against §4.1. The projection is what the linter sees; see `./fabula.ts`. */
 export function scoreMechanical(arc: FabulaArc, storyId: string): MechanicalScore {
-  const pkg = provisionalPackage(arc, storyId);
+  return scoreMechanicalPackage(provisionalPackage(arc, storyId), arc, storyId);
+}
+
+/**
+ * §4.1 over a Story Package that already has real Scene Cards, with the arc alongside it.
+ *
+ * `scoreMechanical` above is this function over the provisional projection, and that is all the
+ * projection ever was: ADR 0019 built it because a Fabula-only package has no Scene Cards for the
+ * linter to read, and said so — it is "a projection, not a package". Once segmentation (#118) has
+ * drawn the scenes there is a real package, and §4.1's gates are better asserted on the artifact
+ * that would actually be published than on a stand-in for it.
+ *
+ * Two arguments rather than one because §4.1 is not entirely a package-level question. Presence
+ * (`./chaining.ts`) and the lexical canary are defined over the *event list* — an event is where a
+ * character is or is not on stage — and stay read off the arc whichever package is being scored.
+ * `events` likewise counts events, not scenes; on the projection the two coincide, which is why
+ * this is not a behaviour change for `scoreMechanical`.
+ */
+export function scoreMechanicalPackage(
+  pkg: StoryPackage,
+  arc: FabulaArc,
+  storyId: string,
+): MechanicalScore {
   const lint = lintPackage(pkg);
   const scenes = scenesInOrder(pkg);
   const seedFacts = seedKnownFacts(pkg);
@@ -267,7 +290,7 @@ export function scoreMechanical(arc: FabulaArc, storyId: string): MechanicalScor
 
   return {
     story_id: storyId,
-    events: scenes.length,
+    events: arc.events.length,
     g0: { passed: lint.publishable, lint },
     payoff_reachability: {
       total: payoffTotal,

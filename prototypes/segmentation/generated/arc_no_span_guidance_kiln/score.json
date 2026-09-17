@@ -1,0 +1,259 @@
+{
+  "story_id": "arc_no_span_guidance_kiln",
+  "segmenter_models": [
+    "gemini-3.8-flash"
+  ],
+  "events": 20,
+  "scenes": 17,
+  "events_per_scene": 1.1764705882352942,
+  "telling_order_basis": "fabula_sequence",
+  "telling_order_displaced": 0,
+  "self_consistency": null,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "mechanical": {
+    "story_id": "arc_no_span_guidance_kiln",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_shift_log",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_shift_log",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 18,
+      "reachable": 18,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 16,
+        "compared": 13
+      },
+      "vacuous": false,
+      "passed": true
+    },
+    "presence": {
+      "problems": [],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 14,
+      "reachable": 14,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 17,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "single_key_custody",
+          "payoff_event": "scene_01_the_early_opening",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "maren_double_shift_fatigue",
+          "payoff_event": "scene_01_the_early_opening",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "dockyard_contract_penalty",
+          "payoff_event": "scene_02_body_in_kiln",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "single_key_custody",
+          "payoff_event": "scene_02_body_in_kiln",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "gabe_body_in_kiln",
+          "payoff_event": "scene_03_suspension_and_blame",
+          "plant_event": "scene_02_body_in_kiln",
+          "span": 1
+        },
+        {
+          "fact_ref": "logbook_entry_signed_two_am",
+          "payoff_event": "scene_06_the_tally_tag",
+          "plant_event": "scene_02_body_in_kiln",
+          "span": 4
+        },
+        {
+          "fact_ref": "cone_indicates_delayed_heat",
+          "payoff_event": "scene_11_delirious_conclusion",
+          "plant_event": "scene_05_the_test_cones",
+          "span": 6
+        },
+        {
+          "fact_ref": "hidden_barograph_chart",
+          "payoff_event": "scene_11_delirious_conclusion",
+          "plant_event": "scene_10_the_hidden_chart",
+          "span": 1
+        },
+        {
+          "fact_ref": "moran_administrative_dismissal_deal",
+          "payoff_event": "scene_12_urged_resignation",
+          "plant_event": "scene_09_the_union_warning",
+          "span": 3
+        },
+        {
+          "fact_ref": "red_slip_on_brass_key",
+          "payoff_event": "scene_13_the_signing",
+          "plant_event": "scene_08_the_red_slip",
+          "span": 5
+        },
+        {
+          "fact_ref": "rush_docket_for_early_firing",
+          "payoff_event": "scene_14_tildas_confession",
+          "plant_event": "scene_13_the_signing",
+          "span": 1
+        },
+        {
+          "fact_ref": "flue_hammering_at_two",
+          "payoff_event": "scene_15_reconstructing_the_theft",
+          "plant_event": "scene_04_questioning_foster",
+          "span": 11
+        },
+        {
+          "fact_ref": "tilda_saw_maren_blackout",
+          "payoff_event": "scene_15_reconstructing_the_theft",
+          "plant_event": "scene_07_tildas_confession",
+          "span": 8
+        },
+        {
+          "fact_ref": "orde_hurrying_inspection",
+          "payoff_event": "scene_16_the_settlement",
+          "plant_event": "scene_01_the_early_opening",
+          "span": 15
+        },
+        {
+          "fact_ref": "orde_red_slip_stains",
+          "payoff_event": "scene_16_the_settlement",
+          "plant_event": "scene_13_the_signing",
+          "span": 3
+        },
+        {
+          "fact_ref": "tilda_saw_gabe_at_three",
+          "payoff_event": "scene_16_the_settlement",
+          "plant_event": "scene_14_tildas_confession",
+          "span": 2
+        },
+        {
+          "fact_ref": "union_sacrificing_supervisor",
+          "payoff_event": "scene_16_the_settlement",
+          "plant_event": "scene_09_the_union_warning",
+          "span": 7
+        },
+        {
+          "fact_ref": "orde_took_key_while_maren_slept",
+          "payoff_event": "scene_17_the_final_locker",
+          "plant_event": "scene_15_reconstructing_the_theft",
+          "span": 2
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "1": 3,
+          "2": 2,
+          "3": 2,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "11": 1,
+          "15": 1
+        },
+        "seed_grounded": 4,
+        "edges": 18,
+        "mean": 4.928571428571429,
+        "median": 4,
+        "min": 1,
+        "max": 15,
+        "share_span_1": 0.21428571428571427
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  },
+  "generator_all_gates_passed": true,
+  "plant_edges": {
+    "authored_by_generator": 16,
+    "authored_seed_grounded": 4,
+    "carried_onto_scenes": 16,
+    "dangling": 0,
+    "proposed_by_segmentation": 3,
+    "verified": 2,
+    "unrepresentable": 0,
+    "on_scene_cards": 18
+  },
+  "span_histogram_after": {
+    "counts": {
+      "1": 3,
+      "2": 2,
+      "3": 2,
+      "4": 1,
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "11": 1,
+      "15": 1
+    },
+    "seed_grounded": 4,
+    "edges": 18,
+    "mean": 4.928571428571429,
+    "median": 4,
+    "min": 1,
+    "max": 15,
+    "share_span_1": 0.21428571428571427
+  },
+  "unscoreable": {
+    "boundary precision/recall (§3.5)": "needs a fixture segmentation of the same story and source offsets to place it in; a generated arc is the only authoring of itself and has no source text",
+    "required_beats coverage (§3.5)": "judged against a fixture scene's beats; there is no fixture scene",
+    "beat invention rate (§3.5)": "judged against the source the beat claims to come from; there is no source",
+    "pov/location accuracy (§3.5)": "agreement with a fixture; there is no fixture",
+    "source coverage (§3.5)": "the fraction of a source text assigned to a scene; there is no source",
+    "reveal-order fidelity (§3.6)": "pairwise against the fixture order; there is no fixture order",
+    "premature reveal count (§3.6)": "a reveal is premature relative to where the source discloses it; there is no source",
+    "must_stay_hidden recall (§3.6)": "recall against the fixture's withholding; there is no fixture",
+    "plant/payoff pair recall (§3.7)": "against the fixture's graph — but see pairs_from_generator below, which is the same question asked against the generator's own authored graph, and is answerable"
+  }
+}

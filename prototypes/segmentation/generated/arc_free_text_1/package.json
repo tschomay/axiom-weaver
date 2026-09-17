@@ -1,0 +1,1990 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "arc_free_text_1",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_jesse_vane",
+        "name": "Jesse Vane",
+        "location_id": "loc_boiler_house",
+        "status": "uninjured",
+        "goal": "determine the cause of the manifold rupture",
+        "bag": {
+          "occupation": "yard safety inspector and chief fitter"
+        }
+      },
+      {
+        "id": "char_orson_dunlow",
+        "name": "Orson Dunlow",
+        "location_id": "loc_boiler_house",
+        "status": "agitated",
+        "goal": "contain scandal before morning acquisition audit",
+        "bag": {
+          "occupation": "works superintendent"
+        }
+      },
+      {
+        "id": "char_clara_fenn",
+        "name": "Clara Fenn",
+        "location_id": "loc_gatehouse",
+        "status": "exhausted",
+        "goal": "complete the overnight shift log",
+        "bag": {
+          "occupation": "night gatekeeper and timekeeper"
+        }
+      },
+      {
+        "id": "char_toby_callow",
+        "name": "Toby Callow",
+        "location_id": "loc_boiler_house",
+        "status": "deceased",
+        "goal": null,
+        "bag": {
+          "occupation": "apprentice pipefitter"
+        }
+      },
+      {
+        "id": "char_martha_callow",
+        "name": "Martha Callow",
+        "location_id": "loc_gatehouse",
+        "status": "distraught",
+        "goal": "find out how Toby died",
+        "bag": {
+          "relation": "widowed mother of Toby"
+        }
+      },
+      {
+        "id": "char_harlan_kemp",
+        "name": "Harlan Kemp",
+        "location_id": "loc_fitting_shop",
+        "status": "nervous",
+        "goal": "protect union scrap holdings",
+        "bag": {
+          "occupation": "senior lathe machinist"
+        }
+      },
+      {
+        "id": "char_donald_pell",
+        "name": "Donald Pell",
+        "location_id": "loc_boiler_house",
+        "status": "suspicious",
+        "goal": "assign official blame for the death",
+        "bag": {
+          "occupation": "town constable"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_boiler_house",
+        "name": "Boiler House Sub-Vault",
+        "bag": {
+          "environment": "damp subterranean brick cellar beneath the high-pressure steam boilers"
+        }
+      },
+      {
+        "id": "loc_superintendents_office",
+        "name": "Superintendent's Yard Office",
+        "bag": {
+          "environment": "elevated pine-paneled office overlooking the yard track sidings"
+        }
+      },
+      {
+        "id": "loc_foremans_shack",
+        "name": "Maintenance Foreman's Shack",
+        "bag": {
+          "environment": "corrugated zinc hut beside the water tower containing tools and gear pegs"
+        }
+      },
+      {
+        "id": "loc_fitting_shop",
+        "name": "General Fitting Machine Shop",
+        "bag": {
+          "environment": "long brick workshop filled with belt-driven lathes and swarf bins"
+        }
+      },
+      {
+        "id": "loc_gatehouse",
+        "name": "Main Yard Siding Gatehouse",
+        "bag": {
+          "environment": "timber guard booth with barrier gate and official turnstile"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_steam_manifold",
+        "name": "Main Steam Manifold Header",
+        "location_id": "loc_boiler_house",
+        "status": "ruptured",
+        "bag": {
+          "material": "cast iron and bronze"
+        }
+      },
+      {
+        "id": "obj_waxed_mackinaw",
+        "name": "Yellow Waxed Canvas Mackinaw",
+        "location_id": "loc_foremans_shack",
+        "status": "hanging_on_peg",
+        "bag": {
+          "owner": "char_jesse_vane"
+        }
+      },
+      {
+        "id": "obj_gate_register",
+        "name": "Bound Night Shift Register",
+        "location_id": "loc_gatehouse",
+        "status": "open_on_desk",
+        "bag": {
+          "records": "entry and exit timestamps"
+        }
+      },
+      {
+        "id": "obj_aniline_pencil",
+        "name": "German Aniline Copying Pencil",
+        "location_id": "loc_superintendents_office",
+        "status": "in_desk_tray",
+        "bag": {
+          "ink": "purple indelible graphite"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_jesse_vane",
+        "to_id": "char_toby_callow",
+        "kind": "mentor",
+        "sentiment": "protective",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_orson_dunlow",
+        "to_id": "char_jesse_vane",
+        "kind": "employer",
+        "sentiment": "distrustful",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_donald_pell",
+        "to_id": "char_jesse_vane",
+        "kind": "law_enforcer",
+        "sentiment": "antagonistic",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_martha_callow",
+        "to_id": "char_jesse_vane",
+        "kind": "grieving_mother",
+        "sentiment": "demanding",
+        "bag": {}
+      },
+      {
+        "id": "rel_05",
+        "from_id": "char_harlan_kemp",
+        "to_id": "char_jesse_vane",
+        "kind": "coworker",
+        "sentiment": "wary",
+        "bag": {}
+      },
+      {
+        "id": "rel_06",
+        "from_id": "char_clara_fenn",
+        "to_id": "char_jesse_vane",
+        "kind": "coworker",
+        "sentiment": "sympathetic",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_jesse_vane",
+        "fact_ref": "jesse_sole_signatory_liability",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_jesse_vane",
+        "fact_ref": "toby_left_handed_grip",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_ruptured_manifold",
+      "order": 1,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_boiler_house",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_donald_pell",
+        "char_orson_dunlow",
+        "char_toby_callow"
+      ],
+      "dramatic_function": "Establishes Toby's fatal accident and frames Jesse with immediate criminal and professional jeopardy.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "goal": "determine the cause of the manifold rupture"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "goal": "prove the rupture was caused by tampering rather than inspection negligence"
+        }
+      },
+      "required_beats": [
+        "Jesse finds Toby Callow's body trapped beneath the sheared steam pipe in the sub-vault.",
+        "Constable Pell warns Jesse that his signed inspection leaves him legally liable for manslaughter.",
+        "Dunlow insists Jesse clear the works before the morning audit arrives."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "clara_sighting_of_mackinaw",
+        "illegal_manifold_bypass"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "jesse_sole_signatory_liability",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_the_yard_ledger",
+      "order": 2,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_superintendents_office",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_orson_dunlow"
+      ],
+      "dramatic_function": "Deepens the cover-up by showing Dunlow suppress the investigation under threat of termination.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_boiler_house"
+        },
+        "char_orson_dunlow": {
+          "location_id": "loc_boiler_house"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_superintendents_office"
+        },
+        "char_orson_dunlow": {
+          "location_id": "loc_superintendents_office"
+        }
+      },
+      "required_beats": [
+        "Jesse asks to review the key vault register for valve access.",
+        "Dunlow snaps his purple copying pencil while marking the audit schedule.",
+        "Dunlow threatens to fire Jesse if he claims mechanical failure rather than apprentice negligence."
+      ],
+      "reader_must_learn": [
+        "purple_aniline_ink_smudge"
+      ],
+      "must_stay_hidden": [
+        "dunlow_forged_work_order"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_the_spare_coat",
+      "order": 3,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_foremans_shack",
+      "characters_present": [
+        "char_jesse_vane"
+      ],
+      "dramatic_function": "Plants physical evidence that someone used Jesse's gear during the night.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_superintendents_office"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_foremans_shack"
+        }
+      },
+      "required_beats": [
+        "Jesse retrieves his brass pressure gauges from the equipment cabinet.",
+        "Jesse notices torn yellow threads caught on the hasp by his crookedly hung mackinaw.",
+        "Jesse takes his flashlight and heads out, annoyed that yard hands borrowed his coat."
+      ],
+      "reader_must_learn": [
+        "torn_canvas_cuff_thread"
+      ],
+      "must_stay_hidden": [
+        "dunlow_stolen_coat_use"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_at_the_gatehouse",
+      "order": 4,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_gatehouse",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_clara_fenn",
+        "char_martha_callow"
+      ],
+      "dramatic_function": "Reveals that Jesse has been directly implicated in the midnight sabotage by an eyewitness account.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_foremans_shack"
+        },
+        "char_martha_callow": {
+          "status": "distraught",
+          "location_id": "loc_gatehouse"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_gatehouse"
+        },
+        "char_martha_callow": {
+          "status": "vengeful",
+          "location_id": "loc_foremans_shack"
+        }
+      },
+      "required_beats": [
+        "Martha Callow accuses Jesse of sending her son into the condemned line to cover his own record.",
+        "Jesse promises Martha he will uncover the truth before Pell concludes the case.",
+        "Clara warns Jesse that Pell is drafting an affidavit against him.",
+        "Clara reveals she saw someone in Jesse's yellow mackinaw heading toward the sub-vault in the night."
+      ],
+      "reader_must_learn": [
+        "promise_to_martha",
+        "clara_eyewitness_yellow_mackinaw"
+      ],
+      "must_stay_hidden": [
+        "clara_witness_testimony",
+        "identity_of_mackinaw_wearer"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_lathe_bench",
+      "order": 5,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_fitting_shop",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_harlan_kemp",
+        "char_donald_pell"
+      ],
+      "dramatic_function": "Escalates the urgency of Jesse's investigation by giving him physical evidence of tampering alongside an impending arrest deadline.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_gatehouse"
+        },
+        "char_harlan_kemp": {
+          "status": "nervous"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_boiler_house",
+          "goal": "assign official blame for the death"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_fitting_shop"
+        },
+        "char_harlan_kemp": {
+          "status": "defensive"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_fitting_shop",
+          "goal": "secure Jesse's confession before the audit train arrives"
+        }
+      },
+      "required_beats": [
+        "Jesse searches Harlan's work area and discovers hidden nickel-alloy flange bolts.",
+        "Harlan confronts Jesse and demands he step away from the bench.",
+        "Constable Pell corners Jesse with Clara's signed statement and imposes a two-hour deadline to prove his innocence."
+      ],
+      "reader_must_learn": [
+        "mismatched_flange_bolts"
+      ],
+      "must_stay_hidden": [
+        "harlans_illicit_scrap_sale",
+        "true_identity_of_infiltrator"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_tallow_on_gloves",
+      "order": 6,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_foremans_shack",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_martha_callow"
+      ],
+      "dramatic_function": "Reveals an anomalous physical clue on Toby's belongings while intensifying Jesse's guilt through Martha's grief.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_fitting_shop"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_foremans_shack"
+        }
+      },
+      "required_beats": [
+        "Jesse examines Toby's effects with Martha and finds thick animal tallow on the boy's gauntlets instead of mineral oil.",
+        "Martha condemns Jesse for obsessing over grease to evade responsibility for Toby's death."
+      ],
+      "reader_must_learn": [
+        "paraffin_tallow_lubricant"
+      ],
+      "must_stay_hidden": [
+        "origin_of_tallow_lubricant"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_sub_vault_header",
+      "order": 7,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_boiler_house",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_toby_callow"
+      ],
+      "dramatic_function": "Uncovers the physical mechanics of the explosion, establishing that the rupture was caused by sabotage rather than boiler failure.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_foremans_shack"
+        },
+        "obj_steam_manifold": {
+          "status": "ruptured"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_boiler_house"
+        },
+        "obj_steam_manifold": {
+          "status": "inspected_by_jesse"
+        }
+      },
+      "required_beats": [
+        "Jesse inspects the fractured bronze header beneath the manifold with a lantern.",
+        "Jesse determines the pressure surge came from an auxiliary branch rather than the boilers.",
+        "Jesse finds an inspection valve jammed open with a pipe lever."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "hidden_bypass_junction"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_dunlows_blotter",
+      "order": 8,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_superintendents_office",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_orson_dunlow"
+      ],
+      "dramatic_function": "Points Jesse toward the machinists' shop while establishing Dunlow's furtive involvement in illicit yard activity.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_boiler_house"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_superintendents_office"
+        }
+      },
+      "required_beats": [
+        "Jesse reports the forced auxiliary surge to Dunlow.",
+        "Dunlow conceals an unauthorized scrap manifest and blames pirate union castings for the disaster.",
+        "Dunlow directs Jesse to search Harlan's bench before Pell arrests him."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "dunlows_bribe_payments"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_matching_the_thread",
+      "order": 9,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_fitting_shop",
+      "characters_present": [
+        "char_jesse_vane"
+      ],
+      "dramatic_function": "To give Jesse false confidence that he has found proof of sabotage to clear his name.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_superintendents_office"
+        },
+        "char_harlan_kemp": {
+          "location_id": "loc_fitting_shop"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_fitting_shop"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_fitting_shop"
+        },
+        "char_harlan_kemp": {
+          "location_id": "loc_boiler_house"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_gatehouse"
+        }
+      },
+      "required_beats": [
+        "Jesse compares the thread pitch of Harlan's nickel bolts to the fractured manifold studs and finds an exact match.",
+        "Believing Harlan swapped out factory safety studs for brittle turnings, Jesse gathers the evidence to confront him."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "manifold_true_thread_pitch"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_10_the_accusation",
+      "order": 10,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_boiler_house",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_harlan_kemp",
+        "char_donald_pell",
+        "char_toby_callow"
+      ],
+      "dramatic_function": "To stage Jesse's public accusation of Harlan, seemingly resolving the investigation before authority.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_fitting_shop"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_gatehouse"
+        },
+        "char_harlan_kemp": {
+          "status": "defensive"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_boiler_house"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_boiler_house"
+        },
+        "char_harlan_kemp": {
+          "status": "arrested_provisional"
+        }
+      },
+      "required_beats": [
+        "Jesse confronts Harlan in front of Constable Pell, accusing him of installing counterfeit studs that killed Toby.",
+        "Pell seizes Harlan, eager to close the manslaughter inquiry before the audit.",
+        "Harlan vehemently denies touching Boiler Three and accuses Jesse of framing him."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "harlans_ironclad_alibi"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "mismatched_flange_bolts",
+          "plant": "scene_05_the_lathe_bench"
+        }
+      ]
+    },
+    {
+      "id": "scene_11_the_broken_alibi",
+      "order": 11,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_gatehouse",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_donald_pell",
+        "char_clara_fenn",
+        "char_harlan_kemp"
+      ],
+      "dramatic_function": "To overturn Jesse's case completely, isolating him and leaving him without legal defense.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_boiler_house"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_boiler_house"
+        },
+        "char_harlan_kemp": {
+          "location_id": "loc_boiler_house",
+          "status": "arrested_provisional"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_gatehouse"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_gatehouse"
+        },
+        "char_harlan_kemp": {
+          "location_id": "loc_gatehouse",
+          "status": "cleared"
+        }
+      },
+      "required_beats": [
+        "Clara presents a lockup slip showing Harlan was jailed during the hours of the sabotage.",
+        "Pell releases Harlan and turns furiously against Jesse for presenting false claims.",
+        "Jesse realizes his evidence was purely circumstantial and his defense has collapsed."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "true_manifold_culprit"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_12_grease_on_the_lamp",
+      "order": 12,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_foremans_shack",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_martha_callow",
+        "char_donald_pell"
+      ],
+      "dramatic_function": "To bring Jesse to his lowest point of condemnation before uncovering the true, corrupt cause of the explosion.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_gatehouse",
+          "status": "uninjured",
+          "goal": "prove the rupture was caused by tampering rather than inspection negligence"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_gatehouse"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_foremans_shack",
+          "status": "disgraced_suspect",
+          "goal": "expose the illegal bypass and its true operator"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_gatehouse"
+        }
+      },
+      "required_beats": [
+        "Martha curses Jesse for trying to scapegoat Harlan as Pell places Jesse under arrest with minutes left until transport.",
+        "Left guarded in the shack, Jesse heats the grease from Toby's gloves over a spirit lamp.",
+        "Recognizing tallow packing exclusive to the condemned 1880 bypass, Jesse realizes Toby was sent to open an illegal line to falsify audit capacity."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "bypass_valve_existence",
+        "identity_of_bypass_operator"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "paraffin_tallow_lubricant",
+          "plant": "scene_06_tallow_on_gloves"
+        }
+      ]
+    },
+    {
+      "id": "scene_13_the_bypass_tunnel",
+      "order": 13,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_boiler_house",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_toby_callow"
+      ],
+      "dramatic_function": "To uncover physical proof that the boiler bypass was rigged by someone framing Jesse and not Toby.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_foremans_shack"
+        },
+        "obj_steam_manifold": {
+          "status": "inspected_by_jesse"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_boiler_house"
+        },
+        "obj_steam_manifold": {
+          "status": "tampering_proven"
+        }
+      },
+      "required_beats": [
+        "Jesse enters the sub-vault and exposes the hidden bypass pipe packed with tallow.",
+        "Jesse recovers yellow coat threads wedged in the valve wheel.",
+        "Jesse determines the valve was forced clockwise right-handed, ruling out Toby."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "dunlows_forged_tag"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "torn_canvas_cuff_thread",
+          "plant": "scene_03_the_spare_coat"
+        },
+        {
+          "fact_ref": "toby_left_handed_grip",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_14_the_confrontation",
+      "order": 14,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_superintendents_office",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_orson_dunlow"
+      ],
+      "dramatic_function": "To pin the sabotage directly on Dunlow using the physical evidence and the forged slip.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_boiler_house"
+        },
+        "char_orson_dunlow": {
+          "status": "agitated"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_superintendents_office"
+        },
+        "char_orson_dunlow": {
+          "status": "unmasked"
+        }
+      },
+      "required_beats": [
+        "Jesse confronts Dunlow in his office with the recovered threads, tallow, and valve tag.",
+        "Jesse demonstrates that the forged bypass authorization was written with Dunlow's distinct indelible pencil.",
+        "Jesse lays out how Dunlow staged the bypass in Jesse's coat to cheat the audit and fled when it failed."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "purple_aniline_ink_smudge",
+          "plant": "scene_02_the_yard_ledger"
+        },
+        {
+          "fact_ref": "clara_eyewitness_yellow_mackinaw",
+          "plant": "scene_04_at_the_gatehouse"
+        }
+      ]
+    },
+    {
+      "id": "scene_15_the_gatehouse_reckoning",
+      "order": 15,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_gatehouse",
+      "characters_present": [
+        "char_jesse_vane",
+        "char_orson_dunlow",
+        "char_donald_pell",
+        "char_martha_callow",
+        "char_clara_fenn",
+        "char_harlan_kemp"
+      ],
+      "dramatic_function": "To clear Toby and expose Dunlow publicly, only for the truth to destroy the plant and alienate the town.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_superintendents_office",
+          "status": "disgraced_suspect",
+          "goal": "expose the illegal bypass and its true operator"
+        },
+        "char_orson_dunlow": {
+          "location_id": "loc_superintendents_office",
+          "status": "unmasked"
+        },
+        "char_martha_callow": {
+          "location_id": "loc_foremans_shack"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_gatehouse"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_gatehouse",
+          "status": "exonerated",
+          "goal": "accept the personal cost of the truth"
+        },
+        "char_orson_dunlow": {
+          "location_id": "loc_foremans_shack",
+          "status": "arrested"
+        },
+        "char_martha_callow": {
+          "location_id": "loc_gatehouse"
+        },
+        "char_donald_pell": {
+          "location_id": "loc_foremans_shack"
+        }
+      },
+      "required_beats": [
+        "Jesse drags Dunlow before Pell and Martha, exposing Dunlow's steam burns and forcing a confession.",
+        "Pell drops the warrant against Jesse and arrests Dunlow.",
+        "The railway auditor condemns the fraudulent plant and padlocks the gatehouse.",
+        "The workers and Martha turn on Jesse with bitter fury for ruining the town's livelihood to clear a name."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "promise_to_martha",
+          "plant": "scene_04_at_the_gatehouse"
+        }
+      ]
+    },
+    {
+      "id": "scene_16_the_departure",
+      "order": 16,
+      "pov": "char_jesse_vane",
+      "location_id": "loc_foremans_shack",
+      "characters_present": [
+        "char_jesse_vane"
+      ],
+      "dramatic_function": "To resolve Jesse's journey as an honest man exiled by the town he vindicated.",
+      "entry_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_gatehouse",
+          "status": "exonerated",
+          "goal": "accept the personal cost of the truth"
+        }
+      },
+      "exit_state": {
+        "char_jesse_vane": {
+          "location_id": "loc_foremans_shack",
+          "status": "departed",
+          "goal": "find work elsewhere"
+        }
+      },
+      "required_beats": [
+        "Jesse packs his tools in the maintenance shack and strips his nameplate.",
+        "Jesse looks out over the shuttered plant, acknowledging his total ruin despite his innocence.",
+        "Jesse carries his bag onto the tracks and leaves the valley alone."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    }
+  ],
+  "voice_card": {},
+  "metadata": {
+    "title": "The Cold Manifold",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-17T16:52:57.613Z"
+  },
+  "_fabula": {
+    "generator": "src/arc (issue #119)",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-16T00:42:46.434Z",
+    "brief": {
+      "story_id": "arc_free_text_1",
+      "title": "Free-text run 1",
+      "premise": {
+        "logline": "A mystery in a working town, where the person who has to find out what happened is also the person who will be blamed for it.",
+        "modules": null
+      },
+      "plot_shape": {
+        "id": "mystery",
+        "name": "Mystery",
+        "central_question": "What actually happened, and who is willing to say so?",
+        "phases": [
+          {
+            "name": "Disturbance",
+            "purpose": "A wrong surfaces and someone is obliged to look into it.",
+            "share": 0.2
+          },
+          {
+            "name": "Inquiry",
+            "purpose": "Evidence accumulates, most of it true and misread.",
+            "share": 0.35
+          },
+          {
+            "name": "Wrong turn",
+            "purpose": "A reading of the evidence that is coherent and wrong collapses.",
+            "share": 0.2
+          },
+          {
+            "name": "Solution",
+            "purpose": "The true account, assembled only from what the reader has already been shown.",
+            "share": 0.15
+          },
+          {
+            "name": "Cost",
+            "purpose": "What knowing costs the person who found out.",
+            "share": 0.1
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "investigator",
+            "purpose": "Carries the reader through the inquiry and pays its cost."
+          },
+          {
+            "role": "concealer",
+            "purpose": "Has a reason to keep the true account from being assembled."
+          },
+          {
+            "role": "witness",
+            "purpose": "Holds one true piece and misunderstands its meaning."
+          },
+          {
+            "role": "wronged party",
+            "purpose": "The reason the question matters at all."
+          }
+        ],
+        "obligatory_moves": [
+          "Every element of the true account is on the page before it is stated.",
+          "At least one true detail is shown early in a context that makes it look irrelevant.",
+          "The wrong reading is defensible on the evidence available when it is made."
+        ]
+      },
+      "event_count": 20,
+      "cast": {
+        "characters": 7,
+        "locations": 5,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 10
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "mystery",
+        "premise_preset": "free_text"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_discovery_in_the_cistern",
+        "sequence": 1,
+        "summary": "Jesse examines Toby Callow's body beside the ruptured steam manifold as Constable Pell threatens Jesse with sole criminal liability.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_boiler_house",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_donald_pell",
+          "char_orson_dunlow",
+          "char_toby_callow"
+        ],
+        "dramatic_function": "Establishes the disturbance, the central stakes, and the immediate personal peril hanging over the investigator.",
+        "beats": [
+          "Jesse discovers Toby's body pinned under the sheared steam header pipe in the flooded crawlspace.",
+          "Constable Pell warns Jesse that under the town works compact, Jesse's inspection signature makes him legally liable for manslaughter.",
+          "Superintendent Dunlow demands Jesse inspect the rupture immediately and clear the works before the morning railway audit."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [
+          "clara_sighting_of_mackinaw",
+          "illegal_manifold_bypass"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "jesse_sole_signatory_liability",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "goal",
+            "value": "prove the rupture was caused by tampering rather than inspection negligence"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_superintendents_ledger_inspection",
+        "sequence": 2,
+        "summary": "Dunlow reviews the plant ledger with Jesse in the yard office, snapping an indelible purple copying pencil while ordering the inquiry shut down.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_superintendents_office",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_orson_dunlow"
+        ],
+        "dramatic_function": "Plants the unique indelible pencil casually during an administrative confrontation about the upcoming audit.",
+        "beats": [
+          "Jesse asks for the key vault register to see who had night access to the high-pressure valves.",
+          "Dunlow marks the morning audit timetable with an imported purple aniline pencil, snapping the lead and dusting his desk blotter.",
+          "Dunlow threatens to fire Jesse on the spot if he raises rumors of mechanical failure instead of apprentice error."
+        ],
+        "caused_by": [
+          "ev_01_discovery_in_the_cistern"
+        ],
+        "reveals": [
+          "purple_aniline_ink_smudge"
+        ],
+        "conceals": [
+          "dunlow_forged_work_order"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_superintendents_office"
+          },
+          {
+            "entity_id": "char_orson_dunlow",
+            "column": "location_id",
+            "value": "loc_superintendents_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_inspecting_the_foremans_locker",
+        "sequence": 3,
+        "summary": "Jesse retrieves his test gauges from the maintenance shack and notices torn yellow threads caught on the cuff of his spare work coat.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_foremans_shack",
+        "characters_present": [
+          "char_jesse_vane"
+        ],
+        "dramatic_function": "Plants the frayed coat thread detail while Jesse gathers his mechanical inspection tools.",
+        "beats": [
+          "Jesse unlocks his equipment cabinet to take down his calibrated brass pressure gauges.",
+          "He sees his spare yellow-waxed mackinaw hanging crooked on the peg with frayed threads snagged on the door hasp.",
+          "Jesse grumbles about careless yard hands borrowing gear without asking, grabs his flashlight, and heads back out."
+        ],
+        "caused_by": [
+          "ev_02_superintendents_ledger_inspection"
+        ],
+        "reveals": [
+          "torn_canvas_cuff_thread"
+        ],
+        "conceals": [
+          "dunlow_stolen_coat_use"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_foremans_shack"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_confrontation_at_the_gate",
+        "sequence": 4,
+        "summary": "Martha Callow confronts Jesse at the gatehouse railing, accusing him of sending Toby into a condemned line to protect his own safety record.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_gatehouse",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_clara_fenn",
+          "char_martha_callow"
+        ],
+        "dramatic_function": "Elevates the community antagonism and anchors the emotional imperative of the wronged party.",
+        "beats": [
+          "Martha demands that Jesse look her in the face and explain why her boy was ordered into the cellar at midnight.",
+          "Jesse vows to Martha that he will establish whether the boiler was tampered with before Constable Pell closes the case.",
+          "Clara Fenn warns Jesse quietly that Pell is already writing up an affidavit based on what people saw in the fog."
+        ],
+        "caused_by": [
+          "ev_01_discovery_in_the_cistern"
+        ],
+        "reveals": [],
+        "conceals": [
+          "clara_witness_testimony"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_gatehouse"
+          },
+          {
+            "entity_id": "char_martha_callow",
+            "column": "status",
+            "value": "vengeful"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_interviewing_the_gatekeeper",
+        "sequence": 5,
+        "summary": "Clara admits to Jesse that she logged a figure wearing his yellow waxed mackinaw crossing toward the boiler house at two in the morning.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_gatehouse",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_clara_fenn"
+        ],
+        "dramatic_function": "Delivers the witness's true but misunderstood piece of evidence that directly implicates the investigator.",
+        "beats": [
+          "Jesse inspects Clara's register to see who passed through the turnstile between midnight and the explosion.",
+          "Clara confesses she told Constable Pell she saw Jesse's distinctive yellow coat heading down into the sub-vault at 2:30 AM.",
+          "Clara urges Jesse to tell the truth if he went down there to patch a leak without logging the downtime."
+        ],
+        "caused_by": [
+          "ev_04_confrontation_at_the_gate"
+        ],
+        "reveals": [],
+        "conceals": [
+          "identity_of_mackinaw_wearer"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_callow",
+            "column": "location_id",
+            "value": "loc_foremans_shack"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_searching_the_fitting_shop",
+        "sequence": 6,
+        "summary": "Jesse searches the machine shop and finds freshly turned nickel-alloy flange bolts hidden under Harlan Kemp's lathe bench.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_fitting_shop",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_harlan_kemp"
+        ],
+        "dramatic_function": "Plants the mismatched flange bolts in the fitting shop, providing the material base for the wrong turn.",
+        "beats": [
+          "Jesse examines the shop work orders to identify which machinist fabricated fittings for the boiler lines this week.",
+          "He uncovers an uncataloged box of high-tensile nickel-alloy flange bolts tucked beneath Harlan's lathe.",
+          "Harlan aggressively orders Jesse away from his bench, claiming the bolts are standard scrap turnings."
+        ],
+        "caused_by": [
+          "ev_05_interviewing_the_gatekeeper"
+        ],
+        "reveals": [
+          "mismatched_flange_bolts"
+        ],
+        "conceals": [
+          "harlans_illicit_scrap_sale"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_fitting_shop"
+          },
+          {
+            "entity_id": "char_harlan_kemp",
+            "column": "status",
+            "value": "defensive"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_constables_interrogation",
+        "sequence": 7,
+        "summary": "Constable Pell corners Jesse in the fitting shop, brandishing Clara's signed statement and setting a dawn deadline for Jesse's arrest.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_fitting_shop",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_donald_pell",
+          "char_harlan_kemp"
+        ],
+        "dramatic_function": "Ratchets legal time pressure on Jesse, making the town's impending scapegoating explicit.",
+        "beats": [
+          "Pell informs Jesse that Clara's identification of the yellow mackinaw gives the magistrate sufficient grounds for a warrant.",
+          "Jesse insists someone took his spare coat from the unlocked shack to frame him or mask their own identity.",
+          "Pell gives Jesse two hours to produce physical proof of an intruder before he is taken into custody for manslaughter."
+        ],
+        "caused_by": [
+          "ev_05_interviewing_the_gatekeeper"
+        ],
+        "reveals": [],
+        "conceals": [
+          "true_identity_of_infiltrator"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_donald_pell",
+            "column": "location_id",
+            "value": "loc_fitting_shop"
+          },
+          {
+            "entity_id": "char_donald_pell",
+            "column": "goal",
+            "value": "secure Jesse's confession before the audit train arrives"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_examining_the_victim_effects",
+        "sequence": 8,
+        "summary": "Jesse reviews Toby's personal effects with Martha in the foreman's shack, noting thick waxy animal tallow coating the boy's work gloves.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_foremans_shack",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_martha_callow"
+        ],
+        "dramatic_function": "Plants the animal tallow residue while showing Martha's suspicion of Jesse's motives.",
+        "beats": [
+          "Jesse inventories Toby's tool pouch to return the personal kit to Martha.",
+          "He notices that the boy's heavy leather gauntlets are saturated with stiff animal tallow rather than machine mineral oil.",
+          "Martha accuses Jesse of staring at grease to dodge the fact that he sent Toby into a condemned vault."
+        ],
+        "caused_by": [
+          "ev_04_confrontation_at_the_gate"
+        ],
+        "reveals": [
+          "paraffin_tallow_lubricant"
+        ],
+        "conceals": [
+          "origin_of_tallow_lubricant"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_foremans_shack"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_mapping_the_steam_lines",
+        "sequence": 9,
+        "summary": "Jesse crawls beneath the fractured manifold header with a lantern, mapping the shear lines and discovering that pressure spiked from behind the wall.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_boiler_house",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_toby_callow"
+        ],
+        "dramatic_function": "Deepens the physical investigation of the fracture site and confirms deliberate over-pressurization.",
+        "beats": [
+          "Jesse traces the tear along the bronze header and observes sheared flange studs along the rear manifold wall.",
+          "He calculates that the pressure surge originated not from the boilers, but from an auxiliary branch feeding into the main stack.",
+          "He finds a cracked inspection valve that had been forcibly jammed open with a pipe lever."
+        ],
+        "caused_by": [
+          "ev_07_constables_interrogation"
+        ],
+        "reveals": [],
+        "conceals": [
+          "hidden_bypass_junction"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_boiler_house"
+          },
+          {
+            "entity_id": "obj_steam_manifold",
+            "column": "status",
+            "value": "inspected_by_jesse"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_discovering_the_scrap_ledger",
+        "sequence": 10,
+        "summary": "Jesse returns to the office to report the pressure spike and catches Dunlow hastily pocketing an unauthorized scrap metal manifest.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_superintendents_office",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_orson_dunlow"
+        ],
+        "dramatic_function": "Misdirects Jesse toward the machinist scrap ring by revealing Dunlow's panic over unauthorized metal inventory.",
+        "beats": [
+          "Jesse reports that the manifold blew because auxiliary steam was forced through an unrated flange.",
+          "Dunlow shoves a brass scrap shipping receipt under his blotter and declares that the union machinists have been running pirate castings.",
+          "Dunlow tells Jesse to search Harlan's tooling bench before Pell arrests the wrong man."
+        ],
+        "caused_by": [
+          "ev_09_mapping_the_steam_lines"
+        ],
+        "reveals": [],
+        "conceals": [
+          "dunlows_bribe_payments"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_superintendents_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_gathering_the_fitting_evidence",
+        "sequence": 11,
+        "summary": "Jesse uses his calipers to match Harlan's nickel-alloy bolts against the manifold's sheared studs, convincing himself he has solved the sabotage.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_fitting_shop",
+        "characters_present": [
+          "char_jesse_vane"
+        ],
+        "dramatic_function": "Assembles the false reading of the evidence, cementing Jesse's plausible but mistaken deduction.",
+        "beats": [
+          "Jesse measures the thread pitch of the nickel bolts from Harlan's bench against the fractured studs from the boiler room.",
+          "The thread count matches perfectly, leading Jesse to believe Harlan replaced the factory safety studs with brittle bootleg turnings.",
+          "Confident he can clear himself of manslaughter, Jesse gathers the bolts to confront Harlan publicly."
+        ],
+        "caused_by": [
+          "ev_06_searching_the_fitting_shop",
+          "ev_10_discovering_the_scrap_ledger"
+        ],
+        "reveals": [],
+        "conceals": [
+          "manifold_true_thread_pitch"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_fitting_shop"
+          },
+          {
+            "entity_id": "char_harlan_kemp",
+            "column": "location_id",
+            "value": "loc_boiler_house"
+          },
+          {
+            "entity_id": "char_donald_pell",
+            "column": "location_id",
+            "value": "loc_gatehouse"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_accusing_the_lathe_machinist",
+        "sequence": 12,
+        "summary": "Jesse confronts Harlan in the boiler house before Constable Pell, accusing him of causing Toby's death with counterfeit nickel-alloy studs.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_boiler_house",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_harlan_kemp",
+          "char_donald_pell",
+          "char_toby_callow"
+        ],
+        "dramatic_function": "The Wrong Turn detonates: the investigator presents an internally consistent case that targets the wrong suspect.",
+        "beats": [
+          "Jesse presents the nickel bolts, accusing Harlan of stealing brass and installing defective home-turned studs on the manifold.",
+          "Constable Pell grabs Harlan by the coat, declaring the manslaughter case resolved before the audit train arrives.",
+          "Harlan screams that he never touched Boiler Three and that Jesse is fabricating evidence to save his own neck."
+        ],
+        "caused_by": [
+          "ev_11_gathering_the_fitting_evidence"
+        ],
+        "reveals": [],
+        "conceals": [
+          "harlans_ironclad_alibi"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "mismatched_flange_bolts",
+            "plant": "ev_06_searching_the_fitting_shop"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_boiler_house"
+          },
+          {
+            "entity_id": "char_donald_pell",
+            "column": "location_id",
+            "value": "loc_boiler_house"
+          },
+          {
+            "entity_id": "char_harlan_kemp",
+            "column": "status",
+            "value": "arrested_provisional"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_collapse_of_the_machinist_theory",
+        "sequence": 13,
+        "summary": "At the gatehouse, Clara pulls the town lockup slip showing Harlan was jailed for public drunkenness until four in the morning, destroying Jesse's case.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_gatehouse",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_donald_pell",
+          "char_clara_fenn",
+          "char_harlan_kemp"
+        ],
+        "dramatic_function": "The false hypothesis completely collapses under indisputable third-party documentation.",
+        "beats": [
+          "Clara produces the town lockup receipt stamped by the desk sergeant, proving Harlan was behind bars from midnight to 4:00 AM.",
+          "Pell releases Harlan immediately and turns on Jesse in outrage for concocting a reckless frame-up.",
+          "Jesse realizes with mounting dread that the matching bolt thread was purely circumstantial and that his time has run out."
+        ],
+        "caused_by": [
+          "ev_12_accusing_the_lathe_machinist"
+        ],
+        "reveals": [],
+        "conceals": [
+          "true_manifold_culprit"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_gatehouse"
+          },
+          {
+            "entity_id": "char_donald_pell",
+            "column": "location_id",
+            "value": "loc_gatehouse"
+          },
+          {
+            "entity_id": "char_harlan_kemp",
+            "column": "location_id",
+            "value": "loc_gatehouse"
+          },
+          {
+            "entity_id": "char_harlan_kemp",
+            "column": "status",
+            "value": "cleared"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_ultimatum_in_the_shack",
+        "sequence": 14,
+        "summary": "Pell marches Jesse into the foreman's shack beside Martha, giving him thirty minutes before formal arrest while Martha curses his cowardice.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_foremans_shack",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_martha_callow",
+          "char_donald_pell"
+        ],
+        "dramatic_function": "The investigator hits rock bottom, utterly discredited, facing imminent ruin and total community contempt.",
+        "beats": [
+          "Martha denounces Jesse for trying to pin her boy's slaughter on an innocent lathe operator.",
+          "Pell lays out the arrest warrant on the workbench and announces the rail company van will transport Jesse to the county seat at dawn.",
+          "Pell leaves Jesse under shack guard while he goes to the gate to meet the incoming auditor."
+        ],
+        "caused_by": [
+          "ev_13_collapse_of_the_machinist_theory"
+        ],
+        "reveals": [],
+        "conceals": [
+          "bypass_valve_existence"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_foremans_shack"
+          },
+          {
+            "entity_id": "char_donald_pell",
+            "column": "location_id",
+            "value": "loc_foremans_shack"
+          },
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "status",
+            "value": "disgraced_suspect"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_retesting_the_residue",
+        "sequence": 15,
+        "summary": "Left alone with Martha, Jesse melts the grease from Toby's gloves over a spirit lamp and recognizes tallow used solely in the old unmetered bypass.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_foremans_shack",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_martha_callow"
+        ],
+        "dramatic_function": "The pivotal realization: re-evaluating the physical residue unlocks the true mechanical crime.",
+        "beats": [
+          "Jesse heats the grease scrapings from Toby's gloves over his burner, smelling scorched animal fat and resin packing.",
+          "He realizes that tallow was never used in modern boilers; it was only packed into the condemned 1880 bypass that skirts the city steam meter.",
+          "Jesse deduces that Toby was ordered to open an illegal bypass line to fake steam capacity for the audit."
+        ],
+        "caused_by": [
+          "ev_14_ultimatum_in_the_shack"
+        ],
+        "reveals": [],
+        "conceals": [
+          "identity_of_bypass_operator"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "paraffin_tallow_lubricant",
+            "plant": "ev_08_examining_the_victim_effects"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_donald_pell",
+            "column": "location_id",
+            "value": "loc_gatehouse"
+          },
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "goal",
+            "value": "expose the illegal bypass and its true operator"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_dissecting_the_manifold_valve",
+        "sequence": 16,
+        "summary": "Jesse slips into the bypass tunnel, finding torn yellow coat threads on the valve wheel and proving it was forced clockwise by a right-handed man.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_boiler_house",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_toby_callow"
+        ],
+        "dramatic_function": "Connects the physical proof at the scene directly to the stolen coat and eliminates Toby as the valve operator.",
+        "beats": [
+          "Jesse pulls away the bricking behind the boiler and exposes the unauthorized bypass pipe packed with fresh tallow.",
+          "He retrieves frayed yellow waxed-canvas threads wedged tight inside the petcock wheel spokes, matching his shack coat.",
+          "He observes that the bypass cheater bar was pulled right-handed with massive force, impossible for Toby who worked left-handed due to missing right fingers."
+        ],
+        "caused_by": [
+          "ev_15_retesting_the_residue"
+        ],
+        "reveals": [],
+        "conceals": [
+          "dunlows_forged_tag"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "torn_canvas_cuff_thread",
+            "plant": "ev_03_inspecting_the_foremans_locker"
+          },
+          {
+            "fact_ref": "toby_left_handed_grip",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_boiler_house"
+          },
+          {
+            "entity_id": "obj_steam_manifold",
+            "column": "status",
+            "value": "tampering_proven"
+          }
+        ]
+      },
+      {
+        "id": "ev_17_confronting_the_superintendent",
+        "sequence": 17,
+        "summary": "Jesse corners Dunlow in his office, matching the purple aniline ink on the forged bypass work slip to Dunlow's German copying pencil.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_superintendents_office",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_orson_dunlow"
+        ],
+        "dramatic_function": "The solution is stated: the investigator assembles the complete true account and traps the concealer.",
+        "beats": [
+          "Jesse lays the bypass valve tag on Dunlow's desk beside the broken yellow threads and the animal tallow residue.",
+          "He shows that the forged initials authorizing the pressure diversion were written in Dunlow's distinct purple aniline indelible pencil.",
+          "Jesse exposes how Dunlow wore Jesse's spare coat into the sub-vault, forced the bypass to trick the audit, and fled when the tallow seal gave way."
+        ],
+        "caused_by": [
+          "ev_16_dissecting_the_manifold_valve"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "purple_aniline_ink_smudge",
+            "plant": "ev_02_superintendents_ledger_inspection"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_superintendents_office"
+          },
+          {
+            "entity_id": "char_orson_dunlow",
+            "column": "status",
+            "value": "unmasked"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_public_revelation",
+        "sequence": 18,
+        "summary": "Jesse drags Dunlow to the yard gate before Pell and Martha, forcing Dunlow to show his scalded wrist and confess to the illegal bypass.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_gatehouse",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_orson_dunlow",
+          "char_donald_pell",
+          "char_martha_callow",
+          "char_clara_fenn"
+        ],
+        "dramatic_function": "Public resolution of the mystery; the scapegoat forces the true account onto the record in front of all parties.",
+        "beats": [
+          "Jesse strips back Dunlow's cuff, exposing fresh superheated steam burns on his right forearm where the bypass flared.",
+          "Faced with the purple pencil slip, the threads, and his burns, Dunlow breaks down and admits he caused the blowout to pass the audit.",
+          "Constable Pell drops the warrant against Jesse and locks the cuffs onto Superintendent Dunlow."
+        ],
+        "caused_by": [
+          "ev_17_confronting_the_superintendent"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_gatehouse"
+          },
+          {
+            "entity_id": "char_orson_dunlow",
+            "column": "location_id",
+            "value": "loc_gatehouse"
+          },
+          {
+            "entity_id": "char_martha_callow",
+            "column": "location_id",
+            "value": "loc_gatehouse"
+          },
+          {
+            "entity_id": "char_orson_dunlow",
+            "column": "status",
+            "value": "arrested"
+          },
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "status",
+            "value": "exonerated"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_condemnation_of_the_works",
+        "sequence": 19,
+        "summary": "The visiting railway auditor condemns the plant due to the illegal bypass, padlocking the yard gate and leaving the town destitute.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_gatehouse",
+        "characters_present": [
+          "char_jesse_vane",
+          "char_harlan_kemp",
+          "char_clara_fenn",
+          "char_martha_callow"
+        ],
+        "dramatic_function": "First beat of the cost: proving the truth triggers immediate systemic collapse and community ruin.",
+        "beats": [
+          "The railway auditor cancels the acquisition contract and padlocks the main gatehouse on grounds of structural fraud.",
+          "Harlan and the arriving day-shift workers realize the works are shuttered forever and turn their bitter rage on Jesse for speaking up.",
+          "Martha tells Jesse that while he cleared Toby's name, he has starved every living child in Dunlow."
+        ],
+        "caused_by": [
+          "ev_18_public_revelation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_donald_pell",
+            "column": "location_id",
+            "value": "loc_foremans_shack"
+          },
+          {
+            "entity_id": "char_orson_dunlow",
+            "column": "location_id",
+            "value": "loc_foremans_shack"
+          },
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "goal",
+            "value": "accept the personal cost of the truth"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_departure_from_dunlow",
+        "sequence": 20,
+        "summary": "Jesse packs his gauges in the abandoned maintenance shack, exiled by the community he saved from a lie, and walks down the tracks alone.",
+        "pov": "char_jesse_vane",
+        "location_id": "loc_foremans_shack",
+        "characters_present": [
+          "char_jesse_vane"
+        ],
+        "dramatic_function": "The final cost paid: thematic completion of the investigator's isolation in a working town that cannot forgive what he proved.",
+        "beats": [
+          "Jesse wraps his brass calipers in oiled cloth and takes his nameplate off the maintenance cabinet.",
+          "He looks out at the cold chimneys of the shuttered works, knowing he is officially blameless but completely unemployable.",
+          "Jesse hoists his tool bag onto his shoulder and steps onto the railway ties, heading out of the valley into the grey dawn."
+        ],
+        "caused_by": [
+          "ev_19_condemnation_of_the_works"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "location_id",
+            "value": "loc_foremans_shack"
+          },
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "status",
+            "value": "departed"
+          },
+          {
+            "entity_id": "char_jesse_vane",
+            "column": "goal",
+            "value": "find work elsewhere"
+          }
+        ]
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-17T16:52:57.613Z",
+    "started_at": "2026-09-17T16:52:08.563Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_ruptured_manifold",
+        "order": 1,
+        "event_ids": [
+          "ev_01_discovery_in_the_cistern"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_yard_ledger",
+        "order": 2,
+        "event_ids": [
+          "ev_02_superintendents_ledger_inspection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_spare_coat",
+        "order": 3,
+        "event_ids": [
+          "ev_03_inspecting_the_foremans_locker"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_at_the_gatehouse",
+        "order": 4,
+        "event_ids": [
+          "ev_04_confrontation_at_the_gate",
+          "ev_05_interviewing_the_gatekeeper"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_lathe_bench",
+        "order": 5,
+        "event_ids": [
+          "ev_06_searching_the_fitting_shop",
+          "ev_07_constables_interrogation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_tallow_on_gloves",
+        "order": 6,
+        "event_ids": [
+          "ev_08_examining_the_victim_effects"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_sub_vault_header",
+        "order": 7,
+        "event_ids": [
+          "ev_09_mapping_the_steam_lines"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_dunlows_blotter",
+        "order": 8,
+        "event_ids": [
+          "ev_10_discovering_the_scrap_ledger"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_matching_the_thread",
+        "order": 9,
+        "event_ids": [
+          "ev_11_gathering_the_fitting_evidence"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_accusation",
+        "order": 10,
+        "event_ids": [
+          "ev_12_accusing_the_lathe_machinist"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_the_broken_alibi",
+        "order": 11,
+        "event_ids": [
+          "ev_13_collapse_of_the_machinist_theory"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_grease_on_the_lamp",
+        "order": 12,
+        "event_ids": [
+          "ev_14_ultimatum_in_the_shack",
+          "ev_15_retesting_the_residue"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_bypass_tunnel",
+        "order": 13,
+        "event_ids": [
+          "ev_16_dissecting_the_manifold_valve"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_14_the_confrontation",
+        "order": 14,
+        "event_ids": [
+          "ev_17_confronting_the_superintendent"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_15_the_gatehouse_reckoning",
+        "order": 15,
+        "event_ids": [
+          "ev_18_public_revelation",
+          "ev_19_condemnation_of_the_works"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_16_the_departure",
+        "order": 16,
+        "event_ids": [
+          "ev_20_departure_from_dunlow"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+    ]
+  }
+}

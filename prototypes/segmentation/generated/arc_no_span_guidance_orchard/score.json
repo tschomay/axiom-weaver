@@ -1,0 +1,221 @@
+{
+  "story_id": "arc_no_span_guidance_orchard",
+  "segmenter_models": [
+    "gemini-3.8-flash"
+  ],
+  "events": 20,
+  "scenes": 13,
+  "events_per_scene": 1.5384615384615385,
+  "telling_order_basis": "fabula_sequence",
+  "telling_order_displaced": 0,
+  "self_consistency": null,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "mechanical": {
+    "story_id": "arc_no_span_guidance_orchard",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_coop_covenant_ledger",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_diesel_saw",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_coop_covenant_ledger",
+            "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_diesel_saw",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 11,
+      "reachable": 11,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 12,
+        "compared": 10
+      },
+      "vacuous": false,
+      "passed": true
+    },
+    "presence": {
+      "problems": [],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 7,
+      "reachable": 7,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 13,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "russet_pear_unregistered",
+          "payoff_event": "scene_02_the_packing_shed",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "agdev_buyout_bonus",
+          "payoff_event": "scene_04_the_farmhouse_confrontation",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "clean_cambium_girdling",
+          "payoff_event": "scene_06_the_shed_inspection",
+          "plant_event": "scene_01_the_felled_russets",
+          "span": 5
+        },
+        {
+          "fact_ref": "coop_founding_covenant",
+          "payoff_event": "scene_09_the_archive_charter",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "gorse_secret_patent_draft",
+          "payoff_event": "scene_10_the_packing_confrontation",
+          "plant_event": "scene_06_the_shed_inspection",
+          "span": 4
+        },
+        {
+          "fact_ref": "corin_alibi_breakdown",
+          "payoff_event": "scene_10_the_packing_confrontation",
+          "plant_event": "scene_09_the_archive_charter",
+          "span": 1
+        },
+        {
+          "fact_ref": "blue_chalk_traces",
+          "payoff_event": "scene_11_the_hidden_knife",
+          "plant_event": "scene_03_tracking_the_lorry",
+          "span": 8
+        },
+        {
+          "fact_ref": "missing_copper_knife",
+          "payoff_event": "scene_11_the_hidden_knife",
+          "plant_event": "scene_05_the_missing_knife",
+          "span": 6
+        },
+        {
+          "fact_ref": "ledger_indemnity_clause",
+          "payoff_event": "scene_12_tomas_s_confession",
+          "plant_event": "scene_09_the_archive_charter",
+          "span": 3
+        },
+        {
+          "fact_ref": "hidden_scion_cache",
+          "payoff_event": "scene_12_tomas_s_confession",
+          "plant_event": "scene_11_the_hidden_knife",
+          "span": 1
+        },
+        {
+          "fact_ref": "knife_notch_mark",
+          "payoff_event": "scene_13_the_parish_hearing",
+          "plant_event": null,
+          "span": null
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "1": 2,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "8": 1
+        },
+        "seed_grounded": 4,
+        "edges": 11,
+        "mean": 4,
+        "median": 4,
+        "min": 1,
+        "max": 8,
+        "share_span_1": 0.2857142857142857
+      }
+    },
+    "lexical_canary": [],
+    "all_gates_passed": true
+  },
+  "generator_all_gates_passed": true,
+  "plant_edges": {
+    "authored_by_generator": 11,
+    "authored_seed_grounded": 4,
+    "carried_onto_scenes": 11,
+    "dangling": 0,
+    "proposed_by_segmentation": 0,
+    "verified": 0,
+    "unrepresentable": 0,
+    "on_scene_cards": 11
+  },
+  "span_histogram_after": {
+    "counts": {
+      "1": 2,
+      "3": 1,
+      "4": 1,
+      "5": 1,
+      "6": 1,
+      "8": 1
+    },
+    "seed_grounded": 4,
+    "edges": 11,
+    "mean": 4,
+    "median": 4,
+    "min": 1,
+    "max": 8,
+    "share_span_1": 0.2857142857142857
+  },
+  "unscoreable": {
+    "boundary precision/recall (§3.5)": "needs a fixture segmentation of the same story and source offsets to place it in; a generated arc is the only authoring of itself and has no source text",
+    "required_beats coverage (§3.5)": "judged against a fixture scene's beats; there is no fixture scene",
+    "beat invention rate (§3.5)": "judged against the source the beat claims to come from; there is no source",
+    "pov/location accuracy (§3.5)": "agreement with a fixture; there is no fixture",
+    "source coverage (§3.5)": "the fraction of a source text assigned to a scene; there is no source",
+    "reveal-order fidelity (§3.6)": "pairwise against the fixture order; there is no fixture order",
+    "premature reveal count (§3.6)": "a reveal is premature relative to where the source discloses it; there is no source",
+    "must_stay_hidden recall (§3.6)": "recall against the fixture's withholding; there is no fixture",
+    "plant/payoff pair recall (§3.7)": "against the fixture's graph — but see pairs_from_generator below, which is the same question asked against the generator's own authored graph, and is answerable"
+  }
+}

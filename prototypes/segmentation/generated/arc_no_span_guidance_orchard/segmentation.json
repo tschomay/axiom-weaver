@@ -1,0 +1,467 @@
+{
+  "story_id": "arc_no_span_guidance_orchard",
+  "generator": "segmentation pipeline (#118)",
+  "models_used": [
+    "gemini-3.8-flash"
+  ],
+  "requested_model": "gemini-3.8-flash",
+  "segmented_at": "2026-09-17T16:55:42.910Z",
+  "cost_usd": 0.02249025,
+  "calls": [
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 0 (0–20)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2858,
+      "output_tokens": 1066,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.006141,
+      "ms": 3053,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 919,
+      "output_tokens": 620,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00301425,
+      "ms": 7363,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1019,
+      "output_tokens": 584,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00295425,
+      "ms": 4517,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 9–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1463,
+      "output_tokens": 662,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00357975,
+      "ms": 5712,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 13–13",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 623,
+      "output_tokens": 244,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00138225,
+      "ms": 4661,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 1–13",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2104,
+      "output_tokens": 9,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00161175,
+      "ms": 5660,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1271,
+      "output_tokens": 134,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00145575,
+      "ms": 6444,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 5–7",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2520,
+      "output_tokens": 123,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00235125,
+      "ms": 5568,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "events": 20,
+  "scenes": 13,
+  "events_per_scene": 1.5384615384615385,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "telling_order": {
+    "basis": "fabula_sequence",
+    "displaced": 0
+  },
+  "boundaries": {
+    "windows": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 20
+      }
+    ],
+    "window_problems": [],
+    "failed_windows": [],
+    "fell_back_to_signals": 0,
+    "disagreements": 0,
+    "judged_adjacencies": 19,
+    "self_consistency": null,
+    "decisions": [
+      {
+        "index": 0,
+        "after_event_id": "ev_02_buyout_inventory_threat",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Change of location to the packing shed with different characters.",
+        "from_signals": false
+      },
+      {
+        "index": 1,
+        "after_event_id": "ev_03_inspecting_boundary_gate",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Relocation back to the terrace perimeter with Judith.",
+        "from_signals": false
+      },
+      {
+        "index": 2,
+        "after_event_id": "ev_04_confronting_gorse_homestead",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cut to Julian's farmhouse for a confrontation.",
+        "from_signals": false
+      },
+      {
+        "index": 3,
+        "after_event_id": "ev_05_missing_grafting_knife",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Change of location to Martha's cottage workshop.",
+        "from_signals": false
+      },
+      {
+        "index": 4,
+        "after_event_id": "ev_06_auditing_shared_tools",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cut to the packing shed to inspect cooperative tools with Corin.",
+        "from_signals": false
+      },
+      {
+        "index": 5,
+        "after_event_id": "ev_07_gorse_draft_patent_found",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous investigation within the packing shed/office.",
+        "from_signals": false
+      },
+      {
+        "index": 6,
+        "after_event_id": "ev_08_judiths_misguided_witness",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Relocation to the high terrace with Judith.",
+        "from_signals": false
+      },
+      {
+        "index": 7,
+        "after_event_id": "ev_09_interrogating_corin_fenn",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move to the Gorse homestead to confront Corin.",
+        "from_signals": false
+      },
+      {
+        "index": 8,
+        "after_event_id": "ev_10_arthurs_defence_of_corin",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cut to the parish hall with Arthur Fenn.",
+        "from_signals": false
+      },
+      {
+        "index": 9,
+        "after_event_id": "ev_11_the_old_covenant_warning",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation with Arthur in the parish hall.",
+        "from_signals": false
+      },
+      {
+        "index": 10,
+        "after_event_id": "ev_12_discovering_indemnity_clause",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Ongoing investigation within the parish hall archive.",
+        "from_signals": false
+      },
+      {
+        "index": 11,
+        "after_event_id": "ev_13_the_shed_confrontation",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Change of location to the packing shed gathering.",
+        "from_signals": false
+      },
+      {
+        "index": 12,
+        "after_event_id": "ev_14_collapse_of_the_allegation",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous public meeting and confrontation in the packing shed.",
+        "from_signals": false
+      },
+      {
+        "index": 13,
+        "after_event_id": "ev_15_confiding_the_secret_scions",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to Martha's cottage in private with Tomas.",
+        "from_signals": false
+      },
+      {
+        "index": 14,
+        "after_event_id": "ev_16_the_evidence_in_the_workshop",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous scene at the cottage workshop with Tomas.",
+        "from_signals": false
+      },
+      {
+        "index": 15,
+        "after_event_id": "ev_17_tomas_confession",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate continuation of Tomas's confession in the cottage.",
+        "from_signals": false
+      },
+      {
+        "index": 16,
+        "after_event_id": "ev_18_the_grafters_choice",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Resolution of the conversation and decision right after confession.",
+        "from_signals": false
+      },
+      {
+        "index": 17,
+        "after_event_id": "ev_19_presenting_the_authorship_proof",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jump to the closing meeting at the parish hall.",
+        "from_signals": false
+      },
+      {
+        "index": 18,
+        "after_event_id": "ev_20_the_price_of_truth",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conclusion of the parish hall closing meeting.",
+        "from_signals": false
+      }
+    ]
+  },
+  "grouping": {
+    "judged_boundaries": 11,
+    "forced_by_plant_span": 1,
+    "forced_by_size": 0,
+    "unseparable_plant_spans": []
+  },
+  "scene_properties": {
+    "failed_batches": 0,
+    "pov_fallbacks": 0,
+    "location_fallbacks": 0,
+    "location_inherited": 0,
+    "beat_fallbacks": 0,
+    "function_fallbacks": 0
+  },
+  "substitutions": {
+    "pov_from_seed": 0,
+    "location_from_seed": 0,
+    "pov_from_candidates": 0,
+    "location_from_candidates": 0,
+    "beats_from_events": 0
+  },
+  "state": {
+    "dropped_unknown_entity": 0,
+    "dropped_entity_ids": [],
+    "dropped_unknown_column": 0
+  },
+  "plants": {
+    "carried_from_fabula": 11,
+    "dangling_plants": 0,
+    "proposed": 0,
+    "rejected_malformed": 0,
+    "verified": 0,
+    "rejected_by_verifier": 0,
+    "unverified_dropped": 0,
+    "seed_grounded_unrepresentable": 0,
+    "failed_batches": 0,
+    "accepted": [
+      {
+        "fact_ref": "russet_pear_unregistered",
+        "plant": null,
+        "payoff": "scene_02_the_packing_shed",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "agdev_buyout_bonus",
+        "plant": null,
+        "payoff": "scene_04_the_farmhouse_confrontation",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "clean_cambium_girdling",
+        "plant": "scene_01_the_felled_russets",
+        "payoff": "scene_06_the_shed_inspection",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "coop_founding_covenant",
+        "plant": null,
+        "payoff": "scene_09_the_archive_charter",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "gorse_secret_patent_draft",
+        "plant": "scene_06_the_shed_inspection",
+        "payoff": "scene_10_the_packing_confrontation",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "corin_alibi_breakdown",
+        "plant": "scene_09_the_archive_charter",
+        "payoff": "scene_10_the_packing_confrontation",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "blue_chalk_traces",
+        "plant": "scene_03_tracking_the_lorry",
+        "payoff": "scene_11_the_hidden_knife",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "missing_copper_knife",
+        "plant": "scene_05_the_missing_knife",
+        "payoff": "scene_11_the_hidden_knife",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "ledger_indemnity_clause",
+        "plant": "scene_09_the_archive_charter",
+        "payoff": "scene_12_tomas_s_confession",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "hidden_scion_cache",
+        "plant": "scene_11_the_hidden_knife",
+        "payoff": "scene_12_tomas_s_confession",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "knife_notch_mark",
+        "plant": null,
+        "payoff": "scene_13_the_parish_hearing",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      }
+    ]
+  },
+  "told_ledger": {
+    "facts": 7,
+    "withheld_scene_entries": 1,
+    "rejected_out_of_range": 0,
+    "failed_batches": 0
+  },
+  "lint": {
+    "problems": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_coop_covenant_ledger",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_diesel_saw",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_coop_covenant_ledger",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_diesel_saw",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "publishable": true
+  },
+  "vacuous_checks": [
+    "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+    "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+    "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+  ]
+}

@@ -1,0 +1,472 @@
+{
+  "story_id": "arc_free_text_1",
+  "generator": "segmentation pipeline (#118)",
+  "models_used": [
+    "gemini-3.8-flash"
+  ],
+  "requested_model": "gemini-3.8-flash",
+  "segmented_at": "2026-09-17T16:52:57.613Z",
+  "cost_usd": 0.0253305,
+  "calls": [
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 0 (0–20)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 3033,
+      "output_tokens": 1130,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00651225,
+      "ms": 2987,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1083,
+      "output_tokens": 626,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00315975,
+      "ms": 5607,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1049,
+      "output_tokens": 616,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00309675,
+      "ms": 6809,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 9–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1118,
+      "output_tokens": 627,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00318975,
+      "ms": 5041,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 13–16",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1143,
+      "output_tokens": 645,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.003276,
+      "ms": 6049,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 1–16",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2167,
+      "output_tokens": 228,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00248025,
+      "ms": 6159,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_verification",
+      "label": "pairs 1–2",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 627,
+      "output_tokens": 197,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.001209,
+      "ms": 4460,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1065,
+      "output_tokens": 142,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00133125,
+      "ms": 6930,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 5–6",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1049,
+      "output_tokens": 77,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0010755,
+      "ms": 5002,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "events": 20,
+  "scenes": 16,
+  "events_per_scene": 1.25,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "telling_order": {
+    "basis": "fabula_sequence",
+    "displaced": 0
+  },
+  "boundaries": {
+    "windows": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 20
+      }
+    ],
+    "window_problems": [],
+    "failed_windows": [],
+    "fell_back_to_signals": 0,
+    "disagreements": 0,
+    "judged_adjacencies": 19,
+    "self_consistency": null,
+    "decisions": [
+      {
+        "index": 0,
+        "after_event_id": "ev_02_superintendents_ledger_inspection",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Location moves to the superintendent's office for an administrative meeting.",
+        "from_signals": false
+      },
+      {
+        "index": 1,
+        "after_event_id": "ev_03_inspecting_the_foremans_locker",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse moves alone to the maintenance shack to gather tools.",
+        "from_signals": false
+      },
+      {
+        "index": 2,
+        "after_event_id": "ev_04_confrontation_at_the_gate",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Location shifts to the gatehouse where Martha confronts Jesse.",
+        "from_signals": false
+      },
+      {
+        "index": 3,
+        "after_event_id": "ev_05_interviewing_the_gatekeeper",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous scene at the gatehouse as Clara reveals her testimony.",
+        "from_signals": false
+      },
+      {
+        "index": 4,
+        "after_event_id": "ev_06_searching_the_fitting_shop",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Location changes to the fitting shop to investigate Harlan Kemp.",
+        "from_signals": false
+      },
+      {
+        "index": 5,
+        "after_event_id": "ev_07_constables_interrogation",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Constable Pell corners Jesse in the fitting shop right after the search.",
+        "from_signals": false
+      },
+      {
+        "index": 6,
+        "after_event_id": "ev_08_examining_the_victim_effects",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cut to the foreman's shack to examine Toby's effects with Martha.",
+        "from_signals": false
+      },
+      {
+        "index": 7,
+        "after_event_id": "ev_09_mapping_the_steam_lines",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse heads back to the boiler house alone with a lantern.",
+        "from_signals": false
+      },
+      {
+        "index": 8,
+        "after_event_id": "ev_10_discovering_the_scrap_ledger",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse goes to the superintendent's office to report to Dunlow.",
+        "from_signals": false
+      },
+      {
+        "index": 9,
+        "after_event_id": "ev_11_gathering_the_fitting_evidence",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse returns to the fitting shop to measure the bolts.",
+        "from_signals": false
+      },
+      {
+        "index": 10,
+        "after_event_id": "ev_12_accusing_the_lathe_machinist",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Confrontation convenes in the boiler house before Pell.",
+        "from_signals": false
+      },
+      {
+        "index": 11,
+        "after_event_id": "ev_13_collapse_of_the_machinist_theory",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "The party moves to the gatehouse where Clara produces the lockup slip.",
+        "from_signals": false
+      },
+      {
+        "index": 12,
+        "after_event_id": "ev_14_ultimatum_in_the_shack",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Pell marches Jesse into the foreman's shack under guard.",
+        "from_signals": false
+      },
+      {
+        "index": 13,
+        "after_event_id": "ev_15_retesting_the_residue",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Jesse remains in the shack with Martha after Pell leaves, testing the grease.",
+        "from_signals": false
+      },
+      {
+        "index": 14,
+        "after_event_id": "ev_16_dissecting_the_manifold_valve",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse slips into the bypass tunnel/boiler house to inspect the valve.",
+        "from_signals": false
+      },
+      {
+        "index": 15,
+        "after_event_id": "ev_17_confronting_the_superintendent",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Jesse enters Dunlow's office for the climactic confrontation.",
+        "from_signals": false
+      },
+      {
+        "index": 16,
+        "after_event_id": "ev_18_public_revelation",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dunlow is dragged out to the yard gate for the public exposure.",
+        "from_signals": false
+      },
+      {
+        "index": 17,
+        "after_event_id": "ev_19_condemnation_of_the_works",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous aftermath at the gate as the auditor padlocks the works.",
+        "from_signals": false
+      },
+      {
+        "index": 18,
+        "after_event_id": "ev_20_departure_from_dunlow",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time skip to Jesse packing alone in the maintenance shack and leaving.",
+        "from_signals": false
+      }
+    ]
+  },
+  "grouping": {
+    "judged_boundaries": 15,
+    "forced_by_plant_span": 0,
+    "forced_by_size": 0,
+    "unseparable_plant_spans": []
+  },
+  "scene_properties": {
+    "failed_batches": 0,
+    "pov_fallbacks": 0,
+    "location_fallbacks": 0,
+    "location_inherited": 0,
+    "beat_fallbacks": 0,
+    "function_fallbacks": 0
+  },
+  "substitutions": {
+    "pov_from_seed": 0,
+    "location_from_seed": 0,
+    "pov_from_candidates": 0,
+    "location_from_candidates": 0,
+    "beats_from_events": 0
+  },
+  "state": {
+    "dropped_unknown_entity": 0,
+    "dropped_entity_ids": [],
+    "dropped_unknown_column": 0
+  },
+  "plants": {
+    "carried_from_fabula": 6,
+    "dangling_plants": 0,
+    "proposed": 2,
+    "rejected_malformed": 0,
+    "verified": 2,
+    "rejected_by_verifier": 0,
+    "unverified_dropped": 0,
+    "seed_grounded_unrepresentable": 0,
+    "failed_batches": 0,
+    "accepted": [
+      {
+        "fact_ref": "jesse_sole_signatory_liability",
+        "plant": null,
+        "payoff": "scene_01_the_ruptured_manifold",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "mismatched_flange_bolts",
+        "plant": "scene_05_the_lathe_bench",
+        "payoff": "scene_10_the_accusation",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "paraffin_tallow_lubricant",
+        "plant": "scene_06_tallow_on_gloves",
+        "payoff": "scene_12_grease_on_the_lamp",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "torn_canvas_cuff_thread",
+        "plant": "scene_03_the_spare_coat",
+        "payoff": "scene_13_the_bypass_tunnel",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "toby_left_handed_grip",
+        "plant": null,
+        "payoff": "scene_13_the_bypass_tunnel",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "purple_aniline_ink_smudge",
+        "plant": "scene_02_the_yard_ledger",
+        "payoff": "scene_14_the_confrontation",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "promise_to_martha",
+        "plant": "scene_04_at_the_gatehouse",
+        "payoff": "scene_15_the_gatehouse_reckoning",
+        "why": "Jesse promises Martha Callow that he will uncover the truth behind Toby's death before Constable Pell concludes the case.",
+        "type": "speech_act"
+      },
+      {
+        "fact_ref": "clara_eyewitness_yellow_mackinaw",
+        "plant": "scene_04_at_the_gatehouse",
+        "payoff": "scene_14_the_confrontation",
+        "why": "Clara informs Jesse that she saw someone wearing his yellow mackinaw heading toward the sub-vault during the night.",
+        "type": "event"
+      }
+    ]
+  },
+  "told_ledger": {
+    "facts": 6,
+    "withheld_scene_entries": 0,
+    "rejected_out_of_range": 0,
+    "failed_batches": 0
+  },
+  "lint": {
+    "problems": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_waxed_mackinaw",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_gate_register",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_aniline_pencil",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_waxed_mackinaw",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_gate_register",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_aniline_pencil",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "publishable": true
+  },
+  "vacuous_checks": [
+    "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+    "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+    "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+  ]
+}

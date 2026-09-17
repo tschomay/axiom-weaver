@@ -24,7 +24,7 @@ import { StoryPackageSchema, WorldModelSeedSchema } from '@/schema/story-package
 import { DraftStoryPackageSchema } from '@/schema/manuscript';
 import { MAX_EVENTS_PER_SCENE, group, mechanicalBoundaries } from '@/segmentation/grouping';
 import { assertWindowed, eventWindows, findBoundaries } from '@/segmentation/pass-boundaries';
-import { carryForward } from '@/segmentation/pass-plants';
+import { carryForward, proposePairs } from '@/segmentation/pass-plants';
 import { draftScenes } from '@/segmentation/pass-scene-cards';
 import { adjacencies, signalAvailability, tellingOrder } from '@/segmentation/signals';
 import { replayStates } from '@/segmentation/state';
@@ -490,6 +490,49 @@ describe('plant/payoff graph', () => {
     expect(carried.dangling_plants).toBe(0);
   });
 
+  /**
+   * #120. The guard that stops an authored edge being proposed back to itself lives in the
+   * prompt, not in a `fact_ref` comparison downstream, because the two layers name the same fact
+   * differently. Measured before the change: 4 of 5 "new" pairs per generated arc sat on a scene
+   * pair the generator had already authored, under an alias of its own slug.
+   */
+  it('shows the proposal pass what the Fabula layer already declared', async () => {
+    const client = new StubClient();
+    const sketches = [
+      { id: 'scene_01', order: 1, dramatic_function: 'plant', required_beats: ['a'] },
+      { id: 'scene_02', order: 2, dramatic_function: 'payoff', required_beats: ['b'] },
+    ];
+    await proposePairs(new ExtractionModel(client, 'stub-model'), sketches, {
+      known: [
+        { fact_ref: 'the_key', plant: 'scene_01', payoff: 'scene_02', why: '', type: '' },
+        { fact_ref: 'ada_can_swim', plant: null, payoff: 'scene_02', why: '', type: '' },
+      ],
+    });
+    const contents = client.requests.at(-1)!.contents;
+    expect(contents).toContain('ALREADY RECORDED');
+    expect(contents).toContain('the_key — scene_01 → scene_02');
+    expect(contents).toContain('ada_can_swim — known before the story opens → scene_02');
+  });
+
+  it('leaves the prompt alone for an entry point that authored no graph', async () => {
+    const client = new StubClient();
+    const sketches = [
+      { id: 'scene_01', order: 1, dramatic_function: 'plant', required_beats: ['a'] },
+      { id: 'scene_02', order: 2, dramatic_function: 'payoff', required_beats: ['b'] },
+    ];
+    await proposePairs(new ExtractionModel(client, 'stub-model'), sketches, { known: [] });
+    const withEmpty = client.requests.at(-1)!.contents;
+    const system = client.requests.at(-1)!.systemInstruction;
+    await proposePairs(new ExtractionModel(client, 'stub-model'), sketches);
+    // Extraction emits `pays_off: []` on every event, so this is the path #118's numbers were
+    // measured on; the block is omitted and the call is byte-identical either way — including the
+    // system instruction, which is the cacheable prefix.
+    expect(client.requests.at(-1)!.contents).toBe(withEmpty);
+    expect(client.requests.at(-1)!.systemInstruction).toBe(system);
+    expect(withEmpty).not.toContain('ALREADY RECORDED');
+    expect(system).not.toContain('ALREADY RECORDED');
+  });
+
   it('counts a plant event no scene holds instead of inventing a scene for it', () => {
     const events = arcOf([
       { id: 'ev_1', sequence: 1, summary: 'Payoff.', pays_off: [{ fact_ref: 'f', plant: 'ev_gone' }] },
@@ -663,6 +706,36 @@ describe('segmentFabulaPackage', () => {
     const payoff = strict.scene_cards.find((scene) => scene.pays_off.length > 0);
     expect(payoff?.pays_off[0]?.plant).not.toBe(payoff?.id);
     expect(strict.scene_cards[0]!.reader_must_learn).toContain('the_key');
+  });
+
+  it('hands a generated arc\'s own edges to the proposal pass rather than re-deriving them', async () => {
+    const client = new StubClient();
+    await segmentFabulaPackage(
+      extractedEnvelope([
+        {
+          id: 'ev_1',
+          sequence: 1,
+          summary: 'Ada notices the key.',
+          characters_present: ['char_ada'],
+          beats: ['Ada notices the key'],
+          reveals: ['the_key'],
+        },
+        {
+          id: 'ev_2',
+          sequence: 2,
+          summary: 'Ada opens the door.',
+          characters_present: ['char_ada'],
+          beats: ['the key opens the door'],
+          pays_off: [{ fact_ref: 'the_key', plant: 'ev_1' }],
+        },
+      ]),
+      new ExtractionModel(client, 'stub-model'),
+    );
+    const proposal = client.requests.find((request) =>
+      request.contents.includes('SCENES IN FOCUS'),
+    );
+    expect(proposal?.contents).toContain('ALREADY RECORDED');
+    expect(proposal?.contents).toContain('the_key');
   });
 
   it('never reads a field only one entry point supplies', async () => {
