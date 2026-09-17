@@ -323,7 +323,16 @@
     "out_of_order_correct": 0,
     "out_of_order_accuracy": null,
     "fabricated": 0,
-    "fabricated_examples": []
+    "fabricated_examples": [],
+    "fabricated_judged": 45,
+    "ungroundable_events": 0,
+    "correction": {
+      "ticket": 152,
+      "was": 0,
+      "why": "#152: fabricated counted ungroundable quotes as invention. Recomputed as judged `contradicts` events only; the ungroundable events move to ungroundable_events and remain counted by §3.2 quote_resolution_rate.",
+      "method": "arithmetic from this file's own recorded verdicts, not a re-run — no new judge calls were made, and fabricated_examples is cleared because the old list named ungroundable events, not invented ones",
+      "worst_list_complete": true
+    }
   },
   "not_scored": [
     {
