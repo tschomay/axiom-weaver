@@ -52,7 +52,18 @@ export interface SpanGroundingScore {
   readonly unjudged: number;
   /** Fraction of judged claims whose span actually supports them. */
   readonly support_rate: number;
+  /**
+   * The non-supporting verdicts, **truncated to 12 for a human reader**. Display only.
+   *
+   * It was briefly also the input to §3.4's fabricated-event count, which is why the truncation
+   * is called out here rather than left implicit: a zero-tolerance metric computed off a list
+   * that drops everything past the twelfth entry under-reports silently the moment a run has
+   * more than twelve non-supporting spans. `contradicted_subjects` below is the complete list,
+   * and is what any scored metric must read.
+   */
   readonly worst: ReadonlyArray<{ subject: string; verdict: string; why: string }>;
+  /** Every subject the judge read as contradicted by its own span. Complete, never truncated. */
+  readonly contradicted_subjects: readonly string[];
 }
 
 export interface TableScore {
@@ -92,8 +103,26 @@ export interface EventScore {
   readonly out_of_order_total: number;
   readonly out_of_order_correct: number;
   readonly out_of_order_accuracy: number | null;
+  /**
+   * §3.4's zero-tolerance row: events the judge read against their own span and found the source
+   * **contradicts**. Invention, and nothing else.
+   *
+   * It used to also count events whose quote would not resolve, and on *A Christmas Carol* that
+   * made it 13 against a bar of 0 — while all ten published examples were events Dickens actually
+   * narrates, flagged because the model paraphrased instead of copying. That is a real defect and
+   * it is still reported, as `ungroundable_events` and as §3.2's `quote_resolution_rate`; it is
+   * simply not invention, and folding it in here made a zero-tolerance row unreadable.
+   */
   readonly fabricated: number;
+  /**
+   * How many spans the judge actually read. `fabricated` is a count out of *this*, never a bare
+   * zero — a zero-tolerance row reported without its sample size overstates what was measured.
+   */
+  readonly fabricated_judged: number;
   readonly fabricated_examples: readonly string[];
+  /** Events whose quote could not be resolved in the source. A §3.2 defect, not invention. */
+  readonly ungroundable_events: number;
+  readonly ungroundable_examples: readonly string[];
 }
 
 export interface AlignmentFile {
@@ -381,6 +410,9 @@ async function scoreSpanGrounding(
       .filter((entry) => entry.verdict !== 'supports')
       .slice(0, 12)
       .map((entry) => ({ subject: entry.subject, verdict: entry.verdict, why: entry.why })),
+    contradicted_subjects: verdicts
+      .filter((entry) => entry.verdict === 'contradicts')
+      .map((entry) => entry.subject),
   };
 }
 
@@ -447,6 +479,37 @@ async function scoreSeedAttributes(
   };
 }
 
+/**
+ * Split the two failures §3.4 used to add together: **invention** and **an unresolvable quote**.
+ *
+ * They look alike in the output — both are events you cannot point at a supporting span — and they
+ * are opposite defects. An invented event is one the source does not contain; an ungroundable one
+ * is usually an event the source contains perfectly well, whose `quote` the model paraphrased
+ * instead of copying, so the span lookup missed. The first is a hallucination. The second is a
+ * transcription failure, already counted by §3.2's `quote_resolution_rate`.
+ *
+ * §3.4 puts a zero bar on invention because "an invented event propagates into segmentation and
+ * plant structure". That reasoning does not reach a real event with a sloppy quote, and counting
+ * the two together is what made the *Carol* report 13 fabricated events while every published
+ * example was something Dickens narrates.
+ *
+ * `contradicted` must be the **complete** list of contradicted subjects, never
+ * `SpanGroundingScore.worst`, which is truncated to twelve for display.
+ */
+export function invention(
+  ungroundedSubjects: readonly string[],
+  contradicted: readonly string[],
+): { fabricated: string[]; ungroundable: string[] } {
+  const eventIds = (subjects: readonly string[]): string[] => [
+    ...new Set(
+      subjects
+        .filter((subject) => subject.startsWith('event:'))
+        .map((subject) => subject.slice('event:'.length)),
+    ),
+  ];
+  return { fabricated: eventIds(contradicted), ungroundable: eventIds(ungroundedSubjects) };
+}
+
 async function scoreEvents(
   result: ExtractionResult,
   truth: GroundTruth,
@@ -498,17 +561,11 @@ async function scoreEvents(
     }
   }
 
-  // §3.3's fabricated-event count. An event is fabricated when nothing in the source grounds it:
-  // either its quote could not be found at all, or the judge read the span and said the prose
-  // does not support the summary. Both are read off work already done — the ungrounded list and
-  // the span-support verdicts — rather than spending a second judge pass on the same question.
-  const ungroundedEventIds = result.sidecar.grounding.ungrounded
-    .filter((entry) => entry.subject.startsWith('event:'))
-    .map((entry) => entry.subject.slice('event:'.length));
-  const unsupportedEventIds = spanGrounding.worst
-    .filter((entry) => entry.subject.startsWith('event:') && entry.verdict === 'contradicts')
-    .map((entry) => entry.subject.slice('event:'.length));
-  const fabricated = new Set([...ungroundedEventIds, ...unsupportedEventIds]);
+  // §3.4's fabricated-event count — invention, and only invention. See `invention()`.
+  const { fabricated, ungroundable } = invention(
+    result.sidecar.grounding.ungrounded.map((entry) => entry.subject),
+    spanGrounding.contradicted_subjects,
+  );
 
   const byId = new Map(result.sidecar.events.map((event) => [event.id, event]));
 
@@ -529,8 +586,11 @@ async function scoreEvents(
       out_of_order_total: outTotal,
       out_of_order_correct: outCorrect,
       out_of_order_accuracy: outTotal === 0 ? null : outCorrect / outTotal,
-      fabricated: fabricated.size,
-      fabricated_examples: [...fabricated].slice(0, 10).map((id) => byId.get(id)?.summary ?? id),
+      fabricated: fabricated.length,
+      fabricated_judged: spanGrounding.judged,
+      fabricated_examples: fabricated.slice(0, 10).map((id) => byId.get(id)?.summary ?? id),
+      ungroundable_events: ungroundable.length,
+      ungroundable_examples: ungroundable.slice(0, 10).map((id) => byId.get(id)?.summary ?? id),
     },
   };
 }

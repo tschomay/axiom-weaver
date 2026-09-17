@@ -250,7 +250,12 @@ function printScore(report: Awaited<ReturnType<typeof scoreExtraction>>): void {
         : `${pct(events.out_of_order_accuracy)} over ${events.out_of_order_total}`
     }`,
   );
-  lines.push(`      fabricated events: ${events.fabricated}`);
+  lines.push(
+    `      fabricated events (§3.4, bar 0): ${events.fabricated} of ${events.fabricated_judged} judged`,
+  );
+  lines.push(
+    `      ungroundable quotes (§3.2, not invention): ${events.ungroundable_events} events`,
+  );
 
   lines.push('');
   lines.push(`  extractor: ${report.extractor_models.join(', ')}   judge: ${report.judge_model}`);

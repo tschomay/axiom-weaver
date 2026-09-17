@@ -1492,19 +1492,17 @@
     "out_of_order_total": 69,
     "out_of_order_correct": 40,
     "out_of_order_accuracy": 0.5797101449275363,
-    "fabricated": 13,
-    "fabricated_examples": [
-      "Fezziwig skips down from his desk and tells the lads to clear the room.",
-      "Scrooge's nephew gave Bob Cratchit his card.",
-      "Bob Cratchit visited the burial place earlier that day.",
-      "Scrooge threatens to fire the clerk if he hears another sound from him.",
-      "The Spirit rebukes Scrooge, telling him not to charge bigots' actions to the Spirits.",
-      "The Ghost predicts Tiny Tim will die if the shadows remain unaltered.",
-      "The Ghost quotes Scrooge's own words back to him.",
-      "Mrs. Cratchit angrily rejects the praise and states her resentment toward Scrooge.",
-      "Mrs. Cratchit relents and drinks to Scrooge's health for Bob's sake.",
-      "The Ghost of Christmas Present and Scrooge speed over the sea and alight on a ship."
-    ]
+    "fabricated": 0,
+    "fabricated_examples": [],
+    "fabricated_judged": 60,
+    "ungroundable_events": 13,
+    "correction": {
+      "ticket": 152,
+      "was": 13,
+      "why": "#152: fabricated counted ungroundable quotes as invention. Recomputed as judged `contradicts` events only; the ungroundable events move to ungroundable_events and remain counted by §3.2 quote_resolution_rate.",
+      "method": "arithmetic from this file's own recorded verdicts, not a re-run — no new judge calls were made, and fabricated_examples is cleared because the old list named ungroundable events, not invented ones",
+      "worst_list_complete": true
+    }
   },
   "not_scored": [
     {

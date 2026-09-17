@@ -283,8 +283,14 @@ exactly the thing that matters.
   correctly relative to each other (pairwise, not sequence-identity, so one misplaced event costs
   one event's worth and not the whole tail). Bar: ≥ 0.95, and **≥ 0.90 restricted to pairs the
   source narrates out of order**, which is the number actually worth watching.
-- **Fabricated events** — events with no support in the source: **0**. Unlike an extra character
+- **Fabricated events** — events the source **contradicts**: **0**. Unlike an extra character
   row, an invented event propagates into segmentation and plant structure.
+  **Report it as a count out of the judged sample** (`0 of 60 judged`), never as a bare zero: a
+  zero-tolerance row given without its denominator overstates what was measured.
+  An event whose `quote` will not resolve in the source is **not** counted here — that is a
+  transcription failure, it is usually a real event the model paraphrased rather than copied, and
+  §3.2's *groundable rate* already owns it. The two were added together until #152, which made
+  this row read 13 on the *Carol* while every published example was an event Dickens narrates.
 
 ### 3.5 Scene segmentation
 

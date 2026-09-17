@@ -16,6 +16,7 @@ import { repairOrder } from '@/extraction/pass-chronology';
 import { dedupeBySpan } from '@/extraction/pass-events';
 import { foldProposals, isSuspiciousMerge, reconcile } from '@/extraction/pass-reconcile';
 import { gateG0 } from '@/extraction/scoring/gates';
+import { invention } from '@/extraction/scoring/score';
 import { FABULA_BLOCK } from '@/schema/fabula';
 import { importSummary } from '@/authoring/transfer';
 import { loadGroundTruth, narratedOutOfOrder } from '@/extraction/scoring/ground-truth';
@@ -760,5 +761,49 @@ describe('ExtractionModel bookkeeping', () => {
     expect(client.budgets).toEqual([100, 200]);
     expect(model.calls).toHaveLength(2);
     expect(model.calls.every((call) => call.error !== null)).toBe(true);
+  });
+});
+
+describe('fabricated events vs ungroundable quotes (#152)', () => {
+  it('counts only contradicted events as invention', () => {
+    const { fabricated, ungroundable } = invention(
+      ['event:ev_0001', 'event:ev_0002', 'character:char_scrooge'],
+      ['event:ev_0009'],
+    );
+    expect(fabricated).toEqual(['ev_0009']);
+    expect(ungroundable).toEqual(['ev_0001', 'ev_0002']);
+  });
+
+  it('does not count a state_update contradiction as a fabricated event', () => {
+    // The exact shape that made A Christmas Carol report 13 fabricated events: its one
+    // `contradicts` verdict is on a state_update, not on an event, so invention is empty.
+    const { fabricated, ungroundable } = invention(
+      ['event:ev_0113', 'event:ev_0358'],
+      ['state_update:ev_0358:char_charwoman.location_id'],
+    );
+    expect(fabricated).toEqual([]);
+    expect(ungroundable).toHaveLength(2);
+  });
+
+  it('keeps the two populations separate rather than unioning them', () => {
+    // An event can be both ungroundable and contradicted; it must not be double-counted away
+    // from either row, and the zero-tolerance row must still see it.
+    const { fabricated, ungroundable } = invention(['event:ev_0007'], ['event:ev_0007']);
+    expect(fabricated).toEqual(['ev_0007']);
+    expect(ungroundable).toEqual(['ev_0007']);
+  });
+
+  it('dedupes repeated subjects', () => {
+    const { fabricated } = invention([], ['event:ev_0004', 'event:ev_0004']);
+    expect(fabricated).toEqual(['ev_0004']);
+  });
+
+  it('ignores non-event subjects entirely', () => {
+    const { fabricated, ungroundable } = invention(
+      ['character:char_ali_baba', 'location:loc_court'],
+      ['relationship:char_a|char_b|knows'],
+    );
+    expect(fabricated).toEqual([]);
+    expect(ungroundable).toEqual([]);
   });
 });
