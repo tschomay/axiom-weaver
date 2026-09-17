@@ -1,0 +1,207 @@
+{
+  "story_id": "arc_structured_kiln",
+  "segmenter_models": [
+    "gemini-3.8-flash"
+  ],
+  "events": 20,
+  "scenes": 17,
+  "events_per_scene": 1.1764705882352942,
+  "telling_order_basis": "fabula_sequence",
+  "telling_order_displaced": 0,
+  "self_consistency": null,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "mechanical": {
+    "story_id": "arc_structured_kiln",
+    "events": 20,
+    "g0": {
+      "passed": true,
+      "lint": {
+        "problems": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_supervisor_coat",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          {
+            "severity": "warn",
+            "code": "unused_seed_entity",
+            "path": "world_model_seed.objects.obj_supervisor_coat",
+            "message": "is in the seed but no Scene Card ever names it"
+          }
+        ],
+        "publishable": true
+      }
+    },
+    "payoff_reachability": {
+      "total": 10,
+      "reachable": 10,
+      "passed": true
+    },
+    "state_chaining": {
+      "problems": [],
+      "coverage": {
+        "pairs": 16,
+        "compared": 15
+      },
+      "vacuous": false,
+      "passed": true
+    },
+    "presence": {
+      "problems": [
+        {
+          "code": "state_change_for_absentee",
+          "event_id": "ev_01_early_opening",
+          "message": "changes status of \"char_derry\", who is not present"
+        }
+      ],
+      "gated": 0,
+      "passed": true
+    },
+    "causal_reachability": {
+      "total": 6,
+      "reachable": 6,
+      "unreachable": [],
+      "passed": true
+    },
+    "required_beats": {
+      "scenes": 17,
+      "empty": [],
+      "passed": true
+    },
+    "unpaid_facts": {
+      "facts": [],
+      "passed": true
+    },
+    "plant_spans": {
+      "rows": [
+        {
+          "fact_ref": "only_supervisor_holds_interlock_key",
+          "payoff_event": "scene_01_the_kiln_breach",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "maren_suffered_exhaustion_blackout",
+          "payoff_event": "scene_02_keys_and_twine",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "plant_facing_contract_cancellation",
+          "payoff_event": "scene_04_the_framing_warning",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "derry_threatened_grievance_over_short_shift",
+          "payoff_event": "scene_04_the_framing_warning",
+          "plant_event": null,
+          "span": null
+        },
+        {
+          "fact_ref": "missing_brass_scale_counterweight",
+          "payoff_event": "scene_11_the_locker_search",
+          "plant_event": "scene_05_missing_weight",
+          "span": 6
+        },
+        {
+          "fact_ref": "falsified_gas_meter_log",
+          "payoff_event": "scene_12_the_broken_timeline",
+          "plant_event": "scene_09_the_falsified_sheet",
+          "span": 3
+        },
+        {
+          "fact_ref": "yellow_oilskin_coat_eyewitness",
+          "payoff_event": "scene_13_the_steam_test",
+          "plant_event": "scene_06_orsons_testimony",
+          "span": 7
+        },
+        {
+          "fact_ref": "purple_twine_on_brams_cuffs",
+          "payoff_event": "scene_14_mended_cuffs",
+          "plant_event": "scene_02_keys_and_twine",
+          "span": 12
+        },
+        {
+          "fact_ref": "bram_fresh_arc_burns",
+          "payoff_event": "scene_14_mended_cuffs",
+          "plant_event": "scene_07_arc_burns",
+          "span": 7
+        },
+        {
+          "fact_ref": "roof_exhaust_damper_propped_open",
+          "payoff_event": "scene_15_the_propped_damper",
+          "plant_event": "scene_03_the_jammed_damper",
+          "span": 12
+        }
+      ],
+      "histogram": {
+        "counts": {
+          "3": 1,
+          "6": 1,
+          "7": 2,
+          "12": 2
+        },
+        "seed_grounded": 4,
+        "edges": 10,
+        "mean": 7.833333333333333,
+        "median": 7,
+        "min": 3,
+        "max": 12,
+        "share_span_1": 0
+      }
+    },
+    "lexical_canary": [
+      "whisper"
+    ],
+    "all_gates_passed": true
+  },
+  "generator_all_gates_passed": true,
+  "plant_edges": {
+    "authored_by_generator": 9,
+    "authored_seed_grounded": 4,
+    "carried_onto_scenes": 9,
+    "dangling": 0,
+    "proposed_by_segmentation": 1,
+    "verified": 1,
+    "unrepresentable": 0,
+    "on_scene_cards": 10
+  },
+  "span_histogram_after": {
+    "counts": {
+      "3": 1,
+      "6": 1,
+      "7": 2,
+      "12": 2
+    },
+    "seed_grounded": 4,
+    "edges": 10,
+    "mean": 7.833333333333333,
+    "median": 7,
+    "min": 3,
+    "max": 12,
+    "share_span_1": 0
+  },
+  "unscoreable": {
+    "boundary precision/recall (§3.5)": "needs a fixture segmentation of the same story and source offsets to place it in; a generated arc is the only authoring of itself and has no source text",
+    "required_beats coverage (§3.5)": "judged against a fixture scene's beats; there is no fixture scene",
+    "beat invention rate (§3.5)": "judged against the source the beat claims to come from; there is no source",
+    "pov/location accuracy (§3.5)": "agreement with a fixture; there is no fixture",
+    "source coverage (§3.5)": "the fraction of a source text assigned to a scene; there is no source",
+    "reveal-order fidelity (§3.6)": "pairwise against the fixture order; there is no fixture order",
+    "premature reveal count (§3.6)": "a reveal is premature relative to where the source discloses it; there is no source",
+    "must_stay_hidden recall (§3.6)": "recall against the fixture's withholding; there is no fixture",
+    "plant/payoff pair recall (§3.7)": "against the fixture's graph — but see pairs_from_generator below, which is the same question asked against the generator's own authored graph, and is answerable"
+  }
+}

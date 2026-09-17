@@ -26,7 +26,12 @@ import { provisionalPackage } from '../src/authoring/lint-fabula';
 import { FABULA_BLOCK, FabulaArcSchema, type FabulaArc } from '../src/schema/fabula';
 import { presenceProblems, stateChainingProblems } from '../src/arc/chaining';
 import { applyEdits, mechanicalRepairs, repairTargets } from '../src/arc/repair';
-import { scoreDiversity, scoreMechanical, spanHistogram } from '../src/arc/rubric';
+import {
+  scoreDiversity,
+  scoreMechanical,
+  scoreMechanicalPackage,
+  spanHistogram,
+} from '../src/arc/rubric';
 import { blindArcView, summarize } from '../src/arc/judge';
 import { briefsFor } from '../src/arc/premises';
 import { renderArcPrompt, arcResponseJsonSchema } from '../src/arc/prompt';
@@ -303,6 +308,19 @@ describe('§4.1 mechanical scoring', () => {
     expect(score.plant_spans.histogram.edges).toBe(1);
     expect(score.plant_spans.histogram.counts[4]).toBe(1);
     expect(score.plant_spans.histogram.share_span_1).toBe(0);
+  });
+
+  /**
+   * #120 scores §4.1 over the segmented Story Package rather than the Fabula projection, so the
+   * package-level half is its own function. On the projection the two must agree exactly, or
+   * #119's published numbers and #120's stop being comparable.
+   */
+  it('scores a real package and the projection through the same code', () => {
+    const arc = sampleArc();
+    expect(scoreMechanicalPackage(provisionalPackage(arc, 'arc_test'), arc, 'arc_test')).toEqual(
+      scoreMechanical(arc, 'arc_test'),
+    );
+    expect(scoreMechanical(arc, 'arc_test').events).toBe(arc.events.length);
   });
 
   it('reports the span-1 share, which is the number §6 predicts will collapse', () => {

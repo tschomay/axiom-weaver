@@ -1,0 +1,1849 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "arc_free_text_3",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_dan_mercer",
+        "name": "Dan Mercer",
+        "location_id": "loc_rail_depot",
+        "status": "exhausted",
+        "goal": "complete the night yard inspection and clear the coal manifests",
+        "bag": {
+          "role": "investigator",
+          "occupation": "yardmaster"
+        }
+      },
+      {
+        "id": "char_hector_vance",
+        "name": "Hector Vance",
+        "location_id": "loc_kiln_spur",
+        "status": "agitated",
+        "goal": "shift official responsibility for the hopper derailment onto the rail yard",
+        "bag": {
+          "role": "concealer",
+          "occupation": "kiln foreman"
+        }
+      },
+      {
+        "id": "char_martha_finch",
+        "name": "Martha Finch",
+        "location_id": "loc_creek_canteen",
+        "status": "watchful",
+        "goal": "keep the peace among the night shift workers in the canteen",
+        "bag": {
+          "role": "witness",
+          "occupation": "canteen keeper"
+        }
+      },
+      {
+        "id": "char_toby_gault",
+        "name": "Toby Gault",
+        "location_id": "loc_kiln_spur",
+        "status": "dead",
+        "goal": null,
+        "bag": {
+          "role": "wronged party",
+          "occupation": "kiln feeder"
+        }
+      },
+      {
+        "id": "char_jonah_gault",
+        "name": "Jonah Gault",
+        "location_id": "loc_creek_canteen",
+        "status": "intoxicated",
+        "goal": "sleep off an argument and catch the morning timber wagon out of town",
+        "bag": {
+          "role": "suspect",
+          "occupation": "teamster"
+        }
+      },
+      {
+        "id": "char_alderman_crane",
+        "name": "Alderman Patrick Crane",
+        "location_id": "loc_magistrate_office",
+        "status": "composed",
+        "goal": "protect the lime syndicate from financial liability and public scrutiny",
+        "bag": {
+          "role": "authority",
+          "occupation": "lime works magistrate"
+        }
+      },
+      {
+        "id": "char_dr_hollis",
+        "name": "Dr. Edwin Hollis",
+        "location_id": "loc_infirmary",
+        "status": "weary",
+        "goal": "certify the cause of death quickly to avoid inquest delays",
+        "bag": {
+          "role": "coroner",
+          "occupation": "town physician"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_rail_depot",
+        "name": "Scarrow Creek Rail Depot",
+        "bag": {
+          "setting": "timber weigh-station and switch log office"
+        }
+      },
+      {
+        "id": "loc_kiln_spur",
+        "name": "Kiln Number Four Spur",
+        "bag": {
+          "setting": "elevated lime kilns and narrow-gauge shunting chute"
+        }
+      },
+      {
+        "id": "loc_creek_canteen",
+        "name": "Creek Canteen and Boarding House",
+        "bag": {
+          "setting": "greasy-spoon tavern and bunkhouse beside the drainage canal"
+        }
+      },
+      {
+        "id": "loc_magistrate_office",
+        "name": "Alderman Crane's Office",
+        "bag": {
+          "setting": "paneled boardroom over the municipal scale"
+        }
+      },
+      {
+        "id": "loc_infirmary",
+        "name": "Parish Infirmary Mortuary",
+        "bag": {
+          "setting": "stone dissecting cellar lit by gas jets"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_switch_manifest",
+        "name": "Night Switch Manifest",
+        "location_id": "loc_rail_depot",
+        "status": "signed_by_dan",
+        "bag": {}
+      },
+      {
+        "id": "obj_tallow_lantern",
+        "name": "Dented Railway Lantern",
+        "location_id": "loc_kiln_spur",
+        "status": "snuffed",
+        "bag": {}
+      },
+      {
+        "id": "obj_sheepskin_coat",
+        "name": "Jonah's Heavy Sheepskin Coat",
+        "location_id": "loc_creek_canteen",
+        "status": "damp",
+        "bag": {}
+      },
+      {
+        "id": "obj_coupling_pin",
+        "name": "Hopper Coupling Pin",
+        "location_id": "loc_kiln_spur",
+        "status": "displaced",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_crane_dan",
+        "from_id": "char_alderman_crane",
+        "to_id": "char_dan_mercer",
+        "kind": "employer",
+        "sentiment": "predatory",
+        "bag": {}
+      },
+      {
+        "id": "rel_dan_crane",
+        "from_id": "char_dan_mercer",
+        "to_id": "char_alderman_crane",
+        "kind": "employee",
+        "sentiment": "mistrustful",
+        "bag": {}
+      },
+      {
+        "id": "rel_vance_dan",
+        "from_id": "char_hector_vance",
+        "to_id": "char_dan_mercer",
+        "kind": "collaborator",
+        "sentiment": "hostile",
+        "bag": {}
+      },
+      {
+        "id": "rel_jonah_toby",
+        "from_id": "char_jonah_gault",
+        "to_id": "char_toby_gault",
+        "kind": "brother",
+        "sentiment": "resentful",
+        "bag": {}
+      },
+      {
+        "id": "rel_martha_dan",
+        "from_id": "char_martha_finch",
+        "to_id": "char_dan_mercer",
+        "kind": "confidante",
+        "sentiment": "sympathetic",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_dan_manifest",
+        "character_id": "char_dan_mercer",
+        "fact_ref": "dan_responsible_for_night_manifest",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_midnight_alarm",
+      "order": 1,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_rail_depot",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_hector_vance"
+      ],
+      "dramatic_function": "Establishes the crisis that pulls Dan into the fatal accident at Kiln Four before the main train arrives.",
+      "entry_state": {
+        "char_hector_vance": {
+          "location_id": "loc_kiln_spur"
+        }
+      },
+      "exit_state": {
+        "char_hector_vance": {
+          "location_id": "loc_rail_depot"
+        }
+      },
+      "required_beats": [
+        "Hector Vance bursts into the depot office reporting a runaway hopper car has trapped a worker at Kiln Four.",
+        "Dan gathers his tools and lantern to inspect the line."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "vance_tampered_derailer"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_02_under_the_hopper",
+      "order": 2,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_kiln_spur",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_hector_vance",
+        "char_dr_hollis",
+        "char_toby_gault"
+      ],
+      "dramatic_function": "Confronts Dan with Toby Gault's fatal accident and reveals suspicious physical evidence at the scene.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_rail_depot"
+        },
+        "char_hector_vance": {
+          "location_id": "loc_rail_depot"
+        },
+        "char_dr_hollis": {
+          "location_id": "loc_infirmary"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_kiln_spur"
+        },
+        "char_hector_vance": {
+          "location_id": "loc_kiln_spur"
+        },
+        "char_dr_hollis": {
+          "location_id": "loc_kiln_spur"
+        }
+      },
+      "required_beats": [
+        "Dan and Dr. Hollis recover Toby Gault's crushed body from beneath the hopper car.",
+        "Dan snuffs a dropped switch lantern smelling unusually of kitchen tallow."
+      ],
+      "reader_must_learn": [
+        "mutton_tallow_in_switch_lantern"
+      ],
+      "must_stay_hidden": [
+        "bludgeon_wound_under_lime"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_the_missing_token",
+      "order": 3,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_rail_depot",
+      "characters_present": [
+        "char_dan_mercer"
+      ],
+      "dramatic_function": "Reveals that Toby Gault was off-duty, deepening the mystery behind his presence on the spur.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_kiln_spur"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_rail_depot"
+        }
+      },
+      "required_beats": [
+        "Dan checks the depot peg board and finds Toby's shift token missing.",
+        "Dan realizes Toby was on the spur outside of official duty."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "vance_withheld_token"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_cranes_threat",
+      "order": 4,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_magistrate_office",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_alderman_crane"
+      ],
+      "dramatic_function": "Raises the stakes with a threat of prosecution while uncovering evidence of Crane's illicit deliveries.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_rail_depot"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_magistrate_office"
+        }
+      },
+      "required_beats": [
+        "Crane threatens Dan with manslaughter charges over the runaway car.",
+        "Dan spots an invoice on Crane's desk detailing substandard marl shipments."
+      ],
+      "reader_must_learn": [
+        "unslaked_marl_in_hopper_four"
+      ],
+      "must_stay_hidden": [
+        "crane_insurance_fraud"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_yard_log",
+      "order": 5,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_rail_depot",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_alderman_crane"
+      ],
+      "dramatic_function": "Establishes Dan as the sole legal scapegoat for the derailment unless he finds the true culprit.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_magistrate_office"
+        },
+        "char_alderman_crane": {
+          "location_id": "loc_magistrate_office"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_rail_depot"
+        },
+        "char_alderman_crane": {
+          "location_id": "loc_rail_depot"
+        }
+      },
+      "required_beats": [
+        "Crane serves Dan an administrative notice impounding the yard log.",
+        "Crane warns that Dan's signature on the manifest leaves him solely accountable for the spur derailment.",
+        "Dan realizes he must uncover the real cause of the release to protect his own freedom."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "dan_responsible_for_night_manifest",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_06_the_gault_brawl",
+      "order": 6,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_creek_canteen",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_martha_finch"
+      ],
+      "dramatic_function": "Directs Dan's investigation toward Jonah Gault by revealing a violent fraternal dispute before the accident.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_rail_depot"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_creek_canteen"
+        }
+      },
+      "required_beats": [
+        "Dan visits the canteen to question Martha Finch.",
+        "Martha recounts the violent brawl between Toby and Jonah over stolen pay.",
+        "Martha notes that Jonah stormed off toward the kilns wearing his sheepskin coat."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "jonah_passed_out_in_pantry"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_the_switch_fleece",
+      "order": 7,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_kiln_spur",
+      "characters_present": [
+        "char_dan_mercer"
+      ],
+      "dramatic_function": "Corroborates Martha's account by providing physical evidence linking Jonah's coat to the sabotaged switch.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_creek_canteen"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_kiln_spur"
+        }
+      },
+      "required_beats": [
+        "Dan inspects the manual switch handle for signs of forced tampering.",
+        "Dan recovers dirty sheepskin fleece caught in the switch's latch assembly."
+      ],
+      "reader_must_learn": [
+        "torn_sheepskin_on_switch_lever"
+      ],
+      "must_stay_hidden": [
+        "vance_borrowed_coat"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_behind_the_canteen",
+      "order": 8,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_creek_canteen",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_jonah_gault"
+      ],
+      "dramatic_function": "Escalates the conflict when Dan's prime suspect turns violent and escapes into hiding.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_kiln_spur"
+        },
+        "char_jonah_gault": {
+          "status": "intoxicated"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_creek_canteen"
+        },
+        "char_jonah_gault": {
+          "status": "fugitive"
+        }
+      },
+      "required_beats": [
+        "Dan corners Jonah Gault near the coal carts behind the canteen.",
+        "Jonah strikes Dan in a panic and escapes into the canal alleys."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "jonah_fears_debt_arrest"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_the_mortuary_exam",
+      "order": 9,
+      "pov": "char_dr_hollis",
+      "location_id": "loc_infirmary",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_dr_hollis",
+        "char_toby_gault"
+      ],
+      "dramatic_function": "To uncover physical evidence on the victim's body that contradicts the presumed nature of the fatal blow.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_creek_canteen"
+        },
+        "char_dr_hollis": {
+          "location_id": "loc_kiln_spur"
+        },
+        "char_toby_gault": {
+          "location_id": "loc_kiln_spur"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_infirmary"
+        },
+        "char_dr_hollis": {
+          "location_id": "loc_infirmary"
+        },
+        "char_toby_gault": {
+          "location_id": "loc_infirmary"
+        }
+      },
+      "required_beats": [
+        "Dr. Hollis cleans lime dust from Toby Gault's fractured temple.",
+        "Hollis extracts a chip of white lead paint embedded in the cracked bone."
+      ],
+      "reader_must_learn": [
+        "white_lead_flake_in_skull_fracture"
+      ],
+      "must_stay_hidden": [
+        "death_preceded_crushing"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_10_bunkhouse_search",
+      "order": 10,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_creek_canteen",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_martha_finch"
+      ],
+      "dramatic_function": "To discover incriminating physical evidence directly connecting Jonah to Toby's death.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_infirmary"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_creek_canteen"
+        }
+      },
+      "required_beats": [
+        "Dan searches Jonah's quarters under Martha's watchful eye.",
+        "Dan discovers Toby's blood-soaked red neckerchief hidden in the mattress."
+      ],
+      "reader_must_learn": [
+        "bloody_red_neckerchief"
+      ],
+      "must_stay_hidden": [
+        "planted_evidence_by_vance"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_11_the_warrant_signed",
+      "order": 11,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_magistrate_office",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_alderman_crane"
+      ],
+      "dramatic_function": "To present the evidence to the authorities, resulting in an arrest warrant and Dan's temporary clearance.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_creek_canteen"
+        },
+        "char_alderman_crane": {
+          "location_id": "loc_rail_depot"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_magistrate_office"
+        },
+        "char_alderman_crane": {
+          "location_id": "loc_magistrate_office"
+        }
+      },
+      "required_beats": [
+        "Dan delivers the bloody neckerchief to Alderman Crane.",
+        "Crane deems the evidence conclusive and signs an arrest warrant for Jonah."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "impending_collapse_of_theory"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "bloody_red_neckerchief",
+          "plant": "scene_10_bunkhouse_search"
+        }
+      ]
+    },
+    {
+      "id": "scene_12_the_depot_lockup",
+      "order": 12,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_rail_depot",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_jonah_gault",
+        "char_martha_finch"
+      ],
+      "dramatic_function": "To upend the case against Jonah by revealing an alibi and disproving the physical match to the crime scene.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_magistrate_office"
+        },
+        "char_jonah_gault": {
+          "location_id": "loc_creek_canteen",
+          "status": "fugitive"
+        },
+        "char_martha_finch": {
+          "location_id": "loc_creek_canteen"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_rail_depot"
+        },
+        "char_jonah_gault": {
+          "location_id": "loc_rail_depot",
+          "status": "detained"
+        },
+        "char_martha_finch": {
+          "location_id": "loc_rail_depot"
+        }
+      },
+      "required_beats": [
+        "Jonah is locked in the depot holding cell, tearfully claiming innocence and a lost coat.",
+        "Martha delivers Jonah's sheepskin coat and testifies she locked him in her cellar that night.",
+        "Dan examines the coat and discovers the tear does not match the fresh fleece from the scene."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "torn_sheepskin_on_switch_lever",
+          "plant": "scene_07_the_switch_fleece"
+        }
+      ]
+    },
+    {
+      "id": "scene_13_the_gantry_evidence",
+      "order": 13,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_kiln_spur",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_hector_vance"
+      ],
+      "dramatic_function": "To uncover the physical evidence at the kiln spur proving Toby was murdered and the runaway car was deliberately released.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_rail_depot",
+          "goal": "complete the night yard inspection and clear the coal manifests"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_kiln_spur",
+          "goal": "confront Vance with the murder evidence"
+        }
+      },
+      "required_beats": [
+        "Dan examines the derailer switch in Vance's presence and proves it was unlocked using a management square-head key.",
+        "Dan climbs the catwalk above the kiln and discovers a fresh gouge in the lead-painted railing matching the injury on Toby's skull."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "white_lead_flake_in_skull_fracture",
+          "plant": "scene_09_the_mortuary_exam"
+        }
+      ]
+    },
+    {
+      "id": "scene_14_the_canteen_porch",
+      "order": 14,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_creek_canteen",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_martha_finch"
+      ],
+      "dramatic_function": "To uncover the method behind the frame-up by connecting the staged runaway to Martha's canteen.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_kiln_spur"
+        },
+        "char_martha_finch": {
+          "location_id": "loc_rail_depot"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_creek_canteen"
+        },
+        "char_martha_finch": {
+          "location_id": "loc_creek_canteen"
+        }
+      },
+      "required_beats": [
+        "Dan inspects Martha's lantern rack and tallow crocks by the wash-tubs.",
+        "Dan deduces that the killer stole Martha's mutton-tallow lantern and Jonah's coat from the porch to disguise the deliberate release of the hopper car."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "mutton_tallow_in_switch_lantern",
+          "plant": "scene_02_under_the_hopper"
+        }
+      ]
+    },
+    {
+      "id": "scene_15_confronting_vance",
+      "order": 15,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_kiln_spur",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_hector_vance"
+      ],
+      "dramatic_function": "To corner Vance with the compiled evidence and lay out the full truth of Toby's murder and the marl fraud.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_creek_canteen"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_kiln_spur"
+        }
+      },
+      "required_beats": [
+        "Dan corners Vance at the Kiln Four loading bay with the coupling pin and marl vouchers.",
+        "Dan reveals how Vance killed Toby on the catwalk over the marl skimming scheme and staged the runaway car to frame Dan."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "unslaked_marl_in_hopper_four",
+          "plant": "scene_04_cranes_threat"
+        }
+      ]
+    },
+    {
+      "id": "scene_16_cranes_boardroom",
+      "order": 16,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_magistrate_office",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_hector_vance",
+        "char_alderman_crane",
+        "char_dr_hollis"
+      ],
+      "dramatic_function": "To deliver Vance's confession and pay off the systemic corruption by showing Crane bury the scandal at Dan's expense.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_kiln_spur",
+          "status": "exhausted",
+          "goal": "confront Vance with the murder evidence"
+        },
+        "char_hector_vance": {
+          "location_id": "loc_kiln_spur",
+          "status": "agitated"
+        },
+        "char_dr_hollis": {
+          "location_id": "loc_infirmary"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_magistrate_office",
+          "status": "discharged",
+          "goal": "leave Scarrow Creek"
+        },
+        "char_hector_vance": {
+          "location_id": "loc_magistrate_office",
+          "status": "arrested"
+        },
+        "char_dr_hollis": {
+          "location_id": "loc_magistrate_office"
+        }
+      },
+      "required_beats": [
+        "Dan brings Vance under guard before Crane, where Vance breaks down and confesses to Toby's murder and sabotaging the switch.",
+        "Crane orders Vance quietly transferred to protect the syndicate's adulterated lime operation.",
+        "Crane revokes Dan's yardmaster license and blacklists him to bury the truth."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_17_the_final_departure",
+      "order": 17,
+      "pov": "char_dan_mercer",
+      "location_id": "loc_rail_depot",
+      "characters_present": [
+        "char_dan_mercer",
+        "char_jonah_gault"
+      ],
+      "dramatic_function": "Concludes the investigation by showing Mercer leaving Scarrow Creek as Gault faces freedom in a ruined town.",
+      "entry_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_magistrate_office"
+        },
+        "char_jonah_gault": {
+          "status": "detained"
+        }
+      },
+      "exit_state": {
+        "char_dan_mercer": {
+          "location_id": "loc_rail_depot"
+        },
+        "char_jonah_gault": {
+          "status": "exonerated"
+        }
+      },
+      "required_beats": [
+        "Mercer packs his belongings at the deserted depot while Gault watches from the platform.",
+        "Mercer turns over the office keys to the railway constable and takes up his seabag.",
+        "Gault silently acknowledges Mercer as the last coal cars roll through the valley."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    }
+  ],
+  "voice_card": {},
+  "metadata": {
+    "title": "The Weight of the Slag",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-17T16:53:52.566Z"
+  },
+  "_fabula": {
+    "generator": "src/arc (issue #119)",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-16T00:45:17.052Z",
+    "brief": {
+      "story_id": "arc_free_text_3",
+      "title": "Free-text run 3",
+      "premise": {
+        "logline": "A mystery in a working town, where the person who has to find out what happened is also the person who will be blamed for it.",
+        "modules": null
+      },
+      "plot_shape": {
+        "id": "mystery",
+        "name": "Mystery",
+        "central_question": "What actually happened, and who is willing to say so?",
+        "phases": [
+          {
+            "name": "Disturbance",
+            "purpose": "A wrong surfaces and someone is obliged to look into it.",
+            "share": 0.2
+          },
+          {
+            "name": "Inquiry",
+            "purpose": "Evidence accumulates, most of it true and misread.",
+            "share": 0.35
+          },
+          {
+            "name": "Wrong turn",
+            "purpose": "A reading of the evidence that is coherent and wrong collapses.",
+            "share": 0.2
+          },
+          {
+            "name": "Solution",
+            "purpose": "The true account, assembled only from what the reader has already been shown.",
+            "share": 0.15
+          },
+          {
+            "name": "Cost",
+            "purpose": "What knowing costs the person who found out.",
+            "share": 0.1
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "investigator",
+            "purpose": "Carries the reader through the inquiry and pays its cost."
+          },
+          {
+            "role": "concealer",
+            "purpose": "Has a reason to keep the true account from being assembled."
+          },
+          {
+            "role": "witness",
+            "purpose": "Holds one true piece and misunderstands its meaning."
+          },
+          {
+            "role": "wronged party",
+            "purpose": "The reason the question matters at all."
+          }
+        ],
+        "obligatory_moves": [
+          "Every element of the true account is on the page before it is stated.",
+          "At least one true detail is shown early in a context that makes it look irrelevant.",
+          "The wrong reading is defensible on the evidence available when it is made."
+        ]
+      },
+      "event_count": 20,
+      "cast": {
+        "characters": 7,
+        "locations": 5,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 10
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "mystery",
+        "premise_preset": "free_text"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_alarm_at_the_kiln",
+        "sequence": 1,
+        "summary": "Hector Vance rushes into the depot office in the dead of night to report that a hopper car has slipped its derailer at Kiln Four and trapped a worker.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_rail_depot",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_hector_vance"
+        ],
+        "dramatic_function": "The disturbance is announced; the protagonist is forced out of his routine into immediate institutional jeopardy.",
+        "beats": [
+          "Vance barges into the depot with soot on his collar and reports a loose car.",
+          "Dan grabs his wrench and lantern to inspect the line before the main train arrives."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [
+          "vance_tampered_derailer"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hector_vance",
+            "column": "location_id",
+            "value": "loc_rail_depot"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_body_in_hopper",
+        "sequence": 2,
+        "summary": "At the Kiln Four chute, Dan and Dr. Hollis extract Toby Gault's crushed body from under the hopper, where Dan snuffs a dropped switch lantern reeking of kitchen mutton tallow.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_kiln_spur",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_hector_vance",
+          "char_dr_hollis",
+          "char_toby_gault"
+        ],
+        "dramatic_function": "Establishes the fatal stakes and seeds an obscure physical anomaly during the chaotic recovery of the body.",
+        "beats": [
+          "Dan and Dr. Hollis pull Toby Gault's body from under the iron wheel flange.",
+          "Dan extinguishes an overturned tallow lantern nearby to prevent an explosion, noticing its odd smell."
+        ],
+        "caused_by": [
+          "ev_01_alarm_at_the_kiln"
+        ],
+        "reveals": [
+          "mutton_tallow_in_switch_lantern"
+        ],
+        "conceals": [
+          "bludgeon_wound_under_lime"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_kiln_spur"
+          },
+          {
+            "entity_id": "char_hector_vance",
+            "column": "location_id",
+            "value": "loc_kiln_spur"
+          },
+          {
+            "entity_id": "char_dr_hollis",
+            "column": "location_id",
+            "value": "loc_kiln_spur"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_the_missing_shift_token",
+        "sequence": 3,
+        "summary": "Dan returns to the depot to reconcile the yard board, discovering that Toby's brass shift token is missing from the peg board.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_rail_depot",
+        "characters_present": [
+          "char_dan_mercer"
+        ],
+        "dramatic_function": "The inquiry begins as procedural anomalies indicate Toby should not have been near the hopper at that hour.",
+        "beats": [
+          "Dan tallies the brass tokens and finds Toby Gault was officially logged off duty.",
+          "Dan realizes Toby must have been on the spur for reasons outside normal loading."
+        ],
+        "caused_by": [
+          "ev_02_body_in_hopper"
+        ],
+        "reveals": [],
+        "conceals": [
+          "vance_withheld_token"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_rail_depot"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_crane_threatens_investigation",
+        "sequence": 4,
+        "summary": "Alderman Crane summons Dan to his office, threatening criminal charges for negligent track-setting while Dan spots an invoice on Crane's desk for sub-grade unslaked marl.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_magistrate_office",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_alderman_crane"
+        ],
+        "dramatic_function": "The blame trap closes around Dan, raising the stakes while introducing a seemingly irrelevant industrial supply detail.",
+        "beats": [
+          "Crane warns Dan that a runaway car under Dan's shift means a manslaughter indictment.",
+          "Dan notices a shipping voucher detailing deliveries of cheap unslaked marl instead of kiln limestone."
+        ],
+        "caused_by": [
+          "ev_02_body_in_hopper"
+        ],
+        "reveals": [
+          "unslaked_marl_in_hopper_four"
+        ],
+        "conceals": [
+          "crane_insurance_fraud"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_magistrate_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_crane_lays_blame",
+        "sequence": 5,
+        "summary": "Crane follows Dan back to the depot and serves an administrative notice impounding the yard log, reminding Dan that the yardmaster alone answers for spur derailments.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_rail_depot",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_alderman_crane"
+        ],
+        "dramatic_function": "Concretizes the protagonist's vulnerability by leveraging his pre-existing statutory obligations.",
+        "beats": [
+          "Crane slaps the formal notice on Dan's desk, citing Dan's signature on the shift manifest.",
+          "Dan understands that finding the true cause of the release is the only way to save his own freedom."
+        ],
+        "caused_by": [
+          "ev_04_crane_threatens_investigation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "dan_responsible_for_night_manifest",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_rail_depot"
+          },
+          {
+            "entity_id": "char_alderman_crane",
+            "column": "location_id",
+            "value": "loc_rail_depot"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_interviewing_the_canteen_cook",
+        "sequence": 6,
+        "summary": "Dan goes to the canteen where Martha Finch describes a violent brawl earlier that evening between Toby and his brother Jonah over stolen pay.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_creek_canteen",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_martha_finch"
+        ],
+        "dramatic_function": "Introduces a powerful witness statement that points toward fraternal murder, offering a compelling alternative to yard negligence.",
+        "beats": [
+          "Martha recounts the bitter fight between the Gault brothers over stolen sovereigns.",
+          "Martha adds that Jonah was seen storming toward the kilns in his ragged sheepskin coat."
+        ],
+        "caused_by": [
+          "ev_05_crane_lays_blame"
+        ],
+        "reveals": [],
+        "conceals": [
+          "jonah_passed_out_in_pantry"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_creek_canteen"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_inspecting_the_switch_stand",
+        "sequence": 7,
+        "summary": "Dan examines the spur switch stand and finds fresh tufts of raw sheepskin fleece caught in the iron latch assembly.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_kiln_spur",
+        "characters_present": [
+          "char_dan_mercer"
+        ],
+        "dramatic_function": "The inquiry turns physical, uncovering a clue that appears to validate the suspect's involvement.",
+        "beats": [
+          "Dan scrapes grease off the manual switch handle to check if the lock was forced.",
+          "He pulls several long strands of dirty sheepskin fleece from the latch pin."
+        ],
+        "caused_by": [
+          "ev_06_interviewing_the_canteen_cook"
+        ],
+        "reveals": [
+          "torn_sheepskin_on_switch_lever"
+        ],
+        "conceals": [
+          "vance_borrowed_coat"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_kiln_spur"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_jonah_flees_the_wharf",
+        "sequence": 8,
+        "summary": "Dan corners Jonah Gault behind the canteen to question him, but Jonah lashes out in drunken panic and bolts into the canal alleys.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_creek_canteen",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_jonah_gault"
+        ],
+        "dramatic_function": "The suspect acts guilty through flight, escalating the plausibility of the wrong turn.",
+        "beats": [
+          "Dan tries to stop Jonah near the coal carts to question him about Toby.",
+          "Jonah strikes Dan across the face and flees into the maze of canal sheds."
+        ],
+        "caused_by": [
+          "ev_06_interviewing_the_canteen_cook"
+        ],
+        "reveals": [],
+        "conceals": [
+          "jonah_fears_debt_arrest"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_creek_canteen"
+          },
+          {
+            "entity_id": "char_jonah_gault",
+            "column": "status",
+            "value": "fugitive"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_examining_the_corpse",
+        "sequence": 9,
+        "summary": "At the infirmary mortuary, Dr. Hollis picks a flake of industrial white lead paint from Toby Gault's depressed skull fracture before writing up his report.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_infirmary",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_dr_hollis",
+          "char_toby_gault"
+        ],
+        "dramatic_function": "A forensic anomaly is surfaced that contradicts the simple theory of a runaway car crushing the victim.",
+        "beats": [
+          "Dr. Hollis sponges the lime dust from Toby's shattered temple.",
+          "Hollis tweezes out a tiny chip of white lead paint embedded in the cracked bone."
+        ],
+        "caused_by": [
+          "ev_02_body_in_hopper"
+        ],
+        "reveals": [
+          "white_lead_flake_in_skull_fracture"
+        ],
+        "conceals": [
+          "death_preceded_crushing"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_infirmary"
+          },
+          {
+            "entity_id": "char_dr_hollis",
+            "column": "location_id",
+            "value": "loc_infirmary"
+          },
+          {
+            "entity_id": "char_toby_gault",
+            "column": "location_id",
+            "value": "loc_infirmary"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_searching_the_bunkhouse",
+        "sequence": 10,
+        "summary": "Dan searches Jonah's bunk at the canteen and finds Toby's blood-soaked neckerchief stashed beneath the straw mattress.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_creek_canteen",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_martha_finch"
+        ],
+        "dramatic_function": "The evidence against Jonah reaches a crescendo, making the case against him seemingly airtight.",
+        "beats": [
+          "Dan turns over Jonah's room under Martha's anxious watch.",
+          "Dan pulls Toby's distinctive red handkerchief, stiff with blood, from the bed ticking."
+        ],
+        "caused_by": [
+          "ev_08_jonah_flees_the_wharf"
+        ],
+        "reveals": [],
+        "conceals": [
+          "planted_evidence_by_vance"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_creek_canteen"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_the_town_warrant",
+        "sequence": 11,
+        "summary": "Dan delivers the bloody neckerchief to Alderman Crane, who issues an immediate warrant for Jonah's arrest and temporarily relieves Dan of personal liability.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_magistrate_office",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_alderman_crane"
+        ],
+        "dramatic_function": "The wrong turn is formalized; both the authorities and the investigator embrace an incorrect but defensible solution.",
+        "beats": [
+          "Crane accepts the neckerchief as conclusive proof of Jonah's drunken fratricide.",
+          "Crane signs the arrest warrant and praises Dan for solving the matter swiftly."
+        ],
+        "caused_by": [
+          "ev_10_searching_the_bunkhouse"
+        ],
+        "reveals": [],
+        "conceals": [
+          "impending_collapse_of_theory"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_magistrate_office"
+          },
+          {
+            "entity_id": "char_alderman_crane",
+            "column": "location_id",
+            "value": "loc_magistrate_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_jonahs_capture",
+        "sequence": 12,
+        "summary": "Constables bring a battered Jonah into the depot lockup, where Jonah weeps and swears he never went near the Kiln Four catwalk that night.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_rail_depot",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_jonah_gault"
+        ],
+        "dramatic_function": "The wrong turn begins to wobble as Jonah's despair and specifics do not match the profile of a deliberate saboteur.",
+        "beats": [
+          "Jonah is thrown into the holding cell beside the scale room.",
+          "Jonah insists through tears that he lost his coat in the tavern before midnight."
+        ],
+        "caused_by": [
+          "ev_11_the_town_warrant"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_rail_depot"
+          },
+          {
+            "entity_id": "char_jonah_gault",
+            "column": "location_id",
+            "value": "loc_rail_depot"
+          },
+          {
+            "entity_id": "char_jonah_gault",
+            "column": "status",
+            "value": "detained"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_jonah_alibi_confirmed",
+        "sequence": 13,
+        "summary": "Martha arrives with Jonah's recovered sheepskin coat, and Dan realizes the rip in the hem is years old, while Martha confirms Jonah was locked insensible in her root cellar all night.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_rail_depot",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_jonah_gault",
+          "char_martha_finch"
+        ],
+        "dramatic_function": "The wrong turn collapses completely; the physical evidence on the lever cannot belong to Jonah.",
+        "beats": [
+          "Martha presents the coat left hanging on the porch peg during the storm.",
+          "Dan matches the fresh fleece from the switch lever against Jonah's coat and sees the coat's tear is ancient and greaseless.",
+          "Martha testifies she personally locked the unconscious Jonah in the cellar after the fight."
+        ],
+        "caused_by": [
+          "ev_12_jonahs_capture"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "torn_sheepskin_on_switch_lever",
+            "plant": "ev_07_inspecting_the_switch_stand"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_finch",
+            "column": "location_id",
+            "value": "loc_rail_depot"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_the_switch_tampering_gap",
+        "sequence": 14,
+        "summary": "Dan rushes back to the Kiln Four spur and tests the safety derailer mechanism, finding the locking pin was extracted using an official brass square-head key.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_kiln_spur",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_hector_vance"
+        ],
+        "dramatic_function": "The inquiry redirects inward toward town insiders who possess master keys to the rail infrastructure.",
+        "beats": [
+          "Dan examines the derailer switch teeth in Vance's presence.",
+          "Dan proves the car was not jarred loose by an accident, but released with a key only the kiln management possesses."
+        ],
+        "caused_by": [
+          "ev_13_jonah_alibi_confirmed"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_kiln_spur"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_inspecting_the_catwalk",
+        "sequence": 15,
+        "summary": "Climbing the catwalk above Kiln Four, Dan finds where the white lead paint on the safety rail was freshly chipped away by a violent blow from an iron coupling pin.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_kiln_spur",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_hector_vance"
+        ],
+        "dramatic_function": "The solution snaps into focus as the medical clue from the morgue aligns with physical marks on the high catwalk.",
+        "beats": [
+          "Dan ascends the high iron gantry over the burning lime pit.",
+          "He identifies a fresh gouge in the white-leaded handrail matching the flake found in Toby's skull."
+        ],
+        "caused_by": [
+          "ev_14_the_switch_tampering_gap",
+          "ev_09_examining_the_corpse"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "white_lead_flake_in_skull_fracture",
+            "plant": "ev_09_examining_the_corpse"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "goal",
+            "value": "confront Vance with the murder evidence"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_reconstructing_the_crime",
+        "sequence": 16,
+        "summary": "At the canteen porch, Dan inspects Martha's lantern rack and realizes Vance took Jonah's coat and Martha's mutton-tallow lantern to disguise his staged runaway car.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_creek_canteen",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_martha_finch"
+        ],
+        "dramatic_function": "The true account is assembled by synthesizing the overlooked early domestic detail with the staged crime scene.",
+        "beats": [
+          "Dan sniffs the tallow crocks beside Martha's wash-tubs, matching the distinct kitchen scent to the fatal lantern.",
+          "Dan pieces together how the killer stole the lantern and coat from the porch to frame Jonah while moving the hopper car."
+        ],
+        "caused_by": [
+          "ev_15_inspecting_the_catwalk"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "mutton_tallow_in_switch_lantern",
+            "plant": "ev_02_body_in_hopper"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_creek_canteen"
+          },
+          {
+            "entity_id": "char_martha_finch",
+            "column": "location_id",
+            "value": "loc_creek_canteen"
+          }
+        ]
+      },
+      {
+        "id": "ev_17_confronting_the_foreman",
+        "sequence": 17,
+        "summary": "Dan corners Vance at the Kiln Four loading bay, proving Toby discovered Vance's unslaked marl skimming operation and was murdered on the catwalk before the hopper car was dropped.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_kiln_spur",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_hector_vance"
+        ],
+        "dramatic_function": "The confrontation detonates the killer's alibi and exposes the economic motive seeded earlier in the story.",
+        "beats": [
+          "Dan confronts Vance with the coupling pin and the marl vouchers from Crane's office.",
+          "Dan explains that Vance killed Toby on the catwalk over the marl fraud, dumped him into the car, and released the brakes to pin it on Dan."
+        ],
+        "caused_by": [
+          "ev_16_reconstructing_the_crime"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "unslaked_marl_in_hopper_four",
+            "plant": "ev_04_crane_threatens_investigation"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_kiln_spur"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_vances_confession",
+        "sequence": 18,
+        "summary": "Dan brings Vance under guard into Crane's boardroom, where Vance confesses to striking Toby with the coupling pin and releasing the hopper car under Dan's shift.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_magistrate_office",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_hector_vance",
+          "char_alderman_crane",
+          "char_dr_hollis"
+        ],
+        "dramatic_function": "The mystery reaches its formal legal solution before the assembled town figures.",
+        "beats": [
+          "Vance breaks down under Dr. Hollis's medical notes and admits striking Toby on the gantry.",
+          "Vance confesses to pulling the switch pin to simulate an accidental yard derailment."
+        ],
+        "caused_by": [
+          "ev_17_confronting_the_foreman"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_magistrate_office"
+          },
+          {
+            "entity_id": "char_hector_vance",
+            "column": "location_id",
+            "value": "loc_magistrate_office"
+          },
+          {
+            "entity_id": "char_dr_hollis",
+            "column": "location_id",
+            "value": "loc_magistrate_office"
+          },
+          {
+            "entity_id": "char_hector_vance",
+            "column": "status",
+            "value": "arrested"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_crane_silences_the_yard",
+        "sequence": 19,
+        "summary": "To protect the syndicate from a fatal investigation into adulterated lime, Crane orders Vance transferred in secret and summarily discharges Dan for yard irregularities.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_magistrate_office",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_alderman_crane"
+        ],
+        "dramatic_function": "The heavy cost lands on the investigator; uncovering the truth does not protect him from the corrupt power structure.",
+        "beats": [
+          "Crane has Vance taken away to a quiet county jail to avoid an open trial on the marl shipments.",
+          "Crane revokes Dan's yardmaster license, blacklisting him from the line to bury the scandal."
+        ],
+        "caused_by": [
+          "ev_18_vances_confession"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "status",
+            "value": "discharged"
+          },
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "goal",
+            "value": "leave Scarrow Creek"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_the_empty_basin",
+        "sequence": 20,
+        "summary": "Dan packs his kit at the deserted depot while Jonah Gault watches from the platform, exonerated of murder but left with nothing in a dead town.",
+        "pov": "char_dan_mercer",
+        "location_id": "loc_rail_depot",
+        "characters_present": [
+          "char_dan_mercer",
+          "char_jonah_gault"
+        ],
+        "dramatic_function": "The final resolution confirms the cost: the mystery is solved, the innocent are spared the gallows, but the investigator departs in defeat.",
+        "beats": [
+          "Dan hands the office keys to the railway constable and picks up his seabag.",
+          "Jonah thanks Dan in silence on the dark platform as the last empty coal cars roll through the valley."
+        ],
+        "caused_by": [
+          "ev_19_crane_silences_the_yard"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_dan_mercer",
+            "column": "location_id",
+            "value": "loc_rail_depot"
+          },
+          {
+            "entity_id": "char_jonah_gault",
+            "column": "status",
+            "value": "exonerated"
+          }
+        ]
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-17T16:53:52.566Z",
+    "started_at": "2026-09-17T16:52:57.625Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_midnight_alarm",
+        "order": 1,
+        "event_ids": [
+          "ev_01_alarm_at_the_kiln"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_under_the_hopper",
+        "order": 2,
+        "event_ids": [
+          "ev_02_body_in_hopper"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_missing_token",
+        "order": 3,
+        "event_ids": [
+          "ev_03_the_missing_shift_token"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_cranes_threat",
+        "order": 4,
+        "event_ids": [
+          "ev_04_crane_threatens_investigation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_yard_log",
+        "order": 5,
+        "event_ids": [
+          "ev_05_crane_lays_blame"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_gault_brawl",
+        "order": 6,
+        "event_ids": [
+          "ev_06_interviewing_the_canteen_cook"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_the_switch_fleece",
+        "order": 7,
+        "event_ids": [
+          "ev_07_inspecting_the_switch_stand"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_behind_the_canteen",
+        "order": 8,
+        "event_ids": [
+          "ev_08_jonah_flees_the_wharf"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_mortuary_exam",
+        "order": 9,
+        "event_ids": [
+          "ev_09_examining_the_corpse"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_bunkhouse_search",
+        "order": 10,
+        "event_ids": [
+          "ev_10_searching_the_bunkhouse"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_the_warrant_signed",
+        "order": 11,
+        "event_ids": [
+          "ev_11_the_town_warrant"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_the_depot_lockup",
+        "order": 12,
+        "event_ids": [
+          "ev_12_jonahs_capture",
+          "ev_13_jonah_alibi_confirmed"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_gantry_evidence",
+        "order": 13,
+        "event_ids": [
+          "ev_14_the_switch_tampering_gap",
+          "ev_15_inspecting_the_catwalk"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_14_the_canteen_porch",
+        "order": 14,
+        "event_ids": [
+          "ev_16_reconstructing_the_crime"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_15_confronting_vance",
+        "order": 15,
+        "event_ids": [
+          "ev_17_confronting_the_foreman"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_16_cranes_boardroom",
+        "order": 16,
+        "event_ids": [
+          "ev_18_vances_confession",
+          "ev_19_crane_silences_the_yard"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_17_the_final_departure",
+        "order": 17,
+        "event_ids": [
+          "ev_20_the_empty_basin"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+    ]
+  }
+}

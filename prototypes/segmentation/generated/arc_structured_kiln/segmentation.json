@@ -1,0 +1,476 @@
+{
+  "story_id": "arc_structured_kiln",
+  "generator": "segmentation pipeline (#118)",
+  "models_used": [
+    "gemini-3.8-flash"
+  ],
+  "requested_model": "gemini-3.8-flash",
+  "segmented_at": "2026-09-17T16:51:19.374Z",
+  "cost_usd": 0.0246405,
+  "calls": [
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 0 (0–20)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2771,
+      "output_tokens": 1058,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00604575,
+      "ms": 3315,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 902,
+      "output_tokens": 447,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00235275,
+      "ms": 5797,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 893,
+      "output_tokens": 615,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002976,
+      "ms": 5093,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 9–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1100,
+      "output_tokens": 648,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.003255,
+      "ms": 6322,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 13–16",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1036,
+      "output_tokens": 655,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00323325,
+      "ms": 7204,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 17–17",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 474,
+      "output_tokens": 175,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00101175,
+      "ms": 3466,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 1–17",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2378,
+      "output_tokens": 114,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002211,
+      "ms": 12033,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_verification",
+      "label": "pairs 1–1",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 360,
+      "output_tokens": 108,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.000675,
+      "ms": 1439,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1246,
+      "output_tokens": 149,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00149325,
+      "ms": 7233,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 5–6",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1384,
+      "output_tokens": 93,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00138675,
+      "ms": 4420,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "events": 20,
+  "scenes": 17,
+  "events_per_scene": 1.1764705882352942,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "telling_order": {
+    "basis": "fabula_sequence",
+    "displaced": 0
+  },
+  "boundaries": {
+    "windows": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 20
+      }
+    ],
+    "window_problems": [],
+    "failed_windows": [],
+    "fell_back_to_signals": 0,
+    "disagreements": 0,
+    "judged_adjacencies": 19,
+    "self_consistency": null,
+    "decisions": [
+      {
+        "index": 0,
+        "after_event_id": "ev_02_coat_inspection",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Location moves to Maren's office for a confrontation with Arthur.",
+        "from_signals": false
+      },
+      {
+        "index": 1,
+        "after_event_id": "ev_03_catwalk_inspection",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Maren moves out to the kiln hall with Orson.",
+        "from_signals": false
+      },
+      {
+        "index": 2,
+        "after_event_id": "ev_04_union_warning",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Location moves to supervisor office to speak with Tessa.",
+        "from_signals": false
+      },
+      {
+        "index": 3,
+        "after_event_id": "ev_05_batch_house_inventory",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Maren moves to the batch house to investigate receipts with Nora.",
+        "from_signals": false
+      },
+      {
+        "index": 4,
+        "after_event_id": "ev_06_reconstructing_timeline",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cut back to the office for a conversation with Orson.",
+        "from_signals": false
+      },
+      {
+        "index": 5,
+        "after_event_id": "ev_07_maintenance_bay_search",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Maren moves to the maintenance bay to see Bram.",
+        "from_signals": false
+      },
+      {
+        "index": 6,
+        "after_event_id": "ev_08_logbook_discrepancy",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Arthur summons Maren to the manager's office.",
+        "from_signals": false
+      },
+      {
+        "index": 7,
+        "after_event_id": "ev_09_weighbridge_records",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Maren catches Nora at the batch house.",
+        "from_signals": false
+      },
+      {
+        "index": 8,
+        "after_event_id": "ev_10_union_meeting",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Confrontation shifts out onto the kiln hall floor.",
+        "from_signals": false
+      },
+      {
+        "index": 9,
+        "after_event_id": "ev_11_locker_search",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Maren moves to her office for the formal search.",
+        "from_signals": false
+      },
+      {
+        "index": 10,
+        "after_event_id": "ev_12_the_weight_discovered",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action during the locker search in Maren's office.",
+        "from_signals": false
+      },
+      {
+        "index": 11,
+        "after_event_id": "ev_13_interrogation_and_doubt",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move to the manager's office for interrogation.",
+        "from_signals": false
+      },
+      {
+        "index": 12,
+        "after_event_id": "ev_14_the_gas_drop_contradiction",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous scene in the manager's office as Nora enters with the ledger.",
+        "from_signals": false
+      },
+      {
+        "index": 13,
+        "after_event_id": "ev_15_re_examining_the_corridor",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Maren brings Orson back out to the kiln hall.",
+        "from_signals": false
+      },
+      {
+        "index": 14,
+        "after_event_id": "ev_16_the_oilskin_cuffs",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Maren confronts Bram in the maintenance shop.",
+        "from_signals": false
+      },
+      {
+        "index": 15,
+        "after_event_id": "ev_17_the_arc_burn_confession",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous confrontation in the maintenance bay as Arthur arrives.",
+        "from_signals": false
+      },
+      {
+        "index": 16,
+        "after_event_id": "ev_18_the_damper_truth",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Action moves to the kiln base for the demonstration.",
+        "from_signals": false
+      },
+      {
+        "index": 17,
+        "after_event_id": "ev_19_police_arrival_and_arrest",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cut to the manager's office where the police arrest Arthur.",
+        "from_signals": false
+      },
+      {
+        "index": 18,
+        "after_event_id": "ev_20_the_cost_of_truth",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time skip to Maren leaving the factory past her coworkers.",
+        "from_signals": false
+      }
+    ]
+  },
+  "grouping": {
+    "judged_boundaries": 16,
+    "forced_by_plant_span": 0,
+    "forced_by_size": 0,
+    "unseparable_plant_spans": []
+  },
+  "scene_properties": {
+    "failed_batches": 0,
+    "pov_fallbacks": 0,
+    "location_fallbacks": 0,
+    "location_inherited": 0,
+    "beat_fallbacks": 0,
+    "function_fallbacks": 0
+  },
+  "substitutions": {
+    "pov_from_seed": 0,
+    "location_from_seed": 0,
+    "pov_from_candidates": 0,
+    "location_from_candidates": 0,
+    "beats_from_events": 0
+  },
+  "state": {
+    "dropped_unknown_entity": 0,
+    "dropped_entity_ids": [],
+    "dropped_unknown_column": 0
+  },
+  "plants": {
+    "carried_from_fabula": 9,
+    "dangling_plants": 0,
+    "proposed": 1,
+    "rejected_malformed": 0,
+    "verified": 1,
+    "rejected_by_verifier": 0,
+    "unverified_dropped": 0,
+    "seed_grounded_unrepresentable": 0,
+    "failed_batches": 0,
+    "accepted": [
+      {
+        "fact_ref": "only_supervisor_holds_interlock_key",
+        "plant": null,
+        "payoff": "scene_01_the_kiln_breach",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "maren_suffered_exhaustion_blackout",
+        "plant": null,
+        "payoff": "scene_02_keys_and_twine",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "plant_facing_contract_cancellation",
+        "plant": null,
+        "payoff": "scene_04_the_framing_warning",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "derry_threatened_grievance_over_short_shift",
+        "plant": null,
+        "payoff": "scene_04_the_framing_warning",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "missing_brass_scale_counterweight",
+        "plant": "scene_05_missing_weight",
+        "payoff": "scene_11_the_locker_search",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "falsified_gas_meter_log",
+        "plant": "scene_09_the_falsified_sheet",
+        "payoff": "scene_12_the_broken_timeline",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "purple_twine_on_brams_cuffs",
+        "plant": "scene_02_keys_and_twine",
+        "payoff": "scene_14_mended_cuffs",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "bram_fresh_arc_burns",
+        "plant": "scene_07_arc_burns",
+        "payoff": "scene_14_mended_cuffs",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "roof_exhaust_damper_propped_open",
+        "plant": "scene_03_the_jammed_damper",
+        "payoff": "scene_15_the_propped_damper",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "yellow_oilskin_coat_eyewitness",
+        "plant": "scene_06_orsons_testimony",
+        "payoff": "scene_13_the_steam_test",
+        "why": "Orson claims he identified Maren at the lock bar by her yellow oilskin coat.",
+        "type": "speech_act"
+      }
+    ]
+  },
+  "told_ledger": {
+    "facts": 6,
+    "withheld_scene_entries": 1,
+    "rejected_out_of_range": 0,
+    "failed_batches": 0
+  },
+  "lint": {
+    "problems": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_supervisor_coat",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_supervisor_coat",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "publishable": true
+  },
+  "vacuous_checks": [
+    "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+    "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+    "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+  ]
+}

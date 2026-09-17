@@ -1,0 +1,2245 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "arc_structured_kiln",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_maren",
+        "name": "Maren Vance",
+        "location_id": "loc_kiln_hall",
+        "status": "exhausted_from_double_shift",
+        "goal": "complete_shift_handover_and_sleep",
+        "bag": {
+          "role": "investigator",
+          "shift_position": "night_supervisor"
+        }
+      },
+      {
+        "id": "char_arthur",
+        "name": "Arthur Pendelton",
+        "location_id": "loc_kiln_hall",
+        "status": "anxious_and_authoritarian",
+        "goal": "protect_factory_from_contract_liability",
+        "bag": {
+          "role": "concealer",
+          "shift_position": "works_manager"
+        }
+      },
+      {
+        "id": "char_orson",
+        "name": "Orson Pike",
+        "location_id": "loc_kiln_hall",
+        "status": "tired_and_complaining",
+        "goal": "finish_unloading_and_avoid_blame",
+        "bag": {
+          "role": "witness",
+          "shift_position": "kiln_loader"
+        }
+      },
+      {
+        "id": "char_derry",
+        "name": "Derry Cloutier",
+        "location_id": "loc_kiln_hall",
+        "status": "unresponsive_inside_kiln",
+        "goal": "survive",
+        "bag": {
+          "role": "wronged_party",
+          "shift_position": "frit_mixer"
+        }
+      },
+      {
+        "id": "char_tessa",
+        "name": "Tessa Renwick",
+        "location_id": "loc_supervisor_office",
+        "status": "vigilant",
+        "goal": "defend_union_crew_from_management_reprisals",
+        "bag": {
+          "role": "shop_steward",
+          "shift_position": "senior_mixer"
+        }
+      },
+      {
+        "id": "char_bram",
+        "name": "Bram Holcomb",
+        "location_id": "loc_maintenance_bay",
+        "status": "nervous_and_singed",
+        "goal": "conceal_his_part_in_overnight_bypass",
+        "bag": {
+          "role": "maintenance_tech",
+          "shift_position": "burner_mechanic"
+        }
+      },
+      {
+        "id": "char_nora",
+        "name": "Nora Finch",
+        "location_id": "loc_batch_house",
+        "status": "intimidated",
+        "goal": "balance_manifests_without_provoking_arthur",
+        "bag": {
+          "role": "clerk",
+          "shift_position": "weighbridge_clerk"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_kiln_hall",
+        "name": "Tunnel Kiln Hall 4",
+        "bag": {
+          "environment": "industrial_heat_and_drafty_slip_fumes"
+        }
+      },
+      {
+        "id": "loc_supervisor_office",
+        "name": "Glaze Floor Supervisor Office",
+        "bag": {
+          "environment": "greasy_glass_windows_overlooking_tanks"
+        }
+      },
+      {
+        "id": "loc_batch_house",
+        "name": "Batch House and Weighbridge",
+        "bag": {
+          "environment": "white_silica_dust_and_balance_scales"
+        }
+      },
+      {
+        "id": "loc_maintenance_bay",
+        "name": "Rear Burner Maintenance Bay",
+        "bag": {
+          "environment": "smell_of_kerosene_and_scrap_pipe"
+        }
+      },
+      {
+        "id": "loc_manager_office",
+        "name": "Works Manager Office",
+        "bag": {
+          "environment": "wood_paneling_and_shipping_telegrams"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_kiln_key",
+        "name": "Master Brass Interlock Key",
+        "location_id": "loc_kiln_hall",
+        "status": "clipped_to_marens_belt",
+        "bag": {
+          "function": "sole_key_to_kiln_4_wicket_lock"
+        }
+      },
+      {
+        "id": "obj_shift_log",
+        "name": "Shift Firing Ledger",
+        "location_id": "loc_supervisor_office",
+        "status": "initialed_up_to_midnight",
+        "bag": {
+          "function": "official_record_of_temperatures_and_signatures"
+        }
+      },
+      {
+        "id": "obj_brass_counterweight",
+        "name": "Two-Pound Balance Counterweight",
+        "location_id": "loc_batch_house",
+        "status": "seated_on_scale_pedestal",
+        "bag": {
+          "material": "solid_turned_brass"
+        }
+      },
+      {
+        "id": "obj_supervisor_coat",
+        "name": "Yellow Oilskin Supervisor Coat",
+        "location_id": "loc_supervisor_office",
+        "status": "hanging_on_wall_peg",
+        "bag": {
+          "color": "faded_yellow"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_arthur_maren",
+        "from_id": "char_arthur",
+        "to_id": "char_maren",
+        "kind": "supervisor_to_subordinate",
+        "sentiment": "suspicious_and_expedient",
+        "bag": {}
+      },
+      {
+        "id": "rel_maren_arthur",
+        "from_id": "char_maren",
+        "to_id": "char_arthur",
+        "kind": "subordinate_to_supervisor",
+        "sentiment": "distrustful_and_intimidated",
+        "bag": {}
+      },
+      {
+        "id": "rel_orson_maren",
+        "from_id": "char_orson",
+        "to_id": "char_maren",
+        "kind": "workplace_peers",
+        "sentiment": "resentful_of_her_promotion",
+        "bag": {}
+      },
+      {
+        "id": "rel_tessa_maren",
+        "from_id": "char_tessa",
+        "to_id": "char_maren",
+        "kind": "union_allies",
+        "sentiment": "protective_yet_wary",
+        "bag": {}
+      },
+      {
+        "id": "rel_arthur_bram",
+        "from_id": "char_arthur",
+        "to_id": "char_bram",
+        "kind": "conspiratorial_employer",
+        "sentiment": "coercive",
+        "bag": {}
+      },
+      {
+        "id": "rel_bram_arthur",
+        "from_id": "char_bram",
+        "to_id": "char_arthur",
+        "kind": "compromised_employee",
+        "sentiment": "fearful",
+        "bag": {}
+      },
+      {
+        "id": "rel_nora_arthur",
+        "from_id": "char_nora",
+        "to_id": "char_arthur",
+        "kind": "clerk_to_manager",
+        "sentiment": "intimidated",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_maren",
+        "fact_ref": "only_supervisor_holds_interlock_key",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_arthur",
+        "fact_ref": "only_supervisor_holds_interlock_key",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_orson",
+        "fact_ref": "only_supervisor_holds_interlock_key",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_maren",
+        "fact_ref": "maren_suffered_exhaustion_blackout",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_05",
+        "character_id": "char_arthur",
+        "fact_ref": "plant_facing_contract_cancellation",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_06",
+        "character_id": "char_tessa",
+        "fact_ref": "plant_facing_contract_cancellation",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_07",
+        "character_id": "char_derry",
+        "fact_ref": "derry_threatened_grievance_over_short_shift",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_08",
+        "character_id": "char_tessa",
+        "fact_ref": "derry_threatened_grievance_over_short_shift",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_kiln_breach",
+      "order": 1,
+      "pov": "char_maren",
+      "location_id": "loc_kiln_hall",
+      "characters_present": [
+        "char_maren",
+        "char_arthur",
+        "char_orson"
+      ],
+      "dramatic_function": "To trigger the core conflict by revealing Derry's death inside the prematurely opened kiln.",
+      "entry_state": {
+        "char_derry": {
+          "status": "unresponsive_inside_kiln"
+        },
+        "char_maren": {
+          "goal": "complete_shift_handover_and_sleep"
+        },
+        "char_arthur": {
+          "status": "anxious_and_authoritarian"
+        }
+      },
+      "exit_state": {
+        "char_derry": {
+          "status": "deceased"
+        },
+        "char_maren": {
+          "goal": "reconstruct_the_missing_hours_of_her_shift"
+        },
+        "char_arthur": {
+          "status": "demanding_an_immediate_culprit"
+        }
+      },
+      "required_beats": [
+        "Arthur overrides Maren's cooling schedule and forces an immediate opening of Kiln 4.",
+        "Maren uses her interlock key to unlock the wicket door.",
+        "Orson pulls out the kiln car to reveal Derry dead among the saggers."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "arthurs_clandestine_night_order"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "only_supervisor_holds_interlock_key",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_keys_and_twine",
+      "order": 2,
+      "pov": "char_maren",
+      "location_id": "loc_supervisor_office",
+      "characters_present": [
+        "char_maren",
+        "char_arthur"
+      ],
+      "dramatic_function": "To place Maren directly under suspicion while surfacing the first anomalous clue.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_hall"
+        },
+        "char_arthur": {
+          "location_id": "loc_kiln_hall"
+        },
+        "obj_kiln_key": {
+          "location_id": "loc_kiln_hall",
+          "status": "clipped_to_marens_belt"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_supervisor_office"
+        },
+        "char_arthur": {
+          "location_id": "loc_supervisor_office"
+        },
+        "obj_kiln_key": {
+          "location_id": "loc_supervisor_office",
+          "status": "confiscated_by_arthur"
+        }
+      },
+      "required_beats": [
+        "Arthur confronts Maren with negligence charges and confiscates her brass interlock key.",
+        "Maren notices coarse purple twine used to repair a coat sleeve on the office peg."
+      ],
+      "reader_must_learn": [
+        "purple_twine_on_brams_cuffs"
+      ],
+      "must_stay_hidden": [
+        "brams_midnight_entry"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "maren_suffered_exhaustion_blackout",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_03_the_jammed_damper",
+      "order": 3,
+      "pov": "char_maren",
+      "location_id": "loc_kiln_hall",
+      "characters_present": [
+        "char_maren",
+        "char_orson"
+      ],
+      "dramatic_function": "To uncover physical evidence indicating intentional tampering with the kiln ventilation.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_supervisor_office"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_hall"
+        }
+      },
+      "required_beats": [
+        "Maren and Orson inspect the outer wall of Kiln 4 as Orson grumbles about Derry loafing near the exhaust.",
+        "Maren discovers the overhead draft damper wedged open with scrap rebar."
+      ],
+      "reader_must_learn": [
+        "roof_exhaust_damper_propped_open"
+      ],
+      "must_stay_hidden": [
+        "external_flue_access_route"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_the_framing_warning",
+      "order": 4,
+      "pov": "char_maren",
+      "location_id": "loc_supervisor_office",
+      "characters_present": [
+        "char_maren",
+        "char_tessa"
+      ],
+      "dramatic_function": "To reveal the institutional conspiracy aligning against Maren and highlight her vulnerability.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_hall"
+        },
+        "char_tessa": {
+          "goal": "defend_union_crew_from_management_reprisals"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_supervisor_office"
+        },
+        "char_tessa": {
+          "goal": "protect_union_workers_from_corporate_liability"
+        }
+      },
+      "required_beats": [
+        "Tessa warns Maren that management and insurers are preparing to scapegoat her over contract liability.",
+        "Maren confesses that severe exhaustion left her memory of the critical shift hours completely blank."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "derrys_informal_bargain_with_arthur"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "plant_facing_contract_cancellation",
+          "plant": null
+        },
+        {
+          "fact_ref": "derry_threatened_grievance_over_short_shift",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_05_missing_weight",
+      "order": 5,
+      "pov": "char_maren",
+      "location_id": "loc_batch_house",
+      "characters_present": [
+        "char_maren",
+        "char_nora"
+      ],
+      "dramatic_function": "To uncover physical discrepancies in the batch house and establish Nora's evasiveness regarding Derry's timeline.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_supervisor_office"
+        },
+        "obj_brass_counterweight": {
+          "status": "seated_on_scale_pedestal"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_batch_house"
+        },
+        "obj_brass_counterweight": {
+          "status": "missing_from_batch_scale"
+        }
+      },
+      "required_beats": [
+        "Maren presses Nora for Derry's mixing chits from earlier in the night.",
+        "Nora nervously evades Maren and claims Derry departed before 02:30.",
+        "Maren discovers that the balance scale's two-pound brass counterweight is missing."
+      ],
+      "reader_must_learn": [
+        "missing_brass_scale_counterweight"
+      ],
+      "must_stay_hidden": [
+        "noras_altered_shipping_slips"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_orsons_testimony",
+      "order": 6,
+      "pov": "char_maren",
+      "location_id": "loc_supervisor_office",
+      "characters_present": [
+        "char_maren",
+        "char_orson"
+      ],
+      "dramatic_function": "To turn the suspicion directly onto Maren and destabilize her trust in her own memory.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_batch_house",
+          "status": "exhausted_from_double_shift"
+        },
+        "char_orson": {
+          "location_id": "loc_kiln_hall"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_supervisor_office",
+          "status": "severely_rattled_and_sleep_deprived"
+        },
+        "char_orson": {
+          "location_id": "loc_supervisor_office"
+        }
+      },
+      "required_beats": [
+        "Maren questions Orson about the exact timing of the wicket bar closure.",
+        "Orson claims he witnessed Maren at the lock bar in her yellow oilskin coat at 03:45.",
+        "Maren realizes she lacks an alibi for that hour and questions her own sanity."
+      ],
+      "reader_must_learn": [
+        "yellow_oilskin_coat_eyewitness"
+      ],
+      "must_stay_hidden": [
+        "orsons_mistaken_identity_in_the_fog"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_arc_burns",
+      "order": 7,
+      "pov": "char_maren",
+      "location_id": "loc_maintenance_bay",
+      "characters_present": [
+        "char_maren",
+        "char_bram"
+      ],
+      "dramatic_function": "To reveal physical evidence tying Bram to recent illicit electrical work despite his hostility.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_supervisor_office"
+        },
+        "char_bram": {
+          "status": "nervous_and_singed"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_maintenance_bay"
+        },
+        "char_bram": {
+          "status": "defensive_and_bandaged"
+        }
+      },
+      "required_beats": [
+        "Maren searches Bram's pegboard for spare wicket keys or lock picks.",
+        "Bram angrily orders her to leave while claiming he was rebuilding a slip pump.",
+        "Maren spots fresh, blistering arc burns on Bram's forearms and wrists."
+      ],
+      "reader_must_learn": [
+        "bram_fresh_arc_burns"
+      ],
+      "must_stay_hidden": [
+        "brams_clandestine_welding_job"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_the_ledger",
+      "order": 8,
+      "pov": "char_maren",
+      "location_id": "loc_manager_office",
+      "characters_present": [
+        "char_maren",
+        "char_arthur"
+      ],
+      "dramatic_function": "To confront Maren with seemingly undeniable written proof of her complicity in the shift's events.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_maintenance_bay"
+        },
+        "char_arthur": {
+          "location_id": "loc_supervisor_office"
+        },
+        "obj_shift_log": {
+          "location_id": "loc_supervisor_office",
+          "status": "initialed_up_to_midnight"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_manager_office"
+        },
+        "char_arthur": {
+          "location_id": "loc_manager_office"
+        },
+        "obj_shift_log": {
+          "location_id": "loc_manager_office",
+          "status": "marked_with_damning_0400_entry"
+        }
+      },
+      "required_beats": [
+        "Arthur presents the shift firing ledger on his desk to Maren.",
+        "Arthur points out Maren's distinctive cursive initials marking the 04:00 gas valve check.",
+        "Maren recognizes her own handwriting and struggles to understand how or when she made it."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "forged_signature_under_arthurs_direction",
+        "falsified_gas_meter_log"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_the_falsified_sheet",
+      "order": 9,
+      "pov": "char_maren",
+      "location_id": "loc_batch_house",
+      "characters_present": [
+        "char_maren",
+        "char_nora"
+      ],
+      "dramatic_function": "Exposes Arthur's deliberate cover-up of the kiln's overnight pressure failure.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_manager_office"
+        },
+        "char_nora": {
+          "status": "intimidated"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_batch_house"
+        },
+        "char_nora": {
+          "status": "compromised_and_anxious"
+        }
+      },
+      "required_beats": [
+        "Maren enters the weighbridge booth to inspect the pipeline manometer tapes.",
+        "Maren catches Nora transcribing data to conceal a major pressure drop at 03:10.",
+        "Nora admits that Arthur commanded her to erase the incident from the records."
+      ],
+      "reader_must_learn": [
+        "falsified_gas_meter_log"
+      ],
+      "must_stay_hidden": [
+        "arthurs_threat_to_fire_nora"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_10_the_crew_turns",
+      "order": 10,
+      "pov": "char_maren",
+      "location_id": "loc_kiln_hall",
+      "characters_present": [
+        "char_maren",
+        "char_tessa",
+        "char_orson"
+      ],
+      "dramatic_function": "Isolates Maren as the union turns on her to shield the crew from blame.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_batch_house"
+        },
+        "char_tessa": {
+          "location_id": "loc_supervisor_office",
+          "goal": "protect_union_workers_from_corporate_liability"
+        },
+        "char_orson": {
+          "location_id": "loc_supervisor_office"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_hall"
+        },
+        "char_tessa": {
+          "location_id": "loc_kiln_hall",
+          "goal": "isolate_maren_to_protect_shift_crew"
+        },
+        "char_orson": {
+          "location_id": "loc_kiln_hall"
+        }
+      },
+      "required_beats": [
+        "Tessa gathers the shift workers at Kiln 4 under the guise of reviewing safety protocols.",
+        "Orson publicly accuses Maren of standing by the padlock bar when Derry disappeared.",
+        "Tessa informs Maren that the union will protect the workforce rather than defend her."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "tessas_secret_deal_for_severance"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_11_the_locker_search",
+      "order": 11,
+      "pov": "char_maren",
+      "location_id": "loc_supervisor_office",
+      "characters_present": [
+        "char_maren",
+        "char_arthur",
+        "char_tessa"
+      ],
+      "dramatic_function": "Frames Maren conclusively in front of the union by planting incriminating evidence in her possession.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_hall",
+          "status": "severely_rattled_and_sleep_deprived"
+        },
+        "char_arthur": {
+          "location_id": "loc_manager_office"
+        },
+        "char_tessa": {
+          "location_id": "loc_kiln_hall"
+        },
+        "obj_brass_counterweight": {
+          "location_id": "loc_batch_house",
+          "status": "missing_from_batch_scale"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_supervisor_office",
+          "status": "accused_of_manslaughter"
+        },
+        "char_arthur": {
+          "location_id": "loc_supervisor_office"
+        },
+        "char_tessa": {
+          "location_id": "loc_supervisor_office"
+        },
+        "obj_brass_counterweight": {
+          "location_id": "loc_supervisor_office",
+          "status": "found_in_marens_locker"
+        }
+      },
+      "required_beats": [
+        "Arthur brings the police liaison and yard committee to Maren's office to search her locker.",
+        "Confident in her innocence, Maren unlocks her locker for Arthur.",
+        "Arthur uncovers Derry's soot-stained rag hiding the missing scale counterweight.",
+        "Tessa abandons Maren to management's custody."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "arthurs_pre_planted_item_in_locker",
+        "how_the_weight_entered_the_locker"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "missing_brass_scale_counterweight",
+          "plant": "scene_05_missing_weight"
+        }
+      ]
+    },
+    {
+      "id": "scene_12_the_broken_timeline",
+      "order": 12,
+      "pov": "char_maren",
+      "location_id": "loc_manager_office",
+      "characters_present": [
+        "char_maren",
+        "char_arthur",
+        "char_nora"
+      ],
+      "dramatic_function": "Breaks Arthur's frame-up by revealing a critical flaw in his fabricated timeline.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_supervisor_office",
+          "goal": "reconstruct_the_missing_hours_of_her_shift",
+          "status": "accused_of_manslaughter"
+        },
+        "char_arthur": {
+          "location_id": "loc_supervisor_office"
+        },
+        "char_nora": {
+          "location_id": "loc_batch_house"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_manager_office",
+          "goal": "uncover_the_management_conspiracy",
+          "status": "clear_headed_and_combative"
+        },
+        "char_arthur": {
+          "location_id": "loc_manager_office"
+        },
+        "char_nora": {
+          "location_id": "loc_manager_office"
+        }
+      },
+      "required_beats": [
+        "Arthur pressures an exhausted Maren to confess to manslaughter using the planted evidence.",
+        "Nora brings the sanitized ledger into the office for Arthur's signature.",
+        "Maren spots that the 03:10 gas failure makes Arthur's 04:00 firing timeline impossible.",
+        "Arthur falters while attempting to reconcile the discrepancy, exposing his fabrication."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "arthurs_coercion_strategy",
+        "the_exact_repair_derry_performed"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "falsified_gas_meter_log",
+          "plant": "scene_09_the_falsified_sheet"
+        }
+      ]
+    },
+    {
+      "id": "scene_13_the_steam_test",
+      "order": 13,
+      "pov": "char_maren",
+      "location_id": "loc_kiln_hall",
+      "characters_present": [
+        "char_maren",
+        "char_orson"
+      ],
+      "dramatic_function": "Dismantles the eyewitness claim tying Maren to the lock bar and uncovers a key physical clue.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_manager_office"
+        },
+        "char_orson": {
+          "location_id": "loc_kiln_hall"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_hall"
+        },
+        "char_orson": {
+          "location_id": "loc_kiln_hall"
+        }
+      },
+      "required_beats": [
+        "Maren uses the slip agitator steam at the wicket to show Orson could not have recognized her face.",
+        "Orson admits he only saw a yellow oilskin coat at the lock bar.",
+        "Orson reveals the coat sleeves had distinctive purple mending thread at the cuffs."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "who_actually_wore_the_coat"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "yellow_oilskin_coat_eyewitness",
+          "plant": "scene_06_orsons_testimony"
+        }
+      ]
+    },
+    {
+      "id": "scene_14_mended_cuffs",
+      "order": 14,
+      "pov": "char_maren",
+      "location_id": "loc_maintenance_bay",
+      "characters_present": [
+        "char_maren",
+        "char_bram",
+        "char_arthur"
+      ],
+      "dramatic_function": "Exposes Bram's theft of the key and uncovers Arthur's illegal payoff to Derry.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_hall"
+        },
+        "char_bram": {
+          "status": "defensive_and_bandaged",
+          "goal": "conceal_his_part_in_overnight_bypass"
+        },
+        "char_arthur": {
+          "location_id": "loc_manager_office",
+          "status": "demanding_an_immediate_culprit"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_maintenance_bay"
+        },
+        "char_bram": {
+          "status": "confessing_under_pressure",
+          "goal": "avoid_criminal_charges_by_cooperating"
+        },
+        "char_arthur": {
+          "location_id": "loc_maintenance_bay",
+          "status": "cornered_and_exposed"
+        }
+      },
+      "required_beats": [
+        "Maren identifies the purple twine cuffs on Bram's slicker in the repair shop.",
+        "Bram confesses to stealing Maren's master key while she was asleep.",
+        "Arthur tries to silence Bram, but Maren links Bram's forearm burns to the high-voltage burner electrodes.",
+        "Bram admits Arthur paid Derry to crawl inside the hot muffle flue to repair a broken baffle."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "arthurs_direct_orders_to_bram"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "purple_twine_on_brams_cuffs",
+          "plant": "scene_02_keys_and_twine"
+        },
+        {
+          "fact_ref": "bram_fresh_arc_burns",
+          "plant": "scene_07_arc_burns"
+        }
+      ]
+    },
+    {
+      "id": "scene_15_the_propped_damper",
+      "order": 15,
+      "pov": "char_maren",
+      "location_id": "loc_kiln_hall",
+      "characters_present": [
+        "char_maren",
+        "char_arthur",
+        "char_tessa"
+      ],
+      "dramatic_function": "Reveals the fatal mechanism of Derry's death and demonstrates Arthur's direct culpability.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_maintenance_bay"
+        },
+        "char_arthur": {
+          "location_id": "loc_maintenance_bay"
+        },
+        "char_tessa": {
+          "location_id": "loc_supervisor_office",
+          "goal": "isolate_maren_to_protect_shift_crew"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_hall"
+        },
+        "char_arthur": {
+          "location_id": "loc_kiln_hall"
+        },
+        "char_tessa": {
+          "location_id": "loc_kiln_hall",
+          "goal": "secure_arthurs_arrest_and_protect_plant"
+        }
+      },
+      "required_beats": [
+        "Maren brings Tessa and Arthur to the rebar wedge holding the high roof damper open.",
+        "Maren explains that the open damper served as Derry's only breathing line inside the flue.",
+        "Maren proves Arthur triggered the automated firing cycle from his office, suffocating Derry and framing her."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "roof_exhaust_damper_propped_open",
+          "plant": "scene_03_the_jammed_damper"
+        }
+      ]
+    },
+    {
+      "id": "scene_16_the_plant_lockout",
+      "order": 16,
+      "pov": "char_maren",
+      "location_id": "loc_manager_office",
+      "characters_present": [
+        "char_maren",
+        "char_arthur",
+        "char_tessa"
+      ],
+      "dramatic_function": "Brings Arthur to justice at the cost of shutting down the town's industrial lifeblood.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_hall"
+        },
+        "char_arthur": {
+          "location_id": "loc_kiln_hall",
+          "status": "cornered_and_exposed"
+        },
+        "char_tessa": {
+          "location_id": "loc_kiln_hall"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_manager_office"
+        },
+        "char_arthur": {
+          "location_id": "loc_manager_office",
+          "status": "under_arrest"
+        },
+        "char_tessa": {
+          "location_id": "loc_manager_office"
+        }
+      },
+      "required_beats": [
+        "Maren gives the police the manometer logs and Bram's signed witness statement.",
+        "Arthur is arrested for manslaughter while issuing a parting warning about the town's ruin.",
+        "The board orders an immediate and indefinite lockout of the works."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_17_the_padlocked_gate",
+      "order": 17,
+      "pov": "char_maren",
+      "location_id": "loc_kiln_hall",
+      "characters_present": [
+        "char_maren",
+        "char_tessa",
+        "char_orson"
+      ],
+      "dramatic_function": "To demonstrate the pyrrhic cost of Maren's victory as she is cast out by the very community she revealed the truth to.",
+      "entry_state": {
+        "char_maren": {
+          "location_id": "loc_manager_office",
+          "status": "clear_headed_and_combative",
+          "goal": "uncover_the_management_conspiracy"
+        },
+        "char_tessa": {
+          "location_id": "loc_manager_office"
+        }
+      },
+      "exit_state": {
+        "char_maren": {
+          "location_id": "loc_kiln_hall",
+          "status": "blacklisted_and_unemployed",
+          "goal": "leave_the_port_town"
+        },
+        "char_tessa": {
+          "location_id": "loc_kiln_hall"
+        }
+      },
+      "required_beats": [
+        "Receivers chain the gates and shut down the last operational kilns.",
+        "Orson and the assembled workers turn their backs in ostracism as Maren departs.",
+        "Tessa warns Maren that uncovering the truth has rendered her unemployable across the entire port."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    }
+  ],
+  "voice_card": {},
+  "metadata": {
+    "title": "The Cold Muffle",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-17T16:51:19.374Z"
+  },
+  "_fabula": {
+    "generator": "src/arc (issue #119)",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-16T00:41:19.783Z",
+    "brief": {
+      "story_id": "arc_structured_kiln",
+      "title": "Firing Two",
+      "premise": {
+        "logline": "A glaze factory kiln is opened a day early and a worker is found inside, and the shift supervisor who holds the only key has to account for a night she cannot remember clearly.",
+        "modules": {
+          "theme": "how a workplace decides in advance who will be blamed",
+          "setting_time": "a winter of short shifts and a failing order book",
+          "setting_place": "a glaze works on the edge of a port town",
+          "protagonist": "the night shift supervisor, recently promoted from the floor",
+          "protagonist_want": "to reconstruct a night she spent too tired to remember properly",
+          "antagonism": "a management that has already chosen its account of events",
+          "complication": "her own reconstruction keeps producing a version that convicts her",
+          "ending_shape": "the truth is established and costs the person who established it"
+        }
+      },
+      "plot_shape": {
+        "id": "mystery",
+        "name": "Mystery",
+        "central_question": "What actually happened, and who is willing to say so?",
+        "phases": [
+          {
+            "name": "Disturbance",
+            "purpose": "A wrong surfaces and someone is obliged to look into it.",
+            "share": 0.2
+          },
+          {
+            "name": "Inquiry",
+            "purpose": "Evidence accumulates, most of it true and misread.",
+            "share": 0.35
+          },
+          {
+            "name": "Wrong turn",
+            "purpose": "A reading of the evidence that is coherent and wrong collapses.",
+            "share": 0.2
+          },
+          {
+            "name": "Solution",
+            "purpose": "The true account, assembled only from what the reader has already been shown.",
+            "share": 0.15
+          },
+          {
+            "name": "Cost",
+            "purpose": "What knowing costs the person who found out.",
+            "share": 0.1
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "investigator",
+            "purpose": "Carries the reader through the inquiry and pays its cost."
+          },
+          {
+            "role": "concealer",
+            "purpose": "Has a reason to keep the true account from being assembled."
+          },
+          {
+            "role": "witness",
+            "purpose": "Holds one true piece and misunderstands its meaning."
+          },
+          {
+            "role": "wronged party",
+            "purpose": "The reason the question matters at all."
+          }
+        ],
+        "obligatory_moves": [
+          "Every element of the true account is on the page before it is stated.",
+          "At least one true detail is shown early in a context that makes it look irrelevant.",
+          "The wrong reading is defensible on the evidence available when it is made."
+        ]
+      },
+      "event_count": 20,
+      "cast": {
+        "characters": 7,
+        "locations": 5,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 10
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "mystery",
+        "premise_preset": "kiln"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_early_opening",
+        "sequence": 1,
+        "summary": "Arthur demands Kiln 4 be opened early to check an anomalous heat loss, and Derry's body is discovered on the kiln car tracks.",
+        "pov": "char_maren",
+        "location_id": "loc_kiln_hall",
+        "characters_present": [
+          "char_maren",
+          "char_arthur",
+          "char_orson"
+        ],
+        "dramatic_function": "Disturbance: the inciting crime is discovered, instantly putting the protagonist in the crosshairs of management.",
+        "beats": [
+          "Arthur overrules Maren's cooling schedule and insists on unsealing Kiln 4 immediately.",
+          "Maren uses her master interlock key to unlock the wicket door padlock.",
+          "Orson rolls out the forward kiln car and finds Derry dead inside among the saggers."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [
+          "arthurs_clandestine_night_order"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "only_supervisor_holds_interlock_key",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_derry",
+            "column": "status",
+            "value": "deceased"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "goal",
+            "value": "reconstruct_the_missing_hours_of_her_shift"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "status",
+            "value": "demanding_an_immediate_culprit"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_coat_inspection",
+        "sequence": 2,
+        "summary": "Arthur corners Maren in her office to seize her key and logbook while Maren notices purple twine mending a coat on the peg.",
+        "pov": "char_maren",
+        "location_id": "loc_supervisor_office",
+        "characters_present": [
+          "char_maren",
+          "char_arthur"
+        ],
+        "dramatic_function": "Disturbance / Setup: establishes Arthur's aggressive blame campaign and plants the repaired coat cuffs during the confrontation.",
+        "beats": [
+          "Arthur accuses Maren of criminal negligence since only her key could seal the wicket.",
+          "Arthur seizes the brass interlock key from Maren's desk.",
+          "Maren notices someone has stitched torn sleeve cuffs on a wall coat using coarse purple nylon twine."
+        ],
+        "caused_by": [
+          "ev_01_early_opening"
+        ],
+        "reveals": [
+          "purple_twine_on_brams_cuffs"
+        ],
+        "conceals": [
+          "brams_midnight_entry"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "maren_suffered_exhaustion_blackout",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "obj_kiln_key",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "obj_kiln_key",
+            "column": "status",
+            "value": "confiscated_by_arthur"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_catwalk_inspection",
+        "sequence": 3,
+        "summary": "Maren checks the kiln exterior with Orson and notices an iron rebar wedge holding the high roof draft damper open.",
+        "pov": "char_maren",
+        "location_id": "loc_kiln_hall",
+        "characters_present": [
+          "char_maren",
+          "char_orson"
+        ],
+        "dramatic_function": "Disturbance / Plant: introduces physical evidence of ventilation tampering while disguised as general shift disorder.",
+        "beats": [
+          "Maren retraces her perimeter rounds along the Kiln 4 outer muffle wall.",
+          "Orson complains that Derry had been loafing near the exhaust stacks during the shift.",
+          "Maren spots the high overhead roof exhaust damper jammed open with a scrap piece of rebar."
+        ],
+        "caused_by": [
+          "ev_01_early_opening"
+        ],
+        "reveals": [
+          "roof_exhaust_damper_propped_open"
+        ],
+        "conceals": [
+          "external_flue_access_route"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_union_warning",
+        "sequence": 4,
+        "summary": "Tessa warns Maren that management is drafting an incident report pinning Derry's death entirely on supervisor fatigue.",
+        "pov": "char_maren",
+        "location_id": "loc_supervisor_office",
+        "characters_present": [
+          "char_maren",
+          "char_tessa"
+        ],
+        "dramatic_function": "Disturbance / Escalation: reveals the institutional stakes and confirms that the factory has chosen its scapegoat.",
+        "beats": [
+          "Tessa enters the office to report that Arthur has already called the firm's marine insurers.",
+          "Tessa explains the naval contract penalties make an accident verdict financially fatal for the owners.",
+          "Maren admits her recollection between 03:00 and 05:00 is completely blank from three days of double shifts."
+        ],
+        "caused_by": [
+          "ev_02_coat_inspection"
+        ],
+        "reveals": [],
+        "conceals": [
+          "derrys_informal_bargain_with_arthur"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "plant_facing_contract_cancellation",
+            "plant": null
+          },
+          {
+            "fact_ref": "derry_threatened_grievance_over_short_shift",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "char_tessa",
+            "column": "goal",
+            "value": "protect_union_workers_from_corporate_liability"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_batch_house_inventory",
+        "sequence": 5,
+        "summary": "Maren searches the raw materials station for Derry's batch receipts and discovers a two-pound counterweight is missing.",
+        "pov": "char_maren",
+        "location_id": "loc_batch_house",
+        "characters_present": [
+          "char_maren",
+          "char_nora"
+        ],
+        "dramatic_function": "Inquiry / Plant: begins Maren's active timeline investigation and plants the missing weight.",
+        "beats": [
+          "Maren presses Nora for Derry's mixing chits from the first half of the night.",
+          "Nora nervously evades eye contact and insists Derry left the batch house before 02:30.",
+          "Maren notices the mechanical balance scale is missing its two-pound brass counterweight."
+        ],
+        "caused_by": [
+          "ev_04_union_warning"
+        ],
+        "reveals": [
+          "missing_brass_scale_counterweight"
+        ],
+        "conceals": [
+          "noras_altered_shipping_slips"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_batch_house"
+          },
+          {
+            "entity_id": "obj_brass_counterweight",
+            "column": "status",
+            "value": "missing_from_batch_scale"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_reconstructing_timeline",
+        "sequence": 6,
+        "summary": "Orson tells Maren he saw her at the Kiln 4 wicket bar around 03:45, shaking her confidence in her own innocence.",
+        "pov": "char_maren",
+        "location_id": "loc_supervisor_office",
+        "characters_present": [
+          "char_maren",
+          "char_orson"
+        ],
+        "dramatic_function": "Inquiry / Complication: the witness provides honest testimony that misidentifies the figure at the kiln.",
+        "beats": [
+          "Maren questions Orson about exactly when the wicket was secured.",
+          "Orson states under oath that he saw Maren herself standing at the lock bar in her yellow oilskin coat at 03:45.",
+          "Maren realizes she cannot prove she was asleep at that hour and begins to doubt her own mind."
+        ],
+        "caused_by": [
+          "ev_03_catwalk_inspection"
+        ],
+        "reveals": [],
+        "conceals": [
+          "orsons_mistaken_identity_in_the_fog"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "char_orson",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "status",
+            "value": "severely_rattled_and_sleep_deprived"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_maintenance_bay_search",
+        "sequence": 7,
+        "summary": "Maren checks the maintenance shop for an extra key and spots fresh electrical arc burns on Bram's forearms.",
+        "pov": "char_maren",
+        "location_id": "loc_maintenance_bay",
+        "characters_present": [
+          "char_maren",
+          "char_bram"
+        ],
+        "dramatic_function": "Inquiry / Plant: introduces physical evidence on the maintenance mechanic that connects to the high-voltage ignition line.",
+        "beats": [
+          "Maren searches Bram's pegboard for duplicate wicket keys or master lock picks.",
+          "Bram aggressively orders her out, claiming he spent the shift rebuilding a slip pump.",
+          "Maren notices fresh, blistering arc burns across Bram's wrists and inner forearms."
+        ],
+        "caused_by": [
+          "ev_06_reconstructing_timeline"
+        ],
+        "reveals": [
+          "bram_fresh_arc_burns"
+        ],
+        "conceals": [
+          "brams_clandestine_welding_job"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_maintenance_bay"
+          },
+          {
+            "entity_id": "char_bram",
+            "column": "status",
+            "value": "defensive_and_bandaged"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_logbook_discrepancy",
+        "sequence": 8,
+        "summary": "Arthur summons Maren to display her own grease-pencil initials on the 04:00 logbook entry.",
+        "pov": "char_maren",
+        "location_id": "loc_manager_office",
+        "characters_present": [
+          "char_maren",
+          "char_arthur"
+        ],
+        "dramatic_function": "Inquiry / Complication: management displays seemingly irrefutable document evidence confirming Maren's actions.",
+        "beats": [
+          "Arthur lays out the shift firing ledger on his desk.",
+          "Arthur shows the 04:00 gas valve check initialed with Maren's distinctive cursive mark.",
+          "Maren inspects the smudge and recognizes her hand, unable to comprehend when she could have drawn it."
+        ],
+        "caused_by": [
+          "ev_02_coat_inspection"
+        ],
+        "reveals": [],
+        "conceals": [
+          "forged_signature_under_arthurs_direction"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_manager_office"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_manager_office"
+          },
+          {
+            "entity_id": "obj_shift_log",
+            "column": "location_id",
+            "value": "loc_manager_office"
+          },
+          {
+            "entity_id": "obj_shift_log",
+            "column": "status",
+            "value": "marked_with_damning_0400_entry"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_weighbridge_records",
+        "sequence": 9,
+        "summary": "Maren catches Nora rewriting the gas manometer intake sheet to remove record of an overnight pressure collapse.",
+        "pov": "char_maren",
+        "location_id": "loc_batch_house",
+        "characters_present": [
+          "char_maren",
+          "char_nora"
+        ],
+        "dramatic_function": "Inquiry / Plant: plants the falsified gas ledger while proving that management is scrubbing records.",
+        "beats": [
+          "Maren slips into the weighbridge booth to review the continuous pipeline manometer tapes.",
+          "Maren discovers Nora copying the numbers onto a sanitized sheet that omits a massive pressure plunge at 03:10.",
+          "Nora breaks down and whispers that Arthur ordered the gas drop erased from the permanent file."
+        ],
+        "caused_by": [
+          "ev_05_batch_house_inventory"
+        ],
+        "reveals": [
+          "falsified_gas_meter_log"
+        ],
+        "conceals": [
+          "arthurs_threat_to_fire_nora"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_batch_house"
+          },
+          {
+            "entity_id": "char_nora",
+            "column": "status",
+            "value": "compromised_and_anxious"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_union_meeting",
+        "sequence": 10,
+        "summary": "Tessa and Orson confront Maren on the floor, where Orson publicly repeats that he saw her seal Derry inside.",
+        "pov": "char_maren",
+        "location_id": "loc_kiln_hall",
+        "characters_present": [
+          "char_maren",
+          "char_tessa",
+          "char_orson"
+        ],
+        "dramatic_function": "Inquiry / Social Pressure: Maren is isolated from the floor workers, who now view her as an ambitious killer.",
+        "beats": [
+          "Tessa convenes the shift workers near Kiln 4 to review safety protocols.",
+          "Orson openly declares to the crew that Maren stood at the padlock bar when Derry went missing.",
+          "Tessa tells Maren that the union must prioritize protecting the crew from manslaughter charges over saving her."
+        ],
+        "caused_by": [
+          "ev_06_reconstructing_timeline",
+          "ev_08_logbook_discrepancy"
+        ],
+        "reveals": [],
+        "conceals": [
+          "tessas_secret_deal_for_severance"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          },
+          {
+            "entity_id": "char_tessa",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          },
+          {
+            "entity_id": "char_orson",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          },
+          {
+            "entity_id": "char_tessa",
+            "column": "goal",
+            "value": "isolate_maren_to_protect_shift_crew"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_locker_search",
+        "sequence": 11,
+        "summary": "Arthur brings the police liaison into Maren's office to conduct an aggressive formal search of her locker.",
+        "pov": "char_maren",
+        "location_id": "loc_supervisor_office",
+        "characters_present": [
+          "char_maren",
+          "char_arthur"
+        ],
+        "dramatic_function": "Inquiry / Build-up: creates the stage where the planted evidence will be sprung upon Maren.",
+        "beats": [
+          "Arthur demands Maren open her supervisor locker in full view of the yard committee.",
+          "Arthur announces that any concealed tools or unauthorized bypass keys will settle the matter.",
+          "Maren unlocks her steel locker, confident she has nothing illicit hidden inside."
+        ],
+        "caused_by": [
+          "ev_08_logbook_discrepancy"
+        ],
+        "reveals": [],
+        "conceals": [
+          "arthurs_pre_planted_item_in_locker"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_the_weight_discovered",
+        "sequence": 12,
+        "summary": "Arthur searches Maren's locker and pulls out Derry's soot-stained rag wrapped around the missing two-pound brass counterweight.",
+        "pov": "char_maren",
+        "location_id": "loc_supervisor_office",
+        "characters_present": [
+          "char_maren",
+          "char_arthur",
+          "char_tessa"
+        ],
+        "dramatic_function": "Wrong Turn: the false case against Maren reaches its apex with physical proof apparently framing her for murder.",
+        "beats": [
+          "Arthur pulls a soot-stained rag from beneath Maren's spare overalls.",
+          "The rag unrolls to reveal the missing two-pound brass counterweight from the batch scale.",
+          "Tessa turns away in disgust, abandoning Maren to management's custody."
+        ],
+        "caused_by": [
+          "ev_11_locker_search"
+        ],
+        "reveals": [],
+        "conceals": [
+          "how_the_weight_entered_the_locker"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "missing_brass_scale_counterweight",
+            "plant": "ev_05_batch_house_inventory"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_tessa",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "obj_brass_counterweight",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "obj_brass_counterweight",
+            "column": "status",
+            "value": "found_in_marens_locker"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "status",
+            "value": "accused_of_manslaughter"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_interrogation_and_doubt",
+        "sequence": 13,
+        "summary": "Arthur interrogates Maren in his office, constructing a damning narrative of exhausted rage that Maren nearly accepts.",
+        "pov": "char_maren",
+        "location_id": "loc_manager_office",
+        "characters_present": [
+          "char_maren",
+          "char_arthur"
+        ],
+        "dramatic_function": "Wrong Turn: psychological rock bottom where the protagonist is nearly convinced of her own guilt.",
+        "beats": [
+          "Arthur describes Maren striking Derry during an argument over shift speeds and locking him inside in panic.",
+          "Arthur points to the key, the initialed logbook, and the counterweight as total proof.",
+          "Maren, reeling from sleep deprivation, hovers on the verge of signing an admission of involuntary manslaughter."
+        ],
+        "caused_by": [
+          "ev_12_the_weight_discovered"
+        ],
+        "reveals": [],
+        "conceals": [
+          "arthurs_coercion_strategy"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_manager_office"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_manager_office"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "goal",
+            "value": "survive_interrogation_without_confessing_falsely"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_the_gas_drop_contradiction",
+        "sequence": 14,
+        "summary": "When Nora brings in the altered ledger, Maren notices the 03:10 gas drop proves the burners were unlit during Arthur's timeline.",
+        "pov": "char_maren",
+        "location_id": "loc_manager_office",
+        "characters_present": [
+          "char_maren",
+          "char_arthur",
+          "char_nora"
+        ],
+        "dramatic_function": "Wrong Turn Collapses: an internal contradiction in the manufactured story gives Maren the key to break it.",
+        "beats": [
+          "Nora delivers the rewritten gas report for Arthur to sign before the detectives arrive.",
+          "Maren notes that if the gas failed at 03:10, Derry could not have burned during her 04:00 firing round.",
+          "Arthur stumbles over his explanation, inadvertently exposing that the firing timeline was fabricated."
+        ],
+        "caused_by": [
+          "ev_13_interrogation_and_doubt"
+        ],
+        "reveals": [],
+        "conceals": [
+          "the_exact_repair_derry_performed"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "falsified_gas_meter_log",
+            "plant": "ev_09_weighbridge_records"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_nora",
+            "column": "location_id",
+            "value": "loc_manager_office"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "status",
+            "value": "clear_headed_and_combative"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "goal",
+            "value": "uncover_the_management_conspiracy"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_re_examining_the_corridor",
+        "sequence": 15,
+        "summary": "Maren pulls Orson back to the wicket and proves his identification of her in the steam was impossible.",
+        "pov": "char_maren",
+        "location_id": "loc_kiln_hall",
+        "characters_present": [
+          "char_maren",
+          "char_orson"
+        ],
+        "dramatic_function": "Wrong Turn / Pivot: dismantles the false witness testimony using factory acoustics and sightlines.",
+        "beats": [
+          "Maren recreates the dense steam blowing from the slip agitators at 03:45.",
+          "Orson admits he only saw an oversized yellow oilskin coat and never saw the face of the person at the lock bar.",
+          "Orson mentions that the sleeves on the coat had heavy purple mending thread at the cuffs."
+        ],
+        "caused_by": [
+          "ev_14_the_gas_drop_contradiction"
+        ],
+        "reveals": [],
+        "conceals": [
+          "who_actually_wore_the_coat"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          },
+          {
+            "entity_id": "char_orson",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_the_oilskin_cuffs",
+        "sequence": 16,
+        "summary": "Maren confronts Bram in the maintenance shop and reveals his coat has the purple twine cuffs Orson saw at the kiln.",
+        "pov": "char_maren",
+        "location_id": "loc_maintenance_bay",
+        "characters_present": [
+          "char_maren",
+          "char_bram"
+        ],
+        "dramatic_function": "Solution: cracks the true sequence of physical events by identifying who was really at the wicket.",
+        "beats": [
+          "Maren storms into the repair shop and seizes Bram's work slicker from the rack.",
+          "Maren matches the purple twine on the cuffs to the thread Orson observed at the lock bar.",
+          "Bram breaks down and confesses that he took Maren's master key while she slept at 03:30."
+        ],
+        "caused_by": [
+          "ev_15_re_examining_the_corridor"
+        ],
+        "reveals": [],
+        "conceals": [
+          "arthurs_direct_orders_to_bram"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "purple_twine_on_brams_cuffs",
+            "plant": "ev_02_coat_inspection"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_maintenance_bay"
+          },
+          {
+            "entity_id": "char_bram",
+            "column": "status",
+            "value": "confessing_under_pressure"
+          }
+        ]
+      },
+      {
+        "id": "ev_17_the_arc_burn_confession",
+        "sequence": 17,
+        "summary": "Arthur attempts to silence Bram, but Maren proves Bram's arc burns match the muffle igniter line Derry was sent to patch.",
+        "pov": "char_maren",
+        "location_id": "loc_maintenance_bay",
+        "characters_present": [
+          "char_maren",
+          "char_bram",
+          "char_arthur"
+        ],
+        "dramatic_function": "Solution: links the maintenance mechanic's injuries directly to management's clandestine repair operation.",
+        "beats": [
+          "Arthur enters the bay and threatens to fire Bram on the spot if he speaks another word.",
+          "Maren forces Bram to expose his forearm burns, proving they match high-voltage burner electrodes.",
+          "Bram admits Arthur paid Derry fifty pounds to crawl into the hot muffle flue to weld a broken burner baffle."
+        ],
+        "caused_by": [
+          "ev_16_the_oilskin_cuffs"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "bram_fresh_arc_burns",
+            "plant": "ev_07_maintenance_bay_search"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_maintenance_bay"
+          },
+          {
+            "entity_id": "char_bram",
+            "column": "goal",
+            "value": "avoid_criminal_charges_by_cooperating"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "status",
+            "value": "cornered_and_exposed"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_the_damper_truth",
+        "sequence": 18,
+        "summary": "At the kiln base, Maren demonstrates that the propped roof damper was Derry's breathing line, which Arthur shut down early.",
+        "pov": "char_maren",
+        "location_id": "loc_kiln_hall",
+        "characters_present": [
+          "char_maren",
+          "char_arthur",
+          "char_tessa"
+        ],
+        "dramatic_function": "Solution: the complete true account is assembled from all previously observed physical facts.",
+        "beats": [
+          "Maren brings Tessa and Arthur to the rebar wedge holding the high roof damper open.",
+          "Maren explains the damper was Derry's only draft air while inside the flue crawlway.",
+          "Maren shows that Arthur engaged the automated firing cycle from the office, suffocating Derry and planting the weight to blame Maren."
+        ],
+        "caused_by": [
+          "ev_17_the_arc_burn_confession"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "roof_exhaust_damper_propped_open",
+            "plant": "ev_03_catwalk_inspection"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          },
+          {
+            "entity_id": "char_tessa",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          },
+          {
+            "entity_id": "char_tessa",
+            "column": "goal",
+            "value": "secure_arthurs_arrest_and_protect_plant"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_police_arrival_and_arrest",
+        "sequence": 19,
+        "summary": "Port police arrive and arrest Arthur for corporate manslaughter, triggering an immediate shutdown of the factory.",
+        "pov": "char_maren",
+        "location_id": "loc_manager_office",
+        "characters_present": [
+          "char_maren",
+          "char_arthur",
+          "char_tessa"
+        ],
+        "dramatic_function": "Cost: legal resolution arrives, but institutional collapse immediately follows.",
+        "beats": [
+          "Maren hands the police the original manometer records and Bram's signed witness statement.",
+          "Arthur is handcuffed and led out, warning that exposing the plant will kill the town's livelihood.",
+          "The board of directors sends an emergency telegraph ordering the entire works locked out indefinitely."
+        ],
+        "caused_by": [
+          "ev_18_the_damper_truth"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_manager_office"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_manager_office"
+          },
+          {
+            "entity_id": "char_tessa",
+            "column": "location_id",
+            "value": "loc_manager_office"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "status",
+            "value": "under_arrest"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_the_cost_of_truth",
+        "sequence": 20,
+        "summary": "Maren leaves the padlocked factory as her former co-workers ostracize her for destroying the town's remaining jobs.",
+        "pov": "char_maren",
+        "location_id": "loc_kiln_hall",
+        "characters_present": [
+          "char_maren",
+          "char_tessa",
+          "char_orson"
+        ],
+        "dramatic_function": "Cost: the theme completes as the protagonist pays the full personal price for clearing her name.",
+        "beats": [
+          "Receivers chain the factory gates shut, extinguishing the last operating kilns in the district.",
+          "Orson and the shift workers turn their backs in silence as Maren walks down the yard.",
+          "Tessa tells Maren that while she proved the truth, no works in the port will ever employ her again."
+        ],
+        "caused_by": [
+          "ev_19_police_arrival_and_arrest"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          },
+          {
+            "entity_id": "char_tessa",
+            "column": "location_id",
+            "value": "loc_kiln_hall"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "status",
+            "value": "blacklisted_and_unemployed"
+          },
+          {
+            "entity_id": "char_maren",
+            "column": "goal",
+            "value": "leave_the_port_town"
+          }
+        ]
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-17T16:51:19.374Z",
+    "started_at": "2026-09-17T16:50:23.028Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_kiln_breach",
+        "order": 1,
+        "event_ids": [
+          "ev_01_early_opening"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_keys_and_twine",
+        "order": 2,
+        "event_ids": [
+          "ev_02_coat_inspection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_jammed_damper",
+        "order": 3,
+        "event_ids": [
+          "ev_03_catwalk_inspection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_framing_warning",
+        "order": 4,
+        "event_ids": [
+          "ev_04_union_warning"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_missing_weight",
+        "order": 5,
+        "event_ids": [
+          "ev_05_batch_house_inventory"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_orsons_testimony",
+        "order": 6,
+        "event_ids": [
+          "ev_06_reconstructing_timeline"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_arc_burns",
+        "order": 7,
+        "event_ids": [
+          "ev_07_maintenance_bay_search"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_the_ledger",
+        "order": 8,
+        "event_ids": [
+          "ev_08_logbook_discrepancy"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_falsified_sheet",
+        "order": 9,
+        "event_ids": [
+          "ev_09_weighbridge_records"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_crew_turns",
+        "order": 10,
+        "event_ids": [
+          "ev_10_union_meeting"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_the_locker_search",
+        "order": 11,
+        "event_ids": [
+          "ev_11_locker_search",
+          "ev_12_the_weight_discovered"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_the_broken_timeline",
+        "order": 12,
+        "event_ids": [
+          "ev_13_interrogation_and_doubt",
+          "ev_14_the_gas_drop_contradiction"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_steam_test",
+        "order": 13,
+        "event_ids": [
+          "ev_15_re_examining_the_corridor"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_14_mended_cuffs",
+        "order": 14,
+        "event_ids": [
+          "ev_16_the_oilskin_cuffs",
+          "ev_17_the_arc_burn_confession"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_15_the_propped_damper",
+        "order": 15,
+        "event_ids": [
+          "ev_18_the_damper_truth"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_16_the_plant_lockout",
+        "order": 16,
+        "event_ids": [
+          "ev_19_police_arrival_and_arrest"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_17_the_padlocked_gate",
+        "order": 17,
+        "event_ids": [
+          "ev_20_the_cost_of_truth"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+    ]
+  }
+}

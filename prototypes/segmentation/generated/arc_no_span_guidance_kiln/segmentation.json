@@ -1,0 +1,560 @@
+{
+  "story_id": "arc_no_span_guidance_kiln",
+  "generator": "segmentation pipeline (#118)",
+  "models_used": [
+    "gemini-3.8-flash"
+  ],
+  "requested_model": "gemini-3.8-flash",
+  "segmented_at": "2026-09-17T16:54:59.916Z",
+  "cost_usd": 0.033278999999999996,
+  "calls": [
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 0 (0–20)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2689,
+      "output_tokens": 1050,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00595425,
+      "ms": 2917,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1014,
+      "output_tokens": 608,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0030405,
+      "ms": 5385,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 942,
+      "output_tokens": 561,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00281025,
+      "ms": 5947,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 9–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 914,
+      "output_tokens": 602,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002943,
+      "ms": 6194,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 13–16",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1271,
+      "output_tokens": 704,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00359325,
+      "ms": 6156,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 17–17",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 466,
+      "output_tokens": 165,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00096825,
+      "ms": 6335,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 1–17",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2596,
+      "output_tokens": 321,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00315075,
+      "ms": 4350,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_verification",
+      "label": "pairs 1–3",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 755,
+      "output_tokens": 281,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00162,
+      "ms": 6168,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 742,
+      "output_tokens": 141,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00108525,
+      "ms": 5513,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2467,
+      "output_tokens": 142,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00238275,
+      "ms": 8354,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 9–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 3812,
+      "output_tokens": 141,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00338775,
+      "ms": 5102,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 13–14",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2614,
+      "output_tokens": 102,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002343,
+      "ms": 4914,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "events": 20,
+  "scenes": 17,
+  "events_per_scene": 1.1764705882352942,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "telling_order": {
+    "basis": "fabula_sequence",
+    "displaced": 0
+  },
+  "boundaries": {
+    "windows": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 20
+      }
+    ],
+    "window_problems": [],
+    "failed_windows": [],
+    "fell_back_to_signals": 0,
+    "disagreements": 0,
+    "judged_adjacencies": 19,
+    "self_consistency": null,
+    "decisions": [
+      {
+        "index": 0,
+        "after_event_id": "ev_02_kiln_unsealed",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Moving from shift office to kiln house to unseal Kiln 4 with additional witnesses.",
+        "from_signals": false
+      },
+      {
+        "index": 1,
+        "after_event_id": "ev_03_the_accusation",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate continuation of the kiln discovery confrontation.",
+        "from_signals": false
+      },
+      {
+        "index": 2,
+        "after_event_id": "ev_04_suspension_order",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Relocation to the works office for formal suspension.",
+        "from_signals": false
+      },
+      {
+        "index": 3,
+        "after_event_id": "ev_05_foster_alibi",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cut to the canteen where Maren begins investigating Foster Vance.",
+        "from_signals": false
+      },
+      {
+        "index": 4,
+        "after_event_id": "ev_06_nel_cone_analysis",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move to glaze lab to examine pyrometric cones with Nel.",
+        "from_signals": false
+      },
+      {
+        "index": 5,
+        "after_event_id": "ev_07_logbook_inspection",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return alone to the shift office to inspect logbook and desk.",
+        "from_signals": false
+      },
+      {
+        "index": 6,
+        "after_event_id": "ev_08_tilda_sighting",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move back to kiln house to question Tilda.",
+        "from_signals": false
+      },
+      {
+        "index": 7,
+        "after_event_id": "ev_09_key_residue",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move to glaze lab to examine the key with Nel.",
+        "from_signals": false
+      },
+      {
+        "index": 8,
+        "after_event_id": "ev_10_union_warning",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move to canteen for conversation with union steward Moran.",
+        "from_signals": false
+      },
+      {
+        "index": 9,
+        "after_event_id": "ev_11_barograph_found",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move to shift office alone searching for evidence.",
+        "from_signals": false
+      },
+      {
+        "index": 10,
+        "after_event_id": "ev_12_maren_false_reconstruction",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous internal deduction following the discovery of the barograph in the shift office.",
+        "from_signals": false
+      },
+      {
+        "index": 11,
+        "after_event_id": "ev_13_moran_confession_prep",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move to canteen to consult Moran about confessing.",
+        "from_signals": false
+      },
+      {
+        "index": 12,
+        "after_event_id": "ev_14_confession_meeting",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move to works office to meet Orde.",
+        "from_signals": false
+      },
+      {
+        "index": 13,
+        "after_event_id": "ev_15_orde_red_stains",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous beat within the signing meeting in Orde's office.",
+        "from_signals": false
+      },
+      {
+        "index": 14,
+        "after_event_id": "ev_16_tilda_full_testimony",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move to glaze lab to confront Tilda with Nel.",
+        "from_signals": false
+      },
+      {
+        "index": 15,
+        "after_event_id": "ev_17_reconstructing_the_theft",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Regrouping in the shift office with Foster and Nel to reconstruct the crime.",
+        "from_signals": false
+      },
+      {
+        "index": 16,
+        "after_event_id": "ev_18_confronting_orde",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Move to works office for the formal climax confronting Orde.",
+        "from_signals": false
+      },
+      {
+        "index": 17,
+        "after_event_id": "ev_19_board_coverup",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate institutional resolution following the confrontation in the works office.",
+        "from_signals": false
+      },
+      {
+        "index": 18,
+        "after_event_id": "ev_20_the_blacklisting",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cut to the canteen aftermath as Maren departs.",
+        "from_signals": false
+      }
+    ]
+  },
+  "grouping": {
+    "judged_boundaries": 15,
+    "forced_by_plant_span": 1,
+    "forced_by_size": 0,
+    "unseparable_plant_spans": []
+  },
+  "scene_properties": {
+    "failed_batches": 0,
+    "pov_fallbacks": 0,
+    "location_fallbacks": 0,
+    "location_inherited": 0,
+    "beat_fallbacks": 0,
+    "function_fallbacks": 0
+  },
+  "substitutions": {
+    "pov_from_seed": 0,
+    "location_from_seed": 0,
+    "pov_from_candidates": 0,
+    "location_from_candidates": 0,
+    "beats_from_events": 0
+  },
+  "state": {
+    "dropped_unknown_entity": 0,
+    "dropped_entity_ids": [],
+    "dropped_unknown_column": 0
+  },
+  "plants": {
+    "carried_from_fabula": 16,
+    "dangling_plants": 0,
+    "proposed": 3,
+    "rejected_malformed": 0,
+    "verified": 2,
+    "rejected_by_verifier": 1,
+    "unverified_dropped": 0,
+    "seed_grounded_unrepresentable": 0,
+    "failed_batches": 0,
+    "accepted": [
+      {
+        "fact_ref": "single_key_custody",
+        "plant": null,
+        "payoff": "scene_01_the_early_opening",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "maren_double_shift_fatigue",
+        "plant": null,
+        "payoff": "scene_01_the_early_opening",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "dockyard_contract_penalty",
+        "plant": null,
+        "payoff": "scene_02_body_in_kiln",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "single_key_custody",
+        "plant": null,
+        "payoff": "scene_02_body_in_kiln",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "gabe_body_in_kiln",
+        "plant": "scene_02_body_in_kiln",
+        "payoff": "scene_03_suspension_and_blame",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "logbook_entry_signed_two_am",
+        "plant": "scene_02_body_in_kiln",
+        "payoff": "scene_06_the_tally_tag",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "cone_indicates_delayed_heat",
+        "plant": "scene_05_the_test_cones",
+        "payoff": "scene_11_delirious_conclusion",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "hidden_barograph_chart",
+        "plant": "scene_10_the_hidden_chart",
+        "payoff": "scene_11_delirious_conclusion",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "red_slip_on_brass_key",
+        "plant": "scene_08_the_red_slip",
+        "payoff": "scene_13_the_signing",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "flue_hammering_at_two",
+        "plant": "scene_04_questioning_foster",
+        "payoff": "scene_15_reconstructing_the_theft",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "tilda_saw_maren_blackout",
+        "plant": "scene_07_tildas_confession",
+        "payoff": "scene_15_reconstructing_the_theft",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "orde_hurrying_inspection",
+        "plant": "scene_01_the_early_opening",
+        "payoff": "scene_16_the_settlement",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "orde_red_slip_stains",
+        "plant": "scene_13_the_signing",
+        "payoff": "scene_16_the_settlement",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "tilda_saw_gabe_at_three",
+        "plant": "scene_14_tildas_confession",
+        "payoff": "scene_16_the_settlement",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "union_sacrificing_supervisor",
+        "plant": "scene_09_the_union_warning",
+        "payoff": "scene_16_the_settlement",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "orde_took_key_while_maren_slept",
+        "plant": "scene_15_reconstructing_the_theft",
+        "payoff": "scene_17_the_final_locker",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "moran_administrative_dismissal_deal",
+        "plant": "scene_09_the_union_warning",
+        "payoff": "scene_12_urged_resignation",
+        "why": "Moran urges Maren to accept an administrative dismissal to protect floor jobs and avoid a criminal inquest.",
+        "type": "speech_act"
+      },
+      {
+        "fact_ref": "rush_docket_for_early_firing",
+        "plant": "scene_13_the_signing",
+        "payoff": "scene_14_tildas_confession",
+        "why": "Maren sees a rush docket timed for the early morning on Orde's desk.",
+        "type": "object"
+      }
+    ]
+  },
+  "told_ledger": {
+    "facts": 14,
+    "withheld_scene_entries": 1,
+    "rejected_out_of_range": 0,
+    "failed_batches": 0
+  },
+  "lint": {
+    "problems": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_shift_log",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_shift_log",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "publishable": true
+  },
+  "vacuous_checks": [
+    "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+    "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+    "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+  ]
+}

@@ -1,0 +1,486 @@
+{
+  "story_id": "arc_structured_ferry",
+  "generator": "segmentation pipeline (#118)",
+  "models_used": [
+    "gemini-3.8-flash"
+  ],
+  "requested_model": "gemini-3.8-flash",
+  "segmented_at": "2026-09-17T16:52:08.550Z",
+  "cost_usd": 0.025354500000000002,
+  "calls": [
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 0 (0–20)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2808,
+      "output_tokens": 1075,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00613725,
+      "ms": 5002,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 908,
+      "output_tokens": 611,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00297225,
+      "ms": 6229,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 994,
+      "output_tokens": 637,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00313425,
+      "ms": 3133,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 9–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1361,
+      "output_tokens": 719,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.003717,
+      "ms": 6824,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 13–14",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 762,
+      "output_tokens": 386,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002019,
+      "ms": 4769,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 1–14",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2213,
+      "output_tokens": 315,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002841,
+      "ms": 5399,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_verification",
+      "label": "pairs 1–3",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 871,
+      "output_tokens": 269,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.001662,
+      "ms": 5886,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1166,
+      "output_tokens": 140,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0013995,
+      "ms": 5844,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 5–6",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1583,
+      "output_tokens": 76,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00147225,
+      "ms": 6055,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "events": 20,
+  "scenes": 14,
+  "events_per_scene": 1.4285714285714286,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "telling_order": {
+    "basis": "fabula_sequence",
+    "displaced": 0
+  },
+  "boundaries": {
+    "windows": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 20
+      }
+    ],
+    "window_problems": [],
+    "failed_windows": [],
+    "fell_back_to_signals": 0,
+    "disagreements": 0,
+    "judged_adjacencies": 19,
+    "self_consistency": null,
+    "decisions": [
+      {
+        "index": 0,
+        "after_event_id": "ev_02_mudflat_witness",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Location moves from the wharf office to the riverbank mudflats with new characters.",
+        "from_signals": false
+      },
+      {
+        "index": 1,
+        "after_event_id": "ev_03_prefect_arrival",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Location moves to the inquiry hall with the arrival of Prefect Pell.",
+        "from_signals": false
+      },
+      {
+        "index": 2,
+        "after_event_id": "ev_04_logbook_scrutiny",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time jumps to Renate at home reviewing records with Marta.",
+        "from_signals": false
+      },
+      {
+        "index": 3,
+        "after_event_id": "ev_05_inquiry_convened",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cuts to the formal inquiry convened at the municipal hall.",
+        "from_signals": false
+      },
+      {
+        "index": 4,
+        "after_event_id": "ev_06_timberyard_inquiry",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Renate travels to Doolan's timberyard to question the shipwright.",
+        "from_signals": false
+      },
+      {
+        "index": 5,
+        "after_event_id": "ev_07_briony_deposition",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Moves to the mudflat banks to interview Briony Cole.",
+        "from_signals": false
+      },
+      {
+        "index": 6,
+        "after_event_id": "ev_08_wharf_records_search",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Renate moves alone to search the wharf office.",
+        "from_signals": false
+      },
+      {
+        "index": 7,
+        "after_event_id": "ev_09_tomas_blackmail",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action in the wharf office as Tomas catches Renate searching.",
+        "from_signals": false
+      },
+      {
+        "index": 8,
+        "after_event_id": "ev_10_gravel_spit_survey",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Relocates to the river channel mudflats with Kester.",
+        "from_signals": false
+      },
+      {
+        "index": 9,
+        "after_event_id": "ev_11_subpoena_served",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Action moves back to the municipal inquiry hall before Pell.",
+        "from_signals": false
+      },
+      {
+        "index": 10,
+        "after_event_id": "ev_12_overload_accusation",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous court session as Renate presents her evidence to Pell.",
+        "from_signals": false
+      },
+      {
+        "index": 11,
+        "after_event_id": "ev_13_tomas_counterattack",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous hearing in the inquiry hall as Tomas calls Doolan.",
+        "from_signals": false
+      },
+      {
+        "index": 12,
+        "after_event_id": "ev_14_salvage_operation",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cuts to the outdoor salvage operation dragging the hull onto the riverbank.",
+        "from_signals": false
+      },
+      {
+        "index": 13,
+        "after_event_id": "ev_15_hull_contradiction",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action on the mudflat banks examining the raised hull.",
+        "from_signals": false
+      },
+      {
+        "index": 14,
+        "after_event_id": "ev_16_shrinkage_discovery",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous examination of the hull on the riverbank.",
+        "from_signals": false
+      },
+      {
+        "index": 15,
+        "after_event_id": "ev_17_doolan_confrontation",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Renate goes to the timberyard to confront Barney Doolan.",
+        "from_signals": false
+      },
+      {
+        "index": 16,
+        "after_event_id": "ev_18_marta_reckoning",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Renate returns home to speak with Marta.",
+        "from_signals": false
+      },
+      {
+        "index": 17,
+        "after_event_id": "ev_19_confession_testimony",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Moves to the reconvened inquiry at the municipal hall for Renate's confession.",
+        "from_signals": false
+      },
+      {
+        "index": 18,
+        "after_event_id": "ev_20_inquiry_judgment",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conclusion of the hearing as Pell delivers judgment.",
+        "from_signals": false
+      }
+    ]
+  },
+  "grouping": {
+    "judged_boundaries": 13,
+    "forced_by_plant_span": 0,
+    "forced_by_size": 0,
+    "unseparable_plant_spans": []
+  },
+  "scene_properties": {
+    "failed_batches": 0,
+    "pov_fallbacks": 0,
+    "location_fallbacks": 0,
+    "location_inherited": 0,
+    "beat_fallbacks": 0,
+    "function_fallbacks": 0
+  },
+  "substitutions": {
+    "pov_from_seed": 0,
+    "location_from_seed": 0,
+    "pov_from_candidates": 0,
+    "location_from_candidates": 0,
+    "beats_from_events": 0
+  },
+  "state": {
+    "dropped_unknown_entity": 0,
+    "dropped_entity_ids": [],
+    "dropped_unknown_column": 0
+  },
+  "plants": {
+    "carried_from_fabula": 9,
+    "dangling_plants": 0,
+    "proposed": 3,
+    "rejected_malformed": 0,
+    "verified": 1,
+    "rejected_by_verifier": 2,
+    "unverified_dropped": 0,
+    "seed_grounded_unrepresentable": 0,
+    "failed_batches": 0,
+    "accepted": [
+      {
+        "fact_ref": "certified_fit_without_slipway",
+        "plant": null,
+        "payoff": "scene_05_the_formal_examination",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "skipper_protested_rough_weather_load",
+        "plant": null,
+        "payoff": "scene_07_the_tally_card",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "sister_dependent_pension",
+        "plant": null,
+        "payoff": "scene_08_the_toll_records",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "falsified_cargo_weight",
+        "plant": "scene_08_the_toll_records",
+        "payoff": "scene_10_the_inquiry_opens",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "charted_spit_depth_clearance",
+        "plant": "scene_09_sounding_the_spit",
+        "payoff": "scene_11_raising_the_hull",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "shrunken_seam_silt_blast",
+        "plant": "scene_02_mudflat_testimonies",
+        "payoff": "scene_11_raising_the_hull",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "green_ash_timber_order",
+        "plant": "scene_06_the_timberyard_inquiry",
+        "payoff": "scene_12_doolans_yard_confrontation",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "omitted_verbal_warning",
+        "plant": "scene_04_reviewing_the_permit",
+        "payoff": "scene_14_the_reckoning",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "sister_dependent_pension",
+        "plant": null,
+        "payoff": "scene_14_the_reckoning",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "submerged_snag_collision_theory",
+        "plant": "scene_02_mudflat_testimonies",
+        "payoff": "scene_11_raising_the_hull",
+        "why": "Kester Finch insists that a submerged obstacle punctured or gouged the hull beneath the water.",
+        "type": "speech_act"
+      }
+    ]
+  },
+  "told_ledger": {
+    "facts": 6,
+    "withheld_scene_entries": 0,
+    "rejected_out_of_range": 0,
+    "failed_batches": 0
+  },
+  "lint": {
+    "problems": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_inspection_logbook",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_cargo_manifest_ledger",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_unfiled_timber_receipt",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_inspection_logbook",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_cargo_manifest_ledger",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_unfiled_timber_receipt",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "publishable": true
+  },
+  "vacuous_checks": [
+    "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+    "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+    "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+  ]
+}

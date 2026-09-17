@@ -1,0 +1,484 @@
+{
+  "story_id": "arc_free_text_3",
+  "generator": "segmentation pipeline (#118)",
+  "models_used": [
+    "gemini-3.8-flash"
+  ],
+  "requested_model": "gemini-3.8-flash",
+  "segmented_at": "2026-09-17T16:53:52.566Z",
+  "cost_usd": 0.02481225,
+  "calls": [
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 0 (0–20)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 3066,
+      "output_tokens": 1089,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00638325,
+      "ms": 3124,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 858,
+      "output_tokens": 532,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0026385,
+      "ms": 5053,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 812,
+      "output_tokens": 565,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00272775,
+      "ms": 5818,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 9–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 955,
+      "output_tokens": 560,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00281625,
+      "ms": 6446,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 13–16",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1070,
+      "output_tokens": 639,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00319875,
+      "ms": 6420,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 17–17",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 446,
+      "output_tokens": 167,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00096075,
+      "ms": 4305,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 1–17",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2037,
+      "output_tokens": 221,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0023565,
+      "ms": 5990,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_verification",
+      "label": "pairs 1–2",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 483,
+      "output_tokens": 210,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00114975,
+      "ms": 5983,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1619,
+      "output_tokens": 153,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.001788,
+      "ms": 5889,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 5–5",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 837,
+      "output_tokens": 44,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00079275,
+      "ms": 5909,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "events": 20,
+  "scenes": 17,
+  "events_per_scene": 1.1764705882352942,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "telling_order": {
+    "basis": "fabula_sequence",
+    "displaced": 0
+  },
+  "boundaries": {
+    "windows": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 20
+      }
+    ],
+    "window_problems": [],
+    "failed_windows": [],
+    "fell_back_to_signals": 0,
+    "disagreements": 0,
+    "judged_adjacencies": 19,
+    "self_consistency": null,
+    "decisions": [
+      {
+        "index": 0,
+        "after_event_id": "ev_02_body_in_hopper",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan moves from the depot to the accident site at Kiln Four.",
+        "from_signals": false
+      },
+      {
+        "index": 1,
+        "after_event_id": "ev_03_the_missing_shift_token",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan returns to the depot office after recovering the body.",
+        "from_signals": false
+      },
+      {
+        "index": 2,
+        "after_event_id": "ev_04_crane_threatens_investigation",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan goes to Alderman Crane's office.",
+        "from_signals": false
+      },
+      {
+        "index": 3,
+        "after_event_id": "ev_05_crane_lays_blame",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Crane follows Dan back to the depot yard.",
+        "from_signals": false
+      },
+      {
+        "index": 4,
+        "after_event_id": "ev_06_interviewing_the_canteen_cook",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan departs for the creek canteen to interview Martha.",
+        "from_signals": false
+      },
+      {
+        "index": 5,
+        "after_event_id": "ev_07_inspecting_the_switch_stand",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan relocates to the kiln spur to inspect the switch stand.",
+        "from_signals": false
+      },
+      {
+        "index": 6,
+        "after_event_id": "ev_08_jonah_flees_the_wharf",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan returns to the canteen to corner Jonah.",
+        "from_signals": false
+      },
+      {
+        "index": 7,
+        "after_event_id": "ev_09_examining_the_corpse",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan moves to the infirmary mortuary with Dr. Hollis.",
+        "from_signals": false
+      },
+      {
+        "index": 8,
+        "after_event_id": "ev_10_searching_the_bunkhouse",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan goes back to Jonah's bunk at the canteen.",
+        "from_signals": false
+      },
+      {
+        "index": 9,
+        "after_event_id": "ev_11_the_town_warrant",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan brings the neckerchief to Crane's office.",
+        "from_signals": false
+      },
+      {
+        "index": 10,
+        "after_event_id": "ev_12_jonahs_capture",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "The action shifts to the depot lockup where Jonah is brought in.",
+        "from_signals": false
+      },
+      {
+        "index": 11,
+        "after_event_id": "ev_13_jonah_alibi_confirmed",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous scene in the depot lockup as Martha arrives.",
+        "from_signals": false
+      },
+      {
+        "index": 12,
+        "after_event_id": "ev_14_the_switch_tampering_gap",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan rushes back to the Kiln Four spur.",
+        "from_signals": false
+      },
+      {
+        "index": 13,
+        "after_event_id": "ev_15_inspecting_the_catwalk",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous physical investigation climbing from the spur onto the catwalk above.",
+        "from_signals": false
+      },
+      {
+        "index": 14,
+        "after_event_id": "ev_16_reconstructing_the_crime",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan travels to the canteen porch to inspect the lantern rack.",
+        "from_signals": false
+      },
+      {
+        "index": 15,
+        "after_event_id": "ev_17_confronting_the_foreman",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Dan moves back to the kiln spur loading bay to confront Vance.",
+        "from_signals": false
+      },
+      {
+        "index": 16,
+        "after_event_id": "ev_18_vances_confession",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Vance is brought before Crane at the magistrate's office.",
+        "from_signals": false
+      },
+      {
+        "index": 17,
+        "after_event_id": "ev_19_crane_silences_the_yard",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The immediate aftermath and confrontation with Crane continues in his office.",
+        "from_signals": false
+      },
+      {
+        "index": 18,
+        "after_event_id": "ev_20_the_empty_basin",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time skips to Dan packing up alone at the deserted depot.",
+        "from_signals": false
+      }
+    ]
+  },
+  "grouping": {
+    "judged_boundaries": 16,
+    "forced_by_plant_span": 0,
+    "forced_by_size": 0,
+    "unseparable_plant_spans": []
+  },
+  "scene_properties": {
+    "failed_batches": 0,
+    "pov_fallbacks": 0,
+    "location_fallbacks": 0,
+    "location_inherited": 0,
+    "beat_fallbacks": 0,
+    "function_fallbacks": 0
+  },
+  "substitutions": {
+    "pov_from_seed": 0,
+    "location_from_seed": 0,
+    "pov_from_candidates": 0,
+    "location_from_candidates": 0,
+    "beats_from_events": 0
+  },
+  "state": {
+    "dropped_unknown_entity": 0,
+    "dropped_entity_ids": [],
+    "dropped_unknown_column": 0
+  },
+  "plants": {
+    "carried_from_fabula": 5,
+    "dangling_plants": 0,
+    "proposed": 2,
+    "rejected_malformed": 0,
+    "verified": 1,
+    "rejected_by_verifier": 1,
+    "unverified_dropped": 0,
+    "seed_grounded_unrepresentable": 0,
+    "failed_batches": 0,
+    "accepted": [
+      {
+        "fact_ref": "dan_responsible_for_night_manifest",
+        "plant": null,
+        "payoff": "scene_05_the_yard_log",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "torn_sheepskin_on_switch_lever",
+        "plant": "scene_07_the_switch_fleece",
+        "payoff": "scene_12_the_depot_lockup",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "white_lead_flake_in_skull_fracture",
+        "plant": "scene_09_the_mortuary_exam",
+        "payoff": "scene_13_the_gantry_evidence",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "mutton_tallow_in_switch_lantern",
+        "plant": "scene_02_under_the_hopper",
+        "payoff": "scene_14_the_canteen_porch",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "unslaked_marl_in_hopper_four",
+        "plant": "scene_04_cranes_threat",
+        "payoff": "scene_15_confronting_vance",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "bloody_red_neckerchief",
+        "plant": "scene_10_bunkhouse_search",
+        "payoff": "scene_11_the_warrant_signed",
+        "why": "Dan discovers Toby's blood-soaked red neckerchief stashed in Jonah's mattress.",
+        "type": "object"
+      }
+    ]
+  },
+  "told_ledger": {
+    "facts": 5,
+    "withheld_scene_entries": 0,
+    "rejected_out_of_range": 0,
+    "failed_batches": 0
+  },
+  "lint": {
+    "problems": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_switch_manifest",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_tallow_lantern",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_sheepskin_coat",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_coupling_pin",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_switch_manifest",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_tallow_lantern",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_sheepskin_coat",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_coupling_pin",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "publishable": true
+  },
+  "vacuous_checks": [
+    "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+    "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+    "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+  ]
+}

@@ -1,0 +1,1805 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "arc_no_span_guidance_orchard",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_martha_vane",
+        "name": "Martha Vane",
+        "location_id": "loc_high_terrace",
+        "status": "hale but weary from decades of manual grafting",
+        "goal": "prove legal authorship of the Wren's Russet pear before the buyout completes",
+        "bag": {
+          "age": "64",
+          "trade": "master grafter"
+        }
+      },
+      {
+        "id": "char_tomas_vane",
+        "name": "Tomas Vane",
+        "location_id": "loc_high_terrace",
+        "status": "anxious and visibly exhausted",
+        "goal": "shield Martha from cooperative liability and prevent the discovery of the scions",
+        "bag": {
+          "age": "28",
+          "role": "nursery hand"
+        }
+      },
+      {
+        "id": "char_julian_gorse",
+        "name": "Julian Gorse",
+        "location_id": "loc_packing_shed",
+        "status": "healthy, brisk, and combative",
+        "goal": "deliver an unencumbered cooperative orchard to AgDev to claim his buyout bonus",
+        "bag": {
+          "role": "cooperative treasurer"
+        }
+      },
+      {
+        "id": "char_judith_callow",
+        "name": "Judith Callow",
+        "location_id": "loc_packing_shed",
+        "status": "arthritic but observant",
+        "goal": "ensure her family's cider press shares are honoured in the liquidation",
+        "bag": {
+          "role": "neighbour"
+        }
+      },
+      {
+        "id": "char_arthur_fenn",
+        "name": "Arthur Fenn",
+        "location_id": "loc_parish_hall",
+        "status": "frail and hard of hearing",
+        "goal": "preserve the cooperative archive and defend his son Corin's reputation",
+        "bag": {
+          "role": "founding member"
+        }
+      },
+      {
+        "id": "char_corin_fenn",
+        "name": "Corin Fenn",
+        "location_id": "loc_packing_shed",
+        "status": "sullen and physically strong",
+        "goal": "complete haulage contracts for AgDev without getting embroiled in valley disputes",
+        "bag": {
+          "role": "lorry driver"
+        }
+      },
+      {
+        "id": "char_beatrice_hale",
+        "name": "Beatrice Hale",
+        "location_id": "loc_packing_shed",
+        "status": "poised and professionally detached",
+        "goal": "close the Low Tarn acquisition cleanly on behalf of AgDev Consortium",
+        "bag": {
+          "role": "corporate land agent"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_high_terrace",
+        "name": "High Terrace Pear Rows",
+        "bag": {
+          "soil": "slate limestone bench facing northwest"
+        }
+      },
+      {
+        "id": "loc_packing_shed",
+        "name": "Cooperative Packing Shed and Yard",
+        "bag": {
+          "features": "timber frame, hydraulic press, weighbridge"
+        }
+      },
+      {
+        "id": "loc_martha_cottage",
+        "name": "Martha's Cottage and Workshop",
+        "bag": {
+          "features": "grafting bench, root cellar, stone hearth"
+        }
+      },
+      {
+        "id": "loc_gorse_homestead",
+        "name": "Gorse Homestead Farmhouse",
+        "bag": {
+          "features": "modernised office, gravel drive"
+        }
+      },
+      {
+        "id": "loc_parish_hall",
+        "name": "Parish Reading Room and Archive",
+        "bag": {
+          "features": "cooperative lockbox, parish records"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_copper_grafting_knife",
+        "name": "Notched Copper Grafting Knife",
+        "location_id": "loc_martha_cottage",
+        "status": "honed with a distinct notched heel on the blade bevel",
+        "bag": {
+          "owner": "char_martha_vane"
+        }
+      },
+      {
+        "id": "obj_coop_covenant_ledger",
+        "name": "1972 Cooperative Covenant Ledger",
+        "location_id": "loc_parish_hall",
+        "status": "vellum bound, containing original charter clauses",
+        "bag": {
+          "governance": "Low Tarn Fruit Cooperative"
+        }
+      },
+      {
+        "id": "obj_diesel_saw",
+        "name": "Cooperative Chainsaw",
+        "location_id": "loc_packing_shed",
+        "status": "greasy and blunt-toothed",
+        "bag": {
+          "type": "mechanical tool"
+        }
+      },
+      {
+        "id": "obj_scion_crate",
+        "name": "Paraffin-Dipped Scion Crate",
+        "location_id": "loc_martha_cottage",
+        "status": "dormant wood sealed in beeswax and damp moss",
+        "bag": {
+          "cultivar": "Wren's Russet"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_martha_vane",
+        "to_id": "char_tomas_vane",
+        "kind": "aunt_and_mentor",
+        "sentiment": "deeply protective and trusting",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_tomas_vane",
+        "to_id": "char_martha_vane",
+        "kind": "nephew_and_assistant",
+        "sentiment": "desperately protective",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_martha_vane",
+        "to_id": "char_julian_gorse",
+        "kind": "cooperative_partners",
+        "sentiment": "acrimonious distrust",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_julian_gorse",
+        "to_id": "char_martha_vane",
+        "kind": "cooperative_partners",
+        "sentiment": "dismissive contempt",
+        "bag": {}
+      },
+      {
+        "id": "rel_05",
+        "from_id": "char_judith_callow",
+        "to_id": "char_martha_vane",
+        "kind": "neighbour",
+        "sentiment": "grudging alliance",
+        "bag": {}
+      },
+      {
+        "id": "rel_06",
+        "from_id": "char_arthur_fenn",
+        "to_id": "char_martha_vane",
+        "kind": "cooperative_veterans",
+        "sentiment": "wary respect",
+        "bag": {}
+      },
+      {
+        "id": "rel_07",
+        "from_id": "char_corin_fenn",
+        "to_id": "char_julian_gorse",
+        "kind": "contractor",
+        "sentiment": "financially beholden",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_martha_vane",
+        "fact_ref": "russet_pear_unregistered",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_julian_gorse",
+        "fact_ref": "agdev_buyout_bonus",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_arthur_fenn",
+        "fact_ref": "coop_founding_covenant",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_tomas_vane",
+        "fact_ref": "knife_notch_mark",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_felled_russets",
+      "order": 1,
+      "pov": "char_martha_vane",
+      "location_id": "loc_high_terrace",
+      "characters_present": [
+        "char_martha_vane",
+        "char_tomas_vane"
+      ],
+      "dramatic_function": "Establishes the deliberate destruction of Martha's mother trees and Tomas's complicit reluctance to resist the buyout.",
+      "entry_state": {
+        "char_martha_vane": {
+          "status": "hale but weary from decades of manual grafting"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "status": "shocked and determined to find who destroyed her trees"
+        }
+      },
+      "required_beats": [
+        "Martha and Tomas discover the fourteen Wren's Russet trees felled and ring-barked.",
+        "Martha inspects the clean cuts on the stumps.",
+        "Tomas urges Martha to let the damage go unreported and allow the buyout to proceed."
+      ],
+      "reader_must_learn": [
+        "clean_cambium_girdling"
+      ],
+      "must_stay_hidden": [
+        "tomas_night_cuttings"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_02_the_packing_shed",
+      "order": 2,
+      "pov": "char_martha_vane",
+      "location_id": "loc_packing_shed",
+      "characters_present": [
+        "char_martha_vane",
+        "char_beatrice_hale",
+        "char_julian_gorse"
+      ],
+      "dramatic_function": "Closes Martha's legal recourse through the cooperative by establishing the trees' lack of registered status.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_high_terrace"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_packing_shed"
+        }
+      },
+      "required_beats": [
+        "Martha arrives at the packing shed to report the destruction to the committee.",
+        "Julian presses Martha to sign AgDev's title release.",
+        "Beatrice informs Martha that unregistered varieties are ineligible for compensation or ownership claims."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "russet_pear_unregistered",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_03_tracking_the_lorry",
+      "order": 3,
+      "pov": "char_martha_vane",
+      "location_id": "loc_high_terrace",
+      "characters_present": [
+        "char_martha_vane",
+        "char_judith_callow"
+      ],
+      "dramatic_function": "Uncovers physical evidence tying the felling of the trees to a specific vehicle and nighttime entry.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_packing_shed"
+        },
+        "char_judith_callow": {
+          "location_id": "loc_packing_shed"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_high_terrace"
+        },
+        "char_judith_callow": {
+          "location_id": "loc_high_terrace"
+        }
+      },
+      "required_beats": [
+        "Martha and Judith inspect the high terrace perimeter for signs of trespass.",
+        "Judith notes dual-tyre ruts and links them to hearing Corin's lorry at midnight.",
+        "Martha discovers blue timber chalk smeared on the gate latch."
+      ],
+      "reader_must_learn": [
+        "blue_chalk_traces"
+      ],
+      "must_stay_hidden": [
+        "tomas_chalk_marking"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_the_farmhouse_confrontation",
+      "order": 4,
+      "pov": "char_martha_vane",
+      "location_id": "loc_gorse_homestead",
+      "characters_present": [
+        "char_martha_vane",
+        "char_julian_gorse"
+      ],
+      "dramatic_function": "Reveals Julian's personal financial motive for ensuring the orchard transfer proceeds free of patent disputes.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_high_terrace"
+        },
+        "char_julian_gorse": {
+          "location_id": "loc_packing_shed"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_gorse_homestead"
+        },
+        "char_julian_gorse": {
+          "location_id": "loc_gorse_homestead"
+        }
+      },
+      "required_beats": [
+        "Martha accuses Julian at his farmhouse of sabotaging her trees ahead of AgDev's inspection.",
+        "Julian defends clearing sentimental varieties in light of Low Tarn's five-year financial failure.",
+        "Julian inadvertently reveals he stands to gain a substantial bonus if the transfer closes without patent encumbrances."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "agdev_buyout_bonus",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_05_the_missing_knife",
+      "order": 5,
+      "pov": "char_martha_vane",
+      "location_id": "loc_martha_cottage",
+      "characters_present": [
+        "char_martha_vane",
+        "char_tomas_vane"
+      ],
+      "dramatic_function": "To plant suspicion within Martha's own household when she discovers a crucial tool has vanished.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_gorse_homestead"
+        },
+        "char_tomas_vane": {
+          "location_id": "loc_high_terrace"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_martha_cottage"
+        },
+        "char_tomas_vane": {
+          "location_id": "loc_martha_cottage"
+        }
+      },
+      "required_beats": [
+        "Martha searches her workshop for her copper grafting knife to sample the pear stumps.",
+        "Martha finds the tool missing from its rack.",
+        "Tomas claims he misplaced the knife and presses Martha to drop her investigation."
+      ],
+      "reader_must_learn": [
+        "missing_copper_knife"
+      ],
+      "must_stay_hidden": [
+        "tomas_hidden_knife"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_the_shed_inspection",
+      "order": 6,
+      "pov": "char_martha_vane",
+      "location_id": "loc_packing_shed",
+      "characters_present": [
+        "char_martha_vane",
+        "char_corin_fenn"
+      ],
+      "dramatic_function": "To eliminate the cooperative saw as the felling tool and reveal Julian's secret patent claim.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_martha_cottage"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_packing_shed"
+        }
+      },
+      "required_beats": [
+        "Martha inspects the cooperative chainsaw and learns from Corin that Julian ordered it borrowed.",
+        "Sawdust on the chain proves the saw was used on softwood rather than the pear trees.",
+        "Martha searches Julian's office files and finds a draft patent for Wren's Russet filed under his sole name."
+      ],
+      "reader_must_learn": [
+        "gorse_secret_patent_draft"
+      ],
+      "must_stay_hidden": [
+        "gorse_commercial_intent"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "clean_cambium_girdling",
+          "plant": "scene_01_the_felled_russets"
+        }
+      ]
+    },
+    {
+      "id": "scene_07_the_terrace_ruts",
+      "order": 7,
+      "pov": "char_martha_vane",
+      "location_id": "loc_high_terrace",
+      "characters_present": [
+        "char_martha_vane",
+        "char_judith_callow"
+      ],
+      "dramatic_function": "To turn Martha's suspicions toward a coordinated conspiracy between Julian and Corin.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_packing_shed"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_high_terrace"
+        }
+      },
+      "required_beats": [
+        "Martha and Judith inspect physical evidence around the high terrace boundary fence.",
+        "Judith reports sighting Corin's flatbed near the site and accuses Julian of hiring Corin to destroy the trees for patent rights."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_confronting_corin",
+      "order": 8,
+      "pov": "char_martha_vane",
+      "location_id": "loc_gorse_homestead",
+      "characters_present": [
+        "char_martha_vane",
+        "char_corin_fenn",
+        "char_julian_gorse"
+      ],
+      "dramatic_function": "To bring Martha into direct conflict with Julian when she attempts to interrogate his accomplice.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_high_terrace"
+        },
+        "char_corin_fenn": {
+          "location_id": "loc_packing_shed"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_gorse_homestead"
+        },
+        "char_corin_fenn": {
+          "location_id": "loc_gorse_homestead"
+        }
+      },
+      "required_beats": [
+        "Martha confronts Corin at the homestead about his presence near the high terrace.",
+        "Julian intervenes to silence Corin and warn Martha to stop harassing his worker."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "corin_alibi_breakdown"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_the_archive_charter",
+      "order": 9,
+      "pov": "char_martha_vane",
+      "location_id": "loc_parish_hall",
+      "characters_present": [
+        "char_martha_vane",
+        "char_arthur_fenn"
+      ],
+      "dramatic_function": "To clear Corin of the sabotage while revealing the cooperative covenant's ruinous forfeiture penalty for private breeding.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_gorse_homestead"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_parish_hall"
+        }
+      },
+      "required_beats": [
+        "Martha demands the truth from Arthur Fenn, who presents delivery manifests proving Corin could not have felled the trees.",
+        "Arthur warns Martha that the cooperative's founding charter punishes unauthorized private breeding with total ruin.",
+        "Martha inspects the archive ledger and discovers that breeding unregistered cultivars results in the forfeiture of land and home."
+      ],
+      "reader_must_learn": [
+        "corin_alibi_breakdown",
+        "ledger_indemnity_clause"
+      ],
+      "must_stay_hidden": [
+        "tomas_prior_ledger_reading"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "coop_founding_covenant",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_10_the_packing_confrontation",
+      "order": 10,
+      "pov": "char_martha_vane",
+      "location_id": "loc_packing_shed",
+      "characters_present": [
+        "char_martha_vane",
+        "char_julian_gorse",
+        "char_beatrice_hale",
+        "char_tomas_vane",
+        "char_corin_fenn"
+      ],
+      "dramatic_function": "To shatter Martha's theory that Julian destroyed the orchard to seize her breeding rights.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_parish_hall"
+        },
+        "char_julian_gorse": {
+          "location_id": "loc_gorse_homestead"
+        },
+        "char_tomas_vane": {
+          "location_id": "loc_martha_cottage"
+        },
+        "char_corin_fenn": {
+          "location_id": "loc_gorse_homestead"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_packing_shed"
+        },
+        "char_julian_gorse": {
+          "location_id": "loc_packing_shed"
+        },
+        "char_tomas_vane": {
+          "location_id": "loc_packing_shed"
+        },
+        "char_corin_fenn": {
+          "location_id": "loc_packing_shed"
+        }
+      },
+      "required_beats": [
+        "Martha publicly accuses Julian of destroying the trees to trigger covenant forfeiture and take her patent.",
+        "Julian protests that he needed the living trees to validate the patent with AgDev.",
+        "Corin provides documented logs establishing his and Julian's alibi, forcing Martha to realize Julian had no motive for the felling."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "tomas_motive_protective"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "gorse_secret_patent_draft",
+          "plant": "scene_06_the_shed_inspection"
+        },
+        {
+          "fact_ref": "corin_alibi_breakdown",
+          "plant": "scene_09_the_archive_charter"
+        }
+      ]
+    },
+    {
+      "id": "scene_11_the_hidden_knife",
+      "order": 11,
+      "pov": "char_martha_vane",
+      "location_id": "loc_martha_cottage",
+      "characters_present": [
+        "char_martha_vane",
+        "char_tomas_vane"
+      ],
+      "dramatic_function": "To expose Tomas as the saboteur after Martha reveals she preserved the pear scions.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_packing_shed"
+        },
+        "char_tomas_vane": {
+          "location_id": "loc_packing_shed"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_martha_cottage"
+        },
+        "char_tomas_vane": {
+          "location_id": "loc_martha_cottage"
+        }
+      },
+      "required_beats": [
+        "Martha reveals to Tomas that she secretly preserved scions in her root cellar, which triggers his panic.",
+        "Martha notices blue lumber chalk on Tomas's coat and discovers her missing copper knife hidden among his tools.",
+        "Martha confronts Tomas with the evidence and demands an explanation."
+      ],
+      "reader_must_learn": [
+        "hidden_scion_cache"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "blue_chalk_traces",
+          "plant": "scene_03_tracking_the_lorry"
+        },
+        {
+          "fact_ref": "missing_copper_knife",
+          "plant": "scene_05_the_missing_knife"
+        }
+      ]
+    },
+    {
+      "id": "scene_12_tomas_s_confession",
+      "order": 12,
+      "pov": "char_martha_vane",
+      "location_id": "loc_martha_cottage",
+      "characters_present": [
+        "char_martha_vane",
+        "char_tomas_vane"
+      ],
+      "dramatic_function": "To reveal the protective motive behind the felling and force Martha to choose her legacy over her security.",
+      "entry_state": {
+        "char_tomas_vane": {
+          "status": "anxious and visibly exhausted"
+        },
+        "char_martha_vane": {
+          "goal": "prove legal authorship of the Wren's Russet pear before the buyout completes"
+        }
+      },
+      "exit_state": {
+        "char_tomas_vane": {
+          "status": "confessed and weeping"
+        },
+        "char_martha_vane": {
+          "goal": "prove she created Wren's Russet regardless of the legal penalties"
+        }
+      },
+      "required_beats": [
+        "Tomas admits he girdled the trees to destroy proof of private breeding and save Martha from losing her cottage under the covenant.",
+        "Tomas pleads with Martha to burn the surviving scions and surrender the variety.",
+        "Martha rejects financial safety, packing the scions and knife to claim authorship at the cooperative meeting."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "ledger_indemnity_clause",
+          "plant": "scene_09_the_archive_charter"
+        },
+        {
+          "fact_ref": "hidden_scion_cache",
+          "plant": "scene_11_the_hidden_knife"
+        }
+      ]
+    },
+    {
+      "id": "scene_13_the_parish_hearing",
+      "order": 13,
+      "pov": "char_martha_vane",
+      "location_id": "loc_parish_hall",
+      "characters_present": [
+        "char_martha_vane",
+        "char_beatrice_hale",
+        "char_julian_gorse",
+        "char_tomas_vane"
+      ],
+      "dramatic_function": "To deliver the climactic confrontation where Martha successfully establishes her authorship of the pear at the cost of her land and home.",
+      "entry_state": {
+        "char_martha_vane": {
+          "location_id": "loc_martha_cottage",
+          "status": "shocked and determined to find who destroyed her trees",
+          "goal": "prove she created Wren's Russet regardless of the legal penalties"
+        },
+        "char_tomas_vane": {
+          "location_id": "loc_martha_cottage"
+        },
+        "char_beatrice_hale": {
+          "location_id": "loc_packing_shed"
+        },
+        "char_julian_gorse": {
+          "location_id": "loc_packing_shed",
+          "status": "healthy, brisk, and combative"
+        },
+        "obj_copper_grafting_knife": {
+          "location_id": "loc_martha_cottage"
+        },
+        "obj_scion_crate": {
+          "location_id": "loc_martha_cottage"
+        }
+      },
+      "exit_state": {
+        "char_martha_vane": {
+          "location_id": "loc_parish_hall",
+          "status": "dispossessed of home and land, but validated as the sole breeder",
+          "goal": null
+        },
+        "char_tomas_vane": {
+          "location_id": "loc_parish_hall"
+        },
+        "char_beatrice_hale": {
+          "location_id": "loc_parish_hall"
+        },
+        "char_julian_gorse": {
+          "location_id": "loc_parish_hall",
+          "status": "denied his personal patent and bonus"
+        },
+        "obj_copper_grafting_knife": {
+          "location_id": "loc_parish_hall"
+        },
+        "obj_scion_crate": {
+          "location_id": "loc_parish_hall"
+        }
+      },
+      "required_beats": [
+        "Martha and Tomas present the scions and notched copper knife to Beatrice at the buyout meeting, proving the knife cut the stumps and that Julian's patent claim is fraudulent.",
+        "Martha proves she bred Wren's Russet across eighteen seasons.",
+        "Beatrice voids Julian's patent and claims legal custody of the scions for AgDev under the cooperative covenant.",
+        "Invoking clause 14, Beatrice forfeits Martha's buyout equity and cottage as restitution for unauthorized breeding.",
+        "Martha leaves the parish hall into the rain, dispossessed of home and land but acknowledged as the pear's breeder."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "knife_notch_mark",
+          "plant": null
+        }
+      ]
+    }
+  ],
+  "voice_card": {},
+  "metadata": {
+    "title": "The Cambium Cut",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-17T16:55:42.910Z"
+  },
+  "_fabula": {
+    "generator": "src/arc (issue #119)",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-16T00:47:33.212Z",
+    "brief": {
+      "story_id": "arc_no_span_guidance_orchard",
+      "title": "Grafting Season",
+      "premise": {
+        "logline": "An orchard loses a whole variety of pear overnight, and the grafter who bred it has to work out which of her neighbours did it and why.",
+        "modules": {
+          "theme": "the difference between owning work and having made it",
+          "setting_time": "the last autumn before a cooperative is bought out",
+          "setting_place": "a hill orchard shared by four families who no longer speak",
+          "protagonist": "a grafter in her sixties who bred the lost variety and never registered it",
+          "protagonist_want": "to prove the variety was hers before the sale closes",
+          "antagonism": "a neighbour with a legitimate claim and a bad motive",
+          "complication": "the person who destroyed the trees did it to protect her",
+          "ending_shape": "the truth is established and costs the person who established it"
+        }
+      },
+      "plot_shape": {
+        "id": "mystery",
+        "name": "Mystery",
+        "central_question": "What actually happened, and who is willing to say so?",
+        "phases": [
+          {
+            "name": "Disturbance",
+            "purpose": "A wrong surfaces and someone is obliged to look into it.",
+            "share": 0.2
+          },
+          {
+            "name": "Inquiry",
+            "purpose": "Evidence accumulates, most of it true and misread.",
+            "share": 0.35
+          },
+          {
+            "name": "Wrong turn",
+            "purpose": "A reading of the evidence that is coherent and wrong collapses.",
+            "share": 0.2
+          },
+          {
+            "name": "Solution",
+            "purpose": "The true account, assembled only from what the reader has already been shown.",
+            "share": 0.15
+          },
+          {
+            "name": "Cost",
+            "purpose": "What knowing costs the person who found out.",
+            "share": 0.1
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "investigator",
+            "purpose": "Carries the reader through the inquiry and pays its cost."
+          },
+          {
+            "role": "concealer",
+            "purpose": "Has a reason to keep the true account from being assembled."
+          },
+          {
+            "role": "witness",
+            "purpose": "Holds one true piece and misunderstands its meaning."
+          },
+          {
+            "role": "wronged party",
+            "purpose": "The reason the question matters at all."
+          }
+        ],
+        "obligatory_moves": [
+          "Every element of the true account is on the page before it is stated.",
+          "At least one true detail is shown early in a context that makes it look irrelevant.",
+          "The wrong reading is defensible on the evidence available when it is made."
+        ]
+      },
+      "event_count": 20,
+      "cast": {
+        "characters": 7,
+        "locations": 5,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 10
+      },
+      "span_guidance": false,
+      "based_on": {
+        "plot_shape_preset": "mystery",
+        "premise_preset": "orchard"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_discovery_on_high_terrace",
+        "sequence": 1,
+        "summary": "Martha and Tomas discover all fourteen Wren's Russet trees felled and cleanly ring-barked on the high terrace.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_high_terrace",
+        "characters_present": [
+          "char_martha_vane",
+          "char_tomas_vane"
+        ],
+        "dramatic_function": "Disturbance: establishes the central crime and reveals the surgical nature of the destruction.",
+        "beats": [
+          "Martha discovers the fourteen mother trees cut to low stumps in the dawn frost.",
+          "Martha examines the wounds and observes that the cambium was sliced cleanly rather than torn by a mechanical saw.",
+          "Tomas urges her not to report the damage and to let the buyout proceed without trouble."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "clean_cambium_girdling"
+        ],
+        "conceals": [
+          "tomas_night_cuttings"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "status",
+            "value": "shocked and determined to find who destroyed her trees"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_buyout_inventory_threat",
+        "sequence": 2,
+        "summary": "At the packing shed, Beatrice Hale warns Martha that unrecorded varieties will receive no compensation in the sale.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_packing_shed",
+        "characters_present": [
+          "char_martha_vane",
+          "char_beatrice_hale",
+          "char_julian_gorse"
+        ],
+        "dramatic_function": "Disturbance: defines the ticking clock and formal obstacle regarding the unregistered variety.",
+        "beats": [
+          "Martha walks down from the terrace to report the felling to the cooperative committee.",
+          "Julian presents AgDev's formal land audit and demands Martha sign the title release.",
+          "Beatrice confirms that because Wren's Russet was never formally registered in nursery records, Martha cannot claim ownership or damages."
+        ],
+        "caused_by": [
+          "ev_01_discovery_on_high_terrace"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "russet_pear_unregistered",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_packing_shed"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_inspecting_boundary_gate",
+        "sequence": 3,
+        "summary": "Judith Callow walks the terrace perimeter with Martha, pointing out tyre marks and scuffed blue chalk on the gate.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_high_terrace",
+        "characters_present": [
+          "char_martha_vane",
+          "char_judith_callow"
+        ],
+        "dramatic_function": "Disturbance: plants physical clues at the perimeter while introducing Judith's biased suspicions.",
+        "beats": [
+          "Martha returns to the terrace with Judith to search for signs of vehicle entry.",
+          "Judith points out heavy dual-tyre ruts by the top access gate and claims she heard Corin's lorry at midnight.",
+          "Martha spots smeared blue timber chalk on the iron latch of the gate."
+        ],
+        "caused_by": [
+          "ev_01_discovery_on_high_terrace"
+        ],
+        "reveals": [
+          "blue_chalk_traces"
+        ],
+        "conceals": [
+          "tomas_chalk_marking"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_high_terrace"
+          },
+          {
+            "entity_id": "char_judith_callow",
+            "column": "location_id",
+            "value": "loc_high_terrace"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_confronting_gorse_homestead",
+        "sequence": 4,
+        "summary": "Martha confronts Julian Gorse at his farmhouse, discovering his personal financial stake in an unencumbered sale.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_gorse_homestead",
+        "characters_present": [
+          "char_martha_vane",
+          "char_julian_gorse"
+        ],
+        "dramatic_function": "Disturbance: confirms Julian's motive and establishes him as the primary antagonist.",
+        "beats": [
+          "Martha accuses Julian of having her trees cleared to prevent disputes during AgDev's inspection.",
+          "Julian retorts that Low Tarn has been broke for five years and cannot afford individual sentimental varieties.",
+          "Julian lets slip that AgDev promised him a massive bonus if the orchard transfer closes without outstanding plant patent encumbrances."
+        ],
+        "caused_by": [
+          "ev_02_buyout_inventory_threat"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "agdev_buyout_bonus",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_gorse_homestead"
+          },
+          {
+            "entity_id": "char_julian_gorse",
+            "column": "location_id",
+            "value": "loc_gorse_homestead"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_missing_grafting_knife",
+        "sequence": 5,
+        "summary": "Martha searches her workshop for her notched copper knife to test stump viability, but discovers it is missing.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_martha_cottage",
+        "characters_present": [
+          "char_martha_vane",
+          "char_tomas_vane"
+        ],
+        "dramatic_function": "Inquiry: plants a crucial piece of physical evidence in an innocuous domestic scene.",
+        "beats": [
+          "Martha returns to her cottage workshop intending to gather tools to take root samples from the high terrace.",
+          "She finds the magnetic tool rack empty of her favourite copper grafting knife.",
+          "Tomas claims he misplaced the knife during spring grafting and urges her to leave the dead stumps alone."
+        ],
+        "caused_by": [
+          "ev_01_discovery_on_high_terrace"
+        ],
+        "reveals": [
+          "missing_copper_knife"
+        ],
+        "conceals": [
+          "tomas_hidden_knife"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_martha_cottage"
+          },
+          {
+            "entity_id": "char_tomas_vane",
+            "column": "location_id",
+            "value": "loc_martha_cottage"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_auditing_shared_tools",
+        "sequence": 6,
+        "summary": "Martha audits the cooperative tool rack and finds the diesel saw coated in crushed pine, disproving its use on the pears.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_packing_shed",
+        "characters_present": [
+          "char_martha_vane",
+          "char_corin_fenn"
+        ],
+        "dramatic_function": "Inquiry: Martha tests a mechanical hypothesis and pays off the initial observation about clean cuts.",
+        "beats": [
+          "Martha inspects the shared cooperative diesel chainsaw in the machinery bay.",
+          "Corin admits he borrowed the saw two nights ago on Julian's instructions.",
+          "Martha checks the saw's chain teeth and finds gummy softwood sawdust, proving it could not have made the precise cambium cuts on the hardwood pears."
+        ],
+        "caused_by": [
+          "ev_01_discovery_on_high_terrace",
+          "ev_05_missing_grafting_knife"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "clean_cambium_girdling",
+            "plant": "ev_01_discovery_on_high_terrace"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_packing_shed"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_gorse_draft_patent_found",
+        "sequence": 7,
+        "summary": "Searching the cooperative office desk, Martha finds a draft patent application for Wren's Russet filed under Julian's name.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_packing_shed",
+        "characters_present": [
+          "char_martha_vane"
+        ],
+        "dramatic_function": "Inquiry: discovers apparent documentary proof of Julian's plan to steal her work.",
+        "beats": [
+          "Martha slips into Julian's unlocked cooperative office while the yard is quiet.",
+          "She rifles through the buyout correspondence folders inside the metal filing cabinet.",
+          "She unearths an AgDev plant breeder patent draft submitted under Julian Gorse's sole name describing the Wren's Russet."
+        ],
+        "caused_by": [
+          "ev_04_confronting_gorse_homestead",
+          "ev_06_auditing_shared_tools"
+        ],
+        "reveals": [
+          "gorse_secret_patent_draft"
+        ],
+        "conceals": [
+          "gorse_commercial_intent"
+        ],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_08_judiths_misguided_witness",
+        "sequence": 8,
+        "summary": "Judith Callow insists that Corin and Julian worked together to clear the trees for the patent scheme.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_high_terrace",
+        "characters_present": [
+          "char_martha_vane",
+          "char_judith_callow"
+        ],
+        "dramatic_function": "Inquiry: reinforces the misleading witness testimony with circumstantial conviction.",
+        "beats": [
+          "Martha returns to the terrace to re-examine the felling site alongside Judith.",
+          "Judith points to grease marks on the boundary fence and declares she saw Corin's flatbed idling there after dusk.",
+          "Judith assures Martha that Julian paid Corin to clear the grove so Julian could claim exclusive patent rights elsewhere."
+        ],
+        "caused_by": [
+          "ev_03_inspecting_boundary_gate",
+          "ev_06_auditing_shared_tools"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_high_terrace"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_interrogating_corin_fenn",
+        "sequence": 9,
+        "summary": "Martha corners Corin Fenn at the Gorse homestead, but Corin refuses to explain his midnight trip.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_gorse_homestead",
+        "characters_present": [
+          "char_martha_vane",
+          "char_corin_fenn",
+          "char_julian_gorse"
+        ],
+        "dramatic_function": "Inquiry: intensifies the suspicion around Corin and Julian's secretive nighttime work.",
+        "beats": [
+          "Martha tracks Corin to Julian's gravel yard where he is strapping heavy timber stakes onto his flatbed.",
+          "Martha confronts Corin about the tyre ruts and his presence near the high terrace two nights ago.",
+          "Julian steps between them, warns Martha against harassing cooperative workers, and orders Corin to stay silent."
+        ],
+        "caused_by": [
+          "ev_06_auditing_shared_tools",
+          "ev_07_gorse_draft_patent_found"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_gorse_homestead"
+          },
+          {
+            "entity_id": "char_corin_fenn",
+            "column": "location_id",
+            "value": "loc_gorse_homestead"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_arthurs_defence_of_corin",
+        "sequence": 10,
+        "summary": "Arthur Fenn defends his son in the parish hall, producing a delivery log that breaks Corin's alleged link to the pear felling.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_parish_hall",
+        "characters_present": [
+          "char_martha_vane",
+          "char_arthur_fenn"
+        ],
+        "dramatic_function": "Inquiry: breaks the apparent physical link between Corin's lorry and the severed pear trees.",
+        "beats": [
+          "Martha seeks out Arthur Fenn to demand the truth about Corin's midnight truck run.",
+          "Arthur produces AgDev receipt manifests proving Corin was hauling perimeter survey posts to the lower highway boundary all night.",
+          "Arthur warns Martha that Corin never climbed the high ridge and tells her she is misreading the orchard's old enmities."
+        ],
+        "caused_by": [
+          "ev_09_interrogating_corin_fenn"
+        ],
+        "reveals": [
+          "corin_alibi_breakdown"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_parish_hall"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_the_old_covenant_warning",
+        "sequence": 11,
+        "summary": "Arthur warns Martha that the cooperative's founding charter contains brutal penalties for individual breeding.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_parish_hall",
+        "characters_present": [
+          "char_martha_vane",
+          "char_arthur_fenn"
+        ],
+        "dramatic_function": "Inquiry: surfaces the existence of the cooperative covenant and the legal trap governing orchard stock.",
+        "beats": [
+          "Martha presses Arthur on why everyone is so desperate to silence the question of Wren's Russet.",
+          "Arthur reminds her of the 1972 charter signed by the four founding families to stop private commercial side-deals.",
+          "Arthur warns Martha that proving private cultivation on cooperative land will ruin whoever did it."
+        ],
+        "caused_by": [
+          "ev_10_arthurs_defence_of_corin"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "coop_founding_covenant",
+            "plant": null
+          }
+        ],
+        "state_changes": []
+      },
+      {
+        "id": "ev_12_discovering_indemnity_clause",
+        "sequence": 12,
+        "summary": "Examining the founding ledger in the archive, Martha discovers the severe forfeiture penalty for unauthorized cultivars.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_parish_hall",
+        "characters_present": [
+          "char_martha_vane"
+        ],
+        "dramatic_function": "Wrong turn: Martha reads the covenant and constructs a coherent but flawed theory of Julian's extortion.",
+        "beats": [
+          "Martha pulls the vellum cooperative ledger from the parish lockbox.",
+          "She finds clause 14 dog-eared, stating that any member breeding unregistered cultivars on co-op rootstock forfeits their land share and cottage.",
+          "Martha assumes Julian intends to invoke this clause against her to seize her home along with the pear patent."
+        ],
+        "caused_by": [
+          "ev_11_the_old_covenant_warning"
+        ],
+        "reveals": [
+          "ledger_indemnity_clause"
+        ],
+        "conceals": [
+          "tomas_prior_ledger_reading"
+        ],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_13_the_shed_confrontation",
+        "sequence": 13,
+        "summary": "In the packing shed, Martha publicly accuses Julian of destroying the trees to force her into a covenant forfeiture.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_packing_shed",
+        "characters_present": [
+          "char_martha_vane",
+          "char_julian_gorse",
+          "char_beatrice_hale",
+          "char_tomas_vane"
+        ],
+        "dramatic_function": "Wrong turn: Martha delivers her accusation based on the patent draft, setting up its collapse.",
+        "beats": [
+          "Martha confronts Julian in front of Beatrice Hale and Tomas, slamming the draft patent onto the sorting table.",
+          "She accuses Julian of cutting down the trees to eliminate competition and using the indemnity clause to steal her breeding rights.",
+          "Julian reacts with disbelief and counters that he needed the mother trees alive to prove the variety to AgDev."
+        ],
+        "caused_by": [
+          "ev_07_gorse_draft_patent_found",
+          "ev_12_discovering_indemnity_clause"
+        ],
+        "reveals": [],
+        "conceals": [
+          "tomas_motive_protective"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "gorse_secret_patent_draft",
+            "plant": "ev_07_gorse_draft_patent_found"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_packing_shed"
+          },
+          {
+            "entity_id": "char_julian_gorse",
+            "column": "location_id",
+            "value": "loc_packing_shed"
+          },
+          {
+            "entity_id": "char_tomas_vane",
+            "column": "location_id",
+            "value": "loc_packing_shed"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_collapse_of_the_allegation",
+        "sequence": 14,
+        "summary": "Corin arrives with documented delivery logs and GPS manifests, thoroughly dismantling Martha's case against Julian.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_packing_shed",
+        "characters_present": [
+          "char_martha_vane",
+          "char_julian_gorse",
+          "char_beatrice_hale",
+          "char_corin_fenn"
+        ],
+        "dramatic_function": "Wrong turn: the false solution collapses completely under verified evidence.",
+        "beats": [
+          "Corin presents signed AgDev delivery manifests confirming he and Julian were at the lower highway junction during the night of the felling.",
+          "Beatrice verifies the log stamps and warns Martha that filing unfounded sabotage claims will invalidate her cooperative share.",
+          "Martha realizes Julian genuinely needed the living trees to monetize the patent, meaning he had no motive to destroy them."
+        ],
+        "caused_by": [
+          "ev_13_the_shed_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "corin_alibi_breakdown",
+            "plant": "ev_10_arthurs_defence_of_corin"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_corin_fenn",
+            "column": "location_id",
+            "value": "loc_packing_shed"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_confiding_the_secret_scions",
+        "sequence": 15,
+        "summary": "Back at her cottage, Martha tells Tomas she secretly preserved scions in the root cellar, which provokes his panic.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_martha_cottage",
+        "characters_present": [
+          "char_martha_vane",
+          "char_tomas_vane"
+        ],
+        "dramatic_function": "Wrong turn: Martha introduces the living scions, triggering Tomas's emotional unravelling.",
+        "beats": [
+          "Martha retreats to her cottage workshop in defeat, followed by Tomas.",
+          "She opens the flagstone hatch to her root cellar and shows him a sealed crate of paraffin-coated scion cuttings taken before the destruction.",
+          "Tomas reacts with visible horror rather than relief, begging her to burn the wood and let the variety die."
+        ],
+        "caused_by": [
+          "ev_14_collapse_of_the_allegation"
+        ],
+        "reveals": [
+          "hidden_scion_cache"
+        ],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_martha_cottage"
+          },
+          {
+            "entity_id": "char_tomas_vane",
+            "column": "location_id",
+            "value": "loc_martha_cottage"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_the_evidence_in_the_workshop",
+        "sequence": 16,
+        "summary": "Martha finds blue chalk in Tomas's pocket and her missing copper knife hidden inside his workbench boots.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_martha_cottage",
+        "characters_present": [
+          "char_martha_vane",
+          "char_tomas_vane"
+        ],
+        "dramatic_function": "Solution: the physical clues coalesce to reveal Tomas as the person who cut the trees.",
+        "beats": [
+          "Martha notices blue lumber chalk powder dusting the hem and pockets of Tomas's work coat.",
+          "She searches his work crate beneath the grafting table and pulls out her missing notched copper knife wrapped in oiled rag.",
+          "Martha confronts Tomas with the knife and the blue chalk, demanding to know why he felled her trees."
+        ],
+        "caused_by": [
+          "ev_05_missing_grafting_knife",
+          "ev_15_confiding_the_secret_scions"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "blue_chalk_traces",
+            "plant": "ev_03_inspecting_boundary_gate"
+          },
+          {
+            "fact_ref": "missing_copper_knife",
+            "plant": "ev_05_missing_grafting_knife"
+          }
+        ],
+        "state_changes": []
+      },
+      {
+        "id": "ev_17_tomas_confession",
+        "sequence": 17,
+        "summary": "Tomas confesses that he destroyed the trees to shield Martha from the indemnity clause that would seize her cottage.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_martha_cottage",
+        "characters_present": [
+          "char_martha_vane",
+          "char_tomas_vane"
+        ],
+        "dramatic_function": "Solution: the true protective motive is revealed, completing the causal chain.",
+        "beats": [
+          "Tomas breaks down and admits he used her copper knife to cleanly girdle the trees under cover of dark.",
+          "He explains he read the 1972 covenant in the parish ledger weeks ago and overheard Julian planning to report her for illegal private breeding.",
+          "He destroyed the trees so there would be no living proof of the variety on co-op land, ensuring Martha could keep her home."
+        ],
+        "caused_by": [
+          "ev_16_the_evidence_in_the_workshop"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "ledger_indemnity_clause",
+            "plant": "ev_12_discovering_indemnity_clause"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_tomas_vane",
+            "column": "status",
+            "value": "confessed and weeping"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_the_grafters_choice",
+        "sequence": 18,
+        "summary": "Martha decides that establishing that she made the variety is worth losing her home and financial security.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_martha_cottage",
+        "characters_present": [
+          "char_martha_vane",
+          "char_tomas_vane"
+        ],
+        "dramatic_function": "Solution: the protagonist faces the core thematic choice between owning work and having made it.",
+        "beats": [
+          "Tomas begs Martha to cast the scion crate into the hearth fire and let AgDev purchase the land quietly.",
+          "Martha refuses to let eighteen years of breeding be erased merely to preserve her financial safety.",
+          "She packs the scion crate and the notched knife into her satchel to take them to the final cooperative meeting."
+        ],
+        "caused_by": [
+          "ev_17_tomas_confession"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "hidden_scion_cache",
+            "plant": "ev_15_confiding_the_secret_scions"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "goal",
+            "value": "prove she created Wren's Russet regardless of the legal penalties"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_presenting_the_authorship_proof",
+        "sequence": 19,
+        "summary": "At the parish hall closing meeting, Martha presents the notched knife and scions to prove she bred the lost pear.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_parish_hall",
+        "characters_present": [
+          "char_martha_vane",
+          "char_beatrice_hale",
+          "char_julian_gorse",
+          "char_tomas_vane"
+        ],
+        "dramatic_function": "Cost: Martha formally demonstrates the truth to the buyer and the cooperative.",
+        "beats": [
+          "Martha enters the buyout ratification session and places the dormant scions and notched copper knife before Beatrice.",
+          "Tomas stands beside her and confirms the knife's chipped heel cut the terrace stumps, matching the wound impressions exactly.",
+          "Martha proves Wren's Russet exists, that she bred it over eighteen seasons, and that Julian's patent claim is completely fraudulent."
+        ],
+        "caused_by": [
+          "ev_17_tomas_confession",
+          "ev_18_the_grafters_choice"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [
+          {
+            "fact_ref": "knife_notch_mark",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "location_id",
+            "value": "loc_parish_hall"
+          },
+          {
+            "entity_id": "char_tomas_vane",
+            "column": "location_id",
+            "value": "loc_parish_hall"
+          },
+          {
+            "entity_id": "char_beatrice_hale",
+            "column": "location_id",
+            "value": "loc_parish_hall"
+          },
+          {
+            "entity_id": "char_julian_gorse",
+            "column": "location_id",
+            "value": "loc_parish_hall"
+          },
+          {
+            "entity_id": "obj_copper_grafting_knife",
+            "column": "location_id",
+            "value": "loc_parish_hall"
+          },
+          {
+            "entity_id": "obj_scion_crate",
+            "column": "location_id",
+            "value": "loc_parish_hall"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_the_price_of_truth",
+        "sequence": 20,
+        "summary": "AgDev seizes the scions under the cooperative covenant and forfeits Martha's share, leaving her dispossessed but acknowledged.",
+        "pov": "char_martha_vane",
+        "location_id": "loc_parish_hall",
+        "characters_present": [
+          "char_martha_vane",
+          "char_beatrice_hale",
+          "char_julian_gorse",
+          "char_tomas_vane"
+        ],
+        "dramatic_function": "Cost: resolution of theme and ending shape; the truth is established at absolute personal expense.",
+        "beats": [
+          "Beatrice accepts the proof of breeding, voids Julian's individual patent claim, and takes legal custody of the scion wood for AgDev.",
+          "Invoking clause 14 of the cooperative charter, Beatrice declares Martha's buyout equity and cottage forfeited to AgDev as restitution for unauthorized breeding.",
+          "Martha walks out into the cold orchard rain stripped of her land and home, holding only the undeniable knowledge that the pear was hers."
+        ],
+        "caused_by": [
+          "ev_19_presenting_the_authorship_proof"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_martha_vane",
+            "column": "status",
+            "value": "dispossessed of home and land, but validated as the sole breeder"
+          },
+          {
+            "entity_id": "char_martha_vane",
+            "column": "goal",
+            "value": null
+          },
+          {
+            "entity_id": "char_julian_gorse",
+            "column": "status",
+            "value": "denied his personal patent and bonus"
+          }
+        ]
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-17T16:55:42.910Z",
+    "started_at": "2026-09-17T16:54:59.931Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_felled_russets",
+        "order": 1,
+        "event_ids": [
+          "ev_01_discovery_on_high_terrace"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_packing_shed",
+        "order": 2,
+        "event_ids": [
+          "ev_02_buyout_inventory_threat"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_tracking_the_lorry",
+        "order": 3,
+        "event_ids": [
+          "ev_03_inspecting_boundary_gate"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_farmhouse_confrontation",
+        "order": 4,
+        "event_ids": [
+          "ev_04_confronting_gorse_homestead"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_missing_knife",
+        "order": 5,
+        "event_ids": [
+          "ev_05_missing_grafting_knife"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_shed_inspection",
+        "order": 6,
+        "event_ids": [
+          "ev_06_auditing_shared_tools",
+          "ev_07_gorse_draft_patent_found"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_the_terrace_ruts",
+        "order": 7,
+        "event_ids": [
+          "ev_08_judiths_misguided_witness"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_confronting_corin",
+        "order": 8,
+        "event_ids": [
+          "ev_09_interrogating_corin_fenn"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_archive_charter",
+        "order": 9,
+        "event_ids": [
+          "ev_10_arthurs_defence_of_corin",
+          "ev_11_the_old_covenant_warning",
+          "ev_12_discovering_indemnity_clause"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_packing_confrontation",
+        "order": 10,
+        "event_ids": [
+          "ev_13_the_shed_confrontation",
+          "ev_14_collapse_of_the_allegation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_the_hidden_knife",
+        "order": 11,
+        "event_ids": [
+          "ev_15_confiding_the_secret_scions",
+          "ev_16_the_evidence_in_the_workshop"
+        ],
+        "forced_by_plant_span": true,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_tomas_s_confession",
+        "order": 12,
+        "event_ids": [
+          "ev_17_tomas_confession",
+          "ev_18_the_grafters_choice"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_parish_hearing",
+        "order": 13,
+        "event_ids": [
+          "ev_19_presenting_the_authorship_proof",
+          "ev_20_the_price_of_truth"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+    ]
+  }
+}

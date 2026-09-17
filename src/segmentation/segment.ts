@@ -407,14 +407,20 @@ export async function segmentFabulaPackage(
   let verifiedPairs: PlantPair[] = [];
 
   if (options.skipPlantProposals !== true) {
-    const proposals = await proposePairs(model, sketches, { onProgress: progress });
+    // Anything the Fabula layer already asserted is not re-proposed: a generated arc's own graph
+    // is authored, not inferred, and putting it through a verifier would be second-guessing the
+    // entry point rather than deriving anything. The carried edges go *into* the call, because the
+    // two layers name the same fact differently and a `fact_ref` comparison downstream cannot see
+    // that they are the same fact — see `proposePairs`. The filter below stays as the cheap exact
+    // case; it is no longer the only thing standing between a carried edge and its own duplicate.
+    const proposals = await proposePairs(model, sketches, {
+      known: carriedPairs,
+      onProgress: progress,
+    });
     proposed = proposals.pairs.length;
     malformed = proposals.rejected_malformed;
     plantFailedBatches += proposals.failed_batches;
 
-    // Anything the Fabula layer already asserted is not re-proposed: a generated arc's own graph
-    // is authored, not inferred, and putting it through a verifier would be second-guessing the
-    // entry point rather than deriving anything.
     const alreadyKnown = new Set(carriedPairs.map((pair) => pair.fact_ref));
     const fresh = proposals.pairs.filter((pair) => !alreadyKnown.has(pair.fact_ref));
 
