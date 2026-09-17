@@ -591,3 +591,50 @@ remaining gap is a modeling-policy question the fixtures answer only implicitly,
 an explicit answer — possibly an ADR, since it bears on what a World Model seed is *for*. Nothing
 in this file pre-empts that, and nothing should until the number is measured through fixed
 instruments.
+
+---
+
+## 9. Wave 1: what actually happened
+
+Wave 1 is done — #147, #149, #151, #152 and #153 are merged. This section records the outcomes
+against what §§1–8 predicted, because two predictions were wrong in ways that matter more than the
+ones that were right, and a plan that quietly drops its failed predictions is not a record.
+
+| Ticket | Predicted | Measured |
+| --- | --- | --- |
+| #152 fabricated events | corrected count "0 or nonzero, and either is informative" | **0 of 60 judged** on the *Carol*, 0 of 45 on Cinderella — a zero-tolerance row went from failing to passing with no pipeline change |
+| #151 entity denominator | "necessary, not sufficient" | exactly that: characters 0.129 → **0.202** (*Carol*), 0.400 → **0.500** (Cinderella), both still far below the 0.85 bar |
+| #149 plant-span layer | six arcs' numbers already corrected, three to re-run | all nine now segmented: **mean span falls on every one**, and a fourth arc joins those whose span-1 share rises from 0.00 |
+| #147 judge bars | two bars rebuilt, fixtures then pass | non-genericity **fixed** (all three fixtures pass); causal **2 of 3** pass — and the ticket's stated cause was wrong (below) |
+| #153 plant/payoff sidecar | a real denominator would show whether 0.00 was an artifact | it is **not** an artifact: 1 of 31 pairs recovered (#162) |
+
+### Three things this file got wrong
+
+1. **#147's root cause was not flashback structure.** §4.1 repeated the ticket's diagnosis and
+   proposed scoring causal follow-through over Fabula order. The measurement says the *Carol*'s
+   jump seams are **more** causal (0.71) than its continuous ones (0.58). What depresses that
+   number is **montage** — the Ghosts' guided tours — not non-chronological telling. #159 owns it.
+2. **The first fix for it made things worse, and only re-running caught that.** A fourth
+   `discontinuity` verdict looked obviously right and took the *Carol* from 0.63 to 0.38, because a
+   seam can be both a story-time jump and genuinely causal, so the new verdict got spent on pairs
+   the judge had rated `causes`. Three repeat runs put judge variance at **±0.08**, which is how
+   that was established as a real effect rather than noise. Recording the jump *beside* the verdict
+   works. **The lesson generalises to wave 2: propose, measure, and be willing to throw the
+   proposal away.**
+3. **§6 treated the fixture payoff corpus as only a calibration problem.** It is also a *pipeline*
+   problem: at n=31 the pipeline recovers one pair. The small denominator was hiding a real failure,
+   not just preventing a bar from being read.
+
+### One thing worth keeping that this file did not predict
+
+Judge run-to-run variance on §4.2's causal criterion is **±0.08**, measured over three repeats per
+fixture. No bar in §4.2 should be argued to a finer resolution than that, and no single judged run
+should be treated as a measurement. §4.2 already says three arcs per configuration; the same rule
+applies to the judge itself and did not, until now.
+
+### Where wave 2 starts
+
+Unchanged from §3, with one addition: **#154 (orphaned objects) joins #144 and #145** as one piece
+of work over `pass-events.ts`, and #151's denominator cannot be extended to objects until it lands.
+The open question §8 left for after wave 2 — the *Carol*'s residual over-extraction — is still open
+and still should not be pre-empted.
