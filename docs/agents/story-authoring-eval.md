@@ -376,7 +376,13 @@ G0 already guarantees the graph is *internally* valid. What's left is whether it
 graph:
 
 - **Plant/payoff pair recall** — aligned `{fact_ref, plant scene, payoff scene}` triples ÷ the
-  fixture's: ≥ 0.70.
+  fixture's: ≥ 0.70. **Score it against the annotation sidecar where one exists** (#153):
+  `fixtures/<story>/plants.annotation.json` records the pairs a reader would name, built from the
+  source and blind to candidate output, because the packages' own declared graphs are 2, 3 and 5
+  edges and no rate can be read at that denominator. The sidecar adds no `pays_off` edges to any
+  package — it is a sidecar for the same reason §3.2's spans are one. The result reports
+  `fixture_pairs_source`, and declared and annotated pairs are counted both together and
+  separately.
 - **Long-range pair recall** — the same, restricted to pairs spanning ≥ 5 scenes: ≥ 0.60,
   reported separately. Short-range pairs are easy and will carry the aggregate; the *Carol*'s
   "surplus population" plant (Stave I → Stave III) is the case this number exists for.

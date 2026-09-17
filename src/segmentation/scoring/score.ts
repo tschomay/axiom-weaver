@@ -167,8 +167,20 @@ export interface PlantScore {
   readonly pair_bar: '≥ 0.70 recall (§3.7)';
   readonly long_range_bar: '≥ 0.60 recall (§3.7)';
   readonly fixture_pairs: number;
+  /**
+   * Where the fixture side of this metric came from (#153).
+   *
+   * `declared_graph` means the package's own `pays_off` edges alone — 2, 3 and 5 across the three
+   * fixtures, a denominator too small to read a recall number at. `annotation_sidecar` means
+   * `fixtures/<story>/plants.annotation.json` was found and its implicit pairs were scored too.
+   */
+  readonly fixture_pairs_source: 'declared_graph' | 'annotation_sidecar';
+  readonly fixture_pairs_declared: number;
+  readonly fixture_pairs_annotated: number;
   readonly candidate_pairs: number;
   readonly matched: number;
+  readonly matched_declared: number;
+  readonly matched_annotated: number;
   readonly recall: number | null;
   readonly long_range_fixture_pairs: number;
   readonly long_range_matched: number;
@@ -496,7 +508,13 @@ function plantScore(
   const fixtureOrder = new Map(truth.package.scene_cards.map((scene) => [scene.id, scene.order]));
   const candidateOrder = new Map(candidate.scene_cards.map((scene) => [scene.id, scene.order]));
 
-  const fixturePairs: Array<{ fact: string; plant: string | null; payoff: string; span: number }> = [];
+  const fixturePairs: Array<{
+    fact: string;
+    plant: string | null;
+    payoff: string;
+    span: number;
+    declared: boolean;
+  }> = [];
   for (const scene of truth.package.scene_cards) {
     for (const payoff of scene.pays_off) {
       const plantOrder = payoff.plant === null ? null : (fixtureOrder.get(payoff.plant) ?? null);
@@ -505,8 +523,23 @@ function plantScore(
         plant: payoff.plant,
         payoff: scene.id,
         span: plantOrder === null ? 0 : scene.order - plantOrder,
+        declared: true,
       });
     }
+  }
+  // #153: the pairs the source supports that the package does not declare. Scored identically —
+  // the point of the sidecar is a denominator §3.7 can actually be read at, not a softer test.
+  for (const pair of truth.plant_annotation?.implicit ?? []) {
+    const payoffOrder = fixtureOrder.get(pair.payoff);
+    if (payoffOrder === undefined) continue;
+    const plantOrder = pair.plant === null ? null : (fixtureOrder.get(pair.plant) ?? null);
+    fixturePairs.push({
+      fact: pair.fact_ref,
+      plant: pair.plant,
+      payoff: pair.payoff,
+      span: plantOrder === null ? 0 : payoffOrder - plantOrder,
+      declared: false,
+    });
   }
 
   const candidatePairs: Array<{ fact: string; plant: string | null; payoff: string; span: number }> = [];
@@ -522,6 +555,8 @@ function plantScore(
   }
 
   let matched = 0;
+  let matchedDeclared = 0;
+  let matchedAnnotated = 0;
   let longRangeMatched = 0;
   let misattributed = 0;
   let longRangeFixture = 0;
@@ -541,6 +576,8 @@ function plantScore(
     const exact = samePayoff.some((entry) => entry.plant === (expectedPlant ?? null));
     if (exact) {
       matched += 1;
+      if (pair.declared) matchedDeclared += 1;
+      else matchedAnnotated += 1;
       if (isLongRange) longRangeMatched += 1;
     } else {
       misattributed += 1;
@@ -560,6 +597,12 @@ function plantScore(
     pair_bar: '≥ 0.70 recall (§3.7)',
     long_range_bar: '≥ 0.60 recall (§3.7)',
     fixture_pairs: fixturePairs.length,
+    fixture_pairs_source:
+      (truth.plant_annotation?.implicit.length ?? 0) > 0 ? 'annotation_sidecar' : 'declared_graph',
+    fixture_pairs_declared: fixturePairs.filter((pair) => pair.declared).length,
+    fixture_pairs_annotated: fixturePairs.filter((pair) => !pair.declared).length,
+    matched_declared: matchedDeclared,
+    matched_annotated: matchedAnnotated,
     candidate_pairs: candidatePairs.length,
     matched,
     recall: fixturePairs.length === 0 ? null : matched / fixturePairs.length,
@@ -760,6 +803,9 @@ export async function scoreSegmentation(
     for (const fact of scene.must_stay_hidden) fixtureFacts.add(fact);
     for (const payoff of scene.pays_off) fixtureFacts.add(payoff.fact_ref);
   }
+  // #153's sidecar facts go through the same alignment judge as the declared ones. Without this
+  // the annotated pairs would be unalignable and score a guaranteed zero.
+  for (const pair of inputs.truth.plant_annotation?.implicit ?? []) fixtureFacts.add(pair.fact_ref);
   const candidateFacts = new Set<string>();
   for (const scene of scenes) {
     for (const fact of scene.reader_must_learn) candidateFacts.add(fact);

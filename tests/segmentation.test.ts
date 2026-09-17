@@ -10,10 +10,13 @@
  * shapes, and it never reaches for a field only one of them supplies.
  */
 
+import { existsSync } from 'node:fs';
+
 import { describe, expect, it } from 'vitest';
 
 import { ExtractionModel } from '@/extraction/call';
 import { lintPackage } from '@/authoring/lint';
+import { loadGroundTruth } from '@/extraction/scoring/ground-truth';
 import {
   FABULA_PROJECTION_NOTE,
   lintFabulaArc,
@@ -843,5 +846,57 @@ describe('the shared Fabula shape (ADR 0019)', () => {
     const real = lintPackage(deliverable);
     expect(real.publishable).toBe(false);
     expect(real.errors.some((problem) => problem.path === 'scene_cards')).toBe(true);
+  });
+});
+
+describe('plant/payoff ground-truth sidecar (#153)', () => {
+  it('loads the annotation beside the fixture and keeps the package untouched', async () => {
+    const truth = await loadGroundTruth('cinderella');
+    expect(truth.plant_annotation).not.toBeNull();
+    expect(truth.plant_annotation!.implicit.length).toBeGreaterThan(5);
+    // The whole point of a sidecar: the package's own graph is exactly as authored.
+    const declaredEdges = truth.package.scene_cards.flatMap((scene) => scene.pays_off);
+    expect(declaredEdges).toHaveLength(2);
+    expect(lintPackage(truth.package).publishable).toBe(true);
+  });
+
+  it('gives §3.7 a denominator it can actually be read at', async () => {
+    const cinderella = await loadGroundTruth('cinderella');
+    const carol = await loadGroundTruth('a-christmas-carol');
+    const pairs = (t: Awaited<ReturnType<typeof loadGroundTruth>>) =>
+      t.package.scene_cards.flatMap((s) => s.pays_off).length + t.plant_annotation!.implicit.length;
+    // Five declared pairs across the two fixtures was the problem; this is the fix.
+    expect(pairs(cinderella) + pairs(carol)).toBeGreaterThanOrEqual(25);
+  });
+
+  it('every annotated scene id resolves in its own fixture', async () => {
+    for (const story of ['cinderella', 'a-christmas-carol']) {
+      const truth = await loadGroundTruth(story);
+      const ids = new Set(truth.package.scene_cards.map((scene) => scene.id));
+      for (const pair of truth.plant_annotation!.implicit) {
+        expect(ids.has(pair.payoff)).toBe(true);
+        if (pair.plant !== null) expect(ids.has(pair.plant)).toBe(true);
+      }
+    }
+  });
+
+  it('every annotated pair carries a reason, so the rule can be argued with', async () => {
+    const truth = await loadGroundTruth('a-christmas-carol');
+    for (const pair of truth.plant_annotation!.implicit) {
+      expect(pair.why.length).toBeGreaterThan(20);
+    }
+    expect(truth.plant_annotation!.inclusion_rule).not.toBeNull();
+    expect(truth.plant_annotation!.provenance).not.toBeNull();
+  });
+
+  it('leaves the third fixture unannotated, and says why', async () => {
+    // the-machine-stops has no sidecar on purpose: `src/extraction/sources.ts` carries no manifest
+    // for it, so its source text cannot be fetched, and #153's own rule is that an annotation is
+    // built FROM THE SOURCE, blind to candidate output. An annotation written from the package
+    // alone would be reverse-engineered ground truth, which is worse than none.
+    // It is also not scoreable here yet for an unrelated, pre-existing reason: chronology.json has
+    // no entry for it either.
+    expect(existsSync('fixtures/the-machine-stops/plants.annotation.json')).toBe(false);
+    await expect(loadGroundTruth('the-machine-stops')).rejects.toThrow(/chronology\.json/);
   });
 });
