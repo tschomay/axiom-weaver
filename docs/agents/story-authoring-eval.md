@@ -236,6 +236,26 @@ Precision bars sit below recall bars on purpose: a minor named character the fix
 is the "different valid grain" case, and over-extraction is cheap for an author to delete.
 Under-extraction is not — it is silent.
 
+**The grain rule §2 promises, stated (#151).** §2 says a different valid grain is "not an error;
+excluded from the denominator where the rule below says so," and until #151 no rule below said so —
+precision was `aligned / candidate_rows` flat, which scores agreement with one author's grain
+rather than fidelity to the source. The rule: a candidate row is **load-bearing** when some
+extracted event refers to it — in `participants`, as the event's `location_id`, or as a
+`state_updates` entity or location value — or when it aligned to a fixture row. Precision's
+denominator is the load-bearing rows; everything else is reported as **`over_extracted`**, never
+silently forgiven, because over-extraction is still a cost even when it is not a fidelity failure.
+
+Three things about the rule, and the third is a live exemption:
+
+- **The bars do not move.** Changing the denominator without changing the bar is what makes the
+  bar mean what §2 already says it means.
+- **It is necessary, not sufficient.** It takes *A Christmas Carol*'s characters from 0.129 to
+  0.202 and Cinderella's from 0.400 to 0.500 — real, and nowhere near the 0.85 bar. The residue is
+  under-merge (#143) and under-extracted events (#144), both of which change this input.
+- **Objects are exempt until #154.** No Fabula field can name an object, so not one object row on
+  either fixture is referenced by any event and the rule would empty the table. Objects score flat
+  meanwhile, and the result reports which denominator it used.
+
 **Attribute contradiction is judged against the source, never against the fixture.** A candidate
 that gives Scrooge a `goal` the fixture doesn't have is not wrong; one that puts him in the wrong
 location at the story's start is. This is the one metric with a zero bar.

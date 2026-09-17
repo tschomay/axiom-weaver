@@ -16,7 +16,7 @@ import { repairOrder } from '@/extraction/pass-chronology';
 import { dedupeBySpan } from '@/extraction/pass-events';
 import { foldProposals, isSuspiciousMerge, reconcile } from '@/extraction/pass-reconcile';
 import { gateG0 } from '@/extraction/scoring/gates';
-import { invention } from '@/extraction/scoring/score';
+import { eventReferencedIds, invention } from '@/extraction/scoring/score';
 import { FABULA_BLOCK } from '@/schema/fabula';
 import { importSummary } from '@/authoring/transfer';
 import { loadGroundTruth, narratedOutOfOrder } from '@/extraction/scoring/ground-truth';
@@ -805,5 +805,70 @@ describe('fabricated events vs ungroundable quotes (#152)', () => {
     );
     expect(fabricated).toEqual([]);
     expect(ungroundable).toEqual([]);
+  });
+});
+
+describe('load-bearing rows — §2\'s grain rule (#151)', () => {
+  const event = (over: Partial<Parameters<typeof eventReferencedIds>[0][number]> = {}) =>
+    ({
+      id: 'ev_0001',
+      summary: '',
+      story_time: 'present' as const,
+      time_anchor: '',
+      participants: [],
+      location_id: null,
+      chronological_index: 0,
+      narrated_index: 0,
+      window: 0,
+      span: null,
+      quote: '',
+      state_updates: [],
+      ...over,
+    }) as Parameters<typeof eventReferencedIds>[0][number];
+
+  it('counts participants, locations and state-update targets', () => {
+    const referenced = eventReferencedIds([
+      event({ participants: ['char_scrooge'], location_id: 'loc_counting_house' }),
+      event({
+        state_updates: [
+          { entity_id: 'char_marley', column: 'status', value: 'dead', quote: '', span: null },
+        ],
+      }),
+    ]);
+    expect([...referenced].sort()).toEqual(['char_marley', 'char_scrooge', 'loc_counting_house']);
+  });
+
+  it('counts a location a state update moves an entity to', () => {
+    const referenced = eventReferencedIds([
+      event({
+        state_updates: [
+          { entity_id: 'char_a', column: 'location_id', value: 'loc_school', quote: '', span: null },
+        ],
+      }),
+    ]);
+    expect(referenced.has('loc_school')).toBe(true);
+  });
+
+  it('does not treat a non-location column value as an entity id', () => {
+    const referenced = eventReferencedIds([
+      event({
+        state_updates: [
+          { entity_id: 'char_a', column: 'status', value: 'loc_school', quote: '', span: null },
+        ],
+      }),
+    ]);
+    expect(referenced.has('loc_school')).toBe(false);
+  });
+
+  it('leaves a row no event mentions out — the case the rule exists for', () => {
+    // Cinderella extracts `char_the_king`, `char_six_mice` and friends; the fixture folds them
+    // away. §2 calls that a different valid grain, not an invention.
+    const referenced = eventReferencedIds([event({ participants: ['char_cinderella'] })]);
+    expect(referenced.has('char_the_king')).toBe(false);
+    expect(referenced.has('char_cinderella')).toBe(true);
+  });
+
+  it('is empty for an empty event list rather than throwing', () => {
+    expect(eventReferencedIds([]).size).toBe(0);
   });
 });

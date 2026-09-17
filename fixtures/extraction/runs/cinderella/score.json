@@ -203,7 +203,7 @@
         "candidate_rows": 20,
         "aligned": 8,
         "recall": 1,
-        "precision": 0.4,
+        "precision": 0.5,
         "misses": [],
         "inventions": [
           "Mademoiselle de la Poche",
@@ -218,7 +218,22 @@
           "three huge rats",
           "guards",
           "two great lords of the Court"
-        ]
+        ],
+        "precision_flat": 0.4,
+        "load_bearing_rows": 16,
+        "over_extracted": 4,
+        "over_extracted_examples": [
+          "Mademoiselle de la Poche",
+          "gentleman's first wife",
+          "tire-woman",
+          "guards"
+        ],
+        "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
+        "correction": {
+          "ticket": 151,
+          "was": 0.4,
+          "method": "recomputed from this run's own package and alignment file, not a re-run"
+        }
       },
       {
         "table": "locations",
@@ -226,7 +241,7 @@
         "candidate_rows": 10,
         "aligned": 4,
         "recall": 0.6666666666666666,
-        "precision": 0.4,
+        "precision": 0.5714285714285714,
         "misses": [
           "the palace steps",
           "the houses of the kingdom"
@@ -238,7 +253,21 @@
           "Cinderella's chamber",
           "palace gate",
           "the palace"
-        ]
+        ],
+        "precision_flat": 0.4,
+        "load_bearing_rows": 7,
+        "over_extracted": 3,
+        "over_extracted_examples": [
+          "sorry garret",
+          "madam's chamber",
+          "palace gate"
+        ],
+        "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
+        "correction": {
+          "ticket": 151,
+          "was": 0.4,
+          "method": "recomputed from this run's own package and alignment file, not a re-run"
+        }
       },
       {
         "table": "objects",
@@ -263,7 +292,17 @@
           "watering-pot",
           "oranges and citrons",
           "yellow suit of clothes"
-        ]
+        ],
+        "precision_flat": 0.25,
+        "load_bearing_rows": 12,
+        "over_extracted": 0,
+        "over_extracted_examples": [],
+        "denominator": "all candidate rows — the load-bearing rule is not applied to this table (see #154)",
+        "correction": {
+          "ticket": 151,
+          "was": 0.25,
+          "method": "recomputed from this run's own package and alignment file, not a re-run"
+        }
       }
     ],
     "relationship_recall": 1,
