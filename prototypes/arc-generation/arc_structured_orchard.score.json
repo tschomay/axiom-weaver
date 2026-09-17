@@ -163,6 +163,7 @@
         }
       ],
       "histogram": {
+        "layer": "fabula_projection",
         "counts": {
           "5": 1,
           "9": 1,
@@ -181,5 +182,27 @@
     },
     "lexical_canary": [],
     "all_gates_passed": true
+  },
+  "scene_layer": {
+    "note": "#149: §4.1 asks for payoff-to-plant SCENE distances. The histogram above is measured on ADR 0019's one-event-per-scene projection, so it reports event distances and reads systematically more favourably. This block is the same arc measured after real segmentation, and is the number §4.1 is asking for.",
+    "source": "prototypes/segmentation/generated/arc_structured_orchard/score.json",
+    "scenes": 10,
+    "histogram": {
+      "layer": "segmented_scenes",
+      "counts": {
+        "1": 2,
+        "3": 2,
+        "5": 1,
+        "6": 2,
+        "8": 1
+      },
+      "seed_grounded": 3,
+      "edges": 11,
+      "mean": 4.125,
+      "median": 5,
+      "min": 1,
+      "max": 8,
+      "share_span_1": 0.25
+    }
   }
 }

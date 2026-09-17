@@ -267,6 +267,30 @@ says the ticket that runs a bar should propose adjustments in a PR against the r
 score against a different one silently. That proposal is not made here — it is flagged for the owner
 alongside the two metric definitions #118 already flagged.
 
+> **Resolved by #149.** The proposal was made and accepted: `story-authoring-eval.md` §4.1 now
+> requires the histogram to carry its `layer`, and every committed score file does. The table above
+> covered the six arcs that had been segmented at the time; the remaining three were segmented for
+> #149, and the completed set is below. **Mean span falls on all nine** — the projection flatters
+> every arc in the corpus, not just the six measured here — and `arc_structured_orchard` joins the
+> arcs whose span-1 share rises from 0.00 once the real scenes are drawn.
+>
+> | arc | span-1, event layer | span-1, scene layer | mean, event layer | mean, scene layer |
+> | --- | --- | --- | --- | --- |
+> | `arc_free_text_1` | 0.00 | 0.00 | 10.25 | 9.00 |
+> | `arc_free_text_2` | 0.00 | 0.00 | 10.00 | 6.00 |
+> | `arc_free_text_3` | 0.00 | 0.20 | 9.75 | 6.60 |
+> | `arc_no_span_guidance_ferry` | 0.00 | 0.00 | 9.40 | 6.14 |
+> | `arc_no_span_guidance_kiln` | 0.08 | 0.21 | 6.17 | 4.93 |
+> | `arc_no_span_guidance_orchard` | 0.00 | 0.29 | 6.71 | 4.00 |
+> | `arc_structured_ferry` | 0.00 | 0.00 | 9.80 | 6.33 |
+> | `arc_structured_kiln` | 0.00 | 0.00 | 10.20 | 7.83 |
+> | `arc_structured_orchard` | 0.00 | **0.25** | 9.80 | **4.12** |
+>
+> One caveat on the newly-segmented three: `arc_free_text_2` fails G0 after segmentation with an
+> `unknown_entity` error. That failure is **pre-existing and generator-side** — its committed #119
+> score already records `all_gates_passed: false` for the same `char_stoddard.location_id`
+> reference — so it is not a segmentation defect and is not evidence against this table.
+
 ## 8. Verdict
 
 Shared segmentation **holds**. There is one `segmentFabulaPackage()`, it reads only what ADR 0019

@@ -419,6 +419,13 @@ section: **do the mechanical gates first, and never let a judge's score excuse a
 - **Plant-span distribution** — report the histogram of payoff-to-plant scene distances. Not a
   pass/fail. An arc whose every plant lands one scene before its payoff is structurally valid and
   narratively inert; this number makes that visible where a boolean cannot.
+  **Measure it on real Scene Cards, and make the histogram say which layer it came from**
+  (`layer: segmented_scenes` or `fabula_projection`, #149). Measured on ADR 0019's projection — one
+  event, one provisional scene — it reports *event* distances, and across all nine of #119's arcs
+  the mean span falls once the arcs are really segmented, while span-1 share rises on four of them
+  (to 0.20–0.29). The projection is still the only thing available before segmentation exists, so
+  it is not wrong to use; it is wrong to use it without saying so, because this is the one
+  instrument §4.1 has for the "mechanically valid but dramatically inert" failure.
 - **No trivially-satisfied scene** — every scene has non-empty `required_beats` (the linter's
   `no_required_beats` warning, promoted to a gate for generated arcs, since nothing else is
   holding a generated scene to anything).

@@ -150,7 +150,7 @@ function scoreOne(
     telling_order_displaced: report.telling_order.displaced,
     self_consistency: report.boundaries.self_consistency,
     signals_available: report.signals_available,
-    mechanical: scoreMechanicalPackage(segmented, arc, storyId),
+    mechanical: scoreMechanicalPackage(segmented, arc, storyId, 'segmented_scenes'),
     generator_all_gates_passed: generatorGates,
     plant_edges: {
       authored_by_generator: authored.length,
@@ -162,7 +162,7 @@ function scoreOne(
       unrepresentable: report.plants.seed_grounded_unrepresentable,
       on_scene_cards: plantSpans(segmented).length,
     },
-    span_histogram_after: spanHistogram(segmented),
+    span_histogram_after: spanHistogram(segmented, 'segmented_scenes'),
     unscoreable: UNSCOREABLE_WITHOUT_GROUND_TRUTH,
   };
 }

@@ -27,6 +27,12 @@
             "code": "unused_seed_entity",
             "path": "world_model_seed.objects.obj_shift_log",
             "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.ev_12_maren_false_reconstruction.pays_off",
+            "message": "pays off \"hidden_barograph_chart\" from \"ev_11_barograph_found\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
           }
         ],
         "errors": [],
@@ -36,6 +42,12 @@
             "code": "unused_seed_entity",
             "path": "world_model_seed.objects.obj_shift_log",
             "message": "is in the seed but no Scene Card ever names it"
+          },
+          {
+            "severity": "warn",
+            "code": "short_range_payoff",
+            "path": "scene_cards.ev_12_maren_false_reconstruction.pays_off",
+            "message": "pays off \"hidden_barograph_chart\" from \"ev_11_barograph_found\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
           }
         ],
         "publishable": true
@@ -175,6 +187,7 @@
         }
       ],
       "histogram": {
+        "layer": "fabula_projection",
         "counts": {
           "1": 1,
           "2": 2,
@@ -196,5 +209,32 @@
     },
     "lexical_canary": [],
     "all_gates_passed": true
+  },
+  "scene_layer": {
+    "note": "#149: §4.1 asks for payoff-to-plant SCENE distances. The histogram above is measured on ADR 0019's one-event-per-scene projection, so it reports event distances and reads systematically more favourably. This block is the same arc measured after real segmentation, and is the number §4.1 is asking for.",
+    "source": "prototypes/segmentation/generated/arc_no_span_guidance_kiln/score.json",
+    "scenes": 17,
+    "histogram": {
+      "layer": "segmented_scenes",
+      "counts": {
+        "1": 3,
+        "2": 2,
+        "3": 2,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "11": 1,
+        "15": 1
+      },
+      "seed_grounded": 4,
+      "edges": 18,
+      "mean": 4.928571428571429,
+      "median": 4,
+      "min": 1,
+      "max": 15,
+      "share_span_1": 0.21428571428571427
+    }
   }
 }

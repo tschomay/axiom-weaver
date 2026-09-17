@@ -1,0 +1,515 @@
+{
+  "story_id": "arc_structured_orchard",
+  "generator": "segmentation pipeline (#118)",
+  "models_used": [
+    "gemini-3.8-flash"
+  ],
+  "requested_model": "gemini-3.8-flash",
+  "segmented_at": "2026-09-17T22:57:51.892Z",
+  "cost_usd": 0.024059999999999998,
+  "calls": [
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 0 (0–20)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2911,
+      "output_tokens": 1073,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.006207,
+      "ms": 3766,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1223,
+      "output_tokens": 726,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00363975,
+      "ms": 2636,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1283,
+      "output_tokens": 708,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00361725,
+      "ms": 3490,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 9–10",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 978,
+      "output_tokens": 420,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0023085,
+      "ms": 4153,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 1–10",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1960,
+      "output_tokens": 322,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0026775,
+      "ms": 1497,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_verification",
+      "label": "pairs 1–3",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 942,
+      "output_tokens": 272,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0017265,
+      "ms": 1589,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 826,
+      "output_tokens": 147,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00117075,
+      "ms": 1960,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2767,
+      "output_tokens": 170,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00271275,
+      "ms": 1394,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "events": 20,
+  "scenes": 10,
+  "events_per_scene": 2,
+  "signals_available": {
+    "pov": true,
+    "dramatic_function": true,
+    "caused_by": true,
+    "story_time": false,
+    "narrated_index": false,
+    "location": true
+  },
+  "telling_order": {
+    "basis": "fabula_sequence",
+    "displaced": 0
+  },
+  "boundaries": {
+    "windows": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 20
+      }
+    ],
+    "window_problems": [],
+    "failed_windows": [],
+    "fell_back_to_signals": 0,
+    "disagreements": 0,
+    "judged_adjacencies": 19,
+    "self_consistency": null,
+    "decisions": [
+      {
+        "index": 0,
+        "after_event_id": "ev_02_stump_inspection",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Robin joins Aletha on the terrace as the immediate continuation of discovering the felled trees.",
+        "from_signals": false
+      },
+      {
+        "index": 1,
+        "after_event_id": "ev_03_calder_confrontation",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "The scene moves to the cooperative weigh station with a different cast of characters.",
+        "from_signals": false
+      },
+      {
+        "index": 2,
+        "after_event_id": "ev_04_ledger_dispute",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The confrontation directly transitions into Milo showing Aletha the maps at the weigh station.",
+        "from_signals": false
+      },
+      {
+        "index": 3,
+        "after_event_id": "ev_05_packing_barn_search",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Aletha travels to Gervais's packing barn on a separate errand.",
+        "from_signals": false
+      },
+      {
+        "index": 4,
+        "after_event_id": "ev_06_beth_testimony",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Beth intercepts Aletha right outside the packing barn immediately following the visit.",
+        "from_signals": false
+      },
+      {
+        "index": 5,
+        "after_event_id": "ev_07_helen_recollection",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "The location shifts to Fenn cottage for a new conversation.",
+        "from_signals": false
+      },
+      {
+        "index": 6,
+        "after_event_id": "ev_08_safe_petition_found",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "A new scene begins as Aletha returns to the cooperative weigh station to search the safe.",
+        "from_signals": false
+      },
+      {
+        "index": 7,
+        "after_event_id": "ev_09_calder_terms",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action at the weigh station as Calder confronts Aletha.",
+        "from_signals": false
+      },
+      {
+        "index": 8,
+        "after_event_id": "ev_10_sawdust_test",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Aletha relocates back to the orchard terrace with Robin.",
+        "from_signals": false
+      },
+      {
+        "index": 9,
+        "after_event_id": "ev_11_alibi_confirmed",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "The action shifts back to the Orris packing barn to confront Beth again.",
+        "from_signals": false
+      },
+      {
+        "index": 10,
+        "after_event_id": "ev_12_accusation_meeting",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "An emergency assembly is convened at the weigh station.",
+        "from_signals": false
+      },
+      {
+        "index": 11,
+        "after_event_id": "ev_13_gervais_collapse",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous flow of the confrontation and meeting in the weigh station.",
+        "from_signals": false
+      },
+      {
+        "index": 12,
+        "after_event_id": "ev_14_clause_14b_revealed",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Unbroken continuation of the weigh station meeting.",
+        "from_signals": false
+      },
+      {
+        "index": 13,
+        "after_event_id": "ev_15_sign_in_sheet",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate aftermath within the weigh station as Milo checks the log.",
+        "from_signals": false
+      },
+      {
+        "index": 14,
+        "after_event_id": "ev_16_cellar_discovery",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Aletha travels to the nursery shed alone to search.",
+        "from_signals": false
+      },
+      {
+        "index": 15,
+        "after_event_id": "ev_17_robin_confession",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Robin enters the nursery shed while Aletha is searching it.",
+        "from_signals": false
+      },
+      {
+        "index": 16,
+        "after_event_id": "ev_18_scion_revelation",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation and inspection inside the shed.",
+        "from_signals": false
+      },
+      {
+        "index": 17,
+        "after_event_id": "ev_19_board_hearing",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "The location moves back to the weigh station for the formal board hearing.",
+        "from_signals": false
+      },
+      {
+        "index": 18,
+        "after_event_id": "ev_20_cost_and_surrender",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The hearing concludes with the resolution and surrender of dividends in the same room.",
+        "from_signals": false
+      }
+    ]
+  },
+  "grouping": {
+    "judged_boundaries": 9,
+    "forced_by_plant_span": 0,
+    "forced_by_size": 0,
+    "unseparable_plant_spans": []
+  },
+  "scene_properties": {
+    "failed_batches": 0,
+    "pov_fallbacks": 0,
+    "location_fallbacks": 0,
+    "location_inherited": 0,
+    "beat_fallbacks": 0,
+    "function_fallbacks": 0
+  },
+  "substitutions": {
+    "pov_from_seed": 0,
+    "location_from_seed": 0,
+    "pov_from_candidates": 0,
+    "location_from_candidates": 0,
+    "beats_from_events": 0
+  },
+  "state": {
+    "dropped_unknown_entity": 0,
+    "dropped_entity_ids": [],
+    "dropped_unknown_column": 0
+  },
+  "plants": {
+    "carried_from_fabula": 8,
+    "dangling_plants": 0,
+    "proposed": 3,
+    "rejected_malformed": 0,
+    "verified": 3,
+    "rejected_by_verifier": 0,
+    "unverified_dropped": 0,
+    "seed_grounded_unrepresentable": 0,
+    "failed_batches": 0,
+    "accepted": [
+      {
+        "fact_ref": "ash_warden_unregistered_status",
+        "plant": null,
+        "payoff": "scene_01_the_felled_terrace",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "kemp_boundary_soil_dispute",
+        "plant": null,
+        "payoff": "scene_02_confrontation_at_weigh_station",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "orris_chainsaw_blue_oil",
+        "plant": "scene_03_in_the_barn",
+        "payoff": "scene_06_the_sawdust_test",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "gervais_undisclosed_bonus_claim",
+        "plant": "scene_02_confrontation_at_weigh_station",
+        "payoff": "scene_08_the_hidden_fine",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "calder_penalty_clause_mention",
+        "plant": "scene_02_confrontation_at_weigh_station",
+        "payoff": "scene_08_the_hidden_fine",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "linseed_scent_on_cut_wood",
+        "plant": "scene_01_the_felled_terrace",
+        "payoff": "scene_09_the_living_scions",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "midnight_lantern_at_shed",
+        "plant": "scene_04_a_midnight_lantern",
+        "payoff": "scene_09_the_living_scions",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "robin_access_to_calder_drafts",
+        "plant": null,
+        "payoff": "scene_09_the_living_scions",
+        "why": "carried forward from the Fabula layer",
+        "type": ""
+      },
+      {
+        "fact_ref": "bounty_requires_living_scion_buds",
+        "plant": "scene_05_the_bounty_terms",
+        "payoff": "scene_08_the_hidden_fine",
+        "why": "Calder explains that variety bounties require living scions, meaning destroyed trees forfeit any bonus payout.",
+        "type": "rule"
+      },
+      {
+        "fact_ref": "clause_14b_uncertified_fines",
+        "plant": "scene_08_the_hidden_fine",
+        "payoff": "scene_09_the_living_scions",
+        "why": "Calder reveals Clause 14B penalizing breeders with ruinous fines for uncertified varieties.",
+        "type": "rule"
+      },
+      {
+        "fact_ref": "hidden_salvaged_living_scions",
+        "plant": "scene_09_the_living_scions",
+        "payoff": "scene_10_the_final_surrender",
+        "why": "Robin preserved living scions of the Ash Warden variety beneath the nursery shed floorboards.",
+        "type": "object"
+      }
+    ]
+  },
+  "told_ledger": {
+    "facts": 8,
+    "withheld_scene_entries": 1,
+    "rejected_out_of_range": 0,
+    "failed_batches": 0
+  },
+  "lint": {
+    "problems": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_warden_journal",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_copper_notch_knife",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_calder_agreement",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_orris_chainsaw",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "short_range_payoff",
+        "path": "scene_cards.scene_09_the_living_scions.pays_off",
+        "message": "pays off \"clause_14b_uncertified_fines\" from \"scene_08_the_hidden_fine\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
+      },
+      {
+        "severity": "warn",
+        "code": "short_range_payoff",
+        "path": "scene_cards.scene_10_the_final_surrender.pays_off",
+        "message": "pays off \"hidden_salvaged_living_scions\" from \"scene_09_the_living_scions\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_warden_journal",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_copper_notch_knife",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_calder_agreement",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_orris_chainsaw",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "short_range_payoff",
+        "path": "scene_cards.scene_09_the_living_scions.pays_off",
+        "message": "pays off \"clause_14b_uncertified_fines\" from \"scene_08_the_hidden_fine\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
+      },
+      {
+        "severity": "warn",
+        "code": "short_range_payoff",
+        "path": "scene_cards.scene_10_the_final_surrender.pays_off",
+        "message": "pays off \"hidden_salvaged_living_scions\" from \"scene_09_the_living_scions\", 1 scene away — rarely reads as earned rather than merely linked (ADR 0020)"
+      }
+    ],
+    "publishable": true
+  },
+  "vacuous_checks": [
+    "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+    "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+    "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+  ]
+}

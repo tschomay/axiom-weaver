@@ -92,7 +92,8 @@ async function main(): Promise<void> {
       const score = await judgePackage(pkg, `fixture:${fixture}`, { client, model });
       scores.push(score);
       console.log(line(score));
-      const histogram = spanHistogram(pkg);
+      // A fixture is hand-authored Scene Cards — the real scene layer, not a projection.
+      const histogram = spanHistogram(pkg, 'segmented_scenes');
       console.log(
         `  ${' '.repeat(26)} plant spans: ${JSON.stringify(histogram.counts)} ` +
           `(+${histogram.seed_grounded} seed-grounded), mean ${histogram.mean?.toFixed(1) ?? 'n/a'}`,
@@ -128,9 +129,10 @@ async function main(): Promise<void> {
       const score = await judgePackage(pkg, label, { client, model });
       scores.push(score);
       console.log(line(score));
+      // provisionalPackage: these spans are event distances, not scene distances (#149).
       const spans = plantSpans(pkg);
       console.log(
-        `  ${' '.repeat(26)} spans: ${JSON.stringify(
+        `  ${' '.repeat(26)} spans (fabula_projection): ${JSON.stringify(
           spans.map((row) => row.span),
         )}  per-payoff: ${score.raw.payoffs
           .map((row) => `${row.fact_ref}=${row.verdict === 'earned' ? 'E' : 'L'}`)

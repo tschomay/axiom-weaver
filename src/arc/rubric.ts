@@ -59,7 +59,28 @@ export interface PlantSpanRow {
   readonly span: number | null;
 }
 
+/**
+ * Which layer a plant-span number was measured at — and why it must travel with the number.
+ *
+ * §4.1 asks for "the histogram of payoff-to-plant **scene** distances." #119 reported it over the
+ * Fabula projection, where one event is one scene by construction, so what it published was
+ * *event* distances. #120 re-measured the same arcs after real segmentation and span-1 share rose
+ * from 0.00 to as much as 0.29, with mean span falling 6.7 → 4.0 on one arc: the projection reads
+ * systematically more favourable than the structure a reader would meet.
+ *
+ * The projection cannot simply be deleted — a Fabula-only package has no Scene Cards, and ADR 0019
+ * built the projection precisely so §4.1 could run before segmentation exists. So both layers stay
+ * available and every histogram says which one produced it. A histogram that does not is the whole
+ * defect #149 is about.
+ */
+export type SpanLayer = 'fabula_projection' | 'segmented_scenes';
+
 export interface SpanHistogram {
+  /**
+   * Where this was measured. `fabula_projection` is one-event-per-scene and reads optimistically;
+   * `segmented_scenes` is the real Scene Card structure and is the number §4.1 actually wants.
+   */
+  readonly layer: SpanLayer;
   /** span → count, seed-grounded payoffs excluded (they have no span by construction). */
   readonly counts: Record<number, number>;
   readonly seed_grounded: number;
@@ -105,7 +126,7 @@ export interface MechanicalScore {
   readonly all_gates_passed: boolean;
 }
 
-function histogram(rows: readonly PlantSpanRow[]): SpanHistogram {
+function histogram(rows: readonly PlantSpanRow[], layer: SpanLayer): SpanHistogram {
   const spans = rows
     .map((row) => row.span)
     .filter((span): span is number => span !== null)
@@ -114,6 +135,7 @@ function histogram(rows: readonly PlantSpanRow[]): SpanHistogram {
   for (const span of spans) counts[span] = (counts[span] ?? 0) + 1;
   const middle = spans[Math.floor(spans.length / 2)];
   return {
+    layer,
     counts,
     seed_grounded: rows.length - spans.length,
     edges: rows.length,
@@ -144,8 +166,8 @@ export function plantSpans(pkg: StoryPackage): PlantSpanRow[] {
   return rows;
 }
 
-export function spanHistogram(pkg: StoryPackage): SpanHistogram {
-  return histogram(plantSpans(pkg));
+export function spanHistogram(pkg: StoryPackage, layer: SpanLayer): SpanHistogram {
+  return histogram(plantSpans(pkg), layer);
 }
 
 /**
@@ -219,9 +241,17 @@ function canaryHits(arc: FabulaArc): string[] {
   return LEXICAL_CANARY.filter((word) => new RegExp(`\\b${word}`).test(haystack));
 }
 
-/** Score an arc against §4.1. The projection is what the linter sees; see `./fabula.ts`. */
+/**
+ * Score an arc against §4.1 over the Fabula projection — one event, one provisional scene.
+ *
+ * This is the only path available before segmentation exists, and its plant-span histogram is
+ * therefore measured in *events*, which reads more favourably than the real scene structure
+ * (#149). It says so in its own output: `plant_spans.histogram.layer` is `fabula_projection`.
+ * Where a segmented package exists, `scoreMechanicalPackage` with `segmented_scenes` is the number
+ * §4.1 is asking for.
+ */
 export function scoreMechanical(arc: FabulaArc, storyId: string): MechanicalScore {
-  return scoreMechanicalPackage(provisionalPackage(arc, storyId), arc, storyId);
+  return scoreMechanicalPackage(provisionalPackage(arc, storyId), arc, storyId, 'fabula_projection');
 }
 
 /**
@@ -243,6 +273,12 @@ export function scoreMechanicalPackage(
   pkg: StoryPackage,
   arc: FabulaArc,
   storyId: string,
+  /**
+   * Required, and deliberately not inferred: the caller knows whether `pkg` is a real segmented
+   * package or ADR 0019's projection, and #149 exists because a histogram that does not carry that
+   * answer was read as though it did.
+   */
+  layer: SpanLayer,
 ): MechanicalScore {
   const lint = lintPackage(pkg);
   const scenes = scenesInOrder(pkg);
@@ -311,7 +347,7 @@ export function scoreMechanicalPackage(
     causal_reachability: { ...causal, passed: causal.total === causal.reachable },
     required_beats: { scenes: scenes.length, empty: emptyBeats, passed: emptyBeats.length === 0 },
     unpaid_facts: { facts: unpaid, passed: unpaid.length === 0 },
-    plant_spans: { rows, histogram: histogram(rows) },
+    plant_spans: { rows, histogram: histogram(rows, layer) },
     lexical_canary: canaryHits(arc),
     all_gates_passed: gates.every(Boolean),
   };
