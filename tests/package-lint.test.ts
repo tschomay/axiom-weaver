@@ -213,6 +213,40 @@ describe('warnings never block', () => {
       }),
     );
   });
+
+  it('flags a payoff whose plant sits in the immediately preceding scene (ADR 0020)', async () => {
+    const pkg = structuredClone(await fixture('the-dragon-of-thistlewick'));
+    const scenes = [...pkg.scene_cards].sort((a, b) => a.order - b.order);
+    const [plantScene, payoffScene] = scenes;
+    plantScene!.reader_must_learn = [...plantScene!.reader_must_learn, 'short_range_test_fact'];
+    payoffScene!.pays_off = [
+      ...payoffScene!.pays_off,
+      { fact_ref: 'short_range_test_fact', plant: plantScene!.id },
+    ];
+
+    expect(lintStoryPackage(pkg).warnings).toContainEqual(
+      expect.objectContaining({
+        code: 'short_range_payoff',
+        path: `scene_cards.${payoffScene!.id}.pays_off`,
+      }),
+    );
+  });
+
+  it('does not flag a payoff whose plant sits well before it', async () => {
+    const pkg = structuredClone(await fixture('the-dragon-of-thistlewick'));
+    const scenes = [...pkg.scene_cards].sort((a, b) => a.order - b.order);
+    const plantScene = scenes[0]!;
+    const payoffScene = scenes[scenes.length - 1]!;
+    plantScene.reader_must_learn = [...plantScene.reader_must_learn, 'long_range_test_fact'];
+    payoffScene.pays_off = [
+      ...payoffScene.pays_off,
+      { fact_ref: 'long_range_test_fact', plant: plantScene.id },
+    ];
+
+    expect(
+      lintStoryPackage(pkg).warnings.filter((problem) => problem.code === 'short_range_payoff'),
+    ).toEqual([]);
+  });
 });
 
 describe('entry_state is chained against the previous scene', () => {

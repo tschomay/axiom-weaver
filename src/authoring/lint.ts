@@ -312,6 +312,30 @@ function warnings(pkg: StoryPackage, model: WorldModel): PackageProblem[] {
     }
   }
 
+  // ADR 0020: not a trigger field, a proxy. #119/#120 measured that unearned payoffs concentrate
+  // almost entirely in edges whose plant sits 0 or 1 scenes before the payoff — a same-scene or
+  // adjacent-scene "plant" reads as linked rather than earned far more often than not. A warning,
+  // never a gate: an author may have a good reason, and it must never be fed back into generation
+  // as a mechanical floor (that reproduces the "scoring our own homework" problem #119 rejected
+  // for the identical signal).
+  const sceneOrder = new Map(scenes.map((scene) => [scene.id, scene.order]));
+  for (const scene of scenes) {
+    for (const payoff of scene.pays_off) {
+      if (payoff.plant === null) continue;
+      const plantOrder = sceneOrder.get(payoff.plant);
+      if (plantOrder === undefined) continue;
+      const span = scene.order - plantOrder;
+      if (span <= 1) {
+        problems.push({
+          severity: 'warn',
+          code: 'short_range_payoff',
+          path: `scene_cards.${scene.id}.pays_off`,
+          message: `pays off "${payoff.fact_ref}" from "${payoff.plant}", ${span} scene${span === 1 ? '' : 's'} away — rarely reads as earned rather than merely linked (ADR 0020)`,
+        });
+      }
+    }
+  }
+
   if (isUntouchedPreset(pkg.voice_card)) {
     problems.push({
       severity: 'warn',
