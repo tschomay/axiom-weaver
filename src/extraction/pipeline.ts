@@ -69,6 +69,11 @@ import {
   type ExtractedEvent,
   type StoryTime,
 } from './pass-events';
+import {
+  canonicalize,
+  redirectRelationships,
+  type CanonicalizeResult,
+} from './pass-canonicalize';
 import { orderChronologically, type ChronologyResult } from './pass-chronology';
 import { extractSeedState, type SeedRow } from './pass-seed';
 import { reconcile, type MergeGroup, type ReconcileResult } from './pass-reconcile';
@@ -143,6 +148,21 @@ export interface ExtractionDiagnostics {
   readonly failed_seed_batches: number;
   readonly merges: readonly MergeGroup[];
   readonly suspicious_merges: readonly MergeGroup[];
+  /**
+   * What pass 3b actually merged, and what it refused (#143).
+   *
+   * **`canonical_blocked` is normally empty, and that is correct** — an earlier version of this
+   * comment said an empty list "deserves suspicion", which was wrong. The guard does its work
+   * upstream in `mergeCandidates`, which never offers a co-occurring pair in the first place; a
+   * block can only register when the model returns a merge for a pair it was not shown. So the
+   * measured shape — 37 merges over 331 rows with zero blocks — is the expected one, and the
+   * evidence the guard is working is in `canonical_candidate_pairs` being far smaller than every
+   * same-kind pair, not in this list.
+   */
+  readonly canonical_merges: ReadonlyArray<{ kept: string; absorbed: readonly string[]; why: string }>;
+  readonly canonical_blocked: ReadonlyArray<{ keep: string; absorb: string; reason: string }>;
+  readonly canonical_candidate_pairs: number;
+  readonly canonical_failed: boolean;
   readonly dropped_proposals: readonly string[];
   readonly dropped_state_updates: number;
   readonly dropped_participants: number;
@@ -231,10 +251,19 @@ export async function extractStoryPackage(
     `      ${deduped.kept.length} events (${deduped.removed.length} duplicates at window seams removed)`,
   );
 
+  progress(`pass 3b/5 — canonicalize ${reconciled.entities.length} rows against event co-occurrence`);
+  const canonical: CanonicalizeResult = await canonicalize(extraction, reconciled.entities, deduped.kept);
+  if (canonical.applied.length > 0) {
+    progress(
+      `      ${canonical.applied.length} merges, ${canonical.entities.length} rows remain ` +
+        `(${canonical.blocked.length} refused by the co-occurrence guard)`,
+    );
+  }
+
   progress('pass 4/5 — chronological ordering');
-  const chronology: ChronologyResult = await orderChronologically(extraction, deduped.kept);
+  const chronology: ChronologyResult = await orderChronologically(extraction, canonical.events);
   const chronologicalIndex = new Map(chronology.order.map((id, index) => [id, index]));
-  const byId = new Map(deduped.kept.map((event) => [event.id, event]));
+  const byId = new Map(canonical.events.map((event) => [event.id, event]));
   const orderedEvents = chronology.order
     .map((id) => byId.get(id))
     .filter((event): event is ExtractedEvent => event !== undefined);
@@ -243,7 +272,7 @@ export async function extractStoryPackage(
   const opening = windows[0]?.text ?? source.text.slice(0, 8000);
   const seed = await extractSeedState(
     extraction,
-    reconciled.entities,
+    canonical.entities,
     opening,
     orderedEvents,
   );
@@ -256,7 +285,7 @@ export async function extractStoryPackage(
   const claims: SpanClaim[] = [];
 
   const firstProposalQuote = new Map<string, string>();
-  for (const entity of reconciled.entities) {
+  for (const entity of canonical.entities) {
     const names = new Set(entity.merged_from.map((name) => name.toLowerCase()));
     names.add(entity.name.toLowerCase());
     const match = proposals.entities.find(
@@ -265,7 +294,7 @@ export async function extractStoryPackage(
     firstProposalQuote.set(entity.id, match?.quote ?? '');
   }
 
-  const entitySpans = reconciled.entities.map((entity) => {
+  const entitySpans = canonical.entities.map((entity) => {
     const quote = firstProposalQuote.get(entity.id) ?? '';
     const span = quote === '' ? null : resolveQuote(source.text, quote);
     claims.push({
@@ -277,10 +306,14 @@ export async function extractStoryPackage(
     return { id: entity.id, quote, span };
   });
 
-  const relationships = reconciled.relationships.map((edge, index) => ({
-    ...edge,
-    id: `rel_${String(index + 1).padStart(3, '0')}`,
-  }));
+  // Through the merge map first (#143): an edge naming a row pass 3b absorbed would otherwise
+  // point at an id the seed no longer carries, which is an `unknown_entity` G0 error.
+  const relationships = redirectRelationships(reconciled.relationships, canonical.redirect).map(
+    (edge, index) => ({
+      ...edge,
+      id: `rel_${String(index + 1).padStart(3, '0')}`,
+    }),
+  );
 
   const relationshipSpans = relationships.map((edge) => {
     const proposal = proposals.relationships[edge.from_proposal];
@@ -376,7 +409,7 @@ export async function extractStoryPackage(
     package_version: 1,
     story_id: source.manifest.id,
     world_model_seed: {
-      characters: reconciled.entities
+      characters: canonical.entities
         .filter((entity) => entity.kind === 'character')
         .map((entity) => ({
           id: entity.id,
@@ -386,14 +419,14 @@ export async function extractStoryPackage(
           goal: seedById.get(entity.id)?.goal ?? null,
           bag: bagOf(seedById.get(entity.id)),
         })),
-      locations: reconciled.entities
+      locations: canonical.entities
         .filter((entity) => entity.kind === 'location')
         .map((entity) => ({
           id: entity.id,
           name: entity.name,
           bag: bagOf(seedById.get(entity.id)),
         })),
-      objects: reconciled.entities
+      objects: canonical.entities
         .filter((entity) => entity.kind === 'object')
         .map((entity) => ({
           id: entity.id,
@@ -456,6 +489,10 @@ export async function extractStoryPackage(
         merges: reconciled.merges,
         suspicious_merges: reconciled.suspicious_merges,
         dropped_proposals: reconciled.dropped_proposals,
+        canonical_merges: canonical.applied,
+        canonical_blocked: canonical.blocked,
+        canonical_candidate_pairs: canonical.candidate_pairs,
+        canonical_failed: canonical.failed,
         dropped_state_updates: eventPass.dropped_state_updates,
         dropped_participants: eventPass.dropped_participants,
         event_frames: eventPass.frames,

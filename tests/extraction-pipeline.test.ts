@@ -13,7 +13,15 @@ import { describe, expect, it } from 'vitest';
 import { ExtractionModel } from '@/extraction/call';
 import { extractStoryPackage } from '@/extraction/pipeline';
 import { repairOrder } from '@/extraction/pass-chronology';
-import { dedupeBySpan, extractEvents } from '@/extraction/pass-events';
+import { dedupeBySpan, extractEvents, type ExtractedEvent } from '@/extraction/pass-events';
+import {
+  applyMerges,
+  coOccurring,
+  mergeCandidates,
+  sharesEvent,
+  redirectRelationships,
+} from '@/extraction/pass-canonicalize';
+import type { CanonicalEntity } from '@/extraction/pass-reconcile';
 import { foldProposals, isSuspiciousMerge, reconcile } from '@/extraction/pass-reconcile';
 import { gateG0 } from '@/extraction/scoring/gates';
 import { judgeEventEntailment } from '@/extraction/scoring/judge';
@@ -1062,5 +1070,155 @@ describe('entailment judge failure is recovered, never silently scored as misses
     );
     expect(client.calls).toBe(1);
     expect(result.unresolved).toEqual([]);
+  });
+});
+
+describe('canonicalization and its co-occurrence guard (#143)', () => {
+  const event = (id: string, participants: string[]): ExtractedEvent =>
+    ({
+      id,
+      summary: '',
+      story_time: 'present',
+      time_anchor: '',
+      participants,
+      location_id: null,
+      state_updates: [],
+      chronological_index: 0,
+      narrated_index: 0,
+      window: 0,
+      quote: '',
+    }) as unknown as ExtractedEvent;
+
+  const row = (id: string, name: string, kind = 'character'): CanonicalEntity =>
+    ({ id, kind, name, aliases: [], note: '', merged_from: [] }) as CanonicalEntity;
+
+  it('refuses to merge two rows that share an event', () => {
+    // Fezziwig and Mrs. Fezziwig dance in the same scene, so they cannot be one person, however
+    // alike their names. This is the discrimination a name heuristic cannot make.
+    const pairs = coOccurring([event('ev_1', ['char_fezziwig', 'char_mrs_fezziwig'])]);
+    expect(sharesEvent(pairs, 'char_fezziwig', 'char_mrs_fezziwig')).toBe(true);
+    const candidates = mergeCandidates(
+      [row('char_fezziwig', 'Fezziwig'), row('char_mrs_fezziwig', 'Mrs. Fezziwig')],
+      pairs,
+    );
+    expect(candidates).toHaveLength(0);
+  });
+
+  it('offers rows that share a name and never share an event', () => {
+    const pairs = coOccurring([event('ev_1', ['char_marley'])]);
+    const candidates = mergeCandidates(
+      [row('char_marley', 'Marley'), row('char_jacob_marley', 'Jacob Marley')],
+      pairs,
+    );
+    expect(candidates).toHaveLength(1);
+  });
+
+  it('never offers rows from different tables', () => {
+    const candidates = mergeCandidates(
+      [row('char_machine', 'the Machine'), row('loc_machine', 'the Machine', 'location')],
+      new Set(),
+    );
+    expect(candidates).toHaveLength(0);
+  });
+
+  it('rewrites absorbed ids everywhere an event names them', () => {
+    const entities = [row('char_scrooge', 'Ebenezer Scrooge'), row('char_mr_scrooge', 'Mr. Scrooge')];
+    const events = [
+      {
+        ...event('ev_1', ['char_mr_scrooge']),
+        location_id: 'loc_counting_house',
+        state_updates: [
+          { entity_id: 'char_mr_scrooge', column: 'status', value: 'alarmed', quote: '' },
+        ],
+      } as unknown as ExtractedEvent,
+    ];
+    const merged = applyMerges(entities, events, [
+      { kept: 'char_scrooge', absorbed: ['char_mr_scrooge'], why: 'same man' },
+    ]);
+    expect(merged.entities.map((e) => e.id)).toEqual(['char_scrooge']);
+    expect(merged.entities[0]!.merged_from).toContain('Mr. Scrooge');
+    expect(merged.events[0]!.participants).toEqual(['char_scrooge']);
+    expect(merged.events[0]!.state_updates[0]!.entity_id).toBe('char_scrooge');
+  });
+
+  it('rewrites a location value carried inside a state update', () => {
+    const events = [
+      {
+        ...event('ev_1', []),
+        state_updates: [
+          { entity_id: 'char_a', column: 'location_id', value: 'loc_old', quote: '' },
+        ],
+      } as unknown as ExtractedEvent,
+    ];
+    const merged = applyMerges([row('loc_new', 'the hall', 'location')], events, [
+      { kept: 'loc_new', absorbed: ['loc_old'], why: 'one hall' },
+    ]);
+    expect(merged.events[0]!.state_updates[0]!.value).toBe('loc_new');
+  });
+
+  it('dedupes participants when two absorbed rows collapse onto one', () => {
+    const events = [event('ev_1', ['char_marley', 'char_jacob_marley'])];
+    // Contrived: the guard would normally stop this, and applyMerges is the layer below it.
+    const merged = applyMerges([row('char_marley', 'Marley')], events, [
+      { kept: 'char_marley', absorbed: ['char_jacob_marley'], why: 'same ghost' },
+    ]);
+    expect(merged.events[0]!.participants).toEqual(['char_marley']);
+  });
+
+  it('cannot see a namesake that is not a person — the guard is necessary, not sufficient', () => {
+    // Old Joe and Joe Miller never share an event, because Joe Miller is a joke book. The guard
+    // offers the pair; only the model's reading of the names can refuse it. Documented as a test
+    // so the limit is not mistaken for a bug later.
+    const candidates = mergeCandidates(
+      [row('char_old_joe', 'Old Joe'), row('char_joe_miller', 'Joe Miller')],
+      new Set(),
+    );
+    expect(candidates).toHaveLength(1);
+  });
+});
+
+describe('merges reach every id, not just the ones in events (#143)', () => {
+  const edges = [
+    { from_id: 'char_scrooge', to_id: 'loc_counting_house', kind: 'works_at' },
+    { from_id: 'char_mr_scrooge', to_id: 'loc_the_office', kind: 'works_at' },
+    { from_id: 'char_bob', to_id: 'char_scrooge', kind: 'employed_by' },
+  ];
+
+  it('rewrites a relationship end that names an absorbed row', () => {
+    // The bug G0 caught: a merged-away loc_counting_house left rel_025.to_id pointing at a row the
+    // seed no longer carried, which made the package unpublishable and every score meaningless.
+    const out = redirectRelationships(edges, new Map([['loc_the_office', 'loc_counting_house']]));
+    expect(out.map((e) => e.to_id)).toEqual([
+      'loc_counting_house',
+      'loc_counting_house',
+      'char_scrooge',
+    ]);
+  });
+
+  it('drops an edge that collapses onto itself', () => {
+    // "Scrooge knows Scrooge" is what an acquaintance becomes when the two rows turn out to be one.
+    const out = redirectRelationships(
+      [{ from_id: 'char_scrooge', to_id: 'char_mr_scrooge', kind: 'is' }],
+      new Map([['char_mr_scrooge', 'char_scrooge']]),
+    );
+    expect(out).toEqual([]);
+  });
+
+  it('dedupes edges that become identical after the merge', () => {
+    const out = redirectRelationships(edges, new Map([['char_mr_scrooge', 'char_scrooge']]));
+    // Both works_at edges now start at char_scrooge but keep different targets, so both survive.
+    expect(out).toHaveLength(3);
+    const same = redirectRelationships(
+      [
+        { from_id: 'char_a', to_id: 'char_x', kind: 'knows' },
+        { from_id: 'char_b', to_id: 'char_x', kind: 'knows' },
+      ],
+      new Map([['char_b', 'char_a']]),
+    );
+    expect(same).toHaveLength(1);
+  });
+
+  it('is a no-op when nothing merged', () => {
+    expect(redirectRelationships(edges, new Map())).toEqual(edges);
   });
 });
