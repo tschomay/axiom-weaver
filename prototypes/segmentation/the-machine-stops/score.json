@@ -1,0 +1,332 @@
+{
+  "story_id": "the-machine-stops",
+  "scored_at": "2026-09-18T19:56:54.274Z",
+  "fixture_package_version": 1,
+  "segmenter_models": [
+    "gemini-3.8-flash"
+  ],
+  "judge_model": "gemini-3.8-flash",
+  "judge_cost_usd": 0.09414000000000002,
+  "g0": {
+    "bar": "publishable === true (§1)",
+    "publishable": true,
+    "errors": [],
+    "warning_counts": {
+      "unused_seed_entity": 32
+    }
+  },
+  "scene_count": {
+    "fixture": 16,
+    "candidate": 42,
+    "ratio": 2.625,
+    "trustworthy_band": false
+  },
+  "scene_alignment": [
+    {
+      "fixture_scene": "scene_01_the_call",
+      "candidate_scene": "scene_01_kunos_summons",
+      "aligned_beats": 5,
+      "fixture_beats": 5,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_02_the_book_of_the_machine",
+      "candidate_scene": "scene_02_the_lecture",
+      "aligned_beats": 1,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_03_the_decision_to_travel",
+      "candidate_scene": "scene_03_leaving_the_room",
+      "aligned_beats": 4,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_04_the_air_ship_journey",
+      "candidate_scene": "scene_07_over_the_himalayas",
+      "aligned_beats": 2,
+      "fixture_beats": 5,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_05_threatened_with_homelessness",
+      "candidate_scene": "scene_10_kunos_revelation",
+      "aligned_beats": 1,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_06_the_climb",
+      "candidate_scene": "scene_17_tunnel_exploration",
+      "aligned_beats": 2,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_07_the_hills_of_wessex",
+      "candidate_scene": "scene_23_the_surface_hollow",
+      "aligned_beats": 2,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_08_the_worms",
+      "candidate_scene": "scene_27_taken_by_worms",
+      "aligned_beats": 3,
+      "fixture_beats": 3,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_09_vashtis_verdict",
+      "candidate_scene": "scene_29_surface_survivors",
+      "aligned_beats": 1,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_10_two_developments",
+      "candidate_scene": "scene_30_intellectual_retreat",
+      "aligned_beats": 2,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_11_vashtis_years",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 2,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_12_the_machine_stops",
+      "candidate_scene": "scene_31_the_machine_stops",
+      "aligned_beats": 2,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_13_the_mending_apparatus_in_need_of_repair",
+      "candidate_scene": "scene_32_mending_apparatus",
+      "aligned_beats": 1,
+      "fixture_beats": 4,
+      "how": "majority_of_aligned_beats"
+    },
+    {
+      "fixture_scene": "scene_14_twilight",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 3,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_15_the_silence",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 4,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_16_reunion_in_the_dark",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 4,
+      "how": "unaligned"
+    }
+  ],
+  "boundaries": {
+    "bar": "≥ 0.70 precision and recall (§3.5)",
+    "window_chars": 1369,
+    "fixture_boundaries": 11,
+    "candidate_boundaries": 41,
+    "matched": 10,
+    "precision": 0.24390243902439024,
+    "recall": 0.9090909090909091,
+    "note": "fixture boundaries are located at the earliest source offset among the candidate events #117's alignment assigned to that fixture scene; the fixtures carry no offsets of their own"
+  },
+  "beats": {
+    "coverage_bar": "≥ 0.80 mean, no aligned scene below 0.5 (§3.5)",
+    "invention_bar": "≤ 0.10 (§3.5)",
+    "scored_scenes": 12,
+    "mean_coverage": 0.6,
+    "worst_scene": {
+      "scene": "scene_02_the_book_of_the_machine",
+      "coverage": 0.25
+    },
+    "scenes_below_half": [
+      "scene_02_the_book_of_the_machine",
+      "scene_04_the_air_ship_journey",
+      "scene_05_threatened_with_homelessness",
+      "scene_13_the_mending_apparatus_in_need_of_repair"
+    ],
+    "sampled_beats": 28,
+    "supported": 28,
+    "insufficient": 0,
+    "contradicted": 0,
+    "invention_rate": 0
+  },
+  "pov_location": {
+    "bar": "≥ 0.95, read as agreement with the fixture rather than against the source (§3.5)",
+    "scored": 12,
+    "pov_agreements": 10,
+    "location_agreements": 7,
+    "pov_accuracy": 0.8333333333333334,
+    "location_accuracy": 0.5833333333333334,
+    "disagreements": [
+      {
+        "fixture_scene": "scene_04_the_air_ship_journey",
+        "field": "location_id",
+        "fixture": "loc_air_ship (unaligned)",
+        "candidate": "loc_platform"
+      },
+      {
+        "fixture_scene": "scene_05_threatened_with_homelessness",
+        "field": "pov",
+        "fixture": "char_kuno → char_kuno",
+        "candidate": "char_vashti"
+      },
+      {
+        "fixture_scene": "scene_06_the_climb",
+        "field": "location_id",
+        "fixture": "loc_kunos_cell → loc_kuno_room",
+        "candidate": "loc_railway_tunnel"
+      },
+      {
+        "fixture_scene": "scene_07_the_hills_of_wessex",
+        "field": "location_id",
+        "fixture": "loc_kunos_cell → loc_kuno_room",
+        "candidate": "loc_grass_grown_hollow"
+      },
+      {
+        "fixture_scene": "scene_08_the_worms",
+        "field": "location_id",
+        "fixture": "loc_kunos_cell → loc_kuno_room",
+        "candidate": "loc_grass_grown_hollow"
+      },
+      {
+        "fixture_scene": "scene_10_two_developments",
+        "field": "pov",
+        "fixture": "char_vashti → char_vashti",
+        "candidate": "char_famous_lecturer"
+      },
+      {
+        "fixture_scene": "scene_10_two_developments",
+        "field": "location_id",
+        "fixture": "loc_vashtis_cell → loc_vashti_s_room",
+        "candidate": "loc_the_machine"
+      }
+    ]
+  },
+  "source_coverage": {
+    "bar": "≥ 0.95 (§3.5)",
+    "source_chars": 68473,
+    "covered_chars": 54718,
+    "coverage": 0.799117900486323,
+    "gaps": [
+      {
+        "start": 40059,
+        "end": 41672,
+        "chars": 1613
+      },
+      {
+        "start": 27453,
+        "end": 28919,
+        "chars": 1466
+      },
+      {
+        "start": 18611,
+        "end": 19769,
+        "chars": 1158
+      },
+      {
+        "start": 35463,
+        "end": 36535,
+        "chars": 1072
+      },
+      {
+        "start": 57694,
+        "end": 58625,
+        "chars": 931
+      },
+      {
+        "start": 24047,
+        "end": 24868,
+        "chars": 821
+      },
+      {
+        "start": 47147,
+        "end": 47935,
+        "chars": 788
+      },
+      {
+        "start": 0,
+        "end": 735,
+        "chars": 735
+      },
+      {
+        "start": 6735,
+        "end": 7455,
+        "chars": 720
+      },
+      {
+        "start": 19910,
+        "end": 20579,
+        "chars": 669
+      }
+    ],
+    "events_supplied": 209,
+    "events_assigned": 209,
+    "assignment_rate": 1
+  },
+  "reveal_order": {
+    "order_bar": "≥ 0.90 pairwise (§3.6)",
+    "premature_bar": "0 (§3.6)",
+    "hidden_bar": "≥ 0.80 recall (§3.6)",
+    "fixture_facts": 6,
+    "candidate_facts": 4,
+    "aligned_facts": 3,
+    "pairwise_total": 3,
+    "pairwise_correct": 2,
+    "pairwise_accuracy": 0.6666666666666666,
+    "premature": [
+      {
+        "fact": "homelessness_means_death",
+        "fixture_scene": 5,
+        "candidate_scene": 6
+      }
+    ],
+    "fixture_hidden_facts": 0,
+    "hidden_recovered": 0,
+    "hidden_recall": null
+  },
+  "plants": {
+    "pair_bar": "≥ 0.70 recall (§3.7)",
+    "long_range_bar": "≥ 0.60 recall (§3.7)",
+    "fixture_pairs": 5,
+    "fixture_pairs_source": "declared_graph",
+    "fixture_pairs_declared": 5,
+    "fixture_pairs_annotated": 0,
+    "matched_declared": 0,
+    "matched_annotated": 0,
+    "candidate_pairs": 4,
+    "matched": 0,
+    "recall": 0,
+    "long_range_fixture_pairs": 2,
+    "long_range_matched": 0,
+    "long_range_recall": 0,
+    "misattributed": 0,
+    "orphans": [],
+    "plant_walk_errors": [],
+    "span_histogram": {
+      "4": 2,
+      "5+": 2
+    }
+  },
+  "caveats": [
+    "§2: the fixtures are one valid authoring, not the unique correct one — a deviation is not automatically an error, and both fixtures sit at the easy end of the difficulty range.",
+    "The scene alignment is derived from #117's frozen event alignment; a fixture scene whose beats went unaligned there is unscoreable here and is listed with candidate_scene: null.",
+    "§3.5 POV/location is agreement with the fixture, not a judgment against the source.",
+    "Beat invention is judged against the source window the scene's own spans cover, so a beat supported elsewhere in the story reads as \"insufficient\" rather than \"contradicts\" — the two are reported separately for that reason."
+  ]
+}
