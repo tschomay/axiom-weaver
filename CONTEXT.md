@@ -328,6 +328,17 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   volitional commit) is run-report-only, never surfaced live, since that was the one
   category issue #21 flagged as risking becoming noise. See
   [ADR 0016](docs/adr/0016-author-surfaces-and-the-state-log.md).
+- **Authoring run** — the durable job behind the **Generate** and **Extract** entry points:
+  arc generation or extraction, then segmentation, as stages of one job (`brief`/`draft_events`/
+  `segment`, or the extraction pipeline's five passes plus `segment`) — never two author-visible
+  jobs with a pause between them, since an unsegmented Fabula-only package has no Scene Cards yet
+  and isn't reviewable in any surface the author already has. Shares the read-time run loop's
+  `StepRunner` seam and mint-id/poll HTTP shape, but not its scene-shaped manifest — an Authoring
+  run has stages, not scenes, until `segment` finishes. Its output is a `StoryPackage` that lands
+  in the same import-preview screen a pasted/uploaded file already uses, never published or
+  seeded into a Manuscript automatically; the preview's quality signal there gains a
+  scene-count-vs-event-count ratio. Not the same "run" as a Compiled edition — see Read-time run
+  loop, above. See [ADR 0021](docs/adr/0021-generate-and-extract-entry-points.md).
 
 ## The seam-failure rubric
 
