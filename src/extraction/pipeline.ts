@@ -69,7 +69,11 @@ import {
   type ExtractedEvent,
   type StoryTime,
 } from './pass-events';
-import { canonicalize, type CanonicalizeResult } from './pass-canonicalize';
+import {
+  canonicalize,
+  redirectRelationships,
+  type CanonicalizeResult,
+} from './pass-canonicalize';
 import { orderChronologically, type ChronologyResult } from './pass-chronology';
 import { extractSeedState, type SeedRow } from './pass-seed';
 import { reconcile, type MergeGroup, type ReconcileResult } from './pass-reconcile';
@@ -298,10 +302,14 @@ export async function extractStoryPackage(
     return { id: entity.id, quote, span };
   });
 
-  const relationships = reconciled.relationships.map((edge, index) => ({
-    ...edge,
-    id: `rel_${String(index + 1).padStart(3, '0')}`,
-  }));
+  // Through the merge map first (#143): an edge naming a row pass 3b absorbed would otherwise
+  // point at an id the seed no longer carries, which is an `unknown_entity` G0 error.
+  const relationships = redirectRelationships(reconciled.relationships, canonical.redirect).map(
+    (edge, index) => ({
+      ...edge,
+      id: `rel_${String(index + 1).padStart(3, '0')}`,
+    }),
+  );
 
   const relationshipSpans = relationships.map((edge) => {
     const proposal = proposals.relationships[edge.from_proposal];

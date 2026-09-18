@@ -69,6 +69,16 @@ export interface AppliedMerge {
 export interface CanonicalizeResult {
   readonly entities: CanonicalEntity[];
   readonly events: ExtractedEvent[];
+  /**
+   * absorbed id → surviving id, for every other place in the pipeline that carries an entity id.
+   *
+   * Events are rewritten here because this pass owns them. The World Model seed's relationships are
+   * not: they are assembled later from `reconcile`'s output, and leaving them un-redirected is a
+   * bug G0 caught immediately — a merged-away `loc_counting_house` left `rel_025.to_id` pointing at
+   * a row that no longer existed, which made the whole package unpublishable and every score below
+   * the level the rubric grades. Anything holding an id must be mapped through this.
+   */
+  readonly redirect: ReadonlyMap<string, string>;
   readonly applied: AppliedMerge[];
   /** Merges the model asked for that the co-occurrence guard refused. Output, not a log line. */
   readonly blocked: ReadonlyArray<{ keep: string; absorb: string; reason: string }>;
@@ -253,6 +263,7 @@ export async function canonicalize(
     return {
       entities: [...entities],
       events: [...events],
+      redirect: new Map(),
       applied: [],
       blocked: [],
       candidate_pairs: 0,
@@ -295,6 +306,7 @@ export async function canonicalize(
     return {
       entities: [...entities],
       events: [...events],
+      redirect: new Map(),
       applied: [],
       blocked: [],
       candidate_pairs: candidates.length,
@@ -331,12 +343,43 @@ export async function canonicalize(
   }
 
   const result = applyMerges(entities, events, applied);
+  const redirect = new Map<string, string>();
+  for (const merge of applied) {
+    for (const absorbed of merge.absorbed) redirect.set(absorbed, merge.kept);
+  }
   return {
     entities: result.entities,
     events: result.events,
+    redirect,
     applied,
     blocked,
     candidate_pairs: candidates.length,
     failed: false,
   };
+}
+
+/**
+ * Map a relationship's ends through a merge, dropping any edge that collapses onto itself.
+ *
+ * An edge from a row to itself says nothing — "Scrooge knows Scrooge" is what "Scrooge" and
+ * "Mr. Scrooge" becoming one row turns their acquaintance into — so it is dropped rather than
+ * emitted as a self-loop the linter would have to reason about.
+ */
+export function redirectRelationships<T extends { from_id: string; to_id: string }>(
+  relationships: readonly T[],
+  redirect: ReadonlyMap<string, string>,
+): T[] {
+  if (redirect.size === 0) return [...relationships];
+  const seen = new Set<string>();
+  const out: T[] = [];
+  for (const edge of relationships) {
+    const from = redirect.get(edge.from_id) ?? edge.from_id;
+    const to = redirect.get(edge.to_id) ?? edge.to_id;
+    if (from === to) continue;
+    const key = `${from}|${to}|${(edge as unknown as { kind?: string }).kind ?? ''}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push({ ...edge, from_id: from, to_id: to });
+  }
+  return out;
 }

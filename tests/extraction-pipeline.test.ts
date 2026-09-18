@@ -19,6 +19,7 @@ import {
   coOccurring,
   mergeCandidates,
   sharesEvent,
+  redirectRelationships,
 } from '@/extraction/pass-canonicalize';
 import type { CanonicalEntity } from '@/extraction/pass-reconcile';
 import { foldProposals, isSuspiciousMerge, reconcile } from '@/extraction/pass-reconcile';
@@ -1173,5 +1174,51 @@ describe('canonicalization and its co-occurrence guard (#143)', () => {
       new Set(),
     );
     expect(candidates).toHaveLength(1);
+  });
+});
+
+describe('merges reach every id, not just the ones in events (#143)', () => {
+  const edges = [
+    { from_id: 'char_scrooge', to_id: 'loc_counting_house', kind: 'works_at' },
+    { from_id: 'char_mr_scrooge', to_id: 'loc_the_office', kind: 'works_at' },
+    { from_id: 'char_bob', to_id: 'char_scrooge', kind: 'employed_by' },
+  ];
+
+  it('rewrites a relationship end that names an absorbed row', () => {
+    // The bug G0 caught: a merged-away loc_counting_house left rel_025.to_id pointing at a row the
+    // seed no longer carried, which made the package unpublishable and every score meaningless.
+    const out = redirectRelationships(edges, new Map([['loc_the_office', 'loc_counting_house']]));
+    expect(out.map((e) => e.to_id)).toEqual([
+      'loc_counting_house',
+      'loc_counting_house',
+      'char_scrooge',
+    ]);
+  });
+
+  it('drops an edge that collapses onto itself', () => {
+    // "Scrooge knows Scrooge" is what an acquaintance becomes when the two rows turn out to be one.
+    const out = redirectRelationships(
+      [{ from_id: 'char_scrooge', to_id: 'char_mr_scrooge', kind: 'is' }],
+      new Map([['char_mr_scrooge', 'char_scrooge']]),
+    );
+    expect(out).toEqual([]);
+  });
+
+  it('dedupes edges that become identical after the merge', () => {
+    const out = redirectRelationships(edges, new Map([['char_mr_scrooge', 'char_scrooge']]));
+    // Both works_at edges now start at char_scrooge but keep different targets, so both survive.
+    expect(out).toHaveLength(3);
+    const same = redirectRelationships(
+      [
+        { from_id: 'char_a', to_id: 'char_x', kind: 'knows' },
+        { from_id: 'char_b', to_id: 'char_x', kind: 'knows' },
+      ],
+      new Map([['char_b', 'char_a']]),
+    );
+    expect(same).toHaveLength(1);
+  });
+
+  it('is a no-op when nothing merged', () => {
+    expect(redirectRelationships(edges, new Map())).toEqual(edges);
   });
 });
