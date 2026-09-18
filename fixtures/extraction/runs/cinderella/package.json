@@ -10,16 +10,18 @@
         "location_id": null,
         "status": "alive",
         "goal": null,
-        "bag": {}
+        "bag": {
+          "role": "gentleman"
+        }
       },
       {
-        "id": "char_stepmother",
+        "id": "char_second_wife",
         "name": "second wife",
         "location_id": null,
         "status": "alive",
         "goal": null,
         "bag": {
-          "temperament": "proud and haughty"
+          "temperament": "proudest and most haughty"
         }
       },
       {
@@ -39,7 +41,7 @@
         "status": "alive",
         "goal": null,
         "bag": {
-          "temperament": "of her own humor"
+          "temperament": "exactly like her in all things"
         }
       },
       {
@@ -49,7 +51,7 @@
         "status": "alive",
         "goal": null,
         "bag": {
-          "temperament": "of her own humor"
+          "temperament": "exactly like her in all things"
         }
       },
       {
@@ -83,8 +85,16 @@
         "status": "dead",
         "goal": null,
         "bag": {
-          "character": "the best creature in the world"
+          "temperament": "the best creature in the world"
         }
+      },
+      {
+        "id": "char_former_husband",
+        "name": "former husband",
+        "location_id": null,
+        "status": "dead",
+        "goal": null,
+        "bag": {}
       },
       {
         "id": "char_tire_woman",
@@ -103,8 +113,8 @@
         "bag": {}
       },
       {
-        "id": "char_coachman",
-        "name": "coachman",
+        "id": "char_rat",
+        "name": "rat",
         "location_id": null,
         "status": null,
         "goal": null,
@@ -136,33 +146,41 @@
       },
       {
         "id": "char_two_sisters",
-        "name": "sisters",
+        "name": "two sisters",
         "location_id": null,
         "status": "alive",
         "goal": null,
         "bag": {
-          "character": "exactly like her in all things"
+          "humor": "exactly like her in all things"
         }
       },
       {
-        "id": "char_three_huge_rats",
-        "name": "three huge rats",
+        "id": "char_ladies",
+        "name": "ladies",
         "location_id": null,
         "status": null,
         "goal": null,
         "bag": {}
       },
       {
-        "id": "char_guards",
-        "name": "guards",
+        "id": "char_miss_charlotte",
+        "name": "Miss Charlotte",
         "location_id": null,
         "status": null,
         "goal": null,
         "bag": {}
       },
       {
-        "id": "char_gentleman_official",
-        "name": "gentleman official",
+        "id": "char_guards_palace_gate",
+        "name": "The guards at the palace gate",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_gentleman_sent_to_try_slipper",
+        "name": "gentleman who was sent to try the slipper",
         "location_id": null,
         "status": null,
         "goal": null,
@@ -179,11 +197,6 @@
     ],
     "locations": [
       {
-        "id": "loc_sorry_garret",
-        "name": "sorry garret",
-        "bag": {}
-      },
-      {
         "id": "loc_court",
         "name": "Court",
         "bag": {}
@@ -194,18 +207,8 @@
         "bag": {}
       },
       {
-        "id": "loc_madams_chamber",
-        "name": "madam's chamber",
-        "bag": {}
-      },
-      {
-        "id": "loc_chimney_corner",
-        "name": "chimney-corner",
-        "bag": {}
-      },
-      {
-        "id": "loc_cinderellas_chamber",
-        "name": "Cinderella's chamber",
+        "id": "loc_garret",
+        "name": "garret",
         "bag": {}
       },
       {
@@ -225,7 +228,7 @@
       },
       {
         "id": "loc_palace",
-        "name": "the palace",
+        "name": "palace",
         "bag": {}
       }
     ],
@@ -242,6 +245,13 @@
         "name": "wand",
         "location_id": null,
         "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_coach",
+        "name": "coach",
+        "location_id": null,
+        "status": "not_yet_created",
         "bag": {}
       },
       {
@@ -301,14 +311,7 @@
         "bag": {}
       },
       {
-        "id": "obj_oranges_and_citrons",
-        "name": "oranges and citrons",
-        "location_id": null,
-        "status": null,
-        "bag": {}
-      },
-      {
-        "id": "obj_yellow_suit",
+        "id": "obj_yellow_suit_of_clothes",
         "name": "yellow suit of clothes",
         "location_id": null,
         "status": null,
@@ -319,9 +322,9 @@
       {
         "id": "rel_001",
         "from_id": "char_gentleman",
-        "to_id": "char_stepmother",
+        "to_id": "char_second_wife",
         "kind": "husband_of",
-        "sentiment": null,
+        "sentiment": "neutral",
         "bag": {}
       },
       {
@@ -329,12 +332,12 @@
         "from_id": "char_gentleman",
         "to_id": "char_cinderella",
         "kind": "father_of",
-        "sentiment": null,
+        "sentiment": "neutral",
         "bag": {}
       },
       {
         "id": "rel_003",
-        "from_id": "char_stepmother",
+        "from_id": "char_second_wife",
         "to_id": "char_eldest_daughter",
         "kind": "mother_of",
         "sentiment": "positive",
@@ -342,7 +345,7 @@
       },
       {
         "id": "rel_004",
-        "from_id": "char_stepmother",
+        "from_id": "char_second_wife",
         "to_id": "char_youngest_daughter",
         "kind": "mother_of",
         "sentiment": "positive",
@@ -350,7 +353,7 @@
       },
       {
         "id": "rel_005",
-        "from_id": "char_stepmother",
+        "from_id": "char_second_wife",
         "to_id": "char_cinderella",
         "kind": "stepmother_of",
         "sentiment": "negative",
@@ -377,11 +380,35 @@
         "from_id": "char_gentlemans_first_wife",
         "to_id": "char_cinderella",
         "kind": "mother_of",
-        "sentiment": "positive",
+        "sentiment": null,
         "bag": {}
       },
       {
         "id": "rel_009",
+        "from_id": "char_former_husband",
+        "to_id": "char_second_wife",
+        "kind": "husband_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_010",
+        "from_id": "char_former_husband",
+        "to_id": "char_eldest_daughter",
+        "kind": "father_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_011",
+        "from_id": "char_former_husband",
+        "to_id": "char_youngest_daughter",
+        "kind": "father_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_012",
         "from_id": "char_eldest_daughter",
         "to_id": "char_youngest_daughter",
         "kind": "sister_of",
@@ -389,7 +416,7 @@
         "bag": {}
       },
       {
-        "id": "rel_010",
+        "id": "rel_013",
         "from_id": "char_eldest_daughter",
         "to_id": "char_cinderella",
         "kind": "stepsister_of",
@@ -397,23 +424,15 @@
         "bag": {}
       },
       {
-        "id": "rel_011",
+        "id": "rel_014",
         "from_id": "char_youngest_daughter",
         "to_id": "char_cinderella",
         "kind": "stepsister_of",
-        "sentiment": "negative",
-        "bag": {}
-      },
-      {
-        "id": "rel_012",
-        "from_id": "char_the_king",
-        "to_id": "char_kings_son",
-        "kind": "father_of",
         "sentiment": null,
         "bag": {}
       },
       {
-        "id": "rel_013",
+        "id": "rel_015",
         "from_id": "char_two_sisters",
         "to_id": "char_cinderella",
         "kind": "sibling_of",
@@ -421,15 +440,23 @@
         "bag": {}
       },
       {
-        "id": "rel_014",
+        "id": "rel_016",
         "from_id": "char_the_king",
         "to_id": "char_queen",
         "kind": "spouse_of",
-        "sentiment": "positive",
+        "sentiment": "neutral",
         "bag": {}
       },
       {
-        "id": "rel_015",
+        "id": "rel_017",
+        "from_id": "char_the_king",
+        "to_id": "char_kings_son",
+        "kind": "father_of",
+        "sentiment": "neutral",
+        "bag": {}
+      },
+      {
+        "id": "rel_018",
         "from_id": "char_queen",
         "to_id": "char_the_king",
         "kind": "spouse_of",
@@ -437,15 +464,7 @@
         "bag": {}
       },
       {
-        "id": "rel_016",
-        "from_id": "char_queen",
-        "to_id": "char_kings_son",
-        "kind": "mother_of",
-        "sentiment": null,
-        "bag": {}
-      },
-      {
-        "id": "rel_017",
+        "id": "rel_019",
         "from_id": "char_kings_son",
         "to_id": "char_the_king",
         "kind": "child_of",
@@ -453,23 +472,15 @@
         "bag": {}
       },
       {
-        "id": "rel_018",
-        "from_id": "char_two_sisters",
-        "to_id": "char_cinderella",
-        "kind": "sister_of",
-        "sentiment": "negative",
-        "bag": {}
-      },
-      {
-        "id": "rel_019",
-        "from_id": "char_eldest_daughter",
-        "to_id": "char_cinderella",
-        "kind": "sister_of",
-        "sentiment": "negative",
-        "bag": {}
-      },
-      {
         "id": "rel_020",
+        "from_id": "char_miss_charlotte",
+        "to_id": "char_cinderella",
+        "kind": "sibling_of",
+        "sentiment": "negative",
+        "bag": {}
+      },
+      {
+        "id": "rel_021",
         "from_id": "char_kings_son",
         "to_id": "char_cinderella",
         "kind": "in_love_with",
@@ -477,58 +488,18 @@
         "bag": {}
       },
       {
-        "id": "rel_021",
-        "from_id": "char_eldest_daughter",
-        "to_id": "obj_yellow_suit",
-        "kind": "owner_of",
-        "sentiment": null,
-        "bag": {}
-      },
-      {
         "id": "rel_022",
-        "from_id": "char_cinderella",
-        "to_id": "obj_glass_slippers",
-        "kind": "owner_of",
-        "sentiment": null,
+        "from_id": "char_kings_son",
+        "to_id": "char_cinderella",
+        "kind": "spouse_of",
+        "sentiment": "positive",
         "bag": {}
       },
       {
         "id": "rel_023",
-        "from_id": "char_godmother",
-        "to_id": "obj_wand",
-        "kind": "owner_of",
-        "sentiment": null,
-        "bag": {}
-      },
-      {
-        "id": "rel_024",
-        "from_id": "char_kings_son",
-        "to_id": "char_cinderella",
-        "kind": "husband_of",
-        "sentiment": "positive",
-        "bag": {}
-      },
-      {
-        "id": "rel_025",
         "from_id": "char_two_great_lords",
         "to_id": "char_two_sisters",
-        "kind": "husband_of",
-        "sentiment": null,
-        "bag": {}
-      },
-      {
-        "id": "rel_026",
-        "from_id": "char_cinderella",
-        "to_id": "char_kings_son",
-        "kind": "wife_of",
-        "sentiment": "positive",
-        "bag": {}
-      },
-      {
-        "id": "rel_027",
-        "from_id": "char_two_sisters",
-        "to_id": "char_two_great_lords",
-        "kind": "wife_of",
+        "kind": "spouse_of",
         "sentiment": null,
         "bag": {}
       }
@@ -540,12 +511,12 @@
   "metadata": {
     "title": "Cinderella, or the Little Glass Slipper",
     "source": "Andrew Lang (ed.), The Blue Fairy Book, Longmans, Green & Co., 1889 (PG #503) — https://raw.githubusercontent.com/GITenberg/The-Blue-Fairy-Book_503/master/503.txt",
-    "created_at": "2026-09-16T05:58:55.873Z"
+    "created_at": "2026-09-18T02:45:34.782Z"
   },
   "_fabula": {
     "generator": "extraction pipeline (#117)",
     "model": "gemini-3.8-flash",
-    "generated_at": "2026-09-16T06:00:25.243Z",
+    "generated_at": "2026-09-18T02:47:46.220Z",
     "source": {
       "id": "cinderella",
       "edition": "Andrew Lang (ed.), The Blue Fairy Book, Longmans, Green & Co., 1889 (PG #503)",
@@ -562,14 +533,14 @@
       {
         "id": "ev_0001",
         "sequence": 1,
-        "summary": "The gentleman marries his proud second wife.",
+        "summary": "The gentleman marries his second wife.",
         "location_id": null,
         "characters_present": [
           "char_gentleman",
-          "char_stepmother"
+          "char_second_wife"
         ],
         "beats": [
-          "The gentleman marries his proud second wife."
+          "The gentleman marries his second wife."
         ],
         "pays_off": [],
         "state_changes": [],
@@ -578,22 +549,23 @@
         "narrated_index": 0,
         "source_span": {
           "start": 42,
-          "end": 158,
-          "resolution": "exact"
+          "end": 138,
+          "resolution": "normalized"
         }
       },
       {
         "id": "ev_0002",
         "sequence": 2,
-        "summary": "The King's son invites all persons of fashion, including the two daughters, to a ball.",
+        "summary": "The King's son gives a ball and invites people of fashion, including the two sisters.",
         "location_id": null,
         "characters_present": [
           "char_kings_son",
           "char_eldest_daughter",
-          "char_youngest_daughter"
+          "char_youngest_daughter",
+          "char_two_sisters"
         ],
         "beats": [
-          "The King's son invites all persons of fashion, including the two daughters, to a ball."
+          "The King's son gives a ball and invites people of fashion, including the two sisters."
         ],
         "pays_off": [],
         "state_changes": [],
@@ -602,54 +574,42 @@
         "narrated_index": 1,
         "source_span": {
           "start": 1646,
-          "end": 1767,
-          "resolution": "exact"
+          "end": 1732,
+          "resolution": "normalized"
         }
       },
       {
         "id": "ev_0003",
         "sequence": 3,
-        "summary": "The two daughters depart for the Court to attend the ball.",
-        "location_id": "loc_court",
+        "summary": "The eldest daughter decides to wear her red velvet suit with French trimming.",
+        "location_id": null,
         "characters_present": [
-          "char_eldest_daughter",
-          "char_youngest_daughter"
+          "char_eldest_daughter"
         ],
         "beats": [
-          "The two daughters depart for the Court to attend the ball."
+          "The eldest daughter decides to wear her red velvet suit with French trimming."
         ],
         "pays_off": [],
-        "state_changes": [
-          {
-            "entity_id": "char_eldest_daughter",
-            "column": "location_id",
-            "value": "loc_court"
-          },
-          {
-            "entity_id": "char_youngest_daughter",
-            "column": "location_id",
-            "value": "loc_court"
-          }
-        ],
+        "state_changes": [],
         "story_time": "present",
-        "time_anchor": "At last the happy day came",
+        "time_anchor": "",
         "narrated_index": 2,
         "source_span": {
-          "start": 3535,
-          "end": 3581,
-          "resolution": "exact"
+          "start": 2150,
+          "end": 2236,
+          "resolution": "normalized"
         }
       },
       {
         "id": "ev_0004",
         "sequence": 4,
-        "summary": "Cinderella begins weeping after watching her sisters depart.",
+        "summary": "The youngest daughter decides to wear her gold-flowered manteau and diamond stomacher.",
         "location_id": null,
         "characters_present": [
-          "char_cinderella"
+          "char_youngest_daughter"
         ],
         "beats": [
-          "Cinderella begins weeping after watching her sisters depart."
+          "The youngest daughter decides to wear her gold-flowered manteau and diamond stomacher."
         ],
         "pays_off": [],
         "state_changes": [],
@@ -657,22 +617,24 @@
         "time_anchor": "",
         "narrated_index": 3,
         "source_span": {
-          "start": 3648,
-          "end": 3703,
-          "resolution": "exact"
+          "start": 2238,
+          "end": 2371,
+          "resolution": "normalized"
         }
       },
       {
         "id": "ev_0005",
         "sequence": 5,
-        "summary": "The godmother arrives, notices Cinderella weeping, and asks what is wrong.",
+        "summary": "The two sisters send for a tire-woman.",
         "location_id": null,
         "characters_present": [
-          "char_godmother",
-          "char_cinderella"
+          "char_eldest_daughter",
+          "char_youngest_daughter",
+          "char_tire_woman",
+          "char_two_sisters"
         ],
         "beats": [
-          "The godmother arrives, notices Cinderella weeping, and asks what is wrong."
+          "The two sisters send for a tire-woman."
         ],
         "pays_off": [],
         "state_changes": [],
@@ -680,149 +642,187 @@
         "time_anchor": "",
         "narrated_index": 4,
         "source_span": {
-          "start": 3705,
-          "end": 3776,
-          "resolution": "exact"
+          "start": 2461,
+          "end": 2539,
+          "resolution": "normalized"
         }
       },
       {
         "id": "ev_0006",
         "sequence": 6,
-        "summary": "The godmother brings Cinderella into her chamber and orders her to fetch a pumpkin from the garden.",
-        "location_id": "loc_cinderellas_chamber",
-        "characters_present": [
-          "char_godmother",
-          "char_cinderella"
-        ],
-        "beats": [
-          "The godmother brings Cinderella into her chamber and orders her to fetch a pumpkin from the garden."
-        ],
-        "pays_off": [],
-        "state_changes": [
-          {
-            "entity_id": "char_godmother",
-            "column": "location_id",
-            "value": "loc_cinderellas_chamber"
-          },
-          {
-            "entity_id": "char_cinderella",
-            "column": "location_id",
-            "value": "loc_cinderellas_chamber"
-          }
-        ],
-        "story_time": "present",
-        "time_anchor": "Then",
-        "narrated_index": 5,
-        "source_span": {
-          "start": 4145,
-          "end": 4244,
-          "resolution": "exact"
-        }
-      },
-      {
-        "id": "ev_0007",
-        "sequence": 7,
-        "summary": "Cinderella goes to the garden, gathers a pumpkin, and brings it back to her godmother.",
-        "location_id": "loc_garden",
-        "characters_present": [
-          "char_cinderella",
-          "char_godmother"
-        ],
-        "beats": [
-          "Cinderella goes to the garden, gathers a pumpkin, and brings it back to her godmother."
-        ],
-        "pays_off": [],
-        "state_changes": [],
-        "story_time": "present",
-        "time_anchor": "immediately",
-        "narrated_index": 6,
-        "source_span": {
-          "start": 4246,
-          "end": 4341,
-          "resolution": "exact"
-        }
-      },
-      {
-        "id": "ev_0008",
-        "sequence": 8,
-        "summary": "The godmother scoops out the pumpkin and strikes it with her wand, transforming it into a fine coach.",
-        "location_id": "loc_cinderellas_chamber",
-        "characters_present": [
-          "char_godmother"
-        ],
-        "beats": [
-          "The godmother scoops out the pumpkin and strikes it with her wand, transforming it into a fine coach."
-        ],
-        "pays_off": [],
-        "state_changes": [],
-        "story_time": "present",
-        "time_anchor": "instantly",
-        "narrated_index": 7,
-        "source_span": {
-          "start": 4417,
-          "end": 4594,
-          "resolution": "exact"
-        }
-      },
-      {
-        "id": "ev_0011",
-        "sequence": 9,
-        "summary": "The godmother finds six mice in the mouse-trap and orders Cinderella to lift the trapdoor.",
+        "summary": "Cinderella offers to dress her sisters' hair.",
         "location_id": null,
         "characters_present": [
-          "char_godmother",
-          "char_six_mice",
-          "char_cinderella"
+          "char_cinderella",
+          "char_eldest_daughter",
+          "char_youngest_daughter",
+          "char_two_sisters"
         ],
         "beats": [
-          "The godmother finds six mice in the mouse-trap and orders Cinderella to lift the trapdoor."
+          "Cinderella offers to dress her sisters' hair."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
+        "narrated_index": 5,
+        "source_span": {
+          "start": 2806,
+          "end": 2892,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0007",
+        "sequence": 7,
+        "summary": "The sisters ask Cinderella if she would like to go to the ball.",
+        "location_id": null,
+        "characters_present": [
+          "char_two_sisters",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The sisters ask Cinderella if she would like to go to the ball."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 6,
+        "source_span": {
+          "start": 2893,
+          "end": 2989,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0008",
+        "sequence": 8,
+        "summary": "Cinderella replies that they are jeering her and that the ball is not for someone like her.",
+        "location_id": null,
+        "characters_present": [
+          "char_cinderella"
+        ],
+        "beats": [
+          "Cinderella replies that they are jeering her and that the ball is not for someone like her."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 7,
+        "source_span": {
+          "start": 2991,
+          "end": 3070,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0009",
+        "sequence": 9,
+        "summary": "The sisters mock Cinderella and say people would laugh to see her at a ball.",
+        "location_id": null,
+        "characters_present": [
+          "char_two_sisters"
+        ],
+        "beats": [
+          "The sisters mock Cinderella and say people would laugh to see her at a ball."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 8,
+        "source_span": {
+          "start": 3072,
+          "end": 3181,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0010",
+        "sequence": 10,
+        "summary": "Cinderella dresses her sisters' heads.",
+        "location_id": null,
+        "characters_present": [
+          "char_cinderella",
+          "char_two_sisters"
+        ],
+        "beats": [
+          "Cinderella dresses her sisters' heads."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 9,
+        "source_span": {
+          "start": 3183,
+          "end": 3296,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0011",
+        "sequence": 11,
+        "summary": "The sisters depart for Court to attend the ball.",
+        "location_id": "loc_court",
+        "characters_present": [
+          "char_two_sisters"
+        ],
+        "beats": [
+          "The sisters depart for Court to attend the ball."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_two_sisters",
+            "column": "location_id",
+            "value": "loc_court"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "the happy day",
         "narrated_index": 10,
         "source_span": {
-          "start": 4667,
-          "end": 4759,
+          "start": 3535,
+          "end": 3581,
           "resolution": "exact"
         }
       },
       {
         "id": "ev_0012",
-        "sequence": 10,
-        "summary": "The godmother taps each mouse with her wand, turning them into six dapple-gray horses.",
+        "sequence": 12,
+        "summary": "Cinderella weeps after watching her sisters leave.",
         "location_id": null,
         "characters_present": [
-          "char_godmother",
-          "char_six_mice"
+          "char_cinderella"
         ],
         "beats": [
-          "The godmother taps each mouse with her wand, turning them into six dapple-gray horses."
+          "Cinderella weeps after watching her sisters leave."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
-        "time_anchor": "that moment",
+        "time_anchor": "",
         "narrated_index": 11,
         "source_span": {
-          "start": 4767,
-          "end": 4880,
-          "resolution": "exact"
+          "start": 3648,
+          "end": 3703,
+          "resolution": "normalized"
         }
       },
       {
         "id": "ev_0013",
-        "sequence": 11,
-        "summary": "Cinderella brings the rat-trap containing three huge rats to her godmother.",
+        "sequence": 13,
+        "summary": "The godmother asks Cinderella what is the matter.",
         "location_id": null,
         "characters_present": [
-          "char_cinderella",
           "char_godmother",
-          "char_three_huge_rats"
+          "char_cinderella"
         ],
         "beats": [
-          "Cinderella brings the rat-trap containing three huge rats to her godmother."
+          "The godmother asks Cinderella what is the matter."
         ],
         "pays_off": [],
         "state_changes": [],
@@ -830,22 +830,21 @@
         "time_anchor": "",
         "narrated_index": 12,
         "source_span": {
-          "start": 5186,
-          "end": 5259,
+          "start": 3705,
+          "end": 3776,
           "resolution": "exact"
         }
       },
       {
         "id": "ev_0014",
-        "sequence": 12,
-        "summary": "The godmother touches a rat with her wand and turns him into a fat, jolly coachman.",
+        "sequence": 14,
+        "summary": "Cinderella tries to explain her wish through her tears.",
         "location_id": null,
         "characters_present": [
-          "char_godmother",
-          "char_coachman"
+          "char_cinderella"
         ],
         "beats": [
-          "The godmother touches a rat with her wand and turns him into a fat, jolly coachman."
+          "Cinderella tries to explain her wish through her tears."
         ],
         "pays_off": [],
         "state_changes": [],
@@ -853,22 +852,22 @@
         "time_anchor": "",
         "narrated_index": 13,
         "source_span": {
-          "start": 5336,
-          "end": 5410,
-          "resolution": "exact"
+          "start": 3778,
+          "end": 3893,
+          "resolution": "normalized"
         }
       },
       {
         "id": "ev_0015",
-        "sequence": 13,
-        "summary": "The godmother orders Cinderella to bring six lizards from behind the watering-pot in the garden.",
+        "sequence": 15,
+        "summary": "The godmother asks Cinderella if she wishes to go to the ball.",
         "location_id": null,
         "characters_present": [
           "char_godmother",
           "char_cinderella"
         ],
         "beats": [
-          "The godmother orders Cinderella to bring six lizards from behind the watering-pot in the garden."
+          "The godmother asks Cinderella if she wishes to go to the ball."
         ],
         "pays_off": [],
         "state_changes": [],
@@ -876,60 +875,478 @@
         "time_anchor": "",
         "narrated_index": 14,
         "source_span": {
-          "start": 5490,
-          "end": 5590,
-          "resolution": "exact"
+          "start": 3895,
+          "end": 4006,
+          "resolution": "normalized"
         }
       },
       {
         "id": "ev_0016",
-        "sequence": 14,
-        "summary": "The godmother turns the six lizards into six footmen who skip up behind the coach.",
+        "sequence": 16,
+        "summary": "Cinderella confirms she wants to go to the ball.",
         "location_id": null,
         "characters_present": [
-          "char_godmother",
-          "char_six_lizards"
+          "char_cinderella"
         ],
         "beats": [
-          "The godmother turns the six lizards into six footmen who skip up behind the coach."
+          "Cinderella confirms she wants to go to the ball."
         ],
         "pays_off": [],
-        "state_changes": [],
+        "state_changes": [
+          {
+            "entity_id": "char_cinderella",
+            "column": "goal",
+            "value": "go to the ball"
+          }
+        ],
         "story_time": "present",
-        "time_anchor": "immediately",
+        "time_anchor": "",
         "narrated_index": 15,
         "source_span": {
-          "start": 5622,
-          "end": 5709,
+          "start": 4008,
+          "end": 4053,
           "resolution": "exact"
         }
       },
       {
         "id": "ev_0017",
-        "sequence": 15,
-        "summary": "The godmother touches Cinderella with her wand, turning her clothes into cloth of gold and silver beset with jewels.",
+        "sequence": 17,
+        "summary": "The godmother promises to help Cinderella go to the ball if she behaves well.",
         "location_id": null,
         "characters_present": [
           "char_godmother",
           "char_cinderella"
         ],
         "beats": [
-          "The godmother touches Cinderella with her wand, turning her clothes into cloth of gold and silver beset with jewels."
+          "The godmother promises to help Cinderella go to the ball if she behaves well."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
-        "time_anchor": "at the same instant",
+        "time_anchor": "",
         "narrated_index": 16,
         "source_span": {
-          "start": 6059,
-          "end": 6189,
-          "resolution": "exact"
+          "start": 4055,
+          "end": 4144,
+          "resolution": "normalized"
         }
       },
       {
         "id": "ev_0018",
-        "sequence": 16,
+        "sequence": 18,
+        "summary": "The godmother takes Cinderella into her chamber and orders her to fetch a pumpkin from the garden.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The godmother takes Cinderella into her chamber and orders her to fetch a pumpkin from the garden."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 17,
+        "source_span": {
+          "start": 4145,
+          "end": 4244,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0019",
+        "sequence": 19,
+        "summary": "Cinderella goes into the garden and gathers a pumpkin.",
+        "location_id": "loc_garden",
+        "characters_present": [
+          "char_cinderella"
+        ],
+        "beats": [
+          "Cinderella goes into the garden and gathers a pumpkin."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_cinderella",
+            "column": "location_id",
+            "value": "loc_garden"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "immediately",
+        "narrated_index": 18,
+        "source_span": {
+          "start": 4246,
+          "end": 4308,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0020",
+        "sequence": 20,
+        "summary": "Cinderella brings the pumpkin to her godmother.",
+        "location_id": null,
+        "characters_present": [
+          "char_cinderella",
+          "char_godmother"
+        ],
+        "beats": [
+          "Cinderella brings the pumpkin to her godmother."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_pumpkin",
+            "column": "location_id",
+            "value": null
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 19,
+        "source_span": {
+          "start": 4310,
+          "end": 4416,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0021",
+        "sequence": 21,
+        "summary": "The godmother scoops out the pumpkin and strikes it with her wand, turning it into a golden coach.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother"
+        ],
+        "beats": [
+          "The godmother scoops out the pumpkin and strikes it with her wand, turning it into a golden coach."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_pumpkin",
+            "column": "status",
+            "value": "turned into a fine coach, gilded all over with gold"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "instantly",
+        "narrated_index": 20,
+        "source_span": {
+          "start": 4417,
+          "end": 4594,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0022",
+        "sequence": 22,
+        "summary": "Cinderella brings a pumpkin to her godmother.",
+        "location_id": null,
+        "characters_present": [
+          "char_cinderella",
+          "char_godmother"
+        ],
+        "beats": [
+          "Cinderella brings a pumpkin to her godmother."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "immediately",
+        "narrated_index": 21,
+        "source_span": {
+          "start": 4246,
+          "end": 4341,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0023",
+        "sequence": 23,
+        "summary": "The godmother scoops out the pumpkin and turns it into a coach with her wand.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother"
+        ],
+        "beats": [
+          "The godmother scoops out the pumpkin and turns it into a coach with her wand."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_pumpkin",
+            "column": "status",
+            "value": "turned into a fine coach"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "instantly",
+        "narrated_index": 22,
+        "source_span": {
+          "start": 4511,
+          "end": 4622,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0024",
+        "sequence": 24,
+        "summary": "The godmother orders Cinderella to lift the trapdoor of the mouse-trap.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The godmother orders Cinderella to lift the trapdoor of the mouse-trap."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 23,
+        "source_span": {
+          "start": 4708,
+          "end": 4759,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0025",
+        "sequence": 25,
+        "summary": "The godmother taps each mouse with her wand, turning them into six horses.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother",
+          "char_six_mice"
+        ],
+        "beats": [
+          "The godmother taps each mouse with her wand, turning them into six horses."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_six_mice",
+            "column": "status",
+            "value": "turned into six horses"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "that moment",
+        "narrated_index": 24,
+        "source_span": {
+          "start": 4767,
+          "end": 4880,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0026",
+        "sequence": 26,
+        "summary": "Cinderella proposes checking the rat-trap for a coachman.",
+        "location_id": null,
+        "characters_present": [
+          "char_cinderella",
+          "char_godmother"
+        ],
+        "beats": [
+          "Cinderella proposes checking the rat-trap for a coachman."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 25,
+        "source_span": {
+          "start": 5009,
+          "end": 5120,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0027",
+        "sequence": 27,
+        "summary": "The godmother tells Cinderella to go look in the rat-trap.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The godmother tells Cinderella to go look in the rat-trap."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 26,
+        "source_span": {
+          "start": 5122,
+          "end": 5184,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0028",
+        "sequence": 28,
+        "summary": "Cinderella brings the rat-trap to her godmother.",
+        "location_id": null,
+        "characters_present": [
+          "char_cinderella",
+          "char_godmother"
+        ],
+        "beats": [
+          "Cinderella brings the rat-trap to her godmother."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 27,
+        "source_span": {
+          "start": 5186,
+          "end": 5259,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0029",
+        "sequence": 29,
+        "summary": "The godmother touches one of the rats with her wand, turning him into a coachman.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother",
+          "char_rat"
+        ],
+        "beats": [
+          "The godmother touches one of the rats with her wand, turning him into a coachman."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_rat",
+            "column": "status",
+            "value": "turned into a fat, jolly coachman"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 28,
+        "source_span": {
+          "start": 5336,
+          "end": 5410,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0030",
+        "sequence": 30,
+        "summary": "The godmother instructs Cinderella to fetch six lizards from behind the watering-pot in the garden.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The godmother instructs Cinderella to fetch six lizards from behind the watering-pot in the garden."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 29,
+        "source_span": {
+          "start": 5490,
+          "end": 5590,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0031",
+        "sequence": 31,
+        "summary": "The godmother turns the six lizards into six footmen.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother",
+          "char_six_lizards"
+        ],
+        "beats": [
+          "The godmother turns the six lizards into six footmen."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_six_lizards",
+            "column": "status",
+            "value": "turned into six footmen"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "immediately",
+        "narrated_index": 30,
+        "source_span": {
+          "start": 5622,
+          "end": 5709,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0032",
+        "sequence": 32,
+        "summary": "Cinderella asks her godmother if she must go to the ball in her nasty rags.",
+        "location_id": null,
+        "characters_present": [
+          "char_cinderella",
+          "char_godmother"
+        ],
+        "beats": [
+          "Cinderella asks her godmother if she must go to the ball in her nasty rags."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 31,
+        "source_span": {
+          "start": 5982,
+          "end": 6057,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0033",
+        "sequence": 33,
+        "summary": "The godmother touches Cinderella with her wand, turning her clothes into cloth of gold and silver with jewels.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The godmother touches Cinderella with her wand, turning her clothes into cloth of gold and silver with jewels."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_clothes",
+            "column": "status",
+            "value": "cloth of gold and silver, all beset with jewels"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "at the same instant",
+        "narrated_index": 32,
+        "source_span": {
+          "start": 6059,
+          "end": 6189,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0034",
+        "sequence": 34,
         "summary": "The godmother gives Cinderella a pair of glass slippers.",
         "location_id": null,
         "characters_present": [
@@ -943,70 +1360,92 @@
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 17,
+        "narrated_index": 33,
         "source_span": {
-          "start": 6225,
+          "start": 6214,
           "end": 6297,
-          "resolution": "exact"
+          "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0019",
-        "sequence": 17,
-        "summary": "Cinderella enters the coach while her godmother commands her not to stay past midnight.",
+        "id": "ev_0035",
+        "sequence": 35,
+        "summary": "Cinderella climbs into her coach.",
         "location_id": null,
         "characters_present": [
-          "char_cinderella",
-          "char_godmother"
+          "char_cinderella"
         ],
         "beats": [
-          "Cinderella enters the coach while her godmother commands her not to stay past midnight."
+          "Cinderella climbs into her coach."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 18,
+        "narrated_index": 34,
         "source_span": {
-          "start": 6321,
-          "end": 6430,
-          "resolution": "exact"
+          "start": 6298,
+          "end": 6346,
+          "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0020",
-        "sequence": 18,
-        "summary": "Cinderella promises her godmother to leave the ball before midnight and drives away.",
+        "id": "ev_0036",
+        "sequence": 36,
+        "summary": "The godmother commands Cinderella not to stay at the ball past midnight.",
+        "location_id": null,
+        "characters_present": [
+          "char_godmother",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The godmother commands Cinderella not to stay at the ball past midnight."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 35,
+        "source_span": {
+          "start": 6352,
+          "end": 6430,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0037",
+        "sequence": 37,
+        "summary": "Cinderella promises her godmother to leave the ball before midnight and departs.",
         "location_id": null,
         "characters_present": [
           "char_cinderella",
           "char_godmother"
         ],
         "beats": [
-          "Cinderella promises her godmother to leave the ball before midnight and drives away."
+          "Cinderella promises her godmother to leave the ball before midnight and departs."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 19,
+        "narrated_index": 36,
         "source_span": {
           "start": 6645,
           "end": 6752,
-          "resolution": "exact"
+          "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0021",
-        "sequence": 19,
-        "summary": "The King's son receives Cinderella, helps her alight, and leads her into the ball.",
+        "id": "ev_0038",
+        "sequence": 38,
+        "summary": "The King's son runs out, receives Cinderella from the coach, and leads her into the ball.",
         "location_id": "loc_ball",
         "characters_present": [
           "char_kings_son",
           "char_cinderella"
         ],
         "beats": [
-          "The King's son receives Cinderella, helps her alight, and leads her into the ball."
+          "The King's son runs out, receives Cinderella from the coach, and leads her into the ball."
         ],
         "pays_off": [],
         "state_changes": [
@@ -1014,48 +1453,43 @@
             "entity_id": "char_cinderella",
             "column": "location_id",
             "value": "loc_ball"
-          },
-          {
-            "entity_id": "char_kings_son",
-            "column": "location_id",
-            "value": "loc_ball"
           }
         ],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 20,
+        "narrated_index": 37,
         "source_span": {
-          "start": 6873,
+          "start": 6794,
           "end": 6977,
-          "resolution": "exact"
+          "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0022",
-        "sequence": 20,
-        "summary": "The King whispers to the Queen about Cinderella's beauty.",
+        "id": "ev_0039",
+        "sequence": 39,
+        "summary": "The King softly tells the Queen that he has not seen so beautiful a creature in a long time.",
         "location_id": "loc_ball",
         "characters_present": [
           "char_the_king",
           "char_queen"
         ],
         "beats": [
-          "The King whispers to the Queen about Cinderella's beauty."
+          "The King softly tells the Queen that he has not seen so beautiful a creature in a long time."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 21,
+        "narrated_index": 38,
         "source_span": {
           "start": 7356,
           "end": 7458,
-          "resolution": "exact"
+          "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0023",
-        "sequence": 21,
+        "id": "ev_0040",
+        "sequence": 40,
         "summary": "The King's son conducts Cinderella to the most honorable seat and dances with her.",
         "location_id": "loc_ball",
         "characters_present": [
@@ -1069,69 +1503,69 @@
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "afterward",
-        "narrated_index": 22,
+        "narrated_index": 39,
         "source_span": {
           "start": 7675,
           "end": 7776,
-          "resolution": "exact"
+          "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0024",
-        "sequence": 22,
-        "summary": "Cinderella sits beside her sisters and shares the oranges and citrons given by the Prince.",
+        "id": "ev_0041",
+        "sequence": 41,
+        "summary": "Cinderella sits by her two sisters and shares with them the oranges and citrons given to her by the Prince.",
         "location_id": "loc_ball",
         "characters_present": [
           "char_cinderella",
           "char_two_sisters"
         ],
         "beats": [
-          "Cinderella sits beside her sisters and shares the oranges and citrons given by the Prince."
+          "Cinderella sits by her two sisters and shares with them the oranges and citrons given to her by the Prince."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 23,
+        "narrated_index": 40,
         "source_span": {
           "start": 7969,
-          "end": 8086,
-          "resolution": "exact"
+          "end": 8126,
+          "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0025",
-        "sequence": 23,
-        "summary": "Hearing the clock strike eleven and three-quarters, Cinderella courtesies and leaves the ball.",
+        "id": "ev_0042",
+        "sequence": 42,
+        "summary": "Hearing the clock strike eleven and three-quarters, Cinderella courtesies and hurries away.",
         "location_id": "loc_ball",
         "characters_present": [
           "char_cinderella"
         ],
         "beats": [
-          "Hearing the clock strike eleven and three-quarters, Cinderella courtesies and leaves the ball."
+          "Hearing the clock strike eleven and three-quarters, Cinderella courtesies and hurries away."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "eleven and three-quarters",
-        "narrated_index": 24,
+        "narrated_index": 41,
         "source_span": {
           "start": 8234,
-          "end": 8360,
-          "resolution": "exact"
+          "end": 8382,
+          "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0026",
-        "sequence": 24,
-        "summary": "Cinderella reaches home and thanks her godmother, wishing to return to the ball the next day.",
+        "id": "ev_0043",
+        "sequence": 43,
+        "summary": "Cinderella returns home, seeks out her godmother, and thanks her.",
         "location_id": "loc_home",
         "characters_present": [
           "char_cinderella",
           "char_godmother"
         ],
         "beats": [
-          "Cinderella reaches home and thanks her godmother, wishing to return to the ball the next day."
+          "Cinderella returns home, seeks out her godmother, and thanks her."
         ],
         "pays_off": [],
         "state_changes": [
@@ -1143,70 +1577,181 @@
         ],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 25,
+        "narrated_index": 42,
         "source_span": {
           "start": 8384,
-          "end": 8542,
-          "resolution": "exact"
+          "end": 8466,
+          "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0027",
-        "sequence": 25,
-        "summary": "The two sisters knock at the door, and Cinderella runs to open it.",
+        "id": "ev_0044",
+        "sequence": 44,
+        "summary": "Cinderella tells her godmother she wishes to go to the ball the next day.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_cinderella",
+          "char_godmother"
+        ],
+        "beats": [
+          "Cinderella tells her godmother she wishes to go to the ball the next day."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 43,
+        "source_span": {
+          "start": 8468,
+          "end": 8583,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0045",
+        "sequence": 45,
+        "summary": "The two sisters knock at the door, and Cinderella runs and opens it.",
         "location_id": "loc_home",
         "characters_present": [
           "char_two_sisters",
           "char_cinderella"
         ],
         "beats": [
-          "The two sisters knock at the door, and Cinderella runs to open it."
+          "The two sisters knock at the door, and Cinderella runs and opens it."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 26,
+        "narrated_index": 44,
         "source_span": {
           "start": 8659,
           "end": 8728,
-          "resolution": "exact"
-        }
-      },
-      {
-        "id": "ev_0029",
-        "sequence": 26,
-        "summary": "Miss Charlotte refuses to lend Cinderella her yellow suit.",
-        "location_id": "loc_home",
-        "characters_present": [
-          "char_eldest_daughter",
-          "char_cinderella"
-        ],
-        "beats": [
-          "Miss Charlotte refuses to lend Cinderella her yellow suit."
-        ],
-        "pays_off": [],
-        "state_changes": [],
-        "story_time": "present",
-        "time_anchor": "",
-        "narrated_index": 28,
-        "source_span": {
-          "start": 9721,
-          "end": 9797,
           "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0030",
-        "sequence": 27,
-        "summary": "Cinderella and her sisters attend the ball the next day.",
+        "id": "ev_0047",
+        "sequence": 46,
+        "summary": "One of Cinderella's sisters tells her about the beautiful princess at the ball.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_two_sisters",
+          "char_cinderella"
+        ],
+        "beats": [
+          "One of Cinderella's sisters tells her about the beautiful princess at the ball."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 46,
+        "source_span": {
+          "start": 8950,
+          "end": 9090,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0048",
+        "sequence": 47,
+        "summary": "Cinderella asks her sisters the name of the princess.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_cinderella",
+          "char_two_sisters"
+        ],
+        "beats": [
+          "Cinderella asks her sisters the name of the princess."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 47,
+        "source_span": {
+          "start": 9265,
+          "end": 9314,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0049",
+        "sequence": 48,
+        "summary": "The sisters tell Cinderella that they do not know the princess's name and that the King's son is uneasy on her account.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_two_sisters",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The sisters tell Cinderella that they do not know the princess's name and that the King's son is uneasy on her account."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 48,
+        "source_span": {
+          "start": 9319,
+          "end": 9409,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0050",
+        "sequence": 49,
+        "summary": "Cinderella asks Miss Charlotte to lend her yellow suit of clothes.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_cinderella",
+          "char_miss_charlotte"
+        ],
+        "beats": [
+          "Cinderella asks Miss Charlotte to lend her yellow suit of clothes."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 49,
+        "source_span": null
+      },
+      {
+        "id": "ev_0051",
+        "sequence": 50,
+        "summary": "Miss Charlotte refuses to lend her clothes to Cinderella.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_miss_charlotte",
+          "char_cinderella"
+        ],
+        "beats": [
+          "Miss Charlotte refuses to lend her clothes to Cinderella."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 50,
+        "source_span": {
+          "start": 9680,
+          "end": 9798,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0052",
+        "sequence": 51,
+        "summary": "The two sisters and Cinderella attend the ball the next day.",
         "location_id": "loc_ball",
         "characters_present": [
           "char_two_sisters",
           "char_cinderella"
         ],
         "beats": [
-          "Cinderella and her sisters attend the ball the next day."
+          "The two sisters and Cinderella attend the ball the next day."
         ],
         "pays_off": [],
         "state_changes": [
@@ -1223,7 +1768,7 @@
         ],
         "story_time": "present",
         "time_anchor": "The next day",
-        "narrated_index": 29,
+        "narrated_index": 51,
         "source_span": {
           "start": 9979,
           "end": 10092,
@@ -1231,44 +1776,44 @@
         }
       },
       {
-        "id": "ev_0031",
-        "sequence": 28,
-        "summary": "The clock strikes twelve and Cinderella flees from the ball.",
+        "id": "ev_0053",
+        "sequence": 52,
+        "summary": "The clock strikes twelve, and Cinderella flees the ball.",
         "location_id": "loc_ball",
         "characters_present": [
           "char_cinderella"
         ],
         "beats": [
-          "The clock strikes twelve and Cinderella flees from the ball."
+          "The clock strikes twelve, and Cinderella flees the ball."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "twelve",
-        "narrated_index": 30,
+        "narrated_index": 52,
         "source_span": {
-          "start": 10399,
+          "start": 10307,
           "end": 10446,
           "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0032",
-        "sequence": 29,
-        "summary": "The Prince follows Cinderella but fails to overtake her.",
+        "id": "ev_0054",
+        "sequence": 53,
+        "summary": "The Prince pursues Cinderella but cannot overtake her.",
         "location_id": "loc_ball",
         "characters_present": [
           "char_kings_son",
           "char_cinderella"
         ],
         "beats": [
-          "The Prince follows Cinderella but fails to overtake her."
+          "The Prince pursues Cinderella but cannot overtake her."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 31,
+        "narrated_index": 53,
         "source_span": {
           "start": 10447,
           "end": 10495,
@@ -1276,22 +1821,28 @@
         }
       },
       {
-        "id": "ev_0033",
-        "sequence": 30,
-        "summary": "The Prince picks up the glass slipper Cinderella left behind.",
+        "id": "ev_0055",
+        "sequence": 54,
+        "summary": "Cinderella leaves behind a glass slipper, which the Prince picks up.",
         "location_id": "loc_ball",
         "characters_present": [
-          "char_kings_son",
-          "char_cinderella"
+          "char_cinderella",
+          "char_kings_son"
         ],
         "beats": [
-          "The Prince picks up the glass slipper Cinderella left behind."
+          "Cinderella leaves behind a glass slipper, which the Prince picks up."
         ],
         "pays_off": [],
-        "state_changes": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_glass_slippers",
+            "column": "location_id",
+            "value": "loc_ball"
+          }
+        ],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 32,
+        "narrated_index": 54,
         "source_span": {
           "start": 10496,
           "end": 10579,
@@ -1299,15 +1850,15 @@
         }
       },
       {
-        "id": "ev_0034",
-        "sequence": 31,
-        "summary": "Cinderella arrives home out of breath and dressed in old clothes.",
+        "id": "ev_0056",
+        "sequence": 55,
+        "summary": "Cinderella arrives home in her old clothes.",
         "location_id": "loc_home",
         "characters_present": [
           "char_cinderella"
         ],
         "beats": [
-          "Cinderella arrives home out of breath and dressed in old clothes."
+          "Cinderella arrives home in her old clothes."
         ],
         "pays_off": [],
         "state_changes": [
@@ -1315,11 +1866,16 @@
             "entity_id": "char_cinderella",
             "column": "location_id",
             "value": "loc_home"
+          },
+          {
+            "entity_id": "obj_clothes",
+            "column": "location_id",
+            "value": "loc_home"
           }
         ],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 33,
+        "narrated_index": 55,
         "source_span": {
           "start": 10580,
           "end": 10646,
@@ -1327,21 +1883,117 @@
         }
       },
       {
-        "id": "ev_0035",
-        "sequence": 32,
-        "summary": "The King's son proclaims by sound of trumpet that he will marry the woman whose foot fits the slipper.",
+        "id": "ev_0057",
+        "sequence": 56,
+        "summary": "The palace gate guards are questioned whether they saw a princess leave.",
+        "location_id": "loc_palace_gate",
+        "characters_present": [
+          "char_guards_palace_gate"
+        ],
+        "beats": [
+          "The palace gate guards are questioned whether they saw a princess leave."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 56,
+        "source_span": {
+          "start": 10750,
+          "end": 10832,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0058",
+        "sequence": 57,
+        "summary": "The guards reply that they only saw a poorly dressed young girl leave.",
+        "location_id": "loc_palace_gate",
+        "characters_present": [
+          "char_guards_palace_gate"
+        ],
+        "beats": [
+          "The guards reply that they only saw a poorly dressed young girl leave."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 57,
+        "source_span": {
+          "start": 10834,
+          "end": 10909,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0059",
+        "sequence": 58,
+        "summary": "Cinderella asks her returned sisters about the ball and the fine lady.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_cinderella",
+          "char_two_sisters"
+        ],
+        "beats": [
+          "Cinderella asks her returned sisters about the ball and the fine lady."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_two_sisters",
+            "column": "location_id",
+            "value": "loc_home"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 58,
+        "source_span": {
+          "start": 10981,
+          "end": 11116,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0060",
+        "sequence": 59,
+        "summary": "The sisters tell Cinderella about the lady's hasty departure and the dropped slipper.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_two_sisters",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The sisters tell Cinderella about the lady's hasty departure and the dropped slipper."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 59,
+        "source_span": {
+          "start": 11118,
+          "end": 11271,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0061",
+        "sequence": 60,
+        "summary": "The King's son proclaims that he will marry the woman whose foot fits the slipper.",
         "location_id": null,
         "characters_present": [
           "char_kings_son"
         ],
         "beats": [
-          "The King's son proclaims by sound of trumpet that he will marry the woman whose foot fits the slipper."
+          "The King's son proclaims that he will marry the woman whose foot fits the slipper."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "a few days after",
-        "narrated_index": 34,
+        "narrated_index": 60,
         "source_span": {
           "start": 11559,
           "end": 11685,
@@ -1349,21 +2001,19 @@
         }
       },
       {
-        "id": "ev_0036",
-        "sequence": 33,
-        "summary": "The King's officials try the slipper on the princesses, duchesses, and Court in vain.",
+        "id": "ev_0062",
+        "sequence": 61,
+        "summary": "The King's officials try the slipper on the ladies of the Court without success.",
         "location_id": "loc_court",
-        "characters_present": [
-          "char_gentleman_official"
-        ],
+        "characters_present": [],
         "beats": [
-          "The King's officials try the slipper on the princesses, duchesses, and Court in vain."
+          "The King's officials try the slipper on the ladies of the Court without success."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 35,
+        "narrated_index": 61,
         "source_span": {
           "start": 11686,
           "end": 11795,
@@ -1371,8 +2021,8 @@
         }
       },
       {
-        "id": "ev_0037",
-        "sequence": 34,
+        "id": "ev_0063",
+        "sequence": 62,
         "summary": "The two sisters try unsuccessfully to fit their feet into the slipper.",
         "location_id": "loc_home",
         "characters_present": [
@@ -1385,7 +2035,7 @@
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 36,
+        "narrated_index": 62,
         "source_span": {
           "start": 11796,
           "end": 11931,
@@ -1393,44 +2043,119 @@
         }
       },
       {
-        "id": "ev_0038",
-        "sequence": 35,
-        "summary": "The gentleman official puts the slipper on Cinderella's foot, and it fits easily.",
+        "id": "ev_0064",
+        "sequence": 63,
+        "summary": "Cinderella asks to try on the slipper.",
         "location_id": "loc_home",
         "characters_present": [
-          "char_gentleman_official",
-          "char_cinderella"
+          "char_cinderella",
+          "char_two_sisters"
         ],
         "beats": [
-          "The gentleman official puts the slipper on Cinderella's foot, and it fits easily."
+          "Cinderella asks to try on the slipper."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 37,
+        "narrated_index": 63,
         "source_span": {
-          "start": 12311,
-          "end": 12415,
+          "start": 11932,
+          "end": 12044,
           "resolution": "normalized"
         }
       },
       {
-        "id": "ev_0039",
-        "sequence": 36,
-        "summary": "Cinderella pulls out the other glass slipper and puts it on her foot.",
+        "id": "ev_0065",
+        "sequence": 64,
+        "summary": "The sisters laugh at and banter Cinderella.",
         "location_id": "loc_home",
         "characters_present": [
+          "char_two_sisters",
           "char_cinderella"
         ],
         "beats": [
-          "Cinderella pulls out the other glass slipper and puts it on her foot."
+          "The sisters laugh at and banter Cinderella."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 38,
+        "narrated_index": 64,
+        "source_span": {
+          "start": 12046,
+          "end": 12104,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0066",
+        "sequence": 65,
+        "summary": "The gentleman sent to try the slipper states that Cinderella must be allowed to try it.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_gentleman_sent_to_try_slipper",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The gentleman sent to try the slipper states that Cinderella must be allowed to try it."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 65,
+        "source_span": {
+          "start": 12215,
+          "end": 12309,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0067",
+        "sequence": 66,
+        "summary": "The gentleman fits the glass slipper onto Cinderella's foot easily.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_gentleman_sent_to_try_slipper",
+          "char_cinderella"
+        ],
+        "beats": [
+          "The gentleman fits the glass slipper onto Cinderella's foot easily."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_glass_slippers",
+            "column": "location_id",
+            "value": "loc_home"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 66,
+        "source_span": {
+          "start": 12311,
+          "end": 12462,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0068",
+        "sequence": 67,
+        "summary": "Cinderella takes the other glass slipper from her pocket and puts it on her foot.",
+        "location_id": "loc_home",
+        "characters_present": [
+          "char_cinderella"
+        ],
+        "beats": [
+          "Cinderella takes the other glass slipper from her pocket and puts it on her foot."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 67,
         "source_span": {
           "start": 12561,
           "end": 12639,
@@ -1438,16 +2163,16 @@
         }
       },
       {
-        "id": "ev_0040",
-        "sequence": 37,
-        "summary": "The godmother arrives and transforms Cinderella's clothes with her wand.",
+        "id": "ev_0069",
+        "sequence": 68,
+        "summary": "The godmother arrives and transforms Cinderella's clothes into magnificent attire with her wand.",
         "location_id": "loc_home",
         "characters_present": [
           "char_godmother",
           "char_cinderella"
         ],
         "beats": [
-          "The godmother arrives and transforms Cinderella's clothes with her wand."
+          "The godmother arrives and transforms Cinderella's clothes into magnificent attire with her wand."
         ],
         "pays_off": [],
         "state_changes": [
@@ -1455,11 +2180,21 @@
             "entity_id": "char_godmother",
             "column": "location_id",
             "value": "loc_home"
+          },
+          {
+            "entity_id": "obj_wand",
+            "column": "location_id",
+            "value": "loc_home"
+          },
+          {
+            "entity_id": "obj_clothes",
+            "column": "status",
+            "value": "richer and more magnificent"
           }
         ],
         "story_time": "present",
-        "time_anchor": "Thereupon",
-        "narrated_index": 39,
+        "time_anchor": "",
+        "narrated_index": 68,
         "source_span": {
           "start": 12640,
           "end": 12767,
@@ -1467,31 +2202,8 @@
         }
       },
       {
-        "id": "ev_0043",
-        "sequence": 38,
-        "summary": "The two sisters realize Cinderella is the beautiful lady from the ball.",
-        "location_id": null,
-        "characters_present": [
-          "char_two_sisters",
-          "char_cinderella"
-        ],
-        "beats": [
-          "The two sisters realize Cinderella is the beautiful lady from the ball."
-        ],
-        "pays_off": [],
-        "state_changes": [],
-        "story_time": "present",
-        "time_anchor": "now",
-        "narrated_index": 42,
-        "source_span": {
-          "start": 12811,
-          "end": 12900,
-          "resolution": "normalized"
-        }
-      },
-      {
-        "id": "ev_0041",
-        "sequence": 39,
+        "id": "ev_0070",
+        "sequence": 69,
         "summary": "The two sisters throw themselves at Cinderella's feet to beg for pardon.",
         "location_id": "loc_home",
         "characters_present": [
@@ -1504,8 +2216,8 @@
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
-        "time_anchor": "now",
-        "narrated_index": 40,
+        "time_anchor": "",
+        "narrated_index": 69,
         "source_span": {
           "start": 12901,
           "end": 13001,
@@ -1513,8 +2225,8 @@
         }
       },
       {
-        "id": "ev_0042",
-        "sequence": 40,
+        "id": "ev_0071",
+        "sequence": 70,
         "summary": "Cinderella raises and embraces her sisters.",
         "location_id": "loc_home",
         "characters_present": [
@@ -1528,7 +2240,7 @@
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 41,
+        "narrated_index": 70,
         "source_span": {
           "start": 13002,
           "end": 13060,
@@ -1536,22 +2248,22 @@
         }
       },
       {
-        "id": "ev_0045",
-        "sequence": 41,
-        "summary": "Cinderella raises and embraces her sisters, forgiving them completely.",
-        "location_id": null,
+        "id": "ev_0073",
+        "sequence": 71,
+        "summary": "Cinderella embraces her sisters, forgives them, and asks them to always love her.",
+        "location_id": "loc_home",
         "characters_present": [
           "char_cinderella",
           "char_two_sisters"
         ],
         "beats": [
-          "Cinderella raises and embraces her sisters, forgiving them completely."
+          "Cinderella embraces her sisters, forgives them, and asks them to always love her."
         ],
         "pays_off": [],
         "state_changes": [],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 44,
+        "narrated_index": 72,
         "source_span": {
           "start": 13002,
           "end": 13102,
@@ -1559,51 +2271,57 @@
         }
       },
       {
-        "id": "ev_0046",
-        "sequence": 42,
-        "summary": "Cinderella is brought to the King's son.",
-        "location_id": null,
+        "id": "ev_0074",
+        "sequence": 72,
+        "summary": "Cinderella is brought to the young prince.",
+        "location_id": "loc_palace",
         "characters_present": [
           "char_cinderella",
           "char_kings_son"
         ],
         "beats": [
-          "Cinderella is brought to the King's son."
+          "Cinderella is brought to the young prince."
         ],
         "pays_off": [],
-        "state_changes": [],
+        "state_changes": [
+          {
+            "entity_id": "char_cinderella",
+            "column": "location_id",
+            "value": "loc_palace"
+          }
+        ],
         "story_time": "present",
         "time_anchor": "",
-        "narrated_index": 45,
+        "narrated_index": 73,
         "source_span": {
           "start": 13142,
-          "end": 13200,
+          "end": 13199,
           "resolution": "exact"
         }
       },
       {
-        "id": "ev_0047",
-        "sequence": 43,
-        "summary": "The King's son marries Cinderella a few days later.",
-        "location_id": null,
+        "id": "ev_0075",
+        "sequence": 73,
+        "summary": "The King's son marries Cinderella.",
+        "location_id": "loc_palace",
         "characters_present": [
           "char_kings_son",
           "char_cinderella"
         ],
         "beats": [
-          "The King's son marries Cinderella a few days later."
+          "The King's son marries Cinderella."
         ],
         "pays_off": [],
         "state_changes": [
           {
             "entity_id": "char_cinderella",
             "column": "status",
-            "value": "married"
+            "value": "married to the Prince"
           }
         ],
         "story_time": "present",
         "time_anchor": "a few days after",
-        "narrated_index": 46,
+        "narrated_index": 74,
         "source_span": {
           "start": 13241,
           "end": 13276,
@@ -1611,17 +2329,16 @@
         }
       },
       {
-        "id": "ev_0048",
-        "sequence": 44,
-        "summary": "Cinderella gives her two sisters lodgings in the palace and arranges their marriages to two great lords.",
+        "id": "ev_0076",
+        "sequence": 74,
+        "summary": "Cinderella gives her two sisters lodgings in the palace.",
         "location_id": "loc_palace",
         "characters_present": [
           "char_cinderella",
-          "char_two_sisters",
-          "char_two_great_lords"
+          "char_two_sisters"
         ],
         "beats": [
-          "Cinderella gives her two sisters lodgings in the palace and arranges their marriages to two great lords."
+          "Cinderella gives her two sisters lodgings in the palace."
         ],
         "pays_off": [],
         "state_changes": [
@@ -1632,10 +2349,40 @@
           }
         ],
         "story_time": "present",
-        "time_anchor": "that very same day",
-        "narrated_index": 47,
+        "time_anchor": "",
+        "narrated_index": 75,
         "source_span": {
           "start": 13326,
+          "end": 13369,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0077",
+        "sequence": 75,
+        "summary": "Cinderella marries her two sisters to two great lords of the Court.",
+        "location_id": "loc_palace",
+        "characters_present": [
+          "char_cinderella",
+          "char_two_sisters",
+          "char_two_great_lords"
+        ],
+        "beats": [
+          "Cinderella marries her two sisters to two great lords of the Court."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_two_sisters",
+            "column": "status",
+            "value": "married to two great lords of the Court"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "that very same day",
+        "narrated_index": 76,
+        "source_span": {
+          "start": 13371,
           "end": 13441,
           "resolution": "normalized"
         }

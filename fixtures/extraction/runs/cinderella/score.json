@@ -1,6 +1,6 @@
 {
   "story_id": "cinderella",
-  "scored_at": "2026-09-16T06:01:53.521Z",
+  "scored_at": "2026-09-18T02:49:36.933Z",
   "source": {
     "id": "cinderella",
     "title": "Cinderella, or the Little Glass Slipper",
@@ -30,6 +30,7 @@
       "unexpected_errors": []
     },
     "projected": {
+      "note": "This is a projection of Fabula-only content onto provisional scenes. It is not a Story Package and has not been checked for publish-readiness — Scene Cards, the Voice Card, and everything the real linter checks about them still do not exist.",
       "passed": true,
       "errors": [],
       "warnings": [
@@ -48,43 +49,25 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_tire_woman",
+          "path": "world_model_seed.characters.char_former_husband",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_guards",
+          "path": "world_model_seed.characters.char_ladies",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_madams_chamber",
+          "path": "world_model_seed.locations.loc_garret",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_chimney_corner",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_palace_gate",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_pumpkin",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_wand",
+          "path": "world_model_seed.objects.obj_coach",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -108,12 +91,6 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_glass_slippers",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
           "path": "world_model_seed.objects.obj_mouse_trap",
           "message": "is in the seed but no Scene Card ever names it"
         },
@@ -132,28 +109,17 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_clothes",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_oranges_and_citrons",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_yellow_suit",
+          "path": "world_model_seed.objects.obj_yellow_suit_of_clothes",
           "message": "is in the seed but no Scene Card ever names it"
         }
       ],
-      "scene_count": 44,
+      "scene_count": 75,
       "substitutions": {
-        "pov_from_first_participant": 44,
-        "pov_unavailable": 0,
-        "location_carried_forward": 19,
-        "location_unavailable": 0
+        "pov_from_first_participant": 74,
+        "pov_unavailable": 1,
+        "location_carried_forward": 36,
+        "location_unavailable": 0,
+        "dramatic_function_projected": 75
       }
     },
     "seed_parse_errors": [],
@@ -161,113 +127,108 @@
   },
   "span_grounding": {
     "bar": "no rubric bar: §8 of the prior-art survey defines the check, the rubric has no numeric threshold for it. Reported as the gate the ticket asks for, not as a scored metric.",
-    "claims": 133,
-    "resolved_exact": 46,
-    "resolved_normalized": 87,
-    "unresolved": 0,
-    "quote_resolution_rate": 1,
-    "judged": 45,
-    "supports": 41,
-    "insufficient": 4,
+    "claims": 174,
+    "resolved_exact": 34,
+    "resolved_normalized": 138,
+    "unresolved": 2,
+    "quote_resolution_rate": 0.9885057471264368,
+    "judged": 58,
+    "supports": 53,
+    "insufficient": 5,
     "contradicts": 0,
     "unjudged": 0,
-    "support_rate": 0.9111111111111111,
+    "support_rate": 0.9137931034482759,
     "worst": [
       {
-        "subject": "relationship:rel_004",
+        "subject": "character:char_mademoiselle_de_la_poche",
         "verdict": "insufficient",
-        "why": "The excerpt mentions she had two daughters by a former husband, but does not identify one as char_youngest_daughter."
+        "why": "She is only mentioned in passing as a vendor of brushes and patches."
       },
       {
-        "subject": "relationship:rel_010",
+        "subject": "character:char_tire_woman",
         "verdict": "insufficient",
-        "why": "The excerpt does not establish that the speaker is Cinderella's stepsister."
+        "why": "They merely sent for the best tire-woman they could get, without establishing her presence."
       },
       {
-        "subject": "relationship:rel_016",
+        "subject": "relationship:rel_002",
         "verdict": "insufficient",
-        "why": "The text mentions the King, the Queen, and the King's son, but does not state the Queen is his mother."
+        "why": "The excerpt establishes he had a daughter, but does not identify this daughter specifically as Cinderella."
       },
       {
-        "subject": "state_update:ev_0006:char_godmother.location_id",
+        "subject": "relationship:rel_018",
         "verdict": "insufficient",
-        "why": "The text states 'she took her into her chamber', meaning the godmother's or Cinderella's chamber, but does not identify the room as Cinderella's specifically."
+        "why": "The king and queen are mentioned together, but their marital relationship is not explicitly stated."
+      },
+      {
+        "subject": "seed:char_gentlemans_first_wife",
+        "verdict": "insufficient",
+        "why": "The text does not explicitly state that the first wife is dead, only that he had a child by another wife who was the best creature."
       }
-    ]
+    ],
+    "contradicted_subjects": []
   },
   "world_model": {
     "tables": [
       {
         "table": "characters",
         "fixture_rows": 8,
-        "candidate_rows": 20,
+        "candidate_rows": 22,
         "aligned": 8,
         "recall": 1,
-        "precision": 0.5,
-        "misses": [],
-        "inventions": [
-          "Mademoiselle de la Poche",
-          "gentleman's first wife",
-          "tire-woman",
-          "six mice",
-          "coachman",
-          "six lizards",
-          "The King",
-          "Queen",
-          "sisters",
-          "three huge rats",
-          "guards",
-          "two great lords of the Court"
-        ],
-        "precision_flat": 0.4,
-        "load_bearing_rows": 16,
+        "precision": 0.4444444444444444,
+        "precision_flat": 0.36363636363636365,
+        "load_bearing_rows": 18,
         "over_extracted": 4,
         "over_extracted_examples": [
           "Mademoiselle de la Poche",
           "gentleman's first wife",
-          "tire-woman",
-          "guards"
+          "former husband",
+          "ladies"
         ],
         "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
-        "correction": {
-          "ticket": 151,
-          "was": 0.4,
-          "method": "recomputed from this run's own package and alignment file, not a re-run"
-        }
+        "misses": [],
+        "inventions": [
+          "youngest daughter",
+          "Mademoiselle de la Poche",
+          "gentleman's first wife",
+          "former husband",
+          "tire-woman",
+          "six mice",
+          "rat",
+          "six lizards",
+          "The King",
+          "Queen",
+          "two sisters",
+          "ladies",
+          "The guards at the palace gate",
+          "two great lords of the Court"
+        ]
       },
       {
         "table": "locations",
         "fixture_rows": 6,
-        "candidate_rows": 10,
-        "aligned": 4,
-        "recall": 0.6666666666666666,
-        "precision": 0.5714285714285714,
+        "candidate_rows": 7,
+        "aligned": 3,
+        "recall": 0.5,
+        "precision": 0.5,
+        "precision_flat": 0.42857142857142855,
+        "load_bearing_rows": 6,
+        "over_extracted": 1,
+        "over_extracted_examples": [
+          "garret"
+        ],
+        "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
         "misses": [
+          "the chimney-corner",
           "the palace steps",
           "the houses of the kingdom"
         ],
         "inventions": [
-          "sorry garret",
           "Court",
-          "madam's chamber",
-          "Cinderella's chamber",
+          "garret",
           "palace gate",
-          "the palace"
-        ],
-        "precision_flat": 0.4,
-        "load_bearing_rows": 7,
-        "over_extracted": 3,
-        "over_extracted_examples": [
-          "sorry garret",
-          "madam's chamber",
-          "palace gate"
-        ],
-        "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
-        "correction": {
-          "ticket": 151,
-          "was": 0.4,
-          "method": "recomputed from this run's own package and alignment file, not a re-run"
-        }
+          "palace"
+        ]
       },
       {
         "table": "objects",
@@ -276,6 +237,11 @@
         "aligned": 3,
         "recall": 0.42857142857142855,
         "precision": 0.25,
+        "precision_flat": 0.25,
+        "load_bearing_rows": 12,
+        "over_extracted": 0,
+        "over_extracted_examples": [],
+        "denominator": "all candidate rows — the load-bearing rule is not applied to this table (see #154)",
         "misses": [
           "six mice",
           "a rat",
@@ -284,34 +250,24 @@
         ],
         "inventions": [
           "wand",
+          "coach",
           "red velvet suit",
           "gold-flowered manteau",
           "diamond stomacher",
           "mouse-trap",
           "rat-trap",
           "watering-pot",
-          "oranges and citrons",
           "yellow suit of clothes"
-        ],
-        "precision_flat": 0.25,
-        "load_bearing_rows": 12,
-        "over_extracted": 0,
-        "over_extracted_examples": [],
-        "denominator": "all candidate rows — the load-bearing rule is not applied to this table (see #154)",
-        "correction": {
-          "ticket": 151,
-          "was": 0.25,
-          "method": "recomputed from this run's own package and alignment file, not a re-run"
-        }
+        ]
       }
     ],
-    "relationship_recall": 1,
-    "relationship_matched": 7,
+    "relationship_recall": 0.8571428571428571,
+    "relationship_matched": 6,
     "relationship_fixture_rows": 7,
-    "relationship_candidate_rows": 27,
+    "relationship_candidate_rows": 23,
     "seed_attributes": {
-      "judged": 9,
-      "supported_at_start": 9,
+      "judged": 8,
+      "supported_at_start": 8,
       "seed_time_errors": 0,
       "contradicted": 0,
       "insufficient": 0,
@@ -322,68 +278,63 @@
   },
   "events": {
     "ground_truth_events": 53,
-    "candidate_events": 44,
-    "matched": 28,
-    "recall": 0.5283018867924528,
+    "candidate_events": 75,
+    "matched": 29,
+    "recall": 0.5471698113207547,
     "missed": [
+      "the father has remarried a proud and haughty woman",
       "her two daughters prove as haughty as their mother",
       "the stepmother turns all the housework over to Cinderella and sends her to sleep in the chimney-corner",
+      "word arrives that the King's son is giving a ball, and all persons of fashion are invited",
       "the two sisters are overjoyed and think of nothing but what to wear",
       "Cinderella is expected to help them dress but is not imagined as a guest herself",
-      "Cinderella dresses her sisters' hair with skill and good nature, since she has excellent taste",
-      "the sisters jeer that it would make people laugh to see a Cinderwench at a ball",
       "Cinderella does not ask to go",
       "a hush falls and the dancing stops as she enters",
       "no one — including her own stepmother and sisters — recognizes her",
       "the sisters do not know her",
+      "she leaves at a quarter to twelve, well ahead of the deadline, and thanks the King and the Prince for their civility",
       "she reaches home safely, with time to spare",
       "she confesses she would be glad to go to the ball again the next night",
       "the godmother agrees to send her again",
       "the sisters return home and can talk of nothing but the beautiful unknown princess at the ball",
       "Cinderella asks the princess's name; the sisters say they do not know it",
       "Cinderella asks, with feigned idle curiosity, to borrow Miss Charlotte's yellow suit so she might see the ball for herself",
+      "she is refused and mocked for the suggestion, as expected",
       "she is so happy she loses all track of time",
-      "in her haste she loses one glass slipper on the palace steps",
       "at the last stroke of midnight, coach, horses, coachman, footmen, and gown all revert to a pumpkin, mice, a rat, lizards, and rags",
       "of all her finery, only the fellow glass slipper remains, kept in her pocket",
       "she says nothing of the ball to anyone in the household",
       "the search reaches at last the house of Cinderella's father",
-      "Cinderella asks if she may try, and is laughed at",
-      "the gentleman-in-waiting says he has orders to let every maiden try, and looks earnestly at Cinderella, finding her very beautiful",
-      "she is taken to the palace and presented to the Prince, lovelier than ever"
+      "they are married within a few days"
     ],
-    "pairwise_total": 378,
-    "pairwise_correct": 378,
-    "pairwise_accuracy": 1,
-    "high_confidence_total": 378,
-    "high_confidence_correct": 378,
-    "high_confidence_accuracy": 1,
+    "pairwise_total": 406,
+    "pairwise_correct": 404,
+    "pairwise_accuracy": 0.9950738916256158,
+    "high_confidence_total": 406,
+    "high_confidence_correct": 404,
+    "high_confidence_accuracy": 0.9950738916256158,
     "out_of_order_total": 0,
     "out_of_order_correct": 0,
     "out_of_order_accuracy": null,
     "fabricated": 0,
+    "fabricated_judged": 58,
     "fabricated_examples": [],
-    "fabricated_judged": 45,
-    "ungroundable_events": 0,
-    "correction": {
-      "ticket": 152,
-      "was": 0,
-      "why": "#152: fabricated counted ungroundable quotes as invention. Recomputed as judged `contradicts` events only; the ungroundable events move to ungroundable_events and remain counted by §3.2 quote_resolution_rate.",
-      "method": "arithmetic from this file's own recorded verdicts, not a re-run — no new judge calls were made, and fabricated_examples is cleared because the old list named ungroundable events, not invented ones",
-      "worst_list_complete": true
-    }
+    "ungroundable_events": 1,
+    "ungroundable_examples": [
+      "Cinderella asks Miss Charlotte to lend her yellow suit of clothes."
+    ]
   },
   "not_scored": [
     {
-      "section": "§3.4 Scene segmentation",
-      "reason": "this pipeline stops before segmentation by design (#113 boundary; #118 owns it), so scene_cards is empty and every §3.4 metric has an empty denominator"
+      "section": "§3.5 Scene segmentation",
+      "reason": "this pipeline stops before segmentation by design (#113 boundary; #118 owns it), so scene_cards is empty and every §3.5 metric has an empty denominator. Scored by src/segmentation/scoring/score.ts once #118 has drawn the cards."
     },
     {
-      "section": "§3.5 Reveal order",
+      "section": "§3.6 Reveal order",
       "reason": "reader_must_learn / must_stay_hidden are Scene Card fields; §4.7 of the research is explicit that the told-ledger is derived from those, not extracted from prose"
     },
     {
-      "section": "§3.6 Plant/payoff graph",
+      "section": "§3.7 Plant/payoff graph",
       "reason": "pays_off names scene ids, and no Scene Card exists at this stage"
     }
   ],
@@ -401,21 +352,30 @@
       },
       {
         "table": "characters",
+        "fixture_id": "char_stepsister_charlotte",
+        "fixture_name": "Miss Charlotte",
+        "candidate_id": "char_miss_charlotte",
+        "candidate_name": "Miss Charlotte",
+        "how": "exact_name",
+        "why": "normalized name match"
+      },
+      {
+        "table": "characters",
         "fixture_id": "char_father",
         "fixture_name": "Cinderella's father",
         "candidate_id": "char_gentleman",
         "candidate_name": "gentleman",
         "how": "judged",
-        "why": "Both refer to Cinderella's father, the gentleman who remarried."
+        "why": "Both refer to Cinderella's father."
       },
       {
         "table": "characters",
         "fixture_id": "char_stepmother",
         "fixture_name": "the Stepmother",
-        "candidate_id": "char_stepmother",
+        "candidate_id": "char_second_wife",
         "candidate_name": "second wife",
         "how": "judged",
-        "why": "Both refer to Cinderella's stepmother, the gentleman's second wife."
+        "why": "Both refer to the father's second wife, Cinderella's stepmother."
       },
       {
         "table": "characters",
@@ -424,16 +384,7 @@
         "candidate_id": "char_eldest_daughter",
         "candidate_name": "eldest daughter",
         "how": "judged",
-        "why": "Both represent the elder of the two stepsisters."
-      },
-      {
-        "table": "characters",
-        "fixture_id": "char_stepsister_charlotte",
-        "fixture_name": "Miss Charlotte",
-        "candidate_id": "char_youngest_daughter",
-        "candidate_name": "youngest daughter",
-        "how": "judged",
-        "why": "Both represent the younger stepsister."
+        "why": "Both refer to the older of the two stepsisters."
       },
       {
         "table": "characters",
@@ -457,10 +408,10 @@
         "table": "characters",
         "fixture_id": "char_gentleman_usher",
         "fixture_name": "the gentleman-in-waiting",
-        "candidate_id": "char_gentleman_official",
-        "candidate_name": "gentleman official",
+        "candidate_id": "char_gentleman_sent_to_try_slipper",
+        "candidate_name": "gentleman who was sent to try the slipper",
         "how": "judged",
-        "why": "Both refer to the royal official who tries the slipper on the ladies."
+        "why": "Both refer to the gentleman official tasked with trying the glass slipper."
       },
       {
         "table": "locations",
@@ -469,16 +420,16 @@
         "candidate_id": "loc_home",
         "candidate_name": "home",
         "how": "judged",
-        "why": "Both refer to Cinderella's home and her father's house."
+        "why": "Both refer to Cinderella's family home."
       },
       {
         "table": "locations",
         "fixture_id": "loc_chimney_corner",
         "fixture_name": "the chimney-corner",
-        "candidate_id": "loc_chimney_corner",
-        "candidate_name": "chimney-corner",
-        "how": "judged",
-        "why": "Exact match for the chimney-corner."
+        "candidate_id": null,
+        "candidate_name": null,
+        "how": "unaligned",
+        "why": "No matching candidate row for the chimney-corner."
       },
       {
         "table": "locations",
@@ -487,7 +438,7 @@
         "candidate_id": "loc_garden",
         "candidate_name": "garden",
         "how": "judged",
-        "why": "Exact match for the garden."
+        "why": "Both refer to the garden."
       },
       {
         "table": "locations",
@@ -496,7 +447,7 @@
         "candidate_id": "loc_ball",
         "candidate_name": "ball",
         "how": "judged",
-        "why": "Both refer to the location where the royal ball takes place."
+        "why": "Both refer to the royal ballroom setting."
       },
       {
         "table": "locations",
@@ -505,7 +456,7 @@
         "candidate_id": null,
         "candidate_name": null,
         "how": "unaligned",
-        "why": "The palace steps are distinct from the palace gate and palace generally."
+        "why": "The palace steps are distinct from the palace gate."
       },
       {
         "table": "locations",
@@ -514,7 +465,7 @@
         "candidate_id": null,
         "candidate_name": null,
         "how": "unaligned",
-        "why": "No candidate corresponds to the houses of the kingdom visited during the slipper search."
+        "why": "No candidate matches the general houses of the kingdom visited during the slipper search."
       },
       {
         "table": "objects",
@@ -523,7 +474,7 @@
         "candidate_id": "obj_pumpkin",
         "candidate_name": "pumpkin",
         "how": "judged",
-        "why": "Both denote the pumpkin turned into a coach."
+        "why": "Both represent the pumpkin transformed into a coach."
       },
       {
         "table": "objects",
@@ -532,7 +483,7 @@
         "candidate_id": null,
         "candidate_name": null,
         "how": "unaligned",
-        "why": "No candidate row models the mice."
+        "why": "No candidate row represents the mice."
       },
       {
         "table": "objects",
@@ -541,7 +492,7 @@
         "candidate_id": null,
         "candidate_name": null,
         "how": "unaligned",
-        "why": "No candidate row models the rat."
+        "why": "No candidate row represents the rat."
       },
       {
         "table": "objects",
@@ -550,7 +501,7 @@
         "candidate_id": null,
         "candidate_name": null,
         "how": "unaligned",
-        "why": "No candidate row models the lizards."
+        "why": "No candidate row represents the lizards."
       },
       {
         "table": "objects",
@@ -559,7 +510,7 @@
         "candidate_id": "obj_clothes",
         "candidate_name": "clothes",
         "how": "judged",
-        "why": "Both denote Cinderella's magical ball clothes of gold and silver."
+        "why": "Both refer to Cinderella's magically transformed clothes/gown."
       },
       {
         "table": "objects",
@@ -568,7 +519,7 @@
         "candidate_id": "obj_glass_slippers",
         "candidate_name": "glass slippers",
         "how": "judged",
-        "why": "Candidate models the pair of slippers corresponding to the fixture slipper."
+        "why": "Candidate models the pair of slippers that fixture splits into two items."
       },
       {
         "table": "objects",
@@ -577,14 +528,14 @@
         "candidate_id": null,
         "candidate_name": null,
         "how": "unaligned",
-        "why": "The candidate pair is already assigned to the first slipper."
+        "why": "The candidate pair of glass slippers was already assigned to the first slipper."
       }
     ],
     "events": [
       {
         "truth_id": "scene_01_remarriage#0",
         "truth_text": "the father has remarried a proud and haughty woman",
-        "candidate_id": "ev_0001"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_01_remarriage#1",
@@ -599,7 +550,7 @@
       {
         "truth_id": "scene_02_the_ball_proclaimed#0",
         "truth_text": "word arrives that the King's son is giving a ball, and all persons of fashion are invited",
-        "candidate_id": "ev_0002"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_02_the_ball_proclaimed#1",
@@ -614,12 +565,12 @@
       {
         "truth_id": "scene_03_dressing_the_sisters#0",
         "truth_text": "Cinderella dresses her sisters' hair with skill and good nature, since she has excellent taste",
-        "candidate_id": null
+        "candidate_id": "ev_0010"
       },
       {
         "truth_id": "scene_03_dressing_the_sisters#1",
         "truth_text": "the sisters jeer that it would make people laugh to see a Cinderwench at a ball",
-        "candidate_id": null
+        "candidate_id": "ev_0009"
       },
       {
         "truth_id": "scene_03_dressing_the_sisters#2",
@@ -629,32 +580,32 @@
       {
         "truth_id": "scene_04_sisters_depart#0",
         "truth_text": "the stepmother and sisters depart for the ball",
-        "candidate_id": "ev_0003"
+        "candidate_id": "ev_0011"
       },
       {
         "truth_id": "scene_04_sisters_depart#1",
         "truth_text": "left alone, Cinderella weeps",
-        "candidate_id": "ev_0004"
+        "candidate_id": "ev_0012"
       },
       {
         "truth_id": "scene_05_godmother#0",
         "truth_text": "the godmother appears and asks why Cinderella weeps",
-        "candidate_id": "ev_0005"
+        "candidate_id": "ev_0013"
       },
       {
         "truth_id": "scene_05_godmother#1",
         "truth_text": "a pumpkin is turned into a golden coach; six mice into horses; a rat into a coachman; six lizards into footmen",
-        "candidate_id": "ev_0008"
+        "candidate_id": "ev_0021"
       },
       {
         "truth_id": "scene_05_godmother#2",
         "truth_text": "Cinderella's rags become a gown of gold and silver, beset with jewels, and a pair of glass slippers",
-        "candidate_id": "ev_0017"
+        "candidate_id": "ev_0033"
       },
       {
         "truth_id": "scene_05_godmother#3",
         "truth_text": "the godmother warns her in plain terms: if she stays one moment past midnight, coach, horses, footmen, and gown will all revert",
-        "candidate_id": "ev_0019"
+        "candidate_id": "ev_0036"
       },
       {
         "truth_id": "scene_06_first_ball_arrival#0",
@@ -664,12 +615,12 @@
       {
         "truth_id": "scene_06_first_ball_arrival#1",
         "truth_text": "the old King himself remarks on her beauty",
-        "candidate_id": "ev_0022"
+        "candidate_id": "ev_0039"
       },
       {
         "truth_id": "scene_06_first_ball_arrival#2",
         "truth_text": "the King's son leads her out to dance",
-        "candidate_id": "ev_0023"
+        "candidate_id": "ev_0040"
       },
       {
         "truth_id": "scene_06_first_ball_arrival#3",
@@ -679,7 +630,7 @@
       {
         "truth_id": "scene_07_first_ball_departure#0",
         "truth_text": "Cinderella sits with her sisters and shares the oranges and citrons the Prince gave her",
-        "candidate_id": "ev_0024"
+        "candidate_id": "ev_0041"
       },
       {
         "truth_id": "scene_07_first_ball_departure#1",
@@ -689,7 +640,7 @@
       {
         "truth_id": "scene_07_first_ball_departure#2",
         "truth_text": "she leaves at a quarter to twelve, well ahead of the deadline, and thanks the King and the Prince for their civility",
-        "candidate_id": "ev_0025"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_07_first_ball_departure#3",
@@ -699,7 +650,7 @@
       {
         "truth_id": "scene_08_home_and_thanks#0",
         "truth_text": "Cinderella thanks her godmother",
-        "candidate_id": "ev_0026"
+        "candidate_id": "ev_0043"
       },
       {
         "truth_id": "scene_08_home_and_thanks#1",
@@ -729,12 +680,12 @@
       {
         "truth_id": "scene_09_the_sisters_recount#3",
         "truth_text": "she is refused and mocked for the suggestion, as expected",
-        "candidate_id": "ev_0029"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_10_second_ball_the_flight#0",
         "truth_text": "Cinderella returns for the second ball, more beautifully dressed than before",
-        "candidate_id": "ev_0030"
+        "candidate_id": "ev_0052"
       },
       {
         "truth_id": "scene_10_second_ball_the_flight#1",
@@ -744,17 +695,17 @@
       {
         "truth_id": "scene_10_second_ball_the_flight#2",
         "truth_text": "she hears the clock begin to strike twelve and flees the hall at once",
-        "candidate_id": "ev_0031"
+        "candidate_id": "ev_0053"
       },
       {
         "truth_id": "scene_10_second_ball_the_flight#3",
         "truth_text": "in her haste she loses one glass slipper on the palace steps",
-        "candidate_id": null
+        "candidate_id": "ev_0055"
       },
       {
         "truth_id": "scene_10_second_ball_the_flight#4",
         "truth_text": "the Prince picks up the slipper she left behind, having failed to catch her",
-        "candidate_id": "ev_0033"
+        "candidate_id": "ev_0054"
       },
       {
         "truth_id": "scene_10_second_ball_the_flight#5",
@@ -764,7 +715,7 @@
       {
         "truth_id": "scene_11_the_kept_slipper#0",
         "truth_text": "Cinderella arrives home on foot, in her old clothes, out of breath",
-        "candidate_id": "ev_0034"
+        "candidate_id": "ev_0056"
       },
       {
         "truth_id": "scene_11_the_kept_slipper#1",
@@ -779,12 +730,12 @@
       {
         "truth_id": "scene_12_the_proclamation#0",
         "truth_text": "the Prince has it proclaimed by trumpet that he will marry whichever lady's foot fits the glass slipper",
-        "candidate_id": "ev_0035"
+        "candidate_id": "ev_0061"
       },
       {
         "truth_id": "scene_12_the_proclamation#1",
         "truth_text": "the slipper is tried on princesses, then duchesses, then all the ladies of the court, in vain",
-        "candidate_id": "ev_0036"
+        "candidate_id": "ev_0062"
       },
       {
         "truth_id": "scene_12_the_proclamation#2",
@@ -794,60 +745,60 @@
       {
         "truth_id": "scene_13_the_fitting#0",
         "truth_text": "the sisters try the slipper in vain, squeezing and forcing their feet",
-        "candidate_id": "ev_0037"
+        "candidate_id": "ev_0063"
       },
       {
         "truth_id": "scene_13_the_fitting#1",
         "truth_text": "Cinderella asks if she may try, and is laughed at",
-        "candidate_id": null
+        "candidate_id": "ev_0064"
       },
       {
         "truth_id": "scene_13_the_fitting#2",
         "truth_text": "the gentleman-in-waiting says he has orders to let every maiden try, and looks earnestly at Cinderella, finding her very beautiful",
-        "candidate_id": null
+        "candidate_id": "ev_0066"
       },
       {
         "truth_id": "scene_13_the_fitting#3",
         "truth_text": "the slipper goes onto her foot with perfect ease",
-        "candidate_id": "ev_0038"
+        "candidate_id": "ev_0067"
       },
       {
         "truth_id": "scene_13_the_fitting#4",
         "truth_text": "Cinderella draws the fellow slipper from her pocket and puts it on",
-        "candidate_id": "ev_0039"
+        "candidate_id": "ev_0068"
       },
       {
         "truth_id": "scene_13_the_fitting#5",
         "truth_text": "the godmother appears and touches Cinderella's clothes with her wand, turning them richer than ever before, in full view of the sisters this time",
-        "candidate_id": "ev_0040"
+        "candidate_id": "ev_0069"
       },
       {
         "truth_id": "scene_14_forgiveness_and_marriage#0",
         "truth_text": "the two sisters fling themselves at Cinderella's feet and beg pardon for all their ill usage of her",
-        "candidate_id": "ev_0041"
+        "candidate_id": "ev_0070"
       },
       {
         "truth_id": "scene_14_forgiveness_and_marriage#1",
         "truth_text": "Cinderella forgives them freely and embraces them, and says she loves them with all her heart",
-        "candidate_id": "ev_0045"
+        "candidate_id": "ev_0073"
       },
       {
         "truth_id": "scene_14_forgiveness_and_marriage#2",
         "truth_text": "she is taken to the palace and presented to the Prince, lovelier than ever",
-        "candidate_id": null
+        "candidate_id": "ev_0074"
       },
       {
         "truth_id": "scene_14_forgiveness_and_marriage#3",
         "truth_text": "they are married within a few days",
-        "candidate_id": "ev_0047"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_14_forgiveness_and_marriage#4",
         "truth_text": "Cinderella, as good as she is beautiful, lodges her sisters in the palace and that same day marries them to two great lords of the court",
-        "candidate_id": "ev_0048"
+        "candidate_id": "ev_0077"
       }
     ]
   },
-  "judge_cost_usd": 0.13614,
-  "judge_calls": 21
+  "judge_cost_usd": 0.17547,
+  "judge_calls": 24
 }
