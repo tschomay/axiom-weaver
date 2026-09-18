@@ -781,3 +781,20 @@ as the next concrete step rather than opened as a new ticket: #146 already owns 
 Its result did what a held-out fixture is for: it turned "the Carol over-segments" from a
 single-text anecdote consistent with several explanations into a two-text pattern consistent with
 only one. That is the entire value #132 built it for, delivered on the first real use.
+
+---
+
+## 12. Where this connects to the product, not just the rubric
+
+Everything in this file was developed and measured through CLI scripts — nothing here has ever
+been reachable from the UI. That's deliberate (#142's own non-goals: no schema change, no UI
+route), but it means none of it is visible to anyone who only has the deployed app.
+
+#171 (and its children #172 generation, #173 extraction) pick up exactly that seam: turning the
+pipelines this file measures into something a UI action can trigger, landing through the
+**existing, unmodified** import path (`src/authoring/transfer.ts`'s `parseImport`,
+`app/stories/new`'s `'import'` mode — ADR 0017 §6). #171's own body cites this file's numbers
+directly where they bear on what to expose first and what to warn about — §11's over-segmentation
+finding and §10's payoff-earned-ness gap in particular. A future pass through this map should
+check #171/#172/#173 for whether exposure surfaced anything this file's fixture-only measurement
+couldn't have — that was the whole point of asking.
