@@ -493,6 +493,16 @@ test at the same time — which is the point: one axis, isolated.
   one axis, and that the marginal ordering-difficulty this axis would add over the *Carol* is hard
   to get without also picking up a second axis for free, it was rejected in favor of the axis with
   a cleaner, already-isolated stress case.
+
+  **Postscript (wave 2 of #142).** The reasoning above stands, but the fixture that *was* picked
+  turns out to exercise this axis anyway, for free. "The Machine Stops" Part II is Kuno's own
+  retrospective account of his escape, so its Scene Cards 06–08 depict events earlier than the
+  meeting Card 05 depicts. That was not visible when this section was written, because the fixture
+  had no source manifest and its text could not be read from the repo; it became visible as soon as
+  one was added. It does not change the pick — the ontology axis is still what this fixture
+  isolates, and the ordering structure here is mild next to the *Carol*'s — but a future
+  large-cast or frame-narrative fixture should be chosen knowing the ordering metric already has
+  two real data points rather than one.
 - **Unreliable or limited narrator.** The one #132 itself flags as having "no prior art at all,"
   and `narrative-extraction-prior-art.md` §4 confirms this in full: not a sparse literature, an
   empty one, for the reveal-order/told-ledger problem this axis would stress hardest. That absence

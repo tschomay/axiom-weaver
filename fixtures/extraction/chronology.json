@@ -27,20 +27,76 @@
       "denominator here — it is N/A for this fixture, not a zero. The Carol carries that number."
     ],
     "scenes": [
-      { "id": "scene_01_remarriage", "rank": 1, "confidence": "high" },
-      { "id": "scene_02_the_ball_proclaimed", "rank": 2, "confidence": "high" },
-      { "id": "scene_03_dressing_the_sisters", "rank": 3, "confidence": "high" },
-      { "id": "scene_04_sisters_depart", "rank": 4, "confidence": "high" },
-      { "id": "scene_05_godmother", "rank": 5, "confidence": "high" },
-      { "id": "scene_06_first_ball_arrival", "rank": 6, "confidence": "high" },
-      { "id": "scene_07_first_ball_departure", "rank": 7, "confidence": "high" },
-      { "id": "scene_08_home_and_thanks", "rank": 8, "confidence": "high" },
-      { "id": "scene_09_the_sisters_recount", "rank": 9, "confidence": "high" },
-      { "id": "scene_10_second_ball_the_flight", "rank": 10, "confidence": "high" },
-      { "id": "scene_11_the_kept_slipper", "rank": 11, "confidence": "high" },
-      { "id": "scene_12_the_proclamation", "rank": 12, "confidence": "high" },
-      { "id": "scene_13_the_fitting", "rank": 13, "confidence": "high" },
-      { "id": "scene_14_forgiveness_and_marriage", "rank": 14, "confidence": "high" }
+      {
+        "id": "scene_01_remarriage",
+        "rank": 1,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_02_the_ball_proclaimed",
+        "rank": 2,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_03_dressing_the_sisters",
+        "rank": 3,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_04_sisters_depart",
+        "rank": 4,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_05_godmother",
+        "rank": 5,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_06_first_ball_arrival",
+        "rank": 6,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_07_first_ball_departure",
+        "rank": 7,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_08_home_and_thanks",
+        "rank": 8,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_09_the_sisters_recount",
+        "rank": 9,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_10_second_ball_the_flight",
+        "rank": 10,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_11_the_kept_slipper",
+        "rank": 11,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_12_the_proclamation",
+        "rank": 12,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_13_the_fitting",
+        "rank": 13,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_14_forgiveness_and_marriage",
+        "rank": 14,
+        "confidence": "high"
+      }
     ]
   },
   "a-christmas-carol": {
@@ -72,26 +128,221 @@
       "watching per §3.3."
     ],
     "scenes": [
-      { "id": "scene_04_the_lonely_school", "rank": 10, "confidence": "high" },
-      { "id": "scene_05_fezziwigs_ball", "rank": 20, "confidence": "high" },
-      { "id": "scene_06_belle_then_and_now", "rank": 30, "confidence": "high" },
-      { "id": "scene_01_counting_house", "rank": 40, "confidence": "high" },
-      { "id": "scene_02_the_haunting_begins", "rank": 50, "confidence": "high" },
-      { "id": "scene_03_the_first_spirit", "rank": 60, "confidence": "high" },
-      { "id": "scene_07_the_second_spirit", "rank": 70, "confidence": "low" },
-      { "id": "scene_18_the_waking", "rank": 80, "confidence": "low" },
-      { "id": "scene_09_the_spirits_tour", "rank": 82, "confidence": "low" },
-      { "id": "scene_08_the_cratchits", "rank": 84, "confidence": "low" },
-      { "id": "scene_10_freds_party", "rank": 86, "confidence": "low" },
-      { "id": "scene_19_the_street_and_freds_dinner", "rank": 86, "confidence": "low" },
-      { "id": "scene_11_ignorance_and_want", "rank": 88, "confidence": "low" },
-      { "id": "scene_20_the_office_next_morning", "rank": 90, "confidence": "low" },
-      { "id": "scene_12_the_exchange", "rank": 100, "confidence": "high" },
-      { "id": "scene_13_old_joes_shop", "rank": 110, "confidence": "low" },
-      { "id": "scene_14_the_unwatched_corpse", "rank": 120, "confidence": "low" },
-      { "id": "scene_15_the_relieved_debtors", "rank": 130, "confidence": "low" },
-      { "id": "scene_16_the_cratchits_after_tim", "rank": 140, "confidence": "low" },
-      { "id": "scene_17_the_name_on_the_stone", "rank": 150, "confidence": "low" }
+      {
+        "id": "scene_04_the_lonely_school",
+        "rank": 10,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_05_fezziwigs_ball",
+        "rank": 20,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_06_belle_then_and_now",
+        "rank": 30,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_01_counting_house",
+        "rank": 40,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_02_the_haunting_begins",
+        "rank": 50,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_03_the_first_spirit",
+        "rank": 60,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_07_the_second_spirit",
+        "rank": 70,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_18_the_waking",
+        "rank": 80,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_09_the_spirits_tour",
+        "rank": 82,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_08_the_cratchits",
+        "rank": 84,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_10_freds_party",
+        "rank": 86,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_19_the_street_and_freds_dinner",
+        "rank": 86,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_11_ignorance_and_want",
+        "rank": 88,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_20_the_office_next_morning",
+        "rank": 90,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_12_the_exchange",
+        "rank": 100,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_13_old_joes_shop",
+        "rank": 110,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_14_the_unwatched_corpse",
+        "rank": 120,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_15_the_relieved_debtors",
+        "rank": 130,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_16_the_cratchits_after_tim",
+        "rank": 140,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_17_the_name_on_the_stone",
+        "rank": 150,
+        "confidence": "low"
+      }
+    ]
+  },
+  "the-machine-stops": {
+    "notes": [
+      "Added in wave 2 of #142, when the fixture was finally given a source manifest and became",
+      "scoreable at all. It is the held-out fixture: prompts are tuned against Cinderella and the",
+      "Carol and reported here separately.",
+      "",
+      "THIS STORY IS NOT TOLD IN CHRONOLOGICAL ORDER, and one place said otherwise and was wrong.",
+      "story-authoring-eval.md §2 described it as 'told straightforwardly, start to finish' — now",
+      "corrected there. fixture-stories.md is a different case and needed no correction: it rejected",
+      "non-chronological telling as a deliberate AXIS pick, which was sound then and is sound now; the",
+      "fixture simply turns out to carry some of that structure for free, and now says so in a",
+      "postscript. Both were written before the source could be read from the repo at all.",
+      "",
+      "The structure: Part II is Kuno's own retrospective account — 'I have been outside since I spoke",
+      "to you last', followed by a past-tense first-person narration of the climb and the escape. So",
+      "scene cards 06, 07 and 08 depict events that happen BEFORE the meeting scene 05 depicts, even",
+      "though 05 precedes them in the telling. The §3.4 sub-metric 'pairs the source narrates out of",
+      "order' therefore has a real denominator here, where Cinderella's is empty. That makes this",
+      "fixture more useful than its axis pick claimed, not less.",
+      "",
+      "Rank 4 (Vashti's journey) versus ranks 5-7 (Kuno's climb and escape) is GENUINELY",
+      "UNDERDETERMINED, and both are marked accordingly. The source fixes both inside the interval",
+      "between the call and the meeting — Kuno's 'since I spoke to you last' puts his escape after the",
+      "call, and the threat of Homelessness he reports at the meeting puts it before that — but it",
+      "never says whether he was on the surface before or while his mother was in the air-ship. Do not",
+      "read a pairwise ordering error across that boundary as an extraction failure.",
+      "",
+      "scene_02 is the catalogue of Vashti's room and the Book. It is ambient description of her",
+      "ongoing life rather than a dated event, so its rank is a placement of convenience next to the",
+      "call it interrupts, and its confidence is low for that reason and not because the text is",
+      "unclear."
+    ],
+    "scenes": [
+      {
+        "id": "scene_01_the_call",
+        "rank": 1,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_02_the_book_of_the_machine",
+        "rank": 2,
+        "confidence": "low"
+      },
+      {
+        "id": "scene_03_the_decision_to_travel",
+        "rank": 3,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_04_the_air_ship_journey",
+        "rank": 4,
+        "confidence": "medium"
+      },
+      {
+        "id": "scene_06_the_climb",
+        "rank": 5,
+        "confidence": "medium"
+      },
+      {
+        "id": "scene_07_the_hills_of_wessex",
+        "rank": 6,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_08_the_worms",
+        "rank": 7,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_05_threatened_with_homelessness",
+        "rank": 8,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_09_vashtis_verdict",
+        "rank": 9,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_10_two_developments",
+        "rank": 10,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_11_vashtis_years",
+        "rank": 11,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_12_the_machine_stops",
+        "rank": 12,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_13_the_mending_apparatus_in_need_of_repair",
+        "rank": 13,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_14_twilight",
+        "rank": 14,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_15_the_silence",
+        "rank": 15,
+        "confidence": "high"
+      },
+      {
+        "id": "scene_16_reunion_in_the_dark",
+        "rank": 16,
+        "confidence": "high"
+      }
     ]
   }
 }
