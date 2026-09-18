@@ -19,6 +19,11 @@
  * to WDK, and nothing else about this file changes. The durability contract the platform supplies
  * — resume the step that failed, keep running while the reader's tab is closed — is the reason
  * every scene is flushed to Blob before the next one starts rather than at the end of the run.
+ *
+ * `StepRunner`/`inlineStepRunner` themselves live in `./step-runner` — promoted out of this file
+ * under [ADR 0021](../../docs/adr/0021-generate-and-extract-entry-points.md) so an Authoring run
+ * (`src/authoring/generate-run.ts`) can share the same seam without importing anything
+ * scene-shaped from here. Re-exported below so nothing importing them from this file breaks.
  */
 
 import { parseVoiceCard } from '../voice/voice-card';
@@ -69,13 +74,11 @@ import {
   editionWorldModelPath,
   runReportPath,
 } from '../persistence/paths';
+import { inlineStepRunner, type StepRunner } from './step-runner';
 
 // --- The step seam ----------------------------------------------------------------------------
 
-/** One durable unit of work. On Vercel this is a `"use step"` function; inline everywhere else. */
-export type StepRunner = <T>(name: string, run: () => Promise<T>) => Promise<T>;
-
-export const inlineStepRunner: StepRunner = (_name, run) => run();
+export { type StepRunner, inlineStepRunner } from './step-runner';
 
 // --- Progress ---------------------------------------------------------------------------------
 

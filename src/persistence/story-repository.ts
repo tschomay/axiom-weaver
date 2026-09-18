@@ -30,7 +30,8 @@ import {
   type RunIndex,
 } from '../edition/edition';
 import { RunReportSchema, isPromotable, type RunReport } from '../edition/run-report';
-import { ManuscriptSchema, type Manuscript } from '../schema/manuscript';
+import { DraftStoryPackageSchema, ManuscriptSchema, type DraftStoryPackage, type Manuscript } from '../schema/manuscript';
+import { AuthoringRunManifestSchema, type AuthoringRunManifest } from '../authoring/run';
 import {
   DraftManifestSchema,
   DraftSceneSchema,
@@ -40,6 +41,8 @@ import {
 } from '../draft/working-draft';
 import type { BlobStore } from './blob-store';
 import {
+  authoringRunManifestPath,
+  authoringRunPackagePath,
   bakedPointerPath,
   draftManifestPath,
   draftScenePath,
@@ -503,6 +506,37 @@ export class StoryRepository {
     const body = await this.store.get(draftScenePath(storyId, sceneIndex));
     if (body === null) return null;
     return DraftSceneSchema.parse(JSON.parse(body));
+  }
+
+  // --- Authoring runs (ADR 0021) -------------------------------------------------------------
+  //
+  // Not story-scoped: an Authoring run exists before any story does, and its output lands
+  // wherever the author eventually sends it through the Import entry point.
+
+  /** Rewritten at every stage transition — the manifest is how a poll answers progress. */
+  async putAuthoringRunManifest(manifest: AuthoringRunManifest): Promise<void> {
+    await this.store.put(
+      authoringRunManifestPath(manifest.run_id),
+      stringify(AuthoringRunManifestSchema.parse(manifest)),
+      { allowOverwrite: true },
+    );
+  }
+
+  async getAuthoringRunManifest(runId: string): Promise<AuthoringRunManifest | null> {
+    const body = await this.store.get(authoringRunManifestPath(runId));
+    if (body === null) return null;
+    return AuthoringRunManifestSchema.parse(JSON.parse(body));
+  }
+
+  /** The produced package, written once when the `segment` stage completes. */
+  async putAuthoringRunResult(runId: string, pkg: DraftStoryPackage): Promise<void> {
+    await this.store.put(authoringRunPackagePath(runId), stringify(pkg), { allowOverwrite: true });
+  }
+
+  async getAuthoringRunResult(runId: string): Promise<DraftStoryPackage | null> {
+    const body = await this.store.get(authoringRunPackagePath(runId));
+    if (body === null) return null;
+    return DraftStoryPackageSchema.parse(JSON.parse(body)) as DraftStoryPackage;
   }
 
   // --- Convenience -------------------------------------------------------------------------

@@ -93,8 +93,11 @@ export interface Premise {
  * arc reaches across itself, and a validator that rejected short spans would guarantee the number
  * without changing the arc's character. They are stated in the prompt and measured afterwards.
  */
+/** The three density presets, in the order a picker should offer them. */
+export const PLANT_DENSITIES: readonly ['tight', 'normal', 'loose'] = ['tight', 'normal', 'loose'];
+
 export interface PlantPolicy {
-  readonly density: 'tight' | 'normal' | 'loose';
+  readonly density: (typeof PLANT_DENSITIES)[number];
   readonly target_edges: number;
   /** Fewest events a plant should sit ahead of its payoff. Guidance. */
   readonly min_span: number;

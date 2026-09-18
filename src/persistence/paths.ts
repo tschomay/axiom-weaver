@@ -21,6 +21,8 @@
  * edition/{runId}/state-log.json            Compiled edition: state-update commit log
  * edition/{runId}/run-report.json           Compiled edition: the run report (ADR 0014 §8)
  * baked/{storyId}.json                      pointer to the Baked edition's runId
+ * authoring-run/{runId}/manifest.json       Authoring run: stage, status, cost (ADR 0021)
+ * authoring-run/{runId}/package.json        Authoring run: the produced package, once complete
  * ```
  *
  * `story/{storyId}/runs.json` is the one path here the settled layout does not name. Editions are
@@ -77,6 +79,15 @@ export const runReportPath = (runId: string): string => `edition/${runId}/run-re
 export const runIndexPath = (storyId: string): string => `story/${storyId}/runs.json`;
 
 export const bakedPointerPath = (storyId: string): string => `baked/${storyId}.json`;
+
+/** An Authoring run's manifest — stage, status, cost (ADR 0021). Not story-scoped: the run exists
+ * before any story does, and its output lands wherever the author sends it through Import. */
+export const authoringRunManifestPath = (runId: string): string =>
+  `authoring-run/${runId}/manifest.json`;
+
+/** The package an Authoring run produced, written once, on completion. */
+export const authoringRunPackagePath = (runId: string): string =>
+  `authoring-run/${runId}/package.json`;
 
 /** Parse a `package_version` out of a snapshot pathname; `null` if the name is not one. */
 export function versionFromPackagePath(pathname: string): number | null {
