@@ -737,6 +737,7 @@ export async function scoreSegmentation(
 
   progress('§3.5 — required_beats coverage (judged)');
   const perSceneCoverage: Array<{ scene: string; coverage: number }> = [];
+  let unscoredBeats = 0;
   for (const row of alignmentRows) {
     if (row.candidate_scene === null) continue;
     const fixtureScene = inputs.truth.package.scene_cards.find(
@@ -752,7 +753,11 @@ export async function scoreSegmentation(
         summary: beat,
       })),
     );
-    const covered = [...matches.values()].filter((value) => value !== null).length;
+    // #167: the same silent-loss hazard applies here — a beat the judge could not score is not a
+    // beat the candidate missed. Counted, and surfaced in the caveats rather than folded into
+    // coverage as though it were a real gap.
+    unscoredBeats += matches.unresolved.length;
+    const covered = [...matches.matches.values()].filter((value) => value !== null).length;
     perSceneCoverage.push({
       scene: row.fixture_scene,
       coverage: fixtureScene.required_beats.length === 0 ? 1 : covered / fixtureScene.required_beats.length,
@@ -882,6 +887,13 @@ export async function scoreSegmentation(
     reveal_order: revealOrderScore(inputs.candidate, inputs.truth, factMap),
     plants: plantScore(inputs.candidate, inputs.truth, sceneMap, factMap),
     caveats: [
+      ...(unscoredBeats > 0
+        ? [
+            `#167: ${unscoredBeats} fixture beat(s) could not be scored by the entailment judge ` +
+              'even one at a time. They count against beats coverage because there is nothing ' +
+              'else to do with them, so that number is a floor rather than a measurement.',
+          ]
+        : []),
       '§2: the fixtures are one valid authoring, not the unique correct one — a deviation is not ' +
         'automatically an error, and both fixtures sit at the easy end of the difficulty range.',
       'The scene alignment is derived from #117\'s frozen event alignment; a fixture scene whose ' +

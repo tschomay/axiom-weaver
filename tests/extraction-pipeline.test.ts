@@ -16,6 +16,7 @@ import { repairOrder } from '@/extraction/pass-chronology';
 import { dedupeBySpan, extractEvents } from '@/extraction/pass-events';
 import { foldProposals, isSuspiciousMerge, reconcile } from '@/extraction/pass-reconcile';
 import { gateG0 } from '@/extraction/scoring/gates';
+import { judgeEventEntailment } from '@/extraction/scoring/judge';
 import { eventReferencedIds, invention } from '@/extraction/scoring/score';
 import { FABULA_BLOCK } from '@/schema/fabula';
 import { importSummary } from '@/authoring/transfer';
@@ -984,5 +985,82 @@ describe('frame carry-over between windows (#145)', () => {
     const client = new FrameClient(['x'.repeat(5000)]);
     const result = await extractEvents(new ExtractionModel(client, 'stub-model'), windows(1), []);
     expect(result.frames[0]!.frame.length).toBeLessThanOrEqual(200);
+  });
+});
+
+describe('entailment judge failure is recovered, never silently scored as misses (#167)', () => {
+  /** Fails whole-batch calls, succeeds on singles — the real shape of a budget exhaustion. */
+  class BatchFailingJudge implements ModelClient {
+    readonly labels: string[] = [];
+    constructor(private readonly failSingles = false) {}
+    async generate(request: ModelRequest): Promise<ModelResponse> {
+      const beats = [...request.contents.matchAll(/^(t\d+):/gm)].map((m) => m[1]!);
+      this.labels.push(beats.join(','));
+      const single = beats.length === 1;
+      const ok = single && !this.failSingles;
+      return {
+        text: ok
+          ? JSON.stringify({ matches: beats.map((id) => ({ truth_id: id, candidate_id: `c${id}` })) })
+          : 'not json',
+        finish_reason: ok ? 'STOP' : 'MAX_TOKENS',
+        model: 'stub-model',
+        usage: { prompt_tokens: 1, output_tokens: 1, cached_tokens: 0, thoughts_tokens: 0 },
+      };
+    }
+  }
+
+  const truth = Array.from({ length: 3 }, (_, i) => ({ id: `t${i + 1}`, text: `beat ${i + 1}` }));
+  const candidates = Array.from({ length: 3 }, (_, i) => ({ id: `ct${i + 1}`, summary: `beat ${i + 1}` }));
+
+  it('retries a failed batch one beat at a time and recovers the matches', async () => {
+    const client = new BatchFailingJudge();
+    const result = await judgeEventEntailment(
+      new ExtractionModel(client, 'stub-model'),
+      truth,
+      candidates,
+      { batchSize: 3 },
+    );
+    // Before #167 all three became misses and nothing recorded why.
+    expect(result.unresolved).toEqual([]);
+    expect([...result.matches.values()].filter((v) => v !== null)).toHaveLength(3);
+  });
+
+  it('reports beats that fail even as singles, rather than passing them off as misses', async () => {
+    const client = new BatchFailingJudge(true);
+    const result = await judgeEventEntailment(
+      new ExtractionModel(client, 'stub-model'),
+      truth,
+      candidates,
+      { batchSize: 3 },
+    );
+    expect(result.unresolved).toEqual(['t1', 't2', 't3']);
+    // They are still scored as misses — there is nothing else to do — but they are now countable,
+    // which is the whole point: recall computed over them is a floor, not a measurement.
+    expect([...result.matches.values()].every((v) => v === null)).toBe(true);
+  });
+
+  it('leaves the happy path untouched, so published numbers stay comparable', async () => {
+    class GoodJudge implements ModelClient {
+      calls = 0;
+      async generate(request: ModelRequest): Promise<ModelResponse> {
+        this.calls += 1;
+        const beats = [...request.contents.matchAll(/^(t\d+):/gm)].map((m) => m[1]!);
+        return {
+          text: JSON.stringify({ matches: beats.map((id) => ({ truth_id: id, candidate_id: `c${id}` })) }),
+          finish_reason: 'STOP',
+          model: 'stub-model',
+          usage: { prompt_tokens: 1, output_tokens: 1, cached_tokens: 0, thoughts_tokens: 0 },
+        };
+      }
+    }
+    const client = new GoodJudge();
+    const result = await judgeEventEntailment(
+      new ExtractionModel(client, 'stub-model'),
+      truth,
+      candidates,
+      { batchSize: 3 },
+    );
+    expect(client.calls).toBe(1);
+    expect(result.unresolved).toEqual([]);
   });
 });

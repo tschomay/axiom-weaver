@@ -181,6 +181,15 @@ export interface EventScore {
    * it is still reported, as `ungroundable_events` and as §3.2's `quote_resolution_rate`; it is
    * simply not invention, and folding it in here made a zero-tolerance row unreadable.
    */
+  /**
+   * Beats the entailment judge could not score, even one at a time (#167).
+   *
+   * They are counted as misses in `recall` because there is nothing else to do with them, but they
+   * are a judge failure rather than a pipeline one. A nonzero value here means `recall` is a floor,
+   * not a measurement — report it next to the number, never on its own.
+   */
+  readonly entailment_unresolved: number;
+  readonly entailment_unresolved_beats: readonly string[];
   readonly fabricated: number;
   /**
    * How many spans the judge actually read. `fabricated` is a count out of *this*, never a bare
@@ -603,7 +612,8 @@ async function scoreEvents(
   spanGrounding: SpanGroundingScore,
 ): Promise<{ score: EventScore; matches: Map<string, string | null> }> {
   const candidates = result.sidecar.events.map((event) => ({ id: event.id, summary: event.summary }));
-  const matches = await judgeEventEntailment(judge, truth.events, candidates);
+  const entailment = await judgeEventEntailment(judge, truth.events, candidates);
+  const matches = entailment.matches;
 
   const chronologicalIndex = new Map(
     result.sidecar.events.map((event) => [event.id, event.chronological_index]),
@@ -672,6 +682,8 @@ async function scoreEvents(
       out_of_order_total: outTotal,
       out_of_order_correct: outCorrect,
       out_of_order_accuracy: outTotal === 0 ? null : outCorrect / outTotal,
+      entailment_unresolved: entailment.unresolved.length,
+      entailment_unresolved_beats: entailment.unresolved,
       fabricated: fabricated.length,
       fabricated_judged: spanGrounding.judged,
       fabricated_examples: fabricated.slice(0, 10).map((id) => byId.get(id)?.summary ?? id),

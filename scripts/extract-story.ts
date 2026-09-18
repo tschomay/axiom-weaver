@@ -243,7 +243,10 @@ function printScore(report: Awaited<ReturnType<typeof scoreExtraction>>): void {
   lines.push('  §3.3 Event list and chronology');
   lines.push(
     `      event recall ${pct(events.recall)} (${events.matched}/${events.ground_truth_events}), ` +
-      `${events.candidate_events} candidate events`,
+      `${events.candidate_events} candidate events` +
+      (events.entailment_unresolved > 0
+        ? `  !! ${events.entailment_unresolved} beats UNSCORED (judge failed) — recall is a floor`
+        : ''),
   );
   lines.push(
     `      pairwise chronology ${pct(events.pairwise_accuracy)} over ${events.pairwise_total} pairs; ` +
