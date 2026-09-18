@@ -638,3 +638,65 @@ Unchanged from §3, with one addition: **#154 (orphaned objects) joins #144 and 
 of work over `pass-events.ts`, and #151's denominator cannot be extended to objects until it lands.
 The open question §8 left for after wave 2 — the *Carol*'s residual over-extraction — is still open
 and still should not be pre-empted.
+
+---
+
+## 10. Wave 2: what actually happened
+
+#144, #145 and #154 landed as one change to `pass-events.ts`, preceded by the held-out-fixture
+prerequisite (#164). Same format as §9, and the same reason: one prediction was wrong, and one
+piece of method was wrong in a way worth not repeating.
+
+| Ticket | Predicted | Measured |
+| --- | --- | --- |
+| #154 objects | prompt for `obj_` writes and re-measure both directions | **works, both fixtures**: object `state_updates` 0 → 36 (*Carol*), 0 → 9 (Cinderella), and `dropped_participants` 25 → 0 |
+| #144 speech acts | recall rises, watch for over-extraction | **works on the fixture that motivated it**: *Carol* recall 0.384 → **0.466** for +3.9% events. Cinderella +0.019 for +70% events |
+| #145 frame carry | prompt alone cannot reach the windows; carry the frame | **works**: frames on exactly 12 of 38 windows, `future` 16 → 50, and out-of-order **0.435 → 0.696** on a paired denominator |
+
+### The method error, which cost more than the run it saved
+
+§3 said to do #144 and #145 together because they touch one prompt and one re-run scores both. That
+was wrong, and §2's own rule says why: **#144 changes which events exist and which align, #145
+changes their buckets, and the out-of-order metric depends on both.** The headline number read
+0.580 → 0.467 and looked like a regression. Restricted to the 14 events aligned in *both* runs — the
+same 23 pairs scored twice — it reads **0.435 → 0.696**.
+
+The unpaired comparison was not merely noisy, it was measuring a different denominator: recall
+improving is what changed which pairs the metric selects. A second extraction run would have cost
+about twenty minutes and under a dollar. Untangling it afterwards cost more, and only worked at all
+because the alignment files happened to be committed. **Two changes that move the same metric go in
+two runs, whatever they cost.**
+
+### The held-out fixture earned its keep immediately
+
+`the-machine-stops` was made scoreable in #164 and never looked at while tuning. Run once
+afterwards:
+
+- **Event recall 0.565** — *higher* than either tuning fixture (*Carol* 0.466, Cinderella 0.547).
+  There is no before/after here, so this is a generalisation check and not a delta: the point is
+  that performance does not collapse on unseen, ontologically novel material.
+- **The frame carry generalised to a frame type it was never designed against.** It was built
+  against Dickens's ghost-visions; on Forster it fired on windows 6–9 as *"inside Kuno's account of
+  his escape"* — a character's spoken recollection. That also independently corroborates the
+  hand-written chronology entry, which places Cards 06–08 before Card 05 on exactly that reasoning.
+- It stresses what it was picked to stress: `suspicious merge into loc_underground_city: city + the
+  Machine` welds the story's central entity into a location, which is #143's territory on the axis
+  #132 chose this fixture for.
+
+### Costs, stated rather than buried
+
+More events means more of everything: *Carol* object recall 1.00 → 0.833, location precision
+0.260 → 0.228, and ungroundable quotes 13 → 27 with quote resolution 96.8% → 94.9%. None of these
+is barred, and none is large, but a change that only ever improves numbers has not been measured
+honestly.
+
+### Still open after wave 2
+
+- Out-of-order is **0.696 against a 0.90 bar** — better, not fixed.
+- #165: §3.4's event-recall bar is unreachable because its denominator counts standing facts, moods
+  and non-actions. Filed during wave 2 under the scope rule, because it blocks #144's bar from
+  being readable at all. Not fixed here: it is an instrument change, and bundling one with a
+  pipeline change is what splitting #151 out of #143 existed to prevent.
+- #143 is the remaining wave-2 ticket, and the held-out fixture has already handed it a case.
+- `prototypes/segmentation/*/score.json` now carry a `stale` block: segmentation reads the
+  extraction runs this wave replaced, and #146 owns that re-measure in wave 3.

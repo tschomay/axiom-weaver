@@ -1,0 +1,5441 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "the-machine-stops",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_vashti",
+        "name": "Vashti",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_kuno",
+        "name": "Kuno",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_central_committee",
+        "name": "Central Committee",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_doctor",
+        "name": "doctor",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_man_in_front",
+        "name": "The man in front",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_attendant",
+        "name": "attendant",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_one_other_passenger",
+        "name": "One other passenger",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_other_passengers",
+        "name": "other passengers",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_passengers",
+        "name": "passengers",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_committee_of_the_machine",
+        "name": "Committee of the Machine",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_machine",
+        "name": "Machine",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_the_attendant",
+        "name": "the attendant",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_the_passenger_who_had_dropped_his_book",
+        "name": "the passenger who had dropped his Book",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_the_passengers",
+        "name": "The passengers",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_she",
+        "name": "she",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_humanitarians",
+        "name": "Humanitarians",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_workmen",
+        "name": "workmen",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_spirits_of_those_dead_workmen",
+        "name": "spirits of those dead workmen",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_he",
+        "name": "He",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_his_mother",
+        "name": "his mother",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_voices",
+        "name": "voices",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_aelfrid",
+        "name": "Ælfrid",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_the_danes",
+        "name": "the Danes",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_mending_apparatus",
+        "name": "Mending Apparatus",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_the_woman",
+        "name": "the woman",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_my_friends",
+        "name": "my friends",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_those_who_were_extruded_after_the_great_rebellio",
+        "name": "those who were extruded after the Great Rebellion",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_lecturers",
+        "name": "lecturers",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_one_of_the_most_advanced_of_them",
+        "name": "one of the most advanced of them",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_a_friend",
+        "name": "a friend",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_friend_troubled",
+        "name": "friend troubled by noise",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_famous_lecturer",
+        "name": "famous lecturer",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_audience",
+        "name": "audience",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_inhabitants_of_sumatra",
+        "name": "inhabitants of Sumatra",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_friend_specialist_in_sympathy",
+        "name": "friend who was a specialist in sympathy",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_people_in_the_tunnel",
+        "name": "people in the tunnel",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      },
+      {
+        "id": "char_homeless",
+        "name": "Homeless",
+        "location_id": null,
+        "status": null,
+        "goal": null,
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_small_room",
+        "name": "small room",
+        "bag": {}
+      },
+      {
+        "id": "loc_earth",
+        "name": "earth",
+        "bag": {}
+      },
+      {
+        "id": "loc_vashti_s_room",
+        "name": "Vashti's room",
+        "bag": {}
+      },
+      {
+        "id": "loc_surface_of_the_earth",
+        "name": "surface of the earth",
+        "bag": {}
+      },
+      {
+        "id": "loc_public_nurseries",
+        "name": "public nurseries",
+        "bag": {}
+      },
+      {
+        "id": "loc_the_room",
+        "name": "the room",
+        "bag": {}
+      },
+      {
+        "id": "loc_island_southern_hemisphere",
+        "name": "the island in the southern hemisphere",
+        "bag": {}
+      },
+      {
+        "id": "loc_island_northern_hemisphere",
+        "name": "the island in the northern hemisphere",
+        "bag": {}
+      },
+      {
+        "id": "loc_tunnel",
+        "name": "the tunnel",
+        "bag": {}
+      },
+      {
+        "id": "loc_air_ship_station",
+        "name": "air-ship station",
+        "bag": {}
+      },
+      {
+        "id": "loc_platform",
+        "name": "platform",
+        "bag": {}
+      },
+      {
+        "id": "loc_northern_hemisphere",
+        "name": "northern hemisphere",
+        "bag": {}
+      },
+      {
+        "id": "loc_rheims",
+        "name": "Rheims",
+        "bag": {}
+      },
+      {
+        "id": "loc_alps",
+        "name": "Alps",
+        "bag": {}
+      },
+      {
+        "id": "loc_pekin",
+        "name": "Pekin",
+        "bag": {}
+      },
+      {
+        "id": "loc_shrewsbury",
+        "name": "Shrewsbury",
+        "bag": {}
+      },
+      {
+        "id": "loc_rye",
+        "name": "Rye",
+        "bag": {}
+      },
+      {
+        "id": "loc_christchurch",
+        "name": "Christchurch",
+        "bag": {}
+      },
+      {
+        "id": "loc_helsingfors",
+        "name": "Helsingfors",
+        "bag": {}
+      },
+      {
+        "id": "loc_the_brazils",
+        "name": "the Brazils",
+        "bag": {}
+      },
+      {
+        "id": "loc_palermo",
+        "name": "Palermo",
+        "bag": {}
+      },
+      {
+        "id": "loc_her_room",
+        "name": "Her room",
+        "bag": {}
+      },
+      {
+        "id": "loc_cabin",
+        "name": "cabin",
+        "bag": {}
+      },
+      {
+        "id": "loc_sumatra",
+        "name": "Sumatra",
+        "bag": {}
+      },
+      {
+        "id": "loc_asia",
+        "name": "Asia",
+        "bag": {}
+      },
+      {
+        "id": "loc_vashti_s_cabin",
+        "name": "Vashti's cabin",
+        "bag": {}
+      },
+      {
+        "id": "loc_the_himalayas",
+        "name": "the Himalayas",
+        "bag": {}
+      },
+      {
+        "id": "loc_caucasus",
+        "name": "Caucasus",
+        "bag": {}
+      },
+      {
+        "id": "loc_greece",
+        "name": "Greece",
+        "bag": {}
+      },
+      {
+        "id": "loc_simla",
+        "name": "Simla",
+        "bag": {}
+      },
+      {
+        "id": "loc_brisbane",
+        "name": "Brisbane",
+        "bag": {}
+      },
+      {
+        "id": "loc_kinchinjunga",
+        "name": "Kinchinjunga",
+        "bag": {}
+      },
+      {
+        "id": "loc_mount_taygetus",
+        "name": "Mount Taygetus",
+        "bag": {}
+      },
+      {
+        "id": "loc_railway_tunnels_of_the_topmost_story",
+        "name": "railway-tunnels of the topmost story",
+        "bag": {}
+      },
+      {
+        "id": "loc_underground_city",
+        "name": "underground city",
+        "bag": {}
+      },
+      {
+        "id": "loc_vomitories",
+        "name": "vomitories",
+        "bag": {}
+      },
+      {
+        "id": "loc_platform_of_the_railway_outside_my_room",
+        "name": "platform of the railway outside my room",
+        "bag": {}
+      },
+      {
+        "id": "loc_topmost_platform",
+        "name": "topmost platform",
+        "bag": {}
+      },
+      {
+        "id": "loc_railway_tunnel",
+        "name": "railway-tunnel",
+        "bag": {}
+      },
+      {
+        "id": "loc_shaft",
+        "name": "shaft",
+        "bag": {}
+      },
+      {
+        "id": "loc_wessex",
+        "name": "Wessex",
+        "bag": {}
+      },
+      {
+        "id": "loc_grass_grown_hollow",
+        "name": "grass-grown hollow",
+        "bag": {}
+      },
+      {
+        "id": "loc_andredswald",
+        "name": "Andredswald",
+        "bag": {}
+      },
+      {
+        "id": "loc_cornwall",
+        "name": "Cornwall",
+        "bag": {}
+      },
+      {
+        "id": "loc_wansdyke",
+        "name": "Wansdyke",
+        "bag": {}
+      },
+      {
+        "id": "loc_the_hollow",
+        "name": "the hollow",
+        "bag": {}
+      },
+      {
+        "id": "loc_hills_of_wessex",
+        "name": "hills of Wessex",
+        "bag": {}
+      },
+      {
+        "id": "loc_the_shaft",
+        "name": "the shaft",
+        "bag": {}
+      },
+      {
+        "id": "loc_the_surface_of_the_earth",
+        "name": "the surface of the earth",
+        "bag": {}
+      },
+      {
+        "id": "loc_paris",
+        "name": "Paris",
+        "bag": {}
+      },
+      {
+        "id": "loc_versailles",
+        "name": "Versailles",
+        "bag": {}
+      },
+      {
+        "id": "loc_southern_hemisphere",
+        "name": "southern hemisphere",
+        "bag": {}
+      },
+      {
+        "id": "loc_kuno_s_room",
+        "name": "Kuno's room",
+        "bag": {}
+      },
+      {
+        "id": "loc_courland",
+        "name": "Courland",
+        "bag": {}
+      },
+      {
+        "id": "loc_the_central_power_station",
+        "name": "the central power station",
+        "bag": {}
+      },
+      {
+        "id": "loc_france",
+        "name": "France",
+        "bag": {}
+      },
+      {
+        "id": "loc_dim_tunnel",
+        "name": "dim tunnel",
+        "bag": {}
+      },
+      {
+        "id": "loc_cell",
+        "name": "cell",
+        "bag": {}
+      },
+      {
+        "id": "loc_the_city",
+        "name": "the city",
+        "bag": {}
+      },
+      {
+        "id": "loc_ruined_wharf",
+        "name": "ruined wharf",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_round_plate",
+        "name": "round plate",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_the_machine",
+        "name": "the Machine",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_arm_chair",
+        "name": "arm-chair",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_reading_desk",
+        "name": "reading-desk",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_receiver",
+        "name": "receiver",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_isolation_knob",
+        "name": "isolation knob",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_lighting_apparatus",
+        "name": "lighting apparatus",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_air_ship",
+        "name": "air-ship",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_blue_plate",
+        "name": "the blue plate",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_respirator",
+        "name": "respirator",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_isolation_switch",
+        "name": "isolation-switch",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_speaking_tubes",
+        "name": "speaking-tubes",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_bed",
+        "name": "bed",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_the_book_of_the_machine",
+        "name": "the Book of the Machine",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_car",
+        "name": "the car",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_the_book",
+        "name": "the Book",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_lift",
+        "name": "the lift",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_the_man_in_front_s_book",
+        "name": "The man in front's Book",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_blind",
+        "name": "blind",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_air_ships",
+        "name": "air-ships",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_egression_permit",
+        "name": "Egression-permit",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "loc_ventilation_shafts",
+        "name": "ventilation shafts",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_live_rail",
+        "name": "live rail",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_ladder",
+        "name": "ladder",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_pneumatic_stopper",
+        "name": "pneumatic stopper",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_gloves",
+        "name": "gloves",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_dietetic_tabloids",
+        "name": "dietetic tabloids",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_stopper_handle",
+        "name": "stopper handle",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_stopper",
+        "name": "stopper",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_terrestrial_motors",
+        "name": "terrestrial motors",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_book_of_the_machine",
+        "name": "Book of the Machine",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_blue_optic_plates",
+        "name": "blue optic plates",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_mending_apparatus",
+        "name": "mending apparatus",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_gramophone",
+        "name": "gramophone",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_cinematophote",
+        "name": "cinematophote",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_sleeping_apparatus",
+        "name": "sleeping apparatus",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_poetry_machine",
+        "name": "poetry machine",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_wires",
+        "name": "wires",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_door_of_her_cell",
+        "name": "door of her cell",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      },
+      {
+        "id": "obj_medical_apparatus",
+        "name": "Medical Apparatus",
+        "location_id": null,
+        "status": null,
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_001",
+        "from_id": "char_vashti",
+        "to_id": "char_kuno",
+        "kind": "mother_of",
+        "sentiment": "neutral",
+        "bag": {}
+      },
+      {
+        "id": "rel_002",
+        "from_id": "char_kuno",
+        "to_id": "char_vashti",
+        "kind": "son_of",
+        "sentiment": "positive",
+        "bag": {}
+      },
+      {
+        "id": "rel_003",
+        "from_id": "char_vashti",
+        "to_id": "loc_small_room",
+        "kind": "owner_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_004",
+        "from_id": "char_vashti",
+        "to_id": "obj_the_book_of_the_machine",
+        "kind": "possessor_of",
+        "sentiment": "reverent",
+        "bag": {}
+      },
+      {
+        "id": "rel_005",
+        "from_id": "char_doctor",
+        "to_id": "char_vashti",
+        "kind": "doctor_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_006",
+        "from_id": "char_central_committee",
+        "to_id": "obj_the_book_of_the_machine",
+        "kind": "creator_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_007",
+        "from_id": "char_vashti",
+        "to_id": "obj_the_book",
+        "kind": "owner_of",
+        "sentiment": "reverent",
+        "bag": {}
+      },
+      {
+        "id": "rel_008",
+        "from_id": "char_vashti",
+        "to_id": "char_attendant",
+        "kind": "passenger_served_by",
+        "sentiment": "negative",
+        "bag": {}
+      },
+      {
+        "id": "rel_009",
+        "from_id": "char_man_in_front",
+        "to_id": "obj_the_man_in_front_s_book",
+        "kind": "owner_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_010",
+        "from_id": "char_vashti",
+        "to_id": "loc_her_room",
+        "kind": "resident_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_011",
+        "from_id": "char_attendant",
+        "to_id": "obj_air_ship",
+        "kind": "employee_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_012",
+        "from_id": "char_vashti",
+        "to_id": "obj_air_ship",
+        "kind": "passenger_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_013",
+        "from_id": "char_vashti",
+        "to_id": "obj_the_book",
+        "kind": "possesses",
+        "sentiment": "positive",
+        "bag": {}
+      },
+      {
+        "id": "rel_014",
+        "from_id": "char_committee_of_the_machine",
+        "to_id": "char_kuno",
+        "kind": "threatened",
+        "sentiment": "negative",
+        "bag": {}
+      },
+      {
+        "id": "rel_015",
+        "from_id": "char_she",
+        "to_id": "obj_the_machine",
+        "kind": "worships",
+        "sentiment": "positive",
+        "bag": {}
+      },
+      {
+        "id": "rel_016",
+        "from_id": "char_his_mother",
+        "to_id": "char_he",
+        "kind": "mother_of",
+        "sentiment": "negative",
+        "bag": {}
+      },
+      {
+        "id": "rel_017",
+        "from_id": "char_kuno",
+        "to_id": "char_vashti",
+        "kind": "child_of",
+        "sentiment": "alienated",
+        "bag": {}
+      },
+      {
+        "id": "rel_018",
+        "from_id": "char_kuno",
+        "to_id": "obj_dietetic_tabloids",
+        "kind": "owner_of",
+        "sentiment": "positive",
+        "bag": {}
+      },
+      {
+        "id": "rel_019",
+        "from_id": "char_kuno",
+        "to_id": "obj_respirator",
+        "kind": "owner_of",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_020",
+        "from_id": "char_the_woman",
+        "to_id": "char_kuno",
+        "kind": "rescuer_of",
+        "sentiment": "positive",
+        "bag": {}
+      },
+      {
+        "id": "rel_021",
+        "from_id": "char_my_friends",
+        "to_id": "char_kuno",
+        "kind": "friend_of",
+        "sentiment": "positive",
+        "bag": {}
+      },
+      {
+        "id": "rel_022",
+        "from_id": "char_vashti",
+        "to_id": "char_kuno",
+        "kind": "parent_of",
+        "sentiment": "negative",
+        "bag": {}
+      },
+      {
+        "id": "rel_023",
+        "from_id": "loc_the_central_power_station",
+        "to_id": "loc_france",
+        "kind": "located_in",
+        "sentiment": null,
+        "bag": {}
+      },
+      {
+        "id": "rel_024",
+        "from_id": "char_vashti",
+        "to_id": "char_friend_specialist_in_sympathy",
+        "kind": "friend_of",
+        "sentiment": "neutral",
+        "bag": {}
+      },
+      {
+        "id": "rel_025",
+        "from_id": "char_kuno",
+        "to_id": "char_vashti",
+        "kind": "kinship",
+        "sentiment": "positive",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": []
+  },
+  "scene_cards": [],
+  "voice_card": {},
+  "metadata": {
+    "title": "The Machine Stops",
+    "source": "E. M. Forster, The Eternal Moment and Other Stories, Harcourt, Brace & Co., 1928 (PG #72890; first published in The Oxford and Cambridge Review, November 1909) — https://www.gutenberg.org/cache/epub/72890/pg72890.txt",
+    "created_at": "2026-09-18T03:14:05.692Z"
+  },
+  "_fabula": {
+    "generator": "extraction pipeline (#117)",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-18T03:21:52.247Z",
+    "source": {
+      "id": "the-machine-stops",
+      "edition": "E. M. Forster, The Eternal Moment and Other Stories, Harcourt, Brace & Co., 1928 (PG #72890; first published in The Oxford and Cambridge Review, November 1909)",
+      "sha256": "0cca7368425d76e38f9f154a34fd4fe5501ac1a259606b1115cd8298bba6d01b"
+    },
+    "fields_not_recovered": {
+      "pov": "a property of a scene; no scene boundaries exist before #118",
+      "dramatic_function": "same — a scene-level judgment, not an event-level fact",
+      "reveals": "told-ledger; research §4.7 — derived from Scene Cards, never extracted from prose",
+      "conceals": "told-ledger, same reason; the Syuzhet-critical field with no prior art at all",
+      "caused_by": "not attempted at this stage; causal-graph extraction is a pass this ticket does not run"
+    },
+    "events": [
+      {
+        "id": "ev_0009",
+        "sequence": 1,
+        "summary": "Kuno conceived the idea that the stars resembled a man with a sword.",
+        "location_id": null,
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno conceived the idea that the stars resembled a man with a sword."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 8,
+        "source_span": {
+          "start": 3962,
+          "end": 4004,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0011",
+        "sequence": 2,
+        "summary": "Kuno states that the idea came to him in the air-ship.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno states that the idea came to him in the air-ship."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 10,
+        "source_span": {
+          "start": 4395,
+          "end": 4429,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0043",
+        "sequence": 3,
+        "summary": "The Machine assigned Kuno a room on the other side of the earth, stopping his visits to Vashti.",
+        "location_id": "loc_earth",
+        "characters_present": [
+          "char_machine",
+          "char_kuno"
+        ],
+        "beats": [
+          "The Machine assigned Kuno a room on the other side of the earth, stopping his visits to Vashti."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 42,
+        "source_span": {
+          "start": 13060,
+          "end": 13153,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0060",
+        "sequence": 4,
+        "summary": "The Committee of the Machine previously declared racing aeroplanes to defeat the sun illegal and punishable by Homelessness.",
+        "location_id": null,
+        "characters_present": [
+          "char_committee_of_the_machine"
+        ],
+        "beats": [
+          "The Committee of the Machine previously declared racing aeroplanes to defeat the sun illegal and punishable by Homelessness."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 59,
+        "source_span": {
+          "start": 19769,
+          "end": 19910,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0072",
+        "sequence": 5,
+        "summary": "The passenger who dropped his book was sent to Sumatra to propagate the race.",
+        "location_id": "loc_sumatra",
+        "characters_present": [
+          "char_the_passenger_who_had_dropped_his_book"
+        ],
+        "beats": [
+          "The passenger who dropped his book was sent to Sumatra to propagate the race."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 71,
+        "source_span": {
+          "start": 24459,
+          "end": 24527,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0078",
+        "sequence": 6,
+        "summary": "Kuno went outside to the surface.",
+        "location_id": "loc_surface_of_the_earth",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno went outside to the surface."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "since I spoke to you last",
+        "narrated_index": 77,
+        "source_span": {
+          "start": 26391,
+          "end": 26437,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0079",
+        "sequence": 7,
+        "summary": "Authorities discovered Kuno.",
+        "location_id": null,
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Authorities discovered Kuno."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 78,
+        "source_span": {
+          "start": 26438,
+          "end": 26501,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0087",
+        "sequence": 8,
+        "summary": "The Committee threatened Kuno with Homelessness.",
+        "location_id": null,
+        "characters_present": [
+          "char_committee_of_the_machine",
+          "char_kuno"
+        ],
+        "beats": [
+          "The Committee threatened Kuno with Homelessness."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 86,
+        "source_span": {
+          "start": 27353,
+          "end": 27395,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0091",
+        "sequence": 9,
+        "summary": "Kuno walked up and down the platform outside his room to recover the sense of space.",
+        "location_id": "loc_platform_of_the_railway_outside_my_room",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno walked up and down the platform outside his room to recover the sense of space."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 90,
+        "source_span": {
+          "start": 28919,
+          "end": 28994,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0092",
+        "sequence": 10,
+        "summary": "Kuno called to Vashti for the first time, but she would not come.",
+        "location_id": null,
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno called to Vashti for the first time, but she would not come."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "then",
+        "narrated_index": 91,
+        "source_span": {
+          "start": 29586,
+          "end": 29662,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0093",
+        "sequence": 11,
+        "summary": "Kuno took the lift up to each platform in turn until reaching the topmost platform.",
+        "location_id": "loc_topmost_platform",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno took the lift up to each platform in turn until reaching the topmost platform."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_kuno",
+            "column": "location_id",
+            "value": "loc_topmost_platform"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 92,
+        "source_span": {
+          "start": 29821,
+          "end": 29932,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0094",
+        "sequence": 12,
+        "summary": "Kuno went along the railway-tunnels of the topmost story and discovered an opening.",
+        "location_id": "loc_railway_tunnels_of_the_topmost_story",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno went along the railway-tunnels of the topmost story and discovered an opening."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "after many visits",
+        "narrated_index": 93,
+        "source_span": {
+          "start": 31138,
+          "end": 31175,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0096",
+        "sequence": 13,
+        "summary": "Kuno put his arm into a black gap in the tiles and waved it.",
+        "location_id": "loc_railway_tunnel",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno put his arm into a black gap in the tiles and waved it."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 95,
+        "source_span": {
+          "start": 31369,
+          "end": 31459,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0097",
+        "sequence": 14,
+        "summary": "Kuno loosened another tile, stuck his head in, and shouted into the darkness.",
+        "location_id": "loc_railway_tunnel",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno loosened another tile, stuck his head in, and shouted into the darkness."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 96,
+        "source_span": {
+          "start": 31460,
+          "end": 31569,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0098",
+        "sequence": 15,
+        "summary": "Kuno heard the voices of dead workmen and past generations calling back to him.",
+        "location_id": "loc_railway_tunnel",
+        "characters_present": [
+          "char_kuno",
+          "char_spirits_of_those_dead_workmen"
+        ],
+        "beats": [
+          "Kuno heard the voices of dead workmen and past generations calling back to him."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 97,
+        "source_span": {
+          "start": 31741,
+          "end": 31847,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0100",
+        "sequence": 16,
+        "summary": "Kuno asked to be a father, but the Committee refused his request.",
+        "location_id": null,
+        "characters_present": [
+          "char_kuno",
+          "char_committee_of_the_machine"
+        ],
+        "beats": [
+          "Kuno asked to be a father, but the Committee refused his request."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "lately",
+        "narrated_index": 99,
+        "source_span": {
+          "start": 31914,
+          "end": 32002,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0101",
+        "sequence": 17,
+        "summary": "A train brushed by Kuno while he thrust his head and arms into the hole.",
+        "location_id": "loc_railway_tunnel",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "A train brushed by Kuno while he thrust his head and arms into the hole."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "Then",
+        "narrated_index": 100,
+        "source_span": {
+          "start": 32061,
+          "end": 32144,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0102",
+        "sequence": 18,
+        "summary": "Kuno crawled back to the platform, took the lift down, and summoned his bed.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno crawled back to the platform, took the lift down, and summoned his bed."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_kuno",
+            "column": "location_id",
+            "value": "loc_island_northern_hemisphere"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 101,
+        "source_span": {
+          "start": 32179,
+          "end": 32254,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0103",
+        "sequence": 19,
+        "summary": "Kuno called Vashti again, and she refused him again.",
+        "location_id": null,
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno called Vashti again, and she refused him again."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 102,
+        "source_span": {
+          "start": 32272,
+          "end": 32318,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0105",
+        "sequence": 20,
+        "summary": "Kuno determined to climb the shaft through the hole and began exercising his arms daily.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno determined to climb the shaft through the hole and began exercising his arms daily."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "Day after day",
+        "narrated_index": 104,
+        "source_span": {
+          "start": 32524,
+          "end": 32607,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0106",
+        "sequence": 21,
+        "summary": "Kuno summoned a respirator and departed.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno summoned a respirator and departed."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_respirator",
+            "column": "location_id",
+            "value": "loc_island_northern_hemisphere"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "Then",
+        "narrated_index": 105,
+        "source_span": {
+          "start": 32771,
+          "end": 32813,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0107",
+        "sequence": 22,
+        "summary": "Kuno pushed in more tiles and clambered after them into the shaft's darkness.",
+        "location_id": "loc_shaft",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno pushed in more tiles and clambered after them into the shaft's darkness."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_kuno",
+            "column": "location_id",
+            "value": "loc_shaft"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "soon",
+        "narrated_index": 106,
+        "source_span": {
+          "start": 32873,
+          "end": 32949,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0108",
+        "sequence": 23,
+        "summary": "Kuno climbed an ancient metal ladder as the rough rungs cut through his gloves.",
+        "location_id": "loc_shaft",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno climbed an ancient metal ladder as the rough rungs cut through his gloves."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 107,
+        "source_span": {
+          "start": 34048,
+          "end": 34122,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0109",
+        "sequence": 24,
+        "summary": "Kuno cracked his head against a pneumatic stopper in the dark.",
+        "location_id": "loc_shaft",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno cracked his head against a pneumatic stopper in the dark."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "The next moment",
+        "narrated_index": 108,
+        "source_span": {
+          "start": 34546,
+          "end": 34599,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0111",
+        "sequence": 25,
+        "summary": "Kuno felt along the surface of the smooth stopper for fastenings.",
+        "location_id": "loc_shaft",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno felt along the surface of the smooth stopper for fastenings."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 110,
+        "source_span": {
+          "start": 34973,
+          "end": 35079,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0112",
+        "sequence": 26,
+        "summary": "A voice urged Kuno to jump for the center handle.",
+        "location_id": "loc_shaft",
+        "characters_present": [
+          "char_voices",
+          "char_kuno"
+        ],
+        "beats": [
+          "A voice urged Kuno to jump for the center handle."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "Then",
+        "narrated_index": 111,
+        "source_span": {
+          "start": 35131,
+          "end": 35240,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0113",
+        "sequence": 27,
+        "summary": "Kuno jumped and found a handle on the stopper.",
+        "location_id": "loc_shaft",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno jumped and found a handle on the stopper."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 112,
+        "source_span": {
+          "start": 35410,
+          "end": 35450,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0114",
+        "sequence": 28,
+        "summary": "The voices urge Kuno to jump toward the center of the pneumatic stopper.",
+        "location_id": "loc_shaft",
+        "characters_present": [
+          "char_voices",
+          "char_kuno"
+        ],
+        "beats": [
+          "The voices urge Kuno to jump toward the center of the pneumatic stopper."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 113,
+        "source_span": {
+          "start": 35131,
+          "end": 35174,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0115",
+        "sequence": 29,
+        "summary": "Kuno jumps and catches the handle on the stopper.",
+        "location_id": "loc_shaft",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno jumps and catches the handle on the stopper."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 114,
+        "source_span": null
+      },
+      {
+        "id": "ev_0117",
+        "sequence": 30,
+        "summary": "The stopper and Kuno are blown out of the earth onto the surface.",
+        "location_id": "loc_surface_of_the_earth",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "The stopper and Kuno are blown out of the earth onto the surface."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_kuno",
+            "column": "location_id",
+            "value": "loc_grass_grown_hollow"
+          },
+          {
+            "entity_id": "obj_pneumatic_stopper",
+            "column": "location_id",
+            "value": "loc_grass_grown_hollow"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 116,
+        "source_span": {
+          "start": 36535,
+          "end": 36610,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0118",
+        "sequence": 31,
+        "summary": "Kuno crawls to the hole and sips the escaping artificial air as his nose and ears bleed.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno crawls to the hole and sips the escaping artificial air as his nose and ears bleed."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 117,
+        "source_span": {
+          "start": 36726,
+          "end": 36822,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0119",
+        "sequence": 32,
+        "summary": "Kuno spots his respirator bobbing above him in the air current.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno spots his respirator bobbing above him in the air current."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_respirator",
+            "column": "location_id",
+            "value": "loc_grass_grown_hollow"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "Soon",
+        "narrated_index": 118,
+        "source_span": {
+          "start": 37256,
+          "end": 37337,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0121",
+        "sequence": 33,
+        "summary": "Kuno stands up in the hollow as air pools inside it.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno stands up in the hollow as air pools inside it."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "Presently",
+        "narrated_index": 120,
+        "source_span": {
+          "start": 38700,
+          "end": 38718,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0122",
+        "sequence": 34,
+        "summary": "Kuno crawls and then stands in the hollow as air fills it.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno crawls and then stands in the hollow as air fills it."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 121,
+        "source_span": {
+          "start": 38679,
+          "end": 38718,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0123",
+        "sequence": 35,
+        "summary": "Kuno rushes up the slope but rolls back after breathing the bitter air.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno rushes up the slope but rolls back after breathing the bitter air."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 122,
+        "source_span": {
+          "start": 39060,
+          "end": 39143,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0126",
+        "sequence": 36,
+        "summary": "Kuno climbs the bank of the hollow and looks out at the hills.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno climbs the bank of the hollow and looks out at the hills."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "evening",
+        "narrated_index": 125,
+        "source_span": {
+          "start": 40018,
+          "end": 40119,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0131",
+        "sequence": 37,
+        "summary": "Kuno's respirator falls down around sunset.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno's respirator falls down around sunset."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_respirator",
+            "column": "status",
+            "value": "fallen down"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "about sunset",
+        "narrated_index": 130,
+        "source_span": {
+          "start": 42724,
+          "end": 42757,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0132",
+        "sequence": 38,
+        "summary": "The fountain of air lets Kuno's respirator fall.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [],
+        "beats": [
+          "The fountain of air lets Kuno's respirator fall."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_respirator",
+            "column": "status",
+            "value": "fallen"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "About sunset",
+        "narrated_index": 131,
+        "source_span": {
+          "start": 42830,
+          "end": 42871,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0133",
+        "sequence": 39,
+        "summary": "Kuno runs down to the bottom of the dell and listens at the shaft.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno runs down to the bottom of the dell and listens at the shaft."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "The sky at night",
+        "narrated_index": 132,
+        "source_span": {
+          "start": 43753,
+          "end": 43803,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0134",
+        "sequence": 40,
+        "summary": "A long white worm crawls out of the shaft onto the grass.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_mending_apparatus"
+        ],
+        "beats": [
+          "A long white worm crawls out of the shaft onto the grass."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_mending_apparatus",
+            "column": "location_id",
+            "value": "loc_grass_grown_hollow"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 133,
+        "source_span": {
+          "start": 44390,
+          "end": 44485,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0135",
+        "sequence": 41,
+        "summary": "Kuno screams and stamps on the worm, which curls around his ankle.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_kuno",
+          "char_mending_apparatus"
+        ],
+        "beats": [
+          "Kuno screams and stamps on the worm, which curls around his ankle."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 134,
+        "source_span": {
+          "start": 44488,
+          "end": 44639,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0136",
+        "sequence": 42,
+        "summary": "The worm binds Kuno's feet and drags him past the stopper into the shaft.",
+        "location_id": "loc_the_shaft",
+        "characters_present": [
+          "char_kuno",
+          "char_mending_apparatus"
+        ],
+        "beats": [
+          "The worm binds Kuno's feet and drags him past the stopper into the shaft."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_kuno",
+            "column": "location_id",
+            "value": "loc_the_shaft"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 135,
+        "source_span": {
+          "start": 44886,
+          "end": 45021,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0137",
+        "sequence": 43,
+        "summary": "The stopper closes over the shaft.",
+        "location_id": "loc_the_shaft",
+        "characters_present": [],
+        "beats": [
+          "The stopper closes over the shaft."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_stopper",
+            "column": "status",
+            "value": "closed"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 136,
+        "source_span": {
+          "start": 45488,
+          "end": 45520,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0138",
+        "sequence": 44,
+        "summary": "Kuno's head hits against the ladder, knocking him out.",
+        "location_id": "loc_the_shaft",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno's head hits against the ladder, knocking him out."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 137,
+        "source_span": {
+          "start": 45641,
+          "end": 45704,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0139",
+        "sequence": 45,
+        "summary": "Kuno wakes up in his room.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno wakes up in his room."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_kuno",
+            "column": "location_id",
+            "value": "loc_island_northern_hemisphere"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 138,
+        "source_span": {
+          "start": 45705,
+          "end": 45728,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0144",
+        "sequence": 46,
+        "summary": "A surface woman came to Kuno's help in the dell and was killed by a worm piercing her throat.",
+        "location_id": "loc_grass_grown_hollow",
+        "characters_present": [
+          "char_the_woman",
+          "char_mending_apparatus"
+        ],
+        "beats": [
+          "A surface woman came to Kuno's help in the dell and was killed by a worm piercing her throat."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_the_woman",
+            "column": "status",
+            "value": "dead"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "in the twilight",
+        "narrated_index": 143,
+        "source_span": {
+          "start": 46899,
+          "end": 47047,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0148",
+        "sequence": 47,
+        "summary": "An advanced lecturer urges his audience to beware of first-hand ideas and instead rely on multi-tier second-hand interpretations.",
+        "location_id": null,
+        "characters_present": [
+          "char_one_of_the_most_advanced_of_them"
+        ],
+        "beats": [
+          "An advanced lecturer urges his audience to beware of first-hand ideas and instead rely on multi-tier second-hand interpretations."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 147,
+        "source_span": {
+          "start": 48492,
+          "end": 48565,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0149",
+        "sequence": 48,
+        "summary": "The audience applauds the advanced lecturer's address.",
+        "location_id": null,
+        "characters_present": [
+          "char_one_of_the_most_advanced_of_them"
+        ],
+        "beats": [
+          "The audience applauds the advanced lecturer's address."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 148,
+        "source_span": {
+          "start": 50240,
+          "end": 50280,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0152",
+        "sequence": 49,
+        "summary": "Kuno is transferred from the northern hemisphere to a room in the southern hemisphere near Vashti.",
+        "location_id": "loc_kuno_s_room",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno is transferred from the northern hemisphere to a room in the southern hemisphere near Vashti."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_kuno",
+            "column": "location_id",
+            "value": "loc_kuno_s_room"
+          }
+        ],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 151,
+        "source_span": {
+          "start": 54668,
+          "end": 54797,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0158",
+        "sequence": 50,
+        "summary": "Vashti's friend recounts complaining to the authorities about gasps disfiguring the music.",
+        "location_id": null,
+        "characters_present": [
+          "char_a_friend"
+        ],
+        "beats": [
+          "Vashti's friend recounts complaining to the authorities about gasps disfiguring the music."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 157,
+        "source_span": {
+          "start": 55825,
+          "end": 55922,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0159",
+        "sequence": 51,
+        "summary": "The Committee of the Mending Apparatus told the friend that the music trouble will be remedied shortly.",
+        "location_id": null,
+        "characters_present": [
+          "char_committee_of_the_machine",
+          "char_a_friend"
+        ],
+        "beats": [
+          "The Committee of the Mending Apparatus told the friend that the music trouble will be remedied shortly."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "past",
+        "time_anchor": "",
+        "narrated_index": 158,
+        "source_span": {
+          "start": 55957,
+          "end": 56034,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0001",
+        "sequence": 52,
+        "summary": "The woman touches a switch to silence the music.",
+        "location_id": "loc_small_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "The woman touches a switch to silence the music."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 0,
+        "source_span": {
+          "start": 735,
+          "end": 787,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0002",
+        "sequence": 53,
+        "summary": "The woman sets her chair in motion across the room.",
+        "location_id": "loc_small_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "The woman sets her chair in motion across the room."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 1,
+        "source_span": {
+          "start": 840,
+          "end": 964,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0003",
+        "sequence": 54,
+        "summary": "Vashti listens into the receiver and agrees to talk to Kuno.",
+        "location_id": "loc_small_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti listens into the receiver and agrees to talk to Kuno."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 2,
+        "source_span": {
+          "start": 1220,
+          "end": 1356,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0004",
+        "sequence": 55,
+        "summary": "Vashti touches the isolation knob.",
+        "location_id": "loc_small_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti touches the isolation knob."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 3,
+        "source_span": {
+          "start": 1550,
+          "end": 1621,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0005",
+        "sequence": 56,
+        "summary": "Vashti touches the lighting apparatus, plunging the room into darkness.",
+        "location_id": "loc_small_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti touches the lighting apparatus, plunging the room into darkness."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 4,
+        "source_span": {
+          "start": 1622,
+          "end": 1709,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0006",
+        "sequence": 57,
+        "summary": "The plate glows and reveals Kuno's image to Vashti.",
+        "location_id": "loc_small_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "The plate glows and reveals Kuno's image to Vashti."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "fully fifteen seconds",
+        "narrated_index": 5,
+        "source_span": {
+          "start": 1859,
+          "end": 2000,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0007",
+        "sequence": 58,
+        "summary": "Kuno asks Vashti to come and visit him in person.",
+        "location_id": "loc_small_room",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno asks Vashti to come and visit him in person."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_kuno",
+            "column": "goal",
+            "value": "have Vashti visit him in person"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 6,
+        "source_span": {
+          "start": 2430,
+          "end": 2462,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0008",
+        "sequence": 59,
+        "summary": "Vashti refuses Kuno's invitation to visit him.",
+        "location_id": "loc_small_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti refuses Kuno's invitation to visit him."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 7,
+        "source_span": {
+          "start": 3313,
+          "end": 3376,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0010",
+        "sequence": 60,
+        "summary": "Vashti asks Kuno when the idea first came to him.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti asks Kuno when the idea first came to him."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 9,
+        "source_span": {
+          "start": 4362,
+          "end": 4392,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0012",
+        "sequence": 61,
+        "summary": "Kuno declares that he wants to visit the surface of the earth and see the stars from there.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno declares that he wants to visit the surface of the earth and see the stars from there."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_kuno",
+            "column": "goal",
+            "value": "visit the surface of the earth"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 11,
+        "source_span": {
+          "start": 5179,
+          "end": 5220,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0013",
+        "sequence": 62,
+        "summary": "Kuno demands that his mother come to him to explain the harm of visiting the surface.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno demands that his mother come to him to explain the harm of visiting the surface."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 12,
+        "source_span": {
+          "start": 5248,
+          "end": 5350,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0014",
+        "sequence": 63,
+        "summary": "Vashti warns Kuno that there is no advantage and that the cold outer air would kill him.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti warns Kuno that there is no advantage and that the cold outer air would kill him."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 13,
+        "source_span": {
+          "start": 5353,
+          "end": 5416,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0015",
+        "sequence": 64,
+        "summary": "Vashti asserts to Kuno that his expedition is contrary to the spirit of the age.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti asserts to Kuno that his expedition is contrary to the spirit of the age."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 14,
+        "source_span": {
+          "start": 5813,
+          "end": 5869,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0016",
+        "sequence": 65,
+        "summary": "Kuno cuts the connection and isolates himself.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno cuts the connection and isolates himself."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 15,
+        "source_span": {
+          "start": 5943,
+          "end": 6012,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0017",
+        "sequence": 66,
+        "summary": "Vashti generates the light in her room.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti generates the light in her room."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 16,
+        "source_span": {
+          "start": 6048,
+          "end": 6076,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0018",
+        "sequence": 67,
+        "summary": "Vashti turns off her isolation-switch.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti turns off her isolation-switch."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 17,
+        "source_span": {
+          "start": 6680,
+          "end": 6735,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0019",
+        "sequence": 68,
+        "summary": "Vashti answers the barrage of messages and questions with irritation.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti answers the barrage of messages and questions with irritation."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 18,
+        "source_span": {
+          "start": 7087,
+          "end": 7141,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0020",
+        "sequence": 69,
+        "summary": "Vashti switches off her correspondents.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti switches off her correspondents."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 19,
+        "source_span": {
+          "start": 7455,
+          "end": 7556,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0021",
+        "sequence": 70,
+        "summary": "Vashti delivers a ten-minute lecture on Australian music to her audience.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti delivers a ten-minute lecture on Australian music to her audience."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 20,
+        "source_span": {
+          "start": 7686,
+          "end": 7761,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0022",
+        "sequence": 71,
+        "summary": "Vashti listens to a lecture on the sea.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti listens to a lecture on the sea."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 21,
+        "source_span": {
+          "start": 8227,
+          "end": 8306,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0023",
+        "sequence": 72,
+        "summary": "Vashti summons her bed.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti summons her bed."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_bed",
+            "column": "location_id",
+            "value": "loc_vashti_s_room"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 22,
+        "source_span": {
+          "start": 8408,
+          "end": 8493,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0024",
+        "sequence": 73,
+        "summary": "Vashti isolates herself.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti isolates herself."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 23,
+        "source_span": {
+          "start": 8751,
+          "end": 8792,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0025",
+        "sequence": 74,
+        "summary": "Vashti isolates herself in her room.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti isolates herself in her room."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 24,
+        "source_span": {
+          "start": 8751,
+          "end": 8844,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0026",
+        "sequence": 75,
+        "summary": "Vashti picks up the Book of the Machine and kisses it three times.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti picks up the Book of the Machine and kisses it three times."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 25,
+        "source_span": {
+          "start": 9379,
+          "end": 9473,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0027",
+        "sequence": 76,
+        "summary": "Vashti looks up the departure times for air-ships to the northern hemisphere.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti looks up the departure times for air-ships to the northern hemisphere."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 26,
+        "source_span": {
+          "start": 9733,
+          "end": 9812,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0028",
+        "sequence": 77,
+        "summary": "Vashti calls out to Kuno.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti calls out to Kuno."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 27,
+        "source_span": {
+          "start": 10490,
+          "end": 10497,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0029",
+        "sequence": 78,
+        "summary": "Kuno tells Vashti that he will not talk to her until she comes.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno tells Vashti that he will not talk to her until she comes."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 28,
+        "source_span": {
+          "start": 10499,
+          "end": 10555,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0030",
+        "sequence": 79,
+        "summary": "Vashti asks Kuno if he has been on the surface of the earth since they last spoke.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti asks Kuno if he has been on the surface of the earth since they last spoke."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 29,
+        "source_span": {
+          "start": 10557,
+          "end": 10621,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0031",
+        "sequence": 80,
+        "summary": "Kuno's image fades from the receiver.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno's image fades from the receiver."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 30,
+        "source_span": {
+          "start": 10623,
+          "end": 10639,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0032",
+        "sequence": 81,
+        "summary": "Vashti presses a button to open the wall to the tunnel.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti presses a button to open the wall to the tunnel."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 31,
+        "source_span": {
+          "start": 10773,
+          "end": 10881,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0033",
+        "sequence": 82,
+        "summary": "Frightened by the tunnel, Vashti shrinks back into her room and the wall closes.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Frightened by the tunnel, Vashti shrinks back into her room and the wall closes."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 32,
+        "source_span": {
+          "start": 11983,
+          "end": 12043,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0034",
+        "sequence": 83,
+        "summary": "Vashti tells Kuno that she cannot come to see him because she is not well.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti tells Kuno that she cannot come to see him because she is not well."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 33,
+        "source_span": {
+          "start": 12045,
+          "end": 12105,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0035",
+        "sequence": 84,
+        "summary": "Kuno telegraphs Vashti's doctor.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno",
+          "char_doctor"
+        ],
+        "beats": [
+          "Kuno telegraphs Vashti's doctor."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 34,
+        "source_span": {
+          "start": 12339,
+          "end": 12374,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0036",
+        "sequence": 85,
+        "summary": "A medical apparatus descends from the ceiling to examine Vashti.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "A medical apparatus descends from the ceiling to examine Vashti."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 35,
+        "source_span": {
+          "start": 12107,
+          "end": 12233,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0037",
+        "sequence": 86,
+        "summary": "Vashti swallows the medicine projected into her mouth, and the apparatus withdraws.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti swallows the medicine projected into her mouth, and the apparatus withdraws."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 36,
+        "source_span": {
+          "start": 12442,
+          "end": 12553,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0038",
+        "sequence": 87,
+        "summary": "Kuno asks Vashti how she feels.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno asks Vashti how she feels."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 37,
+        "source_span": {
+          "start": 12554,
+          "end": 12602,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0039",
+        "sequence": 88,
+        "summary": "Vashti replies that she is better and asks why Kuno does not come to her instead.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti replies that she is better and asks why Kuno does not come to her instead."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 38,
+        "source_span": {
+          "start": 12604,
+          "end": 12676,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0040",
+        "sequence": 89,
+        "summary": "Kuno states that he cannot leave his place because something tremendous may happen.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno states that he cannot leave his place because something tremendous may happen."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 39,
+        "source_span": {
+          "start": 12678,
+          "end": 12779,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0041",
+        "sequence": 90,
+        "summary": "Vashti asks Kuno if he has been on the surface of the earth yet.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti asks Kuno if he has been on the surface of the earth yet."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 40,
+        "source_span": {
+          "start": 12781,
+          "end": 12829,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0042",
+        "sequence": 91,
+        "summary": "Kuno refuses to tell Vashti through the Machine.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno refuses to tell Vashti through the Machine."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 41,
+        "source_span": {
+          "start": 12831,
+          "end": 12905,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0044",
+        "sequence": 92,
+        "summary": "Vashti opens the wall again, enters the platform, and summons a car, beginning her journey.",
+        "location_id": "loc_platform",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti opens the wall again, enters the platform, and summons a car, beginning her journey."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_vashti",
+            "column": "location_id",
+            "value": "loc_platform"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 43,
+        "source_span": {
+          "start": 13547,
+          "end": 13743,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0046",
+        "sequence": 93,
+        "summary": "Vashti presses the button, opening the wall to reveal the tunnel.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti presses the button, opening the wall to reveal the tunnel."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 45,
+        "source_span": {
+          "start": 13547,
+          "end": 13663,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0047",
+        "sequence": 94,
+        "summary": "Vashti rises, walks to the platform clasping the Book, and summons the car as her room closes behind her.",
+        "location_id": "loc_platform",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti rises, walks to the platform clasping the Book, and summons the car as her room closes behind her."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_vashti",
+            "column": "location_id",
+            "value": "loc_platform"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 46,
+        "source_span": {
+          "start": 13664,
+          "end": 13770,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0048",
+        "sequence": 95,
+        "summary": "The car arrives, Vashti boards it, and then signals it to stop.",
+        "location_id": "loc_tunnel",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "The car arrives, Vashti boards it, and then signals it to stop."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_vashti",
+            "column": "location_id",
+            "value": "loc_tunnel"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 47,
+        "source_span": {
+          "start": 13856,
+          "end": 13958,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0049",
+        "sequence": 96,
+        "summary": "Vashti enters the lift where one other passenger is present.",
+        "location_id": null,
+        "characters_present": [
+          "char_vashti",
+          "char_one_other_passenger"
+        ],
+        "beats": [
+          "Vashti enters the lift where one other passenger is present."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_vashti",
+            "column": "location_id",
+            "value": null
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 48,
+        "source_span": {
+          "start": 13960,
+          "end": 14027,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0050",
+        "sequence": 97,
+        "summary": "The man in front drops his Book on the gangway.",
+        "location_id": "loc_air_ship_station",
+        "characters_present": [
+          "char_man_in_front"
+        ],
+        "beats": [
+          "The man in front drops his Book on the gangway."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_the_man_in_front_s_book",
+            "column": "location_id",
+            "value": "loc_air_ship_station"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 49,
+        "source_span": {
+          "start": 16004,
+          "end": 16083,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0051",
+        "sequence": 98,
+        "summary": "A passenger warns directly that they will be late.",
+        "location_id": "loc_air_ship_station",
+        "characters_present": [
+          "char_passengers"
+        ],
+        "beats": [
+          "A passenger warns directly that they will be late."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 50,
+        "source_span": {
+          "start": 16397,
+          "end": 16466,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0052",
+        "sequence": 99,
+        "summary": "The passengers board the air-ship, with Vashti treading on the dropped Book.",
+        "location_id": "loc_air_ship_station",
+        "characters_present": [
+          "char_passengers",
+          "char_vashti"
+        ],
+        "beats": [
+          "The passengers board the air-ship, with Vashti treading on the dropped Book."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_vashti",
+            "column": "location_id",
+            "value": null
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 51,
+        "source_span": {
+          "start": 16468,
+          "end": 16538,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0053",
+        "sequence": 100,
+        "summary": "The air-ship's glass valves close, sealing the passengers inside.",
+        "location_id": null,
+        "characters_present": [],
+        "beats": [
+          "The air-ship's glass valves close, sealing the passengers inside."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 52,
+        "source_span": {
+          "start": 16967,
+          "end": 17018,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0054",
+        "sequence": 101,
+        "summary": "Vashti invokes the Machine and caresses her Book for comfort.",
+        "location_id": "loc_vashti_s_cabin",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti invokes the Machine and caresses her Book for comfort."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 53,
+        "source_span": {
+          "start": 17374,
+          "end": 17453,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0056",
+        "sequence": 102,
+        "summary": "The air-ship leaves the tunnel and takes flight over the ocean.",
+        "location_id": null,
+        "characters_present": [],
+        "beats": [
+          "The air-ship leaves the tunnel and takes flight over the ocean."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_air_ship",
+            "column": "location_id",
+            "value": null
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 55,
+        "source_span": {
+          "start": 17712,
+          "end": 17795,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0057",
+        "sequence": 103,
+        "summary": "Vashti briefly sees the coast of Sumatra and its lighthouses.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti briefly sees the coast of Sumatra and its lighthouses."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "night",
+        "narrated_index": 56,
+        "source_span": {
+          "start": 17811,
+          "end": 17890,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0058",
+        "sequence": 104,
+        "summary": "The passengers angrily complain about travelling in the dark.",
+        "location_id": null,
+        "characters_present": [
+          "char_passengers"
+        ],
+        "beats": [
+          "The passengers angrily complain about travelling in the dark."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 57,
+        "source_span": {
+          "start": 18441,
+          "end": 18502,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0059",
+        "sequence": 105,
+        "summary": "The attendant turns on the light and pulls down the metal blinds.",
+        "location_id": null,
+        "characters_present": [
+          "char_attendant"
+        ],
+        "beats": [
+          "The attendant turns on the light and pulls down the metal blinds."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 58,
+        "source_span": {
+          "start": 18508,
+          "end": 18611,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0061",
+        "sequence": 106,
+        "summary": "Vashti attempts to adjust the blind, but it flies up completely.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti attempts to adjust the blind, but it flies up completely."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "dawn",
+        "narrated_index": 60,
+        "source_span": {
+          "start": 20558,
+          "end": 20638,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0062",
+        "sequence": 107,
+        "summary": "Shaken with horror, Vashti rings for the attendant.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Shaken with horror, Vashti rings for the attendant."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 61,
+        "source_span": {
+          "start": 21001,
+          "end": 21060,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0063",
+        "sequence": 108,
+        "summary": "The attendant suggests Vashti change cabins, which Vashti prepares to do.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_attendant",
+          "char_vashti"
+        ],
+        "beats": [
+          "The attendant suggests Vashti change cabins, which Vashti prepares to do."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 62,
+        "source_span": {
+          "start": 21160,
+          "end": 21259,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0064",
+        "sequence": 109,
+        "summary": "The attendant reaches out her hand to steady Vashti.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_attendant",
+          "char_vashti"
+        ],
+        "beats": [
+          "The attendant reaches out her hand to steady Vashti."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 63,
+        "source_span": {
+          "start": 21554,
+          "end": 21670,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0065",
+        "sequence": 110,
+        "summary": "Vashti rebukes the attendant for touching her.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti rebukes the attendant for touching her."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 64,
+        "source_span": {
+          "start": 21672,
+          "end": 21735,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0066",
+        "sequence": 111,
+        "summary": "The attendant apologizes for steadying Vashti.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_attendant"
+        ],
+        "beats": [
+          "The attendant apologizes for steadying Vashti."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 65,
+        "source_span": {
+          "start": 21737,
+          "end": 21804,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0067",
+        "sequence": 112,
+        "summary": "Vashti demands to know where they are.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti demands to know where they are."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 66,
+        "source_span": {
+          "start": 21894,
+          "end": 21937,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0068",
+        "sequence": 113,
+        "summary": "The attendant informs Vashti that they are flying over Asia.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_attendant"
+        ],
+        "beats": [
+          "The attendant informs Vashti that they are flying over Asia."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 67,
+        "source_span": {
+          "start": 21939,
+          "end": 22000,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0069",
+        "sequence": 114,
+        "summary": "The attendant pushes back a metal blind to reveal the Himalayas.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_the_attendant"
+        ],
+        "beats": [
+          "The attendant pushes back a metal blind to reveal the Himalayas."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_blind",
+            "column": "status",
+            "value": "pushed back"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 68,
+        "source_span": {
+          "start": 22438,
+          "end": 22514,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0070",
+        "sequence": 115,
+        "summary": "Vashti asks the attendant to cover the window.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_vashti",
+          "char_the_attendant"
+        ],
+        "beats": [
+          "Vashti asks the attendant to cover the window."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 69,
+        "source_span": {
+          "start": 23139,
+          "end": 23198,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0071",
+        "sequence": 116,
+        "summary": "The attendant hides the Himalayas behind the metal blind.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_the_attendant"
+        ],
+        "beats": [
+          "The attendant hides the Himalayas behind the metal blind."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_blind",
+            "column": "status",
+            "value": "closed"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 70,
+        "source_span": {
+          "start": 23980,
+          "end": 24047,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0073",
+        "sequence": 117,
+        "summary": "Vashti looks out at the earth and closes the metal blind over the Caucasus.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti looks out at the earth and closes the metal blind over the Caucasus."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_blind",
+            "column": "status",
+            "value": "closed"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "At midday",
+        "narrated_index": 72,
+        "source_span": {
+          "start": 24868,
+          "end": 24944,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0074",
+        "sequence": 118,
+        "summary": "Vashti looks out again and covers Greece behind a metal blind.",
+        "location_id": "loc_cabin",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti looks out again and covers Greece behind a metal blind."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_blind",
+            "column": "status",
+            "value": "closed"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "In the evening",
+        "narrated_index": 73,
+        "source_span": {
+          "start": 25064,
+          "end": 25131,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0075",
+        "sequence": 119,
+        "summary": "Vashti arrives at Kuno's room.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti arrives at Kuno's room."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_vashti",
+            "column": "location_id",
+            "value": "loc_island_northern_hemisphere"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 74,
+        "source_span": {
+          "start": 25351,
+          "end": 25420,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0076",
+        "sequence": 120,
+        "summary": "Vashti warns Kuno that she can only stop for a few minutes.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti warns Kuno that she can only stop for a few minutes."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 75,
+        "source_span": {
+          "start": 26045,
+          "end": 26125,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0077",
+        "sequence": 121,
+        "summary": "Kuno reveals that he has been threatened with Homelessness.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno reveals that he has been threatened with Homelessness."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 76,
+        "source_span": {
+          "start": 26128,
+          "end": 26182,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0080",
+        "sequence": 122,
+        "summary": "Vashti questions why Kuno should not go outside legally with a permit.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti questions why Kuno should not go outside legally with a permit."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 79,
+        "source_span": {
+          "start": 26504,
+          "end": 26554,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0081",
+        "sequence": 123,
+        "summary": "Kuno reveals that he did not obtain an Egression-permit.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno reveals that he did not obtain an Egression-permit."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 80,
+        "source_span": {
+          "start": 26908,
+          "end": 26944,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0082",
+        "sequence": 124,
+        "summary": "Vashti asks how Kuno got out.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti asks how Kuno got out."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 81,
+        "source_span": {
+          "start": 26946,
+          "end": 26973,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0083",
+        "sequence": 125,
+        "summary": "Kuno states that he found a way of his own.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno states that he found a way of his own."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 82,
+        "source_span": {
+          "start": 26975,
+          "end": 27005,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0084",
+        "sequence": 126,
+        "summary": "Vashti whispers that doing so would be wrong.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti whispers that doing so would be wrong."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 83,
+        "source_span": {
+          "start": 27072,
+          "end": 27134,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0085",
+        "sequence": 127,
+        "summary": "Kuno asks why.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno asks why."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 84,
+        "source_span": {
+          "start": 27136,
+          "end": 27142,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0086",
+        "sequence": 128,
+        "summary": "Kuno accuses Vashti of worshiping the Machine and mentions the Committee previously threatened him with Homelessness.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno accuses Vashti of worshiping the Machine and mentions the Committee previously threatened him with Homelessness."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 85,
+        "source_span": {
+          "start": 27186,
+          "end": 27245,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0088",
+        "sequence": 129,
+        "summary": "Vashti angrily denies worshiping anything and asserts there is no new way out.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti angrily denies worshiping anything and asserts there is no new way out."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 87,
+        "source_span": {
+          "start": 27398,
+          "end": 27453,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0089",
+        "sequence": 130,
+        "summary": "Vashti states that the Book says it is impossible to get out except through vomitories.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti states that the Book says it is impossible to get out except through vomitories."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 88,
+        "source_span": {
+          "start": 27759,
+          "end": 27883,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0090",
+        "sequence": 131,
+        "summary": "Kuno claims the Book is wrong and that he has been out on his feet.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno claims the Book is wrong and that he has been out on his feet."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 89,
+        "source_span": {
+          "start": 27885,
+          "end": 27942,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0099",
+        "sequence": 132,
+        "summary": "Kuno paused in his narration.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno paused in his narration."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 98,
+        "source_span": {
+          "start": 31850,
+          "end": 31859,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0104",
+        "sequence": 133,
+        "summary": "Vashti told Kuno not to speak of these terrible things.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti told Kuno not to speak of these terrible things."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 103,
+        "source_span": {
+          "start": 32321,
+          "end": 32455,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0110",
+        "sequence": 134,
+        "summary": "Vashti sighed.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti sighed."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 109,
+        "source_span": {
+          "start": 34601,
+          "end": 34612,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0116",
+        "sequence": 135,
+        "summary": "Kuno pauses in his story, and tears gather in Vashti's eyes.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno pauses in his story, and tears gather in Vashti's eyes."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 115,
+        "source_span": {
+          "start": 35453,
+          "end": 35500,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0120",
+        "sequence": 136,
+        "summary": "Kuno turns grave again.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno turns grave again."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "Then",
+        "narrated_index": 119,
+        "source_span": {
+          "start": 38539,
+          "end": 38564,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0124",
+        "sequence": 137,
+        "summary": "Kuno halts his story, expressing doubt that Vashti is interested.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno halts his story, expressing doubt that Vashti is interested."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 123,
+        "source_span": {
+          "start": 39791,
+          "end": 39845,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0125",
+        "sequence": 138,
+        "summary": "Vashti instructs Kuno to continue his narrative.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti instructs Kuno to continue his narrative."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 124,
+        "source_span": {
+          "start": 39990,
+          "end": 40015,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0127",
+        "sequence": 139,
+        "summary": "Kuno stops his story a second time.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno stops his story a second time."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 126,
+        "source_span": {
+          "start": 41672,
+          "end": 41705,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0128",
+        "sequence": 140,
+        "summary": "Vashti tells Kuno to go on, but he refuses and bids her goodbye.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti tells Kuno to go on, but he refuses and bids her goodbye."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 127,
+        "source_span": {
+          "start": 41707,
+          "end": 41760,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0129",
+        "sequence": 141,
+        "summary": "Vashti demands that Kuno tell her how he returned to civilisation.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti demands that Kuno tell her how he returned to civilisation."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 128,
+        "source_span": {
+          "start": 42203,
+          "end": 42245,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0130",
+        "sequence": 142,
+        "summary": "Kuno resumes his escape narrative to Vashti.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno resumes his escape narrative to Vashti."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 129,
+        "source_span": {
+          "start": 42670,
+          "end": 42722,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0140",
+        "sequence": 143,
+        "summary": "Vashti turns to leave.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti turns to leave."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 139,
+        "source_span": {
+          "start": 45937,
+          "end": 46016,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0141",
+        "sequence": 144,
+        "summary": "Vashti warns Kuno that it will end in Homelessness.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti warns Kuno that it will end in Homelessness."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 140,
+        "source_span": {
+          "start": 46018,
+          "end": 46066,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0142",
+        "sequence": 145,
+        "summary": "Kuno retorts that he wishes it would.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno retorts that he wishes it would."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 141,
+        "source_span": {
+          "start": 46068,
+          "end": 46101,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0143",
+        "sequence": 146,
+        "summary": "Kuno claims to have seen a surface woman who came to help him and was killed by the worms.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno claims to have seen a surface woman who came to help him and was killed by the worms."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 142,
+        "source_span": {
+          "start": 46849,
+          "end": 47048,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0145",
+        "sequence": 147,
+        "summary": "Vashti departs from Kuno's room.",
+        "location_id": "loc_island_northern_hemisphere",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti departs from Kuno's room."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 144,
+        "source_span": {
+          "start": 47062,
+          "end": 47147,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0147",
+        "sequence": 148,
+        "summary": "Respirators and terrestrial motors are abolished.",
+        "location_id": "loc_underground_city",
+        "characters_present": [],
+        "beats": [
+          "Respirators and terrestrial motors are abolished."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_respirator",
+            "column": "status",
+            "value": "abolished"
+          },
+          {
+            "entity_id": "obj_terrestrial_motors",
+            "column": "status",
+            "value": "abolished"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "During the years that followed Kuno's escapade",
+        "narrated_index": 146,
+        "source_span": {
+          "start": 47935,
+          "end": 48014,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0150",
+        "sequence": 149,
+        "summary": "The allocution praising the Machine is printed on the first page of the Book of the Machine.",
+        "location_id": null,
+        "characters_present": [],
+        "beats": [
+          "The allocution praising the Machine is printed on the first page of the Book of the Machine."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "before long",
+        "narrated_index": 149,
+        "source_span": {
+          "start": 51643,
+          "end": 51716,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0151",
+        "sequence": 150,
+        "summary": "The allocution praising the Machine is printed on the first page of the Book.",
+        "location_id": null,
+        "characters_present": [],
+        "beats": [
+          "The allocution praising the Machine is printed on the first page of the Book."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "before long",
+        "narrated_index": 150,
+        "source_span": {
+          "start": 51647,
+          "end": 51716,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0153",
+        "sequence": 151,
+        "summary": "Vashti receives a message from Kuno.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti receives a message from Kuno."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "One day",
+        "narrated_index": 152,
+        "source_span": {
+          "start": 54514,
+          "end": 54577,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0154",
+        "sequence": 152,
+        "summary": "Kuno refuses to visualize his face upon the blue plate.",
+        "location_id": "loc_kuno_s_room",
+        "characters_present": [
+          "char_kuno"
+        ],
+        "beats": [
+          "Kuno refuses to visualize his face upon the blue plate."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 153,
+        "source_span": {
+          "start": 54970,
+          "end": 55022,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0155",
+        "sequence": 153,
+        "summary": "Kuno tells Vashti that the Machine is stopping.",
+        "location_id": null,
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno tells Vashti that the Machine is stopping."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 154,
+        "source_span": {
+          "start": 55121,
+          "end": 55176,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0156",
+        "sequence": 154,
+        "summary": "Vashti laughs at Kuno, angering him, and they cease speaking.",
+        "location_id": null,
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti laughs at Kuno, angering him, and they cease speaking."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 155,
+        "source_span": {
+          "start": 55178,
+          "end": 55264,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0157",
+        "sequence": 155,
+        "summary": "Vashti tells a friend about Kuno's claim that the Machine is stopping.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_a_friend"
+        ],
+        "beats": [
+          "Vashti tells a friend about Kuno's claim that the Machine is stopping."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 156,
+        "source_span": {
+          "start": 55266,
+          "end": 55389,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0160",
+        "sequence": 156,
+        "summary": "Vashti speaks petulantly to the Committee of the Mending Apparatus demanding that the music be fixed at once.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_committee_of_the_machine"
+        ],
+        "beats": [
+          "Vashti speaks petulantly to the Committee of the Mending Apparatus demanding that the music be fixed at once."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 159,
+        "source_span": {
+          "start": 56473,
+          "end": 56545,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0161",
+        "sequence": 157,
+        "summary": "The Committee of the Mending Apparatus replies that the defect will be set right shortly.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_committee_of_the_machine",
+          "char_vashti"
+        ],
+        "beats": [
+          "The Committee of the Mending Apparatus replies that the defect will be set right shortly."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 160,
+        "source_span": {
+          "start": 56547,
+          "end": 56615,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0162",
+        "sequence": 158,
+        "summary": "Vashti threatens to complain to the Central Committee if the music is not repaired immediately.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_committee_of_the_machine"
+        ],
+        "beats": [
+          "Vashti threatens to complain to the Central Committee if the music is not repaired immediately."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 161,
+        "source_span": null
+      },
+      {
+        "id": "ev_0163",
+        "sequence": 159,
+        "summary": "The Committee explains that personal complaints must go through them.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_committee_of_the_machine",
+          "char_vashti"
+        ],
+        "beats": [
+          "The Committee explains that personal complaints must go through them."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 162,
+        "source_span": {
+          "start": 56809,
+          "end": 56920,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0164",
+        "sequence": 160,
+        "summary": "Vashti submits her complaint to the Committee.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_committee_of_the_machine"
+        ],
+        "beats": [
+          "Vashti submits her complaint to the Committee."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 163,
+        "source_span": {
+          "start": 56986,
+          "end": 57004,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0165",
+        "sequence": 161,
+        "summary": "The Committee of the Mending Apparatus promises that her complaint will be forwarded.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_committee_of_the_machine",
+          "char_vashti"
+        ],
+        "beats": [
+          "The Committee of the Mending Apparatus promises that her complaint will be forwarded."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 164,
+        "source_span": {
+          "start": 57006,
+          "end": 57054,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0166",
+        "sequence": 162,
+        "summary": "Vashti asks if others have complained, but the Committee refuses to answer.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_committee_of_the_machine"
+        ],
+        "beats": [
+          "Vashti asks if others have complained, but the Committee refuses to answer."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 165,
+        "source_span": {
+          "start": 57083,
+          "end": 57179,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0167",
+        "sequence": 163,
+        "summary": "Vashti complains about her music troubles to a friend.",
+        "location_id": "loc_vashti_s_room",
+        "characters_present": [
+          "char_vashti",
+          "char_friend_troubled"
+        ],
+        "beats": [
+          "Vashti complains about her music troubles to a friend."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 166,
+        "source_span": {
+          "start": 57181,
+          "end": 57238,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0168",
+        "sequence": 164,
+        "summary": "The friend tells Vashti about their own trouble with a jarring noise.",
+        "location_id": null,
+        "characters_present": [
+          "char_friend_troubled",
+          "char_vashti"
+        ],
+        "beats": [
+          "The friend tells Vashti about their own trouble with a jarring noise."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 167,
+        "source_span": {
+          "start": 57379,
+          "end": 57488,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0169",
+        "sequence": 165,
+        "summary": "Across the world, beds fail to appear when summoned.",
+        "location_id": null,
+        "characters_present": [],
+        "beats": [
+          "Across the world, beds fail to appear when summoned."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_bed",
+            "column": "status",
+            "value": "failed to appear"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "There came a day",
+        "narrated_index": 168,
+        "source_span": {
+          "start": 58508,
+          "end": 58689,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0170",
+        "sequence": 166,
+        "summary": "The Committee of the Mending Apparatus confesses that it is itself in need of repair.",
+        "location_id": null,
+        "characters_present": [
+          "char_committee_of_the_machine"
+        ],
+        "beats": [
+          "The Committee of the Mending Apparatus confesses that it is itself in need of repair."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_mending_apparatus",
+            "column": "status",
+            "value": "in need of repair"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 169,
+        "source_span": {
+          "start": 59471,
+          "end": 59540,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0171",
+        "sequence": 167,
+        "summary": "A famous lecturer urges everyone not to press complaints and to wait patiently for the Mending Apparatus to recover.",
+        "location_id": null,
+        "characters_present": [
+          "char_famous_lecturer"
+        ],
+        "beats": [
+          "A famous lecturer urges everyone not to press complaints and to wait patiently for the Mending Apparatus to recover."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 170,
+        "source_span": {
+          "start": 59594,
+          "end": 59751,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0172",
+        "sequence": 168,
+        "summary": "The audience applauds the lecturer's words across the wires.",
+        "location_id": null,
+        "characters_present": [
+          "char_audience",
+          "char_famous_lecturer"
+        ],
+        "beats": [
+          "The audience applauds the lecturer's words across the wires."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 171,
+        "source_span": {
+          "start": 60062,
+          "end": 60109,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0173",
+        "sequence": 169,
+        "summary": "The communication system breaks down completely all over the world.",
+        "location_id": null,
+        "characters_present": [],
+        "beats": [
+          "The communication system breaks down completely all over the world."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "there came a day when",
+        "narrated_index": 172,
+        "source_span": {
+          "start": 61762,
+          "end": 61870,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0174",
+        "sequence": 170,
+        "summary": "Vashti attempts to call a friend who specializes in sympathy.",
+        "location_id": "loc_cell",
+        "characters_present": [
+          "char_vashti",
+          "char_friend_specialist_in_sympathy"
+        ],
+        "beats": [
+          "Vashti attempts to call a friend who specializes in sympathy."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 173,
+        "source_span": {
+          "start": 62072,
+          "end": 62128,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0175",
+        "sequence": 171,
+        "summary": "Vashti presses the button to open her cell door.",
+        "location_id": "loc_cell",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti presses the button to open her cell door."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_door_of_her_cell",
+            "column": "status",
+            "value": "open"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 174,
+        "source_span": {
+          "start": 62974,
+          "end": 63102,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0176",
+        "sequence": 172,
+        "summary": "Vashti looks into the tunnel and shrinks back from the crowd of people.",
+        "location_id": "loc_cell",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti looks into the tunnel and shrinks back from the crowd of people."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 175,
+        "source_span": {
+          "start": 63357,
+          "end": 63453,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0177",
+        "sequence": 173,
+        "summary": "Vashti closes the cell door and sits down.",
+        "location_id": "loc_cell",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti closes the cell door and sits down."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_door_of_her_cell",
+            "column": "status",
+            "value": "closed"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 176,
+        "source_span": {
+          "start": 64266,
+          "end": 64325,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0178",
+        "sequence": 174,
+        "summary": "The heaving floor throws Vashti from her chair.",
+        "location_id": "loc_cell",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "The heaving floor throws Vashti from her chair."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 177,
+        "source_span": {
+          "start": 64526,
+          "end": 64581,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0179",
+        "sequence": 175,
+        "summary": "Vashti whirls around praying, kissing the Book, and striking at buttons.",
+        "location_id": "loc_cell",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti whirls around praying, kissing the Book, and striking at buttons."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 178,
+        "source_span": {
+          "start": 64741,
+          "end": 64851,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0180",
+        "sequence": 176,
+        "summary": "Vashti accidentally strikes the switch that releases her cell door, opening it to the tunnel.",
+        "location_id": "loc_cell",
+        "characters_present": [
+          "char_vashti"
+        ],
+        "beats": [
+          "Vashti accidentally strikes the switch that releases her cell door, opening it to the tunnel."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_door_of_her_cell",
+            "column": "status",
+            "value": "open"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 179,
+        "source_span": {
+          "start": 65566,
+          "end": 65622,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0181",
+        "sequence": 177,
+        "summary": "Vashti bursts into tears, and Kuno weeps in answer.",
+        "location_id": "loc_dim_tunnel",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti bursts into tears, and Kuno weeps in answer."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 180,
+        "source_span": {
+          "start": 65951,
+          "end": 65993,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0182",
+        "sequence": 178,
+        "summary": "Vashti asks Kuno where he is and whether there is any hope.",
+        "location_id": "loc_dim_tunnel",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti asks Kuno where he is and whether there is any hope."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 181,
+        "source_span": {
+          "start": 67161,
+          "end": 67258,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0183",
+        "sequence": 179,
+        "summary": "Kuno tells Vashti there is no hope for them.",
+        "location_id": "loc_dim_tunnel",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno tells Vashti there is no hope for them."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 182,
+        "source_span": {
+          "start": 67260,
+          "end": 67274,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0184",
+        "sequence": 180,
+        "summary": "Vashti crawls toward Kuno over dead bodies until his blood spurts over her hands.",
+        "location_id": "loc_dim_tunnel",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti crawls toward Kuno over dead bodies until his blood spurts over her hands."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 183,
+        "source_span": {
+          "start": 67294,
+          "end": 67380,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0185",
+        "sequence": 181,
+        "summary": "Kuno kisses Vashti.",
+        "location_id": "loc_dim_tunnel",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno kisses Vashti."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 184,
+        "source_span": {
+          "start": 67467,
+          "end": 67481,
+          "resolution": "exact"
+        }
+      },
+      {
+        "id": "ev_0186",
+        "sequence": 182,
+        "summary": "Vashti asks Kuno if there are still men living on the surface of the earth.",
+        "location_id": "loc_dim_tunnel",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "Vashti asks Kuno if there are still men living on the surface of the earth."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 185,
+        "source_span": {
+          "start": 67698,
+          "end": 67770,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0187",
+        "sequence": 183,
+        "summary": "Kuno confirms he has seen, spoken to, and loved the people living on the surface.",
+        "location_id": "loc_dim_tunnel",
+        "characters_present": [
+          "char_kuno",
+          "char_vashti"
+        ],
+        "beats": [
+          "Kuno confirms he has seen, spoken to, and loved the people living on the surface."
+        ],
+        "pays_off": [],
+        "state_changes": [],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 186,
+        "source_span": {
+          "start": 67852,
+          "end": 67940,
+          "resolution": "normalized"
+        }
+      },
+      {
+        "id": "ev_0188",
+        "sequence": 184,
+        "summary": "An air-ship crashes through the vomitory into a ruined wharf, destroying the city and killing Vashti and Kuno.",
+        "location_id": "loc_the_city",
+        "characters_present": [
+          "char_vashti",
+          "char_kuno"
+        ],
+        "beats": [
+          "An air-ship crashes through the vomitory into a ruined wharf, destroying the city and killing Vashti and Kuno."
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_vashti",
+            "column": "status",
+            "value": "dead"
+          },
+          {
+            "entity_id": "char_kuno",
+            "column": "status",
+            "value": "dead"
+          }
+        ],
+        "story_time": "present",
+        "time_anchor": "",
+        "narrated_index": 187,
+        "source_span": {
+          "start": 68201,
+          "end": 68311,
+          "resolution": "normalized"
+        }
+      }
+    ]
+  }
+}
