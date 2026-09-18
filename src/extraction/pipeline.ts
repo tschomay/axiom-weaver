@@ -151,9 +151,13 @@ export interface ExtractionDiagnostics {
   /**
    * What pass 3b actually merged, and what it refused (#143).
    *
-   * `canonical_blocked` is the interesting half: it is every merge the model asked for that the
-   * co-occurrence guard overruled, which is the only visible evidence that the guard is doing
-   * work rather than sitting inert. A run with many merges and no blocks deserves suspicion.
+   * **`canonical_blocked` is normally empty, and that is correct** — an earlier version of this
+   * comment said an empty list "deserves suspicion", which was wrong. The guard does its work
+   * upstream in `mergeCandidates`, which never offers a co-occurring pair in the first place; a
+   * block can only register when the model returns a merge for a pair it was not shown. So the
+   * measured shape — 37 merges over 331 rows with zero blocks — is the expected one, and the
+   * evidence the guard is working is in `canonical_candidate_pairs` being far smaller than every
+   * same-kind pair, not in this list.
    */
   readonly canonical_merges: ReadonlyArray<{ kept: string; absorbed: readonly string[]; why: string }>;
   readonly canonical_blocked: ReadonlyArray<{ keep: string; absorb: string; reason: string }>;
