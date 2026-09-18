@@ -647,10 +647,30 @@ and still should not be pre-empted.
 prerequisite (#164). Same format as §9, and the same reason: one prediction was wrong, and one
 piece of method was wrong in a way worth not repeating.
 
+> ### ⚠ Correction: #144's row below is retracted (#167)
+>
+> Every event-recall figure in this section was produced by an instrument that silently scored a
+> failed judge batch as six misses. The same extraction of the *Carol*, scored three times with no
+> input change, returned **0.233**, **0.534** and — after the #167 fix — **0.795**. A ±0.30 swing,
+> and in the worst run the *Carol* was reported as a *linear* source.
+>
+> So **"*Carol* recall 0.384 → 0.466" is not evidence.** It is a single-run comparison on an
+> unstable instrument, and it should be read as *unmeasured* until re-run. The direction may well
+> survive; the number does not. Every recall figure published before #167 — #117's baseline
+> included — is a floor, understated by an unknown amount.
+>
+> #145's and #154's results are **unaffected**: frames-per-window, `future` counts and
+> `object_state_updates` are counted mechanically, not judged.
+>
+> One caveat on the fixed number itself: #167 recovers a failed batch by re-asking one beat at a
+> time, so a run with failures is scored by a *mix* of prompt shapes. 0.795 is a better measurement
+> than 0.233, and it is not a like-for-like successor to figures produced entirely by the batch
+> path. Making the method uniform is the open question #167 leaves behind.
+
 | Ticket | Predicted | Measured |
 | --- | --- | --- |
 | #154 objects | prompt for `obj_` writes and re-measure both directions | **works, both fixtures**: object `state_updates` 0 → 36 (*Carol*), 0 → 9 (Cinderella), and `dropped_participants` 25 → 0 |
-| #144 speech acts | recall rises, watch for over-extraction | **works on the fixture that motivated it**: *Carol* recall 0.384 → **0.466** for +3.9% events. Cinderella +0.019 for +70% events |
+| #144 speech acts | recall rises, watch for over-extraction | ~~*Carol* recall 0.384 → 0.466~~ **retracted, see above**. Candidate events +3.9% is still sound — it is a count, not a judgment |
 | #145 frame carry | prompt alone cannot reach the windows; carry the frame | **works**: frames on exactly 12 of 38 windows, `future` 16 → 50, and out-of-order **0.435 → 0.696** on a paired denominator |
 
 ### The method error, which cost more than the run it saved
