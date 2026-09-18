@@ -1,6 +1,6 @@
 {
   "story_id": "a-christmas-carol",
-  "scored_at": "2026-09-18T03:10:38.451Z",
+  "scored_at": "2026-09-18T13:18:28.714Z",
   "source": {
     "id": "a-christmas-carol",
     "title": "A Christmas Carol, in Prose: Being a Ghost Story of Christmas",
@@ -31,8 +31,417 @@
     },
     "projected": {
       "note": "This is a projection of Fabula-only content onto provisional scenes. It is not a Story Package and has not been checked for publish-readiness — Scene Cards, the Voice Card, and everything the real linter checks about them still do not exist.",
-      "passed": true,
-      "errors": [],
+      "passed": false,
+      "errors": [
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_003.to_id",
+          "message": "references unknown row \"char_the_clerk\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_009.from_id",
+          "message": "references unknown row \"char_the_clerk\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_010.to_id",
+          "message": "references unknown row \"char_jacob_marley\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_024.to_id",
+          "message": "references unknown row \"loc_counting_house\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_025.to_id",
+          "message": "references unknown row \"loc_counting_house\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_026.from_id",
+          "message": "references unknown row \"char_jacob_marley_s_ghost\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_026.to_id",
+          "message": "references unknown row \"char_ebenezer_scrooge\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_029.from_id",
+          "message": "references unknown row \"char_ghost_of_christmas_past\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_030.from_id",
+          "message": "references unknown row \"char_ghost_of_christmas_past\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_031.from_id",
+          "message": "references unknown row \"char_ghost_of_christmas_past\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_032.from_id",
+          "message": "references unknown row \"char_ghost_of_christmas_past\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_035.to_id",
+          "message": "references unknown row \"char_master_scrooge\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_037.from_id",
+          "message": "references unknown row \"char_nephew\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_038.from_id",
+          "message": "references unknown row \"char_nephew\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_039.to_id",
+          "message": "references unknown row \"char_master_scrooge\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_040.to_id",
+          "message": "references unknown row \"char_master_scrooge\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_041.to_id",
+          "message": "references unknown row \"char_master_scrooge\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_043.to_id",
+          "message": "references unknown row \"char_fezziwig\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_044.to_id",
+          "message": "references unknown row \"char_fezziwig\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_046.to_id",
+          "message": "references unknown row \"char_fezziwig\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_047.to_id",
+          "message": "references unknown row \"char_fezziwig\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_053.from_id",
+          "message": "references unknown row \"char_master_scrooge\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_053.to_id",
+          "message": "references unknown row \"char_fezziwig\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_054.to_id",
+          "message": "references unknown row \"char_fezziwig\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_055.to_id",
+          "message": "references unknown row \"char_master_scrooge\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_061.from_id",
+          "message": "references unknown row \"char_jacob_marley\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_067.from_id",
+          "message": "references unknown row \"char_the_spirit\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_083.from_id",
+          "message": "references unknown row \"char_master_peter\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_084.to_id",
+          "message": "references unknown row \"char_master_peter\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_086.to_id",
+          "message": "references unknown row \"char_master_peter\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_089.to_id",
+          "message": "references unknown row \"char_the_two_young_cratchits\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_090.to_id",
+          "message": "references unknown row \"char_master_peter\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_092.from_id",
+          "message": "references unknown row \"char_the_spirit\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_093.from_id",
+          "message": "references unknown row \"char_the_spirit\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_099.to_id",
+          "message": "references unknown row \"char_clerk\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_101.from_id",
+          "message": "references unknown row \"char_fred\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_101.to_id",
+          "message": "references unknown row \"char_mr_scrooge\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_102.from_id",
+          "message": "references unknown row \"char_jacob_marley\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_105.from_id",
+          "message": "references unknown row \"char_the_undertakers_man\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_107.to_id",
+          "message": "references unknown row \"char_joe\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_108.to_id",
+          "message": "references unknown row \"char_the_body_of_this_man\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_109.to_id",
+          "message": "references unknown row \"char_the_body_of_this_man\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_110.to_id",
+          "message": "references unknown row \"char_the_body_of_this_man\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_111.to_id",
+          "message": "references unknown row \"char_joe\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_114.from_id",
+          "message": "references unknown row \"char_cratchit_s_wife\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_115.to_id",
+          "message": "references unknown row \"char_cratchit_s_wife\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_117.to_id",
+          "message": "references unknown row \"char_cratchit_s_wife\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_118.from_id",
+          "message": "references unknown row \"char_her_daughters\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_118.to_id",
+          "message": "references unknown row \"char_cratchit_s_wife\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_119.from_id",
+          "message": "references unknown row \"char_her_daughters\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_121.from_id",
+          "message": "references unknown row \"char_cratchit_s_wife\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_121.to_id",
+          "message": "references unknown row \"char_bob\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_122.to_id",
+          "message": "references unknown row \"char_bob\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_123.from_id",
+          "message": "references unknown row \"char_bob\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_124.to_id",
+          "message": "references unknown row \"char_bob\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_125.to_id",
+          "message": "references unknown row \"char_mr_scrooge\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_126.to_id",
+          "message": "references unknown row \"char_bob\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_127.to_id",
+          "message": "references unknown row \"char_cratchit_s_wife\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_128.to_id",
+          "message": "references unknown row \"char_cratchit_s_wife\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_129.to_id",
+          "message": "references unknown row \"char_cratchit_s_wife\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_130.to_id",
+          "message": "references unknown row \"char_bob\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_131.from_id",
+          "message": "references unknown row \"char_bob\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_132.from_id",
+          "message": "references unknown row \"char_bob\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_132.to_id",
+          "message": "references unknown row \"char_master_peter\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_133.from_id",
+          "message": "references unknown row \"char_bob\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_133.to_id",
+          "message": "references unknown row \"char_the_two_young_cratchits\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_140.to_id",
+          "message": "references unknown row \"char_fred\""
+        },
+        {
+          "severity": "error",
+          "code": "unknown_entity",
+          "path": "world_model_seed.relationships.rel_144.from_id",
+          "message": "references unknown row \"char_fred\""
+        }
+      ],
       "warnings": [
         {
           "severity": "warn",
@@ -43,31 +452,7 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_clerk",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_jacob_marley",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_clerk_s_wife",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_clerk_s_family",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_gentlemen",
+          "path": "world_model_seed.characters.char_blind_mens_dogs",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -85,19 +470,7 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_ragged_men_and_boys",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_ghost",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_ebenezer_scrooge",
+          "path": "world_model_seed.characters.char_a_party_of_ragged_men_and_boys",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -109,49 +482,25 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_three_spirits",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_wise_men",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
           "path": "world_model_seed.characters.char_one_old_ghost",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_wretched_woman",
+          "path": "world_model_seed.characters.char_wretched_woman_with_an_infant",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_infant",
+          "path": "world_model_seed.characters.char_an_infant",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_i",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_you",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_a_lonely_boy",
+          "path": "world_model_seed.characters.char_narrator",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -181,13 +530,25 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_robin_crusoe",
+          "path": "world_model_seed.characters.char_genii",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_parrot",
+          "path": "world_model_seed.characters.char_princess",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.characters.char_parrot",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.characters.char_robin_crusoe",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -199,85 +560,67 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_father",
+          "path": "world_model_seed.characters.char_what_s_his_name_who_was_put_down_in_his_drawers_",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_genii",
+          "path": "world_model_seed.characters.char_business_friends_in_the_city",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_princess",
+          "path": "world_model_seed.characters.char_all_the_other_boys",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_nephew",
+          "path": "world_model_seed.characters.char_passengers",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_old_fezziwig",
+          "path": "world_model_seed.characters.char_the_two_prentices",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_shadowy_passengers",
+          "path": "world_model_seed.characters.char_master_of_the_boy_from_over_the_way",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_master_of_the_boy",
+          "path": "world_model_seed.characters.char_mistress_of_the_girl_from_next_door",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_mistress",
+          "path": "world_model_seed.characters.char_the_cook_s_brother",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_brother",
+          "path": "world_model_seed.characters.char_elder_brothers",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_girl",
+          "path": "world_model_seed.characters.char_the_boys_snow",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_second_messenger",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_my_elder_brothers",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_people_who_were_shovelling",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_customers",
+          "path": "world_model_seed.characters.char_the_customers",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -301,24 +644,6 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_a_countess",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_a_lord",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_miners",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
           "path": "world_model_seed.characters.char_helmsman",
           "message": "is in the seed but no Scene Card ever names it"
         },
@@ -337,67 +662,37 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_sister_with_the_roses",
+          "path": "world_model_seed.characters.char_the_one_with_the_roses",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_mr_scrooge",
+          "path": "world_model_seed.characters.char_the_unconscious_company",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_phantom",
+          "path": "world_model_seed.characters.char_another_man",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_phantom",
+          "path": "world_model_seed.characters.char_dead_man",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_grey_haired_rascal",
+          "path": "world_model_seed.characters.char_death",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_undertakers_man",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_people_of_obscure_quarter",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_joe",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_woman",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_spirit",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_cat",
+          "path": "world_model_seed.characters.char_a_cat",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -415,12 +710,6 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_poulterers_man",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
           "path": "world_model_seed.characters.char_joe_miller",
           "message": "is in the seed but no Scene Card ever names it"
         },
@@ -433,7 +722,13 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_camden_town",
+          "path": "world_model_seed.locations.loc_bedlam",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.locations.loc_his_garret",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -445,19 +740,13 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_chamber",
+          "path": "world_model_seed.locations.loc_market_town",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_the_room",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_little_market_town",
+          "path": "world_model_seed.locations.loc_the_dull_yard_behind",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -469,7 +758,7 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_school",
+          "path": "world_model_seed.locations.loc_little_creek",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -481,25 +770,19 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_a_room",
+          "path": "world_model_seed.locations.loc_scrooge_s_bed",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_his_bed",
+          "path": "world_model_seed.locations.loc_the_poulterers_shops",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_grocers_shop",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_poulterers_shops",
+          "path": "world_model_seed.locations.loc_the_grocers",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -511,7 +794,7 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_bakers_shops",
+          "path": "world_model_seed.locations.loc_great_britain",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -523,13 +806,19 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_poor_chimney_corner",
+          "path": "world_model_seed.locations.loc_almshouse",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_shop",
+          "path": "world_model_seed.locations.loc_hospital",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.locations.loc_jail",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -559,19 +848,7 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_books_and_papers",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_pen",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_ruler",
+          "path": "world_model_seed.objects.obj_great_coat",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -583,25 +860,37 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_knocker",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
           "path": "world_model_seed.objects.obj_key",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_saucepan",
+          "path": "world_model_seed.objects.obj_candle",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_fireplace",
+          "path": "world_model_seed.objects.obj_saucepan_of_gruel",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_dutch_tiles",
+          "path": "world_model_seed.objects.obj_marleys_chain",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.loc_fireplace",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -631,7 +920,7 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_monstrous_iron_safe",
+          "path": "world_model_seed.objects.obj_iron_safe",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -643,19 +932,7 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_heavy_bell",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
           "path": "world_model_seed.objects.obj_branch_of_fresh_green_holly",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_cap",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -673,19 +950,13 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_country_gigs_and_carts",
+          "path": "world_model_seed.objects.obj_an_axe",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_a_bell",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_master_scrooge_s_box",
+          "path": "world_model_seed.objects.obj_a_coach",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -697,7 +968,13 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_shutters",
+          "path": "world_model_seed.objects.obj_welsh_wig",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_high_desk",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -709,13 +986,19 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_dolls_frying_pan",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
           "path": "world_model_seed.objects.obj_fictitious_turkey",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_glowing_torch",
+          "path": "world_model_seed.objects.obj_torch",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -727,7 +1010,13 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_slippers",
+          "path": "world_model_seed.objects.obj_door",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_lock",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -751,7 +1040,7 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_monstrous_shirt_collar",
+          "path": "world_model_seed.objects.obj_shirt_collar",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -787,12 +1076,6 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_the_wheel",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
           "path": "world_model_seed.objects.obj_harp",
           "message": "is in the seed but no Scene Card ever names it"
         },
@@ -805,49 +1088,43 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_piano",
+          "path": "world_model_seed.objects.obj_a_certain_ring",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_ring",
+          "path": "world_model_seed.objects.obj_a_certain_chain",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_very_large_snuff_box",
+          "path": "world_model_seed.objects.obj_glass_of_mulled_wine",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_deep_black_garment",
+          "path": "world_model_seed.objects.obj_snuff_box",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_pipe",
+          "path": "world_model_seed.objects.obj_great_black_garment",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_screen_of_rags",
+          "path": "world_model_seed.objects.obj_charcoal_stove",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_stair_rod",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_smoky_lamp",
+          "path": "world_model_seed.objects.obj_old_joe_s_pipe",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -859,7 +1136,13 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_shirt",
+          "path": "world_model_seed.objects.obj_dead_mans_shirt",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_flannel_bag",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -871,49 +1154,19 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_book",
+          "path": "world_model_seed.objects.obj_scrooges_gravestone",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_gravestone",
+          "path": "world_model_seed.objects.obj_scrooges_garments",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_bedpost",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_iron_gate",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_the_prize_turkey",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_stockings",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_turkey",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_coal_scuttle",
+          "path": "world_model_seed.objects.obj_window",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -925,17 +1178,29 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_christmas_bowl_of_smoking_bishop",
+          "path": "world_model_seed.objects.obj_bobs_hat",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_smoking_bishop",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_coal_scuttle",
           "message": "is in the seed but no Scene Card ever names it"
         }
       ],
-      "scene_count": 458,
+      "scene_count": 498,
       "substitutions": {
-        "pov_from_first_participant": 450,
-        "pov_unavailable": 8,
-        "location_carried_forward": 39,
+        "pov_from_first_participant": 492,
+        "pov_unavailable": 6,
+        "location_carried_forward": 51,
         "location_unavailable": 0,
-        "dramatic_function_projected": 458
+        "dramatic_function_projected": 498
       }
     },
     "seed_parse_errors": [],
@@ -943,42 +1208,42 @@
   },
   "span_grounding": {
     "bar": "no rubric bar: §8 of the prior-art survey defines the check, the rubric has no numeric threshold for it. Reported as the gate the ticket asks for, not as a scored metric.",
-    "claims": 1108,
-    "resolved_exact": 416,
-    "resolved_normalized": 635,
+    "claims": 1093,
+    "resolved_exact": 366,
+    "resolved_normalized": 670,
     "unresolved": 57,
-    "quote_resolution_rate": 0.9485559566787004,
-    "judged": 59,
-    "supports": 54,
+    "quote_resolution_rate": 0.9478499542543458,
+    "judged": 58,
+    "supports": 53,
     "insufficient": 5,
     "contradicts": 0,
     "unjudged": 0,
-    "support_rate": 0.9152542372881356,
+    "support_rate": 0.9137931034482759,
     "worst": [
       {
-        "subject": "character:char_the_princess",
+        "subject": "location:loc_bedlam",
         "verdict": "insufficient",
-        "why": "The Princess is only briefly mentioned as an element in a story Scrooge remembers reading."
+        "why": "Bedlam is merely mentioned in Scrooge's exclamation rather than established as a story location."
       },
       {
-        "subject": "relationship:rel_058",
+        "subject": "location:loc_little_creek",
         "verdict": "insufficient",
-        "why": "The young girl is the daughter of the comely matron, not the mother of the children."
+        "why": "The creek is part of Scrooge's recollection/vision of a book character, not an actual story setting."
       },
       {
-        "subject": "state_update:ev_0078:char_marley_s_ghost.location_id",
+        "subject": "location:loc_belles_parlour",
         "verdict": "insufficient",
-        "why": "The text mentions sitting by the fireplace, but does not explicitly name the location as the sitting room."
+        "why": "The excerpt mentions a room, but does not identify it as a parlour."
       },
       {
-        "subject": "state_update:ev_0223:char_ghost_of_christmas_present.location_id",
+        "subject": "location:loc_the_room_of_death",
         "verdict": "insufficient",
-        "why": "The text describes the Ghost sitting on a couch in a transformed chamber, but does not identify the room as 'loc_the_adjoining_room'."
+        "why": "While a dark room containing a corpse is described, 'the room of death' is an interpretive label rather than an established named location in the excerpt."
       },
       {
-        "subject": "state_update:ev_0389:char_scrooge.location_id",
+        "subject": "event:ev_0427",
         "verdict": "insufficient",
-        "why": "The text only notes that the scene changed to a dark room containing a bed, without naming or identifying the location as 'loc_the_dark_empty_house'."
+        "why": "The text identifies the woman only as 'a mother', not naming her Caroline."
       }
     ],
     "contradicted_subjects": []
@@ -988,285 +1253,250 @@
       {
         "table": "characters",
         "fixture_rows": 20,
-        "candidate_rows": 161,
+        "candidate_rows": 130,
         "aligned": 20,
         "recall": 1,
-        "precision": 0.20202020202020202,
-        "precision_flat": 0.12422360248447205,
-        "load_bearing_rows": 99,
-        "over_extracted": 62,
+        "precision": 0.23255813953488372,
+        "precision_flat": 0.15384615384615385,
+        "load_bearing_rows": 86,
+        "over_extracted": 44,
         "over_extracted_examples": [
           "Hamlet's Father",
-          "clerk",
-          "clerk's wife",
-          "clerk's family",
-          "gentlemen",
+          "blind men's dogs",
           "Saint Dunstan",
-          "Evil Spirit",
-          "ragged men and boys",
-          "the Ghost",
+          "the Evil Spirit",
+          "a party of ragged men and boys",
           "Ghost",
-          "Three Spirits",
-          "Wise Men",
           "one old ghost",
-          "a wretched woman",
-          "infant",
+          "a wretched woman with an infant",
+          "an infant",
           "I",
-          "you",
-          "a lonely boy",
           "Fowls",
-          "Valentine"
+          "Valentine",
+          "Orson",
+          "Sultan's Groom",
+          "Genii",
+          "Princess",
+          "Parrot",
+          "Robin Crusoe",
+          "Friday",
+          "what's his name, who was put down in his drawers, asleep, at the Gate of Damascus"
         ],
         "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
         "misses": [],
         "inventions": [
-          "Marley",
-          "Scrooge",
+          "the clergyman",
+          "the undertaker",
           "Hamlet's Father",
-          "the clerk",
-          "Scrooge's nephew",
+          "blind men's dogs",
           "people in the court",
-          "clerk",
-          "two portly gentlemen",
-          "clerk's wife",
-          "clerk's family",
-          "Fred's wife",
-          "gentlemen",
           "The Lord Mayor",
           "the little tailor",
-          "wife",
-          "the little tailor's baby",
+          "the tailor's wife",
+          "the baby",
           "Saint Dunstan",
-          "Evil Spirit",
-          "singer",
+          "the Evil Spirit",
+          "the singer",
           "fifty cooks and butlers",
-          "labourers",
-          "ragged men and boys",
-          "the Ghost",
+          "a party of ragged men and boys",
+          "some labourers",
+          "Marley's Ghost",
           "Ghost",
           "Three Spirits",
-          "Wise Men",
-          "Marley's Ghost",
           "phantoms",
           "one old ghost",
-          "a wretched woman",
-          "infant",
+          "a wretched woman with an infant",
+          "an infant",
           "I",
-          "you",
           "boys",
           "farmers",
-          "a lonely boy",
           "shaggy ponies",
           "Fowls",
-          "Scrooge's younger self",
           "Ali Baba",
           "Valentine",
           "Orson",
           "Sultan's Groom",
+          "Genii",
+          "Princess",
+          "Parrot",
           "Robin Crusoe",
-          "the Parrot",
           "Friday",
           "Father",
-          "the Genii",
-          "the Princess",
-          "Master Scrooge",
+          "what's his name, who was put down in his drawers, asleep, at the Gate of Damascus",
+          "an ass laden with wood",
+          "business friends in the city",
+          "all the other boys",
           "the schoolmaster",
           "meagre servant",
           "the postboy",
-          "nephew",
           "Dick Wilkins",
-          "shadowy passengers",
-          "Fezziwig",
-          "fiddler",
+          "passengers",
+          "a fiddler",
           "Mrs. Fezziwig",
           "three Miss Fezziwigs",
           "six young followers",
-          "housemaid",
-          "baker",
-          "cook",
-          "milkman",
-          "boy from over the way",
-          "girl from next door but one",
+          "young men and women employed in the business",
+          "the housemaid",
+          "the baker",
+          "the cook",
+          "the milkman",
+          "the boy from over the way",
+          "the girl from next door but one",
           "the two 'prentices",
-          "all the young men and women employed in the business",
-          "master",
-          "mistress",
-          "brother",
-          "a fair young girl",
-          "the girl",
-          "daughter",
-          "children",
-          "Belle's husband",
+          "master of the boy from over the way",
+          "mistress of the girl from next door",
+          "the cook's brother",
+          "Belle's daughter",
+          "Belle's children",
+          "the father",
           "porter",
-          "Belle's baby",
-          "young Scrooge",
-          "the children",
-          "the second messenger",
-          "my elder brothers",
-          "the people who were shovelling",
-          "customers",
+          "elder brothers",
+          "the people",
+          "the boys",
+          "the customers",
           "the Grocer and his people",
           "girls",
           "gold and silver fish",
-          "poor revellers",
-          "the Spirit",
-          "good people",
+          "dinner-carriers",
           "Belinda Cratchit",
           "two smaller Cratchits",
-          "Master Peter",
-          "two young Cratchits",
-          "a countess",
-          "a lord",
           "the lamplighter",
-          "Miners",
-          "old, old man",
-          "woman",
+          "an old, old man and woman",
           "two men who watched the light",
+          "Miners",
+          "Scrooge's niece",
+          "their assembled friends",
           "Scrooge's niece's sisters",
           "helmsman",
           "look-out",
           "officers who had the watch",
-          "assembled friends",
           "Topper",
-          "Scrooge's niece's sister",
-          "sister with the roses",
-          "Mr. Scrooge",
+          "the plump sister",
+          "the one with the roses",
           "Ignorance",
           "Want",
-          "Phantom",
+          "the unconscious company",
           "great fat man",
+          "third business man",
           "red-faced gentleman",
-          "knot of business men",
           "merchants",
-          "a third businessman",
-          "the Phantom",
+          "second business man",
           "two persons meeting",
-          "grey-haired rascal",
           "the charwoman",
+          "another man",
           "the undertaker's man",
-          "people of the obscure quarter",
-          "the undertaker's man",
-          "Joe",
-          "the woman",
-          "Spirit",
-          "this man",
-          "cat",
+          "Death",
+          "a cat",
           "rats",
           "Caroline's husband",
-          "Cratchit's wife",
-          "half-drunken woman",
           "the noisy little Cratchits",
+          "half-drunken woman",
           "Cratchit daughters",
-          "Bob",
-          "poulterer's man",
           "Joe Miller",
-          "niece by marriage"
+          "the poulterer's man",
+          "the Cratchit family"
         ]
       },
       {
         "table": "locations",
         "fixture_rows": 14,
-        "candidate_rows": 73,
-        "aligned": 13,
-        "recall": 0.9285714285714286,
-        "precision": 0.22807017543859648,
-        "precision_flat": 0.1780821917808219,
-        "load_bearing_rows": 57,
-        "over_extracted": 16,
+        "candidate_rows": 65,
+        "aligned": 12,
+        "recall": 0.8571428571428571,
+        "precision": 0.2553191489361702,
+        "precision_flat": 0.18461538461538463,
+        "load_bearing_rows": 47,
+        "over_extracted": 18,
         "over_extracted_examples": [
           "Saint Paul's Churchyard",
+          "Bedlam",
+          "his garret",
           "lumber-room",
-          "chamber",
-          "the room",
-          "a little market-town",
+          "market-town",
+          "the dull yard behind",
           "Gate of Damascus",
-          "a room",
-          "his bed",
-          "grocer's shop",
-          "poulterers' shops",
+          "little creek",
+          "Scrooge's bed",
+          "the poulterers' shops",
+          "The Grocers'",
           "fruiterers'",
-          "bakers' shops",
+          "Great Britain",
           "back-yard",
-          "poor chimney-corner",
-          "shop",
+          "almshouse",
+          "hospital",
+          "jail",
           "the Porch"
         ],
         "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
         "misses": [
-          "far and lonely places"
+          "far and lonely places",
+          "the home of a poor debtor couple"
         ],
         "inventions": [
-          "warehouse door",
-          "counting-house",
           "Saint Paul's Churchyard",
-          "court",
-          "the Tank",
-          "Scrooge's office",
+          "the court outside the counting-house",
+          "Bedlam",
           "Mansion House",
-          "Tank",
+          "the Tank",
           "Cornhill",
           "Camden Town",
-          "tavern",
-          "church",
-          "garret",
-          "yard",
-          "hall",
-          "stairs",
-          "sitting-room",
+          "his garret",
+          "usual melancholy tavern",
+          "the yard",
+          "wine-merchant's cellars",
+          "Sitting-room",
           "bedroom",
           "lumber-room",
-          "wine-merchant's cellar",
-          "chamber",
-          "door-step",
-          "the room",
-          "an open country road",
-          "a little market-town",
-          "a mansion of dull red brick",
-          "a long, bare, melancholy room",
+          "neighbouring church",
+          "open country road",
+          "market-town",
+          "The city",
+          "the schoolroom",
+          "the dull yard behind",
           "Gate of Damascus",
+          "little creek",
+          "the hall",
           "best-parlour",
-          "city",
           "back-shop",
-          "a room",
-          "top of the house",
-          "his bed",
-          "the adjoining room",
-          "grocer's shop",
-          "poulterers' shops",
+          "open air",
+          "the top of the house",
+          "Scrooge's bed",
+          "adjoining room",
+          "the poulterers' shops",
+          "The Grocers'",
           "fruiterers'",
-          "a baker's doorway",
+          "Great Britain",
           "bakers' shops",
           "suburbs of the town",
           "wash-house",
           "back-yard",
-          "poor chimney-corner",
-          "bleak and desert moor",
-          "solitary lighthouse",
+          "a bleak and desert moor",
+          "a solitary lighthouse",
           "a hut",
-          "sea",
+          "the sea",
           "a ship",
-          "bright, dry, gleaming room",
-          "the city",
-          "obscure part of the town",
-          "shop",
-          "a street",
+          "almshouse",
+          "hospital",
+          "jail",
           "the Porch",
-          "Old Joe's parlour",
-          "Bob Cratchit's house",
+          "obscure part of the town",
+          "a street",
+          "the parlour behind the screen of rags",
           "the room above",
-          "the neglected grave",
-          "Scrooge's room"
+          "iron gate",
+          "resorts of business men",
+          "dining-room"
         ]
       },
       {
         "table": "objects",
         "fixture_rows": 6,
-        "candidate_rows": 90,
+        "candidate_rows": 85,
         "aligned": 5,
         "recall": 0.8333333333333334,
-        "precision": 0.05555555555555555,
-        "precision_flat": 0.05555555555555555,
-        "load_bearing_rows": 90,
+        "precision": 0.058823529411764705,
+        "precision_flat": 0.058823529411764705,
+        "load_bearing_rows": 85,
         "over_extracted": 0,
         "over_extracted_examples": [],
         "denominator": "all candidate rows — the load-bearing rule is not applied to this table (see #154)",
@@ -1277,98 +1507,93 @@
           "register of his burial",
           "coal-box",
           "white comforter",
-          "coal shovel",
-          "books and papers",
+          "the shovel",
+          "credentials",
           "pen",
-          "ruler",
+          "the ruler",
+          "great-coat",
           "banker's-book",
-          "candle",
           "key",
+          "candle",
+          "saucepan of gruel",
           "dressing-gown",
-          "saucepan",
-          "bell",
+          "disused bell",
           "fireplace",
-          "Dutch tiles",
-          "folded kerchief",
           "toothpick",
           "chair",
           "wrapper",
           "table",
           "repeater",
-          "window",
-          "monstrous iron safe",
-          "door",
+          "iron safe",
           "bed",
-          "heavy bell",
-          "curtains of his bed",
           "branch of fresh green holly",
-          "cap",
+          "extinguisher",
           "tunic",
           "lustrous belt",
-          "country gigs and carts",
-          "a bell",
-          "Master Scrooge's box",
+          "an axe",
+          "a coach",
+          "Master Scrooge's trunk",
           "chaise",
+          "Welsh wig",
+          "high desk",
           "shutters",
           "clock",
-          "extinguisher-cap",
+          "lamps",
           "doll's frying-pan",
           "fictitious turkey",
-          "glowing torch",
+          "torch",
           "antique scabbard",
           "slippers",
+          "door",
+          "lock",
           "green robe",
           "holly wreath",
-          "the goose",
-          "monstrous shirt collar",
+          "shirt collar",
           "iron frame",
-          "pudding",
-          "the jug",
-          "carving-knife",
+          "the pudding",
+          "the goose",
+          "jug",
           "little stool",
+          "carving-knife",
           "copper",
           "chestnuts",
           "can of grog",
-          "the wheel",
           "harp",
           "bottle",
-          "piano",
-          "ring",
-          "a glass of mulled wine",
-          "very large snuff-box",
-          "deep black garment",
-          "pipe",
-          "heavy bundle",
-          "screen of rags",
-          "stair-rod",
-          "smoky lamp",
-          "plunder of the man in faded black",
-          "plunder of Mrs. Dilber",
-          "roll of dark stuff",
+          "a certain ring",
+          "a certain chain",
+          "glass of mulled wine",
+          "snuff-box",
+          "great black garment",
+          "charcoal stove",
+          "the charwoman's bundle",
+          "old Joe's pipe",
+          "the undertaker's man's plunder",
+          "Mrs. Dilber's bundle",
           "bed-curtains",
           "blankets",
-          "shirt",
+          "dead man's shirt",
           "flannel bag",
           "a ragged sheet",
-          "book",
-          "visiting card",
+          "Peter Cratchit's book",
+          "his card",
           "bedpost",
-          "iron gate",
-          "stockings",
-          "Turkey",
-          "coal-scuttle",
+          "garments",
+          "window",
           "footstool",
-          "Christmas bowl of smoking bishop"
+          "hat",
+          "Christmas bowl of smoking bishop",
+          "coal-scuttle"
         ]
       }
     ],
-    "relationship_recall": 0.36363636363636365,
-    "relationship_matched": 4,
+    "relationship_recall": 0.5454545454545454,
+    "relationship_matched": 6,
     "relationship_fixture_rows": 11,
-    "relationship_candidate_rows": 148,
+    "relationship_candidate_rows": 144,
     "seed_attributes": {
-      "judged": 1,
-      "supported_at_start": 1,
+      "judged": 3,
+      "supported_at_start": 3,
       "seed_time_errors": 0,
       "contradicted": 0,
       "insufficient": 0,
@@ -1379,74 +1604,52 @@
   },
   "events": {
     "ground_truth_events": 73,
-    "candidate_events": 458,
-    "matched": 34,
-    "recall": 0.4657534246575342,
+    "candidate_events": 498,
+    "matched": 58,
+    "recall": 0.7945205479452054,
     "missed": [
-      "Fred visits, wishes his uncle a merry Christmas, and invites him to dinner; Scrooge answers 'Bah! Humbug!' and refuses",
-      "two portly gentlemen ask Scrooge for a subscription for the poor; he asks whether there are no prisons, no workhouses",
       "told that many would rather die than go there, Scrooge answers that they had better do it, and decrease the surplus population",
-      "Scrooge grudgingly allows Bob Cratchit the whole of Christmas Day off, calling it a poor excuse for picking a man's pocket every twenty-fifth of December",
-      "Scrooge walks home alone through the fog to his gloomy chambers",
-      "the door-knocker briefly becomes Marley's face as Scrooge lets himself in",
       "present-day Scrooge is moved almost to tears, and the Spirit reminds him Fan died young, but left a son — Fred",
-      "the Cratchits sit down to a small, poor, entirely happy Christmas dinner — one goose, a pudding everyone privately feared and no one says aloud might fail",
-      "Tiny Tim, who has been to church and hopes people saw his crutch, since it might do them good to remember who made lame beggars walk and blind men see",
-      "Scrooge, anxious for the first time, asks the Spirit if Tiny Tim will live",
-      "the Spirit answers that if these shadows remain unaltered by the future, the child will die — then quotes Scrooge's own words back to him: that he had better do it, and decrease the surplus population",
       "Scrooge is overcome with penitence and grief and casts his eyes down, ashamed",
-      "the Spirit shows Scrooge a bleak mine, where the miners keep Christmas underground with an old song",
-      "a solitary lighthouse, where the keepers grip hands and wish each other merry Christmas over the roar of the sea",
-      "a ship at sea, where every man aboard hums a Christmas tune to himself, thinking of those at home",
-      "Fred's party plays games, including Yes and No, guessing at 'a most disagreeable animal' that turns out to be Uncle Scrooge himself, to general laughter",
-      "Fred toasts his uncle anyway, wishing him a merry Christmas and a happy new year, whatever he thinks of the toast",
-      "Scrooge, invisible to the party, is in such a mood that he begs the Spirit to let them stay a little longer, and joins in the games in spirit",
-      "the Ghost of Christmas Present visibly ages through the night, and at the last shows Scrooge two wretched, wolfish children hidden in its robes: a boy and a girl",
+      "the Ghost of Christmas Yet to Come, silent and shrouded, leads Scrooge among businessmen on the Exchange",
       "Scrooge does not recognize anyone they describe, and does not think to ask whose death it is",
-      "a charwoman, a laundress (Mrs. Dilber), and an undertaker's man sell Old Joe the dead man's bed-curtains, shirt off his back, and blankets",
       "Old Joe pays them out, remarking the man frightened everyone away from him alive and so has made them all the richer now he's dead",
       "Scrooge is horrified by the scene but still does not connect it to himself",
-      "the Spirit brings Scrooge to a bare, dark room where a covered body lies, plundered and bereft, unwatched, unwept, uncared for",
-      "Scrooge, trembling, is invited to lift the covering and see the dead man's face, and cannot bring himself to do it",
-      "he asks the Spirit to show him some tenderness connected with a death, anywhere, if only one",
+      "their first feeling is relief: whoever inherits the debt may show them mercy the dead man never would",
       "Scrooge understands, without being told, that no one anywhere has shed one genuine tear for this man",
       "the Cratchit household is quiet and subdued; Tiny Tim has died",
       "Tiny Tim's little crutch is kept, without its owner, in a corner",
-      "Bob recalls how gentle and patient Tim always was, and says he will never forget it, nor his first words after the day he died",
-      "the Spirit brings Scrooge to a neglected, grass-choked grave and points down at the stone",
-      "Scrooge begs to know first whether these are the shadows of things that Will be, or only of things that May be",
-      "he reads the name on the stone: EBENEZER SCROOGE",
-      "he clutches at the Spirit's robe and swears he is not the man he was, and will honor Christmas in his heart and try to keep it all the year",
       "he vows to sponge out the writing on the stone, if it is still possible",
-      "he laughs, cries, and talks to himself in delight, hardly able to believe it",
       "Bob, terrified for a moment, is then astonished into delight",
       "the narrator states plainly that Scrooge was better than his word: he did it all, and infinitely more, and to Tiny Tim, who did not die, he was a second father",
       "the narrator closes: Scrooge became as good a friend, as good a master, and as good a man as the good old city knew; and it was always said of him that he knew how to keep Christmas well, if any man alive possessed the knowledge"
     ],
-    "pairwise_total": 561,
-    "pairwise_correct": 486,
-    "pairwise_accuracy": 0.8663101604278075,
-    "high_confidence_total": 136,
-    "high_confidence_correct": 91,
-    "high_confidence_accuracy": 0.6691176470588235,
-    "out_of_order_total": 120,
-    "out_of_order_correct": 56,
-    "out_of_order_accuracy": 0.4666666666666667,
+    "pairwise_total": 1650,
+    "pairwise_correct": 1424,
+    "pairwise_accuracy": 0.863030303030303,
+    "high_confidence_total": 210,
+    "high_confidence_correct": 158,
+    "high_confidence_accuracy": 0.7523809523809524,
+    "out_of_order_total": 306,
+    "out_of_order_correct": 147,
+    "out_of_order_accuracy": 0.4803921568627451,
+    "entailment_unresolved": 0,
+    "entailment_unresolved_beats": [],
     "fabricated": 0,
-    "fabricated_judged": 59,
+    "fabricated_judged": 58,
     "fabricated_examples": [],
     "ungroundable_events": 27,
     "ungroundable_examples": [
-      "Marley's Ghost reveals that he sat invisible beside Scrooge many days.",
-      "Fezziwig skips down from his desk and tells the lads to clear the room for the party.",
-      "The nephew praises Christmas as a good and charitable time and blesses it.",
-      "Scrooge threatens to fire the clerk if he hears another sound from him.",
-      "Scrooge threatens to dismiss his clerk if he hears another sound from him.",
-      "The gentleman asks what amount he shall put Scrooge down for in the charity fund.",
-      "Scrooge inspects behind the door and then closes it with a bang.",
-      "Scrooge explains that slight physical disorders cheat the senses and dismisses the Ghost as humbug.",
-      "Marley's Ghost warns Scrooge that he has a chance of escaping his fate.",
-      "Marley's Ghost instructs Scrooge when to expect each of the three spirits and to remember his warning."
+      "Ali Baba appears outside the window with an axe and an ass laden with wood.",
+      "Fezziwig jumps down from his desk and orders the lads to clear the room.",
+      "Belle tells young Scrooge that a golden idol has displaced her in his heart.",
+      "Belle tells young Scrooge that she releases him from their contract.",
+      "Belle's husband tells Belle he saw Scrooge sitting alone in his office while Marley was dying.",
+      "Scrooge threatens to dismiss the clerk if he hears another sound from him.",
+      "Scrooge threatens to fire his clerk if he hears another sound from him.",
+      "Scrooge's nephew offers Scrooge Christmas and New Year wishes.",
+      "The gentleman picks up a pen and asks what Scrooge will contribute to the fund for the poor.",
+      "Scrooge dismisses the gentlemen, telling them good afternoon."
     ]
   },
   "not_scored": [
@@ -1466,33 +1669,6 @@
   "alignment": {
     "method": "§3.1: exact case/punctuation-normalized name match first, then a judged pass over the remainder using gemini-3.8-flash. One candidate row is never given to two fixture rows.",
     "rows": [
-      {
-        "table": "characters",
-        "fixture_id": "char_scrooge",
-        "fixture_name": "Ebenezer Scrooge",
-        "candidate_id": "char_ebenezer_scrooge",
-        "candidate_name": "Ebenezer Scrooge",
-        "how": "exact_name",
-        "why": "normalized name match"
-      },
-      {
-        "table": "characters",
-        "fixture_id": "char_marley",
-        "fixture_name": "Jacob Marley",
-        "candidate_id": "char_jacob_marley",
-        "candidate_name": "Jacob Marley",
-        "how": "exact_name",
-        "why": "normalized name match"
-      },
-      {
-        "table": "characters",
-        "fixture_id": "char_fred",
-        "fixture_name": "Fred",
-        "candidate_id": "char_fred",
-        "candidate_name": "Fred",
-        "how": "exact_name",
-        "why": "normalized name match"
-      },
       {
         "table": "characters",
         "fixture_id": "char_bob_cratchit",
@@ -1522,10 +1698,10 @@
       },
       {
         "table": "characters",
-        "fixture_id": "char_ghost_past",
-        "fixture_name": "the Ghost of Christmas Past",
-        "candidate_id": "char_the_ghost_of_christmas_past",
-        "candidate_name": "the Ghost of Christmas Past",
+        "fixture_id": "char_fan",
+        "fixture_name": "Fan",
+        "candidate_id": "char_fan",
+        "candidate_name": "Fan",
         "how": "exact_name",
         "why": "normalized name match"
       },
@@ -1576,21 +1752,57 @@
       },
       {
         "table": "characters",
+        "fixture_id": "char_scrooge",
+        "fixture_name": "Ebenezer Scrooge",
+        "candidate_id": "char_scrooge",
+        "candidate_name": "Scrooge",
+        "how": "judged",
+        "why": "Same character, Ebenezer Scrooge."
+      },
+      {
+        "table": "characters",
+        "fixture_id": "char_marley",
+        "fixture_name": "Jacob Marley",
+        "candidate_id": "char_marley",
+        "candidate_name": "Marley",
+        "how": "judged",
+        "why": "Same character, Jacob Marley."
+      },
+      {
+        "table": "characters",
+        "fixture_id": "char_fred",
+        "fixture_name": "Fred",
+        "candidate_id": "char_scrooge_s_nephew",
+        "candidate_name": "Scrooge's nephew",
+        "how": "judged",
+        "why": "Fred is Scrooge's nephew."
+      },
+      {
+        "table": "characters",
         "fixture_id": "char_peter_cratchit",
         "fixture_name": "Peter Cratchit",
         "candidate_id": "char_master_peter_cratchit",
         "candidate_name": "Master Peter Cratchit",
         "how": "judged",
-        "why": "Both refer to Bob Cratchit's son Peter."
+        "why": "Same character, Peter Cratchit."
       },
       {
         "table": "characters",
         "fixture_id": "char_martha_cratchit",
         "fixture_name": "Martha Cratchit",
-        "candidate_id": "char_martha",
+        "candidate_id": "char_martha_cratchit",
         "candidate_name": "Martha",
         "how": "judged",
-        "why": "Both refer to Bob Cratchit's eldest daughter Martha."
+        "why": "Same character, Martha Cratchit."
+      },
+      {
+        "table": "characters",
+        "fixture_id": "char_ghost_past",
+        "fixture_name": "the Ghost of Christmas Past",
+        "candidate_id": "char_the_ghost",
+        "candidate_name": "the Ghost",
+        "how": "judged",
+        "why": "Identifies the Ghost of Christmas Past appearing in Stave Two."
       },
       {
         "table": "characters",
@@ -1599,7 +1811,7 @@
         "candidate_id": "char_ghost_of_christmas_present",
         "candidate_name": "Ghost of Christmas Present",
         "how": "judged",
-        "why": "Both refer to the second of the three spirits."
+        "why": "Same spirit, the Ghost of Christmas Present."
       },
       {
         "table": "characters",
@@ -1608,16 +1820,7 @@
         "candidate_id": "char_ghost_of_christmas_yet_to_come",
         "candidate_name": "Ghost of Christmas Yet To Come",
         "how": "judged",
-        "why": "Both refer to the third spirit visiting Scrooge."
-      },
-      {
-        "table": "characters",
-        "fixture_id": "char_fan",
-        "fixture_name": "Fan",
-        "candidate_id": "char_little_fan",
-        "candidate_name": "little Fan",
-        "how": "judged",
-        "why": "Both refer to Scrooge's sister Fan."
+        "why": "Same spirit, the Ghost of Christmas Yet to Come."
       },
       {
         "table": "characters",
@@ -1626,34 +1829,34 @@
         "candidate_id": "char_dead_man",
         "candidate_name": "dead man",
         "how": "judged",
-        "why": "Both refer to the plundered dead body lying on the bed."
+        "why": "Same unnamed deceased man seen in the vision."
       },
       {
         "table": "characters",
         "fixture_id": "char_portly_gentleman",
         "fixture_name": "a portly gentleman",
-        "candidate_id": "char_portly_gentleman",
-        "candidate_name": "portly gentleman",
+        "candidate_id": "char_two_portly_gentlemen",
+        "candidate_name": "two portly gentlemen",
         "how": "judged",
-        "why": "Both refer to the gentleman soliciting charitable donations."
+        "why": "Candidate models the group of portly gentlemen who visit Scrooge."
       },
       {
         "table": "characters",
         "fixture_id": "char_errand_boy",
         "fixture_name": "the boy in the next street",
-        "candidate_id": "char_the_boy",
-        "candidate_name": "the boy",
+        "candidate_id": "char_boy_in_sunday_clothes",
+        "candidate_name": "boy in Sunday clothes",
         "how": "judged",
-        "why": "Both refer to the boy Scrooge sends to buy the prize turkey on Christmas morning."
+        "why": "Same boy sent by Scrooge on Christmas morning to buy the turkey."
       },
       {
         "table": "locations",
         "fixture_id": "loc_counting_house",
         "fixture_name": "Scrooge and Marley's counting-house",
-        "candidate_id": "loc_scrooges_counting_house",
+        "candidate_id": "loc_scrooge_counting_house",
         "candidate_name": "Scrooge's counting-house",
         "how": "judged",
-        "why": "Identifies Scrooge's counting-house."
+        "why": "Both refer to Scrooge's counting-house."
       },
       {
         "table": "locations",
@@ -1662,16 +1865,16 @@
         "candidate_id": "loc_chambers",
         "candidate_name": "chambers",
         "how": "judged",
-        "why": "Both refer to Scrooge's residential chambers."
+        "why": "Both denote Scrooge's chambers."
       },
       {
         "table": "locations",
         "fixture_id": "loc_school",
         "fixture_name": "the boarding school",
-        "candidate_id": "loc_school",
-        "candidate_name": "school",
+        "candidate_id": "loc_the_school",
+        "candidate_name": "the school",
         "how": "judged",
-        "why": "Both refer to the school where young Scrooge is left behind."
+        "why": "Both represent Scrooge's boyhood boarding school."
       },
       {
         "table": "locations",
@@ -1680,16 +1883,16 @@
         "candidate_id": "loc_warehouse",
         "candidate_name": "warehouse",
         "how": "judged",
-        "why": "Both refer to Fezziwig's warehouse."
+        "why": "Both denote Fezziwig's warehouse."
       },
       {
         "table": "locations",
         "fixture_id": "loc_belle_household",
         "fixture_name": "a modest parlour, in memory",
         "candidate_id": "loc_belles_parlour",
-        "candidate_name": "parlour",
+        "candidate_name": "the parlour",
         "how": "judged",
-        "why": "Both represent Belle's family parlour seen in the Spirit of Christmas Past."
+        "why": "Both denote the parlour of Belle's family home."
       },
       {
         "table": "locations",
@@ -1698,7 +1901,7 @@
         "candidate_id": "loc_bob_cratchit_s_dwelling",
         "candidate_name": "Bob Cratchit's dwelling",
         "how": "judged",
-        "why": "Both refer to the Cratchit family home."
+        "why": "Both refer to the home/dwelling of Bob Cratchit and his family."
       },
       {
         "table": "locations",
@@ -1707,16 +1910,16 @@
         "candidate_id": "loc_the_city_streets",
         "candidate_name": "the city streets",
         "how": "judged",
-        "why": "Both designate the London city streets during Christmas."
+        "why": "Both refer to the bustling city streets of London at Christmas."
       },
       {
         "table": "locations",
         "fixture_id": "loc_freds_house",
         "fixture_name": "Fred's drawing-room",
-        "candidate_id": "loc_nephews_house",
-        "candidate_name": "nephew's house",
+        "candidate_id": "loc_scrooges_nephews_room",
+        "candidate_name": "bright, dry, gleaming room",
         "how": "judged",
-        "why": "Both denote the home of Scrooge's nephew Fred."
+        "why": "Both refer to Fred's room/house visited by the Ghost of Christmas Present."
       },
       {
         "table": "locations",
@@ -1725,7 +1928,7 @@
         "candidate_id": null,
         "candidate_name": null,
         "how": "unaligned",
-        "why": "Candidate splits the tour into individual locations with no matching umbrella entity."
+        "why": "The candidate has split locations (moor, lighthouse, ship, etc.) rather than a single encompassing world tour row."
       },
       {
         "table": "locations",
@@ -1740,64 +1943,55 @@
         "table": "locations",
         "fixture_id": "loc_old_joes_shop",
         "fixture_name": "Old Joe's rag-and-bottle shop",
-        "candidate_id": "loc_old_joes_shop",
-        "candidate_name": "Old Joe's shop",
+        "candidate_id": "loc_beetling_shop",
+        "candidate_name": "beetling shop",
         "how": "judged",
-        "why": "Both denote Old Joe's rag-and-bottle shop."
+        "why": "Both refer to Old Joe's rag and bottle shop in an obscure part of town."
       },
       {
         "table": "locations",
         "fixture_id": "loc_the_death_room",
         "fixture_name": "the room where the dead man lies",
-        "candidate_id": "loc_the_dark_empty_house",
-        "candidate_name": "the dark empty house",
+        "candidate_id": "loc_the_room_of_death",
+        "candidate_name": "the room of death",
         "how": "judged",
-        "why": "Both refer to the plundered room and house of the dead man shown by the Spirit."
+        "why": "Both represent the dark, uncurtained room where the dead man lies."
       },
       {
         "table": "locations",
         "fixture_id": "loc_caroline_home",
         "fixture_name": "the home of a poor debtor couple",
-        "candidate_id": "loc_a_room_by_daylight",
-        "candidate_name": "a room by daylight",
-        "how": "judged",
-        "why": "Both denote the room of Caroline and her husband shown relieved at Scrooge's death."
+        "candidate_id": null,
+        "candidate_name": null,
+        "how": "unaligned",
+        "why": "No candidate row directly corresponds to Caroline and her husband's home."
       },
       {
         "table": "locations",
         "fixture_id": "loc_churchyard",
         "fixture_name": "the churchyard",
-        "candidate_id": "loc_churchyard",
-        "candidate_name": "churchyard",
+        "candidate_id": "loc_neglected_churchyard",
+        "candidate_name": "neglected churchyard",
         "how": "judged",
-        "why": "Both denote the churchyard containing the neglected grave."
-      },
-      {
-        "table": "objects",
-        "fixture_id": "obj_prize_turkey",
-        "fixture_name": "the prize turkey",
-        "candidate_id": "obj_the_prize_turkey",
-        "candidate_name": "the prize Turkey",
-        "how": "exact_name",
-        "why": "normalized name match"
+        "why": "Both refer to the neglected churchyard containing Scrooge's grave."
       },
       {
         "table": "objects",
         "fixture_id": "obj_marleys_chain",
         "fixture_name": "Marley's chain",
-        "candidate_id": "obj_chain",
+        "candidate_id": "obj_marleys_chain",
         "candidate_name": "chain",
         "how": "judged",
-        "why": "Both denote the chain forged in life and dragged by Marley's ghost."
+        "why": "Both represent Marley's chain."
       },
       {
         "table": "objects",
         "fixture_id": "obj_doorknocker",
         "fixture_name": "Scrooge's door-knocker",
         "candidate_id": "obj_knocker",
-        "candidate_name": "knocker",
+        "candidate_name": "the knocker",
         "how": "judged",
-        "why": "Both denote the knocker on Scrooge's door that transforms into Marley's face."
+        "why": "Both represent Scrooge's door knocker."
       },
       {
         "table": "objects",
@@ -1806,7 +2000,16 @@
         "candidate_id": "obj_crutch",
         "candidate_name": "crutch",
         "how": "judged",
-        "why": "Both denote Tiny Tim's crutch."
+        "why": "Both represent Tiny Tim's crutch."
+      },
+      {
+        "table": "objects",
+        "fixture_id": "obj_prize_turkey",
+        "fixture_name": "the prize turkey",
+        "candidate_id": "obj_prize_turkey",
+        "candidate_name": "prize Turkey",
+        "how": "judged",
+        "why": "Both represent the prize turkey purchased by Scrooge."
       },
       {
         "table": "objects",
@@ -1815,28 +2018,28 @@
         "candidate_id": null,
         "candidate_name": null,
         "how": "unaligned",
-        "why": "The candidate splits these stolen goods into separate rows for bed-curtains, blankets, and shirt."
+        "why": "The candidate models the individual stolen items separately rather than as a single group."
       },
       {
         "table": "objects",
         "fixture_id": "obj_gravestone",
         "fixture_name": "a neglected grave, with a stone",
-        "candidate_id": "obj_gravestone",
-        "candidate_name": "gravestone",
+        "candidate_id": "obj_scrooges_gravestone",
+        "candidate_name": "stone of the neglected grave",
         "how": "judged",
-        "why": "Both denote the neglected gravestone bearing Scrooge's name."
+        "why": "Both represent the gravestone on the neglected grave."
       }
     ],
     "events": [
       {
         "truth_id": "scene_01_counting_house#0",
         "truth_text": "Fred visits, wishes his uncle a merry Christmas, and invites him to dinner; Scrooge answers 'Bah! Humbug!' and refuses",
-        "candidate_id": null
+        "candidate_id": "ev_0008"
       },
       {
         "truth_id": "scene_01_counting_house#1",
         "truth_text": "two portly gentlemen ask Scrooge for a subscription for the poor; he asks whether there are no prisons, no workhouses",
-        "candidate_id": null
+        "candidate_id": "ev_0027"
       },
       {
         "truth_id": "scene_01_counting_house#2",
@@ -1846,17 +2049,17 @@
       {
         "truth_id": "scene_01_counting_house#3",
         "truth_text": "Scrooge grudgingly allows Bob Cratchit the whole of Christmas Day off, calling it a poor excuse for picking a man's pocket every twenty-fifth of December",
-        "candidate_id": null
+        "candidate_id": "ev_0044"
       },
       {
         "truth_id": "scene_01_counting_house#4",
         "truth_text": "Scrooge walks home alone through the fog to his gloomy chambers",
-        "candidate_id": null
+        "candidate_id": "ev_0050"
       },
       {
         "truth_id": "scene_02_the_haunting_begins#0",
         "truth_text": "the door-knocker briefly becomes Marley's face as Scrooge lets himself in",
-        "candidate_id": null
+        "candidate_id": "ev_0053"
       },
       {
         "truth_id": "scene_02_the_haunting_begins#1",
@@ -1866,27 +2069,27 @@
       {
         "truth_id": "scene_02_the_haunting_begins#2",
         "truth_text": "Marley declares he wears the chain he forged in life, link by link and yard by yard, and warns Scrooge his own chain is longer still",
-        "candidate_id": "ev_0092"
+        "candidate_id": "ev_0086"
       },
       {
         "truth_id": "scene_02_the_haunting_begins#3",
         "truth_text": "Marley shows Scrooge the air outside the window crowded with other chained, wailing phantoms, doomed to see misery they no longer have the power to help",
-        "candidate_id": "ev_0112"
+        "candidate_id": "ev_0107"
       },
       {
         "truth_id": "scene_02_the_haunting_begins#4",
         "truth_text": "Marley tells Scrooge he will be haunted by Three Spirits, and that this is his one chance and hope",
-        "candidate_id": "ev_0102"
+        "candidate_id": "ev_0094"
       },
       {
         "truth_id": "scene_03_the_first_spirit#0",
         "truth_text": "the bell tolls one, and a strange childlike figure — the Ghost of Christmas Past — draws back Scrooge's bed-curtains",
-        "candidate_id": "ev_0124"
+        "candidate_id": "ev_0122"
       },
       {
         "truth_id": "scene_03_the_first_spirit#1",
         "truth_text": "the Spirit takes Scrooge by the hand and they pass through the wall together, out into the country of his own boyhood",
-        "candidate_id": "ev_0141"
+        "candidate_id": "ev_0139"
       },
       {
         "truth_id": "scene_04_the_lonely_school#0",
@@ -1906,67 +2109,67 @@
       {
         "truth_id": "scene_05_fezziwigs_ball#0",
         "truth_text": "old Fezziwig throws open his warehouse for a joyous Christmas Eve party for his apprentices, young Scrooge among them",
-        "candidate_id": "ev_0172"
+        "candidate_id": "ev_0178"
       },
       {
         "truth_id": "scene_05_fezziwigs_ball#1",
         "truth_text": "the Spirit remarks it is a small thing to be so grateful for; Scrooge, unsettled, defends Fezziwig — the power to make people happy or unhappy costs so little",
-        "candidate_id": "ev_0188"
+        "candidate_id": "ev_0196"
       },
       {
         "truth_id": "scene_05_fezziwigs_ball#2",
         "truth_text": "Scrooge wishes, watching, that he could say a word or two to his own clerk just now",
-        "candidate_id": "ev_0189"
+        "candidate_id": "ev_0197"
       },
       {
         "truth_id": "scene_06_belle_then_and_now#0",
         "truth_text": "young Scrooge, older now, hears Belle release him from their engagement, telling him another idol — gain — has displaced her",
-        "candidate_id": "ev_0192"
+        "candidate_id": "ev_0200"
       },
       {
         "truth_id": "scene_06_belle_then_and_now#1",
         "truth_text": "the Spirit shows Belle years afterward, married to another man, in a warm home crowded with cheerful children",
-        "candidate_id": "ev_0200"
+        "candidate_id": "ev_0216"
       },
       {
         "truth_id": "scene_06_belle_then_and_now#2",
         "truth_text": "Belle's husband mentions passing Scrooge's office that day: a lone light, his partner Marley dying, and Scrooge himself sitting quite alone, as he always is",
-        "candidate_id": "ev_0210"
+        "candidate_id": "ev_0217"
       },
       {
         "truth_id": "scene_06_belle_then_and_now#3",
         "truth_text": "Scrooge, unable to bear it, seizes the extinguisher-cap and begs the Spirit to remove him and show him no more",
-        "candidate_id": "ev_0215"
+        "candidate_id": "ev_0221"
       },
       {
         "truth_id": "scene_07_the_second_spirit#0",
         "truth_text": "Scrooge wakes in his own room, transformed by a mound of Christmas food and greenery, presided over by a jovial giant of a Spirit",
-        "candidate_id": "ev_0223"
+        "candidate_id": "ev_0229"
       },
       {
         "truth_id": "scene_07_the_second_spirit#1",
         "truth_text": "the Ghost of Christmas Present takes Scrooge out into the Christmas morning streets",
-        "candidate_id": "ev_0237"
+        "candidate_id": "ev_0241"
       },
       {
         "truth_id": "scene_08_the_cratchits#0",
         "truth_text": "the Cratchits sit down to a small, poor, entirely happy Christmas dinner — one goose, a pudding everyone privately feared and no one says aloud might fail",
-        "candidate_id": null
+        "candidate_id": "ev_0285"
       },
       {
         "truth_id": "scene_08_the_cratchits#1",
         "truth_text": "Tiny Tim, who has been to church and hopes people saw his crutch, since it might do them good to remember who made lame beggars walk and blind men see",
-        "candidate_id": null
+        "candidate_id": "ev_0272"
       },
       {
         "truth_id": "scene_08_the_cratchits#2",
         "truth_text": "Scrooge, anxious for the first time, asks the Spirit if Tiny Tim will live",
-        "candidate_id": null
+        "candidate_id": "ev_0300"
       },
       {
         "truth_id": "scene_08_the_cratchits#3",
         "truth_text": "the Spirit answers that if these shadows remain unaltered by the future, the child will die — then quotes Scrooge's own words back to him: that he had better do it, and decrease the surplus population",
-        "candidate_id": null
+        "candidate_id": "ev_0301"
       },
       {
         "truth_id": "scene_08_the_cratchits#4",
@@ -1976,62 +2179,62 @@
       {
         "truth_id": "scene_09_the_spirits_tour#0",
         "truth_text": "the Spirit shows Scrooge a bleak mine, where the miners keep Christmas underground with an old song",
-        "candidate_id": null
+        "candidate_id": "ev_0318"
       },
       {
         "truth_id": "scene_09_the_spirits_tour#1",
         "truth_text": "a solitary lighthouse, where the keepers grip hands and wish each other merry Christmas over the roar of the sea",
-        "candidate_id": null
+        "candidate_id": "ev_0321"
       },
       {
         "truth_id": "scene_09_the_spirits_tour#2",
         "truth_text": "a ship at sea, where every man aboard hums a Christmas tune to himself, thinking of those at home",
-        "candidate_id": null
+        "candidate_id": "ev_0325"
       },
       {
         "truth_id": "scene_10_freds_party#0",
         "truth_text": "Fred's party plays games, including Yes and No, guessing at 'a most disagreeable animal' that turns out to be Uncle Scrooge himself, to general laughter",
-        "candidate_id": null
+        "candidate_id": "ev_0354"
       },
       {
         "truth_id": "scene_10_freds_party#1",
         "truth_text": "Fred toasts his uncle anyway, wishing him a merry Christmas and a happy new year, whatever he thinks of the toast",
-        "candidate_id": null
+        "candidate_id": "ev_0361"
       },
       {
         "truth_id": "scene_10_freds_party#2",
         "truth_text": "Scrooge, invisible to the party, is in such a mood that he begs the Spirit to let them stay a little longer, and joins in the games in spirit",
-        "candidate_id": null
+        "candidate_id": "ev_0351"
       },
       {
         "truth_id": "scene_11_ignorance_and_want#0",
         "truth_text": "the Ghost of Christmas Present visibly ages through the night, and at the last shows Scrooge two wretched, wolfish children hidden in its robes: a boy and a girl",
-        "candidate_id": null
+        "candidate_id": "ev_0368"
       },
       {
         "truth_id": "scene_11_ignorance_and_want#1",
         "truth_text": "the Spirit names them Ignorance and Want, and warns Scrooge to beware them both, but most of all beware Ignorance",
-        "candidate_id": "ev_0338"
+        "candidate_id": "ev_0371"
       },
       {
         "truth_id": "scene_11_ignorance_and_want#2",
         "truth_text": "Scrooge asks if they have no refuge; the Spirit throws his own words back at him once more — are there no prisons, no workhouses",
-        "candidate_id": "ev_0340"
+        "candidate_id": "ev_0373"
       },
       {
         "truth_id": "scene_11_ignorance_and_want#3",
         "truth_text": "the bell strikes twelve; the Ghost of Christmas Present vanishes, and a solemn, hooded phantom approaches",
-        "candidate_id": "ev_0341"
+        "candidate_id": "ev_0374"
       },
       {
         "truth_id": "scene_12_the_exchange#0",
         "truth_text": "the Ghost of Christmas Yet to Come, silent and shrouded, leads Scrooge among businessmen on the Exchange",
-        "candidate_id": "ev_0353"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_12_the_exchange#1",
         "truth_text": "the men discuss an unnamed man's death with complete indifference — one will only attend the funeral if lunch is provided",
-        "candidate_id": "ev_0360"
+        "candidate_id": "ev_0392"
       },
       {
         "truth_id": "scene_12_the_exchange#2",
@@ -2041,7 +2244,7 @@
       {
         "truth_id": "scene_13_old_joes_shop#0",
         "truth_text": "a charwoman, a laundress (Mrs. Dilber), and an undertaker's man sell Old Joe the dead man's bed-curtains, shirt off his back, and blankets",
-        "candidate_id": null
+        "candidate_id": "ev_0419"
       },
       {
         "truth_id": "scene_13_old_joes_shop#1",
@@ -2056,27 +2259,27 @@
       {
         "truth_id": "scene_14_the_unwatched_corpse#0",
         "truth_text": "the Spirit brings Scrooge to a bare, dark room where a covered body lies, plundered and bereft, unwatched, unwept, uncared for",
-        "candidate_id": null
+        "candidate_id": "ev_0421"
       },
       {
         "truth_id": "scene_14_the_unwatched_corpse#1",
         "truth_text": "Scrooge, trembling, is invited to lift the covering and see the dead man's face, and cannot bring himself to do it",
-        "candidate_id": null
+        "candidate_id": "ev_0425"
       },
       {
         "truth_id": "scene_14_the_unwatched_corpse#2",
         "truth_text": "he asks the Spirit to show him some tenderness connected with a death, anywhere, if only one",
-        "candidate_id": null
+        "candidate_id": "ev_0434"
       },
       {
         "truth_id": "scene_15_the_relieved_debtors#0",
         "truth_text": "Caroline and her husband, deep in debt to the dead man, learn of his death",
-        "candidate_id": "ev_0399"
+        "candidate_id": "ev_0430"
       },
       {
         "truth_id": "scene_15_the_relieved_debtors#1",
         "truth_text": "their first feeling is relief: whoever inherits the debt may show them mercy the dead man never would",
-        "candidate_id": "ev_0401"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_15_the_relieved_debtors#2",
@@ -2096,32 +2299,32 @@
       {
         "truth_id": "scene_16_the_cratchits_after_tim#2",
         "truth_text": "Bob Cratchit returns from arranging a burial-place, breaks down, then composes himself for the other children's sake",
-        "candidate_id": "ev_0410"
+        "candidate_id": "ev_0442"
       },
       {
         "truth_id": "scene_16_the_cratchits_after_tim#3",
         "truth_text": "Bob recalls how gentle and patient Tim always was, and says he will never forget it, nor his first words after the day he died",
-        "candidate_id": null
+        "candidate_id": "ev_0448"
       },
       {
         "truth_id": "scene_17_the_name_on_the_stone#0",
         "truth_text": "the Spirit brings Scrooge to a neglected, grass-choked grave and points down at the stone",
-        "candidate_id": null
+        "candidate_id": "ev_0458"
       },
       {
         "truth_id": "scene_17_the_name_on_the_stone#1",
         "truth_text": "Scrooge begs to know first whether these are the shadows of things that Will be, or only of things that May be",
-        "candidate_id": null
+        "candidate_id": "ev_0459"
       },
       {
         "truth_id": "scene_17_the_name_on_the_stone#2",
         "truth_text": "he reads the name on the stone: EBENEZER SCROOGE",
-        "candidate_id": null
+        "candidate_id": "ev_0460"
       },
       {
         "truth_id": "scene_17_the_name_on_the_stone#3",
         "truth_text": "he clutches at the Spirit's robe and swears he is not the man he was, and will honor Christmas in his heart and try to keep it all the year",
-        "candidate_id": null
+        "candidate_id": "ev_0463"
       },
       {
         "truth_id": "scene_17_the_name_on_the_stone#4",
@@ -2131,47 +2334,47 @@
       {
         "truth_id": "scene_18_the_waking#0",
         "truth_text": "Scrooge wakes in his own bed, in his own room, and finds it is still Christmas morning — he has all three Spirits' time to do good in",
-        "candidate_id": "ev_0433"
+        "candidate_id": "ev_0467"
       },
       {
         "truth_id": "scene_18_the_waking#1",
         "truth_text": "he laughs, cries, and talks to himself in delight, hardly able to believe it",
-        "candidate_id": null
+        "candidate_id": "ev_0484"
       },
       {
         "truth_id": "scene_18_the_waking#2",
         "truth_text": "he leans out the window and asks a boy in his Sunday clothes what day it is, then sends him to buy the prize turkey hanging in the poulterer's, twice the size of Tiny Tim, and have it sent to Bob Cratchit's, anonymously",
-        "candidate_id": "ev_0437"
+        "candidate_id": "ev_0472"
       },
       {
         "truth_id": "scene_18_the_waking#3",
         "truth_text": "he dresses in his best and goes out into the street, unable to stop smiling at everyone he passes",
-        "candidate_id": "ev_0450"
+        "candidate_id": "ev_0485"
       },
       {
         "truth_id": "scene_19_the_street_and_freds_dinner#0",
         "truth_text": "Scrooge meets the portly gentleman who solicited him in scene 1, apologizes, and whispers a subscription sum large enough to make the gentleman gasp",
-        "candidate_id": "ev_0451"
+        "candidate_id": "ev_0489"
       },
       {
         "truth_id": "scene_19_the_street_and_freds_dinner#1",
         "truth_text": "Scrooge goes to church, then walks the streets, patting children's heads and delighting in everything he sees",
-        "candidate_id": "ev_0453"
+        "candidate_id": "ev_0493"
       },
       {
         "truth_id": "scene_19_the_street_and_freds_dinner#2",
         "truth_text": "he arrives, trembling, at Fred's door, and asks if he may come in to dinner",
-        "candidate_id": "ev_0460"
+        "candidate_id": "ev_0500"
       },
       {
         "truth_id": "scene_19_the_street_and_freds_dinner#3",
         "truth_text": "Fred welcomes him with open arms, and the party is a wonderful one",
-        "candidate_id": "ev_0461"
+        "candidate_id": "ev_0501"
       },
       {
         "truth_id": "scene_20_the_office_next_morning#0",
         "truth_text": "Bob Cratchit arrives eighteen and a half minutes late; Scrooge growls in mock severity that this will not do, and that he is about to raise his salary",
-        "candidate_id": "ev_0469"
+        "candidate_id": "ev_0510"
       },
       {
         "truth_id": "scene_20_the_office_next_morning#1",
@@ -2181,7 +2384,7 @@
       {
         "truth_id": "scene_20_the_office_next_morning#2",
         "truth_text": "Scrooge promises to assist Bob's struggling family and to discuss his affairs over a bowl of smoking bishop that very afternoon",
-        "candidate_id": "ev_0470"
+        "candidate_id": "ev_0511"
       },
       {
         "truth_id": "scene_20_the_office_next_morning#3",
@@ -2195,6 +2398,6 @@
       }
     ]
   },
-  "judge_cost_usd": 0.36748725000000004,
-  "judge_calls": 35
+  "judge_cost_usd": 0.43381274999999997,
+  "judge_calls": 59
 }
