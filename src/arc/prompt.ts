@@ -44,6 +44,13 @@ The one hard constraint, and it is checked mechanically after you answer:
   There is no third option. A payoff you cannot honestly point a plant at is a payoff you have not
   earned; remove it, or go back and plant it properly in an earlier event.
 
+  plant: null is not the easy option. A fact seeded true from the start still has to be MADE TO
+  MATTER before an event can collect it — the same work a mid-story plant does, just done in the
+  seed instead of in an event. Give it a scene where it is noticed, resisted, or put under
+  pressure before the event that collects it, or state clearly why its truth alone was always
+  going to force this payoff. A seed fact that sits inert until the event that cashes it in is
+  linked, not earned, and the reader will feel the difference.
+
 Conversely: anything you put in an event's "reveals" is a promise. If no later event pays it off,
 you have shown the reader a loaded gun and never fired it. Every fact_ref you reveal must be paid
 off by some later event, or must not be revealed.

@@ -35,6 +35,7 @@ import {
 import {
   blindArcView,
   judgeResponseJsonSchema,
+  seedGroundedFactRefs,
   summarize,
   STOCK_SHAPES,
   type JudgeResponse,
@@ -42,6 +43,7 @@ import {
 import { briefsFor } from '../src/arc/premises';
 import { renderArcPrompt, arcResponseJsonSchema } from '../src/arc/prompt';
 import cinderella from '../fixtures/cinderella/package.json';
+import aChristmasCarol from '../fixtures/a-christmas-carol/package.json';
 
 /** A small, deliberately valid arc: 5 events, one span-3 plant/payoff pair. */
 function sampleArc(): FabulaArc {
@@ -602,5 +604,66 @@ describe('the two rebuilt §4.2 criteria (#147)', () => {
     expect(judgeResponseJsonSchema()).toMatchObject({
       properties: { closest_stock_shape: { enum: [...STOCK_SHAPES] } },
     });
+  });
+});
+
+describe('seed-grounded vs planted payoffs (#148)', () => {
+  it('finds the Carol\'s one seed-grounded pair and Cinderella\'s zero', () => {
+    // §4.7's denominator: 1 of 5 fixture pays_off edges are seed-grounded, and it is this one —
+    // corpse_is_scrooge rests on nothing planted mid-story, it is true from the moment Marley's
+    // ghost first speaks.
+    expect(seedGroundedFactRefs(parseStoryPackage(cinderella))).toEqual(new Set());
+    expect(seedGroundedFactRefs(parseStoryPackage(aChristmasCarol))).toEqual(
+      new Set(['corpse_is_scrooge']),
+    );
+  });
+
+  it('splits payoff_earned by whether the judge saw a seed-grounded or a planted pair', () => {
+    const score = summarize(
+      {
+        causal_pairs: [],
+        payoffs: [
+          { fact_ref: 'seeded_fact', verdict: 'linked_only', why: '' },
+          { fact_ref: 'planted_fact_1', verdict: 'earned', why: '' },
+          { fact_ref: 'planted_fact_2', verdict: 'earned', why: '' },
+        ],
+        closest_stock_shape: STOCK_SHAPES[0],
+        stock_adherence: 3,
+        particulars: [],
+        thematic_coherence: 4,
+        engagement: 4,
+        notes: '',
+      },
+      'test',
+      'gemini-3.8-flash',
+      new Set(['seeded_fact']),
+    );
+    expect(score.payoff_earned).toMatchObject({
+      pairs: 3,
+      earned: 2,
+      seed_grounded: { pairs: 1, earned: 0, share: 0 },
+      planted: { pairs: 2, earned: 2, share: 1 },
+    });
+    // The overall bar is unchanged by the breakdown — §7 adds no new bar, it only reports one.
+    expect(score.payoff_earned.earned_share).toBeCloseTo(2 / 3);
+  });
+
+  it('reports a null share rather than 0 when a group is empty, same as the overall bar', () => {
+    const score = summarize(
+      {
+        causal_pairs: [],
+        payoffs: [{ fact_ref: 'planted_fact', verdict: 'earned', why: '' }],
+        closest_stock_shape: STOCK_SHAPES[0],
+        stock_adherence: 3,
+        particulars: [],
+        thematic_coherence: 4,
+        engagement: 4,
+        notes: '',
+      },
+      'test',
+      'gemini-3.8-flash',
+      new Set(),
+    );
+    expect(score.payoff_earned.seed_grounded).toEqual({ pairs: 0, earned: 0, share: null });
   });
 });

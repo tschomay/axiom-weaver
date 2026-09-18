@@ -1,0 +1,2711 @@
+{
+  "story_id": "the-machine-stops",
+  "generator": "segmentation pipeline (#118)",
+  "models_used": [
+    "gemini-3.8-flash"
+  ],
+  "requested_model": "gemini-3.8-flash",
+  "segmented_at": "2026-09-18T19:56:03.878Z",
+  "cost_usd": 0.11332725,
+  "calls": [
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 0 (0–24)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2040,
+      "output_tokens": 1051,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00547125,
+      "ms": 2843,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 1 (18–42)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2045,
+      "output_tokens": 1110,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00569625,
+      "ms": 2827,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 2 (36–60)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2070,
+      "output_tokens": 1121,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00575625,
+      "ms": 3071,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 3 (54–78)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1930,
+      "output_tokens": 1163,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00580875,
+      "ms": 3076,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 4 (72–96)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2010,
+      "output_tokens": 1108,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0056625,
+      "ms": 4432,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 5 (90–114)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2104,
+      "output_tokens": 1146,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0058755,
+      "ms": 7256,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 6 (108–132)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2052,
+      "output_tokens": 1150,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0058515,
+      "ms": 4833,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 7 (126–150)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2015,
+      "output_tokens": 1094,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00561375,
+      "ms": 2586,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 8 (144–168)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2037,
+      "output_tokens": 1143,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.005814,
+      "ms": 3070,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 9 (162–186)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2095,
+      "output_tokens": 1055,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0055275,
+      "ms": 2530,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 10 (180–204)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2048,
+      "output_tokens": 1146,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0058335,
+      "ms": 11289,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 11 (198–218)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1806,
+      "output_tokens": 944,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0048945,
+      "ms": 2422,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1541,
+      "output_tokens": 652,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00360075,
+      "ms": 5835,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 5–8",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 902,
+      "output_tokens": 551,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00274275,
+      "ms": 2112,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 9–12",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 624,
+      "output_tokens": 506,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0023655,
+      "ms": 1752,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 13–16",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 625,
+      "output_tokens": 506,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00236625,
+      "ms": 1465,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 17–20",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 701,
+      "output_tokens": 521,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0024795,
+      "ms": 1686,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 21–24",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 783,
+      "output_tokens": 548,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00264225,
+      "ms": 1972,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 25–28",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 835,
+      "output_tokens": 537,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00264,
+      "ms": 2010,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 29–32",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 916,
+      "output_tokens": 608,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002967,
+      "ms": 2555,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 33–36",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 850,
+      "output_tokens": 537,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00265125,
+      "ms": 2490,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 37–40",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 974,
+      "output_tokens": 526,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.002703,
+      "ms": 2214,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 41–42",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 548,
+      "output_tokens": 310,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0015735,
+      "ms": 1672,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 1–20",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1943,
+      "output_tokens": 295,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0025635,
+      "ms": 1328,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 21–40",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 2630,
+      "output_tokens": 388,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0034275,
+      "ms": 1592,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_proposals",
+      "label": "scenes 41–42",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1927,
+      "output_tokens": 214,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00224775,
+      "ms": 1081,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_verification",
+      "label": "pairs 1–6",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1133,
+      "output_tokens": 477,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.0026385,
+      "ms": 1618,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.plant_verification",
+      "label": "pairs 7–9",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 613,
+      "output_tokens": 264,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00144975,
+      "ms": 1714,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.withholding",
+      "label": "facts 1–4",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 5176,
+      "output_tokens": 155,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00446325,
+      "ms": 1070,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "events": 218,
+  "scenes": 42,
+  "events_per_scene": 5.190476190476191,
+  "signals_available": {
+    "pov": false,
+    "dramatic_function": false,
+    "caused_by": false,
+    "story_time": true,
+    "narrated_index": true,
+    "location": true
+  },
+  "telling_order": {
+    "basis": "narrated_index",
+    "displaced": 213
+  },
+  "boundaries": {
+    "windows": [
+      {
+        "index": 0,
+        "start": 0,
+        "end": 24
+      },
+      {
+        "index": 1,
+        "start": 18,
+        "end": 42
+      },
+      {
+        "index": 2,
+        "start": 36,
+        "end": 60
+      },
+      {
+        "index": 3,
+        "start": 54,
+        "end": 78
+      },
+      {
+        "index": 4,
+        "start": 72,
+        "end": 96
+      },
+      {
+        "index": 5,
+        "start": 90,
+        "end": 114
+      },
+      {
+        "index": 6,
+        "start": 108,
+        "end": 132
+      },
+      {
+        "index": 7,
+        "start": 126,
+        "end": 150
+      },
+      {
+        "index": 8,
+        "start": 144,
+        "end": 168
+      },
+      {
+        "index": 9,
+        "start": 162,
+        "end": 186
+      },
+      {
+        "index": 10,
+        "start": 180,
+        "end": 204
+      },
+      {
+        "index": 11,
+        "start": 198,
+        "end": 218
+      }
+    ],
+    "window_problems": [],
+    "failed_windows": [],
+    "fell_back_to_signals": 0,
+    "disagreements": 3,
+    "judged_adjacencies": 217,
+    "self_consistency": 0.9454545454545454,
+    "decisions": [
+      {
+        "index": 0,
+        "after_event_id": "ev_0002",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti's continuous actions in her room.",
+        "from_signals": false
+      },
+      {
+        "index": 1,
+        "after_event_id": "ev_0003",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action answering the call.",
+        "from_signals": false
+      },
+      {
+        "index": 2,
+        "after_event_id": "ev_0004",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous call setup.",
+        "from_signals": false
+      },
+      {
+        "index": 3,
+        "after_event_id": "ev_0005",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti continues preparing her room for the call.",
+        "from_signals": false
+      },
+      {
+        "index": 4,
+        "after_event_id": "ev_0006",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action adjusting the lighting.",
+        "from_signals": false
+      },
+      {
+        "index": 5,
+        "after_event_id": "ev_0007",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous interaction as the call connects.",
+        "from_signals": false
+      },
+      {
+        "index": 6,
+        "after_event_id": "ev_0008",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The visual communication establishes continuously.",
+        "from_signals": false
+      },
+      {
+        "index": 7,
+        "after_event_id": "ev_0009",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The video conversation continues uninterrupted.",
+        "from_signals": false
+      },
+      {
+        "index": 8,
+        "after_event_id": "ev_0010",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "A single continuous conversation between Vashti and Kuno across their communication device.",
+        "from_signals": false
+      },
+      {
+        "index": 9,
+        "after_event_id": "ev_0011",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The same continuous conversation continues.",
+        "from_signals": false
+      },
+      {
+        "index": 10,
+        "after_event_id": "ev_0012",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The same conversation continues.",
+        "from_signals": false
+      },
+      {
+        "index": 11,
+        "after_event_id": "ev_0013",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 12,
+        "after_event_id": "ev_0014",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 13,
+        "after_event_id": "ev_0015",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 14,
+        "after_event_id": "ev_0016",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 15,
+        "after_event_id": "ev_0017",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 16,
+        "after_event_id": "ev_0018",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 17,
+        "after_event_id": "ev_0019",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 18,
+        "after_event_id": "ev_0020",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 19,
+        "after_event_id": "ev_0021",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 20,
+        "after_event_id": "ev_0022",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 21,
+        "after_event_id": "ev_0023",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 22,
+        "after_event_id": "ev_0024",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Dialogue continues without interruption.",
+        "from_signals": false
+      },
+      {
+        "index": 23,
+        "after_event_id": "ev_0025",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation across the communication link.",
+        "from_signals": false
+      },
+      {
+        "index": 24,
+        "after_event_id": "ev_0026",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation across the communication link.",
+        "from_signals": false
+      },
+      {
+        "index": 25,
+        "after_event_id": "ev_0027",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation across the communication link.",
+        "from_signals": false
+      },
+      {
+        "index": 26,
+        "after_event_id": "ev_0028",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation across the communication link.",
+        "from_signals": false
+      },
+      {
+        "index": 27,
+        "after_event_id": "ev_0029",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation across the communication link.",
+        "from_signals": false
+      },
+      {
+        "index": 28,
+        "after_event_id": "ev_0030",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Conclusion of the call as Kuno hangs up.",
+        "from_signals": false
+      },
+      {
+        "index": 29,
+        "after_event_id": "ev_0031",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous aftermath immediately following the end of the call.",
+        "from_signals": false
+      },
+      {
+        "index": 30,
+        "after_event_id": "ev_0032",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti turns back to her routine immediately in her room.",
+        "from_signals": false
+      },
+      {
+        "index": 31,
+        "after_event_id": "ev_0033",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time moves forward to the lecture session.",
+        "from_signals": false
+      },
+      {
+        "index": 32,
+        "after_event_id": "ev_0034",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti begins delivering her lecture to her audience.",
+        "from_signals": false
+      },
+      {
+        "index": 33,
+        "after_event_id": "ev_0035",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous sequence of lectures/study with the audience.",
+        "from_signals": false
+      },
+      {
+        "index": 34,
+        "after_event_id": "ev_0036",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "A summary montage of the rest of Vashti's daily routine.",
+        "from_signals": false
+      },
+      {
+        "index": 35,
+        "after_event_id": "ev_0037",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti prepares for sleep at the end of the day.",
+        "from_signals": false
+      },
+      {
+        "index": 36,
+        "after_event_id": "ev_0038",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Vashti rests in bed thinking.",
+        "from_signals": false
+      },
+      {
+        "index": 37,
+        "after_event_id": "ev_0039",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Vashti remains in her room interacting with the Book.",
+        "from_signals": false
+      },
+      {
+        "index": 38,
+        "after_event_id": "ev_0040",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous action consulting the Book.",
+        "from_signals": false
+      },
+      {
+        "index": 39,
+        "after_event_id": "ev_0041",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous action placing a call to Kuno.",
+        "from_signals": false
+      },
+      {
+        "index": 40,
+        "after_event_id": "ev_0042",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "The conversation initiated by the call.",
+        "from_signals": false
+      },
+      {
+        "index": 41,
+        "after_event_id": "ev_0043",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Ongoing dialogue between Vashti and Kuno.",
+        "from_signals": false
+      },
+      {
+        "index": 42,
+        "after_event_id": "ev_0044",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Kuno hangs up visually during the ongoing exchange.",
+        "from_signals": false
+      },
+      {
+        "index": 43,
+        "after_event_id": "ev_0045",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti reacts immediately by testing the tunnel button.",
+        "from_signals": false
+      },
+      {
+        "index": 44,
+        "after_event_id": "ev_0046",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate continuous reaction to the open tunnel.",
+        "from_signals": false
+      },
+      {
+        "index": 45,
+        "after_event_id": "ev_0047",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti resumes speaking to Kuno right after closing the wall.",
+        "from_signals": false
+      },
+      {
+        "index": 46,
+        "after_event_id": "ev_0048",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The apparatus descends immediately into the room during the call.",
+        "from_signals": false
+      },
+      {
+        "index": 47,
+        "after_event_id": "ev_0049",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti receives treatment in unbroken time.",
+        "from_signals": false
+      },
+      {
+        "index": 48,
+        "after_event_id": "ev_0050",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Kuno asks about her health right after the treatment.",
+        "from_signals": false
+      },
+      {
+        "index": 49,
+        "after_event_id": "ev_0051",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The dialogue continues seamlessly.",
+        "from_signals": false
+      },
+      {
+        "index": 50,
+        "after_event_id": "ev_0052",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Conversation continues.",
+        "from_signals": false
+      },
+      {
+        "index": 51,
+        "after_event_id": "ev_0053",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues without break.",
+        "from_signals": false
+      },
+      {
+        "index": 52,
+        "after_event_id": "ev_0054",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Conversation concludes.",
+        "from_signals": false
+      },
+      {
+        "index": 53,
+        "after_event_id": "ev_0055",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti steps through the door onto the platform on one continuous errand.",
+        "from_signals": false
+      },
+      {
+        "index": 54,
+        "after_event_id": "ev_0056",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Direct continuation of departing on the platform.",
+        "from_signals": false
+      },
+      {
+        "index": 55,
+        "after_event_id": "ev_0057",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Narrative exposition and backstory break the immediate continuous action.",
+        "from_signals": false
+      },
+      {
+        "index": 56,
+        "after_event_id": "ev_0058",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Resuming the present narrative arc after expository context.",
+        "from_signals": false
+      },
+      {
+        "index": 57,
+        "after_event_id": "ev_0059",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous action preparing to leave the room.",
+        "from_signals": false
+      },
+      {
+        "index": 58,
+        "after_event_id": "ev_0060",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Vashti steps through the doorway onto the platform on the same continuous action.",
+        "from_signals": false
+      },
+      {
+        "index": 59,
+        "after_event_id": "ev_0061",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action as the door closes behind her.",
+        "from_signals": false
+      },
+      {
+        "index": 60,
+        "after_event_id": "ev_0062",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous transit sequence waiting for and boarding the car.",
+        "from_signals": false
+      },
+      {
+        "index": 61,
+        "after_event_id": "ev_0063",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous journey through transit connected spaces.",
+        "from_signals": false
+      },
+      {
+        "index": 62,
+        "after_event_id": "ev_0064",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Boarding sequence continues on the gangway.",
+        "from_signals": false
+      },
+      {
+        "index": 63,
+        "after_event_id": "ev_0065",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous boarding interaction on the gangway.",
+        "from_signals": false
+      },
+      {
+        "index": 64,
+        "after_event_id": "ev_0066",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous movement boarding the air-ship.",
+        "from_signals": false
+      },
+      {
+        "index": 65,
+        "after_event_id": "ev_0067",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Air-ship doors close as boarding finishes.",
+        "from_signals": false
+      },
+      {
+        "index": 66,
+        "after_event_id": "ev_0068",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous scene inside the departing air-ship.",
+        "from_signals": false
+      },
+      {
+        "index": 67,
+        "after_event_id": "ev_0070",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous journey as the air-ship takes flight.",
+        "from_signals": false
+      },
+      {
+        "index": 68,
+        "after_event_id": "ev_0071",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Passengers react inside the soaring air-ship.",
+        "from_signals": false
+      },
+      {
+        "index": 69,
+        "after_event_id": "ev_0072",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous interaction with the attendant inside the cabin.",
+        "from_signals": false
+      },
+      {
+        "index": 70,
+        "after_event_id": "ev_0073",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Narrative exposition about historical Machine decrees.",
+        "from_signals": false
+      },
+      {
+        "index": 71,
+        "after_event_id": "ev_0074",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to the immediate dramatic action in the air-ship cabin.",
+        "from_signals": false
+      },
+      {
+        "index": 72,
+        "after_event_id": "ev_0075",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous action summoning the attendant.",
+        "from_signals": false
+      },
+      {
+        "index": 73,
+        "after_event_id": "ev_0076",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous dialogue with the attendant.",
+        "from_signals": false
+      },
+      {
+        "index": 74,
+        "after_event_id": "ev_0077",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous physical interaction with the attendant.",
+        "from_signals": false
+      },
+      {
+        "index": 75,
+        "after_event_id": "ev_0078",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous argument with the attendant.",
+        "from_signals": false
+      },
+      {
+        "index": 76,
+        "after_event_id": "ev_0079",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous exchange as the attendant apologizes.",
+        "from_signals": false
+      },
+      {
+        "index": 77,
+        "after_event_id": "ev_0080",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous dialogue in the cabin.",
+        "from_signals": false
+      },
+      {
+        "index": 78,
+        "after_event_id": "ev_0081",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous dialogue in the cabin.",
+        "from_signals": false
+      },
+      {
+        "index": 79,
+        "after_event_id": "ev_0082",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous interaction showing the mountains.",
+        "from_signals": false
+      },
+      {
+        "index": 80,
+        "after_event_id": "ev_0083",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous dialogue regarding the view.",
+        "from_signals": false
+      },
+      {
+        "index": 81,
+        "after_event_id": "ev_0084",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Attendant covers the blind in the same scene.",
+        "from_signals": false
+      },
+      {
+        "index": 82,
+        "after_event_id": "ev_0085",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time jumps to midday as the journey progresses.",
+        "from_signals": false
+      },
+      {
+        "index": 83,
+        "after_event_id": "ev_0086",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time jumps to evening.",
+        "from_signals": false
+      },
+      {
+        "index": 84,
+        "after_event_id": "ev_0087",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Vashti completes her journey and arrives at Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 85,
+        "after_event_id": "ev_0088",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 86,
+        "after_event_id": "ev_0089",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 87,
+        "after_event_id": "ev_0090",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Flashback to Kuno's excursion onto the surface.",
+        "from_signals": false
+      },
+      {
+        "index": 88,
+        "after_event_id": "ev_0091",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuation of the surface flashback/past events.",
+        "from_signals": false
+      },
+      {
+        "index": 89,
+        "after_event_id": "ev_0092",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to present conversation in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 90,
+        "after_event_id": "ev_0093",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Flashback / reminiscence of a past lecture.",
+        "from_signals": false
+      },
+      {
+        "index": 91,
+        "after_event_id": "ev_0094",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Part of the same retrospective context of Vashti's past actions.",
+        "from_signals": false
+      },
+      {
+        "index": 92,
+        "after_event_id": "ev_0095",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Return to present conversation in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 93,
+        "after_event_id": "ev_0096",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous dialogue in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 94,
+        "after_event_id": "ev_0097",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous dialogue in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 95,
+        "after_event_id": "ev_0098",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Flashback to Kuno's confrontation with the Committee.",
+        "from_signals": false
+      },
+      {
+        "index": 96,
+        "after_event_id": "ev_0099",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to the continuous conversation in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 97,
+        "after_event_id": "ev_0100",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Kuno begins recounting his extended flashback narrative of walking the tunnels.",
+        "from_signals": false
+      },
+      {
+        "index": 98,
+        "after_event_id": "ev_0101",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Part of the continuous flashback recounting his preparations.",
+        "from_signals": false
+      },
+      {
+        "index": 99,
+        "after_event_id": "ev_0102",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuing the sequence of explorations in the flashback.",
+        "from_signals": false
+      },
+      {
+        "index": 100,
+        "after_event_id": "ev_0103",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuation of tunnel exploration narrative.",
+        "from_signals": false
+      },
+      {
+        "index": 101,
+        "after_event_id": "ev_0105",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Direct continuous action in the railway tunnel.",
+        "from_signals": false
+      },
+      {
+        "index": 102,
+        "after_event_id": "ev_0106",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Discursive digression/flashback to Committee refusing fatherhood.",
+        "from_signals": false
+      },
+      {
+        "index": 103,
+        "after_event_id": "ev_0107",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to the railway-tunnel action as the train passes.",
+        "from_signals": false
+      },
+      {
+        "index": 104,
+        "after_event_id": "ev_0108",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Direct aftermath and continuous escape from the tunnel.",
+        "from_signals": false
+      },
+      {
+        "index": 105,
+        "after_event_id": "ev_0109",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Part of the ongoing montage of events between attempts.",
+        "from_signals": false
+      },
+      {
+        "index": 106,
+        "after_event_id": "ev_0110",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cut back to the framing dialogue in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 107,
+        "after_event_id": "ev_0111",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Kuno resumes narrating his flashback preparations and second attempt.",
+        "from_signals": false
+      },
+      {
+        "index": 108,
+        "after_event_id": "ev_0112",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous flow from preparation to the climb.",
+        "from_signals": false
+      },
+      {
+        "index": 109,
+        "after_event_id": "ev_0113",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous physical movement into the shaft.",
+        "from_signals": false
+      },
+      {
+        "index": 110,
+        "after_event_id": "ev_0114",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous action climbing the ladder.",
+        "from_signals": false
+      },
+      {
+        "index": 111,
+        "after_event_id": "ev_0115",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Immediate continuation reaching the top of the shaft.",
+        "from_signals": false
+      },
+      {
+        "index": 112,
+        "after_event_id": "ev_0116",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous event at the pneumatic stopper.",
+        "from_signals": false
+      },
+      {
+        "index": 113,
+        "after_event_id": "ev_0117",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action jumping for the handle.",
+        "from_signals": false
+      },
+      {
+        "index": 114,
+        "after_event_id": "ev_0119",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Repetition/continuation of grabbing the handle.",
+        "from_signals": false
+      },
+      {
+        "index": 115,
+        "after_event_id": "ev_0120",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to the frame story with Kuno pausing his recounting.",
+        "from_signals": false
+      },
+      {
+        "index": 116,
+        "after_event_id": "ev_0121",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to the flashback narrative on the surface.",
+        "from_signals": false
+      },
+      {
+        "index": 117,
+        "after_event_id": "ev_0122",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action recovering by the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 118,
+        "after_event_id": "ev_0123",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action standing up in the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 119,
+        "after_event_id": "ev_0124",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action breathing the air.",
+        "from_signals": false
+      },
+      {
+        "index": 120,
+        "after_event_id": "ev_0125",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action rushing the slope and rolling back.",
+        "from_signals": false
+      },
+      {
+        "index": 121,
+        "after_event_id": "ev_0126",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to the frame story conversation in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 122,
+        "after_event_id": "ev_0127",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous dialogue between Vashti and Kuno.",
+        "from_signals": false
+      },
+      {
+        "index": 123,
+        "after_event_id": "ev_0128",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to the flashback narrative on the Wessex hills.",
+        "from_signals": false
+      },
+      {
+        "index": 124,
+        "after_event_id": "ev_0129",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to the frame story as Kuno stops speaking.",
+        "from_signals": false
+      },
+      {
+        "index": 125,
+        "after_event_id": "ev_0130",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation in the present.",
+        "from_signals": false
+      },
+      {
+        "index": 126,
+        "after_event_id": "ev_0131",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuing the same dialogue exchange.",
+        "from_signals": false
+      },
+      {
+        "index": 127,
+        "after_event_id": "ev_0132",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuing the same dialogue exchange.",
+        "from_signals": false
+      },
+      {
+        "index": 128,
+        "after_event_id": "ev_0133",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuing the same dialogue exchange.",
+        "from_signals": false
+      },
+      {
+        "index": 129,
+        "after_event_id": "ev_0134",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuing the same dialogue exchange.",
+        "from_signals": false
+      },
+      {
+        "index": 130,
+        "after_event_id": "ev_0135",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuing the same dialogue exchange.",
+        "from_signals": false
+      },
+      {
+        "index": 131,
+        "after_event_id": "ev_0136",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous dialogue in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 132,
+        "after_event_id": "ev_0137",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous dialogue in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 133,
+        "after_event_id": "ev_0138",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Entering Kuno's flashback narrative on the surface.",
+        "from_signals": false
+      },
+      {
+        "index": 134,
+        "after_event_id": "ev_0139",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action in the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 135,
+        "after_event_id": "ev_0140",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action in the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 136,
+        "after_event_id": "ev_0141",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action in the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 137,
+        "after_event_id": "ev_0142",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action in the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 138,
+        "after_event_id": "ev_0143",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action in the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 139,
+        "after_event_id": "ev_0144",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action in the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 140,
+        "after_event_id": "ev_0145",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action in the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 141,
+        "after_event_id": "ev_0146",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action in the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 142,
+        "after_event_id": "ev_0147",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action in the hollow.",
+        "from_signals": false
+      },
+      {
+        "index": 143,
+        "after_event_id": "ev_0148",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action moving from hollow into shaft.",
+        "from_signals": false
+      },
+      {
+        "index": 144,
+        "after_event_id": "ev_0149",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous action falling down the shaft.",
+        "from_signals": false
+      },
+      {
+        "index": 145,
+        "after_event_id": "ev_0150",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Kuno awakes back in his room after losing consciousness.",
+        "from_signals": false
+      },
+      {
+        "index": 146,
+        "after_event_id": "ev_0151",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Flashback concludes; return to the frame story conversation.",
+        "from_signals": false
+      },
+      {
+        "index": 147,
+        "after_event_id": "ev_0152",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous conversation in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 148,
+        "after_event_id": "ev_0153",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous conversation in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 149,
+        "after_event_id": "ev_0154",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous dialogue in Kuno's room.",
+        "from_signals": false
+      },
+      {
+        "index": 150,
+        "after_event_id": "ev_0155",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti leaves at the conclusion of the conversation.",
+        "from_signals": false
+      },
+      {
+        "index": 151,
+        "after_event_id": "ev_0157",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Major temporal jump and shift into historical narration over years.",
+        "from_signals": false
+      },
+      {
+        "index": 152,
+        "after_event_id": "ev_0158",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuation of the historical montage summarizing social changes.",
+        "from_signals": false
+      },
+      {
+        "index": 153,
+        "after_event_id": "ev_0159",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate continuation of the lecture scene.",
+        "from_signals": false
+      },
+      {
+        "index": 154,
+        "after_event_id": "ev_0160",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Part of the ongoing historical exposition montage.",
+        "from_signals": false
+      },
+      {
+        "index": 155,
+        "after_event_id": "ev_0161",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuation of the societal summary across the passing years.",
+        "from_signals": false
+      },
+      {
+        "index": 156,
+        "after_event_id": "ev_0162",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuation of the exposition tracing Kuno's transfer.",
+        "from_signals": false
+      },
+      {
+        "index": 157,
+        "after_event_id": "ev_0163",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Narrative anchors to a specific scene ('One day') with Vashti receiving a call.",
+        "from_signals": false
+      },
+      {
+        "index": 158,
+        "after_event_id": "ev_0164",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous video/audio call between Kuno and Vashti.",
+        "from_signals": false
+      },
+      {
+        "index": 159,
+        "after_event_id": "ev_0165",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation over the communication apparatus.",
+        "from_signals": false
+      },
+      {
+        "index": 160,
+        "after_event_id": "ev_0166",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate reaction within the communication scene.",
+        "from_signals": false
+      },
+      {
+        "index": 161,
+        "after_event_id": "ev_0167",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous interaction as Vashti immediately contacts a friend.",
+        "from_signals": false
+      },
+      {
+        "index": 162,
+        "after_event_id": "ev_0168",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous dialogue with the friend.",
+        "from_signals": false
+      },
+      {
+        "index": 163,
+        "after_event_id": "ev_0169",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous dialogue with the friend.",
+        "from_signals": false
+      },
+      {
+        "index": 164,
+        "after_event_id": "ev_0170",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous dialogue with the friend.",
+        "from_signals": false
+      },
+      {
+        "index": 165,
+        "after_event_id": "ev_0171",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Shift into recounting a past interaction with the authorities.",
+        "from_signals": false
+      },
+      {
+        "index": 166,
+        "after_event_id": "ev_0172",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuation of the past complaint process.",
+        "from_signals": false
+      },
+      {
+        "index": 167,
+        "after_event_id": "ev_0173",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Direct dramatic interaction between Vashti and the Committee.",
+        "from_signals": false
+      },
+      {
+        "index": 168,
+        "after_event_id": "ev_0174",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue with the Committee continues.",
+        "from_signals": false
+      },
+      {
+        "index": 169,
+        "after_event_id": "ev_0175",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues.",
+        "from_signals": false
+      },
+      {
+        "index": 170,
+        "after_event_id": "ev_0176",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues.",
+        "from_signals": false
+      },
+      {
+        "index": 171,
+        "after_event_id": "ev_0177",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues.",
+        "from_signals": false
+      },
+      {
+        "index": 172,
+        "after_event_id": "ev_0178",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue continues.",
+        "from_signals": false
+      },
+      {
+        "index": 173,
+        "after_event_id": "ev_0179",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Dialogue concludes.",
+        "from_signals": false
+      },
+      {
+        "index": 174,
+        "after_event_id": "ev_0180",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time jumps to a later conversation with a friend.",
+        "from_signals": false
+      },
+      {
+        "index": 175,
+        "after_event_id": "ev_0181",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Conversation continues.",
+        "from_signals": false
+      },
+      {
+        "index": 176,
+        "after_event_id": "ev_0182",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Conversation continues.",
+        "from_signals": false
+      },
+      {
+        "index": 177,
+        "after_event_id": "ev_0183",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Conversation continues.",
+        "from_signals": false
+      },
+      {
+        "index": 178,
+        "after_event_id": "ev_0184",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Major time jump introducing worldwide societal breakdown.",
+        "from_signals": false
+      },
+      {
+        "index": 179,
+        "after_event_id": "ev_0185",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Part of the montage/exposition of the Machine's breakdown.",
+        "from_signals": false
+      },
+      {
+        "index": 180,
+        "after_event_id": "ev_0186",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuation of the general collapse exposition.",
+        "from_signals": false
+      },
+      {
+        "index": 181,
+        "after_event_id": "ev_0187",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuation of the montage depicting society's response to the breakdown.",
+        "from_signals": false
+      },
+      {
+        "index": 182,
+        "after_event_id": "ev_0188",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous lecture scene.",
+        "from_signals": false
+      },
+      {
+        "index": 183,
+        "after_event_id": "ev_0190",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous lecture scene.",
+        "from_signals": false
+      },
+      {
+        "index": 184,
+        "after_event_id": "ev_0191",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Part of the ongoing montage of deteriorating conditions worldwide.",
+        "from_signals": false
+      },
+      {
+        "index": 185,
+        "after_event_id": "ev_0192",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time jumps to the day the communication system finally collapses entirely.",
+        "from_signals": false
+      },
+      {
+        "index": 186,
+        "after_event_id": "ev_0193",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Cuts to a specific dramatized scene focused on Vashti in her room.",
+        "from_signals": false
+      },
+      {
+        "index": 187,
+        "after_event_id": "ev_0194",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action as Vashti reacts to the silence in her room.",
+        "from_signals": false
+      },
+      {
+        "index": 188,
+        "after_event_id": "ev_0195",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous attempts to contact others from her room.",
+        "from_signals": false
+      },
+      {
+        "index": 189,
+        "after_event_id": "ev_0196",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous emotional progression in the same room.",
+        "from_signals": false
+      },
+      {
+        "index": 190,
+        "after_event_id": "ev_0197",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti moves to open the door of her room.",
+        "from_signals": false
+      },
+      {
+        "index": 191,
+        "after_event_id": "ev_0198",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti looks out into the doorway.",
+        "from_signals": false
+      },
+      {
+        "index": 192,
+        "after_event_id": "ev_0199",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous view of what Vashti sees in the tunnel outside.",
+        "from_signals": false
+      },
+      {
+        "index": 193,
+        "after_event_id": "ev_0200",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti retreats and closes her door.",
+        "from_signals": false
+      },
+      {
+        "index": 194,
+        "after_event_id": "ev_0201",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate physical collapse of her room's machinery.",
+        "from_signals": false
+      },
+      {
+        "index": 195,
+        "after_event_id": "ev_0202",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous destruction inside Vashti's room.",
+        "from_signals": false
+      },
+      {
+        "index": 196,
+        "after_event_id": "ev_0203",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti's continuous frantic panic on the floor of her room.",
+        "from_signals": false
+      },
+      {
+        "index": 197,
+        "after_event_id": "ev_0204",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti continues her frantic struggle in the room.",
+        "from_signals": false
+      },
+      {
+        "index": 198,
+        "after_event_id": "ev_0206",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous action opening the door again.",
+        "from_signals": false
+      },
+      {
+        "index": 199,
+        "after_event_id": "ev_0207",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Action moves out into the tunnel as the machine completely fails.",
+        "from_signals": false
+      },
+      {
+        "index": 200,
+        "after_event_id": "ev_0208",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Vashti calls out in the darkness of the tunnel.",
+        "from_signals": false
+      },
+      {
+        "index": 201,
+        "after_event_id": "ev_0209",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Kuno answers Vashti in the tunnel.",
+        "from_signals": false
+      },
+      {
+        "index": 202,
+        "after_event_id": "ev_0210",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Dialogue between Vashti and Kuno continues.",
+        "from_signals": false
+      },
+      {
+        "index": 203,
+        "after_event_id": "ev_0211",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Ongoing conversation in the tunnel.",
+        "from_signals": false
+      },
+      {
+        "index": 204,
+        "after_event_id": "ev_0212",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Ongoing conversation in the tunnel.",
+        "from_signals": false
+      },
+      {
+        "index": 205,
+        "after_event_id": "ev_0213",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Vashti crawls through the bodies toward Kuno.",
+        "from_signals": false
+      },
+      {
+        "index": 206,
+        "after_event_id": "ev_0214",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Direct continuation of their physical reunion in the tunnel.",
+        "from_signals": false
+      },
+      {
+        "index": 207,
+        "after_event_id": "ev_0215",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous action as they embrace.",
+        "from_signals": false
+      },
+      {
+        "index": 208,
+        "after_event_id": "ev_0216",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Kuno speaks to Vashti as they hold each other.",
+        "from_signals": false
+      },
+      {
+        "index": 209,
+        "after_event_id": "ev_0217",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Historical allusion / brief narrated leap to ancient Wessex.",
+        "from_signals": false
+      },
+      {
+        "index": 210,
+        "after_event_id": "ev_0218",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to the scene between Vashti and Kuno in the tunnel.",
+        "from_signals": false
+      },
+      {
+        "index": 211,
+        "after_event_id": "ev_0219",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Flashback to Kuno's experience on the surface.",
+        "from_signals": false
+      },
+      {
+        "index": 212,
+        "after_event_id": "ev_0220",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Return to present conversation in the tunnel.",
+        "from_signals": false
+      },
+      {
+        "index": 213,
+        "after_event_id": "ev_0221",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous dialogue between Vashti and Kuno.",
+        "from_signals": false
+      },
+      {
+        "index": 214,
+        "after_event_id": "ev_0222",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous dialogue between Vashti and Kuno.",
+        "from_signals": false
+      },
+      {
+        "index": 215,
+        "after_event_id": "ev_0223",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The crash occurs right as Kuno finishes speaking, collapsing their surroundings.",
+        "from_signals": false
+      },
+      {
+        "index": 216,
+        "after_event_id": "ev_0224",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Direct continuation of the final climax as they die together.",
+        "from_signals": false
+      }
+    ]
+  },
+  "grouping": {
+    "judged_boundaries": 41,
+    "forced_by_plant_span": 0,
+    "forced_by_size": 0,
+    "unseparable_plant_spans": []
+  },
+  "scene_properties": {
+    "failed_batches": 0,
+    "pov_fallbacks": 1,
+    "location_fallbacks": 0,
+    "location_inherited": 10,
+    "beat_fallbacks": 0,
+    "function_fallbacks": 0
+  },
+  "substitutions": {
+    "pov_from_seed": 1,
+    "location_from_seed": 0,
+    "pov_from_candidates": 1,
+    "location_from_candidates": 0,
+    "beats_from_events": 0
+  },
+  "state": {
+    "dropped_unknown_entity": 0,
+    "dropped_entity_ids": [],
+    "dropped_unknown_column": 0
+  },
+  "plants": {
+    "carried_from_fabula": 0,
+    "dangling_plants": 0,
+    "proposed": 9,
+    "rejected_malformed": 0,
+    "verified": 4,
+    "rejected_by_verifier": 5,
+    "unverified_dropped": 0,
+    "seed_grounded_unrepresentable": 0,
+    "failed_batches": 0,
+    "accepted": [
+      {
+        "fact_ref": "penalty_of_homelessness",
+        "plant": "scene_06_committee_decree",
+        "payoff": "scene_10_kunos_revelation",
+        "why": "The Committee institutes Homelessness as the ultimate punishment for defying the Machine's orthodoxy regarding nature.",
+        "type": "rule"
+      },
+      {
+        "fact_ref": "loosened_tunnel_tiles",
+        "plant": "scene_17_tunnel_exploration",
+        "payoff": "scene_21_climbing_the_shaft",
+        "why": "Kuno explores the tunnel system and discovers an opening where tiles are loose.",
+        "type": "event"
+      },
+      {
+        "fact_ref": "punishment_of_homelessness",
+        "plant": "scene_15_threat_of_homelessness",
+        "payoff": "scene_29_surface_survivors",
+        "why": "Homelessness is the ultimate punishment awaiting Kuno for his unauthorized transgressions.",
+        "type": "rule"
+      },
+      {
+        "fact_ref": "existence_of_surface_dwellers",
+        "plant": "scene_29_surface_survivors",
+        "payoff": "scene_41_surface_memories",
+        "why": "Kuno reveals that human beings are surviving on the surface of the earth.",
+        "type": "event"
+      }
+    ]
+  },
+  "told_ledger": {
+    "facts": 4,
+    "withheld_scene_entries": 1,
+    "rejected_out_of_range": 0,
+    "failed_batches": 0
+  },
+  "lint": {
+    "problems": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_dead_workmen",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_mending_apparatus",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_vashtis_friend_noise",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_the_old_and_the_sick",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_andredswald",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_cornwall",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_wansdyke",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_roof_of_the_world",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_paris",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_versailles",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_northern_hemisphere",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_southern_hemisphere",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_courland",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_brazil",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_central_power_station",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_france",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_tremendous_platform",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_ruined_wharf",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_vomitory",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_ladder",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_pillow",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_gloves",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_stopper_handle",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_train",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_the_machine",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_tabloids",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_blue_optic_plates",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_poetry_machine",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_euthanasia",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_artificial_fruit",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_reading_stand",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_chair",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_dead_workmen",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_mending_apparatus",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_vashtis_friend_noise",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.characters.char_the_old_and_the_sick",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_andredswald",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_cornwall",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_wansdyke",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_roof_of_the_world",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_paris",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_versailles",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_northern_hemisphere",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_southern_hemisphere",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_courland",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_brazil",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_central_power_station",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_france",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_tremendous_platform",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_ruined_wharf",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.locations.loc_vomitory",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_ladder",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_pillow",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_gloves",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_stopper_handle",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_train",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_the_machine",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_tabloids",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_blue_optic_plates",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_poetry_machine",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_euthanasia",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_artificial_fruit",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_reading_stand",
+        "message": "is in the seed but no Scene Card ever names it"
+      },
+      {
+        "severity": "warn",
+        "code": "unused_seed_entity",
+        "path": "world_model_seed.objects.obj_chair",
+        "message": "is in the seed but no Scene Card ever names it"
+      }
+    ],
+    "publishable": true
+  },
+  "vacuous_checks": [
+    "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+    "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+    "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+  ]
+}

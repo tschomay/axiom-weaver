@@ -5,8 +5,8 @@
     "gemini-3.8-flash"
   ],
   "requested_model": "gemini-3.8-flash",
-  "segmented_at": "2026-09-17T16:14:01.113Z",
-  "cost_usd": 0.027663,
+  "segmented_at": "2026-09-18T19:53:03.570Z",
+  "cost_usd": 0.03760875,
   "calls": [
     {
       "pass": "segmentation.boundaries",
@@ -14,11 +14,11 @@
       "model": "gemini-3.8-flash",
       "requested_model": "gemini-3.8-flash",
       "finish_reason": "STOP",
-      "prompt_tokens": 2179,
-      "output_tokens": 1102,
+      "prompt_tokens": 2023,
+      "output_tokens": 1064,
       "thoughts_tokens": 0,
-      "cost_usd": 0.00576675,
-      "ms": 3498,
+      "cost_usd": 0.00550725,
+      "ms": 3196,
       "attempts": 1,
       "error": null
     },
@@ -28,25 +28,39 @@
       "model": "gemini-3.8-flash",
       "requested_model": "gemini-3.8-flash",
       "finish_reason": "STOP",
-      "prompt_tokens": 2101,
-      "output_tokens": 1144,
+      "prompt_tokens": 2132,
+      "output_tokens": 1145,
       "thoughts_tokens": 0,
-      "cost_usd": 0.00586575,
-      "ms": 3398,
+      "cost_usd": 0.00589275,
+      "ms": 3225,
       "attempts": 1,
       "error": null
     },
     {
       "pass": "segmentation.boundaries",
-      "label": "window 2 (36–44)",
+      "label": "window 2 (36–60)",
       "model": "gemini-3.8-flash",
       "requested_model": "gemini-3.8-flash",
       "finish_reason": "STOP",
-      "prompt_tokens": 1008,
-      "output_tokens": 405,
+      "prompt_tokens": 2112,
+      "output_tokens": 1084,
       "thoughts_tokens": 0,
-      "cost_usd": 0.00227475,
-      "ms": 2635,
+      "cost_usd": 0.005649,
+      "ms": 2877,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.boundaries",
+      "label": "window 3 (54–75)",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 1870,
+      "output_tokens": 1034,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00528,
+      "ms": 2743,
       "attempts": 1,
       "error": null
     },
@@ -56,11 +70,11 @@
       "model": "gemini-3.8-flash",
       "requested_model": "gemini-3.8-flash",
       "finish_reason": "STOP",
-      "prompt_tokens": 924,
-      "output_tokens": 523,
+      "prompt_tokens": 1323,
+      "output_tokens": 616,
       "thoughts_tokens": 0,
-      "cost_usd": 0.00265425,
-      "ms": 1845,
+      "cost_usd": 0.00330225,
+      "ms": 2544,
       "attempts": 1,
       "error": null
     },
@@ -70,11 +84,11 @@
       "model": "gemini-3.8-flash",
       "requested_model": "gemini-3.8-flash",
       "finish_reason": "STOP",
-      "prompt_tokens": 761,
-      "output_tokens": 536,
+      "prompt_tokens": 762,
+      "output_tokens": 529,
       "thoughts_tokens": 0,
-      "cost_usd": 0.00258075,
-      "ms": 2110,
+      "cost_usd": 0.00255525,
+      "ms": 1933,
       "attempts": 1,
       "error": null
     },
@@ -84,25 +98,39 @@
       "model": "gemini-3.8-flash",
       "requested_model": "gemini-3.8-flash",
       "finish_reason": "STOP",
-      "prompt_tokens": 775,
-      "output_tokens": 535,
+      "prompt_tokens": 772,
+      "output_tokens": 508,
       "thoughts_tokens": 0,
-      "cost_usd": 0.0025875,
-      "ms": 2342,
+      "cost_usd": 0.002484,
+      "ms": 1690,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "pass": "segmentation.scene_properties",
+      "label": "scenes 13–13",
+      "model": "gemini-3.8-flash",
+      "requested_model": "gemini-3.8-flash",
+      "finish_reason": "STOP",
+      "prompt_tokens": 428,
+      "output_tokens": 149,
+      "thoughts_tokens": 0,
+      "cost_usd": 0.00087975,
+      "ms": 1181,
       "attempts": 1,
       "error": null
     },
     {
       "pass": "segmentation.plant_proposals",
-      "label": "scenes 1–12",
+      "label": "scenes 1–13",
       "model": "gemini-3.8-flash",
       "requested_model": "gemini-3.8-flash",
       "finish_reason": "STOP",
-      "prompt_tokens": 1320,
-      "output_tokens": 388,
+      "prompt_tokens": 1448,
+      "output_tokens": 384,
       "thoughts_tokens": 0,
-      "cost_usd": 0.002445,
-      "ms": 1730,
+      "cost_usd": 0.002526,
+      "ms": 3214,
       "attempts": 1,
       "error": null
     },
@@ -112,11 +140,11 @@
       "model": "gemini-3.8-flash",
       "requested_model": "gemini-3.8-flash",
       "finish_reason": "STOP",
-      "prompt_tokens": 920,
-      "output_tokens": 303,
+      "prompt_tokens": 911,
+      "output_tokens": 281,
       "thoughts_tokens": 0,
-      "cost_usd": 0.00182625,
-      "ms": 1489,
+      "cost_usd": 0.001737,
+      "ms": 1513,
       "attempts": 1,
       "error": null
     },
@@ -126,18 +154,18 @@
       "model": "gemini-3.8-flash",
       "requested_model": "gemini-3.8-flash",
       "finish_reason": "STOP",
-      "prompt_tokens": 1551,
-      "output_tokens": 133,
+      "prompt_tokens": 1744,
+      "output_tokens": 130,
       "thoughts_tokens": 0,
-      "cost_usd": 0.001662,
-      "ms": 1095,
+      "cost_usd": 0.0017955,
+      "ms": 1009,
       "attempts": 1,
       "error": null
     }
   ],
-  "events": 44,
-  "scenes": 12,
-  "events_per_scene": 3.6666666666666665,
+  "events": 75,
+  "scenes": 13,
+  "events_per_scene": 5.769230769230769,
   "signals_available": {
     "pov": false,
     "dramatic_function": false,
@@ -148,7 +176,7 @@
   },
   "telling_order": {
     "basis": "narrated_index",
-    "displaced": 3
+    "displaced": 0
   },
   "boundaries": {
     "windows": [
@@ -165,14 +193,19 @@
       {
         "index": 2,
         "start": 36,
-        "end": 44
+        "end": 60
+      },
+      {
+        "index": 3,
+        "start": 54,
+        "end": 75
       }
     ],
     "window_problems": [],
     "failed_windows": [],
     "fell_back_to_signals": 0,
     "disagreements": 0,
-    "judged_adjacencies": 43,
+    "judged_adjacencies": 74,
     "self_consistency": 1,
     "decisions": [
       {
@@ -180,23 +213,23 @@
         "after_event_id": "ev_0002",
         "decision": "new_scene",
         "votes": 1,
-        "why": "Story time skips ahead to the royal invitation.",
+        "why": "Time jumps to the ball announcement with a new focus.",
         "from_signals": false
       },
       {
         "index": 1,
         "after_event_id": "ev_0003",
-        "decision": "new_scene",
+        "decision": "same_scene",
         "votes": 1,
-        "why": "Time jumps forward to the day of departure for the ball.",
+        "why": "Continuous sequence of ball preparations.",
         "from_signals": false
       },
       {
         "index": 2,
         "after_event_id": "ev_0004",
-        "decision": "new_scene",
+        "decision": "same_scene",
         "votes": 1,
-        "why": "Focus shifts back to Cinderella left alone weeping at home.",
+        "why": "Ongoing dressing and preparation montage.",
         "from_signals": false
       },
       {
@@ -204,7 +237,7 @@
         "after_event_id": "ev_0005",
         "decision": "same_scene",
         "votes": 1,
-        "why": "The godmother immediately arrives where Cinderella is crying.",
+        "why": "Continuing the same ball preparation sequence.",
         "from_signals": false
       },
       {
@@ -212,7 +245,7 @@
         "after_event_id": "ev_0006",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Continuous errand and interaction preparing Cinderella.",
+        "why": "Continuous interaction between Cinderella and the sisters.",
         "from_signals": false
       },
       {
@@ -220,7 +253,7 @@
         "after_event_id": "ev_0007",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Continuous errand to the garden and back.",
+        "why": "Direct conversation in the same room.",
         "from_signals": false
       },
       {
@@ -228,301 +261,549 @@
         "after_event_id": "ev_0008",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Continuous magical transformation sequence.",
+        "why": "Continuing dialogue.",
         "from_signals": false
       },
       {
         "index": 7,
-        "after_event_id": "ev_0011",
+        "after_event_id": "ev_0009",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Ongoing preparation montage with the mice.",
+        "why": "Continuing dialogue.",
         "from_signals": false
       },
       {
         "index": 8,
-        "after_event_id": "ev_0012",
+        "after_event_id": "ev_0010",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Part of the same continuous transformation sequence.",
+        "why": "Hairdressing continues the same scene.",
         "from_signals": false
       },
       {
         "index": 9,
-        "after_event_id": "ev_0013",
-        "decision": "same_scene",
+        "after_event_id": "ev_0011",
+        "decision": "new_scene",
         "votes": 1,
-        "why": "Continuous sequence fetching animals for the carriage.",
+        "why": "Time jumps to the day of the ball and departure.",
         "from_signals": false
       },
       {
         "index": 10,
-        "after_event_id": "ev_0014",
+        "after_event_id": "ev_0012",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Part of the ongoing magical transformation.",
+        "why": "Immediate aftermath of the sisters' departure.",
         "from_signals": false
       },
       {
         "index": 11,
-        "after_event_id": "ev_0015",
+        "after_event_id": "ev_0013",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Continuous sequence transforming creatures.",
+        "why": "Fairy godmother arrives as Cinderella cries.",
         "from_signals": false
       },
       {
         "index": 12,
-        "after_event_id": "ev_0016",
+        "after_event_id": "ev_0014",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Continuation of the magical preparations.",
+        "why": "Continuous dialogue.",
         "from_signals": false
       },
       {
         "index": 13,
-        "after_event_id": "ev_0017",
+        "after_event_id": "ev_0015",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Continuation of Cinderella's dressing and transformation.",
+        "why": "Continuous dialogue.",
         "from_signals": false
       },
       {
         "index": 14,
-        "after_event_id": "ev_0018",
+        "after_event_id": "ev_0016",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Immediate continuation of gifting the slippers.",
+        "why": "Continuous dialogue.",
         "from_signals": false
       },
       {
         "index": 15,
-        "after_event_id": "ev_0019",
+        "after_event_id": "ev_0017",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Departure preparations continue in the same setting.",
+        "why": "Continuous dialogue.",
         "from_signals": false
       },
       {
         "index": 16,
-        "after_event_id": "ev_0020",
+        "after_event_id": "ev_0018",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Immediate conclusion of their parting conversation.",
+        "why": "Moving into the chamber on the same continuous action.",
         "from_signals": false
       },
       {
         "index": 17,
-        "after_event_id": "ev_0021",
-        "decision": "new_scene",
+        "after_event_id": "ev_0019",
+        "decision": "same_scene",
         "votes": 1,
-        "why": "Cinderella arrives at the court for the ball.",
+        "why": "Stepping into the garden on a continuous errand.",
         "from_signals": false
       },
       {
         "index": 18,
-        "after_event_id": "ev_0022",
+        "after_event_id": "ev_0020",
         "decision": "same_scene",
         "votes": 2,
-        "why": "Part of the continuous sweep of the ball scene.",
+        "why": "Returning with the pumpkin in continuous action.",
         "from_signals": false
       },
       {
         "index": 19,
-        "after_event_id": "ev_0023",
+        "after_event_id": "ev_0021",
         "decision": "same_scene",
         "votes": 2,
-        "why": "Continuous events unfolding at the ball.",
+        "why": "Transforming the pumpkin in continuous time.",
         "from_signals": false
       },
       {
         "index": 20,
-        "after_event_id": "ev_0024",
+        "after_event_id": "ev_0022",
         "decision": "same_scene",
         "votes": 2,
-        "why": "Continuous ongoing interaction inside the ballroom.",
+        "why": "Continuous action (duplicate narration).",
         "from_signals": false
       },
       {
         "index": 21,
-        "after_event_id": "ev_0025",
+        "after_event_id": "ev_0023",
         "decision": "same_scene",
         "votes": 2,
-        "why": "Climax and departure closing out the ball scene.",
+        "why": "Continuous action (duplicate narration).",
         "from_signals": false
       },
       {
         "index": 22,
-        "after_event_id": "ev_0026",
-        "decision": "new_scene",
+        "after_event_id": "ev_0024",
+        "decision": "same_scene",
         "votes": 2,
-        "why": "Cinderella arrives back home to talk with her godmother.",
+        "why": "Immediate next step in the magical preparations.",
         "from_signals": false
       },
       {
         "index": 23,
-        "after_event_id": "ev_0027",
+        "after_event_id": "ev_0025",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Immediate continuation as the sisters arrive home.",
+        "why": "Immediate continuation of magical transformation.",
         "from_signals": false
       },
       {
         "index": 24,
-        "after_event_id": "ev_0029",
+        "after_event_id": "ev_0026",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Continuous conversation at home after the ball.",
+        "why": "Conversation continues immediately in the same place.",
         "from_signals": false
       },
       {
         "index": 25,
-        "after_event_id": "ev_0030",
-        "decision": "new_scene",
+        "after_event_id": "ev_0027",
+        "decision": "same_scene",
         "votes": 1,
-        "why": "Time jump to the second ball the next day.",
+        "why": "Direct reply in the ongoing conversation.",
         "from_signals": false
       },
       {
         "index": 26,
-        "after_event_id": "ev_0031",
+        "after_event_id": "ev_0028",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Midnight strikes during the second ball.",
+        "why": "Continuous execution of the ongoing preparation errand.",
         "from_signals": false
       },
       {
         "index": 27,
-        "after_event_id": "ev_0032",
+        "after_event_id": "ev_0029",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Direct continuation of the flight and chase.",
+        "why": "Immediate magical transformation continuing the scene.",
         "from_signals": false
       },
       {
         "index": 28,
-        "after_event_id": "ev_0033",
+        "after_event_id": "ev_0030",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Direct aftermath of the chase where the slipper is found.",
+        "why": "Continuous sequence of instructions.",
         "from_signals": false
       },
       {
         "index": 29,
-        "after_event_id": "ev_0034",
-        "decision": "new_scene",
+        "after_event_id": "ev_0031",
+        "decision": "same_scene",
         "votes": 1,
-        "why": "Cinderella arrives back home.",
+        "why": "Next transformation in the continuous preparation sequence.",
         "from_signals": false
       },
       {
         "index": 30,
-        "after_event_id": "ev_0035",
-        "decision": "new_scene",
+        "after_event_id": "ev_0032",
+        "decision": "same_scene",
         "votes": 1,
-        "why": "Time jump of a few days to the prince's proclamation.",
+        "why": "Conversation between the two characters continues unbroken.",
         "from_signals": false
       },
       {
         "index": 31,
-        "after_event_id": "ev_0036",
+        "after_event_id": "ev_0033",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Montage-like continuation of the slipper trials.",
+        "why": "Godmother immediately acts on Cinderella's question.",
         "from_signals": false
       },
       {
         "index": 32,
-        "after_event_id": "ev_0037",
-        "decision": "new_scene",
+        "after_event_id": "ev_0034",
+        "decision": "same_scene",
         "votes": 1,
-        "why": "The slipper trial arrives at Cinderella's house.",
+        "why": "Continuous action of completing Cinderella's attire.",
         "from_signals": false
       },
       {
         "index": 33,
-        "after_event_id": "ev_0038",
+        "after_event_id": "ev_0035",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Continuous action during the slipper trial at home.",
+        "why": "Direct departure sequence immediately following transformation.",
         "from_signals": false
       },
       {
         "index": 34,
-        "after_event_id": "ev_0039",
+        "after_event_id": "ev_0036",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Continuous action during the slipper fitting.",
+        "why": "Final parting instructions given as she boards.",
         "from_signals": false
       },
       {
         "index": 35,
-        "after_event_id": "ev_0040",
+        "after_event_id": "ev_0037",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Immediate magical revelation in the same room.",
+        "why": "Final parting exchange concluding the departure.",
         "from_signals": false
       },
       {
         "index": 36,
-        "after_event_id": "ev_0041",
-        "decision": "same_scene",
+        "after_event_id": "ev_0038",
+        "decision": "new_scene",
         "votes": 2,
-        "why": "Immediate reaction of the sisters in the same room.",
+        "why": "Location shifts to the ball with new characters and arrival.",
         "from_signals": false
       },
       {
         "index": 37,
-        "after_event_id": "ev_0042",
+        "after_event_id": "ev_0039",
         "decision": "same_scene",
         "votes": 2,
-        "why": "Continuous emotional aftermath between the sisters.",
+        "why": "Observational reaction occurring within the ongoing ballroom arrival.",
         "from_signals": false
       },
       {
         "index": 38,
-        "after_event_id": "ev_0043",
+        "after_event_id": "ev_0040",
         "decision": "same_scene",
         "votes": 2,
-        "why": "Continuous scene of realization.",
+        "why": "Continuation of the ball festivities with the Prince.",
         "from_signals": false
       },
       {
         "index": 39,
-        "after_event_id": "ev_0045",
+        "after_event_id": "ev_0041",
         "decision": "same_scene",
         "votes": 2,
-        "why": "Continuous reconciliation.",
+        "why": "Continuous events unfolding at the same ball.",
         "from_signals": false
       },
       {
         "index": 40,
-        "after_event_id": "ev_0046",
-        "decision": "new_scene",
+        "after_event_id": "ev_0042",
+        "decision": "same_scene",
         "votes": 2,
-        "why": "Cinderella is taken to the prince.",
+        "why": "Departure concluding Cinderella's time at the ball.",
         "from_signals": false
       },
       {
         "index": 41,
-        "after_event_id": "ev_0047",
+        "after_event_id": "ev_0043",
         "decision": "new_scene",
         "votes": 1,
-        "why": "Time jumps a few days later for the wedding.",
+        "why": "Cinderella arrives back home to talk with her godmother.",
         "from_signals": false
       },
       {
         "index": 42,
+        "after_event_id": "ev_0044",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation with the godmother at home.",
+        "from_signals": false
+      },
+      {
+        "index": 43,
+        "after_event_id": "ev_0045",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "The sisters return home immediately afterward.",
+        "from_signals": false
+      },
+      {
+        "index": 44,
+        "after_event_id": "ev_0047",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous conversation at home.",
+        "from_signals": false
+      },
+      {
+        "index": 45,
         "after_event_id": "ev_0048",
         "decision": "same_scene",
         "votes": 1,
-        "why": "Part of the same wedding resolution sweep on that very same day.",
+        "why": "Continuous dialogue.",
+        "from_signals": false
+      },
+      {
+        "index": 46,
+        "after_event_id": "ev_0049",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous dialogue.",
+        "from_signals": false
+      },
+      {
+        "index": 47,
+        "after_event_id": "ev_0050",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous interaction between Cinderella and her sister.",
+        "from_signals": false
+      },
+      {
+        "index": 48,
+        "after_event_id": "ev_0051",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate continuation of the exchange.",
+        "from_signals": false
+      },
+      {
+        "index": 49,
+        "after_event_id": "ev_0052",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Time jumps to the next day at the second ball.",
+        "from_signals": false
+      },
+      {
+        "index": 50,
+        "after_event_id": "ev_0053",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Continuous progression of the second ball.",
+        "from_signals": false
+      },
+      {
+        "index": 51,
+        "after_event_id": "ev_0054",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate chase sequence during the escape.",
+        "from_signals": false
+      },
+      {
+        "index": 52,
+        "after_event_id": "ev_0055",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "Immediate continuation of the flight from the palace.",
+        "from_signals": false
+      },
+      {
+        "index": 53,
+        "after_event_id": "ev_0056",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "Location shifts back to Cinderella's home.",
+        "from_signals": false
+      },
+      {
+        "index": 54,
+        "after_event_id": "ev_0057",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Cut back to the palace gates and guards.",
+        "from_signals": false
+      },
+      {
+        "index": 55,
+        "after_event_id": "ev_0058",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Immediate response from the guards.",
+        "from_signals": false
+      },
+      {
+        "index": 56,
+        "after_event_id": "ev_0059",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Cut back home as the sisters return.",
+        "from_signals": false
+      },
+      {
+        "index": 57,
+        "after_event_id": "ev_0060",
+        "decision": "same_scene",
+        "votes": 2,
+        "why": "Continuous conversation with the sisters.",
+        "from_signals": false
+      },
+      {
+        "index": 58,
+        "after_event_id": "ev_0061",
+        "decision": "new_scene",
+        "votes": 2,
+        "why": "Time jumps a few days ahead for the royal proclamation.",
+        "from_signals": false
+      },
+      {
+        "index": 59,
+        "after_event_id": "ev_0062",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "part of the proclamation and nationwide slipper-fitting search montage",
+        "from_signals": false
+      },
+      {
+        "index": 60,
+        "after_event_id": "ev_0063",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "the slipper trial arrives specifically at Cinderella's home",
+        "from_signals": false
+      },
+      {
+        "index": 61,
+        "after_event_id": "ev_0064",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "continuous scene of the slipper trial at home",
+        "from_signals": false
+      },
+      {
+        "index": 62,
+        "after_event_id": "ev_0065",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "sisters react immediately to Cinderella's request",
+        "from_signals": false
+      },
+      {
+        "index": 63,
+        "after_event_id": "ev_0066",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "gentleman intervenes in the ongoing room conversation",
+        "from_signals": false
+      },
+      {
+        "index": 64,
+        "after_event_id": "ev_0067",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "gentleman tries the slipper on Cinderella in continuous action",
+        "from_signals": false
+      },
+      {
+        "index": 65,
+        "after_event_id": "ev_0068",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "continuous action following the slipper fitting",
+        "from_signals": false
+      },
+      {
+        "index": 66,
+        "after_event_id": "ev_0069",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "fairy godmother appears right in the room during the revelation",
+        "from_signals": false
+      },
+      {
+        "index": 67,
+        "after_event_id": "ev_0070",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "sisters react immediately upon the revelation",
+        "from_signals": false
+      },
+      {
+        "index": 68,
+        "after_event_id": "ev_0071",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "continuous response to the sisters begging pardon",
+        "from_signals": false
+      },
+      {
+        "index": 69,
+        "after_event_id": "ev_0073",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "continuation of Cinderella embracing and forgiving them",
+        "from_signals": false
+      },
+      {
+        "index": 70,
+        "after_event_id": "ev_0074",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "change of location to the palace before the prince",
+        "from_signals": false
+      },
+      {
+        "index": 71,
+        "after_event_id": "ev_0075",
+        "decision": "new_scene",
+        "votes": 1,
+        "why": "time jump to the wedding days later",
+        "from_signals": false
+      },
+      {
+        "index": 72,
+        "after_event_id": "ev_0076",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "epilogue wrapping up the fate of the characters",
+        "from_signals": false
+      },
+      {
+        "index": 73,
+        "after_event_id": "ev_0077",
+        "decision": "same_scene",
+        "votes": 1,
+        "why": "continuous part of the concluding epilogue resolution",
         "from_signals": false
       }
     ]
   },
   "grouping": {
-    "judged_boundaries": 11,
+    "judged_boundaries": 12,
     "forced_by_plant_span": 0,
     "forced_by_size": 0,
     "unseparable_plant_spans": []
@@ -531,7 +812,7 @@
     "failed_batches": 0,
     "pov_fallbacks": 0,
     "location_fallbacks": 0,
-    "location_inherited": 3,
+    "location_inherited": 2,
     "beat_fallbacks": 0,
     "function_fallbacks": 0
   },
@@ -560,30 +841,30 @@
     "accepted": [
       {
         "fact_ref": "midnight_curfew",
-        "plant": "scene_04_the_godmothers_magic",
-        "payoff": "scene_07_the_second_ball",
-        "why": "The godmother instructs Cinderella to depart the ball before midnight or the magic will break.",
+        "plant": "scene_03_the_magical_transformation",
+        "payoff": "scene_06_midnight_flight",
+        "why": "Cinderella promises her godmother that she will depart the ball before midnight.",
         "type": "rule"
       },
       {
-        "fact_ref": "pair_of_glass_slippers",
-        "plant": "scene_04_the_godmothers_magic",
-        "payoff": "scene_10_the_slipper_fits",
-        "why": "The godmother gives Cinderella a pair of glass slippers.",
+        "fact_ref": "gift_of_glass_slippers",
+        "plant": "scene_03_the_magical_transformation",
+        "payoff": "scene_11_the_fitting",
+        "why": "The godmother gives Cinderella a pair of glass slippers to wear to the ball.",
         "type": "object"
       },
       {
-        "fact_ref": "lost_glass_slipper",
-        "plant": "scene_07_the_second_ball",
-        "payoff": "scene_09_the_royal_proclamation",
-        "why": "The Prince recovers the glass slipper dropped by Cinderella during her escape.",
+        "fact_ref": "dropped_glass_slipper",
+        "plant": "scene_06_midnight_flight",
+        "payoff": "scene_10_the_royal_proclamation",
+        "why": "The Prince pursues Cinderella and retrieves the glass slipper she dropped while fleeing.",
         "type": "object"
       },
       {
-        "fact_ref": "princes_marriage_proclamation",
-        "plant": "scene_09_the_royal_proclamation",
-        "payoff": "scene_12_a_royal_wedding",
-        "why": "The Prince proclaims he will marry whichever woman can fit into the glass slipper.",
+        "fact_ref": "marriage_proclamation",
+        "plant": "scene_10_the_royal_proclamation",
+        "payoff": "scene_13_the_royal_wedding",
+        "why": "The King's son proclaims that he will marry whoever can fit the glass slipper.",
         "type": "speech_act"
       }
     ]
@@ -611,49 +892,25 @@
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.characters.char_tire_woman",
+        "path": "world_model_seed.characters.char_former_husband",
         "message": "is in the seed but no Scene Card ever names it"
       },
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.characters.char_guards",
+        "path": "world_model_seed.characters.char_ladies",
         "message": "is in the seed but no Scene Card ever names it"
       },
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.locations.loc_garden",
+        "path": "world_model_seed.locations.loc_garret",
         "message": "is in the seed but no Scene Card ever names it"
       },
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.locations.loc_madams_chamber",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.locations.loc_chimney_corner",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.locations.loc_palace_gate",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_pumpkin",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_wand",
+        "path": "world_model_seed.objects.obj_coach",
         "message": "is in the seed but no Scene Card ever names it"
       },
       {
@@ -677,12 +934,6 @@
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_glass_slippers",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
         "path": "world_model_seed.objects.obj_mouse_trap",
         "message": "is in the seed but no Scene Card ever names it"
       },
@@ -701,19 +952,7 @@
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_clothes",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_oranges_and_citrons",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_yellow_suit",
+        "path": "world_model_seed.objects.obj_yellow_suit_of_clothes",
         "message": "is in the seed but no Scene Card ever names it"
       }
     ],
@@ -734,49 +973,25 @@
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.characters.char_tire_woman",
+        "path": "world_model_seed.characters.char_former_husband",
         "message": "is in the seed but no Scene Card ever names it"
       },
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.characters.char_guards",
+        "path": "world_model_seed.characters.char_ladies",
         "message": "is in the seed but no Scene Card ever names it"
       },
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.locations.loc_garden",
+        "path": "world_model_seed.locations.loc_garret",
         "message": "is in the seed but no Scene Card ever names it"
       },
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.locations.loc_madams_chamber",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.locations.loc_chimney_corner",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.locations.loc_palace_gate",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_pumpkin",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_wand",
+        "path": "world_model_seed.objects.obj_coach",
         "message": "is in the seed but no Scene Card ever names it"
       },
       {
@@ -800,12 +1015,6 @@
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_glass_slippers",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
         "path": "world_model_seed.objects.obj_mouse_trap",
         "message": "is in the seed but no Scene Card ever names it"
       },
@@ -824,19 +1033,7 @@
       {
         "severity": "warn",
         "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_clothes",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_oranges_and_citrons",
-        "message": "is in the seed but no Scene Card ever names it"
-      },
-      {
-        "severity": "warn",
-        "code": "unused_seed_entity",
-        "path": "world_model_seed.objects.obj_yellow_suit",
+        "path": "world_model_seed.objects.obj_yellow_suit_of_clothes",
         "message": "is in the seed but no Scene Card ever names it"
       }
     ],

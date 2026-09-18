@@ -159,6 +159,15 @@ export interface JudgeScore {
     /** #124's number: does a `pays_off` edge need an explicit trigger term? Bar: ≥ 0.70. */
     earned_share: number | null;
     passed: boolean;
+    /**
+     * #148's retarget. §6 of the approach doc found the ticket's original comparison — 37%
+     * seed-grounded here versus ~20% in the fixtures — unreadable at a 5-edge fixture denominator.
+     * The signal that survives is *within* this corpus: seed-grounded edges (`plant: null`) earn
+     * their verdict far less often than planted ones (0.45 vs 0.88 across the nine generated arcs).
+     * Reported for context, never gated — §7 adds no new bar.
+     */
+    seed_grounded: { pairs: number; earned: number; share: number | null };
+    planted: { pairs: number; earned: number; share: number | null };
   };
   /**
    * #147's rebuild. `adherence` is now rated against a label from `STOCK_SHAPES` the judge could
@@ -192,6 +201,17 @@ Score every criterion separately. Do not average anything, and do not let a stro
  * Ids are relabelled `E01…`, which is not cosmetic: a fixture's `scene_04_sisters_depart` and a
  * generated `ev_04_…` would otherwise tell the judge exactly what it is not supposed to know.
  */
+/** `fact_ref`s whose `pays_off` edge is seed-grounded (`plant: null`) rather than planted. */
+export function seedGroundedFactRefs(pkg: StoryPackage): ReadonlySet<string> {
+  const refs = new Set<string>();
+  for (const scene of scenesInOrder(pkg)) {
+    for (const payoff of scene.pays_off) {
+      if (payoff.plant === null) refs.add(payoff.fact_ref);
+    }
+  }
+  return refs;
+}
+
 export function blindArcView(pkg: StoryPackage): string {
   const scenes = scenesInOrder(pkg);
   const label = new Map(scenes.map((scene, index) => [scene.id, `E${String(index + 1).padStart(2, '0')}`]));
@@ -433,11 +453,16 @@ export async function judgePackage(
 
   const fenced = /^\s*```(?:json)?\s*([\s\S]*?)\s*```\s*$/.exec(response.text);
   const raw = JudgeResponseSchema.parse(JSON.parse(fenced?.[1] ?? response.text));
-  return summarize(raw, label, response.model);
+  return summarize(raw, label, response.model, seedGroundedFactRefs(pkg));
 }
 
 /** Turn a judge's raw verdicts into the per-criterion result, with each bar applied separately. */
-export function summarize(raw: JudgeResponse, label: string, judgeModel: string): JudgeScore {
+export function summarize(
+  raw: JudgeResponse,
+  label: string,
+  judgeModel: string,
+  seedGrounded: ReadonlySet<string> = new Set(),
+): JudgeScore {
   const causes = raw.causal_pairs.filter((row) => row.verdict === 'causes').length;
   const merely = raw.causal_pairs.filter((row) => row.verdict === 'merely_follows').length;
   const contradicts = raw.causal_pairs.filter((row) => row.verdict === 'contradicts').length;
@@ -456,6 +481,11 @@ export function summarize(raw: JudgeResponse, label: string, judgeModel: string)
   const linkedOnly = raw.payoffs.filter((row) => row.verdict === 'linked_only').length;
   const payoffPairs = raw.payoffs.length;
   const earnedShare = payoffPairs === 0 ? null : earned / payoffPairs;
+
+  const seedGroundedPayoffs = raw.payoffs.filter((row) => seedGrounded.has(row.fact_ref));
+  const plantedPayoffs = raw.payoffs.filter((row) => !seedGrounded.has(row.fact_ref));
+  const seedGroundedEarned = seedGroundedPayoffs.filter((row) => row.verdict === 'earned').length;
+  const plantedEarned = plantedPayoffs.filter((row) => row.verdict === 'earned').length;
 
   return {
     label,
@@ -484,6 +514,16 @@ export function summarize(raw: JudgeResponse, label: string, judgeModel: string)
       linked_only: linkedOnly,
       earned_share: earnedShare,
       passed: earnedShare !== null && earnedShare >= 0.7,
+      seed_grounded: {
+        pairs: seedGroundedPayoffs.length,
+        earned: seedGroundedEarned,
+        share: seedGroundedPayoffs.length === 0 ? null : seedGroundedEarned / seedGroundedPayoffs.length,
+      },
+      planted: {
+        pairs: plantedPayoffs.length,
+        earned: plantedEarned,
+        share: plantedPayoffs.length === 0 ? null : plantedEarned / plantedPayoffs.length,
+      },
     },
     non_genericity: {
       closest_stock_shape: raw.closest_stock_shape,

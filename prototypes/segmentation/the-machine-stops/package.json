@@ -597,12 +597,1202 @@
     ],
     "character_knowledge": []
   },
-  "scene_cards": [],
+  "scene_cards": [
+    {
+      "id": "scene_01_kunos_summons",
+      "order": 1,
+      "pov": "char_vashti",
+      "location_id": "loc_vashti_s_room",
+      "characters_present": [
+        "char_vashti",
+        "char_kuno"
+      ],
+      "dramatic_function": "Establishes the cloistered technological orthodoxy of Vashti's world and introduces the central conflict through Kuno's heretical desire for direct physical experience.",
+      "entry_state": {
+        "char_kuno": {
+          "goal": null
+        }
+      },
+      "exit_state": {
+        "char_kuno": {
+          "goal": "visit the surface of the earth"
+        }
+      },
+      "required_beats": [
+        "Vashti isolates her room to answer a call from Kuno.",
+        "Kuno insists that Vashti visit him in person outside the mediation of the Machine.",
+        "Vashti rejects travel and nature, condemning Kuno's interest in the stars and the surface as contrary to the Machine.",
+        "Kuno breaks the connection, leaving Vashti to restore her room's standard communications."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_02_the_lecture",
+      "order": 2,
+      "pov": "char_vashti",
+      "location_id": "loc_vashti_s_room",
+      "characters_present": [
+        "char_vashti",
+        "char_audience"
+      ],
+      "dramatic_function": "Demonstrates the detached, mediated routine of intellectual and social life inside the Machine.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti delivers a lecture on music to an unseen audience.",
+        "Vashti joins her audience in listening to a remote lecture about the sea."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_leaving_the_room",
+      "order": 3,
+      "pov": "char_vashti",
+      "location_id": "loc_vashti_s_room",
+      "characters_present": [
+        "char_vashti",
+        "char_friends",
+        "char_kuno"
+      ],
+      "dramatic_function": "Forces Vashti to overcome her dread of physical transit and leave her self-contained cell after Kuno's cryptic refusal to explain himself remotely.",
+      "entry_state": {
+        "obj_bed": {
+          "location_id": null
+        },
+        "obj_book_of_the_machine": {
+          "location_id": null
+        },
+        "obj_medical_apparatus": {
+          "location_id": null,
+          "status": null
+        },
+        "char_vashti": {
+          "location_id": null
+        }
+      },
+      "exit_state": {
+        "obj_bed": {
+          "location_id": "loc_vashti_s_room"
+        },
+        "obj_book_of_the_machine": {
+          "location_id": "loc_platform"
+        },
+        "obj_medical_apparatus": {
+          "location_id": "loc_vashti_s_room",
+          "status": "retired into the ceiling"
+        },
+        "char_vashti": {
+          "location_id": "loc_platform"
+        }
+      },
+      "required_beats": [
+        "Vashti completes her domestic routines and consults the Book of the Machine for air-ship schedules.",
+        "Vashti calls Kuno, but he refuses to communicate visually or explain his plans until she visits in person.",
+        "Vashti recoils from opening the tunnel wall and attempts to plead illness, only to be treated by the Machine's apparatus.",
+        "Kuno hints that something tremendous will happen, refusing to say more over the Machine.",
+        "Vashti takes the Book, opens the wall, and steps onto the platform to start her journey."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_the_assignment",
+      "order": 4,
+      "pov": "char_kuno",
+      "location_id": "loc_platform",
+      "characters_present": [
+        "char_the_machine",
+        "char_kuno"
+      ],
+      "dramatic_function": "Reveals the physical distance separating Kuno and Vashti as ordained by the Machine.",
+      "entry_state": {
+        "char_kuno": {
+          "location_id": null
+        }
+      },
+      "exit_state": {
+        "char_kuno": {
+          "location_id": "loc_kuno_room"
+        }
+      },
+      "required_beats": [
+        "The Machine assigns Kuno a dwelling on the opposite side of the planet."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_airship_departure",
+      "order": 5,
+      "pov": "char_vashti",
+      "location_id": "loc_platform",
+      "characters_present": [
+        "char_vashti"
+      ],
+      "dramatic_function": "To depict Vashti's agonizing transition from the secluded security of her room into the disturbing reality of physical travel.",
+      "entry_state": {
+        "char_vashti": {
+          "goal": null,
+          "location_id": "loc_platform"
+        },
+        "obj_air_ships": {
+          "status": null
+        }
+      },
+      "exit_state": {
+        "char_vashti": {
+          "goal": "travel to Kuno",
+          "location_id": "loc_platform"
+        },
+        "obj_air_ships": {
+          "status": "soared above the waters of a tropical ocean"
+        }
+      },
+      "required_beats": [
+        "Vashti decides to visit Kuno and leaves her room with her Book.",
+        "Vashti traverses the platform and boards the crowded air-ship amidst minor mishaps.",
+        "As the air-ship emerges over the ocean, the passengers demand artificial light and draw the blinds to block out the natural world."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_committee_decree",
+      "order": 6,
+      "pov": "char_committee",
+      "location_id": "loc_platform",
+      "characters_present": [
+        "char_committee"
+      ],
+      "dramatic_function": "To establish the state's total prohibition against competing with or acknowledging nature through the threat of ultimate exile.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "The Committee of the Machine outlaws racing to defeat the sun on pain of Homelessness."
+      ],
+      "reader_must_learn": [
+        "penalty_of_homelessness"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_over_the_himalayas",
+      "order": 7,
+      "pov": "char_vashti",
+      "location_id": "loc_platform",
+      "characters_present": [
+        "char_vashti"
+      ],
+      "dramatic_function": "To highlight the society's extreme aversion to physical touch and its complete disdain for the natural landscape.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti's cabin blind flies open, and she summons the attendant when sunlight disturbs her.",
+        "The attendant catches Vashti to steady her and is sharply rebuked for violating the taboo against touch.",
+        "Upon learning they are over Asia, Vashti demands the Himalayas be hidden because nature offers her no ideas."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_blotting_the_earth",
+      "order": 8,
+      "pov": "char_vashti",
+      "location_id": "loc_platform",
+      "characters_present": [
+        "char_vashti"
+      ],
+      "dramatic_function": "To reinforce Vashti's persistent rejection of the outside world as her journey continues.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti inspects the earth at midday and pulls down the blind to shut out the Caucasus."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_closing_the_blind",
+      "order": 9,
+      "pov": "char_vashti",
+      "location_id": "loc_platform",
+      "characters_present": [
+        "char_vashti"
+      ],
+      "dramatic_function": "Establishes Vashti's ongoing aversion to the outside world as she shuts out the sight of Greece.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti looks outside in the evening",
+        "Vashti conceals Greece behind a metal blind"
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_10_kunos_revelation",
+      "order": 10,
+      "pov": "char_vashti",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_vashti",
+        "char_kuno"
+      ],
+      "dramatic_function": "Confronts Vashti with Kuno's dire predicament and sets the stakes of his rebellion.",
+      "entry_state": {
+        "char_vashti": {
+          "location_id": "loc_platform"
+        }
+      },
+      "exit_state": {
+        "char_vashti": {
+          "location_id": "loc_kuno_room"
+        }
+      },
+      "required_beats": [
+        "Vashti arrives at Kuno's room",
+        "Vashti insists she can only stay briefly and urges him to speak",
+        "Kuno reveals he is threatened with Homelessness"
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "penalty_of_homelessness",
+          "plant": "scene_06_committee_decree"
+        }
+      ]
+    },
+    {
+      "id": "scene_11_to_the_surface",
+      "order": 11,
+      "pov": "char_kuno",
+      "location_id": "loc_surface_of_the_earth",
+      "characters_present": [
+        "char_kuno"
+      ],
+      "dramatic_function": "Reveals the forbidden transgression that provoked the authorities against Kuno.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno ventures up to the surface of the earth after his last talk with Vashti",
+        "Kuno's excursion to the outside is discovered"
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_12_questioning_the_ban",
+      "order": 12,
+      "pov": "char_vashti",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_vashti",
+        "char_kuno"
+      ],
+      "dramatic_function": "Exposes the disconnect between technical legality and real danger in the Machine's order.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti states that surface visits are legally permitted",
+        "Vashti questions why Kuno should not be allowed outside"
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_13_the_sea_lecture",
+      "order": 13,
+      "pov": "char_vashti",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_vashti",
+        "char_kuno"
+      ],
+      "dramatic_function": "Establishes Vashti's desperate resistance to Kuno's transgressive desire to reach the surface.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti attends a lecture about the sea.",
+        "Vashti pleads with Kuno not to travel to the surface."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_14_the_independent_path",
+      "order": 14,
+      "pov": "char_kuno",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_kuno",
+        "char_vashti"
+      ],
+      "dramatic_function": "Confronts Vashti's orthodox submission by revealing Kuno's unauthorized escape method and challenging her devotion to the Machine.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno reveals he found his own way to the surface without an Egression-permit.",
+        "Vashti insists an independent path is wrong.",
+        "Kuno accuses Vashti of worshipping the Machine."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_15_threat_of_homelessness",
+      "order": 15,
+      "pov": "char_kuno",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_committee",
+        "char_kuno"
+      ],
+      "dramatic_function": "Raises the stakes by showing the severe official punishment hanging over Kuno's insubordination.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "The Committee threatens Kuno with Homelessness."
+      ],
+      "reader_must_learn": [
+        "punishment_of_homelessness"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_16_denial_of_worship",
+      "order": 16,
+      "pov": "char_vashti",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_vashti",
+        "char_kuno"
+      ],
+      "dramatic_function": "Demonstrates Vashti's rigid denial of both religious machine devotion and the possibility of unauthorized escape.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti denies worshipping anything.",
+        "Vashti insists that no alternative way out of the Machine can exist."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_17_tunnel_exploration",
+      "order": 17,
+      "pov": "char_kuno",
+      "location_id": "loc_railway_tunnel",
+      "characters_present": [
+        "char_kuno",
+        "char_vashti"
+      ],
+      "dramatic_function": "To show Kuno's growing restlessness and his physical discovery of an opening in the tunnel system.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno paces the platform and calls Vashti, who refuses to come.",
+        "Kuno rides the lifts to the topmost platform and explores the railway-tunnels.",
+        "Kuno loosens a tile, looks into an opening, and shouts into the darkness."
+      ],
+      "reader_must_learn": [
+        "loosened_tunnel_tiles"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_18_fatherhood_denied",
+      "order": 18,
+      "pov": "char_kuno",
+      "location_id": "loc_railway_tunnel",
+      "characters_present": [
+        "char_kuno",
+        "char_committee"
+      ],
+      "dramatic_function": "To establish the Committee's institutional rejection of Kuno's reproductive request.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno applies to become a father.",
+        "The Committee denies Kuno's application."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_19_near_collision",
+      "order": 19,
+      "pov": "char_kuno",
+      "location_id": "loc_railway_tunnel",
+      "characters_present": [
+        "char_kuno",
+        "char_vashti"
+      ],
+      "dramatic_function": "To demonstrate the physical danger of Kuno's transgression and his continued alienation from Vashti.",
+      "entry_state": {
+        "char_kuno": {
+          "location_id": "loc_kuno_room"
+        }
+      },
+      "exit_state": {
+        "char_kuno": {
+          "location_id": "loc_kuno_room"
+        }
+      },
+      "required_beats": [
+        "A train brushes past Kuno in the tunnel.",
+        "Kuno retreats to the platform, returns to his room, and summons his bed.",
+        "Kuno calls Vashti again, but she repeats her refusal."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_20_vashtis_plea",
+      "order": 20,
+      "pov": "char_vashti",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_vashti",
+        "char_kuno"
+      ],
+      "dramatic_function": "To register Vashti's horrified resistance to Kuno's forbidden experiences.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti implores Kuno to stop speaking of terrible things."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_21_climbing_the_shaft",
+      "order": 21,
+      "pov": "char_kuno",
+      "location_id": "loc_shaft",
+      "characters_present": [
+        "char_kuno",
+        "char_the_voices"
+      ],
+      "dramatic_function": "To depict Kuno's grueling physical ascent through the forgotten ventilation shaft toward the forbidden surface.",
+      "entry_state": {
+        "char_kuno": {
+          "location_id": "loc_kuno_room"
+        }
+      },
+      "exit_state": {
+        "char_kuno": {
+          "location_id": "loc_shaft"
+        }
+      },
+      "required_beats": [
+        "Kuno prepares his body and uses a respirator to enter the shaft through loosened tiles.",
+        "Kuno climbs the rough ladder, injuring his hands as he ascends to the pneumatic stopper.",
+        "Guided by inner voices, Kuno leaps and grabs the handle at the stopper's center."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "loosened_tunnel_tiles",
+          "plant": "scene_17_tunnel_exploration"
+        }
+      ]
+    },
+    {
+      "id": "scene_22_the_pause",
+      "order": 22,
+      "pov": "char_kuno",
+      "location_id": "loc_vashti_room",
+      "characters_present": [
+        "char_kuno"
+      ],
+      "dramatic_function": "To briefly ground the narrative back in the present conversation before Kuno describes reaching the world above.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno pauses his recounting of the journey."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_23_the_surface_hollow",
+      "order": 23,
+      "pov": "char_kuno",
+      "location_id": "loc_grass_grown_hollow",
+      "characters_present": [
+        "char_kuno"
+      ],
+      "dramatic_function": "To reveal Kuno's first direct contact with the external world and the mysterious threat waiting above.",
+      "entry_state": {
+        "char_kuno": {
+          "location_id": "loc_shaft"
+        },
+        "obj_stopper": {
+          "location_id": null
+        }
+      },
+      "exit_state": {
+        "char_kuno": {
+          "location_id": "loc_grass_grown_hollow"
+        },
+        "obj_stopper": {
+          "location_id": "loc_grass_grown_hollow"
+        }
+      },
+      "required_beats": [
+        "The stopper blows out onto the surface with Kuno holding on.",
+        "Kuno nurses his wounds and catches his breath at the mouth of the shaft before standing in the open hollow.",
+        "Kuno attempts to climb the slope but retreats after seeing something grey."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "existence_of_surface_dwellers"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_24_telling_vashti",
+      "order": 24,
+      "pov": "char_vashti",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_kuno",
+        "char_vashti"
+      ],
+      "dramatic_function": "To test Vashti's patience and compel her continued attention despite her ideological aversion to the surface.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno expresses regret for summoning Vashti, claiming she cannot find his experience interesting.",
+        "Vashti commands Kuno to proceed with the story."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_25_the_hills_above",
+      "order": 25,
+      "pov": "char_kuno",
+      "location_id": "loc_wessex",
+      "characters_present": [
+        "char_kuno"
+      ],
+      "dramatic_function": "To reveal the forbidden outside world directly through Kuno's eyes.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno climbs the bank to look across the open hills."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_26_hesitation_to_finish",
+      "order": 26,
+      "pov": "char_vashti",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_kuno",
+        "char_vashti"
+      ],
+      "dramatic_function": "To build suspense about Kuno's capture while showing Vashti's impatient need to learn the outcome.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno halts his narration and attempts to end the conversation.",
+        "Vashti repeatedly presses him to explain how he returned underground.",
+        "Vashti presents her own mundane guess about his return, which Kuno rejects before resuming the tale."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_27_taken_by_worms",
+      "order": 27,
+      "pov": "char_kuno",
+      "location_id": "loc_grass_grown_hollow",
+      "characters_present": [
+        "char_kuno",
+        "char_the_worms",
+        "char_her"
+      ],
+      "dramatic_function": "To show the violent retribution of the Machine reclaiming Kuno and murdering his rescuer.",
+      "entry_state": {
+        "obj_respirator": {
+          "status": null
+        },
+        "char_the_worms": {
+          "location_id": null
+        },
+        "char_her": {
+          "status": null
+        },
+        "char_kuno": {
+          "location_id": "loc_grass_grown_hollow"
+        },
+        "obj_stopper": {
+          "status": null
+        }
+      },
+      "exit_state": {
+        "obj_respirator": {
+          "status": "gone"
+        },
+        "char_the_worms": {
+          "location_id": "loc_grass_grown_hollow"
+        },
+        "char_her": {
+          "status": "dead"
+        },
+        "char_kuno": {
+          "location_id": "loc_shaft"
+        },
+        "obj_stopper": {
+          "status": "closed"
+        }
+      },
+      "required_beats": [
+        "Kuno's respirator falls as the fountain fades, prompting him to run down toward the shaft.",
+        "White worms emerge from the opening and entrap Kuno's leg.",
+        "A woman rushes to aid Kuno but is swiftly killed by a worm.",
+        "The worms pull Kuno into the shaft, where he strikes his head and blacks out as the opening seals."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_28_waking_below",
+      "order": 28,
+      "pov": "char_kuno",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_kuno"
+      ],
+      "dramatic_function": "To establish Kuno's return to the confines of his subterranean cell.",
+      "entry_state": {
+        "char_kuno": {
+          "location_id": "loc_shaft"
+        }
+      },
+      "exit_state": {
+        "char_kuno": {
+          "location_id": "loc_kuno_room"
+        }
+      },
+      "required_beats": [
+        "Kuno regains consciousness back inside his room."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_29_surface_survivors",
+      "order": 29,
+      "pov": "char_vashti",
+      "location_id": "loc_kuno_room",
+      "characters_present": [
+        "char_vashti",
+        "char_kuno"
+      ],
+      "dramatic_function": "Concludes Vashti's visit by revealing Kuno's heretical discovery of living humans on the surface before she departs.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti prepares to depart and warns Kuno that his defiance will lead to Homelessness.",
+        "Kuno welcomes Homelessness and reveals he saw living humans on the surface.",
+        "Vashti exits Kuno's room."
+      ],
+      "reader_must_learn": [
+        "existence_of_surface_dwellers"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "punishment_of_homelessness",
+          "plant": "scene_15_threat_of_homelessness"
+        }
+      ]
+    },
+    {
+      "id": "scene_30_intellectual_retreat",
+      "order": 30,
+      "pov": "char_famous_lecturer",
+      "location_id": "loc_the_machine",
+      "characters_present": [
+        "char_famous_lecturer",
+        "char_audience",
+        "char_committee",
+        "char_kuno"
+      ],
+      "dramatic_function": "Depicts society's further intellectual surrender to the Machine alongside the enforcement of isolation onto Kuno.",
+      "entry_state": {
+        "obj_respirator": {
+          "status": "gone"
+        },
+        "obj_terrestrial_motor": {
+          "status": null
+        },
+        "obj_book_of_the_machine": {
+          "status": null
+        },
+        "char_kuno": {
+          "location_id": "loc_kuno_room"
+        }
+      },
+      "exit_state": {
+        "obj_respirator": {
+          "status": "abolished"
+        },
+        "obj_terrestrial_motor": {
+          "status": "abolished"
+        },
+        "obj_book_of_the_machine": {
+          "status": "allocution printed on first page"
+        },
+        "char_kuno": {
+          "location_id": "loc_southern_hemisphere"
+        }
+      },
+      "required_beats": [
+        "Terrestrial travel equipment is officially abolished.",
+        "A famous lecturer praises the Machine and urges the audience to shun first-hand ideas, gaining wide acclaim.",
+        "The speech is enshrined in the Book of the Machine as the Central Committee proclaims new developments.",
+        "Kuno is relocated to the southern hemisphere."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_31_the_machine_stops",
+      "order": 31,
+      "pov": "char_vashti",
+      "location_id": "loc_vashti_s_room",
+      "characters_present": [
+        "char_vashti",
+        "char_kuno",
+        "char_vashti_s_friend"
+      ],
+      "dramatic_function": "Introduces Kuno's prophecy of systemic collapse and demonstrates the populace's inability to comprehend it.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno contacts Vashti without video and claims the Machine is stopping, prompting her laughter.",
+        "Vashti shares Kuno's claim with a friend, who finds the phrase meaningless.",
+        "The friend asks if Kuno means the recent flaws in the music and whether Vashti complained."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_32_mending_apparatus",
+      "order": 32,
+      "pov": "char_vashti",
+      "location_id": "loc_vashti_s_room",
+      "characters_present": [
+        "char_vashti",
+        "char_committee"
+      ],
+      "dramatic_function": "Shows the institutional brush-off when citizens report early signs of mechanical degradation.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti's complaint is redirected to the Committee of the Mending Apparatus.",
+        "The Committee promises that the musical defects will soon be corrected."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_33_the_mending_complaint",
+      "order": 33,
+      "pov": "char_vashti",
+      "location_id": "loc_vashti_s_room",
+      "characters_present": [
+        "char_vashti",
+        "char_committee"
+      ],
+      "dramatic_function": "To establish the initial failure of the Machine's repair mechanisms and reveal bureaucratic paralysis.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti complains to the Committee of the Mending Apparatus about defective music.",
+        "The Committee rebuffs her urgency and explains complaint protocol.",
+        "Vashti files an official grievance but is denied information on whether other users are experiencing similar faults."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_34_shared_malfunctions",
+      "order": 34,
+      "pov": "char_vashti",
+      "location_id": "loc_vashti_s_room",
+      "characters_present": [
+        "char_vashti",
+        "char_vashti_s_friend"
+      ],
+      "dramatic_function": "To reveal that mechanical breakdowns are spreading and complaints are stalling across the network.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti discusses her worsening music with a friend.",
+        "Vashti's friend describes hearing an anomalous jarring noise.",
+        "Vashti's friend confirms that an official complaint was lodged and merely queued."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_35_the_apparatus_fails",
+      "order": 35,
+      "pov": "char_famous_lecturer",
+      "location_id": "loc_sumatra",
+      "characters_present": [
+        "char_committee",
+        "char_famous_lecturer",
+        "char_audience",
+        "char_inhabitants_of_sumatra"
+      ],
+      "dramatic_function": "To show the breakdown escalating to physical necessities and the Machine authorities conceding their own helplessness.",
+      "entry_state": {
+        "obj_bed": {
+          "status": null
+        },
+        "obj_mending_apparatus": {
+          "status": null
+        }
+      },
+      "exit_state": {
+        "obj_bed": {
+          "status": "failed to appear"
+        },
+        "obj_mending_apparatus": {
+          "status": "in need of repair"
+        }
+      },
+      "required_beats": [
+        "Summoned beds fail to appear, prompting widespread complaints.",
+        "The Committee admits the Mending Apparatus itself has broken down.",
+        "A famous lecturer urges his audience to endure patiently and not press complaints.",
+        "Sumatran inhabitants are requested to learn how the central power station functions."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_36_total_collapse",
+      "order": 36,
+      "pov": "char_famous_lecturer",
+      "location_id": "loc_sumatra",
+      "characters_present": [
+        "char_famous_lecturer"
+      ],
+      "dramatic_function": "To depict the ultimate collapse of the global communication network.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "The worldwide communication system completely breaks down."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_37_the_machine_breaks",
+      "order": 37,
+      "pov": "char_vashti",
+      "location_id": "loc_vashti_s_room",
+      "characters_present": [
+        "char_vashti",
+        "char_audience",
+        "char_friend_who_was_a_specialist_in_sympathy",
+        "char_friends",
+        "char_the_people_in_the_tunnel"
+      ],
+      "dramatic_function": "To depict the collapse of the Machine and the descent of its inhabitants into total panic.",
+      "entry_state": {
+        "obj_door_of_her_cell": {
+          "status": null
+        },
+        "obj_medical_apparatus": {
+          "status": "retired into the ceiling"
+        }
+      },
+      "exit_state": {
+        "obj_door_of_her_cell": {
+          "status": "open"
+        },
+        "obj_medical_apparatus": {
+          "status": "ruptured and hanging from ceiling"
+        }
+      },
+      "required_beats": [
+        "Vashti's communications fail as total silence falls over the network.",
+        "Vashti opens her door to see a chaotic mob fighting in the tunnel and retreats inside.",
+        "The room collapses around Vashti as she frantically prays and strikes buttons until the door opens again."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_38_reunion_in_death",
+      "order": 38,
+      "pov": "char_vashti",
+      "location_id": "loc_the_tunnel",
+      "characters_present": [
+        "char_the_people_in_the_tunnel",
+        "char_vashti",
+        "char_kuno"
+      ],
+      "dramatic_function": "To bring Vashti and Kuno together amid the carnage as they acknowledge their fate and reconnect before dying.",
+      "entry_state": {
+        "char_the_people_in_the_tunnel": {
+          "status": null
+        }
+      },
+      "exit_state": {
+        "char_the_people_in_the_tunnel": {
+          "status": "dying"
+        }
+      },
+      "required_beats": [
+        "Vashti searches for Kuno among the dying throngs in the dark tunnel.",
+        "Kuno confirms there is no hope for their survival.",
+        "Vashti crawls over the dead to reach Kuno, who kisses her and declares they have recaptured life."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_39_overthrow_in_wessex",
+      "order": 39,
+      "pov": "char_aelfrid",
+      "location_id": "loc_wessex",
+      "characters_present": [
+        "char_aelfrid",
+        "char_danes"
+      ],
+      "dramatic_function": "To mark a historic historical turning point with the defeat of the Danes.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Ælfrid defeats and overthrows the Danes in Wessex."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_40_hope_above",
+      "order": 40,
+      "pov": "char_vashti",
+      "location_id": "loc_the_tunnel",
+      "characters_present": [
+        "char_vashti"
+      ],
+      "dramatic_function": "To plant the final question of humanity's survival on the surface of the Earth.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Vashti asks Kuno whether human life persists on the Earth's surface."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_41_surface_memories",
+      "order": 41,
+      "pov": "char_kuno",
+      "location_id": "loc_surface_of_the_earth",
+      "characters_present": [
+        "char_kuno",
+        "char_the_homeless"
+      ],
+      "dramatic_function": "Establishes Kuno's profound connection with the surviving humans living above ground.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Kuno recalls having seen, spoken with, and loved the people living on the surface of the earth."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "existence_of_surface_dwellers",
+          "plant": "scene_29_surface_survivors"
+        }
+      ]
+    },
+    {
+      "id": "scene_42_the_final_collapse",
+      "order": 42,
+      "pov": "char_vashti",
+      "location_id": "loc_the_whole_city",
+      "characters_present": [
+        "char_kuno",
+        "char_vashti"
+      ],
+      "dramatic_function": "Brings the total annihilation of the subterranean civilization while affirming that humanity's future survives on the surface.",
+      "entry_state": {
+        "obj_air_ships": {
+          "status": "soared above the waters of a tropical ocean"
+        },
+        "char_vashti": {
+          "status": null
+        },
+        "char_kuno": {
+          "status": null
+        }
+      },
+      "exit_state": {
+        "obj_air_ships": {
+          "status": "crashed and exploding"
+        },
+        "char_vashti": {
+          "status": "dead"
+        },
+        "char_kuno": {
+          "status": "dead"
+        }
+      },
+      "required_beats": [
+        "Kuno tells Vashti that the Homeless are surviving on the surface, waiting for the end of their civilization.",
+        "Vashti fears the Machine will be restarted, but Kuno insists humanity has learned its lesson.",
+        "A crashing air-ship tears through the galleries, destroying the entire city in catastrophic explosions.",
+        "Vashti and Kuno glimpse the untainted sky together in their final moments."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    }
+  ],
   "voice_card": {},
   "metadata": {
     "title": "The Machine Stops",
-    "source": "E. M. Forster, The Eternal Moment and Other Stories, Harcourt, Brace & Co., 1928 (PG #72890; first published in The Oxford and Cambridge Review, November 1909) — https://www.gutenberg.org/cache/epub/72890/pg72890.txt",
-    "created_at": "2026-09-18T15:46:54.661Z"
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-18T19:56:03.878Z"
   },
   "_fabula": {
     "generator": "extraction pipeline (#117)",
@@ -5654,6 +6844,573 @@
           "resolution": "exact"
         }
       }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-18T19:56:03.878Z",
+    "started_at": "2026-09-18T19:54:39.446Z",
+    "scenes": [
+      {
+        "id": "scene_01_kunos_summons",
+        "order": 1,
+        "event_ids": [
+          "ev_0001",
+          "ev_0002",
+          "ev_0003",
+          "ev_0004",
+          "ev_0005",
+          "ev_0006",
+          "ev_0007",
+          "ev_0008",
+          "ev_0009",
+          "ev_0010",
+          "ev_0011",
+          "ev_0012",
+          "ev_0013",
+          "ev_0014",
+          "ev_0015",
+          "ev_0016",
+          "ev_0017",
+          "ev_0018",
+          "ev_0019",
+          "ev_0020",
+          "ev_0021",
+          "ev_0022",
+          "ev_0023",
+          "ev_0024",
+          "ev_0025",
+          "ev_0026",
+          "ev_0027",
+          "ev_0028",
+          "ev_0029",
+          "ev_0030",
+          "ev_0031",
+          "ev_0032"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_lecture",
+        "order": 2,
+        "event_ids": [
+          "ev_0033",
+          "ev_0034",
+          "ev_0035"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_leaving_the_room",
+        "order": 3,
+        "event_ids": [
+          "ev_0036",
+          "ev_0037",
+          "ev_0038",
+          "ev_0039",
+          "ev_0040",
+          "ev_0041",
+          "ev_0042",
+          "ev_0043",
+          "ev_0044",
+          "ev_0045",
+          "ev_0046",
+          "ev_0047",
+          "ev_0048",
+          "ev_0049",
+          "ev_0050",
+          "ev_0051",
+          "ev_0052",
+          "ev_0053",
+          "ev_0054",
+          "ev_0055",
+          "ev_0056"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_assignment",
+        "order": 4,
+        "event_ids": [
+          "ev_0057"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_airship_departure",
+        "order": 5,
+        "event_ids": [
+          "ev_0058",
+          "ev_0059",
+          "ev_0060",
+          "ev_0061",
+          "ev_0062",
+          "ev_0063",
+          "ev_0064",
+          "ev_0065",
+          "ev_0066",
+          "ev_0067",
+          "ev_0068",
+          "ev_0070",
+          "ev_0071",
+          "ev_0072"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_committee_decree",
+        "order": 6,
+        "event_ids": [
+          "ev_0073"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_over_the_himalayas",
+        "order": 7,
+        "event_ids": [
+          "ev_0074",
+          "ev_0075",
+          "ev_0076",
+          "ev_0077",
+          "ev_0078",
+          "ev_0079",
+          "ev_0080",
+          "ev_0081",
+          "ev_0082",
+          "ev_0083",
+          "ev_0084"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_blotting_the_earth",
+        "order": 8,
+        "event_ids": [
+          "ev_0085"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_closing_the_blind",
+        "order": 9,
+        "event_ids": [
+          "ev_0086"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_kunos_revelation",
+        "order": 10,
+        "event_ids": [
+          "ev_0087",
+          "ev_0088",
+          "ev_0089"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_to_the_surface",
+        "order": 11,
+        "event_ids": [
+          "ev_0090",
+          "ev_0091"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_questioning_the_ban",
+        "order": 12,
+        "event_ids": [
+          "ev_0092"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_sea_lecture",
+        "order": 13,
+        "event_ids": [
+          "ev_0093",
+          "ev_0094"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_14_the_independent_path",
+        "order": 14,
+        "event_ids": [
+          "ev_0095",
+          "ev_0096",
+          "ev_0097"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_15_threat_of_homelessness",
+        "order": 15,
+        "event_ids": [
+          "ev_0098"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_16_denial_of_worship",
+        "order": 16,
+        "event_ids": [
+          "ev_0099"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_17_tunnel_exploration",
+        "order": 17,
+        "event_ids": [
+          "ev_0100",
+          "ev_0101",
+          "ev_0102",
+          "ev_0103",
+          "ev_0105"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_18_fatherhood_denied",
+        "order": 18,
+        "event_ids": [
+          "ev_0106"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_19_near_collision",
+        "order": 19,
+        "event_ids": [
+          "ev_0107",
+          "ev_0108",
+          "ev_0109"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_20_vashtis_plea",
+        "order": 20,
+        "event_ids": [
+          "ev_0110"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_21_climbing_the_shaft",
+        "order": 21,
+        "event_ids": [
+          "ev_0111",
+          "ev_0112",
+          "ev_0113",
+          "ev_0114",
+          "ev_0115",
+          "ev_0116",
+          "ev_0117",
+          "ev_0119"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_22_the_pause",
+        "order": 22,
+        "event_ids": [
+          "ev_0120"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_23_the_surface_hollow",
+        "order": 23,
+        "event_ids": [
+          "ev_0121",
+          "ev_0122",
+          "ev_0123",
+          "ev_0124",
+          "ev_0125"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_24_telling_vashti",
+        "order": 24,
+        "event_ids": [
+          "ev_0126",
+          "ev_0127"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_25_the_hills_above",
+        "order": 25,
+        "event_ids": [
+          "ev_0128"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_26_hesitation_to_finish",
+        "order": 26,
+        "event_ids": [
+          "ev_0129",
+          "ev_0130",
+          "ev_0131",
+          "ev_0132",
+          "ev_0133",
+          "ev_0134",
+          "ev_0135",
+          "ev_0136",
+          "ev_0137"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_27_taken_by_worms",
+        "order": 27,
+        "event_ids": [
+          "ev_0138",
+          "ev_0139",
+          "ev_0140",
+          "ev_0141",
+          "ev_0142",
+          "ev_0143",
+          "ev_0144",
+          "ev_0145",
+          "ev_0146",
+          "ev_0147",
+          "ev_0148",
+          "ev_0149"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_28_waking_below",
+        "order": 28,
+        "event_ids": [
+          "ev_0150"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_29_surface_survivors",
+        "order": 29,
+        "event_ids": [
+          "ev_0151",
+          "ev_0152",
+          "ev_0153",
+          "ev_0154",
+          "ev_0155"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_30_intellectual_retreat",
+        "order": 30,
+        "event_ids": [
+          "ev_0157",
+          "ev_0158",
+          "ev_0159",
+          "ev_0160",
+          "ev_0161",
+          "ev_0162"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_31_the_machine_stops",
+        "order": 31,
+        "event_ids": [
+          "ev_0163",
+          "ev_0164",
+          "ev_0165",
+          "ev_0166",
+          "ev_0167",
+          "ev_0168",
+          "ev_0169",
+          "ev_0170"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_32_mending_apparatus",
+        "order": 32,
+        "event_ids": [
+          "ev_0171",
+          "ev_0172"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_33_the_mending_complaint",
+        "order": 33,
+        "event_ids": [
+          "ev_0173",
+          "ev_0174",
+          "ev_0175",
+          "ev_0176",
+          "ev_0177",
+          "ev_0178",
+          "ev_0179"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_34_shared_malfunctions",
+        "order": 34,
+        "event_ids": [
+          "ev_0180",
+          "ev_0181",
+          "ev_0182",
+          "ev_0183"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_35_the_apparatus_fails",
+        "order": 35,
+        "event_ids": [
+          "ev_0184",
+          "ev_0185",
+          "ev_0186",
+          "ev_0187",
+          "ev_0188",
+          "ev_0190",
+          "ev_0191"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_36_total_collapse",
+        "order": 36,
+        "event_ids": [
+          "ev_0192"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_37_the_machine_breaks",
+        "order": 37,
+        "event_ids": [
+          "ev_0193",
+          "ev_0194",
+          "ev_0195",
+          "ev_0196",
+          "ev_0197",
+          "ev_0198",
+          "ev_0199",
+          "ev_0200",
+          "ev_0201",
+          "ev_0202",
+          "ev_0203",
+          "ev_0204",
+          "ev_0206"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_38_reunion_in_death",
+        "order": 38,
+        "event_ids": [
+          "ev_0207",
+          "ev_0208",
+          "ev_0209",
+          "ev_0210",
+          "ev_0211",
+          "ev_0212",
+          "ev_0213",
+          "ev_0214",
+          "ev_0215",
+          "ev_0216"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_39_overthrow_in_wessex",
+        "order": 39,
+        "event_ids": [
+          "ev_0217"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_40_hope_above",
+        "order": 40,
+        "event_ids": [
+          "ev_0218"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_41_surface_memories",
+        "order": 41,
+        "event_ids": [
+          "ev_0219"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_42_the_final_collapse",
+        "order": 42,
+        "event_ids": [
+          "ev_0220",
+          "ev_0221",
+          "ev_0222",
+          "ev_0223",
+          "ev_0224"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
     ]
   }
 }
