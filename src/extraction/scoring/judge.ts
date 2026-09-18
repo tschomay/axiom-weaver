@@ -376,22 +376,35 @@ export function documentFrequencies(
   return frequency;
 }
 
+export interface EntailmentResult {
+  readonly matches: Map<string, string | null>;
+  /**
+   * Beats whose batch failed and whose individual retry also failed (#167).
+   *
+   * These are scored as misses because there is nothing else to do with them, but they are a
+   * *judge* failure, not a pipeline one, and a recall figure computed over them is not a
+   * measurement. Before #167 a failed batch silently became six misses and left no trace: the same
+   * extraction of the *Carol* scored 0.233 and 0.534 on two consecutive runs because of it.
+   */
+  readonly unresolved: string[];
+}
+
 export async function judgeEventEntailment(
   judge: ExtractionModel,
   truth: ReadonlyArray<{ id: string; text: string }>,
   candidates: ReadonlyArray<{ id: string; summary: string }>,
   options: { batchSize?: number; shortlist?: number } = {},
-): Promise<Map<string, string | null>> {
+): Promise<EntailmentResult> {
   const batchSize = options.batchSize ?? 6;
   const limit = options.shortlist ?? ENTAIL_SHORTLIST;
   const matches = new Map<string, string | null>();
+  const unresolved: string[] = [];
   const candidateIds = new Set(candidates.map((event) => event.id));
   const used = new Set<string>();
   const frequency = documentFrequencies(candidates);
 
-  for (let start = 0; start < truth.length; start += batchSize) {
-    const batch = truth.slice(start, start + batchSize);
-    const listing = batch
+  const render = (batch: ReadonlyArray<{ id: string; text: string }>): string =>
+    batch
       .map((beat) => {
         const shortlist = shortlistCandidates(beat.text, candidates, frequency, limit);
         const options = shortlist
@@ -400,10 +413,23 @@ export async function judgeEventEntailment(
         return `${beat.id}: ${beat.text}\n  candidates:\n${options}`;
       })
       .join('\n\n');
+
+  /**
+   * Score one batch, or report that it could not be scored.
+   *
+   * The happy path is deliberately byte-identical to what it was before #167 — same batch size,
+   * same thinking level, same budget — so numbers stay comparable with everything already
+   * published. Only the failure path changed.
+   */
+  const attempt = async (
+    batch: ReadonlyArray<{ id: string; text: string }>,
+    label: string,
+  ): Promise<boolean> => {
+    const listing = render(batch);
     try {
       const response = await judge.json(EntailResponseSchema, {
         pass: 'judge.event_entailment',
-        label: `beats ${start}–${start + batch.length - 1}`,
+        label,
         systemInstruction: ENTAIL_SYSTEM,
         contents: `GROUND-TRUTH BEATS, each with its candidate shortlist:\n\n${listing}`,
         responseJsonSchema: entailJsonSchema(),
@@ -422,11 +448,28 @@ export async function judgeEventEntailment(
       }
     } catch (error) {
       if (!(error instanceof ExtractionCallError)) throw error;
-      for (const beat of batch) matches.set(beat.id, null);
+      return false;
+    }
+    return true;
+  };
+
+  for (let start = 0; start < truth.length; start += batchSize) {
+    const batch = truth.slice(start, start + batchSize);
+    const ok = await attempt(batch, `beats ${start}–${start + batch.length - 1}`);
+    if (ok) continue;
+
+    // The batch failed twice (ExtractionModel.json already retried with a doubled budget). Rather
+    // than write off all six beats, ask for them one at a time: a one-beat prompt is a fraction of
+    // the size, and the failure this is recovering from is a budget exhaustion, not a refusal.
+    for (const beat of batch) {
+      const recovered = await attempt([beat], `${beat.id} (single, after batch failure)`);
+      if (recovered) continue;
+      matches.set(beat.id, null);
+      unresolved.push(beat.id);
     }
   }
 
-  return matches;
+  return { matches, unresolved };
 }
 
 // --- Seed attribute verdicts ------------------------------------------------------------
