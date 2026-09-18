@@ -146,6 +146,23 @@ export interface ExtractionDiagnostics {
   readonly dropped_proposals: readonly string[];
   readonly dropped_state_updates: number;
   readonly dropped_participants: number;
+  /**
+   * What each window reported the narrative frame to be at its end (#145).
+   *
+   * Reported rather than logged because a wrong `story_time` bucket has two possible causes — the
+   * frame never reached the window, or it reached it and was ignored — and nothing else in the
+   * output distinguishes them. Windows with an empty frame are the story's ordinary present.
+   */
+  readonly event_frames: ReadonlyArray<{ window: number; frame: string }>;
+  /**
+   * `state_updates` written against an obj_ row (#154).
+   *
+   * Zero on both realist fixtures before #154, which is what made objects orphaned: participants
+   * is characters-only and location_id is a place, so a state_update is the only way an object can
+   * take part in an event at all. A run that extracts object rows and reports 0 here has produced
+   * a World Model table nothing downstream consumes.
+   */
+  readonly object_state_updates: number;
   readonly duplicate_events_removed: number;
   readonly chronology_fallback_buckets: readonly StoryTime[];
   readonly chronology_repaired_ids: number;
@@ -441,6 +458,8 @@ export async function extractStoryPackage(
         dropped_proposals: reconciled.dropped_proposals,
         dropped_state_updates: eventPass.dropped_state_updates,
         dropped_participants: eventPass.dropped_participants,
+        event_frames: eventPass.frames,
+        object_state_updates: eventPass.object_state_updates,
         duplicate_events_removed: deduped.removed.length,
         chronology_fallback_buckets: chronology.fallback_buckets,
         chronology_repaired_ids: chronology.repaired_ids,

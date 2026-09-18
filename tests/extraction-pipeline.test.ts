@@ -13,7 +13,7 @@ import { describe, expect, it } from 'vitest';
 import { ExtractionModel } from '@/extraction/call';
 import { extractStoryPackage } from '@/extraction/pipeline';
 import { repairOrder } from '@/extraction/pass-chronology';
-import { dedupeBySpan } from '@/extraction/pass-events';
+import { dedupeBySpan, extractEvents } from '@/extraction/pass-events';
 import { foldProposals, isSuspiciousMerge, reconcile } from '@/extraction/pass-reconcile';
 import { gateG0 } from '@/extraction/scoring/gates';
 import { eventReferencedIds, invention } from '@/extraction/scoring/score';
@@ -900,5 +900,89 @@ describe('the held-out fixture is scoreable (#142 wave 2)', () => {
       truth.events.some((other, j) => j > i && other.chronological_key < event.chronological_key),
     ).length;
     expect(displaced).toBeGreaterThan(0);
+  });
+});
+
+describe('frame carry-over between windows (#145)', () => {
+  /**
+   * Answers the events pass with a scripted frame per window, and records what each window was
+   * told it inherited.
+   *
+   * Addressed by the window number in the prompt rather than by call count, because an unusable
+   * response is retried once — a call-counted stub silently scripts the wrong window as soon as a
+   * failure is in play.
+   */
+  class FrameClient implements ModelClient {
+    readonly framesSeen = new Map<number, string>();
+    constructor(
+      private readonly script: readonly string[],
+      private readonly failOn: number = -1,
+    ) {}
+    async generate(request: ModelRequest): Promise<ModelResponse> {
+      const window = Number(/window (\d+) of/.exec(request.contents)?.[1] ?? 0) - 1;
+      const carried = /FRAME CARRIED IN: ([^\n]*)/.exec(request.contents)?.[1] ?? '(absent)';
+      this.framesSeen.set(window, carried);
+      const usable = window !== this.failOn;
+      return {
+        // MAX_TOKENS plus unparseable text is the real failure this pass survives: see `call.ts`.
+        text: usable ? JSON.stringify({ events: [], frame_at_end: this.script[window] ?? '' }) : 'not json',
+        finish_reason: usable ? 'STOP' : 'MAX_TOKENS',
+        model: 'stub-model',
+        usage: { prompt_tokens: 1, output_tokens: 1, cached_tokens: 0, thoughts_tokens: 0 },
+      };
+    }
+  }
+
+  const windows = (n: number) =>
+    Array.from({ length: n }, (_, index) => ({
+      index,
+      start: index * 10,
+      end: index * 10 + 10,
+      text: `window ${index}`,
+      first_paragraph: index,
+      last_paragraph: index,
+      words: 2,
+    }));
+
+  it('tells the first window it inherited nothing', async () => {
+    const client = new FrameClient(['']);
+    await extractEvents(new ExtractionModel(client, 'stub-model'), windows(1), []);
+    expect(client.framesSeen.get(0)).toMatch(/none/);
+  });
+
+  it('carries a frame forward until a window closes it', async () => {
+    // The Stave IV shape: one window opens the vision, several more sit inside it with no signal
+    // of their own, and a later one returns to the present.
+    const client = new FrameClient([
+      "inside the Ghost's vision of the future",
+      "inside the Ghost's vision of the future",
+      '',
+    ]);
+    const result = await extractEvents(new ExtractionModel(client, 'stub-model'), windows(4), []);
+    expect(client.framesSeen.get(1)).toContain('vision of the future');
+    expect(client.framesSeen.get(2)).toContain('vision of the future');
+    expect(client.framesSeen.get(3)).toMatch(/none/);
+    expect(result.frames.map((entry) => entry.frame)).toEqual([
+      "inside the Ghost's vision of the future",
+      "inside the Ghost's vision of the future",
+      '',
+      '',
+    ]);
+  });
+
+  it('keeps the inherited frame when a window fails rather than resetting it', async () => {
+    // Resetting would hand the next window a false "ordinary present" and lose the rest of a Stave
+    // to one dropped call — the failure mode the carry exists to prevent.
+    const client = new FrameClient(['inside a remembered childhood scene', '', ''], 1);
+    const result = await extractEvents(new ExtractionModel(client, 'stub-model'), windows(3), []);
+    expect(result.failed_windows).toEqual([1]);
+    expect(client.framesSeen.get(2)).toContain('remembered childhood scene');
+    expect(result.frames[1]).toEqual({ window: 1, frame: 'inside a remembered childhood scene' });
+  });
+
+  it('bounds a runaway frame string', async () => {
+    const client = new FrameClient(['x'.repeat(5000)]);
+    const result = await extractEvents(new ExtractionModel(client, 'stub-model'), windows(1), []);
+    expect(result.frames[0]!.frame.length).toBeLessThanOrEqual(200);
   });
 });
