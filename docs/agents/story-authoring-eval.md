@@ -125,9 +125,17 @@ end. It is **hard along exactly one axis, chosen deliberately, not several at on
 world with coined terms and non-standard entities (E. M. Forster, 1909/1928 — "the Machine," "the
 Book," "the Mending Apparatus," "Homelessness" as a punishment status, none of which map cleanly
 onto `character`/`location`/`object`). It is *not* harder on cast size (two principal named
-characters, deliberately kept small so ontology novelty is isolated from coreference volume),
-narrative order (told straightforwardly, start to finish), or narrator reliability (a plain
-third-person narrator throughout). See `docs/research/fixture-stories.md`, "Category 3 — the hard
+characters, deliberately kept small so ontology novelty is isolated from coreference volume) or
+narrator reliability (a plain third-person narrator throughout).
+
+**Correction (wave 2 of #142): it is not linear, and this section used to say it was.** Part II is
+Kuno's own retrospective account — "I have been outside since I spoke to you last", then a
+past-tense first-person narration of the climb and the escape — so the events Scene Cards 06–08
+depict happen *before* the meeting Scene Card 05 depicts, while following it in the telling. The
+§3.4 sub-metric "pairs the source narrates out of order" therefore has a real denominator here,
+where Cinderella's is empty. The claim was written before the fixture had a source manifest and
+could be read from the repo at all; `fixtures/extraction/chronology.json`'s entry carries the
+ranks and the one genuinely underdetermined ordering. See `docs/research/fixture-stories.md`, "Category 3 — the hard
 fixture," for the full axis selection and the three axes rejected alongside it, and
 `fixtures/authoring-notes.md`'s entry for this package for how the non-standard entities were
 actually modeled against the fixed World Model tables.

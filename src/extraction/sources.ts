@@ -22,7 +22,14 @@ export interface SourceManifest {
   readonly id: string;
   readonly title: string;
   readonly edition: string;
-  /** The raw GITenberg mirror of the Project Gutenberg plain text. */
+  /**
+   * Where the plain text is actually read from.
+   *
+   * The first two are raw GITenberg mirrors of the Project Gutenberg text. GITenberg's corpus
+   * stops well short of recent PG additions, so `the-machine-stops` reads Project Gutenberg's own
+   * cache URL instead — the same bytes, one hop earlier, and the sha256 below is what actually
+   * pins them either way.
+   */
   readonly url: string;
   readonly cache_file: string;
   /** 1-based, inclusive, into the mirrored plain text — the idiom `fixture-stories.md` uses. */
@@ -52,6 +59,31 @@ export const SOURCE_MANIFESTS: readonly SourceManifest[] = [
     first_line: 64,
     last_line: 3870,
     expected_words: 28448,
+  },
+  {
+    // #132's hard fixture, wired up for scoring in wave 2 of #142. It existed as a package from
+    // phase 2 of #132 but had no manifest, so its source could not be fetched and every §3
+    // metric was silently a two-fixture measurement over two short realist Victorian stories —
+    // exactly the "easy end of the range" `story-authoring-eval.md` §2 warns its own numbers
+    // describe. It is the held-out fixture now: prompts are tuned against the other two and
+    // reported here separately.
+    id: 'the-machine-stops',
+    title: 'The Machine Stops',
+    edition:
+      'E. M. Forster, The Eternal Moment and Other Stories, Harcourt, Brace & Co., 1928 ' +
+      '(PG #72890; first published in The Oxford and Cambridge Review, November 1909)',
+    url: 'https://www.gutenberg.org/cache/epub/72890/pg72890.txt',
+    cache_file: '72890.txt',
+    // The story occupies lines 101–1534 of the collection: its title line through "scraps of the
+    // untainted sky.", stopping before THE POINT OF IT. Parts I–III (The Air-Ship / The Mending
+    // Apparatus / The Homeless) are all inside that range. Line numbers are into the cache/epub
+    // rendering this `url` names — PG's `files/` rendering of the same ebook carries different
+    // front matter and numbers ~26 lines lower, so the two are not interchangeable.
+    first_line: 101,
+    last_line: 1534,
+    // Measured on the slice. `docs/research/fixture-stories.md` records wikisource's own
+    // description as "a science fiction short story (of 12,000 words)", which this corroborates.
+    expected_words: 12162,
   },
 ];
 

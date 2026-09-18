@@ -889,14 +889,15 @@ describe('plant/payoff ground-truth sidecar (#153)', () => {
     expect(truth.plant_annotation!.provenance).not.toBeNull();
   });
 
-  it('leaves the third fixture unannotated, and says why', async () => {
-    // the-machine-stops has no sidecar on purpose: `src/extraction/sources.ts` carries no manifest
-    // for it, so its source text cannot be fetched, and #153's own rule is that an annotation is
-    // built FROM THE SOURCE, blind to candidate output. An annotation written from the package
-    // alone would be reverse-engineered ground truth, which is worse than none.
-    // It is also not scoreable here yet for an unrelated, pre-existing reason: chronology.json has
-    // no entry for it either.
+  it('leaves the third fixture unannotated even though it is now scoreable', async () => {
+    // When #153 landed, the-machine-stops could not be annotated at all: it had no source manifest,
+    // so its text could not be fetched, and #153's rule is that an annotation is built FROM THE
+    // SOURCE. Wave 2 of #142 added the manifest and a chronology entry, so it loads now —
+    expect((await loadGroundTruth('the-machine-stops')).events.length).toBeGreaterThan(40);
+    // — but it is still deliberately unannotated, because it is the HELD-OUT fixture. Writing a
+    // plant annotation for it would hand the tuning loop the answer key it is meant to be held back
+    // from. If a later ticket annotates it, that ticket owes an explicit note that the held-out
+    // property was spent.
     expect(existsSync('fixtures/the-machine-stops/plants.annotation.json')).toBe(false);
-    await expect(loadGroundTruth('the-machine-stops')).rejects.toThrow(/chronology\.json/);
   });
 });

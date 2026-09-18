@@ -21,7 +21,7 @@ import { FABULA_BLOCK } from '@/schema/fabula';
 import { importSummary } from '@/authoring/transfer';
 import { loadGroundTruth, narratedOutOfOrder } from '@/extraction/scoring/ground-truth';
 import { groundingReport, normalizeWhitespace, resolveQuote } from '@/extraction/spans';
-import { countWords, sliceLines } from '@/extraction/sources';
+import { countWords, manifestFor, sliceLines } from '@/extraction/sources';
 import { paragraphsOf, windowsOf } from '@/extraction/windows';
 import type { LoadedSource } from '@/extraction/sources';
 import type { ModelClient, ModelRequest, ModelResponse } from '@/writer/model-client';
@@ -870,5 +870,35 @@ describe('load-bearing rows — §2\'s grain rule (#151)', () => {
 
   it('is empty for an empty event list rather than throwing', () => {
     expect(eventReferencedIds([]).size).toBe(0);
+  });
+});
+
+describe('the held-out fixture is scoreable (#142 wave 2)', () => {
+  it('loads a source slice for all three fixtures', async () => {
+    // the-machine-stops had a package from #132 phase 2 but no source manifest, so its text could
+    // not be fetched and every §3 number in this repo was a two-fixture measurement over two short
+    // realist Victorian stories — the "easy end of the range" the rubric's §2 warns about.
+    for (const id of ['cinderella', 'a-christmas-carol', 'the-machine-stops']) {
+      expect(() => manifestFor(id)).not.toThrow();
+    }
+  });
+
+  it('pins the Machine Stops slice to the story and not the collection', () => {
+    const manifest = manifestFor('the-machine-stops');
+    // The collection holds six stories; a slice that drifts would silently score the wrong text.
+    expect(manifest.last_line - manifest.first_line).toBeLessThan(1500);
+    expect(manifest.expected_words).toBeGreaterThan(11000);
+    expect(manifest.expected_words).toBeLessThan(13000);
+  });
+
+  it('carries a chronology entry with a real out-of-order denominator', async () => {
+    const truth = await loadGroundTruth('the-machine-stops');
+    expect(truth.events.length).toBeGreaterThan(40);
+    // Part II is Kuno's retrospective account, so cards 06-08 precede what card 05 depicts. If this
+    // ever reads 0, either the chronology entry or the eval doc's corrected claim has rotted.
+    const displaced = truth.events.filter((event, i) =>
+      truth.events.some((other, j) => j > i && other.chronological_key < event.chronological_key),
+    ).length;
+    expect(displaced).toBeGreaterThan(0);
   });
 });
