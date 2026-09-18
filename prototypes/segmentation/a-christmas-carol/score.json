@@ -1,573 +1,164 @@
 {
   "story_id": "a-christmas-carol",
-  "scored_at": "2026-09-18T13:33:57.766Z",
+  "scored_at": "2026-09-18T14:20:52.918Z",
   "fixture_package_version": 1,
   "segmenter_models": [
     "gemini-3.8-flash"
   ],
   "judge_model": "gemini-3.8-flash",
-  "judge_cost_usd": 0.20724975000000004,
+  "judge_cost_usd": 0.05365500000000001,
   "g0": {
     "bar": "publishable === true (§1)",
-    "publishable": false,
-    "errors": [
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_003.to_id",
-        "message": "references unknown row \"char_the_clerk\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_009.from_id",
-        "message": "references unknown row \"char_the_clerk\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_010.to_id",
-        "message": "references unknown row \"char_jacob_marley\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_024.to_id",
-        "message": "references unknown row \"loc_counting_house\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_025.to_id",
-        "message": "references unknown row \"loc_counting_house\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_026.from_id",
-        "message": "references unknown row \"char_jacob_marley_s_ghost\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_026.to_id",
-        "message": "references unknown row \"char_ebenezer_scrooge\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_029.from_id",
-        "message": "references unknown row \"char_ghost_of_christmas_past\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_030.from_id",
-        "message": "references unknown row \"char_ghost_of_christmas_past\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_031.from_id",
-        "message": "references unknown row \"char_ghost_of_christmas_past\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_032.from_id",
-        "message": "references unknown row \"char_ghost_of_christmas_past\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_035.to_id",
-        "message": "references unknown row \"char_master_scrooge\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_037.from_id",
-        "message": "references unknown row \"char_nephew\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_038.from_id",
-        "message": "references unknown row \"char_nephew\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_039.to_id",
-        "message": "references unknown row \"char_master_scrooge\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_040.to_id",
-        "message": "references unknown row \"char_master_scrooge\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_041.to_id",
-        "message": "references unknown row \"char_master_scrooge\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_043.to_id",
-        "message": "references unknown row \"char_fezziwig\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_044.to_id",
-        "message": "references unknown row \"char_fezziwig\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_046.to_id",
-        "message": "references unknown row \"char_fezziwig\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_047.to_id",
-        "message": "references unknown row \"char_fezziwig\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_053.from_id",
-        "message": "references unknown row \"char_master_scrooge\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_053.to_id",
-        "message": "references unknown row \"char_fezziwig\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_054.to_id",
-        "message": "references unknown row \"char_fezziwig\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_055.to_id",
-        "message": "references unknown row \"char_master_scrooge\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_061.from_id",
-        "message": "references unknown row \"char_jacob_marley\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_067.from_id",
-        "message": "references unknown row \"char_the_spirit\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_083.from_id",
-        "message": "references unknown row \"char_master_peter\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_084.to_id",
-        "message": "references unknown row \"char_master_peter\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_086.to_id",
-        "message": "references unknown row \"char_master_peter\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_089.to_id",
-        "message": "references unknown row \"char_the_two_young_cratchits\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_090.to_id",
-        "message": "references unknown row \"char_master_peter\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_092.from_id",
-        "message": "references unknown row \"char_the_spirit\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_093.from_id",
-        "message": "references unknown row \"char_the_spirit\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_099.to_id",
-        "message": "references unknown row \"char_clerk\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_101.from_id",
-        "message": "references unknown row \"char_fred\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_101.to_id",
-        "message": "references unknown row \"char_mr_scrooge\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_102.from_id",
-        "message": "references unknown row \"char_jacob_marley\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_105.from_id",
-        "message": "references unknown row \"char_the_undertakers_man\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_107.to_id",
-        "message": "references unknown row \"char_joe\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_108.to_id",
-        "message": "references unknown row \"char_the_body_of_this_man\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_109.to_id",
-        "message": "references unknown row \"char_the_body_of_this_man\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_110.to_id",
-        "message": "references unknown row \"char_the_body_of_this_man\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_111.to_id",
-        "message": "references unknown row \"char_joe\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_114.from_id",
-        "message": "references unknown row \"char_cratchit_s_wife\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_115.to_id",
-        "message": "references unknown row \"char_cratchit_s_wife\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_117.to_id",
-        "message": "references unknown row \"char_cratchit_s_wife\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_118.from_id",
-        "message": "references unknown row \"char_her_daughters\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_118.to_id",
-        "message": "references unknown row \"char_cratchit_s_wife\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_119.from_id",
-        "message": "references unknown row \"char_her_daughters\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_121.from_id",
-        "message": "references unknown row \"char_cratchit_s_wife\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_121.to_id",
-        "message": "references unknown row \"char_bob\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_122.to_id",
-        "message": "references unknown row \"char_bob\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_123.from_id",
-        "message": "references unknown row \"char_bob\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_124.to_id",
-        "message": "references unknown row \"char_bob\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_125.to_id",
-        "message": "references unknown row \"char_mr_scrooge\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_126.to_id",
-        "message": "references unknown row \"char_bob\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_127.to_id",
-        "message": "references unknown row \"char_cratchit_s_wife\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_128.to_id",
-        "message": "references unknown row \"char_cratchit_s_wife\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_129.to_id",
-        "message": "references unknown row \"char_cratchit_s_wife\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_130.to_id",
-        "message": "references unknown row \"char_bob\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_131.from_id",
-        "message": "references unknown row \"char_bob\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_132.from_id",
-        "message": "references unknown row \"char_bob\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_132.to_id",
-        "message": "references unknown row \"char_master_peter\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_133.from_id",
-        "message": "references unknown row \"char_bob\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_133.to_id",
-        "message": "references unknown row \"char_the_two_young_cratchits\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_140.to_id",
-        "message": "references unknown row \"char_fred\""
-      },
-      {
-        "severity": "error",
-        "code": "unknown_entity",
-        "path": "world_model_seed.relationships.rel_144.from_id",
-        "message": "references unknown row \"char_fred\""
-      }
-    ],
+    "publishable": true,
+    "errors": [],
     "warning_counts": {
-      "unused_seed_entity": 143,
+      "unused_seed_entity": 147,
       "short_range_payoff": 1
     }
   },
   "scene_count": {
     "fixture": 20,
-    "candidate": 54,
-    "ratio": 2.7,
+    "candidate": 43,
+    "ratio": 2.15,
     "trustworthy_band": false
   },
   "scene_alignment": [
     {
       "fixture_scene": "scene_01_counting_house",
-      "candidate_scene": "scene_04_visitors_in_the_cold",
+      "candidate_scene": "scene_02_christmas_eve_visitors",
       "aligned_beats": 2,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_02_the_haunting_begins",
-      "candidate_scene": "scene_12_marleys_warning",
-      "aligned_beats": 3,
+      "candidate_scene": "scene_09_marleys_warning",
+      "aligned_beats": 4,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_03_the_first_spirit",
-      "candidate_scene": "scene_14_first_spirit_arrives",
+      "candidate_scene": "scene_10_the_first_spirit",
       "aligned_beats": 1,
       "fixture_beats": 2,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_04_the_lonely_school",
-      "candidate_scene": "scene_16_the_lonely_schoolroom",
+      "candidate_scene": "scene_11_boyhood_schoolroom",
       "aligned_beats": 1,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_05_fezziwigs_ball",
-      "candidate_scene": "scene_19_fezziwigs_ball",
+      "candidate_scene": "scene_13_fezziwigs_ball",
       "aligned_beats": 3,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_06_belle_then_and_now",
-      "candidate_scene": "scene_23_the_extinguisher_cap",
+      "candidate_scene": "scene_15_belles_family",
       "aligned_beats": 3,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_07_the_second_spirit",
-      "candidate_scene": "scene_25_the_second_spirit",
+      "candidate_scene": "scene_17_the_second_spirit",
       "aligned_beats": 1,
       "fixture_beats": 2,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_08_the_cratchits",
-      "candidate_scene": "scene_29_the_cratchit_dinner",
-      "aligned_beats": 4,
+      "candidate_scene": "scene_22_the_cratchit_dinner",
+      "aligned_beats": 3,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_09_the_spirits_tour",
-      "candidate_scene": "scene_32_the_solitary_lighthouse",
+      "candidate_scene": "scene_25_out_at_sea",
       "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_10_freds_party",
-      "candidate_scene": "scene_33_freds_party",
+      "candidate_scene": "scene_27_toasting_the_uncle",
       "aligned_beats": 3,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_11_ignorance_and_want",
-      "candidate_scene": "scene_35_ignorance_and_want",
+      "candidate_scene": "scene_28_ignorance_and_want",
       "aligned_beats": 4,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_12_the_exchange",
-      "candidate_scene": "scene_37_on_the_change",
-      "aligned_beats": 1,
+      "candidate_scene": "scene_30_on_the_change",
+      "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_13_old_joes_shop",
-      "candidate_scene": "scene_39_old_joes_shop",
-      "aligned_beats": 1,
+      "candidate_scene": "scene_31_old_joes_shop",
+      "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_14_the_unwatched_corpse",
-      "candidate_scene": "scene_40_room_of_death",
+      "candidate_scene": "scene_32_room_of_death",
       "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_15_the_relieved_debtors",
-      "candidate_scene": "scene_41_the_debtors_relief",
-      "aligned_beats": 1,
+      "candidate_scene": "scene_33_a_creditors_death",
+      "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_16_the_cratchits_after_tim",
-      "candidate_scene": "scene_43_grief_for_tim",
+      "candidate_scene": "scene_34_the_quiet_cratchits",
       "aligned_beats": 1,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_17_the_name_on_the_stone",
-      "candidate_scene": "scene_49_the_neglected_grave",
+      "candidate_scene": "scene_38_the_churchyard",
       "aligned_beats": 4,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_18_the_waking",
-      "candidate_scene": "scene_50_christmas_morning",
-      "aligned_beats": 4,
+      "candidate_scene": "scene_39_christmas_morning",
+      "aligned_beats": 2,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_19_the_street_and_freds_dinner",
-      "candidate_scene": "scene_53_nephews_dinner",
+      "candidate_scene": "scene_40_walking_the_streets",
       "aligned_beats": 2,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_20_the_office_next_morning",
-      "candidate_scene": "scene_54_bobs_raise",
+      "candidate_scene": "scene_42_the_salary_raise",
       "aligned_beats": 2,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
@@ -576,123 +167,127 @@
   "boundaries": {
     "bar": "≥ 0.70 precision and recall (§3.5)",
     "window_chars": 3155,
-    "fixture_boundaries": 19,
-    "candidate_boundaries": 53,
-    "matched": 19,
-    "precision": 0.3584905660377358,
-    "recall": 1,
+    "fixture_boundaries": 18,
+    "candidate_boundaries": 42,
+    "matched": 15,
+    "precision": 0.35714285714285715,
+    "recall": 0.8333333333333334,
     "note": "fixture boundaries are located at the earliest source offset among the candidate events #117's alignment assigned to that fixture scene; the fixtures carry no offsets of their own"
   },
   "beats": {
     "coverage_bar": "≥ 0.80 mean, no aligned scene below 0.5 (§3.5)",
     "invention_bar": "≤ 0.10 (§3.5)",
     "scored_scenes": 20,
-    "mean_coverage": 0.6633333333333333,
+    "mean_coverage": 0.2575,
     "worst_scene": {
-      "scene": "scene_04_the_lonely_school",
-      "coverage": 0.3333333333333333
+      "scene": "scene_08_the_cratchits",
+      "coverage": 0
     },
     "scenes_below_half": [
-      "scene_01_counting_house",
       "scene_04_the_lonely_school",
       "scene_08_the_cratchits",
+      "scene_09_the_spirits_tour",
+      "scene_10_freds_party",
+      "scene_11_ignorance_and_want",
+      "scene_12_the_exchange",
+      "scene_13_old_joes_shop",
+      "scene_14_the_unwatched_corpse",
+      "scene_15_the_relieved_debtors",
+      "scene_16_the_cratchits_after_tim",
+      "scene_17_the_name_on_the_stone",
+      "scene_18_the_waking",
+      "scene_19_the_street_and_freds_dinner",
       "scene_20_the_office_next_morning"
     ],
-    "sampled_beats": 30,
-    "supported": 30,
+    "sampled_beats": 0,
+    "supported": 0,
     "insufficient": 0,
     "contradicted": 0,
-    "invention_rate": 0
+    "invention_rate": null
   },
   "pov_location": {
     "bar": "≥ 0.95, read as agreement with the fixture rather than against the source (§3.5)",
     "scored": 20,
     "pov_agreements": 20,
-    "location_agreements": 11,
+    "location_agreements": 12,
     "pov_accuracy": 1,
-    "location_accuracy": 0.55,
+    "location_accuracy": 0.6,
     "disagreements": [
       {
         "fixture_scene": "scene_02_the_haunting_begins",
         "field": "location_id",
-        "fixture": "loc_scrooges_chambers → loc_chambers",
-        "candidate": "loc_bedroom"
+        "fixture": "loc_scrooges_chambers → loc_scrooge_s_chambers",
+        "candidate": "loc_sitting_room"
       },
       {
         "fixture_scene": "scene_03_the_first_spirit",
         "field": "location_id",
-        "fixture": "loc_scrooges_chambers → loc_chambers",
+        "fixture": "loc_scrooges_chambers → loc_scrooge_s_chambers",
         "candidate": "loc_bedroom"
       },
       {
         "fixture_scene": "scene_04_the_lonely_school",
         "field": "location_id",
-        "fixture": "loc_school → loc_the_school",
+        "fixture": "loc_school → loc_school",
         "candidate": "loc_the_schoolroom"
+      },
+      {
+        "fixture_scene": "scene_06_belle_then_and_now",
+        "field": "location_id",
+        "fixture": "loc_belle_household → loc_best_parlour",
+        "candidate": "loc_parlour"
       },
       {
         "fixture_scene": "scene_07_the_second_spirit",
         "field": "location_id",
-        "fixture": "loc_scrooges_chambers → loc_chambers",
-        "candidate": "loc_adjoining_room"
+        "fixture": "loc_scrooges_chambers → loc_scrooge_s_chambers",
+        "candidate": "loc_the_adjoining_room"
       },
       {
         "fixture_scene": "scene_09_the_spirits_tour",
         "field": "location_id",
         "fixture": "loc_world_tour (unaligned)",
-        "candidate": "loc_solitary_lighthouse"
+        "candidate": "loc_sea"
+      },
+      {
+        "fixture_scene": "scene_10_freds_party",
+        "field": "location_id",
+        "fixture": "loc_freds_house → loc_nephew_s_house",
+        "candidate": "loc_bright_dry_gleaming_room"
       },
       {
         "fixture_scene": "scene_11_ignorance_and_want",
         "field": "location_id",
         "fixture": "loc_london_streets → loc_the_city_streets",
-        "candidate": "loc_scrooges_nephews_room"
-      },
-      {
-        "fixture_scene": "scene_13_old_joes_shop",
-        "field": "location_id",
-        "fixture": "loc_old_joes_shop → loc_beetling_shop",
-        "candidate": "loc_parlour_screen_of_rags"
-      },
-      {
-        "fixture_scene": "scene_15_the_relieved_debtors",
-        "field": "location_id",
-        "fixture": "loc_caroline_home (unaligned)",
-        "candidate": "loc_the_room_of_death"
-      },
-      {
-        "fixture_scene": "scene_19_the_street_and_freds_dinner",
-        "field": "location_id",
-        "fixture": "loc_london_streets → loc_the_city_streets",
-        "candidate": "loc_dining_room"
+        "candidate": "loc_bright_dry_gleaming_room"
       }
     ]
   },
   "source_coverage": {
     "bar": "≥ 0.95 (§3.5)",
     "source_chars": 157754,
-    "covered_chars": 136934,
-    "coverage": 0.8680223639337196,
+    "covered_chars": 138441,
+    "coverage": 0.8775752120389975,
     "gaps": [
       {
         "start": 1238,
-        "end": 4120,
-        "chars": 2882
+        "end": 4102,
+        "chars": 2864
       },
       {
-        "start": 64905,
-        "end": 66853,
-        "chars": 1948
+        "start": 96599,
+        "end": 98167,
+        "chars": 1568
       },
       {
-        "start": 121290,
-        "end": 123099,
-        "chars": 1809
+        "start": 112117,
+        "end": 113655,
+        "chars": 1538
       },
       {
-        "start": 60934,
-        "end": 62373,
-        "chars": 1439
+        "start": 139571,
+        "end": 141052,
+        "chars": 1481
       },
       {
         "start": 16901,
@@ -700,33 +295,33 @@
         "chars": 1413
       },
       {
-        "start": 139571,
-        "end": 140941,
-        "chars": 1370
-      },
-      {
-        "start": 100752,
+        "start": 100935,
         "end": 101954,
-        "chars": 1202
+        "chars": 1019
       },
       {
-        "start": 156689,
+        "start": 156819,
         "end": 157754,
-        "chars": 1065
+        "chars": 935
       },
       {
-        "start": 220,
-        "end": 1126,
-        "chars": 906
+        "start": 49595,
+        "end": 50245,
+        "chars": 650
       },
       {
-        "start": 135198,
-        "end": 135906,
-        "chars": 708
+        "start": 60988,
+        "end": 61631,
+        "chars": 643
+      },
+      {
+        "start": 122475,
+        "end": 123099,
+        "chars": 624
       }
     ],
-    "events_supplied": 471,
-    "events_assigned": 471,
+    "events_supplied": 426,
+    "events_assigned": 426,
     "assignment_rate": 1
   },
   "reveal_order": {
@@ -734,8 +329,8 @@
     "premature_bar": "0 (§3.6)",
     "hidden_bar": "≥ 0.80 recall (§3.6)",
     "fixture_facts": 3,
-    "candidate_facts": 8,
-    "aligned_facts": 1,
+    "candidate_facts": 6,
+    "aligned_facts": 0,
     "pairwise_total": 0,
     "pairwise_correct": 0,
     "pairwise_accuracy": null,
@@ -751,23 +346,24 @@
     "fixture_pairs_source": "annotation_sidecar",
     "fixture_pairs_declared": 3,
     "fixture_pairs_annotated": 15,
-    "matched_declared": 1,
-    "matched_annotated": 1,
-    "candidate_pairs": 8,
-    "matched": 2,
-    "recall": 0.1111111111111111,
+    "matched_declared": 0,
+    "matched_annotated": 0,
+    "candidate_pairs": 6,
+    "matched": 0,
+    "recall": 0,
     "long_range_fixture_pairs": 14,
-    "long_range_matched": 2,
-    "long_range_recall": 0.14285714285714285,
-    "misattributed": 1,
+    "long_range_matched": 0,
+    "long_range_recall": 0,
+    "misattributed": 0,
     "orphans": [],
     "plant_walk_errors": [],
     "span_histogram": {
       "1": 1,
-      "5+": 7
+      "5+": 5
     }
   },
   "caveats": [
+    "#167: 49 fixture beat(s) could not be scored by the entailment judge even one at a time. They count against beats coverage because there is nothing else to do with them, so that number is a floor rather than a measurement.",
     "§2: the fixtures are one valid authoring, not the unique correct one — a deviation is not automatically an error, and both fixtures sit at the easy end of the difficulty range.",
     "The scene alignment is derived from #117's frozen event alignment; a fixture scene whose beats went unaligned there is unscoreable here and is listed with candidate_scene: null.",
     "§3.5 POV/location is agreement with the fixture, not a judgment against the source.",
