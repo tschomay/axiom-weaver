@@ -341,5 +341,14 @@
     "The scene alignment is derived from #117's frozen event alignment; a fixture scene whose beats went unaligned there is unscoreable here and is listed with candidate_scene: null.",
     "§3.5 POV/location is agreement with the fixture, not a judgment against the source.",
     "Beat invention is judged against the source window the scene's own spans cover, so a beat supported elsewhere in the story reads as \"insufficient\" rather than \"contradicts\" — the two are reported separately for that reason."
-  ]
+  ],
+  "stale": {
+    "since": "wave 2 of #142 (#144, #145, #154)",
+    "why": "This score was computed over the extraction run that fixtures/extraction/runs/cinderella/package.json held BEFORE wave 2 changed pass-events.ts. Segmentation reads that file as its input, so every number here describes a different input than the one now committed. #146 owns the re-measure and the approach doc puts it in wave 3 precisely so it happens after this.",
+    "notably_affected": [
+      "plants.* — #153's annotation is unchanged, but the candidate pairs came from the old events",
+      "scene_count / boundaries — the event list grew and its story_time buckets changed",
+      "pov_location — POV is substituted from participants, and participants changed"
+    ]
+  }
 }
