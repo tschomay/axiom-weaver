@@ -52,7 +52,9 @@ function line(score: JudgeScore): string {
     `causes ${pct(score.causal.continuous.share)} of ${score.causal.continuous.pairs} cont ` +
     `(all ${pct(score.causal.causes_share)}, ${score.causal.story_time_jumps} jumps, ` +
     `contradicts ${score.causal.contradicts}) | ` +
-    `earned ${pct(score.payoff_earned.earned_share)} of ${score.payoff_earned.pairs} | ` +
+    `earned ${pct(score.payoff_earned.earned_share)} of ${score.payoff_earned.pairs} ` +
+    `(seed ${pct(score.payoff_earned.seed_grounded.share)} of ${score.payoff_earned.seed_grounded.pairs}, ` +
+    `planted ${pct(score.payoff_earned.planted.share)} of ${score.payoff_earned.planted.pairs}) | ` +
     `stock ${score.non_genericity.adherence}/5 +${score.non_genericity.load_bearing_particulars}lb ` +
     `${score.non_genericity.passed ? 'PASS' : 'FAIL'} | ` +
     `theme ${score.thematic_coherence.score}/5 | engage ${score.engagement.score}/5`
