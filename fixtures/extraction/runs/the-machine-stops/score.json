@@ -1,6 +1,6 @@
 {
   "story_id": "the-machine-stops",
-  "scored_at": "2026-09-18T03:24:34.054Z",
+  "scored_at": "2026-09-18T16:13:39.808Z",
   "source": {
     "id": "the-machine-stops",
     "title": "The Machine Stops",
@@ -37,241 +37,25 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_central_committee",
+          "path": "world_model_seed.characters.char_dead_workmen",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_other_passengers",
+          "path": "world_model_seed.characters.char_mending_apparatus",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_passengers",
+          "path": "world_model_seed.characters.char_vashtis_friend_noise",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_she",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_humanitarians",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_workmen",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_he",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_his_mother",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_aelfrid",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_the_danes",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_my_friends",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_those_who_were_extruded_after_the_great_rebellio",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_lecturers",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_inhabitants_of_sumatra",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_people_in_the_tunnel",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.characters.char_homeless",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_public_nurseries",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_the_room",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_island_southern_hemisphere",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_northern_hemisphere",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_rheims",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_alps",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_pekin",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_shrewsbury",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_rye",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_christchurch",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_helsingfors",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_the_brazils",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_palermo",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_her_room",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_asia",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_the_himalayas",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_caucasus",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_greece",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_simla",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_brisbane",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_kinchinjunga",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_mount_taygetus",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_vomitories",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_wessex",
+          "path": "world_model_seed.characters.char_the_old_and_the_sick",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -295,19 +79,7 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_the_hollow",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_hills_of_wessex",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_the_surface_of_the_earth",
+          "path": "world_model_seed.locations.loc_roof_of_the_world",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -325,7 +97,7 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_southern_hemisphere",
+          "path": "world_model_seed.locations.loc_northern_hemisphere",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -337,7 +109,13 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.locations.loc_the_central_power_station",
+          "path": "world_model_seed.locations.loc_brazil",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.locations.loc_central_power_station",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -349,115 +127,19 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
+          "path": "world_model_seed.locations.loc_tremendous_platform",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
           "path": "world_model_seed.locations.loc_ruined_wharf",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_round_plate",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_the_machine",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_arm_chair",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_reading_desk",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_receiver",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_isolation_knob",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_lighting_apparatus",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_blue_plate",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_isolation_switch",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_speaking_tubes",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_the_book_of_the_machine",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_car",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_the_book",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_lift",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_air_ships",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_egression_permit",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.loc_ventilation_shafts",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_live_rail",
+          "path": "world_model_seed.locations.loc_vomitory",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -469,13 +151,13 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_gloves",
+          "path": "world_model_seed.objects.obj_pillow",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_dietetic_tabloids",
+          "path": "world_model_seed.objects.obj_gloves",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -487,7 +169,19 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_book_of_the_machine",
+          "path": "world_model_seed.objects.obj_train",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_the_machine",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_tabloids",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
@@ -499,47 +193,41 @@
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_gramophone",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_cinematophote",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_sleeping_apparatus",
-          "message": "is in the seed but no Scene Card ever names it"
-        },
-        {
-          "severity": "warn",
-          "code": "unused_seed_entity",
           "path": "world_model_seed.objects.obj_poetry_machine",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_wires",
+          "path": "world_model_seed.objects.obj_euthanasia",
           "message": "is in the seed but no Scene Card ever names it"
         },
         {
           "severity": "warn",
           "code": "unused_seed_entity",
-          "path": "world_model_seed.objects.obj_medical_apparatus",
+          "path": "world_model_seed.objects.obj_artificial_fruit",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_reading_stand",
+          "message": "is in the seed but no Scene Card ever names it"
+        },
+        {
+          "severity": "warn",
+          "code": "unused_seed_entity",
+          "path": "world_model_seed.objects.obj_chair",
           "message": "is in the seed but no Scene Card ever names it"
         }
       ],
-      "scene_count": 184,
+      "scene_count": 218,
       "substitutions": {
-        "pov_from_first_participant": 175,
-        "pov_unavailable": 9,
-        "location_carried_forward": 26,
+        "pov_from_first_participant": 199,
+        "pov_unavailable": 19,
+        "location_carried_forward": 52,
         "location_unavailable": 0,
-        "dramatic_function_projected": 184
+        "dramatic_function_projected": 218
       }
     },
     "seed_parse_errors": [],
@@ -547,143 +235,113 @@
   },
   "span_grounding": {
     "bar": "no rubric bar: §8 of the prior-art survey defines the check, the rubric has no numeric threshold for it. Reported as the gate the ticket asks for, not as a scored metric.",
-    "claims": 385,
-    "resolved_exact": 145,
-    "resolved_normalized": 235,
-    "unresolved": 5,
-    "quote_resolution_rate": 0.987012987012987,
-    "judged": 55,
-    "supports": 50,
-    "insufficient": 4,
-    "contradicts": 1,
+    "claims": 345,
+    "resolved_exact": 150,
+    "resolved_normalized": 185,
+    "unresolved": 10,
+    "quote_resolution_rate": 0.9710144927536232,
+    "judged": 56,
+    "supports": 51,
+    "insufficient": 5,
+    "contradicts": 0,
     "unjudged": 0,
-    "support_rate": 0.9090909090909091,
+    "support_rate": 0.9107142857142857,
     "worst": [
       {
-        "subject": "location:loc_underground_city",
+        "subject": "character:char_aelfrid",
         "verdict": "insufficient",
-        "why": "The excerpt does not mention an underground city."
+        "why": "Ælfrid is only referenced historically as a figure from the past, not as an active character in the story."
       },
       {
-        "subject": "character:char_mending_apparatus",
+        "subject": "character:char_friends",
         "verdict": "insufficient",
-        "why": "The prose describes it as an apparatus/machine pursuing him, not establishing it as a character."
+        "why": "The word refers generally to an unspecified group of acquaintances rather than a discrete character."
       },
       {
-        "subject": "character:char_homeless",
-        "verdict": "contradicts",
-        "why": "'The Homeless' refers to a group or category of people, not an individual character."
+        "subject": "location:loc_versailles",
+        "verdict": "insufficient",
+        "why": "Versailles is mentioned only in passing as part of a historical lecture about the French Revolution, not as a story location."
       },
       {
-        "subject": "state_update:ev_0048:char_vashti.location_id",
+        "subject": "location:loc_the_whole_city",
         "verdict": "insufficient",
-        "why": "The quote and context describe her entering a car and lift, not establishing a specific location id of loc_tunnel."
+        "why": "The phrase 'the whole city' is a common noun phrase describing an entire urban area, not a distinct named entity or discrete location."
       },
       {
-        "subject": "state_update:ev_0052:char_vashti.location_id",
+        "subject": "relationship:rel_015",
         "verdict": "insufficient",
-        "why": "The text states that Vashti trooped on board the air-ship, which does not entail her location becoming null."
+        "why": "The excerpt only refers to 'those two' without naming them in relation to each other as companions."
       }
     ],
-    "contradicted_subjects": [
-      "character:char_homeless"
-    ]
+    "contradicted_subjects": []
   },
   "world_model": {
     "tables": [
       {
         "table": "characters",
         "fixture_rows": 7,
-        "candidate_rows": 37,
-        "aligned": 7,
-        "recall": 1,
-        "precision": 0.3181818181818182,
-        "precision_flat": 0.1891891891891892,
-        "load_bearing_rows": 22,
-        "over_extracted": 15,
+        "candidate_rows": 21,
+        "aligned": 5,
+        "recall": 0.7142857142857143,
+        "precision": 0.29411764705882354,
+        "precision_flat": 0.23809523809523808,
+        "load_bearing_rows": 17,
+        "over_extracted": 4,
         "over_extracted_examples": [
-          "other passengers",
-          "The passengers",
-          "she",
-          "Humanitarians",
-          "workmen",
-          "He",
-          "his mother",
-          "Ælfrid",
-          "the Danes",
-          "my friends",
-          "those who were extruded after the Great Rebellion",
-          "lecturers",
-          "inhabitants of Sumatra",
-          "people in the tunnel",
-          "Homeless"
+          "dead workmen",
+          "Mending Apparatus",
+          "friend",
+          "the old and the sick"
         ],
         "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
-        "misses": [],
+        "misses": [
+          "the Committee of the Mending Apparatus",
+          "the air-ship attendant"
+        ],
         "inventions": [
-          "doctor",
-          "The man in front",
-          "attendant",
-          "One other passenger",
-          "other passengers",
-          "passengers",
-          "Machine",
-          "the passenger who had dropped his Book",
-          "The passengers",
-          "she",
-          "Humanitarians",
-          "workmen",
-          "spirits of those dead workmen",
-          "He",
-          "his mother",
-          "voices",
+          "The Machine",
+          "dead workmen",
+          "the voices",
           "Ælfrid",
-          "the Danes",
+          "Danes",
           "Mending Apparatus",
-          "my friends",
-          "those who were extruded after the Great Rebellion",
-          "lecturers",
-          "one of the most advanced of them",
-          "a friend",
-          "friend troubled by noise",
+          "the worms",
+          "friends",
+          "Vashti's friend",
+          "friend",
           "audience",
+          "the old and the sick",
           "inhabitants of Sumatra",
           "friend who was a specialist in sympathy",
-          "people in the tunnel",
-          "Homeless"
+          "the people in the tunnel",
+          "the Homeless"
         ]
       },
       {
         "table": "locations",
         "fixture_rows": 6,
-        "candidate_rows": 60,
+        "candidate_rows": 28,
         "aligned": 4,
         "recall": 0.6666666666666666,
-        "precision": 0.17391304347826086,
-        "precision_flat": 0.06666666666666667,
-        "load_bearing_rows": 23,
-        "over_extracted": 37,
+        "precision": 0.2857142857142857,
+        "precision_flat": 0.14285714285714285,
+        "load_bearing_rows": 14,
+        "over_extracted": 14,
         "over_extracted_examples": [
-          "public nurseries",
-          "the room",
-          "the island in the southern hemisphere",
+          "Andredswald",
+          "Cornwall",
+          "Wansdyke",
+          "Roof of the World",
+          "Paris",
+          "Versailles",
           "northern hemisphere",
-          "Rheims",
-          "Alps",
-          "Pekin",
-          "Shrewsbury",
-          "Rye",
-          "Christchurch",
-          "Helsingfors",
-          "the Brazils",
-          "Palermo",
-          "Her room",
-          "Asia",
-          "the Himalayas",
-          "Caucasus",
-          "Greece",
-          "Simla",
-          "Brisbane"
+          "Courland",
+          "Brazil",
+          "central power station",
+          "France",
+          "tremendous platform",
+          "ruined wharf",
+          "vomitory"
         ],
         "denominator": "load-bearing rows (§2: referenced by some event, or aligned)",
         "misses": [
@@ -691,125 +349,75 @@
           "the air-ship"
         ],
         "inventions": [
-          "small room",
-          "earth",
-          "surface of the earth",
-          "public nurseries",
-          "the room",
-          "the island in the southern hemisphere",
-          "the island in the northern hemisphere",
-          "air-ship station",
-          "platform",
-          "northern hemisphere",
-          "Rheims",
-          "Alps",
-          "Pekin",
-          "Shrewsbury",
-          "Rye",
-          "Christchurch",
-          "Helsingfors",
-          "the Brazils",
-          "Palermo",
-          "Her room",
-          "cabin",
-          "Sumatra",
-          "Asia",
-          "Vashti's cabin",
-          "the Himalayas",
-          "Caucasus",
-          "Greece",
-          "Simla",
-          "Brisbane",
-          "Kinchinjunga",
-          "Mount Taygetus",
-          "railway-tunnels of the topmost story",
-          "underground city",
-          "vomitories",
-          "platform of the railway outside my room",
-          "topmost platform",
           "railway-tunnel",
           "shaft",
+          "platform",
           "Wessex",
+          "the room",
           "Andredswald",
           "Cornwall",
           "Wansdyke",
-          "the hollow",
-          "hills of Wessex",
-          "the shaft",
-          "the surface of the earth",
+          "Roof of the World",
+          "the Machine",
+          "surface of the earth",
           "Paris",
           "Versailles",
+          "northern hemisphere",
           "southern hemisphere",
+          "Sumatra",
           "Courland",
-          "the central power station",
+          "Brazil",
+          "central power station",
           "France",
-          "dim tunnel",
-          "cell",
-          "the city",
-          "ruined wharf"
+          "the whole city",
+          "tremendous platform",
+          "ruined wharf",
+          "vomitory"
         ]
       },
       {
         "table": "objects",
         "fixture_rows": 3,
-        "candidate_rows": 40,
+        "candidate_rows": 22,
         "aligned": 3,
         "recall": 1,
-        "precision": 0.075,
-        "precision_flat": 0.075,
-        "load_bearing_rows": 40,
+        "precision": 0.13636363636363635,
+        "precision_flat": 0.13636363636363635,
+        "load_bearing_rows": 22,
         "over_extracted": 0,
         "over_extracted_examples": [],
         "denominator": "all candidate rows — the load-bearing rule is not applied to this table (see #154)",
         "misses": [],
         "inventions": [
-          "round plate",
-          "arm-chair",
-          "reading-desk",
-          "receiver",
-          "isolation knob",
-          "lighting apparatus",
-          "air-ship",
-          "the blue plate",
-          "respirator",
-          "isolation-switch",
-          "speaking-tubes",
-          "bed",
-          "the car",
-          "the Book",
-          "the lift",
-          "The man in front's Book",
-          "blind",
-          "air-ships",
-          "Egression-permit",
-          "ventilation shafts",
-          "live rail",
           "ladder",
-          "pneumatic stopper",
+          "respirator",
+          "bed",
+          "pillow",
           "gloves",
-          "dietetic tabloids",
-          "stopper handle",
+          "handle",
+          "train",
+          "tabloids",
           "stopper",
-          "terrestrial motors",
-          "Book of the Machine",
+          "terrestrial motor",
+          "air-ships",
           "blue optic plates",
-          "gramophone",
-          "cinematophote",
-          "sleeping apparatus",
           "poetry machine",
-          "wires",
+          "Euthanasia",
+          "artificial fruit",
+          "Medical Apparatus",
           "door of her cell",
-          "Medical Apparatus"
+          "reading-stand",
+          "chair"
         ]
       }
     ],
-    "relationship_recall": 0.5,
-    "relationship_matched": 2,
+    "relationship_recall": 0.25,
+    "relationship_matched": 1,
     "relationship_fixture_rows": 4,
-    "relationship_candidate_rows": 25,
+    "relationship_candidate_rows": 15,
     "seed_attributes": {
-      "judged": 0,
-      "supported_at_start": 0,
+      "judged": 1,
+      "supported_at_start": 1,
       "seed_time_errors": 0,
       "contradicted": 0,
       "insufficient": 0,
@@ -820,27 +428,16 @@
   },
   "events": {
     "ground_truth_events": 62,
-    "candidate_events": 184,
-    "matched": 35,
-    "recall": 0.5645161290322581,
+    "candidate_events": 218,
+    "matched": 36,
+    "recall": 0.5806451612903226,
     "missed": [
       "Vashti's room is cataloged: buttons for food, music, clothing, hot and cold baths, literature, correspondence — the room, though it holds nothing, is in touch with everything she cares for",
-      "she fields a burst of correspondence and delivers her lecture on 'Music during the Australian Period' to an audience that never leaves its own armchairs",
-      "in bed, she takes up the Book of the Machine and performs her private ritual: she kisses it three times, inclines her head three times, and murmurs 'O Machine! O Machine!'",
       "she recalls the Book's own line: 'Parents, duties of, cease at the moment of birth' — and reflects that there was always something special about Kuno, and about all her children",
-      "Kuno refuses to speak further until she comes; she presses an unfamiliar button and the wall swings open onto the tunnel — and she shrinks back into the room, seized by 'the terrors of direct experience'",
-      "she tells Kuno she cannot come, she is not well; an apparatus descends from the ceiling and a doctor is summoned through the Machine before she has even finished the sentence",
-      "Kuno says only that something tremendous may happen, and that he will not say what through the Machine",
       "the air-ship service is described as a relic kept running past its usefulness, since travel itself has become nearly pointless — the earth is exactly alike everywhere now",
       "the narrator states plainly what Vashti and the reader now both learn: Homelessness means death — the victim is exposed to the outer air, which kills them",
       "Kuno explains that any infant who promises undue physical strength is destroyed at birth as a demerit; he alone was let live, and it is exactly that strength that let him do what follows",
       "he tells Vashti directly that it is humanity, not the surface, that is dying — that the Machine 'develops, but not on our lines' and has narrowed love itself to a carnal act",
-      "Kuno's respirator falls and is lost; too late, he realizes the gap he widened has been sealed again — the Mending Apparatus has come for him",
-      "a long white worm-like thing crawls out of the shaft in the moonlight and winds itself around his ankle; more follow, denuding the hollow of everything movable",
-      "he is dragged, fighting, back down the shaft and into darkness, striking his head on the ladder before he wakes again in his own room, the worms gone, his friends asking down the speaking-tubes whether he has had any new ideas lately",
-      "Vashti tells Kuno it will end in Homelessness; he says he wishes it would, and that he prefers the mercy of God to the mercy of the Machine",
-      "she asks whether he has ever seen the bones of those extruded onto the surface after the Great Rebellion, and states as settled fact that the surface supports life no longer",
-      "pressed for why he still believes otherwise, Kuno says: because he has seen her — a woman who came to his aid when the worms took him, was entangled as he was, and was killed, luckier than him, by one piercing her throat",
       "the narrator states plainly that Vashti departed, and that in the troubles that followed she never saw her son's face again — judging privately that he was mad",
       "the same speech's reverent closing tone tips into open religion: people begin openly worshipping the Machine, the Book's ritual formulas swell into prayer, and heresy against 'undenominational Mechanism' now risks Homelessness",
       "the narrator is explicit that no one on the Central Committee understands the Machine as a whole any longer — each person masters only a fragment of it, and calls that progress",
@@ -848,26 +445,60 @@
       "from time to time a friend is granted Euthanasia and leaves their room for good; after a poorly received lecture, Vashti sometimes asks for it herself, and is refused, since the death-rate may never exceed the birth-rate",
       "she notes, with irritation rather than alarm, that the music has lately taken to a curious gasping sigh, like someone in pain — and privately can't quite forget the coincidence",
       "the mouldy fruit, the stinking bath water, the jarring noises are all bitterly complained of at first, then quietly accepted as part of how things are — humanity proving endlessly adaptable to the Machine's decline",
+      "the beds fail to appear on summons, all over the world, on the same day — the first stoppage too serious to simply absorb, and crowds begin crying 'Punish that man with Homelessness!' at an imagined saboteur",
+      "the Committee of the Mending Apparatus comes forward and confesses, to calm the panic, that the Mending Apparatus itself is in need of repair",
+      "light dims across the world, the air turns foul, and reading becomes difficult; the lecturer cries 'Courage! courage! What matter so long as the Machine goes on? To it the darkness and the light are one'",
       "rumors of hope and collapse alternate — the Mending Apparatus almost mended, new 'nerve-centres' evolving — while people spend their strength praying to their Books",
+      "then, without the slightest warning, the entire communication-system breaks down at once, everywhere, and the world as they understood it ends",
+      "the hum Vashti has heard since birth stops, and silence itself very nearly kills her — she stumbles to the door hoping the Machine has been mended, and finds the tunnel outside full of people crawling, screaming, dying against the live rail",
+      "she shuts herself back in, and her own room disintegrates around her: the medical apparatus ruptures from the ceiling, the floor heaves, the light and air fail in turn",
       "with the whole Machine breaking apart everywhere at once, Kuno too is driven from his own nearby cell into the same tunnel, though Vashti does not yet know this",
-      "Vashti, still hoping this is not the end, asks if tomorrow someone will simply start the Machine again; Kuno answers 'Never. Humanity has learnt its lesson'"
+      "in the last of the light, she strikes the door switch by chance and is thrown back out into the tunnel among the dying, screaming and praying, the Book still in her bleeding hands",
+      "Vashti crawls toward Kuno's voice over the bodies of the dead, and for the first time in the story they touch — not through the Machine",
+      "dying, Kuno tells her plainly: he has seen the Homeless, spoken to them, loved them — they are real, and they are hiding in the mist and the ferns, waiting for civilization to stop",
+      "Vashti, still hoping this is not the end, asks if tomorrow someone will simply start the Machine again; Kuno answers 'Never. Humanity has learnt its lesson'",
+      "an air-ship crashes through the vomitory into the ruined city as they speak, and for one moment they glimpse the nations of the dead, and scraps of the untainted sky, before they join them"
     ],
-    "pairwise_total": 595,
-    "pairwise_correct": 495,
-    "pairwise_accuracy": 0.8319327731092437,
-    "high_confidence_total": 351,
-    "high_confidence_correct": 310,
-    "high_confidence_accuracy": 0.8831908831908832,
-    "out_of_order_total": 14,
-    "out_of_order_correct": 7,
+    "pairwise_total": 630,
+    "pairwise_correct": 382,
+    "pairwise_accuracy": 0.6063492063492063,
+    "high_confidence_total": 325,
+    "high_confidence_correct": 203,
+    "high_confidence_accuracy": 0.6246153846153846,
+    "out_of_order_total": 20,
+    "out_of_order_correct": 10,
     "out_of_order_accuracy": 0.5,
+    "entailment_unresolved": 14,
+    "entailment_unresolved_beats": [
+      "scene_13_the_mending_apparatus_in_need_of_repair#1",
+      "scene_13_the_mending_apparatus_in_need_of_repair#2",
+      "scene_13_the_mending_apparatus_in_need_of_repair#3",
+      "scene_14_twilight#0",
+      "scene_14_twilight#1",
+      "scene_14_twilight#2",
+      "scene_15_the_silence#0",
+      "scene_15_the_silence#1",
+      "scene_15_the_silence#2",
+      "scene_15_the_silence#3",
+      "scene_16_reunion_in_the_dark#0",
+      "scene_16_reunion_in_the_dark#1",
+      "scene_16_reunion_in_the_dark#2",
+      "scene_16_reunion_in_the_dark#3"
+    ],
     "fabricated": 0,
-    "fabricated_judged": 55,
+    "fabricated_judged": 56,
     "fabricated_examples": [],
-    "ungroundable_events": 2,
+    "ungroundable_events": 9,
     "ungroundable_examples": [
-      "Kuno jumps and catches the handle on the stopper.",
-      "Vashti threatens to complain to the Central Committee if the music is not repaired immediately."
+      "Kuno jumps and catches hold of the handle in the center of the stopper.",
+      "Vashti agrees to talk with Kuno for five minutes.",
+      "Kuno asks Vashti to pay him a visit so they can meet face to face.",
+      "Vashti takes the Book of the Machine and kisses it three times.",
+      "The medical apparatus descends from the ceiling upon Vashti after Kuno telegraphs her doctor.",
+      "Vashti presses the button to reopen the wall, steps onto the platform carrying the Book, and summons the car.",
+      "Vashti tells Kuno she can only stay a few minutes and instructs him to say what he wants to say.",
+      "Vashti demands the music be mended at once or she will complain to the Central Committee.",
+      "Vashti complains to a friend about the worsening state of her music."
     ]
   },
   "not_scored": [
@@ -909,37 +540,37 @@
         "table": "characters",
         "fixture_id": "char_central_committee",
         "fixture_name": "the Central Committee",
-        "candidate_id": "char_central_committee",
-        "candidate_name": "Central Committee",
+        "candidate_id": "char_committee",
+        "candidate_name": "the Committee",
         "how": "judged",
-        "why": "Same governing committee."
+        "why": "Both refer to the governing Committee of the Machine."
       },
       {
         "table": "characters",
         "fixture_id": "char_committee_mending_apparatus",
         "fixture_name": "the Committee of the Mending Apparatus",
-        "candidate_id": "char_committee_of_the_machine",
-        "candidate_name": "Committee of the Machine",
-        "how": "judged",
-        "why": "Candidate's corresponding entity for the committee overseeing the apparatus and repairs."
+        "candidate_id": null,
+        "candidate_name": null,
+        "how": "unaligned",
+        "why": "The candidate models the apparatus itself rather than the committee overseeing it."
       },
       {
         "table": "characters",
         "fixture_id": "char_unnamed_woman",
         "fixture_name": "a woman Kuno met on the surface",
-        "candidate_id": "char_the_woman",
-        "candidate_name": "the woman",
+        "candidate_id": "char_her",
+        "candidate_name": "her",
         "how": "judged",
-        "why": "Same woman Kuno encountered on the surface."
+        "why": "Both refer to the surface-dwelling woman Kuno encountered and saw killed."
       },
       {
         "table": "characters",
         "fixture_id": "char_attendant",
         "fixture_name": "the air-ship attendant",
-        "candidate_id": "char_the_attendant",
-        "candidate_name": "the attendant",
-        "how": "judged",
-        "why": "Same attendant aboard the air-ship."
+        "candidate_id": null,
+        "candidate_name": null,
+        "how": "unaligned",
+        "why": "No candidate row models the air-ship attendant."
       },
       {
         "table": "characters",
@@ -948,7 +579,7 @@
         "candidate_id": "char_famous_lecturer",
         "candidate_name": "famous lecturer",
         "how": "judged",
-        "why": "Same lecturer referred to in the story."
+        "why": "Both refer to the lecturer in the Machine."
       },
       {
         "table": "locations",
@@ -957,16 +588,16 @@
         "candidate_id": "loc_vashti_s_room",
         "candidate_name": "Vashti's room",
         "how": "judged",
-        "why": "Both refer to Vashti's subterranean dwelling room/cell."
+        "why": "Both represent Vashti's private room/cell."
       },
       {
         "table": "locations",
         "fixture_id": "loc_kunos_cell",
         "fixture_name": "Kuno's cell",
-        "candidate_id": "loc_kuno_s_room",
+        "candidate_id": "loc_kuno_room",
         "candidate_name": "Kuno's room",
         "how": "judged",
-        "why": "Both refer to Kuno's initial dwelling room/cell in the Northern Hemisphere."
+        "why": "Both represent Kuno's room/cell."
       },
       {
         "table": "locations",
@@ -975,7 +606,7 @@
         "candidate_id": null,
         "candidate_name": null,
         "how": "unaligned",
-        "why": "No candidate specifically corresponds to Kuno's relocated second cell."
+        "why": "No candidate corresponds specifically to Kuno's reassigned second cell."
       },
       {
         "table": "locations",
@@ -984,7 +615,7 @@
         "candidate_id": null,
         "candidate_name": null,
         "how": "unaligned",
-        "why": "No candidate row represents the air-ship itself."
+        "why": "No candidate represents the air-ship."
       },
       {
         "table": "locations",
@@ -993,25 +624,16 @@
         "candidate_id": "loc_grass_grown_hollow",
         "candidate_name": "grass-grown hollow",
         "how": "judged",
-        "why": "Both refer to the grass-grown hollow on the surface of Wessex that Kuno visits."
+        "why": "Both describe the hollow on the surface of Wessex where Kuno emerged."
       },
       {
         "table": "locations",
         "fixture_id": "loc_the_tunnel",
         "fixture_name": "the tunnel outside the cells",
-        "candidate_id": "loc_tunnel",
+        "candidate_id": "loc_the_tunnel",
         "candidate_name": "the tunnel",
         "how": "judged",
-        "why": "Both refer to the tunnel outside the residential cells."
-      },
-      {
-        "table": "objects",
-        "fixture_id": "obj_book_of_the_machine",
-        "fixture_name": "the Book of the Machine",
-        "candidate_id": "obj_the_book_of_the_machine",
-        "candidate_name": "the Book of the Machine",
-        "how": "exact_name",
-        "why": "normalized name match"
+        "why": "Both refer to the tunnel outside the cells."
       },
       {
         "table": "objects",
@@ -1024,12 +646,21 @@
       },
       {
         "table": "objects",
+        "fixture_id": "obj_book_of_the_machine",
+        "fixture_name": "the Book of the Machine",
+        "candidate_id": "obj_book_of_the_machine",
+        "candidate_name": "Book of the Machine",
+        "how": "judged",
+        "why": "Both refer to the sacred Book of the Machine."
+      },
+      {
+        "table": "objects",
         "fixture_id": "obj_mending_apparatus",
         "fixture_name": "the Mending Apparatus",
         "candidate_id": "obj_mending_apparatus",
         "candidate_name": "mending apparatus",
         "how": "judged",
-        "why": "Exact match for the mending apparatus."
+        "why": "Both refer to the Mending Apparatus that maintains the Machine."
       }
     ],
     "events": [
@@ -1041,22 +672,22 @@
       {
         "truth_id": "scene_01_the_call#1",
         "truth_text": "Kuno asks her to come and see him, not through the Machine — to meet face to face",
-        "candidate_id": "ev_0007"
+        "candidate_id": "ev_0014"
       },
       {
         "truth_id": "scene_01_the_call#2",
         "truth_text": "Vashti is vaguely shocked and refuses, calling the request contrary to the spirit of the age",
-        "candidate_id": "ev_0015"
+        "candidate_id": "ev_0029"
       },
       {
         "truth_id": "scene_01_the_call#3",
         "truth_text": "Kuno describes an idea the stars gave him from the air-ship — four big stars like shoulders and knees, three like a belt, three hanging like a sword, 'like a man' — and says he wants to see them from the surface of the earth itself",
-        "candidate_id": "ev_0009"
+        "candidate_id": "ev_0021"
       },
       {
         "truth_id": "scene_01_the_call#4",
         "truth_text": "his image fades in the blue plate; he has isolated himself, and for a moment Vashti feels lonely",
-        "candidate_id": "ev_0016"
+        "candidate_id": "ev_0030"
       },
       {
         "truth_id": "scene_02_the_book_of_the_machine#0",
@@ -1066,12 +697,12 @@
       {
         "truth_id": "scene_02_the_book_of_the_machine#1",
         "truth_text": "she fields a burst of correspondence and delivers her lecture on 'Music during the Australian Period' to an audience that never leaves its own armchairs",
-        "candidate_id": null
+        "candidate_id": "ev_0034"
       },
       {
         "truth_id": "scene_02_the_book_of_the_machine#2",
         "truth_text": "in bed, she takes up the Book of the Machine and performs her private ritual: she kisses it three times, inclines her head three times, and murmurs 'O Machine! O Machine!'",
-        "candidate_id": null
+        "candidate_id": "ev_0039"
       },
       {
         "truth_id": "scene_02_the_book_of_the_machine#3",
@@ -1081,22 +712,22 @@
       {
         "truth_id": "scene_03_the_decision_to_travel#0",
         "truth_text": "Kuno refuses to speak further until she comes; she presses an unfamiliar button and the wall swings open onto the tunnel — and she shrinks back into the room, seized by 'the terrors of direct experience'",
-        "candidate_id": null
+        "candidate_id": "ev_0046"
       },
       {
         "truth_id": "scene_03_the_decision_to_travel#1",
         "truth_text": "she tells Kuno she cannot come, she is not well; an apparatus descends from the ceiling and a doctor is summoned through the Machine before she has even finished the sentence",
-        "candidate_id": null
+        "candidate_id": "ev_0047"
       },
       {
         "truth_id": "scene_03_the_decision_to_travel#2",
         "truth_text": "Kuno says only that something tremendous may happen, and that he will not say what through the Machine",
-        "candidate_id": null
+        "candidate_id": "ev_0052"
       },
       {
         "truth_id": "scene_03_the_decision_to_travel#3",
         "truth_text": "reconsidering — there was always something special about Kuno — she presses the button a second time and this time does not retreat: she takes up the Book, boards the car, and the journey to the northern hemisphere begins",
-        "candidate_id": "ev_0047"
+        "candidate_id": "ev_0055"
       },
       {
         "truth_id": "scene_04_the_air_ship_journey#0",
@@ -1106,27 +737,27 @@
       {
         "truth_id": "scene_04_the_air_ship_journey#1",
         "truth_text": "the narrator recalls the old civilization's races to 'keep pace with the sun', ended when the Committee declared the pursuit illegal, unmechanical, and punishable by Homelessness — 'of Homelessness more will be said later'",
-        "candidate_id": "ev_0060"
+        "candidate_id": "ev_0073"
       },
       {
         "truth_id": "scene_04_the_air_ship_journey#2",
         "truth_text": "the attendant, made a little rough by her direct duties, steadies Vashti with her hand when sunlight nearly touches her; Vashti is scandalized at being touched at all",
-        "candidate_id": "ev_0064"
+        "candidate_id": "ev_0077"
       },
       {
         "truth_id": "scene_04_the_air_ship_journey#3",
         "truth_text": "Vashti watches the Himalayas, the Caucasus, and Greece pass below and orders each hidden behind a metal blind in turn, murmuring 'No ideas here'",
-        "candidate_id": "ev_0074"
+        "candidate_id": "ev_0083"
       },
       {
         "truth_id": "scene_04_the_air_ship_journey#4",
         "truth_text": "she arrives, by vestibule, lift, and sliding door, at her son's room — which exactly resembles her own",
-        "candidate_id": "ev_0075"
+        "candidate_id": "ev_0087"
       },
       {
         "truth_id": "scene_05_threatened_with_homelessness#0",
         "truth_text": "Vashti complains of the journey's cost to her time and her soul; Kuno tells her flatly that he has been threatened with Homelessness",
-        "candidate_id": "ev_0077"
+        "candidate_id": "ev_0089"
       },
       {
         "truth_id": "scene_05_threatened_with_homelessness#1",
@@ -1141,42 +772,42 @@
       {
         "truth_id": "scene_05_threatened_with_homelessness#3",
         "truth_text": "he describes recovering 'the sense of space' by walking the platforms outside his room until he could measure Near and Far by his own feet again, not by how quickly a train could carry him",
-        "candidate_id": "ev_0091"
+        "candidate_id": "ev_0100"
       },
       {
         "truth_id": "scene_06_the_climb#0",
         "truth_text": "walking every platform in turn, Kuno reasons that the topmost storey, nearest the earth's surface, is the one place a workmen's ventilation shaft from before the Machine might still survive",
-        "candidate_id": "ev_0093"
+        "candidate_id": "ev_0102"
       },
       {
         "truth_id": "scene_06_the_climb#1",
         "truth_text": "he finds a gap in the tiles of a railway tunnel, widens it by hand over repeated visits, and eventually finds a primeval metal ladder leading straight up into darkness",
-        "candidate_id": "ev_0094"
+        "candidate_id": "ev_0103"
       },
       {
         "truth_id": "scene_06_the_climb#2",
         "truth_text": "he trains his arms for weeks in secret, then climbs — cutting his hands on the rungs, moving past the light of the railway into a silence that 'pierced his ears like a sword'",
-        "candidate_id": "ev_0108"
+        "candidate_id": "ev_0114"
       },
       {
         "truth_id": "scene_06_the_climb#3",
         "truth_text": "he reaches a smooth pneumatic stopper sealing the shaft's top, finds a handle by feel alone, and jumps, trusting a voice in the dark that tells him it is worth it whether or not the handle holds",
-        "candidate_id": "ev_0113"
+        "candidate_id": "ev_0119"
       },
       {
         "truth_id": "scene_07_the_hills_of_wessex#0",
         "truth_text": "the stopper is blown out from under him and he is thrown onto the grass of a fern-edged hollow in Wessex, blood pouring from his nose and ears, the escaping artificial air roaring around him",
-        "candidate_id": "ev_0117"
+        "candidate_id": "ev_0121"
       },
       {
         "truth_id": "scene_07_the_hills_of_wessex#1",
         "truth_text": "he sips the leaking air to recover, watches his respirator bob away out of reach overhead, and waits as the hollow slowly fills with breathable air like a bowl filling with water",
-        "candidate_id": "ev_0119"
+        "candidate_id": "ev_0122"
       },
       {
         "truth_id": "scene_07_the_hills_of_wessex#2",
         "truth_text": "climbing to the hollow's rim at evening, he sees the low hills of Wessex and feels that they are alive, sleeping, and that people once loved them",
-        "candidate_id": "ev_0126"
+        "candidate_id": "ev_0128"
       },
       {
         "truth_id": "scene_07_the_hills_of_wessex#3",
@@ -1186,32 +817,32 @@
       {
         "truth_id": "scene_08_the_worms#0",
         "truth_text": "Kuno's respirator falls and is lost; too late, he realizes the gap he widened has been sealed again — the Mending Apparatus has come for him",
-        "candidate_id": null
+        "candidate_id": "ev_0139"
       },
       {
         "truth_id": "scene_08_the_worms#1",
         "truth_text": "a long white worm-like thing crawls out of the shaft in the moonlight and winds itself around his ankle; more follow, denuding the hollow of everything movable",
-        "candidate_id": null
+        "candidate_id": "ev_0142"
       },
       {
         "truth_id": "scene_08_the_worms#2",
         "truth_text": "he is dragged, fighting, back down the shaft and into darkness, striking his head on the ladder before he wakes again in his own room, the worms gone, his friends asking down the speaking-tubes whether he has had any new ideas lately",
-        "candidate_id": null
+        "candidate_id": "ev_0147"
       },
       {
         "truth_id": "scene_09_vashtis_verdict#0",
         "truth_text": "Vashti tells Kuno it will end in Homelessness; he says he wishes it would, and that he prefers the mercy of God to the mercy of the Machine",
-        "candidate_id": null
+        "candidate_id": "ev_0152"
       },
       {
         "truth_id": "scene_09_vashtis_verdict#1",
         "truth_text": "she asks whether he has ever seen the bones of those extruded onto the surface after the Great Rebellion, and states as settled fact that the surface supports life no longer",
-        "candidate_id": null
+        "candidate_id": "ev_0027"
       },
       {
         "truth_id": "scene_09_vashtis_verdict#2",
         "truth_text": "pressed for why he still believes otherwise, Kuno says: because he has seen her — a woman who came to his aid when the worms took him, was entangled as he was, and was killed, luckier than him, by one piercing her throat",
-        "candidate_id": null
+        "candidate_id": "ev_0146"
       },
       {
         "truth_id": "scene_09_vashtis_verdict#3",
@@ -1221,12 +852,12 @@
       {
         "truth_id": "scene_10_two_developments#0",
         "truth_text": "respirators are abolished as vulgar and unproductive of ideas; visiting the earth's surface becomes something only a few complaining lecturers still want to do",
-        "candidate_id": "ev_0147"
+        "candidate_id": "ev_0157"
       },
       {
         "truth_id": "scene_10_two_developments#1",
         "truth_text": "the lecturer's celebrated speech on 'second-hand ideas' argues that first-hand experience is worthless, and that a future generation should learn events only through ever-longer chains of other people's opinions",
-        "candidate_id": "ev_0148"
+        "candidate_id": "ev_0158"
       },
       {
         "truth_id": "scene_10_two_developments#2",
@@ -1251,17 +882,17 @@
       {
         "truth_id": "scene_12_the_machine_stops#0",
         "truth_text": "Vashti learns, almost as an aside, that Kuno has been transferred from the northern hemisphere to a room in the southern, not far from her own",
-        "candidate_id": "ev_0152"
+        "candidate_id": "ev_0162"
       },
       {
         "truth_id": "scene_12_the_machine_stops#1",
         "truth_text": "he refuses to show his face on the plate and says only, with solemnity: 'The Machine stops'",
-        "candidate_id": "ev_0155"
+        "candidate_id": "ev_0165"
       },
       {
         "truth_id": "scene_12_the_machine_stops#2",
         "truth_text": "Vashti laughs in his face; to a friend afterward she calls it impious if it were not mad, and the friend finds the phrase meaningless",
-        "candidate_id": "ev_0156"
+        "candidate_id": "ev_0168"
       },
       {
         "truth_id": "scene_12_the_machine_stops#3",
@@ -1271,7 +902,7 @@
       {
         "truth_id": "scene_13_the_mending_apparatus_in_need_of_repair#0",
         "truth_text": "Vashti's complaints about the music are routed, as always, from the Central Committee to the Committee of the Mending Apparatus, who promise only that the defect 'shall be remedied shortly'",
-        "candidate_id": "ev_0161"
+        "candidate_id": "ev_0172"
       },
       {
         "truth_id": "scene_13_the_mending_apparatus_in_need_of_repair#1",
@@ -1281,17 +912,17 @@
       {
         "truth_id": "scene_13_the_mending_apparatus_in_need_of_repair#2",
         "truth_text": "the beds fail to appear on summons, all over the world, on the same day — the first stoppage too serious to simply absorb, and crowds begin crying 'Punish that man with Homelessness!' at an imagined saboteur",
-        "candidate_id": "ev_0169"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_13_the_mending_apparatus_in_need_of_repair#3",
         "truth_text": "the Committee of the Mending Apparatus comes forward and confesses, to calm the panic, that the Mending Apparatus itself is in need of repair",
-        "candidate_id": "ev_0170"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_14_twilight#0",
         "truth_text": "light dims across the world, the air turns foul, and reading becomes difficult; the lecturer cries 'Courage! courage! What matter so long as the Machine goes on? To it the darkness and the light are one'",
-        "candidate_id": "ev_0172"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_14_twilight#1",
@@ -1301,17 +932,17 @@
       {
         "truth_id": "scene_14_twilight#2",
         "truth_text": "then, without the slightest warning, the entire communication-system breaks down at once, everywhere, and the world as they understood it ends",
-        "candidate_id": "ev_0173"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_15_the_silence#0",
         "truth_text": "the hum Vashti has heard since birth stops, and silence itself very nearly kills her — she stumbles to the door hoping the Machine has been mended, and finds the tunnel outside full of people crawling, screaming, dying against the live rail",
-        "candidate_id": "ev_0176"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_15_the_silence#1",
         "truth_text": "she shuts herself back in, and her own room disintegrates around her: the medical apparatus ruptures from the ceiling, the floor heaves, the light and air fail in turn",
-        "candidate_id": "ev_0178"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_15_the_silence#2",
@@ -1321,17 +952,17 @@
       {
         "truth_id": "scene_15_the_silence#3",
         "truth_text": "in the last of the light, she strikes the door switch by chance and is thrown back out into the tunnel among the dying, screaming and praying, the Book still in her bleeding hands",
-        "candidate_id": "ev_0180"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_16_reunion_in_the_dark#0",
         "truth_text": "Vashti crawls toward Kuno's voice over the bodies of the dead, and for the first time in the story they touch — not through the Machine",
-        "candidate_id": "ev_0184"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_16_reunion_in_the_dark#1",
         "truth_text": "dying, Kuno tells her plainly: he has seen the Homeless, spoken to them, loved them — they are real, and they are hiding in the mist and the ferns, waiting for civilization to stop",
-        "candidate_id": "ev_0187"
+        "candidate_id": null
       },
       {
         "truth_id": "scene_16_reunion_in_the_dark#2",
@@ -1341,10 +972,10 @@
       {
         "truth_id": "scene_16_reunion_in_the_dark#3",
         "truth_text": "an air-ship crashes through the vomitory into the ruined city as they speak, and for one moment they glimpse the nations of the dead, and scraps of the untainted sky, before they join them",
-        "candidate_id": "ev_0188"
+        "candidate_id": null
       }
     ]
   },
-  "judge_cost_usd": 0.25113749999999996,
-  "judge_calls": 28
+  "judge_cost_usd": 0.41929500000000003,
+  "judge_calls": 96
 }
