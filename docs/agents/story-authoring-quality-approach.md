@@ -720,3 +720,64 @@ honestly.
 - #143 is the remaining wave-2 ticket, and the held-out fixture has already handed it a case.
 - `prototypes/segmentation/*/score.json` now carry a `stale` block: segmentation reads the
   extraction runs this wave replaced, and #146 owns that re-measure in wave 3.
+
+---
+
+## 11. Wave 3: segmentation re-measured, and the falsification branch fires
+
+#146 said to re-measure before touching anything, and named the four numbers that would tell the
+story: scene-count ratio, boundary precision, POV agreement, `unused_seed_entity`. All three
+fixtures, now clean runs (0 fell back to signals on every one):
+
+| | scene ratio | boundary precision | boundary recall | POV accuracy | unused_seed_entity |
+| --- | --- | --- | --- | --- | --- |
+| *A Christmas Carol* — pre | 2.35 | 0.261 | — | 0.000 | 190 |
+| *A Christmas Carol* — post | **2.15** | 0.357 | 0.833 | **1.000** | 147 |
+| Cinderella — pre | 0.857 | 0.818 | 0.750 | 0.692 | 20 |
+| Cinderella — post | 0.929 | **0.583** | **0.636** | 0.818 | 13 |
+| *the-machine-stops* — held out, first measurement | **2.625** | **0.244** | 0.909 | 0.833 | 32 |
+
+### §4.6's own falsification branch fired, on its own terms
+
+*"If the ratio stays near 2.35 with a clean entity set, the inheritance hypothesis is wrong and
+this is a plain threshold problem on longer texts... no single threshold will serve."* The Carol's
+entity set is now genuinely clean — POV agreement 0.00 → 1.00 says so more decisively than any
+other number in this map — and the ratio moved from 2.35 to 2.15. That is not "resolved by #143,"
+it is "near 2.35." The inheritance hypothesis is falsified on its own stated test.
+
+*the-machine-stops* makes the case on a text #143's entity-duplication problem never touched: its
+extraction was canonicalized from the start (11 merges off a modest 83-row roster, nothing like
+the Carol's original 155), so there is no inflated-cast history for over-segmentation to inherit
+from. It still over-segments harder than the Carol — ratio 2.625, precision 0.244, both worse. The
+one variable both long texts share and Cinderella doesn't is length: 456 events and 218 events
+against Cinderella's 75. That is the correlation the ticket's own title named
+("over-segments on **longer**, higher-entity-count texts") before this map spent two waves
+chasing the entity-count half of that sentence. §4.6's fallback conclusion reads now as the live
+one: *"the honest fix is length-aware calibration... no single threshold will serve."*
+
+### Cinderella's result is not a clean win, and is worth stating as such
+
+POV accuracy improved (0.692 → 0.818) and the scene count landed nearer the fixture (0.857 → 0.929
+ratio) — but boundary precision and recall both **dropped** (0.818 → 0.583, 0.750 → 0.636). More
+of wave 2's events changed which cut points the judge draws, not only how many. A ratio closer to
+1.0 and a POV number that improved are not the same claim as "segmentation got better" on this
+fixture, and reporting only the two numbers that moved the right way would be the kind of
+overstatement §6 warns against.
+
+### What this means for #146
+
+The ticket's own escape hatch — *"whatever gap remains after [#143 lands] is segmentation's own to
+address"* — is now the live branch, on evidence from a genuinely held-out third fixture, not a
+guess. It stays open rather than closing here: the fix the falsification branch names
+(length-aware calibration, or a `WINDOW_EVENTS`/boundary-prompt change that scales with source
+size) is real design work, not a threshold nudge, and landing one now — after the credit outage
+this wave already cost, and against the user's own standing sprawl concern — would be tuning
+against a hypothesis this session doesn't have the budget left to falsify properly. Recorded here
+as the next concrete step rather than opened as a new ticket: #146 already owns it.
+
+### The held-out fixture, used exactly as designed
+
+*the-machine-stops* was segmented for the first time this wave, after being tuned against never.
+Its result did what a held-out fixture is for: it turned "the Carol over-segments" from a
+single-text anecdote consistent with several explanations into a two-text pattern consistent with
+only one. That is the entire value #132 built it for, delivered on the first real use.
