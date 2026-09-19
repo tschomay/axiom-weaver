@@ -42,7 +42,7 @@ import {
 } from '../schema/story-package';
 import { sceneCardCrossReferences } from '../fixtures/cross-reference';
 import { walkPlantObligations } from '../plants/obligation-walk';
-import { STYLE_PRESETS, cardFromPreset } from '../voice/voice-card';
+import { STYLE_PRESETS, cardFromPreset, parseVoiceCard, voiceCardIsBlank } from '../voice/voice-card';
 import { WorldModel } from '../world-model/world-model';
 
 export type ProblemSeverity = 'error' | 'warn';
@@ -178,13 +178,19 @@ function entitiesUsedByScenes(scenes: readonly SceneCard[]): Set<string> {
 }
 
 /**
- * Whether the Voice Card is still exactly one of the five presets.
+ * Whether the Voice Card is nothing the author put their own stamp on: blank (the `{}` every new
+ * Manuscript starts from), or still exactly one of the five presets.
  *
  * ADR 0007 materializes an override fully onto the card rather than storing a diff, so "equals a
  * preset" is a real signal that the author never opened it, not an artifact of how overrides are
- * stored.
+ * stored. A blank card is never rejected — the read-time run loop, an author-time compile, and
+ * the stand-in writer all accept it and just omit the voice instruction — but it is exactly the
+ * "nothing here is specific to this story" state this warning already exists to name, and it was
+ * previously invisible to it: `{}` serializes to nothing that equals a preset, so an untouched
+ * blank card produced zero warnings even though a preset an author never edited produces one.
  */
 function isUntouchedPreset(voiceCard: Record<string, unknown>): boolean {
+  if (voiceCardIsBlank(parseVoiceCard(voiceCard))) return true;
   const serialized = JSON.stringify(voiceCard, Object.keys(voiceCard).sort());
   return STYLE_PRESETS.some((preset) => {
     const card = cardFromPreset(preset.id) as unknown as Record<string, unknown>;
@@ -341,7 +347,9 @@ function warnings(pkg: StoryPackage, model: WorldModel): PackageProblem[] {
       severity: 'warn',
       code: 'voice_card_untouched',
       path: 'voice_card',
-      message: 'is still exactly a style preset — nothing on it is specific to this story',
+      message: voiceCardIsBlank(parseVoiceCard(pkg.voice_card))
+        ? 'is blank — every scene will be written in whatever voice the model reaches for'
+        : 'is still exactly a style preset — nothing on it is specific to this story',
     });
   }
 

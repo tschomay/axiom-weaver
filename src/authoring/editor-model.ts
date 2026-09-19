@@ -14,7 +14,12 @@
 import { BagSchema, type BagValue, type WorldModelSeed } from '../schema/story-package';
 import type { DraftStoryPackage } from '../schema/manuscript';
 import { columnAuthority, type TableName, type Tier } from '../schema/tiers';
-import { STYLE_PRESETS, cardFromPreset, type VoiceCard } from '../voice/voice-card';
+import {
+  STYLE_PRESETS,
+  cardFromPreset,
+  voiceCardIsBlank as cardIsBlank,
+  type VoiceCard,
+} from '../voice/voice-card';
 
 // --- Sections -----------------------------------------------------------------------------
 
@@ -421,11 +426,7 @@ export function presetChoices(): Array<{ id: string; label: string }> {
 
 /** Whether the card is still untouched — the state a new story's `{}` block starts in. */
 export function voiceCardIsBlank(card: VoiceCard): boolean {
-  return (
-    card.based_on === null &&
-    card.imagery_palette.length === 0 &&
-    VOICE_TEXT_FIELDS.every((entry) => card[entry.field] === '')
-  );
+  return cardIsBlank(card);
 }
 
 // --- Publishing, said before the author commits -------------------------------------------

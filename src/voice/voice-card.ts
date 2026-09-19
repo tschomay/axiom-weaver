@@ -14,13 +14,20 @@
 import { z } from 'zod';
 
 export const VoiceCardSchema = z.object({
-  person: z.string().min(1),
-  tense: z.string().min(1),
-  narrative_distance: z.string().min(1),
-  register: z.string().min(1),
-  sentence_rhythm: z.string().min(1),
+  // Blank (not `.min(1)`) on purpose: a story with no Voice Card at all — the state every new
+  // Manuscript starts in (`envelope()` in `authoring/manuscript.ts` writes `voice_card: {}`) — is
+  // a legitimate, publishable package (the editor's own copy says so: "A story publishes fine
+  // without a Voice Card ... every scene will be written in whatever voice the model reaches
+  // for"). Rejecting a blank field here would make that promise false everywhere this schema
+  // gates a real write — the read-time run loop, an author-time compile, and the stand-in writer
+  // all parse the *whole* package's card unconditionally, not only at publish.
+  person: z.string().default(''),
+  tense: z.string().default(''),
+  narrative_distance: z.string().default(''),
+  register: z.string().default(''),
+  sentence_rhythm: z.string().default(''),
   imagery_palette: z.array(z.string().min(1)).default([]),
-  dialogue_density: z.string().min(1),
+  dialogue_density: z.string().default(''),
   /** Empty by default. Rendered only when set; calibration only, never content to reuse. */
   style_exemplar: z.string().default(''),
   /** The preset this card started from, for labelling and reset. Never read when rendering. */
@@ -28,6 +35,26 @@ export const VoiceCardSchema = z.object({
 });
 
 export type VoiceCard = z.infer<typeof VoiceCardSchema>;
+
+/** The seven text fields whose blankness (with no preset and no imagery) makes a card blank. */
+const VOICE_CARD_TEXT_FIELDS = [
+  'person',
+  'tense',
+  'narrative_distance',
+  'register',
+  'sentence_rhythm',
+  'dialogue_density',
+  'style_exemplar',
+] as const satisfies ReadonlyArray<keyof VoiceCard>;
+
+/** Whether the card is still untouched — the state a new story's `{}` block starts in. */
+export function voiceCardIsBlank(card: VoiceCard): boolean {
+  return (
+    card.based_on === null &&
+    card.imagery_palette.length === 0 &&
+    VOICE_CARD_TEXT_FIELDS.every((field) => card[field] === '')
+  );
+}
 
 export interface StylePreset {
   readonly id: string;
@@ -158,8 +185,15 @@ export function parseVoiceCard(raw: Record<string, unknown>): VoiceCard {
  * deliberately *not* rendered here — ADR 0007 decision 5 keeps tone textually separate so it
  * modulates within the voice instead of editing it, and ADR 0012 decision 2 puts the tone line in
  * the volatile tail, on the far side of a cache boundary from this block.
+ *
+ * A blank card (`voiceCardIsBlank`) renders as `''` rather than a block full of empty sentences
+ * ("Point of view: , tense.") — the assembler's header already drops empty segments
+ * (`context-assembler.ts`'s `.filter((block) => block !== '')`), so an unfilled Voice Card simply
+ * leaves no voice instruction in the prompt, matching what the editor tells an author to expect.
  */
 export function renderVoiceCard(card: VoiceCard): string {
+  if (voiceCardIsBlank(card)) return '';
+
   const lines = [
     'VOICE (story-level, stable across the whole telling):',
     `- Point of view: ${card.person}, ${card.tense} tense. Narrative distance: ${card.narrative_distance}.`,

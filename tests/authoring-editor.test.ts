@@ -168,9 +168,11 @@ describe('the Voice Card is written out whole (ADR 0007 decision 4)', () => {
   });
 
   it('reads a brand-new story’s empty block without throwing', () => {
-    // `parseVoiceCard` refuses this — correctly, it is not a publishable card — so the editor
-    // needs its own forgiving read. The strict parse still happens, at publish.
-    expect(() => parseVoiceCard({})).toThrow();
+    // A blank card is a publishable one — the editor's own copy says so ("every scene will be
+    // written in whatever voice the model reaches for") — so `parseVoiceCard` accepts it exactly
+    // like the editor's own forgiving `draftVoiceCard` read does, and both come back blank.
+    expect(() => parseVoiceCard({})).not.toThrow();
+    expect(parseVoiceCard({})).toEqual(draftVoiceCard({}));
     const card = draftVoiceCard({});
     expect(card.person).toBe('');
     expect(card.imagery_palette).toEqual([]);
