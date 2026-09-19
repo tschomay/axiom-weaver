@@ -108,6 +108,19 @@ describe("the Working Draft's scene list (ADR 0016 §1, surface 3)", () => {
     });
   });
 
+  it('compiles a scene from a package whose Voice Card is blank, like a freshly Generated one', async () => {
+    // Every package the Generate flow hands to the import path (ADR 0021 §3) — and every
+    // brand-new hand-authored Manuscript — starts with `voice_card: {}`. Compiling must not
+    // depend on an author having visited the Voice section first.
+    await withRepository(async (repository) => {
+      const pkg: StoryPackage = { ...(await readFixturePackage('cinderella')), voice_card: {} };
+      await expect(compileDraft(repository, pkg, 1)).resolves.not.toThrow();
+
+      const view = await buildDraftView(repository, pkg);
+      expect(view.scenes.filter((scene) => scene.compiled)).toHaveLength(1);
+    });
+  });
+
   it('carries the source scene’s diff on every scene a recompile flagged', async () => {
     await withRepository(async (repository) => {
       const pkg = await readFixturePackage('cinderella');
@@ -455,6 +468,27 @@ describe("the reader's choice (ADR 0014 §3)", () => {
       // Newest first: the telling a reader wants is almost always the one that just finished.
       expect(view.runs.map((run) => run.run_id)).toEqual([second, first]);
       expect(view.baked?.run_id).toBe(first);
+    });
+  });
+
+  it('runs a telling to completion against a package whose Voice Card is blank', async () => {
+    // Before the fix, `parseVoiceCard` threw on `{}` at the top of `runTelling`, before the
+    // manifest was ever written (`putEditionManifest` runs after it) — so the run was invisible
+    // to every reader-facing surface, and a reader polling its status saw nothing but 404s until
+    // the client gave up and reported the run "lost."
+    await withRepository(async (repository) => {
+      const pkg: StoryPackage = {
+        ...(await readFixturePackage('the-dragon-of-thistlewick')),
+        voice_card: {},
+      };
+      await repository.putPackage(pkg);
+
+      const runId = mintRunId(pkg.story_id);
+      const result = await runTelling({ pkg, client: new SyntheticWriterClient(pkg), repository, runId });
+      expect(result.manifest.status).toBe('complete');
+
+      const view = await buildTellingsView(repository, pkg);
+      expect(view.runs.map((run) => run.run_id)).toContain(runId);
     });
   });
 });

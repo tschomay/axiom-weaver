@@ -66,6 +66,16 @@ describe('the Voice Card (ADR 0007)', () => {
     expect(renderSceneTone('wistful')).toContain('never overrides the voice above');
     expect(renderSceneTone(undefined)).toBe('');
   });
+
+  it('accepts a blank card — the state a new story’s `{}` block parses as — and renders nothing', () => {
+    // A new Manuscript, and every package a Generate run hands to the import path, starts with
+    // `voice_card: {}`. Nothing that reads a package's Voice Card unconditionally (the read-time
+    // run loop, an author-time compile, the stand-in writer) may throw on that, because none of
+    // them run only after an author has visited the Voice section.
+    const blank = parseVoiceCard({});
+    expect(blank.person).toBe('');
+    expect(renderVoiceCard(blank)).toBe('');
+  });
 });
 
 describe('the imagery ledger (ADR 0010)', () => {

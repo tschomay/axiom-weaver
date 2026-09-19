@@ -192,6 +192,18 @@ describe('warnings never block', () => {
     expect(result.warnings.map((problem) => problem.code)).toContain('voice_card_untouched');
   });
 
+  it('flags a blank Voice Card too, and still publishes', async () => {
+    // `{}` — what every new Manuscript, and every Generate run's output, starts with — used to
+    // slip past this check entirely: it serializes to nothing that equals a preset, so an
+    // untouched blank card produced zero warnings while an untouched preset produced one.
+    const pkg = structuredClone(await fixture('the-dragon-of-thistlewick'));
+    pkg.voice_card = {};
+
+    const result = lintStoryPackage(pkg);
+    expect(result.publishable).toBe(true);
+    expect(result.warnings.map((problem) => problem.code)).toContain('voice_card_untouched');
+  });
+
   it('says nothing about length budgets when no scene has one', async () => {
     const pkg = structuredClone(await fixture('the-dragon-of-thistlewick'));
     for (const card of pkg.scene_cards) delete card.length_budget;
