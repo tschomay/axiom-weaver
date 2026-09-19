@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { storyRepository } from '@/persistence';
 import { runTelling } from '@/edition/run-loop';
 import { mintRunId } from '@/edition/edition';
@@ -13,6 +13,8 @@ import { SyntheticWriterClient } from '@/writer/synthetic-client';
 import { scenesInOrder } from '@/schema/story-package';
 
 export const dynamic = 'force-dynamic';
+/** A live multi-scene run can outrun the platform's default serverless ceiling. */
+export const maxDuration = 300;
 
 /**
  * The three-way reader choice's third arm (ADR 0014 §3), and the read side of the other two.
@@ -43,12 +45,17 @@ export async function GET(
  * reader-facing state during a compile is scene-count progress against it (§4), and rejoining
  * their own still-in-flight run means presenting this id again.
  *
- * **Where the Workflow goes.** On Vercel this handler starts a durable Workflow run and returns;
- * the loop's `StepRunner` seam is what WDK's `"use step"` wraps, per ADR 0014 §2. Started inline
- * here — deliberately not awaited — the same loop runs to completion in a long-lived process
- * (`npm run dev`, `npm run telling`), which is what makes the mechanism developable before the
- * platform is wired up. It is not a substitute for durability: a serverless invocation that ends
- * takes an un-awaited loop with it, and only the scenes already flushed to Blob survive.
+ * **Where the Workflow goes.** Eventually this handler starts a durable Workflow run and returns;
+ * the loop's `StepRunner` seam is what WDK's `"use step"` wraps, per ADR 0014 §2. Until that's
+ * wired up, the loop runs inline, handed to `next/server`'s `after()` rather than merely started
+ * un-awaited: a bare `void runTelling(...)` races the function's own response against the loop's
+ * first `await`, and on a real serverless invocation the platform is free to freeze the runtime
+ * the instant the response is sent, which is indistinguishable from the loop never running at all
+ * (issue: a fresh telling stalling at "0 of N scenes" until the client's own stalled-run timeout
+ * fires). `after()` extends the invocation's lifetime — via Vercel's `waitUntil` under the hood —
+ * for exactly this route's `maxDuration`, which is not full durability (a run longer than that
+ * ceiling still dies mid-flight, same as `npm run dev` dying with its process) but is what makes
+ * an ordinary telling actually finish before the Workflow migration lands.
  */
 export async function POST(
   request: Request,
@@ -91,17 +98,19 @@ export async function POST(
   const runId = mintRunId(storyId);
   const scenes = scenesInOrder(pkg).length;
 
-  void runTelling({
-    pkg,
-    client,
-    repository,
-    runId,
-    writerModel,
-  }).catch((error: unknown) => {
-    // The run's own failure path has already marked the manifest `failed` and flushed it; this is
-    // only so a crash is not silent in the server log.
-    console.error(`telling ${runId} stopped:`, error);
-  });
+  after(() =>
+    runTelling({
+      pkg,
+      client,
+      repository,
+      runId,
+      writerModel,
+    }).catch((error: unknown) => {
+      // The run's own failure path has already marked the manifest `failed` and flushed it; this
+      // is only so a crash is not silent in the server log.
+      console.error(`telling ${runId} stopped:`, error);
+    }),
+  );
 
   return NextResponse.json(
     {

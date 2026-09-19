@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { bearerToken, isAuthorizedAuthorRequest } from '@/admin/authorize';
 import { storyRepository } from '@/persistence';
 import {
@@ -16,6 +16,8 @@ import { mintAuthoringRunId } from '@/authoring/run';
 import { isSelectableWriterModel, writerModelFromEnv } from '@/writer/model-client';
 
 export const dynamic = 'force-dynamic';
+/** A live multi-stage run can outrun the platform's default serverless ceiling. */
+export const maxDuration = 300;
 
 function parsePremise(body: Record<string, unknown>): Premise | { error: string } {
   const premise = body.premise;
@@ -56,10 +58,12 @@ function parsePremise(body: Record<string, unknown>): Premise | { error: string 
 /**
  * "Generate a new story from a premise" (ADR 0021, #172).
  *
- * The same mint-id / start-un-awaited / `202` shape the tellings route established
- * (`app/api/stories/[storyId]/tellings/route.ts`): this handler mints an Authoring run id,
- * starts `runGenerate` without awaiting it, and hands the id back immediately so the caller polls
- * `GET /api/authoring/generate/{runId}` for stage-based progress (ADR 0021 decision 5).
+ * The same mint-id / start-in-`after` / `202` shape the tellings route established
+ * (`app/api/stories/[storyId]/tellings/route.ts`, which explains why a bare un-awaited start
+ * isn't enough on a real serverless invocation): this handler mints an Authoring run id, starts
+ * `runGenerate` inside `after()` so the invocation survives past the response, and hands the run
+ * id back immediately so the caller polls `GET /api/authoring/generate/{runId}` for stage-based
+ * progress (ADR 0021 decision 5).
  *
  * The cost guard is this route itself: an explicit POST is the confirm action (the form never
  * submits on its own), and `model` is restricted to `SELECTABLE_WRITER_MODELS` the same way the
@@ -147,11 +151,13 @@ export async function POST(request: Request) {
   const brief = materializeBrief(briefInput);
   const repository = storyRepository();
 
-  void runGenerate({ brief, client, repository, runId, model }).catch((error: unknown) => {
-    // The run's own failure path has already marked the manifest `failed` and flushed it; this is
-    // only so a crash outside that path is not silent in the server log.
-    console.error(`authoring run ${runId} stopped:`, error);
-  });
+  after(() =>
+    runGenerate({ brief, client, repository, runId, model }).catch((error: unknown) => {
+      // The run's own failure path has already marked the manifest `failed` and flushed it; this
+      // is only so a crash outside that path is not silent in the server log.
+      console.error(`authoring run ${runId} stopped:`, error);
+    }),
+  );
 
   return NextResponse.json(
     { run_id: runId, model, status_path: `/api/authoring/generate/${runId}` },
