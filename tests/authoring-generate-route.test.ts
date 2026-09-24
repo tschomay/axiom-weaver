@@ -105,6 +105,15 @@ describe('POST /api/authoring/generate — request validation', () => {
     expect(response.status).toBe(400);
   });
 
+  it('rejects an event_count outside the band rather than quietly clamping it', async () => {
+    for (const event_count of [3, 29]) {
+      const response = await routes.generate.POST(post({ ...validBody, event_count }));
+      expect(response.status).toBe(400);
+      const body = (await response.json()) as { error: string };
+      expect(body.error).toContain('between 4 and 28');
+    }
+  });
+
   it('rejects an unknown plant_density', async () => {
     const response = await routes.generate.POST(post({ ...validBody, plant_density: 'extreme' }));
     expect(response.status).toBe(400);

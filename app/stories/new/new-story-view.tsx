@@ -12,12 +12,15 @@ import { FileOpenButton } from '../[storyId]/edit/controls';
 import { useStoryIdCheck } from '../[storyId]/edit/use-story-id-check';
 import {
   EVENT_COUNT_BAND,
+  EVENTS_PER_SCENE,
+  SHORT_ARC_EVENTS,
   PLANT_DENSITIES,
   PLOT_SHAPE_IDS,
   materializePlotShape,
   type PlantPolicy,
   type PremiseModules,
 } from '@/arc/brief';
+import { pickRandomPremise } from '@/arc/random-premises';
 import { PASTED_SOURCE_MAX_WORDS, PASTED_SOURCE_MIN_WORDS, countWords } from '@/extraction/limits';
 
 /** The Generate tab's 8 optional structured-premise fields (ADR 0021, #172). */
@@ -119,6 +122,19 @@ export function NewStoryView({
   const [eventCount, setEventCount] = useState<number>(EVENT_COUNT_BAND.default);
   const [plantDensity, setPlantDensity] = useState<PlantPolicy['density']>('normal');
   const [spanGuidance, setSpanGuidance] = useState(true);
+  // The title the last "Surprise me" filled in, so a second press may replace it but a title the
+  // author typed themselves is never overwritten.
+  const [randomTitle, setRandomTitle] = useState<string | null>(null);
+
+  const fillRandomPremise = (): void => {
+    const picked = pickRandomPremise(randomTitle);
+    setLogline(picked.premise.logline);
+    setModules({ ...picked.premise.modules });
+    setUseModules(true);
+    setPlotShapePreset(picked.plot_shape_preset);
+    if (title === '' || title === randomTitle) setTitle(picked.title);
+    setRandomTitle(picked.title);
+  };
 
   // --- Extract (ADR 0021, #173) ---------------------------------------------------------------
 
@@ -542,6 +558,18 @@ export function NewStoryView({
           </p>
 
           <div className="field">
+            <div className="row-actions">
+              <button type="button" className="action" onClick={fillRandomPremise}>
+                Surprise me
+              </button>
+            </div>
+            <span className="hint">
+              Fills in a ready-made premise and plot shape to edit or generate as-is. Free — no
+              model call until you press Generate.
+            </span>
+          </div>
+
+          <div className="field">
             <label>
               <span className="label-text">Logline</span>
               <textarea
@@ -619,7 +647,10 @@ export function NewStoryView({
             </label>
             <span className="hint">
               {EVENT_COUNT_BAND.min}–{EVENT_COUNT_BAND.max} Fabula events; roughly{' '}
-              {Math.round(eventCount / 1.4)} Scene Cards once segmented.
+              {Math.max(1, Math.round(eventCount / EVENTS_PER_SCENE))} Scene Cards once segmented.
+              {eventCount < SHORT_ARC_EVENTS
+                ? ' A story this short has no room for long-range setups and payoffs, so none are asked for.'
+                : ''}
             </span>
           </div>
 
@@ -671,7 +702,7 @@ export function NewStoryView({
             </button>
           </div>
           {title.trim() === '' && genStatus !== 'running' ? (
-            <span className="hint">Set a title below first — it names the drafted arc.</span>
+            <p className="meta">Set a title below first — it names the drafted arc.</p>
           ) : null}
 
           {genKind === 'generate' ? runStatusLines : null}
@@ -797,7 +828,7 @@ export function NewStoryView({
             </button>
           </div>
           {extractFrom === 'paste' && title.trim() === '' && genStatus !== 'running' ? (
-            <span className="hint">Set a title below first — it names the extracted story.</span>
+            <p className="meta">Set a title below first — it names the extracted story.</p>
           ) : null}
 
           {genKind === 'extract' ? runStatusLines : null}

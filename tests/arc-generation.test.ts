@@ -16,6 +16,9 @@ import { lintPackage } from '../src/authoring/lint';
 import { parseImport } from '../src/authoring/transfer';
 import {
   EVENT_COUNT_BAND,
+  MEASURED_EVENT_COUNT_MIN,
+  PLOT_SHAPE_IDS,
+  SHORT_ARC_EVENTS,
   eventCountForSceneTarget,
   materializeBrief,
   materializePlotShape,
@@ -40,7 +43,8 @@ import {
   type JudgeResponse,
 } from '../src/arc/judge';
 import { briefsFor } from '../src/arc/premises';
-import { renderArcPrompt, arcResponseJsonSchema } from '../src/arc/prompt';
+import { renderArcPrompt, arcResponseJsonSchema, phaseEventCounts } from '../src/arc/prompt';
+import { RANDOM_PREMISES, pickRandomPremise } from '../src/arc/random-premises';
 import cinderella from '../fixtures/cinderella/package.json';
 
 /** A small, deliberately valid arc: 5 events, one span-3 plant/payoff pair. */
@@ -149,6 +153,79 @@ describe('the input surface', () => {
     expect(tight.target_edges).toBeGreaterThan(loose.target_edges);
     // `loose` sits at the human-authored fixtures' own rate: 2 edges / 14 scenes, 3 / 20.
     expect(loose.target_edges).toBeLessThanOrEqual(4);
+  });
+
+  it('leaves every measured-length policy exactly as #119 measured it', () => {
+    for (const density of ['tight', 'normal', 'loose'] as const) {
+      for (let events = MEASURED_EVENT_COUNT_MIN; events <= EVENT_COUNT_BAND.max; events += 1) {
+        const rate = density === 'tight' ? 0.3 : density === 'normal' ? 0.2 : 0.14;
+        const edges = Math.max(2, Math.round(events * rate));
+        expect(plantPolicyFor(density, events)).toEqual({
+          density,
+          target_edges: edges,
+          min_span: 3,
+          long_range_edges: Math.max(1, Math.floor(edges / 2)),
+          long_range_span: Math.max(4, Math.floor(events / 2)),
+        });
+      }
+    }
+  });
+
+  it('lets an author ask for a short story, and stops asking a short arc for long-range pairs', () => {
+    const brief = materializeBrief({
+      story_id: 's', title: 't', premise: { logline: 'x', modules: null },
+      plot_shape_preset: 'mystery', event_count: EVENT_COUNT_BAND.min,
+    });
+    expect(brief.event_count).toBe(4);
+    expect(brief.plant_policy.long_range_edges).toBe(0);
+    expect(brief.plant_policy.min_span).toBe(1);
+    expect(brief.cast.characters).toBeLessThan(4);
+
+    const prompt = renderArcPrompt(brief);
+    expect(prompt).not.toContain('must span');
+    expect(prompt).not.toMatch(/about -\d/);
+    expect(prompt).not.toContain('about 0 events');
+    expect(prompt).toContain('fold it into a neighbouring event');
+    expect(prompt).toContain('one character\nmay hold more than one role');
+
+    expect(plantPolicyFor('normal', SHORT_ARC_EVENTS).long_range_edges).toBeGreaterThan(0);
+  });
+
+  it('refuses an event count outside the band instead of quietly clamping it', () => {
+    const at = (event_count: number) => () =>
+      materializeBrief({
+        story_id: 's', title: 't', premise: { logline: 'x', modules: null },
+        plot_shape_preset: 'quest', event_count,
+      });
+    expect(at(EVENT_COUNT_BAND.min - 1)).toThrow(RangeError);
+    expect(at(EVENT_COUNT_BAND.max + 1)).toThrow(RangeError);
+    expect(at(6.5)).toThrow(RangeError);
+  });
+
+  it('shares events across phases without ever handing one a zero or negative count it cannot fold', () => {
+    for (const id of PLOT_SHAPE_IDS) {
+      const shares = materializePlotShape(id).phases.map((phase) => phase.share);
+      for (let events = EVENT_COUNT_BAND.min; events <= EVENT_COUNT_BAND.max; events += 1) {
+        const counts = phaseEventCounts(shares, events);
+        expect(counts.reduce((sum, count) => sum + count, 0)).toBe(events);
+        expect(counts.every((count) => count >= 0)).toBe(true);
+        if (events >= MEASURED_EVENT_COUNT_MIN) {
+          // The allocation #119's prompts used, unchanged wherever it gave every phase an event.
+          // (It did not always: a 13-event mystery came out [3,5,3,2,0] — "about 0 events" for
+          // the Cost phase. #119's runs were all 20 events, so no measurement rests on that case.)
+          let allocated = 0;
+          const total = shares.reduce((sum, share) => sum + share, 0);
+          const original = shares.map((share, index) => {
+            const count = index === shares.length - 1
+              ? events - allocated
+              : Math.max(1, Math.round((share / total) * events));
+            allocated += count;
+            return count;
+          });
+          if (original.every((count) => count >= 1)) expect(counts).toEqual(original);
+        }
+      }
+    }
   });
 
   it('shows span guidance only in the arm that asked for it', () => {
@@ -602,5 +679,35 @@ describe('the two rebuilt §4.2 criteria (#147)', () => {
     expect(judgeResponseJsonSchema()).toMatchObject({
       properties: { closest_stock_shape: { enum: [...STOCK_SHAPES] } },
     });
+  });
+});
+
+describe('the Generate tab\'s ready-made premises', () => {
+  it('are complete typed premises on real plot shapes, and briefs build from every one', () => {
+    const shapes = new Set(RANDOM_PREMISES.map((entry) => entry.plot_shape_preset));
+    expect(shapes).toEqual(new Set(PLOT_SHAPE_IDS));
+    for (const entry of RANDOM_PREMISES) {
+      expect(entry.title.trim()).not.toBe('');
+      expect(entry.premise.logline.trim()).not.toBe('');
+      for (const value of Object.values(entry.premise.modules)) expect(value.trim()).not.toBe('');
+      expect(() =>
+        materializeBrief({
+          story_id: 's', title: entry.title, premise: entry.premise,
+          plot_shape_preset: entry.plot_shape_preset,
+        }),
+      ).not.toThrow();
+    }
+  });
+
+  it('stay clear of the defaults the prompt tells the generator to avoid', () => {
+    const avoid = /lighthouse|clockmaker|librarian|cartographer|\b(Elias|Mara|Elara|Silas|Thorne)\b/i;
+    for (const entry of RANDOM_PREMISES) expect(JSON.stringify(entry)).not.toMatch(avoid);
+  });
+
+  it('never hands back the premise already on screen', () => {
+    const current = RANDOM_PREMISES[0]!.title;
+    for (const roll of [0, 0.25, 0.5, 0.99]) {
+      expect(pickRandomPremise(current, () => roll).title).not.toBe(current);
+    }
   });
 });
