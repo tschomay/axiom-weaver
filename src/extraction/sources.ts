@@ -17,6 +17,8 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { PASTED_SOURCE_MAX_WORDS, PASTED_SOURCE_MIN_WORDS, countWords } from './limits';
+
 export interface SourceManifest {
   /** Matches the fixture directory name, so `cinderella` scores against `fixtures/cinderella`. */
   readonly id: string;
@@ -108,11 +110,6 @@ export function sha256(text: string): string {
   return createHash('sha256').update(text, 'utf8').digest('hex');
 }
 
-export function countWords(text: string): number {
-  const matched = text.match(/\S+/g);
-  return matched === null ? 0 : matched.length;
-}
-
 /**
  * Cut the story body out of a whole-volume plain text.
  *
@@ -155,4 +152,44 @@ export async function loadSource(
 
   const text = sliceLines(whole, manifest.first_line, manifest.last_line);
   return { manifest, text, words: countWords(text), sha256: sha256(text) };
+}
+
+// Re-exported so existing callers keep importing them from here; defined in `limits.ts` so a
+// client component can read them too.
+export { PASTED_SOURCE_MAX_WORDS, PASTED_SOURCE_MIN_WORDS, countWords };
+
+export interface PastedSourceInput {
+  /** Becomes the extracted package's `story_id`; the Import step still lets the author change it. */
+  readonly id: string;
+  readonly title: string;
+  readonly author?: string | null;
+  readonly text: string;
+}
+
+/**
+ * A `LoadedSource` built from raw text rather than a manifest lookup (#173).
+ *
+ * `loadSource` exists to pin a *known* public-domain edition to exact bytes: a URL, a cache file,
+ * a verified line range. Pasted prose has none of that — its provenance is the author — so this
+ * fills the manifest with what is actually known: the whole text is the story (lines 1–n), the
+ * expected word count is the measured one, and there is no URL. The sha256 still goes into the
+ * package, so a result can be matched back to the exact text it read.
+ */
+export function pastedSource(input: PastedSourceInput): LoadedSource {
+  // The same CRLF normalization `sliceLines` does, for the same reason: paragraph detection
+  // splits on blank lines, and pasted text from a Windows clipboard arrives with `\r\n`.
+  const text = input.text.replace(/\r\n?/g, '\n').trim();
+  const author = input.author?.trim() ?? '';
+  const words = countWords(text);
+  const manifest: SourceManifest = {
+    id: input.id,
+    title: input.title.trim(),
+    edition: author === '' ? 'pasted text' : `${author} (pasted text)`,
+    url: '',
+    cache_file: '',
+    first_line: 1,
+    last_line: text === '' ? 0 : text.split('\n').length,
+    expected_words: words,
+  };
+  return { manifest, text, words, sha256: sha256(text) };
 }

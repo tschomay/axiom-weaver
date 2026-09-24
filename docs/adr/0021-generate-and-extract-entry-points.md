@@ -129,3 +129,21 @@ What the author sees:
 - No change to the read-time run loop, the Manuscript/publish machinery, or any reader-facing
   surface. An Authoring run is strictly an author-time producer of the same `StoryPackage` shape
   Import already accepts.
+
+## Amendment — as built (#172, #173)
+
+Decision 4 sketched finer stages than either run ended up with. As built, a Generate run has two
+stages, `arc` then `segment`, and an Extract run has two, `extract` then `segment`. Extraction's
+passes (entities → reconcile → events → canonicalize → chronology → seed, numbered 1–5 with
+canonicalize as 3b) run inside one
+`extractStoryPackage` call and none of them is independently resumable today, so a step boundary
+per pass would promise a retry granularity nothing backs — the reasoning decision 4 itself cites
+from ADR 0014 §2. Which pass is running still reaches the author: the pipeline's own
+`pass N/5 — …` progress lines are flushed to the manifest's `stage_text` as they arrive.
+
+Extract (#173) also adds what decision 5's cost guard needed for an unbounded input: a hard word
+bound (`PASTED_SOURCE_MAX_WORDS` in `src/extraction/limits.ts`, 30,000 — just above the longest
+source ever measured) checked before any call is made, and a raw-text source
+(`pastedSource` in `src/extraction/sources.ts`) in place of the manifest lookup the CLI uses.
+Its POST also accepts one of the three known-good fixture sources by id, so a UI run can be
+compared against `fixtures/extraction/runs/` before being trusted on novel text.

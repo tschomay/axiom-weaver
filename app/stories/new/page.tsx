@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { storyRepository } from '@/persistence';
-import { NewStoryView, type DuplicableStory } from './new-story-view';
+import { SOURCE_MANIFESTS } from '@/extraction/sources';
+import { NewStoryView, type DuplicableStory, type ExtractableFixture } from './new-story-view';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,5 +24,12 @@ export default async function NewStoryPage() {
     });
   }
 
-  return <NewStoryView stories={stories} />;
+  // The Extract tab's known-good sources (#173) — read here because `sources.ts` is server-only.
+  const fixtures: ExtractableFixture[] = SOURCE_MANIFESTS.map((manifest) => ({
+    id: manifest.id,
+    title: manifest.title,
+    words: manifest.expected_words,
+  }));
+
+  return <NewStoryView stories={stories} fixtures={fixtures} />;
 }

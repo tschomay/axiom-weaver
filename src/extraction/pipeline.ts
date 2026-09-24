@@ -454,7 +454,11 @@ export async function extractStoryPackage(
     voice_card: {},
     metadata: {
       title: source.manifest.title,
-      source: `${source.manifest.edition} — ${source.manifest.url}`,
+      // A pasted source (#173) has no URL; its edition line is the whole provenance.
+      source:
+        source.manifest.url === ''
+          ? source.manifest.edition
+          : `${source.manifest.edition} — ${source.manifest.url}`,
       created_at: startedAt,
     },
     // The chronological Fabula event list, in #119's block and #119's field names.

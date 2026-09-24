@@ -329,8 +329,9 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   category issue #21 flagged as risking becoming noise. See
   [ADR 0016](docs/adr/0016-author-surfaces-and-the-state-log.md).
 - **Authoring run** — the durable job behind the **Generate** and **Extract** entry points:
-  arc generation or extraction, then segmentation, as stages of one job (`brief`/`draft_events`/
-  `segment`, or the extraction pipeline's five passes plus `segment`) — never two author-visible
+  arc generation or extraction, then segmentation, as stages of one job (`arc` then `segment`, or
+  `extract` then `segment`, with the extraction pipeline's five passes reported as the `extract`
+  stage's progress text rather than as stages of their own) — never two author-visible
   jobs with a pause between them, since an unsegmented Fabula-only package has no Scene Cards yet
   and isn't reviewable in any surface the author already has. Shares the read-time run loop's
   `StepRunner` seam and mint-id/poll HTTP shape, but not its scene-shaped manifest — an Authoring
