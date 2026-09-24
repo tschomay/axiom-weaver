@@ -18,6 +18,7 @@ import {
   type PlantPolicy,
   type PremiseModules,
 } from '@/arc/brief';
+import { PASTED_SOURCE_MAX_WORDS, PASTED_SOURCE_MIN_WORDS, countWords } from '@/extraction/limits';
 
 /** The Generate tab's 8 optional structured-premise fields (ADR 0021, #172). */
 const MODULE_FIELDS: ReadonlyArray<{ key: keyof PremiseModules; label: string; placeholder: string }> = [
@@ -33,15 +34,39 @@ const MODULE_FIELDS: ReadonlyArray<{ key: keyof PremiseModules; label: string; p
 
 type GenerateStatus = 'idle' | 'running' | 'complete' | 'failed';
 
-/** `GET /api/authoring/generate/{runId}`'s shape — see that route for what each field means. */
+/**
+ * `GET /api/authoring/{generate,extract}/{runId}`'s shape — see `app/api/authoring/poll.ts` for
+ * what each field means.
+ */
 interface AuthoringPollResponse {
   readonly status: 'running' | 'complete' | 'failed';
   readonly progress: { readonly text: string | null };
   readonly failure: { readonly detail: string } | null;
-  readonly result: { readonly events: number; readonly events_per_scene: number } | null;
+  readonly cost_usd: number;
+  readonly result: {
+    readonly events: number;
+    readonly events_per_scene: number;
+    readonly source_words: number | null;
+    readonly grounded_rate: number | null;
+  } | null;
   readonly package?: DraftStoryPackage;
   readonly lint?: LintResult;
   readonly summary?: ImportSummary;
+}
+
+/** A public-domain source with a known-good CLI extraction run to compare a UI run against. */
+export interface ExtractableFixture {
+  id: string;
+  title: string;
+  words: number;
+}
+
+interface RunQuality {
+  events: number;
+  eventsPerScene: number;
+  sourceWords: number | null;
+  groundedRate: number | null;
+  costUsd: number;
 }
 
 export interface DuplicableStory {
@@ -61,11 +86,19 @@ export interface DuplicableStory {
  * categorically easier first hour than starting from an empty seed, and it needs no template
  * system to exist.
  */
-export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
+export function NewStoryView({
+  stories,
+  fixtures,
+}: {
+  stories: DuplicableStory[];
+  fixtures: ExtractableFixture[];
+}) {
   const router = useRouter();
   const session = useAuthorSession();
 
-  const [mode, setMode] = useState<'new' | 'duplicate' | 'import' | 'generate'>('new');
+  const [mode, setMode] = useState<'new' | 'duplicate' | 'import' | 'generate' | 'extract'>(
+    'new',
+  );
   const [imported, setImported] = useState<ImportResult | null>(null);
   const [title, setTitle] = useState('');
   const [storyId, setStoryId] = useState('');
@@ -87,25 +120,39 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
   const [plantDensity, setPlantDensity] = useState<PlantPolicy['density']>('normal');
   const [spanGuidance, setSpanGuidance] = useState(true);
 
+  // --- Extract (ADR 0021, #173) ---------------------------------------------------------------
+
+  const [extractFrom, setExtractFrom] = useState<'paste' | 'fixture'>('paste');
+  const [prose, setProse] = useState('');
+  const [author, setAuthor] = useState('');
+  const [fixtureSource, setFixtureSource] = useState(fixtures[0]?.id ?? '');
+  const [extractConfirmed, setExtractConfirmed] = useState(false);
+  const proseWords = countWords(prose);
+  const pickedFixture = fixtures.find((fixture) => fixture.id === fixtureSource);
+
+  // --- The Authoring run both tabs share -------------------------------------------------------
+
+  // One run at a time, whichever tab started it: `genKind` says which, and `genStatusPath` is the
+  // poll URL the POST handed back, so the polling below does not care which entry point it is.
+  const [genKind, setGenKind] = useState<'generate' | 'extract'>('generate');
+  const [genStatusPath, setGenStatusPath] = useState<string | null>(null);
   const [genRunId, setGenRunId] = useState<string | null>(null);
   const [genStatus, setGenStatus] = useState<GenerateStatus>('idle');
   const [genProgress, setGenProgress] = useState('');
   const [genError, setGenError] = useState<string | null>(null);
   const [genBusy, setGenBusy] = useState(false);
-  const [genQuality, setGenQuality] = useState<{ events: number; eventsPerScene: number } | null>(
-    null,
-  );
+  const [genQuality, setGenQuality] = useState<RunQuality | null>(null);
 
   // Poll the run while it is going. Self-terminating: once a response says anything but
   // `running`, `genStatus` moves off `running` and this effect's guard stops scheduling the next
   // poll, the same reconnect-safe-polling shape `GET /api/tellings/[runId]` established.
   useEffect(() => {
-    if (genRunId === null || genStatus !== 'running') return;
+    if (genRunId === null || genStatusPath === null || genStatus !== 'running') return;
     let cancelled = false;
     let timer: ReturnType<typeof setTimeout> | null = null;
 
     const poll = (): void => {
-      void fetch(`/api/authoring/generate/${genRunId}`)
+      void fetch(genStatusPath)
         .then((response) => response.json() as Promise<AuthoringPollResponse>)
         .then((body) => {
           if (cancelled) return;
@@ -125,7 +172,13 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
           setGenQuality(
             body.result === null
               ? null
-              : { events: body.result.events, eventsPerScene: body.result.events_per_scene },
+              : {
+                  events: body.result.events,
+                  eventsPerScene: body.result.events_per_scene,
+                  sourceWords: body.result.source_words ?? null,
+                  groundedRate: body.result.grounded_rate ?? null,
+                  costUsd: body.cost_usd,
+                },
           );
           if (body.package !== undefined && body.lint !== undefined && body.summary !== undefined) {
             setImported({ ok: true, package: body.package, lint: body.lint, summary: body.summary });
@@ -143,13 +196,44 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
       cancelled = true;
       if (timer !== null) clearTimeout(timer);
     };
-  }, [genRunId, genStatus]);
+  }, [genRunId, genStatusPath, genStatus]);
 
-  const startGenerate = (): void => {
+  /** POST to an Authoring run entry point and, on `202`, start polling the path it hands back. */
+  const startRun = (kind: 'generate' | 'extract', payload: Record<string, unknown>): void => {
     setGenBusy(true);
     setGenError(null);
     setGenQuality(null);
     setImported(null);
+    setGenKind(kind);
+
+    void fetch(`/api/authoring/${kind}`, {
+      method: 'POST',
+      headers: session.headers(),
+      body: JSON.stringify(payload),
+    })
+      .then(async (response) => {
+        const body = (await response.json()) as {
+          run_id?: string;
+          status_path?: string;
+          error?: string;
+        };
+        if (!response.ok || body.run_id === undefined || body.status_path === undefined) {
+          setGenStatus('idle');
+          setGenError(body.error ?? `could not start the run (${response.status})`);
+          return;
+        }
+        setGenRunId(body.run_id);
+        setGenStatusPath(body.status_path);
+        setGenStatus('running');
+        setGenProgress('starting…');
+      })
+      .catch((reason: unknown) =>
+        setGenError(reason instanceof Error ? reason.message : 'could not start the run'),
+      )
+      .finally(() => setGenBusy(false));
+  };
+
+  const startGenerate = (): void => {
     const premise = {
       logline: logline.trim(),
       modules: useModules
@@ -165,34 +249,35 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
           }
         : null,
     };
-
-    void fetch('/api/authoring/generate', {
-      method: 'POST',
-      headers: session.headers(),
-      body: JSON.stringify({
-        title: title.trim(),
-        premise,
-        plot_shape_preset: plotShapePreset,
-        event_count: eventCount,
-        plant_density: plantDensity,
-        span_guidance: spanGuidance,
-      }),
-    })
-      .then(async (response) => {
-        const body = (await response.json()) as { run_id?: string; error?: string };
-        if (!response.ok || body.run_id === undefined) {
-          setGenError(body.error ?? `could not start generation (${response.status})`);
-          return;
-        }
-        setGenRunId(body.run_id);
-        setGenStatus('running');
-        setGenProgress('starting…');
-      })
-      .catch((reason: unknown) =>
-        setGenError(reason instanceof Error ? reason.message : 'could not start generation'),
-      )
-      .finally(() => setGenBusy(false));
+    startRun('generate', {
+      title: title.trim(),
+      premise,
+      plot_shape_preset: plotShapePreset,
+      event_count: eventCount,
+      plant_density: plantDensity,
+      span_guidance: spanGuidance,
+    });
   };
+
+  const startExtract = (): void => {
+    startRun(
+      'extract',
+      extractFrom === 'fixture'
+        ? { fixture_source: fixtureSource }
+        : { title: title.trim(), author: author.trim() === '' ? null : author.trim(), text: prose },
+    );
+  };
+
+  const extractWords = extractFrom === 'fixture' ? (pickedFixture?.words ?? 0) : proseWords;
+  const extractInBounds =
+    extractWords >= PASTED_SOURCE_MIN_WORDS && extractWords <= PASTED_SOURCE_MAX_WORDS;
+  const extractReady =
+    session.canWrite &&
+    !genBusy &&
+    genStatus !== 'running' &&
+    extractConfirmed &&
+    extractInBounds &&
+    (extractFrom === 'fixture' ? pickedFixture !== undefined : title.trim() !== '');
 
   // The id follows the title until the author edits it, and stops following the moment they do.
   // An import proposes the package's own id and title, which the author can still override —
@@ -266,7 +351,7 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
     setBusy(true);
     setError(null);
 
-    if (mode === 'import' || mode === 'generate') {
+    if (mode === 'import' || mode === 'generate' || mode === 'extract') {
       void createFromImport()
         .then(setError)
         .catch((reason: unknown) =>
@@ -304,6 +389,18 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
       )
       .finally(() => setBusy(false));
   };
+
+  // Progress/failure for the current Authoring run, shown under whichever tab started it.
+  const runStatusLines = (
+    <>
+      {genStatus === 'running' ? <p className="meta">{genProgress || 'working…'}</p> : null}
+      {genError !== null && genStatus !== 'running' ? (
+        <p className="admin-error">{genError}</p>
+      ) : genStatus === 'failed' ? (
+        <p className="admin-error">the run failed</p>
+      ) : null}
+    </>
+  );
 
   return (
     <main>
@@ -347,6 +444,13 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
           onClick={() => setMode('generate')}
         >
           Generate from a premise
+        </button>
+        <button
+          type="button"
+          className={mode === 'extract' ? 'action primary' : 'action'}
+          onClick={() => setMode('extract')}
+        >
+          Extract from existing prose
         </button>
       </div>
 
@@ -563,23 +667,152 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
               }
               onClick={startGenerate}
             >
-              {genStatus === 'running' ? 'Generating…' : 'Generate the arc'}
+              {genStatus === 'running' && genKind === 'generate' ? 'Generating…' : 'Generate the arc'}
             </button>
           </div>
           {title.trim() === '' && genStatus !== 'running' ? (
             <span className="hint">Set a title below first — it names the drafted arc.</span>
           ) : null}
 
-          {genStatus === 'running' ? <p className="meta">{genProgress || 'working…'}</p> : null}
-          {genStatus === 'failed' ? (
-            <p className="admin-error">{genError ?? 'the run failed'}</p>
-          ) : null}
-          {genStatus === 'complete' && genQuality !== null ? (
+          {genKind === 'generate' ? runStatusLines : null}
+          {genKind === 'generate' && genStatus === 'complete' && genQuality !== null ? (
             <p className="meta">
               {genQuality.events} Fabula events →{' '}
               {importedPkg !== null ? importedPkg.summary.scenes : '?'} scenes (
               {genQuality.eventsPerScene.toFixed(1)} events/scene) — segmentation
               over-segments past Cinderella-scale, so judge a choppy result on its own terms.
+            </p>
+          ) : null}
+        </>
+      ) : null}
+
+      {mode === 'extract' ? (
+        <>
+          <p className="lede">
+            An existing story in, its events and cast read out and segmented into Scene Cards —
+            the same two steps <code>npm run extract</code> then <code>npm run segment</code> run
+            from a terminal, started here instead. It reads the text in windows and calls the model
+            many times, so it takes several minutes; nothing is imported until you review the
+            result below and choose to.
+          </p>
+
+          <p className="hint">
+            Set your expectations: this is a rough structural draft of your story, not a faithful
+            conversion. Extraction is the least accurate of the pipeline&apos;s stages — expect
+            duplicate or missing characters, events left out, and plants and payoffs mostly not
+            recovered. What it gives you is a starting package to edit, and every gap the linter
+            finds is a gap in the extraction, not a bug in your story.
+          </p>
+
+          <div className="field">
+            <label>
+              <span className="label-text">Read from</span>
+              <select
+                value={extractFrom}
+                onChange={(event) => setExtractFrom(event.target.value as 'paste' | 'fixture')}
+              >
+                <option value="paste">Text I paste</option>
+                <option value="fixture" disabled={fixtures.length === 0}>
+                  A known public-domain source (to compare against a reference run)
+                </option>
+              </select>
+            </label>
+          </div>
+
+          {extractFrom === 'fixture' ? (
+            <div className="field">
+              <label>
+                <span className="label-text">Source</span>
+                <select value={fixtureSource} onChange={(event) => setFixtureSource(event.target.value)}>
+                  {fixtures.map((fixture) => (
+                    <option key={fixture.id} value={fixture.id}>
+                      {fixture.title} — {fixture.words.toLocaleString('en-US')} words
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <span className="hint">
+                Fetched from Project Gutenberg the same way the CLI fetches it, so the result can be
+                compared against the reference run in <code>fixtures/extraction/runs/</code>.
+              </span>
+            </div>
+          ) : (
+            <>
+              <div className="field">
+                <label>
+                  <span className="label-text">Author</span>
+                  <input
+                    type="text"
+                    value={author}
+                    placeholder="optional — recorded as the package's source"
+                    onChange={(event) => setAuthor(event.target.value)}
+                  />
+                </label>
+              </div>
+
+              <div className="field">
+                <label>
+                  <span className="label-text">The story</span>
+                  <textarea
+                    className="import-box"
+                    value={prose}
+                    placeholder="Paste the whole story. Paragraphs separated by blank lines read best."
+                    onChange={(event) => setProse(event.target.value)}
+                  />
+                </label>
+                <span className="hint">
+                  {proseWords.toLocaleString('en-US')} of at most{' '}
+                  {PASTED_SOURCE_MAX_WORDS.toLocaleString('en-US')} words
+                  {proseWords > PASTED_SOURCE_MAX_WORDS
+                    ? ' — too long; nothing past this length has been measured'
+                    : proseWords > 0 && proseWords < PASTED_SOURCE_MIN_WORDS
+                      ? ` — at least ${PASTED_SOURCE_MIN_WORDS} needed`
+                      : ''}
+                </span>
+              </div>
+            </>
+          )}
+
+          <div className="field">
+            <label>
+              <input
+                type="checkbox"
+                checked={extractConfirmed}
+                onChange={(event) => setExtractConfirmed(event.target.checked)}
+              />{' '}
+              <span className="label-text">
+                I understand this makes many model calls on the shared key and gives a rough draft
+              </span>
+            </label>
+          </div>
+
+          <div className="row-actions">
+            <button
+              type="button"
+              className="action primary"
+              disabled={!extractReady}
+              onClick={startExtract}
+            >
+              {genStatus === 'running' && genKind === 'extract' ? 'Extracting…' : 'Extract the story'}
+            </button>
+          </div>
+          {extractFrom === 'paste' && title.trim() === '' && genStatus !== 'running' ? (
+            <span className="hint">Set a title below first — it names the extracted story.</span>
+          ) : null}
+
+          {genKind === 'extract' ? runStatusLines : null}
+          {genKind === 'extract' && genStatus === 'complete' && genQuality !== null ? (
+            <p className="meta">
+              {genQuality.sourceWords === null
+                ? ''
+                : `${genQuality.sourceWords.toLocaleString('en-US')} words → `}
+              {genQuality.events} Fabula events →{' '}
+              {importedPkg !== null ? importedPkg.summary.scenes : '?'} scenes (
+              {genQuality.eventsPerScene.toFixed(1)} events/scene)
+              {genQuality.groundedRate === null
+                ? ''
+                : ` · ${(genQuality.groundedRate * 100).toFixed(0)}% of claims traced to a quote in the text`}
+              {` · $${genQuality.costUsd.toFixed(2)}`}
             </p>
           ) : null}
         </>
@@ -610,7 +843,7 @@ export function NewStoryView({ stories }: { stories: DuplicableStory[] }) {
             placeholder={
               mode === 'duplicate'
                 ? `${source?.title ?? ''} (copy)`
-                : mode === 'import' || mode === 'generate'
+                : mode === 'import' || mode === 'generate' || mode === 'extract'
                   ? (importedPkg?.summary.title ?? 'from the package')
                   : 'The Dragon of…'
             }

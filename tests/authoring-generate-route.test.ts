@@ -198,6 +198,8 @@ describe('GET /api/authoring/generate/[runId] — polling an Authoring run', () 
         entities: 1,
         lint_errors: 0,
         lint_warnings: 0,
+        source_words: null,
+        grounded_rate: null,
       },
     });
 

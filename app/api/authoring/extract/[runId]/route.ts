@@ -2,8 +2,8 @@ import { pollAuthoringRun } from '../../poll';
 
 export const dynamic = 'force-dynamic';
 
-/** Poll a Generate run (ADR 0021, #172). The shape is `pollAuthoringRun`'s, shared with Extract. */
+/** Poll an Extract run (ADR 0021, #173). The shape is `pollAuthoringRun`'s, shared with Generate. */
 export async function GET(_request: Request, { params }: { params: Promise<{ runId: string }> }) {
   const { runId } = await params;
-  return pollAuthoringRun(runId, 'generate');
+  return pollAuthoringRun(runId, 'extract');
 }

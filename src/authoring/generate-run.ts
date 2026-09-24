@@ -198,6 +198,8 @@ export async function runGenerate(input: RunGenerateInput): Promise<RunGenerateR
     entities: summary.entities,
     lint_errors: segmentation.report.lint.errors.length,
     lint_warnings: segmentation.report.lint.warnings.length,
+    source_words: null,
+    grounded_rate: null,
   };
 
   await flush({
