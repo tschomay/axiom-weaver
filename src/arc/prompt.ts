@@ -70,18 +70,58 @@ function renderPremise(brief: ArcBrief): string {
   ].join('\n');
 }
 
+/**
+ * How many events each phase gets.
+ *
+ * The allocation #119's measured prompts used — every phase at least one, the last phase taking
+ * the remainder — is kept byte-for-byte wherever it works. It does not always: rounding can spend
+ * the whole arc before the last phase (a 13-event mystery came out `[3,5,3,2,0]`, asking for
+ * "about 0 events"), and a short arc has fewer events than phases. There the events are shared
+ * out by largest remainder instead, and a phase that gets none is folded into a neighbour rather
+ * than given a count the arc cannot afford.
+ */
+export function phaseEventCounts(shares: readonly number[], eventCount: number): number[] {
+  const total = shares.reduce((sum, share) => sum + share, 0) || 1;
+  let allocated = 0;
+  const counts = shares.map((share, index) => {
+    const count =
+      index === shares.length - 1
+        ? eventCount - allocated
+        : Math.max(1, Math.round((share / total) * eventCount));
+    allocated += count;
+    return count;
+  });
+  if (counts.every((count) => count >= 1)) return counts;
+
+  const exact = shares.map((share) => (share / total) * eventCount);
+  const floors = exact.map(Math.floor);
+  let remaining = eventCount - floors.reduce((sum, count) => sum + count, 0);
+  const byRemainder = exact
+    .map((value, index) => ({ index, fraction: value - Math.floor(value) }))
+    .sort((a, b) => b.fraction - a.fraction || a.index - b.index);
+  for (const { index } of byRemainder) {
+    if (remaining === 0) break;
+    floors[index]! += 1;
+    remaining -= 1;
+  }
+  return floors;
+}
+
 function renderPlotShape(brief: ArcBrief): string {
   const shape = brief.plot_shape;
-  const total = shape.phases.reduce((sum, phase) => sum + phase.share, 0) || 1;
-  let allocated = 0;
+  const counts = phaseEventCounts(
+    shape.phases.map((phase) => phase.share),
+    brief.event_count,
+  );
   const lines = shape.phases.map((phase, index) => {
-    const isLast = index === shape.phases.length - 1;
-    const count = isLast
-      ? brief.event_count - allocated
-      : Math.max(1, Math.round((phase.share / total) * brief.event_count));
-    allocated += count;
-    return `  ${index + 1}. ${phase.name} — ${phase.purpose} (about ${count} event${count === 1 ? '' : 's'})`;
+    const count = counts[index] ?? 0;
+    const allotment =
+      count === 0
+        ? 'no event of its own — fold it into a neighbouring event'
+        : `about ${count} event${count === 1 ? '' : 's'}`;
+    return `  ${index + 1}. ${phase.name} — ${phase.purpose} (${allotment})`;
   });
+  const shortCast = brief.cast.characters < shape.cast_roles.length;
 
   return [
     `PLOT SHAPE — ${shape.name}`,
@@ -90,8 +130,15 @@ function renderPlotShape(brief: ArcBrief): string {
     'Phases, in chronological order:',
     ...lines,
     '',
-    'Cast roles this shape requires (give each one a real, named character; a character may hold',
-    'more than one role only if that doubling is itself the point):',
+    ...(shortCast
+      ? [
+          'Cast roles this shape requires (this is a short arc with a small cast, so one character',
+          'may hold more than one role):',
+        ]
+      : [
+          'Cast roles this shape requires (give each one a real, named character; a character may hold',
+          'more than one role only if that doubling is itself the point):',
+        ]),
     ...shape.cast_roles.map((role) => `  - ${role.role}: ${role.purpose}`),
     '',
     'Structural obligations — these are what make this shape this shape:',
@@ -111,8 +158,12 @@ function renderPlantPolicy(brief: ArcBrief): string {
       'Span matters more than count. A plant that lands in the event immediately before its payoff',
       'is not a plant — it is a setup sentence. What you are building is a story that reaches',
       'across itself:',
-      `  - No pair should span fewer than ${policy.min_span} events.`,
-      `  - At least ${policy.long_range_edges} pair${policy.long_range_edges === 1 ? '' : 's'} must span ${policy.long_range_span} events or more.`,
+      `  - No pair should span fewer than ${policy.min_span} event${policy.min_span === 1 ? '' : 's'}.`,
+      ...(policy.long_range_edges === 0
+        ? []
+        : [
+            `  - At least ${policy.long_range_edges} pair${policy.long_range_edges === 1 ? '' : 's'} must span ${policy.long_range_span} events or more.`,
+          ]),
       '  - A planting event should be doing something else at the time. The reader should register',
       '    the detail and not know it was a plant until it is collected.',
     );

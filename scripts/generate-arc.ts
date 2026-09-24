@@ -27,6 +27,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 import { briefsFor, CONFIG_IDS, type ConfigId } from '../src/arc/premises';
+import { MEASURED_EVENT_COUNT_MIN } from '../src/arc/brief';
 import { draftPackage } from '../src/arc/fabula';
 import { readFabulaArc, storyIdOf } from '../src/schema/fabula';
 import { generateArc, liveClient } from '../src/arc/generator';
@@ -225,6 +226,13 @@ async function main(): Promise<void> {
   }
 
   const eventCount = Number.parseInt(option('events') ?? '20', 10);
+  if (!(eventCount >= MEASURED_EVENT_COUNT_MIN)) {
+    throw new Error(
+      `--events ${eventCount} is below ${MEASURED_EVENT_COUNT_MIN}, the floor #119's measurements ` +
+        'were taken at; a shorter arc scores on a different footing. Generate short stories from ' +
+        'the app instead.',
+    );
+  }
   const outDir = option('out') ?? DEFAULT_OUT;
   await mkdir(outDir, { recursive: true });
 

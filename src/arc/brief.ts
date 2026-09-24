@@ -81,6 +81,9 @@ export interface Premise {
   readonly modules: PremiseModules | null;
 }
 
+/** The three density presets, in the order a picker should offer them. */
+export const PLANT_DENSITIES: readonly ['tight', 'normal', 'loose'] = ['tight', 'normal', 'loose'];
+
 /**
  * The plant/payoff density dial, materialized.
  *
@@ -93,9 +96,6 @@ export interface Premise {
  * arc reaches across itself, and a validator that rejected short spans would guarantee the number
  * without changing the arc's character. They are stated in the prompt and measured afterwards.
  */
-/** The three density presets, in the order a picker should offer them. */
-export const PLANT_DENSITIES: readonly ['tight', 'normal', 'loose'] = ['tight', 'normal', 'loose'];
-
 export interface PlantPolicy {
   readonly density: (typeof PLANT_DENSITIES)[number];
   readonly target_edges: number;
@@ -134,15 +134,30 @@ export interface ArcBrief {
 }
 
 /**
- * The event-count band, calibrated against the two fixtures.
+ * The event-count band an author may ask for.
  *
+ * The default and the ceiling are calibrated against the two long fixtures:
  * `fixtures/cinderella` is 14 Scene Cards and `fixtures/a-christmas-carol` is 20, and
  * `fixtures/authoring-notes.md` records that the *Carol* was merged down to those 20 from ~28
- * finest-grain beats — a Fabula-to-Syuzhet ratio of about 1.4. So a Fabula event list aiming at
- * the fixtures' scene band wants roughly 18–28 events, and a generated arc below about 12 events
- * cannot carry a plant/payoff graph with any span in it at all.
+ * finest-grain beats — a Fabula-to-Syuzhet ratio of about 1.4.
+ *
+ * The floor is not calibrated against them, on purpose. A short story is a legitimate thing to
+ * want — `fixtures/the-dragon-of-thistlewick` is three scenes, and ADR 0017 §5 calls it the
+ * easiest first authoring experience the project has — so an author may ask for as few as four
+ * events. What a short arc gives up is span: `plantPolicyFor` stops asking for long-range
+ * plant/payoff pairs below `SHORT_ARC_EVENTS`, because an arc that short has no room for them.
  */
-export const EVENT_COUNT_BAND = { min: 12, max: 28, default: 20 } as const;
+export const EVENT_COUNT_BAND = { min: 4, max: 28, default: 20 } as const;
+
+/**
+ * The floor #119's and #120's measurements were taken at. Below it an arc cannot carry a
+ * plant/payoff graph with any real span, so its §4.1 numbers are not comparable to theirs — the
+ * measurement scripts hold to it even though an author need not.
+ */
+export const MEASURED_EVENT_COUNT_MIN = 12;
+
+/** Below this many events, a brief asks for no long-range plant/payoff pairs at all. */
+export const SHORT_ARC_EVENTS = 8;
 
 /** The observed Fabula-event-to-Scene-Card ratio in the one fixture that documents its merge. */
 export const EVENTS_PER_SCENE = 1.4;
@@ -153,6 +168,15 @@ export function eventCountForSceneTarget(scenes: number): number {
   return Math.min(EVENT_COUNT_BAND.max, Math.max(EVENT_COUNT_BAND.min, raw));
 }
 
+/** Why an event count is not one a brief can be built for, or `null` when it is. */
+export function eventCountProblem(eventCount: number): string | null {
+  if (!Number.isInteger(eventCount)) return 'event_count must be an integer';
+  if (eventCount < EVENT_COUNT_BAND.min || eventCount > EVENT_COUNT_BAND.max) {
+    return `event_count must be between ${EVENT_COUNT_BAND.min} and ${EVENT_COUNT_BAND.max}`;
+  }
+  return null;
+}
+
 /**
  * Edge and span targets for a density and a length.
  *
@@ -161,19 +185,28 @@ export function eventCountForSceneTarget(scenes: number): number {
  * across 14 scenes and the *Carol* 3 across 20 — about 0.15 edges per scene, with spans of
  * 5 and 2, and 7 and 8. `loose` is therefore set at the fixtures' own rate, and `tight` at a
  * little over double it; nothing here proposes that a denser graph is a better one.
+ *
+ * From `MEASURED_EVENT_COUNT_MIN` up, the numbers are exactly what #119 measured against. Below
+ * it they scale down rather than hold: the two-edge floor goes, `min_span` shrinks with the arc
+ * (a span of 3 is most of a four-event story), and below `SHORT_ARC_EVENTS` no long-range pair is
+ * asked for, since "half the arc" is two events.
  */
 export function plantPolicyFor(
   density: PlantPolicy['density'],
   eventCount: number,
 ): PlantPolicy {
   const rate = density === 'tight' ? 0.3 : density === 'normal' ? 0.2 : 0.14;
-  const targetEdges = Math.max(2, Math.round(eventCount * rate));
+  const measured = eventCount >= MEASURED_EVENT_COUNT_MIN;
+  const targetEdges = measured
+    ? Math.max(2, Math.round(eventCount * rate))
+    : Math.max(1, Math.round(eventCount * rate));
   const longRangeSpan = Math.max(4, Math.floor(eventCount / 2));
   return {
     density,
     target_edges: targetEdges,
-    min_span: 3,
-    long_range_edges: Math.max(1, Math.floor(targetEdges / 2)),
+    min_span: Math.min(3, Math.max(1, Math.floor(eventCount / 3))),
+    long_range_edges:
+      eventCount < SHORT_ARC_EVENTS ? 0 : Math.max(1, Math.floor(targetEdges / 2)),
     long_range_span: longRangeSpan,
   };
 }
@@ -341,12 +374,16 @@ export interface BriefInput {
   readonly premise_preset?: string | null;
 }
 
-/** Turn preset ids and overrides into the fully-expanded brief the generator actually reads. */
+/**
+ * Turn preset ids and overrides into the fully-expanded brief the generator actually reads.
+ *
+ * An event count outside `EVENT_COUNT_BAND` is refused rather than clamped: a clamp would hand
+ * back a longer or shorter story than was asked for without saying so.
+ */
 export function materializeBrief(input: BriefInput): ArcBrief {
-  const eventCount = Math.min(
-    EVENT_COUNT_BAND.max,
-    Math.max(EVENT_COUNT_BAND.min, input.event_count ?? EVENT_COUNT_BAND.default),
-  );
+  const eventCount = input.event_count ?? EVENT_COUNT_BAND.default;
+  const problem = eventCountProblem(eventCount);
+  if (problem !== null) throw new RangeError(`${problem} (got ${eventCount})`);
   const shape = materializePlotShape(input.plot_shape_preset);
   const density = input.plant_density ?? 'normal';
 
@@ -356,10 +393,12 @@ export function materializeBrief(input: BriefInput): ArcBrief {
     premise: input.premise,
     plot_shape: { ...shape, ...input.plot_shape_overrides },
     event_count: eventCount,
+    // The floors only bind below `MEASURED_EVENT_COUNT_MIN`; from there up, the ratios alone
+    // already clear them, so a measured-length brief is unchanged.
     cast: {
-      characters: input.cast?.characters ?? Math.max(4, Math.round(eventCount / 3)),
-      locations: input.cast?.locations ?? Math.max(3, Math.round(eventCount / 4)),
-      objects: input.cast?.objects ?? Math.max(2, Math.round(eventCount / 5)),
+      characters: input.cast?.characters ?? Math.max(2, Math.round(eventCount / 3)),
+      locations: input.cast?.locations ?? Math.max(2, Math.round(eventCount / 4)),
+      objects: input.cast?.objects ?? Math.max(1, Math.round(eventCount / 5)),
     },
     plant_policy: plantPolicyFor(density, eventCount),
     span_guidance: input.span_guidance ?? true,

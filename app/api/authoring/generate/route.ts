@@ -4,6 +4,7 @@ import { storyRepository } from '@/persistence';
 import {
   PLANT_DENSITIES,
   PLOT_SHAPE_IDS,
+  eventCountProblem,
   materializeBrief,
   type BriefInput,
   type PlantPolicy,
@@ -96,8 +97,10 @@ export async function POST(request: Request) {
   }
 
   const eventCount = body.event_count;
-  if (eventCount !== undefined && (typeof eventCount !== 'number' || !Number.isInteger(eventCount))) {
-    return NextResponse.json({ error: 'event_count must be an integer' }, { status: 400 });
+  if (eventCount !== undefined) {
+    const problem =
+      typeof eventCount === 'number' ? eventCountProblem(eventCount) : 'event_count must be an integer';
+    if (problem !== null) return NextResponse.json({ error: problem }, { status: 400 });
   }
 
   const plantDensity = body.plant_density;
