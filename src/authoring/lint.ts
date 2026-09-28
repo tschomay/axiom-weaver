@@ -30,6 +30,7 @@
  */
 
 import { z } from 'zod';
+import { factTableProblems, factsOf } from '../schema/facts';
 
 import {
   StoryPackageSchema,
@@ -420,7 +421,45 @@ export function lintStoryPackage(pkg: StoryPackage): LintResult {
       message: error.message,
     })),
     ...stateChaining(pkg),
+    ...factTable(pkg),
     ...warnings(pkg, model),
   ];
   return result(problems);
+}
+
+/**
+ * ADR 0022 decision 6: the facts table's shape, and the card facts it leaves unstated.
+ *
+ * Silent on a package with no table — hand-authored and extracted packages carry none, and a
+ * warning on every slug they use would be noise about a feature they never opted into.
+ */
+function factTable(pkg: StoryPackage): PackageProblem[] {
+  const facts = factsOf(pkg);
+  if (facts.length === 0) return [];
+
+  const problems: PackageProblem[] = factTableProblems(facts).map((problem) => ({
+    severity: 'error' as const,
+    code: problem.code,
+    path: `facts["${problem.fact_ref}"]`,
+    message: problem.message,
+  }));
+
+  const stated = new Set(facts.map((fact) => fact.fact_ref));
+  for (const scene of pkg.scene_cards) {
+    const used = new Set([
+      ...scene.reader_must_learn,
+      ...scene.must_stay_hidden,
+      ...scene.pays_off.map((payoff) => payoff.fact_ref),
+    ]);
+    for (const ref of used) {
+      if (stated.has(ref)) continue;
+      problems.push({
+        severity: 'warn',
+        code: 'fact_without_statement',
+        path: `scene_cards.${scene.id}`,
+        message: `uses "${ref}", which has no statement in facts — the writer sees only the slug`,
+      });
+    }
+  }
+  return problems;
 }

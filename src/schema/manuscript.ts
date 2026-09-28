@@ -116,6 +116,8 @@ export const DraftStoryPackageSchema = z.looseObject({
   scene_cards: z.array(DraftSceneCardSchema).default([]),
   voice_card: z.record(z.string(), z.unknown()).default({}),
   metadata: StoryPackageMetadataSchema.partial().extend({ title: z.string() }),
+  // ADR 0022's facts table, loose here like everything else a draft may hold half-finished.
+  facts: z.array(z.looseObject({ fact_ref: z.string() })).optional(),
 });
 
 /** How a Manuscript came to exist — the three entry points of ADR 0017 §5. */

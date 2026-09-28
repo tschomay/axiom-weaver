@@ -139,6 +139,16 @@ export const SceneCardSchema = z.object({
   pays_off: z.array(PayoffSchema).default([]),
 });
 
+/**
+ * A fact's claim, beside its slug (ADR 0022). The slug stays the identity every mechanism matches
+ * on; the statement is what it stands for, and `caused_by` names the facts it follows *from*.
+ */
+export const FactSchema = z.object({
+  fact_ref: z.string().min(1),
+  statement: z.string().min(1),
+  caused_by: z.array(z.string().min(1)).default([]),
+});
+
 // --- Envelope ----------------------------------------------------------------------------
 
 export const StoryPackageMetadataSchema = z.looseObject({
@@ -162,6 +172,11 @@ export const StoryPackageSchema = z.looseObject({
   scene_cards: z.array(SceneCardSchema).min(1),
   voice_card: z.record(z.string(), z.unknown()).default({}),
   metadata: StoryPackageMetadataSchema,
+  /**
+   * Optional, and left absent rather than defaulted to `[]` so a package that never had one
+   * round-trips byte-for-byte (ADR 0022). Read it through `factsOf`.
+   */
+  facts: z.array(FactSchema).optional(),
 });
 
 export type Character = z.infer<typeof CharacterSchema>;
@@ -175,6 +190,7 @@ export type SceneState = z.infer<typeof SceneStateSchema>;
 export type EntityState = z.infer<typeof EntityStateSchema>;
 export type StateValue = z.infer<typeof StateValueSchema>;
 export type Payoff = z.infer<typeof PayoffSchema>;
+export type Fact = z.infer<typeof FactSchema>;
 export type StoryPackage = z.infer<typeof StoryPackageSchema>;
 export type BagValue = z.infer<typeof BagValueSchema>;
 

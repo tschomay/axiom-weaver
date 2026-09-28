@@ -30,7 +30,8 @@
 
 import { z } from 'zod';
 
-import { WorldModelSeedSchema, type SceneState } from './story-package';
+import { FactSchema, WorldModelSeedSchema, type Fact, type SceneState } from './story-package';
+import { mergeHiddenAccount } from './facts';
 
 const slug = z.string().min(1);
 
@@ -96,16 +97,37 @@ export const FabulaEventSchema = z.looseObject({
   state_changes: z.array(StateChangeSchema).default([]),
 });
 
+/**
+ * One step of the hidden account (ADR 0022 decision 4): what actually happened, as its own
+ * chronological chain, separate from the events that happen on the page.
+ *
+ * A mystery's events are usually the *discovery*; its hidden account is the incident being
+ * discovered. `caused_by` names earlier steps; `establishes` names the facts the step makes true,
+ * which is how the chain reaches the writer — as fact statements (decision 5), never as scenes.
+ */
+export const HiddenStepSchema = z.object({
+  id: slug,
+  sequence: z.number().int().positive(),
+  summary: z.string().min(1),
+  caused_by: z.array(slug).default([]),
+  establishes: z.array(z.string().min(1)).default([]),
+});
+
 export const FabulaArcSchema = z.object({
   title: z.string().min(1),
   world_model_seed: WorldModelSeedSchema,
   events: z.array(FabulaEventSchema).min(1),
+  /** Best-effort, like `caused_by`: generation fills it, extraction does not (yet). */
+  hidden_account: z.array(HiddenStepSchema).default([]),
+  /** Statements for the arc's fact_refs (ADR 0022 decision 1). */
+  facts: z.array(FactSchema).default([]),
 });
 
 export type StateChange = z.infer<typeof StateChangeSchema>;
 export type FabulaPayoff = z.infer<typeof FabulaPayoffSchema>;
 export type FabulaEvent = z.infer<typeof FabulaEventSchema>;
 export type FabulaArc = z.infer<typeof FabulaArcSchema>;
+export type HiddenStep = z.infer<typeof HiddenStepSchema>;
 
 /** Where the event list rides in the deliverable. A top-level block the loose schema preserves. */
 export const FABULA_BLOCK = '_fabula';
@@ -134,7 +156,9 @@ export interface FabulaRead {
  */
 export function readFabulaArc(envelope: unknown): FabulaRead {
   const record = (envelope ?? {}) as Record<string, unknown>;
-  const block = record[FABULA_BLOCK] as { events?: unknown } | undefined;
+  const block = record[FABULA_BLOCK] as
+    | { events?: unknown; hidden_account?: unknown; facts?: unknown }
+    | undefined;
   const metadata = record['metadata'] as { title?: unknown } | undefined;
   const known = new Set<string>(EVENT_STATE_COLUMNS);
 
@@ -157,6 +181,8 @@ export function readFabulaArc(envelope: unknown): FabulaRead {
         typeof metadata?.title === 'string' && metadata.title !== '' ? metadata.title : 'untitled',
       world_model_seed: record['world_model_seed'],
       events,
+      hidden_account: Array.isArray(block?.hidden_account) ? block.hidden_account : [],
+      facts: Array.isArray(block?.facts) ? block.facts : [],
     }),
     dropped_state_changes: dropped,
   };
@@ -177,6 +203,16 @@ export function voiceCardOf(envelope: unknown): Record<string, unknown> {
   return typeof block === 'object' && block !== null && !Array.isArray(block)
     ? { ...(block as Record<string, unknown>) }
     : {};
+}
+
+/**
+ * The `facts` block a package built from this arc carries (ADR 0022 decision 5): the arc's table
+ * with its hidden account folded in. Spread into the package; empty adds no key at all, so a
+ * package from an arc without either is unchanged.
+ */
+export function packageFacts(arc: FabulaArc): { facts?: Fact[] } {
+  const facts = mergeHiddenAccount(arc.facts, arc.hidden_account);
+  return facts.length === 0 ? {} : { facts };
 }
 
 /** Events in Fabula order. `sequence` is the field; array position is incidental. */

@@ -103,3 +103,10 @@ decision 3 already established — no second call.
   `plants_opened` / `closing_situation` fields.
 - Rollup *trigger policy* remains open fog — this ADR settles the rollup's shape, not when
   one fires.
+
+## Amendment (2026-09-28)
+
+Decision 1 stands: a `fact_ref` is a slug, and the slug is the identity. [ADR
+0022](0022-fact-statements-and-the-hidden-account.md) adds an optional statement and causes for a
+slug, in the package's `facts` table, because a bare slug reaching the writer carried no claim and
+no direction (issue #179).

@@ -145,3 +145,10 @@ shape — worth formalizing as the sanctioned mechanism rather than three more t
   conditional-severity-by-instance shape the linter's own stated principle rules out, and it
   weakens the schema-level guarantee that a real Story Package always has scenes for every other
   consumer of `StoryPackageSchema` (the compiler, the authoring UI), not just the linter.
+
+## Amendment (2026-09-28)
+
+Event-level `caused_by` still stops at the package boundary. [ADR
+0022](0022-fact-statements-and-the-hidden-account.md) carries a *fact*-level causal graph across
+it instead: the `_fabula` block gains `hidden_account` and `facts`, and segmentation folds them
+into the package's `facts` table (issue #179).

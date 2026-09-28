@@ -186,6 +186,8 @@ export function renderArcPrompt(brief: ArcBrief): string {
     'character_knowledge rows with learned_at_scene: null are facts true before the story begins —',
     'the only thing a payoff with plant: null is allowed to rest on.',
     '',
+    ...renderHiddenAccountSection(),
+    '',
     `EVENTS — exactly ${brief.event_count} of them, sequence 1..${brief.event_count}, CHRONOLOGICAL.`,
     'Each event: what happens, where, who is there, whose experience it follows, what it makes true.',
     '  - beats: the 1–3 things that must happen in it. Never empty.',
@@ -201,10 +203,51 @@ export function renderArcPrompt(brief: ArcBrief): string {
     '',
     renderPlantPolicy(brief),
     '',
+    ...renderFactsSection(),
+    '',
     'AVOID, because they are what every generated story already does: lighthouses, clockmakers,',
     'librarians, cartographers, and the names Elias, Mara, Elara, Silas, Thorne. Not because they',
     'are bad, because they are the default. Go somewhere else.',
   ].join('\n');
+}
+
+/**
+ * ADR 0022 decision 4: the concealed incident as its own chain, written before the events.
+ *
+ * Written first for the same reason the seed is: whatever is emitted first dominates, and a
+ * mystery whose true account is settled before its discovery is plotted cannot contradict it —
+ * The Slackwater Crossing's events said "a proper emergency reverse when the hull flooded" in one
+ * place and reverse-then-flooding in another, because the incident existed only as backstory
+ * rebuilt event by event.
+ */
+function renderHiddenAccountSection(): string[] {
+  return [
+    'HIDDEN ACCOUNT — what actually happened that the story conceals or only reconstructs: the',
+    'crime, the accident, the secret, the backstory. It is its own chronological chain, separate',
+    'from the events: events are what happens on the page (often the uncovering); the hidden',
+    'account is the thing uncovered. Write it before the events, then build the events so the',
+    'discovery reveals it.',
+    '  - Required whenever any event conceals a fact, and for every mystery. Otherwise it may be empty.',
+    '  - Each step: id (hidden_NN_short_name), sequence, a one-sentence summary, caused_by (earlier',
+    '    step ids), establishes (the fact_refs this step makes true — the same slugs events reveal',
+    '    and conceal).',
+    '  - Every step after the first has at least one cause. When a person acts, the summary says WHY',
+    '    ("Jesse throws the engine astern because the ferry is drifting onto the weir"), never only',
+    '    what.',
+    '  - No event summary or beat may retell the hidden account in a different order.',
+  ];
+}
+
+/** ADR 0022 decision 1: the claim each slug stands for, so a retelling paraphrases a fixed text. */
+function renderFactsSection(): string[] {
+  return [
+    'FACTS — after the events, one entry for every fact_ref used anywhere (reveals, conceals,',
+    'pays_off, character_knowledge, the hidden account):',
+    '  - statement: the claim in one plain sentence, with its direction explicit ("the rudder jammed',
+    '    hard over because its stop blocks had been removed"), never a topic ("rudder and stop blocks").',
+    '  - caused_by: the fact_refs this fact follows from, consistent with the hidden account and the',
+    '    events. Causes only, not merely earlier facts.',
+  ];
 }
 
 /**
@@ -319,6 +362,31 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
           'character_knowledge',
         ],
       },
+      hidden_account: {
+        type: 'array',
+        description:
+          'The concealed incident or backstory, as its own chronological chain. Empty only when ' +
+          'nothing is concealed.',
+        items: {
+          type: 'object',
+          properties: {
+            id: { type: 'string', description: 'hidden_NN_short_name, lower_snake_case' },
+            sequence: { type: 'integer' },
+            summary: {
+              type: 'string',
+              description: 'One sentence: what happened, and why when a person acts.',
+            },
+            caused_by: {
+              type: 'array',
+              items: { type: 'string' },
+              description: 'Earlier hidden step ids. Empty only for the first step.',
+            },
+            establishes: { type: 'array', items: factRef },
+          },
+          required: ['id', 'sequence', 'summary', 'caused_by', 'establishes'],
+          propertyOrdering: ['id', 'sequence', 'summary', 'caused_by', 'establishes'],
+        },
+      },
       events: {
         type: 'array',
         // `minItems`/`maxItems` are deliberately absent, and this is a measured constraint rather
@@ -424,8 +492,29 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
           ],
         },
       },
+      facts: {
+        type: 'array',
+        description: 'A statement for every fact_ref the arc uses.',
+        items: {
+          type: 'object',
+          properties: {
+            fact_ref: factRef,
+            statement: {
+              type: 'string',
+              description: 'The claim, one sentence, direction explicit. Never a topic.',
+            },
+            caused_by: {
+              type: 'array',
+              items: factRef,
+              description: 'fact_refs this follows from causally.',
+            },
+          },
+          required: ['fact_ref', 'statement', 'caused_by'],
+          propertyOrdering: ['fact_ref', 'statement', 'caused_by'],
+        },
+      },
     },
-    required: ['title', 'world_model_seed', 'events'],
-    propertyOrdering: ['title', 'world_model_seed', 'events'],
+    required: ['title', 'world_model_seed', 'hidden_account', 'events', 'facts'],
+    propertyOrdering: ['title', 'world_model_seed', 'hidden_account', 'events', 'facts'],
   };
 }

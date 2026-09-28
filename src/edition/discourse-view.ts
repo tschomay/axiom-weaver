@@ -15,6 +15,7 @@
 
 import type { SceneDigest } from '../digest/scene-digest';
 import type { StoryPackage } from '../schema/story-package';
+import { factsOf } from '../schema/facts';
 import type { EditionDiscourse, EditionManifest, EditionScene } from './edition';
 
 export interface DiscourseSceneView {
@@ -43,6 +44,8 @@ export interface EditionDiscourseView {
   readonly digest_hierarchy: EditionDiscourse['digest_hierarchy'];
   readonly rollup_events: EditionDiscourse['rollup_events'];
   readonly scenes: readonly DiscourseSceneView[];
+  /** fact_ref → statement, from the pinned package's facts table (ADR 0022). Empty without one. */
+  readonly statements: Readonly<Record<string, string>>;
 }
 
 /**
@@ -66,6 +69,9 @@ export function buildEditionDiscourseView(
     told_ledger: discourse?.told_ledger ?? [],
     digest_hierarchy: discourse?.digest_hierarchy ?? [],
     rollup_events: discourse?.rollup_events ?? [],
+    statements: Object.fromEntries(
+      (pkg === null ? [] : factsOf(pkg)).map((fact) => [fact.fact_ref, fact.statement]),
+    ),
     scenes: scenes.map((scene) => {
       const card = cards.get(scene.scene_id) ?? null;
       const revealed = new Set(scene.digest.facts_revealed);

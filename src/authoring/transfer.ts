@@ -54,6 +54,7 @@ const KNOWN_BLOCKS = new Set([
   'scene_cards',
   'voice_card',
   'metadata',
+  'facts',
 ]);
 
 export function importSummary(pkg: DraftStoryPackage): ImportSummary {

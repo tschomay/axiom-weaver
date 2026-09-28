@@ -33,6 +33,8 @@ import { z } from 'zod';
 import { lintPackage } from '../authoring/lint';
 import { provisionalPackage } from '../authoring/lint-fabula';
 import { eventsInOrder, type FabulaArc, type FabulaEvent } from '../schema/fabula';
+import { mergeHiddenAccount, reachesThroughCauses } from '../schema/facts';
+import type { Fact } from '../schema/story-package';
 
 /** A defect worth repairing: lint errors, plus the two warnings §4.1 promotes for generated arcs. */
 export interface RepairTarget {
@@ -60,13 +62,72 @@ export interface MechanicalRepairResult {
   readonly applied: string[];
 }
 
+/** Every repair that needs no model: the facts table's bookkeeping, then plant declarations. */
+export function mechanicalRepairs(arc: FabulaArc): MechanicalRepairResult {
+  const facts = factTableRepairs(arc);
+  const plants = plantDeclarationRepairs(facts.arc);
+  return { arc: plants.arc, applied: [...facts.applied, ...plants.applied] };
+}
+
+/**
+ * The facts table's shape errors (ADR 0022 decision 6), fixed without a model: they are
+ * bookkeeping, and the closed edit vocabulary below deliberately has no fact edits.
+ *
+ * A duplicate keeps its first statement; a cause the arc never states is dropped; and a table
+ * edge that would close a cycle — checked against the hidden account's own chain first, which
+ * wins because it was written as the incident's order — is dropped.
+ */
+export function factTableRepairs(arc: FabulaArc): MechanicalRepairResult {
+  if (arc.facts.length === 0) return { arc, applied: [] };
+  const applied: string[] = [];
+
+  const unique: Fact[] = [];
+  for (const fact of arc.facts) {
+    if (unique.some((kept) => kept.fact_ref === fact.fact_ref)) {
+      applied.push(`fact_duplicate: second statement for "${fact.fact_ref}" dropped`);
+      continue;
+    }
+    unique.push({ ...fact, caused_by: [...fact.caused_by] });
+  }
+
+  const known = new Set([
+    ...unique.map((fact) => fact.fact_ref),
+    ...arc.hidden_account.flatMap((step) => step.establishes),
+  ]);
+  for (const fact of unique) {
+    fact.caused_by = fact.caused_by.filter((cause) => {
+      if (known.has(cause)) return true;
+      applied.push(`fact_unknown_cause: "${fact.fact_ref}" no longer caused_by unstated "${cause}"`);
+      return false;
+    });
+  }
+
+  const graph = new Map(
+    mergeHiddenAccount([], arc.hidden_account).map((fact) => [fact.fact_ref, fact]),
+  );
+  for (const fact of unique) {
+    const node = graph.get(fact.fact_ref) ?? { ...fact, caused_by: [] };
+    graph.set(fact.fact_ref, node);
+    fact.caused_by = fact.caused_by.filter((cause) => {
+      if (cause === fact.fact_ref || reachesThroughCauses(graph, cause, fact.fact_ref)) {
+        applied.push(`fact_cycle: "${fact.fact_ref}" no longer caused_by "${cause}"`);
+        return false;
+      }
+      if (!node.caused_by.includes(cause)) node.caused_by = [...node.caused_by, cause];
+      return true;
+    });
+  }
+
+  return applied.length === 0 ? { arc, applied } : { arc: { ...arc, facts: unique }, applied };
+}
+
 /**
  * Install declarations for plants the generator named but did not declare.
  *
  * Only applied where the named plant event exists *and* strictly precedes the payoff — if either
  * is false the link itself is wrong, which is an authoring question and belongs to the model pass.
  */
-export function mechanicalRepairs(arc: FabulaArc): MechanicalRepairResult {
+function plantDeclarationRepairs(arc: FabulaArc): MechanicalRepairResult {
   const events = eventsInOrder(arc);
   const byId = new Map(events.map((event) => [event.id, event]));
   const install = new Map<string, Set<string>>();
