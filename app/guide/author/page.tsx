@@ -154,7 +154,9 @@ export default function AuthorGuidePage() {
         knows it, learns it here, or must not be told yet. That is what keeps a scene that
         <em>retells</em> something from swapping cause and effect. The section offers every slug
         your cards use that has no statement yet. Add the steps of a hidden incident the reader
-        only hears about later as facts too, even if no card names them.
+        only hears about later as facts too, even if no card names them. A scene that
+        <em>retells</em> what the reader already knows (an inquiry, a confession) lists those facts
+        in its card&apos;s <strong>recounts</strong>, so the writer gets the account there too.
       </p>
 
       <h2>Linting and publishing</h2>

@@ -142,6 +142,13 @@ export function SceneCardEditor({
       />
 
       <FactList
+        label="recounts"
+        hint="facts this scene retells that the reader already knows — an inquiry, a confession. The writer gets them as one ordered account so the retelling keeps cause before effect."
+        values={scene.recounts ?? []}
+        onChange={(recounts) => set({ recounts })}
+      />
+
+      <FactList
         label="force reintroduce"
         hint="what to reintroduce because the reader has probably lost it"
         values={scene.force_reintroduce}

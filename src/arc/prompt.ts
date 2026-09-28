@@ -196,6 +196,8 @@ export function renderArcPrompt(brief: ArcBrief): string {
     '  - reveals: fact_refs the reader learns here. Each one must be paid off later.',
     '  - conceals: fact_refs deliberately withheld here, which the reader must not yet learn.',
     '    Every concealed fact_ref must be revealed by a LATER event — the one where the truth comes out.',
+    '  - recounts: fact_refs the reader ALREADY learned that this event retells — an inquiry, a',
+    '    confession, an accusation that goes over what happened. Empty for most events.',
     `  - state_changes: World Model columns this event changes (${EVENT_STATE_COLUMNS.join(', ')} only).`,
     '    Only for characters or objects actually involved. Move people before you place them:',
     '    a character listed in an event\'s characters_present must either already be at that',
@@ -451,6 +453,11 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
               description: 'Facts the reader learns here. Each must be paid off by a later event.',
             },
             conceals: { type: 'array', items: factRef },
+            recounts: {
+              type: 'array',
+              items: factRef,
+              description: 'Facts the reader already learned that this event retells. Usually empty.',
+            },
             state_changes: {
               type: 'array',
               items: {
@@ -493,6 +500,7 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
             'caused_by',
             'reveals',
             'conceals',
+            'recounts',
             'state_changes',
             'pays_off',
           ],
@@ -508,6 +516,7 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
             'caused_by',
             'reveals',
             'conceals',
+            'recounts',
             'state_changes',
             'pays_off',
           ],

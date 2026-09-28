@@ -437,6 +437,14 @@ function renderSceneCard(scene: SceneCard, facts: FactIndex): string {
       facts,
     );
   }
+  if ((scene.recounts ?? []).length > 0) {
+    pushFactList(
+      lines,
+      'This scene retells (the reader already knows these — keep the established account\'s order)',
+      scene.recounts ?? [],
+      facts,
+    );
+  }
   if (scene.invariants.length > 0) {
     lines.push('Invariants:');
     for (const invariant of scene.invariants) lines.push(`  - ${invariant}`);
@@ -472,7 +480,9 @@ function renderState(scene: SceneCard): string {
 function renderEstablishedAccount(input: AssembleInput, facts: FactIndex): string {
   if (facts.size === 0) return '';
   const { scene } = input;
+  const recounts = new Set(scene.recounts ?? []);
   const seeds = [
+    ...recounts,
     ...scene.reader_must_learn,
     ...scene.must_stay_hidden,
     ...scene.pays_off.map((payoff) => payoff.fact_ref),
@@ -488,6 +498,7 @@ function renderEstablishedAccount(input: AssembleInput, facts: FactIndex): strin
     if (hidden.has(ref)) return 'MUST STAY HIDDEN';
     if (learn.has(ref)) return 'reveal here';
     if (resolve.has(ref)) return 'resolve here';
+    if (recounts.has(ref)) return 'retold here — the reader already knows it';
     if (input.ledger.row(ref) !== null) return 'reader already knows';
     return 'not yet told — do not state it';
   };
