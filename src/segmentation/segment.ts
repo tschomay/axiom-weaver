@@ -58,6 +58,7 @@ import {
   readFabulaArc,
   storyIdOf,
   voiceCardOf,
+  packageFacts,
   type FabulaArc,
   type FabulaEvent,
 } from '../schema/fabula';
@@ -481,6 +482,7 @@ export async function segmentFabulaPackage(
       source: `segmented from a Fabula-only package by ${model.model}`,
       created_at: finishedAt,
     },
+    ...packageFacts(arc),
   };
 
   const lint = lintPackage(candidate);
@@ -632,6 +634,7 @@ export function segmentMechanically(
     scene_cards: scenes,
     voice_card: voiceCardOf(envelope),
     metadata: { title: arc.title },
+    ...packageFacts(arc),
   }) as StoryPackage;
 
   return { package: pkg, grouping, lint: lintPackage(pkg) };

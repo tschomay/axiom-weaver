@@ -577,8 +577,15 @@ describe('the response schema', () => {
     const order = events.items.propertyOrdering;
     expect(order.indexOf('pays_off')).toBe(order.length - 1);
     expect(order.indexOf('reveals')).toBeLessThan(order.indexOf('pays_off'));
-    // The seed comes back before the events that reference it.
-    expect(schema['propertyOrdering']).toEqual(['title', 'world_model_seed', 'events']);
+    // The seed comes back before the events that reference it; the hidden account before the
+    // events that uncover it, and the fact statements after everything they describe (ADR 0022).
+    expect(schema['propertyOrdering']).toEqual([
+      'title',
+      'world_model_seed',
+      'hidden_account',
+      'events',
+      'facts',
+    ]);
   });
 });
 

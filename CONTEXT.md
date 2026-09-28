@@ -107,6 +107,14 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   centrality}`, driving introduce / assume / re-anchor decisions. A **fact** is an
   author-declared or auto-generated slug — not required to correspond to a World Model
   row/column — so it can name things the schema has no column for ("the will was forged").
+  A fact may also carry a **fact statement** — the claim the slug stands for, plus the facts it
+  follows from (`caused_by`) — in the package's optional `facts` table. The slug stays the
+  identity every mechanism matches on; the statement is rendered to the writer beside it, and
+  causally linked facts render as one ordered **established account**, so a scene that retells
+  an earlier event paraphrases a fixed claim instead of rebuilding it from recaps. A generated
+  arc's **hidden account** — the concealed incident as its own chronological chain, separate
+  from the on-page events that uncover it — is folded into those statements at segmentation.
+  See [ADR 0022](docs/adr/0022-fact-statements-and-the-hidden-account.md).
   Entity introduction ("has the reader met Marcus?") rides the same mechanism via an
   auto-generated `met:<entity_id>` fact, not a parallel structure.
 - **Re-anchoring policy** — the introduce / assume / reanchor / reintroduce decision for each

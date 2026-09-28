@@ -30,6 +30,7 @@
 import {
   eventsInOrder,
   exitStateFor,
+  packageFacts,
   type FabulaArc,
   type FabulaEvent,
 } from '../schema/fabula';
@@ -174,6 +175,7 @@ export function projectFabulaArc(arc: FabulaArc, storyId: string): FabulaProject
       scene_cards: scenes,
       voice_card: {},
       metadata: { title: arc.title },
+      ...packageFacts(arc),
     },
     substitutions,
   };

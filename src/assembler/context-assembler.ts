@@ -25,6 +25,7 @@ import { renderReanchoring, type BandDecision } from './reanchoring';
 import { joinSceneRows, presentEntityIds, type JoinedRows } from './join';
 import type { PlantObligation } from '../plants/obligation-walk';
 import { tieredColumns, columnAuthority, ROW_COLUMN, TABLE_NAMES } from '../schema/tiers';
+import { FactIndex, factsOf } from '../schema/facts';
 
 /** How a segment is cached. The debug view renders this; nothing else branches on it. */
 export type CacheMechanism = 'explicit' | 'implicit' | 'none';
@@ -184,13 +185,18 @@ function buildVolatileTail(
   diagnostics: AssemblyDiagnostic[],
 ): { text: string; groups: TailGroup[] } {
   const budget = input.volatileTailBudget ?? DEFAULT_VOLATILE_TAIL_BUDGET;
+  // ADR 0022: a slug's statement travels with it. An empty table renders nothing extra, so a
+  // package without one assembles byte-for-byte as it did.
+  const facts = new FactIndex(factsOf(input.pkg));
 
   // Core, in ADR 0012 decision 2's order: Scene Card, payoff instructions, re-anchoring, imagery
-  // ledger, tone, then the filtered rows the scene cannot be staged without.
+  // ledger, tone, then the filtered rows the scene cannot be staged without. The established
+  // account sits right after the card: a recap without it is how cause and effect get swapped.
   const coreBlocks = [
-    renderSceneCard(input.scene),
-    renderPlantObligations(input.plantObligations),
-    renderPayoffInstructions(input.payoffInstructions),
+    renderSceneCard(input.scene, facts),
+    renderEstablishedAccount(input, facts),
+    renderPlantObligations(input.plantObligations, facts),
+    renderPayoffInstructions(input.payoffInstructions, facts),
     renderReanchoring(input.reanchoring),
     renderImageryLedger(input.imageryLedger),
     renderSceneTone(input.scene.tone),
@@ -213,6 +219,7 @@ function buildVolatileTail(
       text: renderToldLedgerRows(
         "TOLD-LEDGER — this scene's own facts (what the reader already knows about them):",
         input.ledger.sliceForScene(input.scene),
+        facts,
       ),
       estimated_tokens: 0,
     },
@@ -243,6 +250,7 @@ function buildVolatileTail(
         "WHO KNOWS WHAT — this scene's own facts:",
         rows.knowledge_scene_facts,
         input.model,
+        facts,
       ),
       estimated_tokens: 0,
     },
@@ -253,6 +261,7 @@ function buildVolatileTail(
         'WHO KNOWS WHAT — broader epistemic context:',
         rows.knowledge_other,
         input.model,
+        facts,
       ),
       estimated_tokens: 0,
     },
@@ -383,7 +392,23 @@ function renderVerbatimTail(paragraph: string | null): string {
   ].join('\n');
 }
 
-function renderSceneCard(scene: SceneCard): string {
+/** `slug` alone, or `slug: statement` when the facts table has one (ADR 0022 decision 2). */
+function factLine(factRef: string, facts: FactIndex): string {
+  const statement = facts.statement(factRef);
+  return statement === null ? factRef : `${factRef}: ${statement}`;
+}
+
+/** A fact list: the old one-line form when no fact in it has a statement, one per line otherwise. */
+function pushFactList(lines: string[], label: string, refs: readonly string[], facts: FactIndex): void {
+  if (refs.every((ref) => facts.statement(ref) === null)) {
+    lines.push(`${label}: ${refs.join(', ')}`);
+    return;
+  }
+  lines.push(`${label}:`);
+  for (const ref of refs) lines.push(`  - ${factLine(ref, facts)}`);
+}
+
+function renderSceneCard(scene: SceneCard, facts: FactIndex): string {
   const lines = [
     `SCENE CARD — ${scene.id} (order ${scene.order})`,
     `POV: ${scene.pov}. Location: ${scene.location_id}. Present: ${scene.characters_present.join(', ')}.`,
@@ -394,11 +419,14 @@ function renderSceneCard(scene: SceneCard): string {
     for (const beat of scene.required_beats) lines.push(`  - ${beat}`);
   }
   if (scene.reader_must_learn.length > 0) {
-    lines.push(`The reader must learn: ${scene.reader_must_learn.join(', ')}`);
+    pushFactList(lines, 'The reader must learn', scene.reader_must_learn, facts);
   }
   if (scene.must_stay_hidden.length > 0) {
-    lines.push(
-      `MUST STAY HIDDEN (absolute — prose reaches the reader before anything else is checkable): ${scene.must_stay_hidden.join(', ')}`,
+    pushFactList(
+      lines,
+      'MUST STAY HIDDEN (absolute — prose reaches the reader before anything else is checkable)',
+      scene.must_stay_hidden,
+      facts,
     );
   }
   if (scene.invariants.length > 0) {
@@ -425,21 +453,73 @@ function renderState(scene: SceneCard): string {
   return parts.length === 0 ? '(unchanged)' : parts.join('; ');
 }
 
-function renderPlantObligations(obligations: readonly PlantObligation[]): string {
+/**
+ * ADR 0022 decision 3: every fact causally linked to the ones this scene names, causes before
+ * effects, each labelled with where the reader stands.
+ *
+ * Seeds are the scene's own facts — must learn, must stay hidden, pays off, plants owed. The
+ * label is what lets the writer know the whole account without telling it: only the facts marked
+ * for this scene reach the page.
+ */
+function renderEstablishedAccount(input: AssembleInput, facts: FactIndex): string {
+  if (facts.size === 0) return '';
+  const { scene } = input;
+  const seeds = [
+    ...scene.reader_must_learn,
+    ...scene.must_stay_hidden,
+    ...scene.pays_off.map((payoff) => payoff.fact_ref),
+    ...input.plantObligations.map((obligation) => obligation.fact_ref),
+  ];
+  const account = facts.account(seeds);
+  if (account.length === 0) return '';
+
+  const hidden = new Set(scene.must_stay_hidden);
+  const learn = new Set(scene.reader_must_learn);
+  const resolve = new Set(scene.pays_off.map((payoff) => payoff.fact_ref));
+  const status = (ref: string): string => {
+    if (hidden.has(ref)) return 'MUST STAY HIDDEN';
+    if (learn.has(ref)) return 'reveal here';
+    if (resolve.has(ref)) return 'resolve here';
+    if (input.ledger.row(ref) !== null) return 'reader already knows';
+    return 'not yet told — do not state it';
+  };
+
+  const lines = [
+    'ESTABLISHED ACCOUNT (how these facts connect, causes before effects — any retelling, recap or',
+    'accusation in this scene keeps this order and this direction; never swap a cause and its effect):',
+  ];
+  for (const fact of account) {
+    const causes = fact.caused_by.filter((cause) => facts.get(cause) !== null);
+    lines.push(
+      `  - [${status(fact.fact_ref)}] ${fact.fact_ref}: ${fact.statement}` +
+        (causes.length === 0 ? '' : ` (because of: ${causes.join(', ')})`),
+    );
+  }
+  return lines.join('\n');
+}
+
+/** An instruction line, with the fact's statement under it when there is one. */
+function pushInstruction(lines: string[], entry: PlantObligation, facts: FactIndex): void {
+  lines.push(`  - ${entry.instruction}`);
+  const statement = facts.statement(entry.fact_ref);
+  if (statement !== null) lines.push(`    The fact: ${statement}`);
+}
+
+function renderPlantObligations(obligations: readonly PlantObligation[], facts: FactIndex): string {
   if (obligations.length === 0) return '';
   const lines = [
     'THIS SCENE PLANTS (each line opens with the fact_ref to report, verbatim, in plants_opened):',
   ];
-  for (const obligation of obligations) lines.push(`  - ${obligation.instruction}`);
+  for (const obligation of obligations) pushInstruction(lines, obligation, facts);
   return lines.join('\n');
 }
 
-function renderPayoffInstructions(payoffs: readonly PlantObligation[]): string {
+function renderPayoffInstructions(payoffs: readonly PlantObligation[], facts: FactIndex): string {
   if (payoffs.length === 0) return '';
   const lines = [
     'THIS SCENE RESOLVES (each line opens with the fact_ref to report, verbatim, in payoffs_closed):',
   ];
-  for (const payoff of payoffs) lines.push(`  - ${payoff.instruction}`);
+  for (const payoff of payoffs) pushInstruction(lines, payoff, facts);
   return lines.join('\n');
 }
 
@@ -490,23 +570,30 @@ function renderKnowledge(
   heading: string,
   rows: readonly { character_id: string; fact_ref: string }[],
   model: WorldModel,
+  facts: FactIndex,
 ): string {
   if (rows.length === 0) return '';
   const lines = [heading];
   for (const row of rows) {
     const who = model.nameOf(row.character_id) ?? row.character_id;
-    lines.push(`  ${who} knows: ${row.fact_ref}`);
+    lines.push(`  ${who} knows: ${factLine(row.fact_ref, facts)}`);
   }
   return lines.join('\n');
 }
 
-function renderToldLedgerRows(heading: string, rows: readonly ToldLedgerRow[]): string {
+function renderToldLedgerRows(
+  heading: string,
+  rows: readonly ToldLedgerRow[],
+  facts?: FactIndex,
+): string {
   if (rows.length === 0) return '';
   const lines = [heading];
   for (const row of rows) {
     const subject = entityOfMetFact(row.fact_ref) ?? row.fact_ref;
+    const statement = facts?.statement(row.fact_ref) ?? null;
     lines.push(
-      `  ${subject}: first told at scene ${row.first_learned_scene}, last touched at scene ${row.last_touched_scene} (${row.centrality})`,
+      `  ${subject}: first told at scene ${row.first_learned_scene}, last touched at scene ${row.last_touched_scene} (${row.centrality})` +
+        (statement === null ? '' : ` — ${statement}`),
     );
   }
   return lines.join('\n');

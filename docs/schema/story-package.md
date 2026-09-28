@@ -181,9 +181,15 @@ invariants it doesn't have.
   },
   "scene_cards": [ { "id": "scene_01_remarriage", "order": 1, "pov": "char_cinderella", "...": "..." } ],
   "voice_card": { "...": "opaque here — field-level shape owned by issue #11" },
-  "metadata": { "title": "Cinderella", "source": "Lang, The Blue Fairy Book, 1889", "created_at": "2026-08-20T00:00:00Z" }
+  "metadata": { "title": "Cinderella", "source": "Lang, The Blue Fairy Book, 1889", "created_at": "2026-08-20T00:00:00Z" },
+  "facts": [ { "fact_ref": "cinderella_is_the_ball_girl", "statement": "The girl at the ball was Cinderella.", "caused_by": [] } ]
 }
 ```
+
+`facts` is optional ([ADR 0022](../adr/0022-fact-statements-and-the-hidden-account.md)): the claim
+each `fact_ref` stands for, and the facts it follows from. The slug stays the identity. The
+statement is rendered to the writer beside the slug wherever it appears, and linked facts are
+rendered as one causal account. A package without the table behaves as it always did.
 
 **Versioning.** `schema_version` is the shape of this document itself, bumped only on breaking
 changes to this schema. `package_version` is an author-facing integer the author increments on
@@ -225,7 +231,8 @@ of scene N" (not just "right now") reconstructable. See
   [The Scene Digest and the told-ledger](https://github.com/tschomay/axiom-weaver/issues/7) /
   [ADR 0003](../adr/0003-scene-digest-and-told-ledger.md): an author-declared or auto-generated
   slug, not required to correspond to a World Model row/column. Entity introduction uses an
-  auto-generated `met:<entity_id>` fact.
+  auto-generated `met:<entity_id>` fact. A slug may now carry a statement and causes in the
+  optional `facts` table ([ADR 0022](../adr/0022-fact-statements-and-the-hidden-account.md)).
 - **Voice Card field-level shape** — carried opaquely in the envelope. Issue #11.
 - **A global story clock / "time of day".** `CONTEXT.md` lists time of day as a physical
   property, but neither fixture needs it modeled per-entity, and it doesn't obviously belong on

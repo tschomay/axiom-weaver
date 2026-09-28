@@ -243,12 +243,24 @@ function DiscoursePanel({ runId, session }: { runId: string; session: AuthorSess
   );
 }
 
-function FactList({ facts, flagged }: { facts: readonly string[]; flagged?: readonly string[] }) {
+function FactList({
+  facts,
+  flagged,
+  statements,
+}: {
+  facts: readonly string[];
+  flagged?: readonly string[];
+  statements: Readonly<Record<string, string>>;
+}) {
   if (facts.length === 0) return <span className="meta">—</span>;
   return (
     <>
       {facts.map((fact) => (
-        <span key={fact} className={flagged?.includes(fact) ? 'tag bad' : 'tag'}>
+        <span
+          key={fact}
+          className={flagged?.includes(fact) ? 'tag bad' : 'tag'}
+          title={statements[fact]}
+        >
           {fact}
         </span>
       ))}
@@ -282,15 +294,26 @@ function DiscourseTable({ view }: { view: EditionDiscourseView }) {
                     <>
                       <div>
                         <span className="meta">learn </span>
-                        <FactList facts={scene.card.reader_must_learn} flagged={scene.unreported} />
+                        <FactList
+                          facts={scene.card.reader_must_learn}
+                          flagged={scene.unreported}
+                          statements={view.statements}
+                        />
                       </div>
                       <div>
                         <span className="meta">hidden </span>
-                        <FactList facts={scene.card.must_stay_hidden} flagged={scene.leaked} />
+                        <FactList
+                          facts={scene.card.must_stay_hidden}
+                          flagged={scene.leaked}
+                          statements={view.statements}
+                        />
                       </div>
                       <div>
                         <span className="meta">pays off </span>
-                        <FactList facts={scene.card.pays_off.map((payoff) => payoff.fact_ref)} />
+                        <FactList
+                          facts={scene.card.pays_off.map((payoff) => payoff.fact_ref)}
+                          statements={view.statements}
+                        />
                       </div>
                     </>
                   )}
@@ -301,7 +324,11 @@ function DiscourseTable({ view }: { view: EditionDiscourseView }) {
                   <span className="meta">closing: {scene.digest.closing_situation}</span>
                 </td>
                 <td>
-                  <FactList facts={scene.digest.facts_revealed} flagged={scene.leaked} />
+                  <FactList
+                    facts={scene.digest.facts_revealed}
+                    flagged={scene.leaked}
+                    statements={view.statements}
+                  />
                 </td>
               </tr>
             ))}
@@ -344,6 +371,12 @@ function DiscourseTable({ view }: { view: EditionDiscourseView }) {
               <tr key={row.fact_ref}>
                 <td>
                   <code>{row.fact_ref}</code>
+                  {view.statements[row.fact_ref] !== undefined && (
+                    <>
+                      <br />
+                      <span className="meta">{view.statements[row.fact_ref]}</span>
+                    </>
+                  )}
                 </td>
                 <td className="meta">{row.first_learned_scene}</td>
                 <td className="meta">{row.last_touched_scene}</td>
