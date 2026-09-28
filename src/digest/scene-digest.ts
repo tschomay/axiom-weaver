@@ -129,6 +129,12 @@ export const SceneDigestSchema = z.object({
   reanchor_used: z.array(ReanchorUsedSchema).default([]),
   /** ADR 0018 decision 1 — scoped to entities the told-ledger already tracks, naturally sparse. */
   grounded_claims: z.array(GroundedClaimSchema).default([]),
+  /**
+   * Slugs of the specialist terms this scene explained to the reader (#182, the ADR 0007
+   * amendment's deferred half). Each touches a `term:<slug>` told-ledger fact, the way
+   * `entities_on_stage` touches `met:` — so a term is glossed once and later scenes can assume it.
+   */
+  terms_glossed: z.array(z.string().min(1)).default([]),
 });
 
 export type ImagerySignature = z.infer<typeof ImagerySignatureSchema>;
@@ -216,6 +222,7 @@ export async function rollUp(
       reanchor_used: [],
       // Same reasoning: a claim is a point-in-time assertion, not a thread a window aggregates.
       grounded_claims: [],
+      terms_glossed: union((digest) => digest.terms_glossed),
     },
   };
 }

@@ -88,7 +88,9 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   palette; added by ADR 0010), **closing situation** (where everyone stands physically
   *and emotionally* at the end — the sole home for emotional state; there is no separate
   "emotional register" field), and **`reanchor_used`** (the introduce/assume/reanchor/
-  reintroduce band the writer self-reports per touched entity, added by ADR 0009). Target
+  reintroduce band the writer self-reports per touched entity, added by ADR 0009), and
+  **`terms_glossed`** (slugs of the specialist terms the scene explained to the reader, per the
+  Voice Card's reader familiarity; added by ADR 0007's 2026-09-28 amendment). Target
   ~150–220 tokens. A **rollup** (Chapter/Part Digest)
   shares this schema but aggregates over its window rather than concatenating: event
   summary is freshly synthesized, list fields union, imagery signature re-caps to 3 by
@@ -116,7 +118,9 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   from the on-page events that uncover it — is folded into those statements at segmentation.
   See [ADR 0022](docs/adr/0022-fact-statements-and-the-hidden-account.md).
   Entity introduction ("has the reader met Marcus?") rides the same mechanism via an
-  auto-generated `met:<entity_id>` fact, not a parallel structure.
+  auto-generated `met:<entity_id>` fact, not a parallel structure — and so does vocabulary: a
+  glossed specialist term becomes a `term:<slug>` fact, so it is explained once and later scenes
+  are told they may use it plainly.
 - **Re-anchoring policy** — the introduce / assume / reanchor / reintroduce decision for each
   entity present in a scene, driven by `scenes_since_last_touch` and the told-ledger's
   `centrality` (a `low`/`medium`/`high` ordinal, not a continuous score). Expressed to the

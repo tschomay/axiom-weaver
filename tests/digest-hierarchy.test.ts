@@ -14,6 +14,7 @@ function digest(overrides: Partial<SceneDigest> = {}): SceneDigest {
     closing_situation: 'and then it stopped',
     reanchor_used: [],
     grounded_claims: [],
+    terms_glossed: [],
     ...overrides,
   };
 }

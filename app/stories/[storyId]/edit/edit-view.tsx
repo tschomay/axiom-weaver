@@ -15,6 +15,7 @@ import {
 import { AuthorTokenField, useAuthorSession } from '../../../author-token';
 import { StorySection } from './story-section';
 import { VoiceSection } from './voice-section';
+import { FactsSection } from './facts-section';
 import { WorldSection } from './world-section';
 import { ScenesSection } from './scenes-section';
 import { PublishSection } from './publish-section';
@@ -292,6 +293,7 @@ export function EditView({
     voice: 0,
     world: counts.entities + counts.relationships,
     scenes: counts.scenes,
+    facts: counts.facts,
     transfer: 0,
     publish: lint.errors.length,
   };
@@ -394,6 +396,9 @@ export function EditView({
               openSceneId={openScene}
               onOpenScene={showScene}
             />
+          ) : null}
+          {section === 'facts' ? (
+            <FactsSection pkg={pkg} onChange={edit} flagged={flagged} />
           ) : null}
           {section === 'transfer' ? (
             <TransferPanel

@@ -423,6 +423,13 @@ function authorFacing(path: string, issue: z.core.$ZodIssue): string | null {
   if (path === 'scene_cards' && issue.code === 'too_small') {
     return 'a package needs at least one Scene Card before it can publish';
   }
+  // The facts form can leave a row half-written; say which half, not the schema's words.
+  if (/^facts\.\d+\.statement$/.test(path) && issue.code === 'too_small') {
+    return 'this fact has no statement yet — write the claim, or remove the row';
+  }
+  if (/^facts\.\d+\.fact_ref$/.test(path) && issue.code === 'too_small') {
+    return 'this fact has no slug yet';
+  }
   return null;
 }
 

@@ -16,7 +16,7 @@
 import type { SceneCard, StoryPackage } from '../schema/story-package';
 import type { WorldModel } from '../world-model/world-model';
 import type { ToldLedger, ToldLedgerRow } from '../digest/told-ledger';
-import { entityOfMetFact } from '../digest/told-ledger';
+import { entityOfMetFact, termOfFact } from '../digest/told-ledger';
 import type { DigestHierarchy } from '../digest/hierarchy';
 import { levelName, type LeveledDigest } from '../digest/scene-digest';
 import { renderVoiceCard, renderSceneTone, type VoiceCard } from '../voice/voice-card';
@@ -266,7 +266,15 @@ function buildVolatileTail(
       estimated_tokens: 0,
     },
     {
+      // Just above the broadest slice: forgetting a term was glossed costs a repeated lecture, a
+      // cheaper failure than losing who is in the room.
       priority: 6,
+      name: 'terms already glossed (term: facts)',
+      text: renderGlossedTerms(input.ledger.termSlice()),
+      estimated_tokens: 0,
+    },
+    {
+      priority: 7,
       name: 'broader told-ledger recency slice (met: facts)',
       text: renderToldLedgerRows(
         'TOLD-LEDGER SLICE (has the reader met these, and how recently):',
@@ -579,6 +587,17 @@ function renderKnowledge(
     lines.push(`  ${who} knows: ${factLine(row.fact_ref, facts)}`);
   }
   return lines.join('\n');
+}
+
+function renderGlossedTerms(rows: readonly ToldLedgerRow[]): string {
+  if (rows.length === 0) return '';
+  const terms = rows.map(
+    (row) => `${(termOfFact(row.fact_ref) ?? row.fact_ref).replace(/_/g, ' ')} (scene ${row.first_learned_scene})`,
+  );
+  return [
+    'TERMS ALREADY GLOSSED (the reader has had these explained — use them plainly, never explain again):',
+    `  ${terms.join('; ')}`,
+  ].join('\n');
 }
 
 function renderToldLedgerRows(
