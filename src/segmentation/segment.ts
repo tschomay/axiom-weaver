@@ -69,6 +69,7 @@ import {
   type StoryPackage,
   type WorldModelSeed,
 } from '../schema/story-package';
+import { phaseEventCounts } from '../arc/prompt';
 import { group, mechanicalBoundaries, type GroupingReport } from './grouping';
 import {
   carryForward,
@@ -141,6 +142,8 @@ export interface SegmentationReport {
   };
   readonly told_ledger: {
     readonly facts: number;
+    /** Concealed facts given a reveal scene by `assignConcealedReveals` (#180). */
+    readonly concealed_reveals_assigned: number;
     readonly withheld_scene_entries: number;
     readonly rejected_out_of_range: number;
     readonly failed_batches: number;
@@ -174,7 +177,8 @@ export const VACUOUS_ON_DERIVED_PACKAGES: readonly string[] = [
     'exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction',
   'plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene\'s ' +
     'own reader_must_learn as it is applied',
-  'unpaid_fact — reader_must_learn is populated only from facts that some scene pays off',
+  'unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, ' +
+    'plus concealed facts given a reveal scene, which the rule exempts (#180)',
 ];
 
 function omit<T extends object, K extends keyof T>(value: T, key: K): Omit<T, K> {
@@ -281,6 +285,79 @@ export function assembleScenes(
  * linter but the definition — a scene that plants a fact for the reader is a scene the reader
  * learns it in (research §4.7: the told-ledger is derived from Scene Cards, never read off prose).
  */
+/**
+ * The events of the brief's Solution phase, if the arc carries a brief that has one.
+ *
+ * Events carry no phase label. They are assigned to phases by count, in chronological order —
+ * `phaseEventCounts` is the same allocation the prompt asked for — so the phase of an event is
+ * recoverable from its chronological position. Over the events actually returned, not the count
+ * requested: the two can differ, and this is a fallback, not a measurement.
+ */
+export function solutionEventIds(envelope: unknown, events: readonly FabulaEvent[]): Set<string> {
+  const block = (envelope as Record<string, unknown> | null)?.[FABULA_BLOCK] as
+    | { brief?: { plot_shape?: { phases?: unknown } } }
+    | undefined;
+  const phases = block?.brief?.plot_shape?.phases;
+  if (!Array.isArray(phases)) return new Set();
+  const typed = phases as Array<{ name?: unknown; share?: unknown }>;
+  const at = typed.findIndex((phase) => String(phase.name).toLowerCase() === 'solution');
+  if (at === -1) return new Set();
+
+  const chronological = [...events].sort((a, b) => a.sequence - b.sequence);
+  const counts = phaseEventCounts(
+    typed.map((phase) => (typeof phase.share === 'number' ? phase.share : 0)),
+    chronological.length,
+  );
+  const start = counts.slice(0, at).reduce((sum, count) => sum + count, 0);
+  return new Set(chronological.slice(start, start + (counts[at] ?? 0)).map((event) => event.id));
+}
+
+/**
+ * Give every concealed fact a scene that reveals it (#180).
+ *
+ * `reader_must_learn` otherwise fills only from events' `reveals` and from plant scenes, so a fact
+ * the Fabula conceals and later only *implies* — The Slackwater Crossing's
+ * `rudder_overextension_cause` — never gets a reveal scene, the told-ledger never records the
+ * story's solution, and nothing notices. The reveal goes to the first later scene holding an event
+ * that pays the fact off, or failing that the first later scene holding a Solution-phase event.
+ * With neither, nothing is invented: `concealed_never_revealed` says so instead.
+ */
+export function assignConcealedReveals(
+  scenes: SceneCard[],
+  sceneEvents: readonly (readonly FabulaEvent[])[],
+  solutionIds: ReadonlySet<string>,
+): number {
+  const lastConcealed = new Map<string, number>();
+  for (const scene of scenes) {
+    for (const fact of scene.must_stay_hidden) {
+      lastConcealed.set(fact, Math.max(lastConcealed.get(fact) ?? 0, scene.order));
+    }
+  }
+
+  let assigned = 0;
+  for (const [fact, concealedAt] of lastConcealed) {
+    const later = scenes
+      .map((scene, index) => ({ scene, events: sceneEvents[index] ?? [] }))
+      .filter(({ scene }) => scene.order > concealedAt)
+      .sort((a, b) => a.scene.order - b.scene.order);
+    const revealed = later.some(
+      ({ scene }) =>
+        scene.reader_must_learn.includes(fact) ||
+        scene.pays_off.some((payoff) => payoff.fact_ref === fact),
+    );
+    if (revealed) continue;
+
+    const target =
+      later.find(({ events }) =>
+        events.some((event) => event.pays_off.some((payoff) => payoff.fact_ref === fact)),
+      ) ?? later.find(({ events }) => events.some((event) => solutionIds.has(event.id)));
+    if (target === undefined) continue;
+    target.scene.reader_must_learn.push(fact);
+    assigned += 1;
+  }
+  return assigned;
+}
+
 export function applyPlantGraph(
   scenes: SceneCard[],
   pairs: readonly PlantPair[],
@@ -446,6 +523,12 @@ export async function segmentFabulaPackage(
     seedFacts,
   );
 
+  const concealedReveals = assignConcealedReveals(
+    scenes,
+    grouped,
+    solutionEventIds(envelope, events),
+  );
+
   const revealedAt = new Map<string, string>();
   for (const scene of scenes) {
     for (const fact of scene.reader_must_learn) {
@@ -549,6 +632,7 @@ export async function segmentFabulaPackage(
       },
       told_ledger: {
         facts: revealedAt.size,
+        concealed_reveals_assigned: concealedReveals,
         withheld_scene_entries: withheldEntries,
         rejected_out_of_range: withholding.rejected_out_of_range,
         failed_batches: withholding.failed_batches,
@@ -625,6 +709,7 @@ export function segmentMechanically(
       .map((row) => row.fact_ref),
   );
   applyPlantGraph(scenes, pairs, seedFacts);
+  assignConcealedReveals(scenes, grouped, solutionEventIds(envelope, arc.events));
 
   const pkg = StoryPackageSchema.parse({
     schema_version: '1.0',

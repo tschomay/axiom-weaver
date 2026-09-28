@@ -31,7 +31,7 @@
 import { z } from 'zod';
 
 import { lintPackage } from '../authoring/lint';
-import { provisionalPackage } from '../authoring/lint-fabula';
+import { hiddenAccountProblems, provisionalPackage } from '../authoring/lint-fabula';
 import { eventsInOrder, type FabulaArc, type FabulaEvent } from '../schema/fabula';
 import { mergeHiddenAccount, reachesThroughCauses } from '../schema/facts';
 import type { Fact } from '../schema/story-package';
@@ -46,11 +46,31 @@ export interface RepairTarget {
 /** The warnings `story-authoring-eval.md` §4.1 promotes to gates for a *generated* arc. */
 const PROMOTED_WARNINGS = new Set(['unpaid_fact', 'no_required_beats']);
 
-export function repairTargets(arc: FabulaArc, storyId: string): RepairTarget[] {
+/**
+ * Promoted only for a mystery (#180): "the true account, assembled only from what the reader has
+ * already been shown" is that shape's whole point, so a concealed fact nothing ever reveals is a
+ * missing solution there. In another shape a withheld fact left withheld can be a choice.
+ */
+const MYSTERY_PROMOTED_WARNINGS = new Set(['concealed_never_revealed']);
+
+export interface RepairTargetOptions {
+  /** The brief's plot shape, when known. Decides which warnings are gates. */
+  readonly plotShapeId?: string;
+}
+
+export function repairTargets(
+  arc: FabulaArc,
+  storyId: string,
+  options: RepairTargetOptions = {},
+): RepairTarget[] {
   const lint = lintPackage(provisionalPackage(arc, storyId));
+  const promoted = (code: string): boolean =>
+    PROMOTED_WARNINGS.has(code) ||
+    (options.plotShapeId === 'mystery' && MYSTERY_PROMOTED_WARNINGS.has(code));
   return [
     ...lint.errors,
-    ...lint.warnings.filter((warning) => PROMOTED_WARNINGS.has(warning.code)),
+    ...hiddenAccountProblems(arc).filter((problem) => problem.severity === 'error'),
+    ...lint.warnings.filter((warning) => promoted(warning.code)),
   ].map(({ code, path, message }) => ({ code, path, message }));
 }
 
@@ -176,16 +196,20 @@ export const ARC_EDIT_KINDS = [
   'drop_reveal',
   'add_beat',
   'seed_fact',
+  'add_hidden_cause',
 ] as const;
 
 export const ArcEditSchema = z.object({
   kind: z.enum(ARC_EDIT_KINDS),
-  /** The event the edit lands on, or the payoff event for the payoff edits. */
+  /** The event the edit lands on, the payoff event for the payoff edits, or the hidden step. */
   event_id: z.string().default(''),
   fact_ref: z.string().default(''),
-  /** For `repoint_plant` / `add_payoff`: the planting event, or '' for a seed-grounded payoff. */
+  /**
+   * For `repoint_plant` / `add_payoff`: the planting event, or '' for a seed-grounded payoff.
+   * For `add_hidden_cause`: the earlier hidden step the step follows from.
+   */
   plant_event_id: z.string().default(''),
-  /** For `add_beat`. */
+  /** For `add_beat`; for `add_hidden_cause`, an optional rewritten summary that says why. */
   text: z.string().default(''),
   /** For `seed_fact`. */
   character_id: z.string().default(''),
@@ -211,7 +235,8 @@ export function arcRepairResponseJsonSchema(): Record<string, unknown> {
             fact_ref: { type: 'string' },
             plant_event_id: {
               type: 'string',
-              description: 'Empty string means seed-grounded (plant: null).',
+              description:
+                'Empty string means seed-grounded (plant: null). For add_hidden_cause: the earlier hidden step.',
             },
             text: { type: 'string' },
             character_id: { type: 'string' },
@@ -240,6 +265,7 @@ export function repairPrompt(arc: FabulaArc, targets: readonly RepairTarget[]): 
     [
       `${event.sequence}. ${event.id} — ${event.summary}`,
       `   reveals: [${event.reveals.join(', ')}]`,
+      ...(event.conceals.length === 0 ? [] : [`   conceals: [${event.conceals.join(', ')}]`]),
       `   pays_off: [${event.pays_off.map((p) => `${p.fact_ref} <- ${p.plant ?? 'SEED'}`).join(', ')}]`,
       `   beats: ${event.beats.length}`,
     ].join('\n'),
@@ -248,6 +274,13 @@ export function repairPrompt(arc: FabulaArc, targets: readonly RepairTarget[]): 
   const seeded = arc.world_model_seed.character_knowledge
     .filter((row) => row.learned_at_scene === null)
     .map((row) => `${row.fact_ref} (known by ${row.character_id})`);
+
+  const hidden = [...arc.hidden_account]
+    .sort((a, b) => a.sequence - b.sequence)
+    .map(
+      (step) =>
+        `${step.sequence}. ${step.id} — ${step.summary}\n   caused_by: [${step.caused_by.join(', ')}]  establishes: [${step.establishes.join(', ')}]`,
+    );
 
   return [
     'A validator rejected this arc. Its verdict is mechanical and final — these are not opinions,',
@@ -259,6 +292,7 @@ export function repairPrompt(arc: FabulaArc, targets: readonly RepairTarget[]): 
     'THE ARC, as it stands',
     ...events,
     '',
+    ...(hidden.length === 0 ? [] : ['THE HIDDEN ACCOUNT (what actually happened)', ...hidden, '']),
     `Facts known from the seed (the only ones a plant_event_id of "" may rest on): ${
       seeded.length === 0 ? 'none' : seeded.join(', ')
     }`,
@@ -272,6 +306,10 @@ export function repairPrompt(arc: FabulaArc, targets: readonly RepairTarget[]): 
     '  4. seed_fact — the fact was always true; seed it and use a seed-grounded payoff.',
     '  5. drop_payoff / drop_reveal — last resorts. These remove story rather than fixing it.',
     'add_beat is only for an event with no beats at all.',
+    'A concealed fact no later event reveals: declare_fact_at_event on the later event where the',
+    'truth comes out.',
+    'A hidden step with no cause: add_hidden_cause — event_id is the step, plant_event_id the earlier',
+    'step it follows from, and text a rewritten summary that says WHY, when a person acts.',
   ].join('\n');
 }
 
@@ -285,6 +323,7 @@ export function applyEdits(arc: FabulaArc, edits: readonly ArcEdit[]): Mechanica
     pays_off: event.pays_off.map((payoff) => ({ ...payoff })),
   }));
   let seed = arc.world_model_seed;
+  const hiddenAccount = arc.hidden_account.map((step) => ({ ...step, caused_by: [...step.caused_by] }));
 
   const find = (id: string): FabulaEvent | undefined => events.find((event) => event.id === id);
 
@@ -342,6 +381,15 @@ export function applyEdits(arc: FabulaArc, edits: readonly ArcEdit[]): Mechanica
         note(`${target.id} gained a beat`);
         break;
       }
+      case 'add_hidden_cause': {
+        const step = hiddenAccount.find((row) => row.id === edit.event_id);
+        const cause = hiddenAccount.find((row) => row.id === edit.plant_event_id);
+        if (step === undefined || cause === undefined || cause.sequence >= step.sequence) break;
+        if (!step.caused_by.includes(cause.id)) step.caused_by.push(cause.id);
+        if (edit.text !== '') step.summary = edit.text;
+        note(`${step.id} now caused_by ${cause.id}`);
+        break;
+      }
       case 'seed_fact': {
         if (edit.fact_ref === '' || edit.character_id === '') break;
         if (seed.character_knowledge.some((row) => row.fact_ref === edit.fact_ref)) break;
@@ -365,5 +413,5 @@ export function applyEdits(arc: FabulaArc, edits: readonly ArcEdit[]): Mechanica
   }
 
   events = events.map((event) => ({ ...event }));
-  return { arc: { ...arc, world_model_seed: seed, events }, applied };
+  return { arc: { ...arc, world_model_seed: seed, events, hidden_account: hiddenAccount }, applied };
 }

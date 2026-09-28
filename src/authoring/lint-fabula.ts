@@ -195,12 +195,62 @@ export function provisionalPackage(arc: FabulaArc, storyId: string): StoryPackag
 export function lintFabulaArc(arc: FabulaArc, storyId: string): FabulaProjectionLintResult {
   const projection = projectFabulaArc(arc, storyId);
   const lint = lintPackage(projection.package);
+  const hidden = hiddenAccountProblems(arc);
   return {
     note: FABULA_PROJECTION_NOTE,
-    problems: lint.problems,
-    errors: lint.errors,
-    warnings: lint.warnings,
+    problems: [...lint.problems, ...hidden],
+    errors: [...lint.errors, ...hidden.filter((problem) => problem.severity === 'error')],
+    warnings: [...lint.warnings, ...hidden.filter((problem) => problem.severity === 'warn')],
     scene_count: projection.package.scene_cards.length,
     substitutions: projection.substitutions,
   };
+}
+
+/**
+ * The hidden account's own chain (ADR 0022 decision 4, #180), which no projection can see: it is
+ * not events, so it never becomes a provisional Scene Card.
+ *
+ * `uncaused_hidden_event` is the Slackwater gap stated as a rule — a step with no stated cause is
+ * the place a writer later invents one, and there it invented an effect ("reversed because he had
+ * no tiller"). The first step is exempt: an account has to start somewhere.
+ */
+export function hiddenAccountProblems(arc: FabulaArc): PackageProblem[] {
+  const steps = [...arc.hidden_account].sort((a, b) => a.sequence - b.sequence);
+  const sequenceOf = new Map(steps.map((step) => [step.id, step.sequence]));
+  const problems: PackageProblem[] = [];
+
+  steps.forEach((step, index) => {
+    const path = `_fabula.hidden_account.${step.id}`;
+    if (index > 0 && step.caused_by.length === 0) {
+      problems.push({
+        severity: 'error',
+        code: 'uncaused_hidden_event',
+        path,
+        message: 'has no caused_by — every hidden step after the first needs a stated cause',
+      });
+    }
+    for (const cause of step.caused_by) {
+      const at = sequenceOf.get(cause);
+      if (at === undefined || at >= step.sequence) {
+        problems.push({
+          severity: 'error',
+          code: 'hidden_cause_not_earlier',
+          path,
+          message:
+            at === undefined
+              ? `is caused_by "${cause}", which is not a hidden step`
+              : `is caused_by "${cause}", which does not come before it`,
+        });
+      }
+    }
+    if (step.establishes.length === 0) {
+      problems.push({
+        severity: 'warn',
+        code: 'hidden_step_establishes_nothing',
+        path,
+        message: 'establishes no fact_ref, so nothing it says can reach the writer',
+      });
+    }
+  });
+  return problems;
 }
