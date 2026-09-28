@@ -91,8 +91,9 @@ lost. Nothing in the package held a fixed account to paraphrase.
 - Prompt size grows with the number of linked facts a scene touches, in the uncached volatile
   tail. For a mystery's solution scene that is the whole hidden account: a handful of sentences.
 - Hand-authored and extracted packages carry no table, so they are unchanged. An author can add
-  statements to an existing package by hand. The editor has no form for the table yet, so it rides
-  through the Manuscript like any other block the forms do not show (ADR 0017 §2).
+  statements to an existing package in the editor's **Facts** section. It offers every slug the
+  cards already use but have not stated yet, lets the author pick causes from the table rather
+  than type them, and previews the account in the order the writer will read it.
 - Not done here, and still worth doing: a digest-level check that a scene's `event_summary` does
   not contradict an established statement. Note it would not have caught Slackwater scene 9: its
   digest omitted the inverted claim, which lived only in the prose.

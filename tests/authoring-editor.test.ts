@@ -383,6 +383,7 @@ describe('a new story is an empty one, not a broken one', () => {
         entities: 0,
         relationships: 0,
         scenes: 0,
+        facts: 0,
       });
       expect(draftVoiceCard(manuscript.package.voice_card).based_on).toBeNull();
       expect(entityChoices(manuscript.package.world_model_seed, ['character'])).toEqual([]);

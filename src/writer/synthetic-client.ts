@@ -167,6 +167,7 @@ export class SyntheticWriterClient implements ModelClient {
       // Same reasoning: the stand-in composes prose from the card's own beats, not from a
       // scrutiny of what it just wrote, so it has nothing honest to claim here either.
       grounded_claims: [],
+      terms_glossed: [],
     };
   }
 }

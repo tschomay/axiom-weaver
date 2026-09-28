@@ -37,7 +37,7 @@ export function VoiceSection({
     <section>
       <h2>Voice Card</h2>
       <p className="lede">
-        Eight fields that hold steady across the whole telling. A scene&apos;s own tone modulates
+        Nine fields that hold steady across the whole telling. A scene&apos;s own tone modulates
         within this voice rather than editing it, which is why tone lives on the Scene Card and not
         here.
       </p>
@@ -64,7 +64,7 @@ export function VoiceSection({
           </select>
         </label>
         <span className="hint">
-          Picking one copies all eight fields onto this card. Editing a field afterwards edits it
+          Picking one copies every field onto this card. Editing a field afterwards edits it
           here, not the preset — nothing you write is a diff against anything.
         </span>
         {card.based_on === null ? null : (

@@ -149,5 +149,10 @@ and nothing on the card said who the reader is or what they already know. Worse,
    reads wrong. Segmentation now carries the envelope's card through instead of writing `{}`.
    Extract envelopes have no card, so they are unchanged.
 
-Deferred, as the issue suggests: tracking glossed terms as `term:<slug>` told-ledger facts. Only
-worth doing if the prose shows repeated re-glossing.
+Term tracking, deferred at first, was added the same day at the owner's request. The Scene Digest
+gains `terms_glossed`: slugs of the specialist terms the scene explained. Each one touches a
+`term:<slug>` told-ledger fact, exactly as `entities_on_stage` touches `met:`, and rollups union
+the field like other lists. Later scenes get a `TERMS ALREADY GLOSSED` group in the volatile tail,
+evicted just before the broadest `met:` slice, so a term is glossed once and then used plainly.
+This extends ADR 0003 decision 2's field set. A digest recorded before the field existed parses
+with it empty.

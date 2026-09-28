@@ -131,12 +131,30 @@ export default function AuthorGuidePage() {
 
       <h2>The Voice Card</h2>
       <p>
-        Five style presets — Fairy-Tale/Fable, Gothic/Brooding, Whimsical/Playful, Hardboiled/Terse,
-        Lyrical/Literary — expand into a fully editable card rather than staying an opaque tag: pick
+        Six style presets — Fairy-Tale/Fable, Gothic/Brooding, Whimsical/Playful, Hardboiled/Terse,
+        Lyrical/Literary, Suspense/Taut — expand into a fully editable card rather than staying an opaque tag: pick
         one, then change any field, and your edit lives in your card, never as a diff against the
         shared preset. That matters because a preset can change later without silently changing a
         story you already told in it. A Scene Card&apos;s own <code>tone</code> field never edits the
         Voice Card — it&apos;s a separate, scene-scoped instruction layered alongside it.
+      </p>
+      <p>
+        <strong>Reader familiarity</strong> says who your reader is and how to treat specialist
+        vocabulary. With it set, the writer explains a deep term the first time it appears and
+        records that it did; every later scene is told the reader already knows it, so it is never
+        explained twice.
+      </p>
+
+      <h2>Facts</h2>
+      <p>
+        The <strong>Facts</strong> section gives each fact slug the one-sentence claim it stands
+        for, and the facts it follows <em>from</em>. The writer sees the statement beside the slug
+        everywhere it appears. When a scene touches facts that are linked, the writer also gets the
+        whole chain in cause-before-effect order, each fact marked with whether the reader already
+        knows it, learns it here, or must not be told yet. That is what keeps a scene that
+        <em>retells</em> something from swapping cause and effect. The section offers every slug
+        your cards use that has no statement yet. Add the steps of a hidden incident the reader
+        only hears about later as facts too, even if no card names them.
       </p>
 
       <h2>Linting and publishing</h2>

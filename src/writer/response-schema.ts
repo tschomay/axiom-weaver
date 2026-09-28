@@ -212,6 +212,13 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
               'touches, not a restatement of everything you know. Leave empty if the prose makes ' +
               'no such claims.',
           },
+          terms_glossed: {
+            type: 'array',
+            items: { type: 'string' },
+            description:
+              'lower_snake_case slugs of the specialist terms you explained to the reader in this ' +
+              'scene, e.g. "hull_gland". Only terms you actually glossed. Empty if none.',
+          },
         },
         required: [
           'event_summary',
@@ -223,6 +230,7 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
           'closing_situation',
           'reanchor_used',
           'grounded_claims',
+          'terms_glossed',
         ],
         propertyOrdering: [
           'event_summary',
@@ -234,6 +242,7 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
           'closing_situation',
           'reanchor_used',
           'grounded_claims',
+          'terms_glossed',
         ],
       },
       stateUpdates: {

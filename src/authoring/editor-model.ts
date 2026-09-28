@@ -11,7 +11,8 @@
  * Nothing here reaches a store or a network. It is shapes, choices and coercions.
  */
 
-import { BagSchema, type BagValue, type WorldModelSeed } from '../schema/story-package';
+import { BagSchema, type BagValue, type Fact, type WorldModelSeed } from '../schema/story-package';
+import { FactIndex } from '../schema/facts';
 import type { DraftStoryPackage } from '../schema/manuscript';
 import { columnAuthority, type TableName, type Tier } from '../schema/tiers';
 import {
@@ -35,6 +36,7 @@ export const EDITOR_SECTIONS = [
   'voice',
   'world',
   'scenes',
+  'facts',
   'transfer',
   'publish',
 ] as const;
@@ -46,6 +48,7 @@ export const SECTION_LABELS: Record<EditorSection, string> = {
   voice: 'Voice Card',
   world: 'World Model seed',
   scenes: 'Scene Cards',
+  facts: 'Facts',
   transfer: 'Import / export',
   publish: 'Publish',
 };
@@ -66,6 +69,7 @@ export function sectionForPath(path: string): EditorSection {
   if (head === 'world_model_seed') return 'world';
   if (head === 'scene_cards') return 'scenes';
   if (head === 'voice_card') return 'voice';
+  if (head === 'facts' || head.startsWith('facts[')) return 'facts';
   if (head === 'package_version' || head === 'schema_version') return 'publish';
   return 'story';
 }
@@ -475,6 +479,7 @@ export interface SectionCounts {
   readonly entities: number;
   readonly relationships: number;
   readonly scenes: number;
+  readonly facts: number;
 }
 
 export function sectionCounts(pkg: DraftStoryPackage): SectionCounts {
@@ -484,5 +489,75 @@ export function sectionCounts(pkg: DraftStoryPackage): SectionCounts {
       (seed.characters?.length ?? 0) + (seed.locations?.length ?? 0) + (seed.objects?.length ?? 0),
     relationships: (seed.relationships?.length ?? 0) + (seed.character_knowledge?.length ?? 0),
     scenes: pkg.scene_cards.length,
+    facts: pkg.facts?.length ?? 0,
   };
+}
+
+// --- The facts table (ADR 0022) ------------------------------------------------------------
+
+/**
+ * Read a draft's `facts` block into rows the form can hold.
+ *
+ * Forgiving for the same reason `draftVoiceCard` is: a half-written row (a slug with no
+ * statement yet) is a legitimate draft, and the strict parse happens at publish.
+ */
+export function draftFacts(pkg: DraftStoryPackage): Fact[] {
+  return (pkg.facts ?? []).map((row) => {
+    const raw = row as Record<string, unknown>;
+    const causes = raw['caused_by'];
+    return {
+      fact_ref: typeof raw['fact_ref'] === 'string' ? raw['fact_ref'] : '',
+      statement: typeof raw['statement'] === 'string' ? raw['statement'] : '',
+      caused_by: Array.isArray(causes)
+        ? causes.filter((cause): cause is string => typeof cause === 'string')
+        : [],
+    };
+  });
+}
+
+/**
+ * Write the rows back. An empty table removes the key rather than writing `facts: []`, so a story
+ * that never used the table round-trips unchanged — a package without one assembles exactly as
+ * it did before ADR 0022.
+ */
+export function withFacts(pkg: DraftStoryPackage, facts: readonly Fact[]): DraftStoryPackage {
+  const next: DraftStoryPackage = { ...pkg };
+  if (facts.length === 0) delete next.facts;
+  else next.facts = facts.map((fact) => ({ ...fact, caused_by: [...fact.caused_by] }));
+  return next;
+}
+
+/**
+ * Every fact_ref the package already uses, in first-use order: the Scene Cards' `reader_must_learn`
+ * / `must_stay_hidden` / `pays_off`, then the seed's `character_knowledge`. The form offers the
+ * ones with no statement as one-tap rows — the same set `fact_without_statement` warns about.
+ */
+export function factRefsInUse(pkg: DraftStoryPackage): string[] {
+  const refs: string[] = [];
+  const add = (ref: string | undefined) => {
+    if (ref !== undefined && ref !== '' && !refs.includes(ref)) refs.push(ref);
+  };
+  const scenes = [...pkg.scene_cards].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  for (const scene of scenes) {
+    for (const ref of scene.reader_must_learn ?? []) add(ref);
+    for (const ref of scene.must_stay_hidden ?? []) add(ref);
+    for (const payoff of scene.pays_off ?? []) add(payoff.fact_ref);
+  }
+  for (const row of pkg.world_model_seed.character_knowledge ?? []) add(row.fact_ref);
+  return refs;
+}
+
+/** Used slugs with no row in the table yet. */
+export function unstatedFactRefs(pkg: DraftStoryPackage): string[] {
+  const stated = new Set(draftFacts(pkg).map((fact) => fact.fact_ref));
+  return factRefsInUse(pkg).filter((ref) => !stated.has(ref));
+}
+
+/**
+ * The table as the writer will read it — causes before effects (ADR 0022 decision 3), linked
+ * facts only. Rows still missing a slug or a statement are left out: they cannot render yet.
+ */
+export function causalPreview(facts: readonly Fact[]): Fact[] {
+  const complete = facts.filter((fact) => fact.fact_ref !== '' && fact.statement.trim() !== '');
+  return new FactIndex(complete).account(complete.map((fact) => fact.fact_ref));
 }

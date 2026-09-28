@@ -41,6 +41,21 @@ export function metFact(entityId: string): string {
   return `${MET_PREFIX}${entityId}`;
 }
 
+/**
+ * The `term:` prefix: a specialist term the reader has had explained (#182). Same mechanism as
+ * `met:`, a different subject — vocabulary rather than an entity.
+ */
+export const TERM_PREFIX = 'term:';
+
+export function termFact(slug: string): string {
+  return `${TERM_PREFIX}${slug}`;
+}
+
+/** The term a `term:` fact is about, or `null`. */
+export function termOfFact(factRef: string): string | null {
+  return factRef.startsWith(TERM_PREFIX) ? factRef.slice(TERM_PREFIX.length) : null;
+}
+
 /** The entity a `met:` fact is about, or `null` for an ordinary plot fact. */
 export function entityOfMetFact(factRef: string): string | null {
   return factRef.startsWith(MET_PREFIX) ? factRef.slice(MET_PREFIX.length) : null;
@@ -184,6 +199,14 @@ export class ToldLedger {
   applyDigest(digest: SceneDigest, sceneOrder: number): void {
     for (const fact of digest.facts_revealed) this.touch(fact, sceneOrder);
     for (const entity of digest.entities_on_stage) this.touch(metFact(entity), sceneOrder);
+    for (const term of digest.terms_glossed ?? []) this.touch(termFact(term), sceneOrder);
+  }
+
+  /** Every term glossed so far, oldest first — what the writer may now use without explaining. */
+  termSlice(): ToldLedgerRow[] {
+    return [...this.rows.values()]
+      .filter((row) => termOfFact(row.fact_ref) !== null)
+      .sort((a, b) => a.first_learned_scene - b.first_learned_scene);
   }
 
   /**

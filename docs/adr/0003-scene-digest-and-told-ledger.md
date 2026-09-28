@@ -110,3 +110,10 @@ Decision 1 stands: a `fact_ref` is a slug, and the slug is the identity. [ADR
 0022](0022-fact-statements-and-the-hidden-account.md) adds an optional statement and causes for a
 slug, in the package's `facts` table, because a bare slug reaching the writer carried no claim and
 no direction (issue #179).
+
+## Amendment (2026-09-28): `terms_glossed`
+
+Decision 2's field set gains `terms_glossed` (slugs of specialist terms the scene explained),
+and decision 4's `met:` mechanism gains a sibling `term:<slug>` fact. See [ADR
+0007](0007-voice-card-and-style-presets.md)'s 2026-09-28 amendment. Like the other list fields,
+it unions across a rollup window.
