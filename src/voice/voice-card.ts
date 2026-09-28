@@ -1,8 +1,8 @@
 /**
  * The Voice Card and its style presets (ADR 0007).
  *
- * Eight fields, five presets, and one rendering template. The card is always **fully
- * materialized** — selecting a preset copies all eight fields in, and editing one edits that
+ * Nine fields, six presets, and one rendering template. The card is always **fully
+ * materialized** — selecting a preset copies every field in, and editing one edits that
  * field in place (ADR 0007 decision 4). A sparse diff was rejected because resolving unset fields
  * against a shared preset at render time would let a later edit to that preset silently change
  * the voice of every story already using it, mid-telling.
@@ -30,13 +30,19 @@ export const VoiceCardSchema = z.object({
   dialogue_density: z.string().default(''),
   /** Empty by default. Rendered only when set; calibration only, never content to reuse. */
   style_exemplar: z.string().default(''),
+  /**
+   * Who the reader is and what they already know — how to handle specialist vocabulary (#182,
+   * ADR 0007's 2026-09-28 amendment). Rendered only when set, so a card written before the field
+   * existed renders exactly as it did.
+   */
+  reader_familiarity: z.string().default(''),
   /** The preset this card started from, for labelling and reset. Never read when rendering. */
   based_on: z.string().nullable().default(null),
 });
 
 export type VoiceCard = z.infer<typeof VoiceCardSchema>;
 
-/** The seven text fields whose blankness (with no preset and no imagery) makes a card blank. */
+/** The text fields whose blankness (with no preset and no imagery) makes a card blank. */
 const VOICE_CARD_TEXT_FIELDS = [
   'person',
   'tense',
@@ -45,6 +51,7 @@ const VOICE_CARD_TEXT_FIELDS = [
   'sentence_rhythm',
   'dialogue_density',
   'style_exemplar',
+  'reader_familiarity',
 ] as const satisfies ReadonlyArray<keyof VoiceCard>;
 
 /** Whether the card is still untouched — the state a new story's `{}` block starts in. */
@@ -62,7 +69,18 @@ export interface StylePreset {
   readonly card: Omit<VoiceCard, 'based_on'>;
 }
 
-/** The five presets validated in ADR 0007 decision 2. */
+/**
+ * The default `reader_familiarity` every preset carries (#182): a reader who knows nothing about
+ * the story's specialist world gets a light guidepost the first time a deep term appears.
+ */
+export const DEFAULT_READER_FAMILIARITY =
+  'The first time a deep term appears (domain-specific jargon), let dialogue or narration make ' +
+  'its meaning clear within a clause. Never lecture.';
+
+/**
+ * The five presets validated in ADR 0007 decision 2, plus Suspense / Taut — added for generated
+ * mysteries (#182) and not yet put through that decision's side-by-side prototype.
+ */
 export const STYLE_PRESETS: readonly StylePreset[] = [
   {
     id: 'fairy_tale_fable',
@@ -76,6 +94,7 @@ export const STYLE_PRESETS: readonly StylePreset[] = [
       imagery_palette: ['hearth and ash', 'finery and brocade', 'glass and candlelight'],
       dialogue_density: 'low to moderate; the narrator reports more than it stages',
       style_exemplar: '',
+      reader_familiarity: DEFAULT_READER_FAMILIARITY,
     },
   },
   {
@@ -90,6 +109,7 @@ export const STYLE_PRESETS: readonly StylePreset[] = [
       imagery_palette: ['damp stone and rot', 'guttering light', 'cold weight and enclosure'],
       dialogue_density: 'low; speech arrives rarely and carries weight when it does',
       style_exemplar: '',
+      reader_familiarity: DEFAULT_READER_FAMILIARITY,
     },
   },
   {
@@ -104,6 +124,7 @@ export const STYLE_PRESETS: readonly StylePreset[] = [
       imagery_palette: ['kitchen clutter', 'weather with opinions', 'animals behaving as people'],
       dialogue_density: 'high; characters talk over each other and the narrator enjoys it',
       style_exemplar: '',
+      reader_familiarity: DEFAULT_READER_FAMILIARITY,
     },
   },
   {
@@ -118,6 +139,7 @@ export const STYLE_PRESETS: readonly StylePreset[] = [
       imagery_palette: ['cheap rooms and worse coffee', 'rain on asphalt', 'money and its smell'],
       dialogue_density: 'high; the scene is mostly what people say and refuse to say',
       style_exemplar: '',
+      reader_familiarity: DEFAULT_READER_FAMILIARITY,
     },
   },
   {
@@ -132,15 +154,52 @@ export const STYLE_PRESETS: readonly StylePreset[] = [
       imagery_palette: ['light on water', 'hands and their small work', 'weather as mood'],
       dialogue_density: 'moderate; speech is embedded in narration rather than set apart',
       style_exemplar: '',
+      reader_familiarity: DEFAULT_READER_FAMILIARITY,
+    },
+  },
+  {
+    id: 'suspense_taut',
+    display_name: 'Suspense / Taut',
+    card: {
+      person: 'third',
+      tense: 'past',
+      narrative_distance: 'close third, locked to the viewpoint character; knows only what they know',
+      register: 'alert, concrete, quietly tense; lets a detail sit wrong before explaining it',
+      sentence_rhythm:
+        'lean sentences that tighten as pressure builds; a short line to land each discovery',
+      imagery_palette: ['cold water and weather', 'worn machinery under strain', 'small wrong details'],
+      dialogue_density: 'moderate to high; people talk around what they are hiding',
+      style_exemplar: '',
+      reader_familiarity: DEFAULT_READER_FAMILIARITY,
     },
   },
 ];
+
+/**
+ * The preset Generate starts a story's Voice Card from, by plot shape (#182).
+ *
+ * A generated package used to ship `voice_card: {}`, so the writer got no voice guidance at all.
+ * The mapping only picks a starting point — the card is materialized in full (decision 4) and is
+ * the author's to edit like any other. First-person Hardboiled is never picked: segmentation
+ * chooses POV per scene, and a first-person narrator who changes from scene to scene reads wrong.
+ */
+const PRESET_BY_PLOT_SHAPE: Readonly<Record<string, string>> = {
+  mystery: 'suspense_taut',
+  reckoning: 'gothic_brooding',
+  transformation: 'lyrical_literary',
+  quest: 'fairy_tale_fable',
+  courtship: 'whimsical_playful',
+};
+
+export function defaultVoiceCardForPlotShape(plotShapeId: string | null | undefined): VoiceCard {
+  return cardFromPreset(PRESET_BY_PLOT_SHAPE[plotShapeId ?? ''] ?? 'suspense_taut');
+}
 
 export function presetById(id: string): StylePreset | null {
   return STYLE_PRESETS.find((preset) => preset.id === id) ?? null;
 }
 
-/** Materialize a preset into a full card — decision 4's copy-all-eight-fields rule. */
+/** Materialize a preset into a full card — decision 4's copy-every-field rule. */
 export function cardFromPreset(id: string): VoiceCard {
   const preset = presetById(id);
   if (preset === null) throw new Error(`Unknown style preset "${id}"`);
@@ -153,6 +212,8 @@ export function cardLabel(card: VoiceCard): string {
   const preset = presetById(card.based_on);
   if (preset === null) return 'Custom';
   const modified = (Object.keys(preset.card) as Array<keyof StylePreset['card']>).some((field) => {
+    // A card materialized before `reader_familiarity` existed has it blank; that is not an edit.
+    if (field === 'reader_familiarity' && card[field] === '') return false;
     const mine = card[field];
     const theirs = preset.card[field];
     return Array.isArray(mine) || Array.isArray(theirs)
@@ -203,6 +264,9 @@ export function renderVoiceCard(card: VoiceCard): string {
       ` domains to draw from, never phrases to reuse verbatim): ${card.imagery_palette.join('; ')}`,
     `- Dialogue: ${card.dialogue_density}`,
   ];
+  if (card.reader_familiarity.trim() !== '') {
+    lines.push(`- Reader: ${card.reader_familiarity}`);
+  }
   if (card.style_exemplar.trim() !== '') {
     lines.push(
       `- Exemplar, for calibration only — do not reuse its content: "${card.style_exemplar}"`,

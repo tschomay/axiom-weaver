@@ -140,7 +140,7 @@ describe('bags: Principle 4 enforced by the control (ADR 0017 §6)', () => {
 });
 
 describe('the Voice Card is written out whole (ADR 0007 decision 4)', () => {
-  it('materializes all nine fields when a preset is chosen', () => {
+  it('materializes all ten fields when a preset is chosen', () => {
     const block = voiceCardBlock(cardFromPreset('fairy_tale_fable'));
     expect(Object.keys(block).sort()).toEqual([
       'based_on',
@@ -148,6 +148,7 @@ describe('the Voice Card is written out whole (ADR 0007 decision 4)', () => {
       'imagery_palette',
       'narrative_distance',
       'person',
+      'reader_familiarity',
       'register',
       'sentence_rhythm',
       'style_exemplar',

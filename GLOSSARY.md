@@ -24,8 +24,8 @@ Grouped the way `CONTEXT.md` groups them; alphabetical within each group.
 | Scene Card | The authored unit: order, POV, location, beats, entry/exit state, invariants. | The granularity the engine performs and the compiler checks against — never inferred from prose. | Author one per beat; only 8 fields are required. |
 | Story Package | World Model seed + Scene Cards + Voice Card — the compiler's entire input. | Bundling these three is what lets a story compile unattended, repeatedly, like source code. | `npm run load-fixtures`, or write one following an existing fixture. |
 | Style exemplar | A hand-written passage on the Voice Card demonstrating tone instead of describing it. | Some voice qualities are easier to show than to specify as discrete fields. | Optional; write a passage in the target voice. |
-| Style presets | Five validated starting voices (Fairy-Tale, Gothic, Whimsical, Hardboiled, Lyrical). | Expands into an editable card, not an opaque tag — editing the preset later can't retroactively change an already-told story. | Pick one as a Voice Card's starting point, then edit freely. |
-| Voice Card | The narrator as data: person, tense, distance, register, rhythm, imagery palette. | Authored, stable voice data survives dozens of writer calls better than one prompt instruction would. | Start from a preset or write from scratch; edit fields directly (ADR 0007). |
+| Style presets | Six starting voices: five validated (Fairy-Tale, Gothic, Whimsical, Hardboiled, Lyrical) plus Suspense, which Generate uses for mysteries. | Expands into an editable card, not an opaque tag — editing the preset later can't retroactively change an already-told story. | Pick one as a Voice Card's starting point, then edit freely. |
+| Voice Card | The narrator as data: person, tense, distance, register, rhythm, imagery palette, and reader familiarity (who the reader is and how to handle jargon). | Authored, stable voice data survives dozens of writer calls better than one prompt instruction would. | Start from a preset or write from scratch; edit fields directly (ADR 0007). |
 
 ## The two memories
 

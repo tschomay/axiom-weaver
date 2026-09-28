@@ -168,6 +168,17 @@ export function storyIdOf(envelope: unknown, fallback = 'candidate'): string {
   return typeof id === 'string' && id !== '' ? id : fallback;
 }
 
+/**
+ * The envelope's Voice Card block, carried through segmentation untouched (#182). Generate fills
+ * one from the arc's plot shape; an Extract envelope has none, and gets `{}` as before.
+ */
+export function voiceCardOf(envelope: unknown): Record<string, unknown> {
+  const block = (envelope as Record<string, unknown> | null)?.['voice_card'];
+  return typeof block === 'object' && block !== null && !Array.isArray(block)
+    ? { ...(block as Record<string, unknown>) }
+    : {};
+}
+
 /** Events in Fabula order. `sequence` is the field; array position is incidental. */
 export function eventsInOrder(arc: FabulaArc): FabulaEvent[] {
   return [...arc.events].sort((a, b) => a.sequence - b.sequence);

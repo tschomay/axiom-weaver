@@ -57,6 +57,7 @@ import {
   eventsInOrder,
   readFabulaArc,
   storyIdOf,
+  voiceCardOf,
   type FabulaArc,
   type FabulaEvent,
 } from '../schema/fabula';
@@ -474,7 +475,7 @@ export async function segmentFabulaPackage(
     story_id: storyId,
     world_model_seed: arc.world_model_seed,
     scene_cards: scenes,
-    voice_card: {},
+    voice_card: voiceCardOf(envelope),
     metadata: {
       title: arc.title,
       source: `segmented from a Fabula-only package by ${model.model}`,
@@ -629,7 +630,7 @@ export function segmentMechanically(
     story_id: storyId,
     world_model_seed: arc.world_model_seed,
     scene_cards: scenes,
-    voice_card: {},
+    voice_card: voiceCardOf(envelope),
     metadata: { title: arc.title },
   }) as StoryPackage;
 
