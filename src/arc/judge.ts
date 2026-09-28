@@ -23,6 +23,7 @@
 import { z } from 'zod';
 
 import { scenesInOrder, type StoryPackage } from '../schema/story-package';
+import { factsOf } from '../schema/facts';
 import type { ModelClient } from '../writer/model-client';
 
 /**
@@ -134,6 +135,20 @@ export const JudgeResponseSchema = z.object({
       }),
     )
     .default([]),
+  /**
+   * Deliberate actions the plot depends on whose reason the skeleton never states or clearly
+   * implies. The Slackwater gap: "Jesse threw her full astern", with no why — so the writer
+   * invented one, and invented an effect. Defaulted for the same reason `setting_rules` is.
+   */
+  unmotivated_actions: z
+    .array(
+      z.object({
+        action: z.string(),
+        where: z.string().default(''),
+        why_missing: z.string().default(''),
+      }),
+    )
+    .default([]),
   notes: z.string().default(''),
 });
 
@@ -191,6 +206,8 @@ export interface JudgeScore {
   readonly engagement: { score: number; passed: boolean };
   /** #181: every setting rule the plot depends on is shown to the reader before it is used. */
   readonly setting_rules: { rules: number; unplanted: number; passed: boolean };
+  /** Every deliberate, plot-bearing action has a stated or clearly implied reason. Bar: none missing. */
+  readonly motivated_actions: { unmotivated: number; passed: boolean };
   readonly notes: string;
   readonly raw: JudgeResponse;
 }
@@ -277,7 +294,31 @@ export function blindArcView(pkg: StoryPackage): string {
     return lines;
   });
 
-  return ['WORLD AS THE STORY OPENS', ...seedLines, '', 'EVENTS, IN ORDER', ...eventLines].join('\n');
+  // ADR 0022: the account of what actually happened, where the package states one — a generated
+  // arc's hidden account arrives here through the projection's facts. Without it the judge could
+  // only see motives the on-page events happen to mention.
+  const facts = factsOf(pkg);
+  const accountLines =
+    facts.length === 0
+      ? []
+      : [
+          '',
+          'WHAT ACTUALLY HAPPENED (the stated facts, causes listed after each)',
+          ...facts.map(
+            (fact) =>
+              `  ${fact.fact_ref}: ${fact.statement}` +
+              (fact.caused_by.length === 0 ? '' : ` (because of: ${fact.caused_by.join(', ')})`),
+          ),
+        ];
+
+  return [
+    'WORLD AS THE STORY OPENS',
+    ...seedLines,
+    '',
+    'EVENTS, IN ORDER',
+    ...eventLines,
+    ...accountLines,
+  ].join('\n');
 }
 
 function judgePrompt(view: string): string {
@@ -345,6 +386,17 @@ function judgePrompt(view: string): string {
     'curfew, a schedule, a water level, who can open what. For each, planted is true only when an',
     'event BEFORE the one that relies on it shows the reader the rule. A rule the reader first',
     'meets at the moment it is needed is not planted. List none rather than pad the list.',
+    '',
+    'UNMOTIVATED ACTIONS. List every DELIBERATE action a character takes that the plot depends on,',
+    'wherever it appears: done on the page, OR only reconstructed, reported or inferred later (an',
+    'investigation working out what someone did, a confession, WHAT ACTUALLY HAPPENED). For each,',
+    'ask: does the skeleton itself say WHY they did it? Do not supply a reason yourself. If you would',
+    'have to guess the reason — even a plausible one like "it must have been an emergency" — the',
+    'action is unmotivated. "She threw the engine full astern" with no reason given anywhere is',
+    'unmotivated; "she went astern to hold the boat off the weir" is not. A reason counts only if',
+    'the skeleton names it, or it follows directly from an event the skeleton shows. Accidents and',
+    'forces of nature are not actions. For each, say where it is (an E-number, or "account") and',
+    'what reason is missing. List none rather than pad the list.',
   ].join('\n');
 }
 
@@ -406,6 +458,19 @@ export function judgeResponseJsonSchema(): Record<string, unknown> {
       },
       thematic_coherence: { type: 'integer' },
       engagement: { type: 'integer' },
+      unmotivated_actions: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            action: { type: 'string', description: 'Who does what.' },
+            where: { type: 'string', description: 'An E-number, or "account".' },
+            why_missing: { type: 'string', description: 'The reason the skeleton never gives.' },
+          },
+          required: ['action', 'where', 'why_missing'],
+          propertyOrdering: ['action', 'where', 'why_missing'],
+        },
+      },
       setting_rules: {
         type: 'array',
         items: {
@@ -433,6 +498,7 @@ export function judgeResponseJsonSchema(): Record<string, unknown> {
       'thematic_coherence',
       'engagement',
       'setting_rules',
+      'unmotivated_actions',
       'notes',
     ],
     propertyOrdering: [
@@ -444,6 +510,7 @@ export function judgeResponseJsonSchema(): Record<string, unknown> {
       'thematic_coherence',
       'engagement',
       'setting_rules',
+      'unmotivated_actions',
       'notes',
     ],
   };
@@ -476,12 +543,19 @@ export async function judgePackage(
 
 /** Turn a judge's raw verdicts into the per-criterion result, with each bar applied separately. */
 export function summarize(
-  input: Omit<JudgeResponse, 'setting_rules'> & { setting_rules?: JudgeResponse['setting_rules'] },
+  input: Omit<JudgeResponse, 'setting_rules' | 'unmotivated_actions'> & {
+    setting_rules?: JudgeResponse['setting_rules'];
+    unmotivated_actions?: JudgeResponse['unmotivated_actions'];
+  },
   label: string,
   judgeModel: string,
 ): JudgeScore {
   // A response recorded before #181 asked the question has no setting rules to read.
-  const raw: JudgeResponse = { ...input, setting_rules: input.setting_rules ?? [] };
+  const raw: JudgeResponse = {
+    ...input,
+    setting_rules: input.setting_rules ?? [],
+    unmotivated_actions: input.unmotivated_actions ?? [],
+  };
   const causes = raw.causal_pairs.filter((row) => row.verdict === 'causes').length;
   const merely = raw.causal_pairs.filter((row) => row.verdict === 'merely_follows').length;
   const contradicts = raw.causal_pairs.filter((row) => row.verdict === 'contradicts').length;
@@ -547,6 +621,10 @@ export function summarize(
       rules: raw.setting_rules.length,
       unplanted: raw.setting_rules.filter((row) => !row.planted).length,
       passed: raw.setting_rules.every((row) => row.planted),
+    },
+    motivated_actions: {
+      unmotivated: raw.unmotivated_actions.length,
+      passed: raw.unmotivated_actions.length === 0,
     },
     notes: raw.notes,
     raw,

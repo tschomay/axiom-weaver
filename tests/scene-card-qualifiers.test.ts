@@ -142,3 +142,45 @@ describe('setting rules are plants', () => {
     expect(scored.setting_rules).toEqual({ rules: 2, unplanted: 1, passed: false });
   });
 });
+
+describe('unmotivated actions', () => {
+  const base = {
+    causal_pairs: [],
+    payoffs: [],
+    closest_stock_shape: 'none of these — the arc does not reduce to any shape on this list',
+    stock_adherence: 1,
+    particulars: [],
+    thematic_coherence: 3,
+    engagement: 3,
+    notes: '',
+  };
+
+  it('fails the criterion on any unmotivated action, and passes an old response without it', () => {
+    expect(summarize(base, 'old', 'judge').motivated_actions).toEqual({ unmotivated: 0, passed: true });
+    const scored = summarize(
+      {
+        ...base,
+        unmotivated_actions: [
+          { action: 'Jesse throws the ferry full astern', where: 'E10', why_missing: 'why he reversed' },
+        ],
+      },
+      'new',
+      'judge',
+    );
+    expect(scored.motivated_actions).toEqual({ unmotivated: 1, passed: false });
+  });
+
+  it('shows the judge what actually happened when the package states it', async () => {
+    const { blindArcView } = await import('@/arc/judge');
+    const { readFixturePackage } = await import('@/fixtures/load');
+    const pkg = await readFixturePackage('the-dragon-of-thistlewick');
+    expect(blindArcView(pkg)).not.toContain('WHAT ACTUALLY HAPPENED');
+    const stated = {
+      ...pkg,
+      facts: [{ fact_ref: 'a_reason', statement: 'She reversed to hold off the weir.', caused_by: [] }],
+    };
+    expect(blindArcView(stated)).toContain(
+      'WHAT ACTUALLY HAPPENED (the stated facts, causes listed after each)\n  a_reason: She reversed to hold off the weir.',
+    );
+  });
+});

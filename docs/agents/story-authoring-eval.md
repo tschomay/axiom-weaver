@@ -507,6 +507,7 @@ to 0.85, both clearing the bar.
 | **Thematic coherence** | Does the arc hold one recognizable concern end to end? | 1–5, ≥ 3. |
 | **Engagement** | Would a reader keep going? | 1–5, ≥ 3. The softest number here; weight it last. |
 | **Setting rules planted** | Is every rule of the setting the plot depends on (a tide, a curfew, a schedule, a water level, who holds which key) shown to the reader *before* the event that relies on it? | Per rule: `planted` / not. 0 unplanted. Added by #181: in *The Slackwater Crossing* the investigation turns on the wreck being reachable on foot at low tide, and the reader first learns that when Nita walks out. |
+| **Motivated actions** | Does every *deliberate* action the plot depends on, on the page or in the stated hidden account, have a stated or clearly implied reason? | Per action: listed when the reason is missing. 0 unmotivated. Added after *The Slackwater Crossing*: the Fabula never said why Jesse threw the ferry full astern, so the writer invented a reason, and invented an effect ("because he had no tiller"). The hidden account's lint (`uncaused_hidden_event`) only checks that a step names a cause, not that a person's motive is actually stated; this is the judged half. |
 
 **Judge protocol**, so scores are comparable across tickets:
 
