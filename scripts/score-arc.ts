@@ -56,7 +56,8 @@ function line(score: JudgeScore): string {
     `stock ${score.non_genericity.adherence}/5 +${score.non_genericity.load_bearing_particulars}lb ` +
     `${score.non_genericity.passed ? 'PASS' : 'FAIL'} | ` +
     `theme ${score.thematic_coherence.score}/5 | engage ${score.engagement.score}/5 | ` +
-    `setting rules ${score.setting_rules.rules - score.setting_rules.unplanted}/${score.setting_rules.rules} planted`
+    `setting rules ${score.setting_rules.rules - score.setting_rules.unplanted}/${score.setting_rules.rules} planted | ` +
+    `unmotivated actions ${score.motivated_actions.unmotivated}`
   );
 }
 
