@@ -195,6 +195,7 @@ export function renderArcPrompt(brief: ArcBrief): string {
     '    The first event has none; almost every other event has at least one.',
     '  - reveals: fact_refs the reader learns here. Each one must be paid off later.',
     '  - conceals: fact_refs deliberately withheld here, which the reader must not yet learn.',
+    '    Every concealed fact_ref must be revealed by a LATER event — the one where the truth comes out.',
     `  - state_changes: World Model columns this event changes (${EVENT_STATE_COLUMNS.join(', ')} only).`,
     '    Only for characters or objects actually involved. Move people before you place them:',
     '    a character listed in an event\'s characters_present must either already be at that',

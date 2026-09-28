@@ -135,7 +135,7 @@ export async function generateArc(
   }
 
   let arc = parseArc(response.text);
-  const initialProblems = repairTargets(arc, brief.story_id);
+  const initialProblems = repairTargets(arc, brief.story_id, { plotShapeId: brief.plot_shape.id });
   const repairs: string[] = [];
 
   if (options.repair !== false && initialProblems.length > 0) {
@@ -143,7 +143,7 @@ export async function generateArc(
     arc = mechanical.arc;
     repairs.push(...mechanical.applied.map((line) => `mechanical | ${line}`));
 
-    const stillWrong = repairTargets(arc, brief.story_id);
+    const stillWrong = repairTargets(arc, brief.story_id, { plotShapeId: brief.plot_shape.id });
     if (stillWrong.length > 0) {
       const repairStartedAt = Date.now();
       const repaired = await options.client.generate({
@@ -182,7 +182,7 @@ export async function generateArc(
     calls,
     repairs,
     initial_problems: initialProblems,
-    remaining_problems: repairTargets(arc, brief.story_id),
+    remaining_problems: repairTargets(arc, brief.story_id, { plotShapeId: brief.plot_shape.id }),
     event_count: { requested: brief.event_count, returned: arc.events.length },
   };
 }

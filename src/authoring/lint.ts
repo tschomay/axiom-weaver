@@ -306,9 +306,13 @@ function warnings(pkg: StoryPackage, model: WorldModel): PackageProblem[] {
   const paidOff = new Set(
     scenes.flatMap((scene) => scene.pays_off.map((payoff) => payoff.fact_ref)),
   );
+  // A fact an earlier scene withheld is paid off by being revealed: the reveal is what closes the
+  // concealment, and asking for a further payoff scene would punish a mystery for its solution.
+  const concealedBefore = (fact: string, order: number): boolean =>
+    scenes.some((earlier) => earlier.order < order && earlier.must_stay_hidden.includes(fact));
   for (const scene of scenes) {
     for (const fact of scene.reader_must_learn) {
-      if (!paidOff.has(fact)) {
+      if (!paidOff.has(fact) && !concealedBefore(fact, scene.order)) {
         problems.push({
           severity: 'warn',
           code: 'unpaid_fact',
@@ -316,6 +320,29 @@ function warnings(pkg: StoryPackage, model: WorldModel): PackageProblem[] {
           message: `"${fact}" is shown to the reader but no scene pays it off`,
         });
       }
+    }
+  }
+
+  // #180: a fact withheld and then never shown is a mystery with no solution on the page. The
+  // told-ledger never records it, so nothing downstream notices on its own.
+  const lastConcealed = new Map<string, SceneCard>();
+  for (const scene of scenes) {
+    for (const fact of scene.must_stay_hidden) lastConcealed.set(fact, scene);
+  }
+  for (const [fact, concealer] of lastConcealed) {
+    const revealed = scenes.some(
+      (later) =>
+        later.order > concealer.order &&
+        (later.reader_must_learn.includes(fact) ||
+          later.pays_off.some((payoff) => payoff.fact_ref === fact)),
+    );
+    if (!revealed) {
+      problems.push({
+        severity: 'warn',
+        code: 'concealed_never_revealed',
+        path: `scene_cards.${concealer.id}.must_stay_hidden`,
+        message: `"${fact}" is withheld here and no later scene reveals it (reader_must_learn or pays_off)`,
+      });
     }
   }
 

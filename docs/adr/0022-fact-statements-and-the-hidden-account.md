@@ -96,3 +96,25 @@ lost. Nothing in the package held a fixed account to paraphrase.
 - Not done here, and still worth doing: a digest-level check that a scene's `event_summary` does
   not contradict an established statement. Note it would not have caught Slackwater scene 9: its
   digest omitted the inverted claim, which lived only in the prose.
+
+## Follow-up (2026-09-28): every concealed fact is revealed, every hidden step is caused
+
+[Issue #180](https://github.com/tschomay/axiom-weaver/issues/180). In Slackwater,
+`rudder_overextension_cause` and `reverse_throttle_meaning` were concealed in scenes 2 and 4 and
+then never put in any scene's `reader_must_learn`, so the told-ledger never recorded the story's
+solution and nothing noticed.
+
+- **`concealed_never_revealed`** (package lint, warning): a fact in some scene's
+  `must_stay_hidden` that no later scene reveals (`reader_must_learn` or `pays_off`). For a
+  generated **mystery** it is promoted to a repair target. That shape's solution is "the true
+  account, assembled only from what the reader has already been shown", so a secret never
+  revealed means the solution is missing. `unpaid_fact` now exempts a fact that an earlier scene
+  concealed, since the reveal is what pays the concealment off.
+- **`uncaused_hidden_event`** / **`hidden_cause_not_earlier`** (Fabula-layer errors, in
+  `lintFabulaArc` and the arc repair targets): every hidden step after the first names an earlier
+  step as its cause. A step with no stated cause is where a writer later invents one. The repair
+  vocabulary gains `add_hidden_cause`, which can also rewrite the step's summary to say why.
+  `hidden_step_establishes_nothing` warns about a step whose facts can never reach the writer.
+- **Segmentation gives each concealed fact a reveal scene**: the first later scene holding an event
+  that pays it off, or failing that the first later scene holding an event of the brief's Solution
+  phase. It never invents one beyond that; the warning above reports the rest.
