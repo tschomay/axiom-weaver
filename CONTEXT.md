@@ -39,10 +39,12 @@ World Model seed and Scene Cards.
 - **Required beats** — the tuning dial. Few beats = the actors improvise widely between
   reads; many = tightly the same story every time. Also the *variance* dial (see below).
 - **Voice Card** — the narrator as a first-class object: person, tense, narrative
-  distance, register, sentence rhythm, imagery palette, dialogue density, and an optional
-  hand-written **style exemplar**, empty by default. **Style presets** (Fairy-Tale/Fable,
-  Gothic/Brooding, Whimsical/Playful, Hardboiled/Terse, Lyrical/Literary validated so far)
-  expand into a fully materialized, editable Voice Card rather than acting as opaque tags;
+  distance, register, sentence rhythm, imagery palette, dialogue density, **reader
+  familiarity** (who the reader is and how to handle specialist vocabulary; every preset
+  defaults it to glossing a deep term within a clause the first time it appears, never
+  lecturing), and an optional hand-written **style exemplar**, empty by default. **Style
+  presets** (Fairy-Tale/Fable, Gothic/Brooding, Whimsical/Playful, Hardboiled/Terse,
+  Lyrical/Literary validated so far, plus Suspense/Taut, not yet prototyped) expand into a fully materialized, editable Voice Card rather than acting as opaque tags;
   an edited field lives in the card itself, never as a diff against the shared preset, so
   editing a preset later can't silently change a story already told in it. A Scene Card's
   `tone` never edits the Voice Card — it's a separate instruction, layered alongside it,

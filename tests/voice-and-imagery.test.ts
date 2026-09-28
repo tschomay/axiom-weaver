@@ -3,6 +3,8 @@ import {
   STYLE_PRESETS,
   cardFromPreset,
   cardLabel,
+  DEFAULT_READER_FAMILIARITY,
+  defaultVoiceCardForPlotShape,
   parseVoiceCard,
   presetById,
   renderSceneTone,
@@ -16,9 +18,41 @@ import {
 } from '@/voice/imagery-ledger';
 
 describe('the Voice Card (ADR 0007)', () => {
-  it('offers the five validated presets', () => {
-    expect(STYLE_PRESETS).toHaveLength(5);
+  it('offers the five validated presets plus Suspense / Taut', () => {
+    expect(STYLE_PRESETS).toHaveLength(6);
     expect(STYLE_PRESETS.map((preset) => preset.id)).toContain('fairy_tale_fable');
+    expect(STYLE_PRESETS.map((preset) => preset.id)).toContain('suspense_taut');
+  });
+
+  describe('reader familiarity (#182)', () => {
+    it('is carried by every preset and rendered into the voice block', () => {
+      for (const preset of STYLE_PRESETS) {
+        expect(preset.card.reader_familiarity).toBe(DEFAULT_READER_FAMILIARITY);
+      }
+      expect(renderVoiceCard(cardFromPreset('suspense_taut'))).toContain(
+        `- Reader: ${DEFAULT_READER_FAMILIARITY}`,
+      );
+    });
+
+    it('renders a card without the field exactly as before', () => {
+      const legacy = { ...cardFromPreset('gothic_brooding'), reader_familiarity: '' };
+      expect(renderVoiceCard(legacy)).not.toContain('Reader:');
+      // Blank because it predates the field, not because the author edited it.
+      expect(cardLabel(legacy)).toBe('Gothic / Brooding');
+      expect(cardLabel({ ...legacy, reader_familiarity: 'experts only' })).toBe(
+        'Gothic / Brooding (modified)',
+      );
+    });
+
+    it('gives Generate a full card by plot shape, never first person', () => {
+      expect(defaultVoiceCardForPlotShape('mystery').based_on).toBe('suspense_taut');
+      expect(defaultVoiceCardForPlotShape('no_such_shape').based_on).toBe('suspense_taut');
+      for (const shape of ['mystery', 'reckoning', 'transformation', 'quest', 'courtship']) {
+        const card = defaultVoiceCardForPlotShape(shape);
+        expect(card.person).toBe('third');
+        expect(card.reader_familiarity).toBe(DEFAULT_READER_FAMILIARITY);
+      }
+    });
   });
 
   it('materializes all eight fields on selection rather than keeping a sparse diff', () => {

@@ -351,7 +351,7 @@ export function reconcileBagRows(
 
 // --- The Voice Card -----------------------------------------------------------------------
 
-/** The seven single-line fields, in the order ADR 0007's rendering template reads them. */
+/** The single-line fields, in the order ADR 0007's rendering template reads them. */
 export const VOICE_TEXT_FIELDS = [
   { field: 'person', label: 'Person', hint: 'third, first…' },
   { field: 'tense', label: 'Tense', hint: 'past, present…' },
@@ -359,6 +359,11 @@ export const VOICE_TEXT_FIELDS = [
   { field: 'register', label: 'Register', hint: '' },
   { field: 'sentence_rhythm', label: 'Sentence rhythm', hint: '' },
   { field: 'dialogue_density', label: 'Dialogue density', hint: '' },
+  {
+    field: 'reader_familiarity',
+    label: 'Reader familiarity',
+    hint: 'who the reader is, and how to handle specialist terms',
+  },
   {
     field: 'style_exemplar',
     label: 'Style exemplar',
@@ -389,12 +394,13 @@ export function draftVoiceCard(raw: Record<string, unknown> | undefined): VoiceC
       : [],
     dialogue_density: text('dialogue_density'),
     style_exemplar: text('style_exemplar'),
+    reader_familiarity: text('reader_familiarity'),
     based_on: typeof preset === 'string' ? preset : null,
   };
 }
 
 /**
- * The card, written back as the package's block — **all nine fields, always**.
+ * The card, written back as the package's block — **all ten fields, always**.
  *
  * ADR 0007 decision 4: an override is fully materialized on the card, never a diff against the
  * preset. A later edit to a preset must not be able to change the voice of a story already using
@@ -411,11 +417,12 @@ export function voiceCardBlock(card: VoiceCard): Record<string, unknown> {
     imagery_palette: [...card.imagery_palette],
     dialogue_density: card.dialogue_density,
     style_exemplar: card.style_exemplar,
+    reader_familiarity: card.reader_familiarity,
     based_on: card.based_on,
   };
 }
 
-/** Applying a preset materializes all eight fields and records what it started from. */
+/** Applying a preset materializes every field and records what it started from. */
 export function applyPreset(id: string): VoiceCard {
   return cardFromPreset(id);
 }

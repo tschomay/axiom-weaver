@@ -624,6 +624,16 @@ describe('segmentMechanically', () => {
     expect(result.package.scene_cards.length).toBeGreaterThan(0);
     expect(() => StoryPackageSchema.parse(result.package)).not.toThrow();
   });
+
+  it("carries the envelope's Voice Card through rather than blanking it (#182)", () => {
+    const card = { person: 'third', based_on: 'suspense_taut' };
+    const result = segmentMechanically({
+      ...extractedEnvelope(linearEvents(12)),
+      voice_card: card,
+    });
+    expect(result.package.voice_card).toEqual(card);
+    expect(segmentMechanically(extractedEnvelope(linearEvents(12))).package.voice_card).toEqual({});
+  });
 });
 
 describe('segmentFabulaPackage', () => {

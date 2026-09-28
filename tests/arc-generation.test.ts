@@ -25,6 +25,11 @@ import {
   plantPolicyFor,
 } from '../src/arc/brief';
 import { draftPackage } from '../src/arc/fabula';
+import {
+  defaultVoiceCardForPlotShape,
+  parseVoiceCard,
+  voiceCardIsBlank,
+} from '../src/voice/voice-card';
 import { provisionalPackage } from '../src/authoring/lint-fabula';
 import { FABULA_BLOCK, FabulaArcSchema, type FabulaArc } from '../src/schema/fabula';
 import { presenceProblems, stateChainingProblems } from '../src/arc/chaining';
@@ -269,6 +274,17 @@ describe('the deliverable', () => {
       brief: briefsFor('structured')[0]!, repairs: [],
     });
     expect(JSON.stringify(pkg)).toContain('gemini-3.8-flash');
+  });
+
+  it("starts with a full Voice Card from the plot shape's preset, not {} (#182)", () => {
+    const brief = briefsFor('structured')[0]!;
+    const pkg = draftPackage(sampleArc(), 'arc_test', {
+      generator: 'test', model: 'm', generated_at: 'now', brief, repairs: [],
+    });
+    const card = parseVoiceCard(pkg['voice_card'] as Record<string, unknown>);
+    expect(voiceCardIsBlank(card)).toBe(false);
+    expect(card).toEqual(defaultVoiceCardForPlotShape(brief.plot_shape.id));
+    expect(card.reader_familiarity).not.toBe('');
   });
 });
 

@@ -116,3 +116,38 @@ The line now names them as domains and says what to do with them:
 
 This is ADR 0010's decision reaching back into this ADR's template, not a new one. Nothing else in
 decision 3 changes, and decision 5's separation of `tone` from the voice is untouched.
+
+## Amendment (2026-09-28): reader familiarity, a sixth preset, and Generate's default card
+
+[Issue #182](https://github.com/tschomay/axiom-weaver/issues/182). Generated stories lean on
+domain jargon (*The Slackwater Crossing*: stop blocks, hull gland, astern propulsion, rudder post),
+and nothing on the card said who the reader is or what they already know. Worse, Generate shipped
+`voice_card: {}`, so the writer got no voice guidance at all.
+
+1. **A ninth field, `reader_familiarity`.** Free text: who the reader is and how to handle
+   specialist vocabulary. It renders as `- Reader: {reader_familiarity}` after the dialogue line,
+   **only when set**. So a card written before the field existed renders exactly as it did, and
+   `cardLabel` does not count a blank one as an edit to its preset. Every preset carries the same
+   default:
+
+   > The first time a deep term appears (domain-specific jargon), let dialogue or narration make
+   > its meaning clear within a clause. Never lecture.
+
+   Decision 4 is unchanged: the default is copied into each card when a preset is chosen, never
+   resolved at render time.
+
+2. **A sixth preset, Suspense / Taut** (`suspense_taut`: third person, past tense, close third,
+   lean and tightening). Added as the natural default for generated mysteries. Unlike the five
+   in decision 2, it has **not** been through the side-by-side prototype, and it should be before
+   it is called validated.
+
+3. **Generate fills in a full card.** `draftPackage` materializes a preset chosen by the arc's
+   plot shape: mystery → Suspense / Taut, reckoning → Gothic / Brooding, transformation →
+   Lyrical / Literary, quest → Fairy-Tale / Fable, courtship → Whimsical / Playful. An unknown
+   shape falls back to Suspense / Taut. First-person Hardboiled is never picked automatically,
+   because segmentation chooses POV per scene and a first-person narrator who changes each scene
+   reads wrong. Segmentation now carries the envelope's card through instead of writing `{}`.
+   Extract envelopes have no card, so they are unchanged.
+
+Deferred, as the issue suggests: tracking glossed terms as `term:<slug>` told-ledger facts. Only
+worth doing if the prose shows repeated re-glossing.

@@ -69,7 +69,7 @@ What loading the two fixtures through all of it turned up is in
 | Scene Digest shape and the told-ledger | `src/digest/scene-digest.ts`, `src/digest/told-ledger.ts` | ADR 0003, 0009, 0010 |
 | Recursive zoom-level hierarchy (Scene → Chapter → Part → Book `L3+`) | `src/digest/hierarchy.ts` | ADR 0008 §1/§7 |
 | Plant-and-payoff obligation walk | `src/plants/obligation-walk.ts` | ADR 0004 |
-| Voice Card, five style presets, imagery ledger | `src/voice/` | ADR 0007, ADR 0010 |
+| Voice Card, style presets, imagery ledger | `src/voice/` | ADR 0007, ADR 0010 |
 | Re-anchoring bands (introduce / assume / reanchor / reintroduce) | `src/assembler/reanchoring.ts` | ADR 0009 |
 | Deterministic join, payload order, cache boundaries, tail eviction | `src/assembler/` | ADR 0008 §3/§4/§6 |
 | Output schema, contract prose, instruction layering | `src/writer/response-schema.ts`, `src/writer/contract.ts` | ADR 0012 §1/§2 |
