@@ -2,7 +2,8 @@
 
 import { useCallback, useState } from 'react';
 import type { RunReportView as RunReportPayload, RunSummaryView } from '@/edition/report-view';
-import { AuthorTokenField, useAuthorSession } from '../../../author-token';
+import type { EditionDiscourseView } from '@/edition/discourse-view';
+import { AuthorTokenField, useAuthorSession, type AuthorSession } from '../../../author-token';
 
 function seconds(ms: number): string {
   return `${(ms / 1000).toFixed(1)}s`;
@@ -129,6 +130,7 @@ export function RunReportView({
           <RunRow
             key={run.run_id}
             run={run}
+            session={session}
             busy={busy === run.run_id}
             disabled={busy !== null || !session.canWrite}
             onPromote={() => void promote(run.run_id)}
@@ -141,11 +143,13 @@ export function RunReportView({
 
 function RunRow({
   run,
+  session,
   busy,
   disabled,
   onPromote,
 }: {
   run: RunSummaryView;
+  session: AuthorSession;
   busy: boolean;
   disabled: boolean;
   onPromote: () => void;
@@ -172,6 +176,7 @@ function RunRow({
         <a className="meta" href={`/api/tellings/${run.run_id}/report`}>
           full report ↗
         </a>
+        <DiscoursePanel runId={run.run_id} session={session} />
       </div>
       <div className="actions">
         <button
@@ -187,6 +192,166 @@ function RunRow({
         >
           {busy ? 'Promoting…' : run.is_baked ? 'Baked' : 'Promote to Baked'}
         </button>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * What the writer reported it told the reader, scene by scene, beside what the card asked for
+ * (#183). Fetched on demand: it is a debugging view, opened for the one run that reads wrong.
+ */
+function DiscoursePanel({ runId, session }: { runId: string; session: AuthorSession }) {
+  const [view, setView] = useState<EditionDiscourseView | null>(null);
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const toggle = useCallback(async () => {
+    if (open) {
+      setOpen(false);
+      return;
+    }
+    setOpen(true);
+    if (view !== null) return;
+    setError(null);
+    try {
+      const response = await fetch(`/api/tellings/${runId}/discourse`, {
+        headers: session.headers(),
+      });
+      const body = (await response.json()) as EditionDiscourseView & { error?: string };
+      if (!response.ok) setError(body.error ?? `Could not load the discourse (${response.status})`);
+      else setView(body);
+    } catch {
+      setError('Network error — the discourse record could not be loaded.');
+    }
+  }, [open, runId, session, view]);
+
+  return (
+    <>
+      {' · '}
+      <button
+        type="button"
+        className="action"
+        disabled={!session.canWrite}
+        onClick={() => void toggle()}
+      >
+        {open ? 'hide discourse' : 'discourse'}
+      </button>
+      {open && error !== null && <p className="admin-error">{error}</p>}
+      {open && view !== null && <DiscourseTable view={view} />}
+    </>
+  );
+}
+
+function FactList({ facts, flagged }: { facts: readonly string[]; flagged?: readonly string[] }) {
+  if (facts.length === 0) return <span className="meta">—</span>;
+  return (
+    <>
+      {facts.map((fact) => (
+        <span key={fact} className={flagged?.includes(fact) ? 'tag bad' : 'tag'}>
+          {fact}
+        </span>
+      ))}
+    </>
+  );
+}
+
+function DiscourseTable({ view }: { view: EditionDiscourseView }) {
+  return (
+    <div className="discourse">
+      <h4>Scenes — card asked vs. writer reported</h4>
+      <div className="table-scroll">
+        <table className="rows">
+          <tbody>
+            <tr>
+              <th>scene</th>
+              <th>card: must learn / stay hidden / pays off</th>
+              <th>digest: event summary</th>
+              <th>digest: facts revealed</th>
+            </tr>
+            {view.scenes.map((scene) => (
+              <tr key={scene.scene_id}>
+                <td>
+                  <span className="meta">{scene.scene_index}</span> <code>{scene.scene_id}</code>
+                  {scene.degraded && <span className="tag bad">degraded</span>}
+                </td>
+                <td>
+                  {scene.card === null ? (
+                    <span className="meta">card not in the pinned package</span>
+                  ) : (
+                    <>
+                      <div>
+                        <span className="meta">learn </span>
+                        <FactList facts={scene.card.reader_must_learn} flagged={scene.unreported} />
+                      </div>
+                      <div>
+                        <span className="meta">hidden </span>
+                        <FactList facts={scene.card.must_stay_hidden} flagged={scene.leaked} />
+                      </div>
+                      <div>
+                        <span className="meta">pays off </span>
+                        <FactList facts={scene.card.pays_off.map((payoff) => payoff.fact_ref)} />
+                      </div>
+                    </>
+                  )}
+                </td>
+                <td>
+                  {scene.digest.event_summary}
+                  <br />
+                  <span className="meta">closing: {scene.digest.closing_situation}</span>
+                </td>
+                <td>
+                  <FactList facts={scene.digest.facts_revealed} flagged={scene.leaked} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="meta">
+        Red on the card side: a fact the card required that the digest never reported, or a hidden
+        fact the digest says it revealed. The digest is the writer&apos;s own account — a claim the
+        prose makes but the digest omits is not visible here.
+      </p>
+
+      <h4>Rollups</h4>
+      {view.digest_hierarchy.filter((entry) => entry.level > 0).length === 0 ? (
+        <p className="meta">No window closed in this run.</p>
+      ) : (
+        view.digest_hierarchy
+          .filter((entry) => entry.level > 0)
+          .map((entry) => (
+            <p key={`${entry.level}:${entry.scene_orders.join(',')}`}>
+              <span className="tag">
+                L{entry.level} · scenes {entry.scene_orders[0]}–{entry.scene_orders.at(-1)}
+              </span>{' '}
+              {entry.digest.event_summary}
+            </p>
+          ))
+      )}
+
+      <h4>Told-ledger at the close of the run</h4>
+      <div className="table-scroll">
+        <table className="rows">
+          <tbody>
+            <tr>
+              <th>fact</th>
+              <th>first learned</th>
+              <th>last touched</th>
+              <th>centrality</th>
+            </tr>
+            {view.told_ledger.map((row) => (
+              <tr key={row.fact_ref}>
+                <td>
+                  <code>{row.fact_ref}</code>
+                </td>
+                <td className="meta">{row.first_learned_scene}</td>
+                <td className="meta">{row.last_touched_scene}</td>
+                <td className="meta">{row.centrality}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
