@@ -199,6 +199,15 @@ export default function AuthorGuidePage() {
         edition a reader gets by default, so their first experience of your story is never a coin
         flip. Promotion is always manual — a degraded run can never be auto-promoted.
       </p>
+      <p>
+        When a finished telling reads wrong, open that run&apos;s <strong>discourse</strong> panel.
+        Scene by scene, it shows the writer&apos;s own Scene Digest (event summary, facts revealed)
+        next to what the card asked for (<code>reader_must_learn</code>,{' '}
+        <code>must_stay_hidden</code>, <code>pays_off</code>), plus the rollups and the told-ledger
+        at the close of the run. A required fact the digest never reported, or a hidden fact it
+        says it revealed, is marked in red. Only the author can open it, because it quotes your
+        Scene Cards.
+      </p>
 
       <h2>Comparing two tellings</h2>
       <p>
