@@ -160,6 +160,7 @@ export function projectFabulaArc(arc: FabulaArc, storyId: string): FabulaProject
       required_beats: event.beats,
       reader_must_learn: event.reveals,
       must_stay_hidden: event.conceals,
+      ...(event.recounts.length === 0 ? {} : { recounts: event.recounts }),
       force_reintroduce: [],
       invariants: [],
       pays_off: event.pays_off.map((payoff) => ({ ...payoff })),

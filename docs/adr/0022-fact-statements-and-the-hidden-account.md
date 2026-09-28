@@ -119,3 +119,24 @@ solution and nothing noticed.
 - **Segmentation gives each concealed fact a reveal scene**: the first later scene holding an event
   that pays it off, or failing that the first later scene holding an event of the brief's Solution
   phase. It never invents one beyond that; the warning above reports the rest.
+
+## Amendment (2026-09-28): `recounts`, for scenes that retell
+
+Decision 3 seeded the established account from the facts a scene *names*: must learn, must stay
+hidden, pays off, plants owed. Building Slackwater's v2 exposed the hole in that. Scene 10, the
+inquiry, retells the whole incident to the Board, but every fact in it was revealed in scenes 8
+and 9, so its card names none of them and it got no account. That is exactly the scene where
+order matters most.
+
+- **Scene Cards gain optional `recounts`**: facts the scene retells that the reader already knows.
+  They seed the account and render on the card as "This scene retells…", labelled
+  `retold here — the reader already knows it`. They change nothing else: not the told-ledger, not
+  the variance contract, not the plant walk.
+- **`recounts_untold`** (warning): a recounted fact that no earlier scene reveals and the seed does
+  not hold. Retelling it would be an undeclared reveal.
+- **Generation**: Fabula events gain optional `recounts`, which the arc prompt asks for on
+  inquiries, confessions and accusations. Segmentation carries them to the scene, minus anything
+  that scene newly reveals.
+- **Why not a new label on `pays_off`**: making a payoff out of a retelling turns the earlier
+  reveal into a plant, and the plant instruction ("make the reader register it without dwelling
+  on it") is wrong for a confession or a climax.

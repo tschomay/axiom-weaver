@@ -93,6 +93,11 @@ export const FabulaEventSchema = z.looseObject({
   reveals: z.array(z.string()).default([]),
   /** `fact_ref`s deliberately withheld here. Becomes `must_stay_hidden`. */
   conceals: z.array(z.string()).default([]),
+  /**
+   * `fact_ref`s the reader already learned that this event retells — an inquiry, a confession.
+   * Becomes the scene's `recounts` (ADR 0022's amendment). Best-effort, like `caused_by`.
+   */
+  recounts: z.array(z.string()).default([]),
   pays_off: z.array(FabulaPayoffSchema).default([]),
   state_changes: z.array(StateChangeSchema).default([]),
 });

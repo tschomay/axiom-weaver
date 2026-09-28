@@ -206,3 +206,20 @@ describe('segmentation gives a concealed fact a reveal scene', () => {
     expect(solutionEventIds({}, events).size).toBe(0);
   });
 });
+
+describe('recounts ride from events to scenes', () => {
+  it('unions the events a scene holds, minus what the scene itself reveals', async () => {
+    const { applyRecounts } = await import('@/segmentation/segment');
+    const cards = StoryPackageSchema.parse(
+      pkg([card('s1', 1, { reader_must_learn: ['fresh'] }), card('s2', 2)]),
+    ).scene_cards;
+    const parse = (fields: Partial<FabulaEvent>) =>
+      FabulaArcSchema.parse({ title: 't', world_model_seed: SEED, events: [event('e', 1, fields)] }).events[0]!;
+    applyRecounts(cards, [
+      [parse({ recounts: ['fresh', 'old_news'] })],
+      [parse({})],
+    ]);
+    expect(cards[0]!.recounts).toEqual(['old_news']);
+    expect(cards[1]!.recounts).toBeUndefined();
+  });
+});

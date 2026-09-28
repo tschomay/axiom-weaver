@@ -99,6 +99,7 @@ export const DraftSceneCardSchema = SceneCardSchema.partial().extend({
   force_reintroduce: z.array(z.string()).default([]),
   invariants: z.array(z.string()).default([]),
   pays_off: z.array(PayoffSchema.partial().extend({ fact_ref: z.string() })).default([]),
+  recounts: z.array(z.string()).optional(),
 });
 
 // --- Envelope, relaxed --------------------------------------------------------------------

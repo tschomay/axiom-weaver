@@ -346,6 +346,34 @@ function warnings(pkg: StoryPackage, model: WorldModel): PackageProblem[] {
     }
   }
 
+  // ADR 0022's amendment: a retelling of something the reader was never told is not a recap, it
+  // is a reveal nobody declared — and it skips the told-ledger, so nothing else would notice.
+  const seedKnown = new Set(
+    pkg.world_model_seed.character_knowledge
+      .filter((row) => row.learned_at_scene === null)
+      .map((row) => row.fact_ref),
+  );
+  for (const scene of scenes) {
+    for (const fact of scene.recounts ?? []) {
+      const toldBefore =
+        seedKnown.has(fact) ||
+        scenes.some(
+          (earlier) =>
+            earlier.order < scene.order &&
+            (earlier.reader_must_learn.includes(fact) ||
+              earlier.pays_off.some((payoff) => payoff.fact_ref === fact)),
+        );
+      if (!toldBefore) {
+        problems.push({
+          severity: 'warn',
+          code: 'recounts_untold',
+          path: `scene_cards.${scene.id}.recounts`,
+          message: `retells "${fact}", which no earlier scene reveals — reveal it first, or move it to reader_must_learn`,
+        });
+      }
+    }
+  }
+
   // ADR 0020: not a trigger field, a proxy. #119/#120 measured that unearned payoffs concentrate
   // almost entirely in edges whose plant sits 0 or 1 scenes before the payoff — a same-scene or
   // adjacent-scene "plant" reads as linked rather than earned far more often than not. A warning,
@@ -481,6 +509,7 @@ function factTable(pkg: StoryPackage): PackageProblem[] {
   const stated = new Set(facts.map((fact) => fact.fact_ref));
   for (const scene of pkg.scene_cards) {
     const used = new Set([
+      ...(scene.recounts ?? []),
       ...scene.reader_must_learn,
       ...scene.must_stay_hidden,
       ...scene.pays_off.map((payoff) => payoff.fact_ref),

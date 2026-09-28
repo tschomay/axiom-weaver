@@ -323,3 +323,34 @@ describe('generation (ADR 0022 decision 4)', () => {
     expect(factTableProblems(packageFacts(repaired.arc).facts!)).toEqual([]);
   });
 });
+
+describe('recounts (ADR 0022 amendment)', () => {
+  it('gives a retelling scene the account even when its card reveals nothing', () => {
+    const cards = PACKAGE.scene_cards.map((card) => ({
+      ...card,
+      reader_must_learn: [],
+      must_stay_hidden: [],
+      pays_off: [],
+      recounts: ['gland_torn'],
+    }));
+    const pkg = StoryPackageSchema.parse({ ...PACKAGE, scene_cards: cards });
+    const ledger = ToldLedger.forPackage(pkg);
+    for (const ref of ['stop_blocks_removed', 'jesse_reversed', 'rudder_jammed', 'gland_torn']) {
+      ledger.touch(ref, 0);
+    }
+    const prompt = assemble(pkg, ledger);
+    expect(prompt).toContain('This scene retells');
+    const block = prompt.slice(prompt.indexOf('ESTABLISHED ACCOUNT'));
+    expect(block).toContain('[retold here — the reader already knows it] gland_torn');
+    expect(block.indexOf('jesse_reversed:')).toBeLessThan(block.indexOf('rudder_jammed:'));
+  });
+
+  it('warns on retelling a fact no earlier scene revealed', () => {
+    const early = { ...PACKAGE.scene_cards[0]!, id: 'scene_01', order: 1, reader_must_learn: ['gland_torn'], pays_off: [], must_stay_hidden: [] };
+    const late = { ...PACKAGE.scene_cards[0]!, id: 'scene_02', order: 2, reader_must_learn: [], pays_off: [], must_stay_hidden: [], recounts: ['gland_torn', 'jesse_reversed'] };
+    const warnings = lintPackage({ ...PACKAGE, scene_cards: [early, late] }).warnings.filter(
+      (warning) => warning.code === 'recounts_untold',
+    );
+    expect(warnings.map((warning) => warning.message)).toEqual([expect.stringMatching(/jesse_reversed/)]);
+  });
+});

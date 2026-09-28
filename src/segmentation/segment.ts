@@ -358,6 +358,22 @@ export function assignConcealedReveals(
   return assigned;
 }
 
+/**
+ * A scene retells whatever its events retell (ADR 0022's amendment), minus what the scene itself
+ * newly reveals — a fact cannot be both news and a recap in one scene.
+ */
+export function applyRecounts(
+  scenes: SceneCard[],
+  sceneEvents: readonly (readonly FabulaEvent[])[],
+): void {
+  scenes.forEach((scene, index) => {
+    const recounts = [
+      ...new Set((sceneEvents[index] ?? []).flatMap((event) => event.recounts)),
+    ].filter((fact) => !scene.reader_must_learn.includes(fact));
+    if (recounts.length > 0) scene.recounts = recounts;
+  });
+}
+
 export function applyPlantGraph(
   scenes: SceneCard[],
   pairs: readonly PlantPair[],
@@ -523,6 +539,7 @@ export async function segmentFabulaPackage(
     seedFacts,
   );
 
+  applyRecounts(scenes, grouped);
   const concealedReveals = assignConcealedReveals(
     scenes,
     grouped,
@@ -712,6 +729,7 @@ export function segmentMechanically(
   );
   applyPlantGraph(scenes, pairs, seedFacts);
   assignConcealedReveals(scenes, grouped, solutionEventIds(envelope, arc.events));
+  applyRecounts(scenes, grouped);
 
   const pkg = StoryPackageSchema.parse({
     schema_version: '1.0',

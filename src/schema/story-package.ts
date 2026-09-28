@@ -137,6 +137,13 @@ export const SceneCardSchema = z.object({
   length_budget: z.number().int().positive().optional(),
   invariants: z.array(z.string()).default([]),
   pays_off: z.array(PayoffSchema).default([]),
+  /**
+   * Facts this scene RETELLS without newly revealing them — an inquiry, a confession, a recap of
+   * what the reader already learned (ADR 0022's amendment). They seed the established account so
+   * the retelling keeps the incident's order, and touch nothing else: not the told-ledger, not the
+   * variance contract. Optional rather than defaulted, so a card without one round-trips as is.
+   */
+  recounts: z.array(z.string()).optional(),
 });
 
 /**

@@ -542,6 +542,7 @@ export function factRefsInUse(pkg: DraftStoryPackage): string[] {
     for (const ref of scene.reader_must_learn ?? []) add(ref);
     for (const ref of scene.must_stay_hidden ?? []) add(ref);
     for (const payoff of scene.pays_off ?? []) add(payoff.fact_ref);
+    for (const ref of scene.recounts ?? []) add(ref);
   }
   for (const row of pkg.world_model_seed.character_knowledge ?? []) add(row.fact_ref);
   return refs;
