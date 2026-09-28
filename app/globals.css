@@ -259,7 +259,8 @@ button.badge-stale:hover {
   border-color: var(--warn);
 }
 
-button.action {
+button.action,
+a.action {
   font: 13px/1.5 ui-serif, Georgia, 'Times New Roman', serif;
   padding: 0.25rem 0.7rem;
   border: 1px solid var(--rule);
@@ -269,8 +270,21 @@ button.action {
   cursor: pointer;
 }
 
-button.action:hover:not(:disabled) {
+button.action:hover:not(:disabled),
+a.action:hover {
   border-color: var(--ink);
+}
+
+/* A link styled as a button — export actions are downloads and new tabs, so they stay anchors. */
+a.action {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* An irreversible action. Quiet until hovered, so it never reads as the obvious next step. */
+button.action.danger:hover:not(:disabled) {
+  border-color: var(--bad);
+  color: var(--bad);
 }
 
 button.action:disabled {
@@ -317,6 +331,13 @@ button.action.primary {
   gap: 0.75rem;
   justify-content: space-between;
   align-items: center;
+}
+
+.proposal .actions,
+.panel > .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 
 .proposal .body {

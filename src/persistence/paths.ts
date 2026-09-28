@@ -60,6 +60,9 @@ export const draftScenePath = (storyId: string, sceneIndex: number): string =>
 export const draftStateLogPath = (storyId: string): string =>
   `story/${storyId}/draft/state-log.json`;
 
+/** Everything one edition holds — its manifest, scenes, logs and run report. */
+export const editionPrefix = (runId: string): string => `edition/${runId}/`;
+
 export const editionManifestPath = (runId: string): string => `edition/${runId}/manifest.json`;
 
 export const editionScenePath = (runId: string, sceneIndex: number): string =>

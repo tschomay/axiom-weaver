@@ -131,3 +131,26 @@ stepwise, human in the loop, iterating a card") but had never named.
   unchanged; this ADR only fills in what "the library" and "diffing" concretely mean.
 - The map's "Not yet specified" fog item about whether a Compiled edition ever needs a
   version-drift signal is resolved as: no — deliberately not built, per decision 1.
+
+## Amendment — author-initiated deletion
+
+Decision 5 says a Compiled edition stays addressable "indefinitely" and that nothing is ever
+*auto*-deleted. In practice the run list collects tellings nobody wants back: runs that failed or
+stopped reporting part-way, stand-in runs made to prove the loop. So the author can now delete a
+telling outright (`DELETE /api/tellings/{runId}`, the Delete button on the Read page, behind a
+confirmation). It removes every blob under `edition/{runId}/` and the run's index entry.
+
+- **Still never automatic.** Nothing in the run loop or anywhere else calls it; "never
+  auto-deleted" holds exactly as written. "Indefinitely" now means "until the author deletes it".
+- **Author-gated**, by the same token as the library's save/name/remove — the same line decision
+  5 draws between reading or sharing a telling and curating what the story keeps.
+- **Two refusals.** The Baked edition can't be deleted (promote another run first), because it's
+  what a first-time reader is handed by default. A run that is still reporting can't be deleted
+  either, because its loop would re-register it at the next scene boundary. Once it has stopped
+  reporting (`hasStoppedReporting`), nothing is coming back to write it, so it can go.
+- A shared link to a deleted telling stops working. The confirmation says so.
+
+A finished telling can also be exported (`GET /api/tellings/{runId}/export`) as one standalone
+HTML document that reads offline and prints cleanly to PDF. It carries only what sharing the
+run's URL already exposes (the story's title and the prose, plus the library name if it has one).
+It never includes the Story Package, so the export doesn't label scenes with Scene Card ids.
