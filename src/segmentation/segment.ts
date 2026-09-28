@@ -681,6 +681,8 @@ export function segmentMechanically(
     location_inherited: drafts.filter((draft) => draft.location_inherited).length,
     beat_fallbacks: drafts.length,
     function_fallbacks: drafts.length,
+    // Every beat is an event's own, verbatim, so nothing load-bearing can have been dropped.
+    phrases_restored: 0,
   };
 
   const states = replayStates(arc.world_model_seed, grouped);

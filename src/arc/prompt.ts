@@ -204,6 +204,8 @@ export function renderArcPrompt(brief: ArcBrief): string {
     '',
     renderPlantPolicy(brief),
     '',
+    ...renderSettingRulesSection(),
+    '',
     ...renderFactsSection(),
     '',
     'AVOID, because they are what every generated story already does: lighthouses, clockmakers,',
@@ -236,6 +238,24 @@ function renderHiddenAccountSection(): string[] {
     '    ("Jesse throws the engine astern because the ferry is drifting onto the weir"), never only',
     '    what.',
     '  - No event summary or beat may retell the hidden account in a different order.',
+  ];
+}
+
+/**
+ * #181: a rule of the setting the plot turns on is a plant like any other.
+ *
+ * The Slackwater Crossing's whole investigation depends on the wreck being reachable on foot at
+ * low tide, and the reader was never told: the only signals were a seed status and one event's
+ * "wades the exposed waterline", and the writer invented the walk-out itself. Stated as a plant,
+ * the existing walk (ADR 0004) enforces it with no new machinery.
+ */
+function renderSettingRulesSection(): string[] {
+  return [
+    'SETTING RULES ARE PLANTS. Any rule of the setting the plot depends on — a tide that exposes',
+    'the wreck, a curfew, a ferry schedule, a weir\'s water levels, who holds which key — is a',
+    'fact_ref like any other. Reveal it in an EARLY event that is doing something else (a character',
+    'whose job or worry it is makes a natural carrier), and pay it off in the event that uses it.',
+    'The reader must know the rule before the story depends on it.',
   ];
 }
 

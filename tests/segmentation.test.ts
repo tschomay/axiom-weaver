@@ -464,6 +464,7 @@ describe('scene assembly', () => {
         location_inherited: 1,
         beat_fallbacks: 0,
         function_fallbacks: 0,
+        phrases_restored: 0,
       },
       { states: [{ entry_state: {}, exit_state: {} }], dropped_unknown_entity: 0, dropped_entity_ids: [], dropped_unknown_column: 0 },
     );

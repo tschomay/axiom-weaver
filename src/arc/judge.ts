@@ -121,6 +121,19 @@ export const JudgeResponseSchema = z.object({
     .default([]),
   thematic_coherence: z.number().int().min(1).max(5),
   engagement: z.number().int().min(1).max(5),
+  /**
+   * #181: rules of the setting the plot depends on, and whether each is shown before it is used.
+   * Defaulted so a judge result recorded before the question existed still parses.
+   */
+  setting_rules: z
+    .array(
+      z.object({
+        rule: z.string(),
+        planted: z.boolean(),
+        why: z.string().default(''),
+      }),
+    )
+    .default([]),
   notes: z.string().default(''),
 });
 
@@ -176,6 +189,8 @@ export interface JudgeScore {
   };
   readonly thematic_coherence: { score: number; passed: boolean };
   readonly engagement: { score: number; passed: boolean };
+  /** #181: every setting rule the plot depends on is shown to the reader before it is used. */
+  readonly setting_rules: { rules: number; unplanted: number; passed: boolean };
   readonly notes: string;
   readonly raw: JudgeResponse;
 }
@@ -325,6 +340,11 @@ function judgePrompt(view: string): string {
     '  1 — nothing here makes a reader want the next event.',
     '  3 — a reader would keep going without enthusiasm.',
     '  5 — the arc creates specific questions a reader wants answered.',
+    '',
+    'SETTING RULES. List the rules of the setting that the plot actually depends on — a tide, a',
+    'curfew, a schedule, a water level, who can open what. For each, planted is true only when an',
+    'event BEFORE the one that relies on it shows the reader the rule. A rule the reader first',
+    'meets at the moment it is needed is not planted. List none rather than pad the list.',
   ].join('\n');
 }
 
@@ -386,6 +406,22 @@ export function judgeResponseJsonSchema(): Record<string, unknown> {
       },
       thematic_coherence: { type: 'integer' },
       engagement: { type: 'integer' },
+      setting_rules: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            rule: { type: 'string' },
+            planted: {
+              type: 'boolean',
+              description: 'Shown to the reader in an earlier event than the one relying on it.',
+            },
+            why: { type: 'string' },
+          },
+          required: ['rule', 'planted', 'why'],
+          propertyOrdering: ['rule', 'planted', 'why'],
+        },
+      },
       notes: { type: 'string', description: 'Anything a score hides. Two sentences at most.' },
     },
     required: [
@@ -396,6 +432,7 @@ export function judgeResponseJsonSchema(): Record<string, unknown> {
       'particulars',
       'thematic_coherence',
       'engagement',
+      'setting_rules',
       'notes',
     ],
     propertyOrdering: [
@@ -406,6 +443,7 @@ export function judgeResponseJsonSchema(): Record<string, unknown> {
       'particulars',
       'thematic_coherence',
       'engagement',
+      'setting_rules',
       'notes',
     ],
   };
@@ -437,7 +475,13 @@ export async function judgePackage(
 }
 
 /** Turn a judge's raw verdicts into the per-criterion result, with each bar applied separately. */
-export function summarize(raw: JudgeResponse, label: string, judgeModel: string): JudgeScore {
+export function summarize(
+  input: Omit<JudgeResponse, 'setting_rules'> & { setting_rules?: JudgeResponse['setting_rules'] },
+  label: string,
+  judgeModel: string,
+): JudgeScore {
+  // A response recorded before #181 asked the question has no setting rules to read.
+  const raw: JudgeResponse = { ...input, setting_rules: input.setting_rules ?? [] };
   const causes = raw.causal_pairs.filter((row) => row.verdict === 'causes').length;
   const merely = raw.causal_pairs.filter((row) => row.verdict === 'merely_follows').length;
   const contradicts = raw.causal_pairs.filter((row) => row.verdict === 'contradicts').length;
@@ -499,6 +543,11 @@ export function summarize(raw: JudgeResponse, label: string, judgeModel: string)
     },
     thematic_coherence: { score: raw.thematic_coherence, passed: raw.thematic_coherence >= 3 },
     engagement: { score: raw.engagement, passed: raw.engagement >= 3 },
+    setting_rules: {
+      rules: raw.setting_rules.length,
+      unplanted: raw.setting_rules.filter((row) => !row.planted).length,
+      passed: raw.setting_rules.every((row) => row.planted),
+    },
     notes: raw.notes,
     raw,
   };

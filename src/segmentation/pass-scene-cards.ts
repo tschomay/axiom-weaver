@@ -81,7 +81,13 @@ Hard rules on the beats:
 - Every beat must be supported by the events shown. Do NOT add an incident, a motive or a
   consequence the events do not state.
 - Compress. Several events usually collapse into one beat. Do not restate each event.
-- Do not name a beat the story has not reached yet.`;
+- Do not name a beat the story has not reached yet.
+- Compress events, never qualifiers. Keep WHEN something happens ("at dead low tide", "after the
+  last ferry"), WHERE, and the sensory detail a witness reports ("an explosive thump"): a later
+  scene may depend on exactly that detail, and a card that drops it leaves the writer to invent
+  the mechanic.
+- Never reword a clue. When a scene lists "keep verbatim" phrases, a later scene refers back to
+  them: each must appear word for word in one of that scene's beats.`;
 
 function scenePropertiesJsonSchema(): Record<string, unknown> {
   return {
@@ -160,6 +166,79 @@ export interface ScenePropertiesResult {
   readonly location_inherited: number;
   readonly beat_fallbacks: number;
   readonly function_fallbacks: number;
+  /**
+   * Load-bearing phrases the model's beats dropped, restored by appending the event beat that
+   * carried them (#181). Counted, because each one is a place the compression lost a detail a
+   * later scene depends on.
+   */
+  readonly phrases_restored: number;
+}
+
+/** Words that never start or end a load-bearing phrase. */
+const STOPWORDS = new Set(
+  (
+    'a an the and or but of to in on at by for from with into onto over under after before ' +
+    'during until as is was were be been being has have had he she they it its his her their ' +
+    'them him this that these those there then than so not no who whom which what when where ' +
+    'why how all any some each every one two about up down out off again also just only very'
+  ).split(' '),
+);
+
+function words(text: string): string[] {
+  return text.toLowerCase().match(/[a-z0-9']+/g) ?? [];
+}
+
+function eventText(event: FabulaEvent): string[] {
+  return [event.summary, ...event.beats];
+}
+
+/**
+ * Phrases a scene's events share with a *later* scene's events — the details the story refers back
+ * to (#181). The Slackwater Crossing's ev_04 has Bram hear an "explosive thump"; scene 5 links the
+ * fittings "to the explosive thump Bram reported"; scene 4's card reworded it to "mechanical
+ * crash", and the reader was never given the words scene 5 points at.
+ *
+ * Two to four words, neither end a stopword, no character name (a name recurring is not a
+ * clue), longest match kept. A heuristic, so it only ever *adds* protection: the model is told to
+ * keep these verbatim, and a phrase it drops anyway is restored from its source beat.
+ */
+export function loadBearingPhrases(
+  drafts: readonly SceneDraft[],
+  seed: WorldModelSeed,
+  perScene = 8,
+): Map<number, string[]> {
+  const names = new Set(seed.characters.flatMap((row) => words(row.name)));
+  const sceneText = drafts.map(
+    (draft) => ` ${draft.events.flatMap(eventText).map((text) => words(text).join(' ')).join(' | ')} `,
+  );
+  const result = new Map<number, string[]>();
+
+  drafts.forEach((draft, index) => {
+    const later = sceneText.slice(index + 1).join(' ');
+    if (later.trim() === '') return;
+    const found: string[] = [];
+    for (const text of draft.events.flatMap(eventText)) {
+      const tokens = words(text);
+      for (let size = 4; size >= 2; size -= 1) {
+        for (let at = 0; at + size <= tokens.length; at += 1) {
+          const window = tokens.slice(at, at + size);
+          if (STOPWORDS.has(window[0]!) || STOPWORDS.has(window[size - 1]!)) continue;
+          if (window.some((token) => names.has(token))) continue;
+          const phrase = window.join(' ');
+          if (!later.includes(` ${phrase} `)) continue;
+          if (found.some((kept) => ` ${kept} `.includes(` ${phrase} `))) continue;
+          found.push(phrase);
+        }
+      }
+    }
+    if (found.length > 0) result.set(draft.order, found.slice(0, perScene));
+  });
+  return result;
+}
+
+/** Whether a phrase survives, word for word, somewhere in the beats. */
+function survives(phrase: string, beats: readonly string[]): boolean {
+  return beats.some((beat) => ` ${words(beat).join(' ')} `.includes(` ${phrase} `));
 }
 
 /** The location a scene inherits when none of its own events names one. */
@@ -236,7 +315,11 @@ function nameOf(seed: WorldModelSeed, id: string): string {
   return row === undefined ? id : `${id} (${row.name})`;
 }
 
-function renderDraft(draft: SceneDraft, seed: WorldModelSeed): string {
+function renderDraft(
+  draft: SceneDraft,
+  seed: WorldModelSeed,
+  keep: readonly string[] = [],
+): string {
   const lines = [
     `SCENE ${draft.order}`,
     `  candidate pov ids: ${
@@ -257,6 +340,9 @@ function renderDraft(draft: SceneDraft, seed: WorldModelSeed): string {
       if (beat !== event.summary) lines.push(`        · ${beat}`);
     }
   }
+  if (keep.length > 0) {
+    lines.push(`  keep verbatim (a later scene refers back to these): ${keep.map((p) => `"${p}"`).join(', ')}`);
+  }
   return lines.join('\n');
 }
 
@@ -270,6 +356,7 @@ export async function describeScenes(
   const progress = options.onProgress ?? ((): void => {});
   const answers = new Map<number, z.infer<typeof ScenePropertiesSchema>['scenes'][number]>();
   const failed: number[] = [];
+  const keep = loadBearingPhrases(drafts, seed);
 
   for (let start = 0; start < drafts.length; start += batchSize) {
     const batch = drafts.slice(start, start + batchSize);
@@ -279,7 +366,9 @@ export async function describeScenes(
         pass: 'segmentation.scene_properties',
         label: `scenes ${batch[0]!.order}–${batch[batch.length - 1]!.order}`,
         systemInstruction: SCENE_SYSTEM,
-        contents: batch.map((draft) => renderDraft(draft, seed)).join('\n\n'),
+        contents: batch
+          .map((draft) => renderDraft(draft, seed, keep.get(draft.order) ?? []))
+          .join('\n\n'),
         responseJsonSchema: scenePropertiesJsonSchema(),
         maxOutputTokens: 4096,
       });
@@ -294,6 +383,7 @@ export async function describeScenes(
   let locationFallbacks = 0;
   let beatFallbacks = 0;
   let functionFallbacks = 0;
+  let phrasesRestored = 0;
 
   const scenes = drafts.map((draft): SceneProperties => {
     const answer = answers.get(draft.order);
@@ -325,6 +415,16 @@ export async function describeScenes(
       beatsFallback = true;
       beatFallbacks += 1;
     }
+    // A load-bearing phrase the compression dropped comes back as the event beat that carried it.
+    for (const phrase of keep.get(draft.order) ?? []) {
+      if (survives(phrase, beats)) continue;
+      const source = draft.events
+        .flatMap(eventText)
+        .find((text) => survives(phrase, [text]));
+      if (source === undefined || beats.includes(source)) continue;
+      beats = [...beats, source];
+      phrasesRestored += 1;
+    }
 
     let dramaticFunction = (answer?.dramatic_function ?? '').trim();
     if (dramaticFunction === '') {
@@ -353,5 +453,6 @@ export async function describeScenes(
     location_inherited: drafts.filter((draft) => draft.location_inherited).length,
     beat_fallbacks: beatFallbacks,
     function_fallbacks: functionFallbacks,
+    phrases_restored: phrasesRestored,
   };
 }
