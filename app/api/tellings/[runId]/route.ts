@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
+import { bearerToken, isAuthorizedAuthorRequest } from '@/admin/authorize';
 import { storyRepository } from '@/persistence';
+import { TellingDeletionError } from '@/persistence/story-repository';
 import { WRITER_MODEL, quotaOffer } from '@/writer/model-client';
 import {
   hasStoppedReporting,
@@ -95,6 +97,37 @@ export async function GET(request: Request, { params }: { params: Promise<{ runI
   }
 
   return NextResponse.json(body);
+}
+
+/**
+ * Delete a telling — its prose, logs and run report, and its entry in the story's run index.
+ *
+ * Author-gated by the same token every other write surface uses: a reader can generate and share
+ * a telling, but only the author takes one off the shelf. It exists mostly for the runs nobody
+ * wants back — a failed or abandoned compile, a stand-in run made to prove the loop — and it is
+ * never called by anything automatic (ADR 0015's amendment). The Baked edition and a run that is
+ * still reporting are refused with a 409.
+ */
+export async function DELETE(request: Request, { params }: { params: Promise<{ runId: string }> }) {
+  if (!isAuthorizedAuthorRequest(bearerToken(request))) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const { runId } = await params;
+  const repository = storyRepository();
+  if ((await repository.getEditionManifest(runId)) === null) {
+    return NextResponse.json({ error: `No telling with run id "${runId}"` }, { status: 404 });
+  }
+
+  try {
+    const index = await repository.deleteTelling(runId);
+    return NextResponse.json({ deleted: runId, runs: index.runs.length });
+  } catch (error) {
+    if (error instanceof TellingDeletionError) {
+      return NextResponse.json({ error: error.message }, { status: 409 });
+    }
+    throw error;
+  }
 }
 
 /**

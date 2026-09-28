@@ -56,6 +56,8 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
   const [writer, setWriter] = useState<string | null>(null);
   const [quota, setQuota] = useState<QuotaOffer | null>(null);
   const [busy, setBusy] = useState(false);
+  /** The run a delete is in flight for, so its button cannot be pressed twice. */
+  const [deleting, setDeleting] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   /** The run the server has stopped hearing from, if any. */
   const [stalled, setStalled] = useState<Progress | null>(null);
@@ -200,6 +202,50 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
         return;
       }
       await refresh();
+    },
+    [refresh, session],
+  );
+
+  /**
+   * Delete a telling for good, once the author has said yes to exactly what that costs.
+   *
+   * The server refuses the Baked edition and a run still reporting; everything else — above all
+   * the failed and abandoned runs that otherwise sit in the list forever — goes, prose, logs and
+   * run report together.
+   */
+  const deleteTelling = useCallback(
+    async (runId: string, name: string | null) => {
+      const what = name === null ? runId : `"${name}" (${runId})`;
+      const confirmed = window.confirm(
+        `Delete the telling ${what}?\n\n` +
+          'Its prose and run report are removed for good' +
+          (name === null ? '' : ', it leaves the library') +
+          ', and anyone holding its link will find nothing there. This cannot be undone.',
+      );
+      if (!confirmed) return;
+
+      setError(null);
+      setDeleting(runId);
+      try {
+        const response = await fetch(`/api/tellings/${runId}`, {
+          method: 'DELETE',
+          headers: session.headers(),
+        });
+        if (!response.ok) {
+          const body = (await response.json().catch(() => ({}))) as { error?: string };
+          setError(body.error ?? `Could not delete ${runId} (${response.status})`);
+          return;
+        }
+        // Nothing on the page may go on describing a run that no longer exists.
+        setReading((current) => (current?.run_id === runId ? null : current));
+        setStalled((current) => (current?.run_id === runId ? null : current));
+        setRunning((current) => (current?.run_id === runId ? null : current));
+        await refresh();
+      } catch {
+        setError(`Network error — ${runId} was not deleted.`);
+      } finally {
+        setDeleting(null);
+      }
     },
     [refresh, session],
   );
@@ -425,6 +471,7 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
               <button type="button" className="action" onClick={() => void read(run.run_id)}>
                 Read
               </button>
+              <ExportLinks runId={run.run_id} />
               {session.canWrite && (
                 <>
                   <button
@@ -437,7 +484,7 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
                   <button
                     type="button"
                     className="action"
-                    title="Takes it off this list. The telling itself is never deleted — its run id keeps working."
+                    title="Takes it off this list. The telling itself stays — its run id keeps working. Delete it from Tellings below to remove it for good."
                     onClick={() => void removeFromLibrary(run.run_id)}
                   >
                     Remove
@@ -488,6 +535,7 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
               >
                 Read
               </button>
+              {run.status === 'complete' && <ExportLinks runId={run.run_id} />}
               {session.canWrite && run.status === 'complete' && !run.saved && (
                 <button
                   type="button"
@@ -495,6 +543,21 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
                   onClick={() => void saveToLibrary(run.run_id, null)}
                 >
                   Save
+                </button>
+              )}
+              {session.canWrite && (
+                <button
+                  type="button"
+                  className="action danger"
+                  disabled={deleting !== null || view.baked?.run_id === run.run_id}
+                  title={
+                    view.baked?.run_id === run.run_id
+                      ? 'This is the Baked edition. Promote another telling to Baked before deleting it.'
+                      : 'Deletes this telling for good — prose, run report and library entry.'
+                  }
+                  onClick={() => void deleteTelling(run.run_id, run.saved ? run.name : null)}
+                >
+                  {deleting === run.run_id ? 'Deleting…' : 'Delete'}
                 </button>
               )}
             </div>
@@ -510,6 +573,9 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
             {reading.provenance === null ? '' : ` · ${reading.provenance}`}. This telling exists
             only as itself: the same Story Package performed again produces a different one.
           </p>
+          <div className="actions">
+            <ExportLinks runId={reading.run_id} />
+          </div>
           {reading.scenes.map((scene) => (
             <div key={scene.scene_id}>
               <p className="meta scene-marker">
@@ -520,6 +586,36 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
           ))}
         </div>
       )}
+    </>
+  );
+}
+
+/**
+ * The two ways a finished telling leaves the app: a PDF by way of the browser's own print dialog
+ * (the export opens in a new tab laid out for it), and the same document as a standalone HTML
+ * file that reads offline in any browser.
+ */
+function ExportLinks({ runId }: { runId: string }) {
+  const href = `/api/tellings/${runId}/export`;
+  return (
+    <>
+      <a
+        className="action"
+        href={href}
+        target="_blank"
+        rel="noopener"
+        title="Opens a print-ready copy in a new tab — choose “Save as PDF” in the print dialog."
+      >
+        PDF
+      </a>
+      <a
+        className="action"
+        href={`${href}?download=1`}
+        download
+        title="A standalone HTML file of this telling — opens in any browser, no app needed."
+      >
+        Download
+      </a>
     </>
   );
 }

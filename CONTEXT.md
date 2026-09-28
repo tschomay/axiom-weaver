@@ -153,7 +153,8 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   against another run of the same `package_version`. Immutable once produced: a Compiled
   edition stays fully correct forever for the version it pins, even after the author advances
   the Story Package further — it is never marked stale and carries no version-drift signal.
-  Addressable and shareable by its run ID/URL indefinitely; nothing is ever auto-deleted.
+  Addressable and shareable by its run ID/URL until the author deletes it; nothing is ever
+  auto-deleted, and the Baked edition and a still-reporting run can't be deleted at all.
   Sharing an edition's URL exposes only its own content (prose, digests) — never the Story
   Package behind it, which stays an author-only surface. Diffing two editions is scoped to a
   matched `package_version` pair (a cross-version comparison is a different question — see

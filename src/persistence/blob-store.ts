@@ -26,8 +26,9 @@ export interface BlobStore {
    * Delete a document. A no-op when the pathname holds nothing.
    *
    * This is not the `del()` + `put()` update the Vercel store's own notes forbid — that is a
-   * *rewrite* pretending to be two operations. This is a genuine removal, and the one caller is
-   * discarding a Manuscript (ADR 0017 §9). No retained snapshot is ever removed through it.
+   * *rewrite* pretending to be two operations. This is a genuine removal, and its callers are
+   * discarding a Manuscript (ADR 0017 §9) and an author deleting a telling (ADR 0015's
+   * amendment). No retained `package_version` snapshot is ever removed through it.
    */
   remove(pathname: string): Promise<void>;
 }

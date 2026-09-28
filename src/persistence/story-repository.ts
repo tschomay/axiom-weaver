@@ -28,6 +28,7 @@ import {
   type EditionManifest,
   type EditionScene,
   type RunIndex,
+  hasStoppedReporting,
 } from '../edition/edition';
 import { RunReportSchema, isPromotable, type RunReport } from '../edition/run-report';
 import { DraftStoryPackageSchema, ManuscriptSchema, type DraftStoryPackage, type Manuscript } from '../schema/manuscript';
@@ -49,6 +50,7 @@ import {
   draftStateLogPath,
   editionDiscoursePath,
   editionManifestPath,
+  editionPrefix,
   editionScenePath,
   editionStateLogPath,
   editionWorldModelPath,
@@ -422,6 +424,57 @@ export class StoryRepository {
     });
   }
 
+  /**
+   * Delete a telling outright: every blob under `edition/{runId}/` and its entry in the story's
+   * run index.
+   *
+   * Author-initiated and manual, always — nothing in the run loop calls this, so ADR 0014 §3 and
+   * ADR 0015 §5's "never auto-deleted" still holds (see ADR 0015's amendment). Two runs are
+   * refused rather than deleted out from under something that depends on them:
+   *
+   * - the Baked edition, which is what a first-time reader is handed by default — promote another
+   *   run first;
+   * - a run still reporting, whose loop would re-register it at its next scene boundary and leave
+   *   a half-deleted edition behind. One that has stopped reporting is fair game: nothing is
+   *   coming back to write it.
+   *
+   * The blobs go before the index entry, so a removal that fails partway leaves the run listed
+   * and the delete can simply be tried again.
+   */
+  async deleteTelling(runId: string, now: Date = new Date()): Promise<RunIndex> {
+    const manifest = await this.getEditionManifest(runId);
+    if (manifest === null) throw new TellingDeletionError(runId, 'no such run');
+
+    if (manifest.status === 'running' && !hasStoppedReporting(manifest, now)) {
+      throw new TellingDeletionError(
+        runId,
+        'it is still compiling — wait for it to finish, or for it to stop reporting',
+      );
+    }
+
+    const baked = await this.getBakedPointer(manifest.story_id);
+    if (baked?.run_id === runId) {
+      throw new TellingDeletionError(
+        runId,
+        'it is the Baked edition — promote another telling to Baked first',
+      );
+    }
+
+    for (const pathname of await this.store.list(editionPrefix(runId))) {
+      await this.store.remove(pathname);
+    }
+
+    const index = await this.getRunIndex(manifest.story_id);
+    const updated: RunIndex = {
+      ...index,
+      runs: index.runs.filter((run) => run.run_id !== runId),
+    };
+    await this.store.put(runIndexPath(manifest.story_id), stringify(updated), {
+      allowOverwrite: true,
+    });
+    return updated;
+  }
+
   private async updateRunIndexEntry(
     storyId: string,
     runId: string,
@@ -592,6 +645,13 @@ export class LibraryError extends Error {
   constructor(runId: string, reason: string) {
     super(`Cannot change the library entry for "${runId}": ${reason}`);
     this.name = 'LibraryError';
+  }
+}
+
+export class TellingDeletionError extends Error {
+  constructor(runId: string, reason: string) {
+    super(`Cannot delete telling "${runId}": ${reason}`);
+    this.name = 'TellingDeletionError';
   }
 }
 
