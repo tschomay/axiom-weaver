@@ -506,6 +506,7 @@ to 0.85, both clearing the bar.
 | **Payoff earned-ness** | Is each payoff *set up*, versus merely *linked*? | Per pair: `earned` / `linked only`. ≥ 0.70 `earned`. This is the one that separates a valid `pays_off` graph from a good one, and §4.1 cannot see it. |
 | **Thematic coherence** | Does the arc hold one recognizable concern end to end? | 1–5, ≥ 3. |
 | **Engagement** | Would a reader keep going? | 1–5, ≥ 3. The softest number here; weight it last. |
+| **Setting rules planted** | Is every rule of the setting the plot depends on (a tide, a curfew, a schedule, a water level, who holds which key) shown to the reader *before* the event that relies on it? | Per rule: `planted` / not. 0 unplanted. Added by #181: in *The Slackwater Crossing* the investigation turns on the wreck being reachable on foot at low tide, and the reader first learns that when Nita walks out. |
 
 **Judge protocol**, so scores are comparable across tickets:
 
