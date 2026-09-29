@@ -1,4 +1,4 @@
-# Curation working notes (in progress — superseded by CURATION.md)
+# Curation working notes — the trace behind CURATION.md
 
 ## Story 02 The Borrowed Boat — coordinates contradiction (4 lenses: consistency, payoff, engagement, character, grounding)
 - Fabula: Ruth KNOWS (hidden_02 deathbed confession; seed character_knowledge ck_01 char_ruth → deathbed_confession_to_ruth).
