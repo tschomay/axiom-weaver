@@ -1,0 +1,1963 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-the-night-shift-letter",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_arthur",
+        "name": "Arthur Finch",
+        "location_id": "loc_locker_room",
+        "status": "exhausted",
+        "goal": "save eight hundred pounds to leave the city for Leeds",
+        "bag": {
+          "shift": "day"
+        }
+      },
+      {
+        "id": "char_julian",
+        "name": "Julian Ward",
+        "location_id": "loc_loading_bay",
+        "status": "chilled",
+        "goal": "endure the isolated night shifts without losing his mind",
+        "bag": {
+          "shift": "night"
+        }
+      },
+      {
+        "id": "char_martin",
+        "name": "Martin Finch",
+        "location_id": null,
+        "status": "impatient",
+        "goal": "secure Arthur's deposit money for the Leeds workshop lease",
+        "bag": {
+          "trade": "joiner"
+        }
+      },
+      {
+        "id": "char_kieran",
+        "name": "Kieran Doyle",
+        "location_id": "loc_boiler_room",
+        "status": "restless",
+        "goal": "avoid disciplinary dismissal for missing hospital supplies",
+        "bag": {
+          "shift": "relief"
+        }
+      },
+      {
+        "id": "char_henderson",
+        "name": "Donald Henderson",
+        "location_id": "loc_supervisor_office",
+        "status": "stern",
+        "goal": "eliminate porter shift overlap and enforce hospital property regulations",
+        "bag": {
+          "rank": "supervisor"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_locker_room",
+        "name": "Basement Locker Room",
+        "bag": {
+          "ambient": "damp pipe hum"
+        }
+      },
+      {
+        "id": "loc_loading_bay",
+        "name": "Sub-basement Loading Bay",
+        "bag": {
+          "ambient": "freezing exhaust draught"
+        }
+      },
+      {
+        "id": "loc_boiler_room",
+        "name": "Boiler and Incinerator Room",
+        "bag": {
+          "ambient": "furnace roar"
+        }
+      },
+      {
+        "id": "loc_supervisor_office",
+        "name": "Supervisor's Office",
+        "bag": {
+          "ambient": "ticking wall clock"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_brass_key",
+        "name": "Brass Key to Locker 44",
+        "location_id": "loc_locker_room",
+        "status": "clipped behind locker",
+        "bag": {}
+      },
+      {
+        "id": "obj_blue_notebook",
+        "name": "Blue Cloth Correspondence Notebook",
+        "location_id": "loc_locker_room",
+        "status": "tucked on top shelf",
+        "bag": {}
+      },
+      {
+        "id": "obj_deposit_envelope",
+        "name": "Brown Paper Envelope of Cash",
+        "location_id": "loc_locker_room",
+        "status": "hidden inside Arthur's work boots",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_arthur",
+        "to_id": "char_martin",
+        "kind": "brother",
+        "sentiment": "strained obligation",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_martin",
+        "to_id": "char_arthur",
+        "kind": "brother",
+        "sentiment": "demanding partner",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_arthur",
+        "to_id": "char_julian",
+        "kind": "unseen locker mate",
+        "sentiment": "curious fascination",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_julian",
+        "to_id": "char_arthur",
+        "kind": "unseen locker mate",
+        "sentiment": "protective admiration",
+        "bag": {}
+      },
+      {
+        "id": "rel_05",
+        "from_id": "char_kieran",
+        "to_id": "char_julian",
+        "kind": "fellow night porter",
+        "sentiment": "wary accomplice",
+        "bag": {}
+      },
+      {
+        "id": "rel_06",
+        "from_id": "char_henderson",
+        "to_id": "char_arthur",
+        "kind": "subordinate porter",
+        "sentiment": "distrustful scrutiny",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_arthur",
+        "fact_ref": "shared_locker_allocation",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_julian",
+        "fact_ref": "shared_locker_allocation",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_arthur",
+        "fact_ref": "arthur_savings_goal",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_martin",
+        "fact_ref": "arthur_savings_goal",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_05",
+        "character_id": "char_kieran",
+        "fact_ref": "kieran_originated_bait_note",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_06",
+        "character_id": "char_julian",
+        "fact_ref": "kieran_originated_bait_note",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_07",
+        "character_id": "char_julian",
+        "fact_ref": "julian_shielded_prank",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_cash_envelope",
+      "order": 1,
+      "pov": "char_arthur",
+      "location_id": "loc_locker_room",
+      "characters_present": [
+        "char_arthur",
+        "char_henderson"
+      ],
+      "dramatic_function": "Establishes Arthur's secret savings stash and the strict enforcement of building lockouts.",
+      "entry_state": {
+        "char_henderson": {
+          "location_id": "loc_supervisor_office"
+        }
+      },
+      "exit_state": {
+        "char_henderson": {
+          "location_id": "loc_locker_room"
+        }
+      },
+      "required_beats": [
+        "Arthur counts his cash envelope and hides it deep inside locker 44 before the warning bell rings.",
+        "Henderson enters the locker room to order all day staff out ahead of the electronic security locks engaging."
+      ],
+      "reader_must_learn": [
+        "shift_handover_lockout",
+        "shared_locker_allocation"
+      ],
+      "must_stay_hidden": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "shared_locker_allocation",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_graveyard_shift_begins",
+      "order": 2,
+      "pov": "char_julian",
+      "location_id": "loc_loading_bay",
+      "characters_present": [
+        "char_julian",
+        "char_henderson"
+      ],
+      "dramatic_function": "Introduces the threat of locker inspections that puts Arthur's hidden savings in jeopardy.",
+      "entry_state": {
+        "char_henderson": {
+          "location_id": "loc_locker_room"
+        }
+      },
+      "exit_state": {
+        "char_henderson": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "required_beats": [
+        "Julian works alone unloading oxygen canisters in the freezing loading bay wind.",
+        "Henderson warns Julian that friday dawn locker sweeps will confiscate any unapproved personal property."
+      ],
+      "reader_must_learn": [
+        "locker_inspection_schedule"
+      ],
+      "must_stay_hidden": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_martins_deadline",
+      "order": 3,
+      "pov": "char_arthur",
+      "location_id": "loc_locker_room",
+      "characters_present": [
+        "char_arthur",
+        "char_martin"
+      ],
+      "dramatic_function": "Escalates financial pressure on Arthur by setting a hard deadline to produce the workshop deposit.",
+      "entry_state": {
+        "char_martin": {
+          "location_id": null
+        }
+      },
+      "exit_state": {
+        "char_martin": {
+          "location_id": "loc_locker_room"
+        }
+      },
+      "required_beats": [
+        "Martin corners Arthur in the basement demanding eight hundred pounds before January first.",
+        "Arthur tucks his money behind the locker vent as the heating flue begins its evening rattle."
+      ],
+      "reader_must_learn": [
+        "boiler_flue_draft",
+        "martins_partnership_ultimatum"
+      ],
+      "must_stay_hidden": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "arthur_savings_goal",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_04_the_secret_card",
+      "order": 4,
+      "pov": "char_arthur",
+      "location_id": "loc_locker_room",
+      "characters_present": [
+        "char_arthur"
+      ],
+      "dramatic_function": "Provides Arthur with a false sense of romantic hope amid his mounting despair.",
+      "entry_state": {
+        "char_martin": {
+          "location_id": "loc_locker_room"
+        }
+      },
+      "exit_state": {
+        "char_martin": {
+          "location_id": null
+        }
+      },
+      "required_beats": [
+        "Arthur finds an unsigned romantic card on his shelf inside locker 44 and assumes it is sincere affection from a colleague.",
+        "Worn down by Martin's demands, Arthur writes an earnest response expressing his dread of dying in the hospital basements."
+      ],
+      "reader_must_learn": [
+        "arthur_resignation_deadline"
+      ],
+      "must_stay_hidden": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_boiler_room",
+      "order": 5,
+      "pov": "char_julian",
+      "location_id": "loc_boiler_room",
+      "characters_present": [
+        "char_julian",
+        "char_kieran"
+      ],
+      "dramatic_function": "To turn a cruel workplace prank into a protective secret correspondence by leveraging Kieran's illicit stash.",
+      "entry_state": {
+        "char_julian": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "location_id": "loc_boiler_room"
+        }
+      },
+      "required_beats": [
+        "Julian intercepts Arthur's tender letter from locker 44 and is deeply moved by its vulnerability.",
+        "Catching Kieran storing stolen pharmacy ethanol in the boiler room, Julian blackmails him into abandoning the prank and staying away from Arthur."
+      ],
+      "reader_must_learn": [
+        "stolen_ethanol_leverage"
+      ],
+      "must_stay_hidden": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_the_blue_notebook",
+      "order": 6,
+      "pov": "char_julian",
+      "location_id": "loc_locker_room",
+      "characters_present": [
+        "char_julian"
+      ],
+      "dramatic_function": "To commit Julian to a sincere correspondence founded on a hidden lie.",
+      "entry_state": {
+        "char_arthur": {
+          "location_id": "loc_locker_room"
+        },
+        "char_julian": {
+          "location_id": "loc_boiler_room"
+        },
+        "obj_blue_notebook": {
+          "status": "tucked on top shelf"
+        }
+      },
+      "exit_state": {
+        "char_arthur": {
+          "location_id": null
+        },
+        "char_julian": {
+          "location_id": "loc_locker_room"
+        },
+        "obj_blue_notebook": {
+          "status": "inscribed with first true reply"
+        }
+      },
+      "required_beats": [
+        "Julian deposits the blue notebook containing his own thoughtful prose onto the upper shelf of locker 44.",
+        "Fearful that the truth would crush Arthur, Julian decides to conceal that the correspondence originated as Kieran's spiteful dare."
+      ],
+      "reader_must_learn": [
+        "blue_notebook_introduced"
+      ],
+      "must_stay_hidden": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_the_reply",
+      "order": 7,
+      "pov": "char_arthur",
+      "location_id": "loc_locker_room",
+      "characters_present": [
+        "char_arthur"
+      ],
+      "dramatic_function": "To establish Arthur's deep emotional investment and his romanticized misconceptions about his correspondent.",
+      "entry_state": {
+        "char_julian": {
+          "location_id": "loc_locker_room"
+        },
+        "char_arthur": {
+          "location_id": null
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "location_id": "loc_loading_bay"
+        },
+        "char_arthur": {
+          "location_id": "loc_locker_room"
+        }
+      },
+      "required_beats": [
+        "At shift start, Arthur reads the entries and pours his private hopes into the notebook.",
+        "From the erudite tone of the letters, Arthur concludes his pen pal must be an unattached, scholarly clerk with no roots."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "julian_shielded_prank",
+        "kieran_originated_bait_note"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_the_blizzard_shift",
+      "order": 8,
+      "pov": "char_julian",
+      "location_id": "loc_loading_bay",
+      "characters_present": [
+        "char_julian",
+        "char_kieran"
+      ],
+      "dramatic_function": "To expose the familial burdens anchoring Julian to the hospital during a crisis.",
+      "entry_state": {
+        "char_kieran": {
+          "location_id": "loc_boiler_room"
+        }
+      },
+      "exit_state": {
+        "char_kieran": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "required_beats": [
+        "Heavy snowfall seals the hospital loading dock, trapping the night staff inside for double shifts.",
+        "Between supply runs, Julian slips away to visit his bedridden uncle in the palliative annex, weighed down by his care duties."
+      ],
+      "reader_must_learn": [
+        "julian_infirmary_care"
+      ],
+      "must_stay_hidden": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_the_dawn_inspection",
+      "order": 9,
+      "pov": "char_arthur",
+      "location_id": "loc_locker_room",
+      "characters_present": [
+        "char_arthur",
+        "char_henderson"
+      ],
+      "dramatic_function": "Arthur risks exposure by intercepting the correspondence just before Henderson can discover and confiscate it.",
+      "entry_state": {
+        "char_henderson": {
+          "location_id": "loc_loading_bay"
+        },
+        "obj_blue_notebook": {
+          "status": "inscribed with first true reply"
+        }
+      },
+      "exit_state": {
+        "char_henderson": {
+          "location_id": "loc_locker_room"
+        },
+        "obj_blue_notebook": {
+          "status": "concealed in Arthur's jacket"
+        }
+      },
+      "required_beats": [
+        "Henderson begins his Friday dawn inspection, searching lockers and seizing unauthorized items.",
+        "Arthur pulls the blue notebook from locker 44 and conceals it beneath his uniform right as Henderson reaches him."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "locker_inspection_schedule",
+          "plant": "scene_02_graveyard_shift_begins"
+        },
+        {
+          "fact_ref": "blue_notebook_introduced",
+          "plant": "scene_06_the_blue_notebook"
+        }
+      ]
+    },
+    {
+      "id": "scene_10_the_overheard_flue",
+      "order": 10,
+      "pov": "char_arthur",
+      "location_id": "loc_boiler_room",
+      "characters_present": [
+        "char_arthur",
+        "char_kieran",
+        "char_julian"
+      ],
+      "dramatic_function": "A misheard conversation shatters Arthur's faith in the correspondence and turns his hope into humiliation.",
+      "entry_state": {
+        "char_arthur": {
+          "location_id": "loc_locker_room"
+        },
+        "char_kieran": {
+          "location_id": "loc_loading_bay"
+        },
+        "char_julian": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "exit_state": {
+        "char_arthur": {
+          "location_id": "loc_boiler_room"
+        },
+        "char_kieran": {
+          "location_id": "loc_boiler_room"
+        },
+        "char_julian": {
+          "location_id": "loc_boiler_room"
+        }
+      },
+      "required_beats": [
+        "Arthur retreats into the boiler room corridor and hears Kieran laughing with Julian through an open ventilation flue.",
+        "Overhearing Kieran talk about 'the joke in locker 44,' Arthur realizes Julian must have been mocking him the entire time."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "boiler_flue_draft",
+          "plant": "scene_03_martins_deadline"
+        }
+      ]
+    },
+    {
+      "id": "scene_11_the_evening_lockout",
+      "order": 11,
+      "pov": "char_arthur",
+      "location_id": "loc_locker_room",
+      "characters_present": [
+        "char_arthur",
+        "char_henderson"
+      ],
+      "dramatic_function": "Arthur commits to a direct confrontation, trapping himself inside the facility and escalating the stakes with security.",
+      "entry_state": {
+        "char_arthur": {
+          "location_id": "loc_boiler_room"
+        },
+        "char_julian": {
+          "location_id": "loc_boiler_room"
+        },
+        "char_kieran": {
+          "location_id": "loc_boiler_room"
+        }
+      },
+      "exit_state": {
+        "char_arthur": {
+          "location_id": "loc_locker_room"
+        },
+        "char_julian": {
+          "location_id": "loc_loading_bay"
+        },
+        "char_kieran": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "required_beats": [
+        "What pushes this decision now, staged first: Arthur overhears Julian and Kieran arguing through the boiler flue, misinterpreting their talk as mockery.",
+        "Determined to confront the note writer face-to-face, Arthur refuses to leave at the end of his shift.",
+        "The automated 19:00 deadbolts engage, trapping Arthur in the basement while Henderson sounds the breach alarm."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "shift_handover_lockout",
+          "plant": "scene_01_the_cash_envelope"
+        }
+      ]
+    },
+    {
+      "id": "scene_12_the_loading_bay_confession",
+      "order": 12,
+      "pov": "char_arthur",
+      "location_id": "loc_loading_bay",
+      "characters_present": [
+        "char_arthur",
+        "char_kieran",
+        "char_julian"
+      ],
+      "dramatic_function": "Arthur learns the cruel origin of the correspondence before Julian redeems it by confessing the sincerity of his feelings.",
+      "entry_state": {
+        "char_arthur": {
+          "location_id": "loc_locker_room"
+        },
+        "char_julian": {
+          "location_id": "loc_loading_bay"
+        },
+        "char_kieran": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "exit_state": {
+        "char_arthur": {
+          "location_id": "loc_loading_bay"
+        },
+        "char_julian": {
+          "location_id": "loc_loading_bay"
+        },
+        "char_kieran": {
+          "location_id": "loc_boiler_room"
+        }
+      },
+      "required_beats": [
+        "Arthur enters the loading bay and encounters Kieran, who spitefully reveals that the first note began as a wager to bait a fool.",
+        "Julian arrives on the ramp just as Arthur throws the blue notebook onto the frozen asphalt.",
+        "Julian confesses that he took over writing every reply after the initial card because Arthur's words made him feel human again."
+      ],
+      "reader_must_learn": [
+        "kieran_originated_bait_note",
+        "julian_shielded_prank"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "stolen_ethanol_leverage",
+          "plant": "scene_05_the_boiler_room"
+        }
+      ]
+    },
+    {
+      "id": "scene_13_the_leeds_lease",
+      "order": 13,
+      "pov": "char_arthur",
+      "location_id": "loc_supervisor_office",
+      "characters_present": [
+        "char_arthur",
+        "char_martin"
+      ],
+      "dramatic_function": "To sever Arthur's ties to Martin's business and commit him to remaining in the city.",
+      "entry_state": {
+        "char_arthur": {
+          "location_id": "loc_loading_bay",
+          "goal": "save eight hundred pounds to leave the city for Leeds"
+        },
+        "char_martin": {
+          "location_id": null
+        }
+      },
+      "exit_state": {
+        "char_arthur": {
+          "location_id": "loc_supervisor_office",
+          "goal": "remain in the city and meet Julian on honest terms"
+        },
+        "char_martin": {
+          "location_id": "loc_supervisor_office"
+        }
+      },
+      "required_beats": [
+        "Arthur retrieves the battered notebook from the frozen slush of the ramp and rereads Julian's honest admissions.",
+        "In the supervisor's office, Martin demands Arthur sign the partnership contract before the New Year deadline expires.",
+        "Realizing Martin's joyless enterprise would only trade one servitude for another, Arthur hands Martin five hundred pounds as a gift and refuses to sign the Leeds lease."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "arthur_resignation_deadline",
+          "plant": "scene_04_the_secret_card"
+        },
+        {
+          "fact_ref": "martins_partnership_ultimatum",
+          "plant": "scene_03_martins_deadline"
+        }
+      ]
+    },
+    {
+      "id": "scene_14_facing_burdens",
+      "order": 14,
+      "pov": "char_arthur",
+      "location_id": "loc_boiler_room",
+      "characters_present": [
+        "char_arthur",
+        "char_julian"
+      ],
+      "dramatic_function": "To strip away the fantasy of escape and establish the unvarnished terms of Arthur and Julian's bond.",
+      "entry_state": {
+        "char_arthur": {
+          "location_id": "loc_supervisor_office"
+        },
+        "char_martin": {
+          "location_id": "loc_supervisor_office"
+        },
+        "char_julian": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "exit_state": {
+        "char_arthur": {
+          "location_id": "loc_boiler_room"
+        },
+        "char_martin": {
+          "location_id": null
+        },
+        "char_julian": {
+          "location_id": "loc_boiler_room"
+        }
+      },
+      "required_beats": [
+        "In the boiler room, Arthur tells Julian he has abandoned the Leeds partnership to remain in the city.",
+        "Julian warns Arthur that his duty to his dying uncle prevents him from ever offering an easy or romantic escape."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "julian_infirmary_care",
+          "plant": "scene_08_the_blizzard_shift"
+        },
+        {
+          "fact_ref": "kieran_originated_bait_note",
+          "plant": "scene_12_the_loading_bay_confession"
+        }
+      ]
+    },
+    {
+      "id": "scene_15_locker_forty_four",
+      "order": 15,
+      "pov": "char_arthur",
+      "location_id": "loc_locker_room",
+      "characters_present": [
+        "char_arthur",
+        "char_julian"
+      ],
+      "dramatic_function": "To culminate their quiet courtship into an open, grounded partnership in the real world.",
+      "entry_state": {
+        "char_arthur": {
+          "location_id": "loc_boiler_room",
+          "status": "exhausted"
+        },
+        "char_julian": {
+          "location_id": "loc_boiler_room",
+          "status": "chilled"
+        }
+      },
+      "exit_state": {
+        "char_arthur": {
+          "location_id": "loc_locker_room",
+          "status": "reconciled"
+        },
+        "char_julian": {
+          "location_id": "loc_locker_room",
+          "status": "hopeful"
+        }
+      },
+      "required_beats": [
+        "Arthur and Julian return to Locker 44 together as the morning shift bells ring.",
+        "Setting aside the notebook, they share a thermos of tea in person to face the hospital together."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "julian_shielded_prank",
+          "plant": "scene_12_the_loading_bay_confession"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "omniscient and openly amused, willing to address the reader",
+    "register": "light, digressive, fond of its own asides",
+    "sentence_rhythm": "springy sentences with parenthetical swerves; frequent dashes",
+    "imagery_palette": [
+      "kitchen clutter",
+      "weather with opinions",
+      "animals behaving as people"
+    ],
+    "dialogue_density": "high; characters talk over each other and the narrator enjoys it",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "whimsical_playful"
+  },
+  "metadata": {
+    "title": "The Locker Below St. Jude's",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T17:34:59.278Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "shared_locker_allocation",
+      "statement": "Locker 44 in the basement is allocated jointly to day porter Arthur Finch and night porter Julian Ward.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "kieran_originated_bait_note",
+      "statement": "Kieran Doyle planted the initial romantic card in Locker 44 as a workplace prank to mock Arthur Finch's reclusiveness.",
+      "caused_by": [
+        "shared_locker_allocation"
+      ]
+    },
+    {
+      "fact_ref": "julian_shielded_prank",
+      "statement": "Julian Ward answered Arthur's vulnerable reply under a pen name to protect him from Kieran's locker-room mockery.",
+      "caused_by": [
+        "kieran_originated_bait_note"
+      ]
+    },
+    {
+      "fact_ref": "arthur_savings_goal",
+      "statement": "Arthur Finch has saved eight hundred pounds in cash to purchase a half-share in Martin's Leeds joinery workshop.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "shift_handover_lockout",
+      "statement": "Hospital security regulations mandate that electronic basement doors deadbolt automatically at 07:00 and 19:00 to prevent shift overlap.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "locker_inspection_schedule",
+      "statement": "Supervisor Henderson inspects all basement porter lockers for contraband and shift infractions every Friday at dawn.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "boiler_flue_draft",
+      "statement": "An acoustic draft through the ventilation flue behind Locker 44 transmits audible conversations directly into the boiler room.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "arthur_resignation_deadline",
+      "statement": "Martin Finch will sell the Leeds joinery lease to an external buyer unless Arthur delivers eight hundred pounds by New Year's Eve.",
+      "caused_by": [
+        "arthur_savings_goal"
+      ]
+    },
+    {
+      "fact_ref": "stolen_ethanol_leverage",
+      "statement": "Julian Ward discovered Kieran Doyle hiding stolen pharmacy ethanol, giving Julian leverage to force Kieran's silence.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "julian_infirmary_care",
+      "statement": "Julian Ward is anchored to the city hospital because he provides daily palliative support to his bedridden uncle in the annex.",
+      "caused_by": []
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-29T17:34:27.658Z",
+    "brief": {
+      "story_id": "review-the-night-shift-letter",
+      "title": "The Night Shift Letter",
+      "premise": {
+        "logline": "Two hospital porters on opposite shifts fall for each other through notes left in a shared locker, and one of them is not who the notes suggest.",
+        "modules": {
+          "theme": "whether you can love someone you have only ever read",
+          "setting_time": "a hard winter of staff shortages",
+          "setting_place": "a large city hospital, its basements and loading bays",
+          "protagonist": "a day porter saving to leave the city",
+          "protagonist_want": "to meet the night porter without ruining it",
+          "antagonism": "a rota that never lets them overlap, and a supervisor who reads the notes",
+          "complication": "the notes were started by someone else, as a joke",
+          "ending_shape": "they meet as themselves and choose each other anyway"
+        }
+      },
+      "plot_shape": {
+        "id": "courtship",
+        "name": "Courtship",
+        "central_question": "What has to be given up for these two to be honest with each other?",
+        "phases": [
+          {
+            "name": "Two worlds",
+            "purpose": "Both parties established separately, each with a commitment in the way.",
+            "share": 0.2
+          },
+          {
+            "name": "Collision",
+            "purpose": "Forced proximity; a misjudgement each makes about the other.",
+            "share": 0.2
+          },
+          {
+            "name": "Concealment",
+            "purpose": "Something true is withheld, for a reason that is not cowardice.",
+            "share": 0.25
+          },
+          {
+            "name": "Exposure",
+            "purpose": "The withheld thing surfaces at the worst available moment.",
+            "share": 0.2
+          },
+          {
+            "name": "Terms",
+            "purpose": "What each actually gives up, stated plainly.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "first party",
+            "purpose": "Withholds something, and has a good reason."
+          },
+          {
+            "role": "second party",
+            "purpose": "Misjudges the first, on evidence."
+          },
+          {
+            "role": "obligation",
+            "purpose": "A person embodying what one of them owes elsewhere."
+          },
+          {
+            "role": "confidant",
+            "purpose": "Knows the withheld thing and is bound not to say it."
+          }
+        ],
+        "obligatory_moves": [
+          "The reader learns the withheld thing before the second party does.",
+          "The misjudgement is reasonable given what that character has been shown.",
+          "Neither party gets what they wanted without naming what it costs."
+        ]
+      },
+      "event_count": 16,
+      "cast": {
+        "characters": 5,
+        "locations": 4,
+        "objects": 3
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 3,
+        "min_span": 3,
+        "long_range_edges": 1,
+        "long_range_span": 8
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "courtship",
+        "premise_preset": "The Night Shift Letter"
+      }
+    },
+    "repairs": [
+      "mechanical | declare_fact_at_event: hidden \"shared_locker_allocation\" installed in ev_01_day_shift_close.reveals",
+      "model | motivation: ev_14_lease_surrender gained a motive beat for \"Arthur hands Martin five hundred pounds, refuses the Leeds joinery lease, and chooses to remain in the city.\""
+    ],
+    "events": [
+      {
+        "id": "ev_01_day_shift_close",
+        "sequence": 1,
+        "summary": "Arthur hides his savings envelope in Locker 44 while Henderson enforces the strict evening lockout.",
+        "pov": "char_arthur",
+        "location_id": "loc_locker_room",
+        "characters_present": [
+          "char_arthur",
+          "char_henderson"
+        ],
+        "dramatic_function": "Establish Arthur's daytime isolation, his plan to depart, and the hospital's rigid shift boundaries.",
+        "beats": [
+          "Arthur counts his cash envelope and tucks it deep into Locker 44 before the warning bell rings.",
+          "Supervisor Henderson enters the locker room to order all day staff out before the electronic security locks engage."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "shift_handover_lockout",
+          "shared_locker_allocation"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "shared_locker_allocation",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_henderson",
+            "column": "location_id",
+            "value": "loc_locker_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_night_rounds",
+        "sequence": 2,
+        "summary": "Julian starts his graveyard shift in the freezing loading bay and learns of Henderson's impending locker sweeps.",
+        "pov": "char_julian",
+        "location_id": "loc_loading_bay",
+        "characters_present": [
+          "char_julian",
+          "char_henderson"
+        ],
+        "dramatic_function": "Establish Julian's nocturnal world, his heavy isolation, and the looming regulatory danger.",
+        "beats": [
+          "Julian unloads oxygen canisters alone in the icy sub-basement wind.",
+          "Henderson warns Julian that Friday dawn locker inspections will confiscate any unapproved personal property."
+        ],
+        "caused_by": [
+          "ev_01_day_shift_close"
+        ],
+        "reveals": [
+          "locker_inspection_schedule"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_henderson",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_martin_ultimatum",
+        "sequence": 3,
+        "summary": "Martin confronts Arthur in the basement, issuing a deadline to produce the workshop deposit by New Year's Eve.",
+        "pov": "char_arthur",
+        "location_id": "loc_locker_room",
+        "characters_present": [
+          "char_arthur",
+          "char_martin"
+        ],
+        "dramatic_function": "Establish Arthur's external obligation and the financial clock forcing his departure.",
+        "beats": [
+          "Martin corners Arthur in the locker room, demanding the full eight hundred pounds before January first.",
+          "Arthur secures the money behind Locker 44's vent while the heating flue begins its noisy evening rattle."
+        ],
+        "caused_by": [
+          "ev_01_day_shift_close"
+        ],
+        "reveals": [
+          "boiler_flue_draft"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "arthur_savings_goal",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_martin",
+            "column": "location_id",
+            "value": "loc_locker_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_first_reply",
+        "sequence": 4,
+        "summary": "Arthur discovers the unsigned romantic card inside Locker 44 and leaves an earnest handwritten response.",
+        "pov": "char_arthur",
+        "location_id": "loc_locker_room",
+        "characters_present": [
+          "char_arthur"
+        ],
+        "dramatic_function": "Establish the initial emotional collision through the written word.",
+        "beats": [
+          "Arthur finds the poetic card left on his shelf and mistakes it for genuine affection from an unseen colleague.",
+          "Exhausted by Martin's pressure, Arthur writes back about his dread of dying in the hospital basements."
+        ],
+        "caused_by": [
+          "ev_03_martin_ultimatum"
+        ],
+        "reveals": [
+          "arthur_resignation_deadline"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_martin",
+            "column": "location_id",
+            "value": null
+          }
+        ]
+      },
+      {
+        "id": "ev_05_prank_discovery",
+        "sequence": 5,
+        "summary": "Julian reads Arthur's vulnerable note and blackmails Kieran to abandon the cruel prank.",
+        "pov": "char_julian",
+        "location_id": "loc_boiler_room",
+        "characters_present": [
+          "char_julian",
+          "char_kieran"
+        ],
+        "dramatic_function": "Reveal the prank to Julian and establish his motive to protect Arthur.",
+        "beats": [
+          "Julian intercepts Arthur's tender letter from Locker 44 and is deeply moved by its honesty.",
+          "Julian discovers Kieran storing stolen pharmacy ethanol in the boiler room and threatens exposure unless Kieran stays away from Arthur."
+        ],
+        "caused_by": [
+          "ev_04_first_reply"
+        ],
+        "reveals": [
+          "stolen_ethanol_leverage"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_boiler_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_notebook_established",
+        "sequence": 6,
+        "summary": "Julian places a blue notebook in Locker 44 with his first real letter, concealing Kieran's initial joke.",
+        "pov": "char_julian",
+        "location_id": "loc_locker_room",
+        "characters_present": [
+          "char_julian"
+        ],
+        "dramatic_function": "Execute the withholding: Julian chooses deception out of tenderness.",
+        "beats": [
+          "Julian deposits the blue notebook on the upper shelf of Locker 44 containing his own thoughtful prose.",
+          "Julian withholds that the exchange began as Kieran's spiteful dare, fearing the truth would crush Arthur."
+        ],
+        "caused_by": [
+          "ev_05_prank_discovery"
+        ],
+        "reveals": [],
+        "conceals": [
+          "kieran_originated_bait_note"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": null
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_locker_room"
+          },
+          {
+            "entity_id": "obj_blue_notebook",
+            "column": "status",
+            "value": "inscribed with first true reply"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_intimate_exchanges",
+        "sequence": 7,
+        "summary": "Arthur replies in the notebook, forming an idealized image of his writer while Julian keeps silent on his burdens.",
+        "pov": "char_arthur",
+        "location_id": "loc_locker_room",
+        "characters_present": [
+          "char_arthur"
+        ],
+        "dramatic_function": "Deepen the courtship through written intimacy while building the misjudgement.",
+        "beats": [
+          "Arthur reads Julian's writing at shift start and pours his private hopes into the notebook.",
+          "Arthur concludes from the erudite tone that his pen pal must be an unattached, scholarly clerk with no roots."
+        ],
+        "caused_by": [
+          "ev_06_notebook_established"
+        ],
+        "reveals": [],
+        "conceals": [
+          "julian_shielded_prank"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_locker_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_snowstorm_lockin",
+        "sequence": 8,
+        "summary": "A winter blizzard strands staff at the hospital, and Julian reveals why he cannot leave the city.",
+        "pov": "char_julian",
+        "location_id": "loc_loading_bay",
+        "characters_present": [
+          "char_julian",
+          "char_kieran"
+        ],
+        "dramatic_function": "Complicate Julian's emotional world under pressure of hospital shortages.",
+        "beats": [
+          "Heavy snowfall seals the hospital loading dock, trapping night staff for double shifts.",
+          "Julian visits his bedridden uncle in the palliative annex between supply runs, weighed down by his care duties."
+        ],
+        "caused_by": [
+          "ev_07_intimate_exchanges"
+        ],
+        "reveals": [
+          "julian_infirmary_care"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_kieran",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_henderson_intercept",
+        "sequence": 9,
+        "summary": "Henderson conducts his Friday dawn inspection, and Arthur barely rescues the notebook from Locker 44.",
+        "pov": "char_arthur",
+        "location_id": "loc_locker_room",
+        "characters_present": [
+          "char_arthur",
+          "char_henderson"
+        ],
+        "dramatic_function": "Escalate tension through the threat of administrative exposure.",
+        "beats": [
+          "Henderson begins his Friday dawn inspection, opening lockers and seizing unauthorized items.",
+          "Arthur pulls the blue notebook from Locker 44 and hides it beneath his uniform just as Henderson arrives."
+        ],
+        "caused_by": [
+          "ev_02_night_rounds",
+          "ev_07_intimate_exchanges"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "locker_inspection_schedule",
+            "plant": "ev_02_night_rounds"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_henderson",
+            "column": "location_id",
+            "value": "loc_locker_room"
+          },
+          {
+            "entity_id": "obj_blue_notebook",
+            "column": "status",
+            "value": "concealed in Arthur's jacket"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_boiler_room_confrontation",
+        "sequence": 10,
+        "summary": "Arthur overhears Julian and Kieran arguing through the boiler flue, misinterpreting their talk as mockery.",
+        "pov": "char_arthur",
+        "location_id": "loc_boiler_room",
+        "characters_present": [
+          "char_arthur",
+          "char_kieran",
+          "char_julian"
+        ],
+        "dramatic_function": "Trigger Arthur's misjudgement through incomplete acoustic evidence.",
+        "beats": [
+          "Arthur flees to the boiler room corridor and hears Kieran laughing with Julian through the open ventilation flue.",
+          "Hearing Kieran mention 'the joke in Locker 44,' Arthur becomes convinced Julian has been laughing at him all along."
+        ],
+        "caused_by": [
+          "ev_03_martin_ultimatum",
+          "ev_09_henderson_intercept"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "boiler_flue_draft",
+            "plant": "ev_03_martin_ultimatum"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_boiler_room"
+          },
+          {
+            "entity_id": "char_kieran",
+            "column": "location_id",
+            "value": "loc_boiler_room"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_boiler_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_cross_shift_breach",
+        "sequence": 11,
+        "summary": "Arthur deliberately stays past 19:00 to confront his correspondent, triggering the automated security lockout.",
+        "pov": "char_arthur",
+        "location_id": "loc_locker_room",
+        "characters_present": [
+          "char_arthur",
+          "char_henderson"
+        ],
+        "dramatic_function": "Force the physical collision by violating institutional boundaries.",
+        "beats": [
+          "Arthur refuses to leave at shift end, determined to look the author of the notes in the eye.",
+          "The automated 19:00 deadbolts trigger, trapping Arthur inside the basement as Henderson sounds the breach alarm."
+        ],
+        "caused_by": [
+          "ev_01_day_shift_close",
+          "ev_10_boiler_room_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "shift_handover_lockout",
+            "plant": "ev_01_day_shift_close"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_locker_room"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          },
+          {
+            "entity_id": "char_kieran",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_kieran_exposure",
+        "sequence": 12,
+        "summary": "Kieran corners Arthur on the loading dock and maliciously reveals that the notes started as a prank bet.",
+        "pov": "char_arthur",
+        "location_id": "loc_loading_bay",
+        "characters_present": [
+          "char_arthur",
+          "char_kieran"
+        ],
+        "dramatic_function": "Detonate the withheld truth at the worst possible moment.",
+        "beats": [
+          "Arthur breaks into the loading bay and runs into Kieran instead of the sensitive soul from the letters.",
+          "Angry over Julian's threats about stolen ethanol, Kieran sneers that the first note was merely a wager to bait a fool."
+        ],
+        "caused_by": [
+          "ev_05_prank_discovery",
+          "ev_11_cross_shift_breach"
+        ],
+        "reveals": [
+          "kieran_originated_bait_note"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "stolen_ethanol_leverage",
+            "plant": "ev_05_prank_discovery"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_boiler_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_dock_confrontation",
+        "sequence": 13,
+        "summary": "Julian finds Arthur reeling from Kieran's cruelty and confesses why he took over the notebook.",
+        "pov": "char_julian",
+        "location_id": "loc_loading_bay",
+        "characters_present": [
+          "char_julian",
+          "char_arthur"
+        ],
+        "dramatic_function": "Force Julian's confession and expose his real motives.",
+        "beats": [
+          "Julian arrives on the loading ramp to find Arthur throwing the blue notebook onto the frozen asphalt.",
+          "Julian admits he wrote every reply after the first card because Arthur's words made him feel human again."
+        ],
+        "caused_by": [
+          "ev_12_kieran_exposure"
+        ],
+        "reveals": [
+          "julian_shielded_prank"
+        ],
+        "conceals": [],
+        "recounts": [
+          "kieran_originated_bait_note"
+        ],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          },
+          {
+            "entity_id": "char_kieran",
+            "column": "location_id",
+            "value": "loc_boiler_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_lease_surrender",
+        "sequence": 14,
+        "summary": "Arthur meets Martin in the supervisor's office and formally surrenders his claim to the Leeds workshop lease.",
+        "pov": "char_arthur",
+        "location_id": "loc_supervisor_office",
+        "characters_present": [
+          "char_arthur",
+          "char_martin"
+        ],
+        "dramatic_function": "Enact Arthur's sacrifice of his previous path.",
+        "beats": [
+          "Arthur retrieves the battered notebook from the frozen slush of the ramp and rereads Julian's honest admissions, realizing that joining Martin's joyless business in Leeds would only exchange one cold, lonely servitude for another.",
+          "Martin demands Arthur sign the partnership contract before the New Year deadline expires.",
+          "Arthur hands Martin five hundred pounds as a gift, refuses the lease, and chooses to stay in the city."
+        ],
+        "caused_by": [
+          "ev_04_first_reply",
+          "ev_13_dock_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "arthur_resignation_deadline",
+            "plant": "ev_04_first_reply"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "char_martin",
+            "column": "location_id",
+            "value": "loc_supervisor_office"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "goal",
+            "value": "remain in the city and meet Julian on honest terms"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_mutual_confession",
+        "sequence": 15,
+        "summary": "Arthur and Julian meet in the boiler room to confront their respective burdens and let go of romantic illusions.",
+        "pov": "char_arthur",
+        "location_id": "loc_boiler_room",
+        "characters_present": [
+          "char_arthur",
+          "char_julian"
+        ],
+        "dramatic_function": "Establish the mutual costs and dismantle romantic illusions.",
+        "beats": [
+          "Arthur tells Julian he has given up the Leeds partnership, acknowledging his own choice to remain.",
+          "Julian explains that his duties to his dying uncle mean he can never offer an easy or romantic escape."
+        ],
+        "caused_by": [
+          "ev_13_dock_confrontation",
+          "ev_14_lease_surrender"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "julian_infirmary_care",
+            "plant": "ev_08_snowstorm_lockin"
+          },
+          {
+            "fact_ref": "kieran_originated_bait_note",
+            "plant": "ev_12_kieran_exposure"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_boiler_room"
+          },
+          {
+            "entity_id": "char_martin",
+            "column": "location_id",
+            "value": null
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_boiler_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_agreed_terms",
+        "sequence": 16,
+        "summary": "Arthur and Julian sit together openly at shift change by Locker 44, choosing each other as they truly are.",
+        "pov": "char_arthur",
+        "location_id": "loc_locker_room",
+        "characters_present": [
+          "char_arthur",
+          "char_julian"
+        ],
+        "dramatic_function": "Resolve the courtship by choosing each other in the plain light of reality.",
+        "beats": [
+          "Arthur and Julian return to Locker 44 together as the morning shift bells ring.",
+          "They set aside the written notebook to share a simple thermos of tea in person, facing the hospital together."
+        ],
+        "caused_by": [
+          "ev_15_mutual_confession"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "julian_shielded_prank",
+            "plant": "ev_13_dock_confrontation"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_locker_room"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_locker_room"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "status",
+            "value": "reconciled"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "status",
+            "value": "hopeful"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01",
+        "sequence": 1,
+        "summary": "Kieran Doyle forged shift logs to force Arthur Finch into sharing Locker 44 because Arthur refused to join the porters' gambling ring.",
+        "caused_by": [],
+        "establishes": [
+          "shared_locker_allocation"
+        ]
+      },
+      {
+        "id": "hidden_02",
+        "sequence": 2,
+        "summary": "Kieran Doyle left an anonymous, florid love card in Locker 44 to trick Arthur into an embarrassing written declaration for the staff room to mock.",
+        "caused_by": [
+          "hidden_01"
+        ],
+        "establishes": [
+          "kieran_originated_bait_note"
+        ]
+      },
+      {
+        "id": "hidden_03",
+        "sequence": 3,
+        "summary": "Julian Ward found Kieran's discarded practice draft near the incinerator and chose to intercept the correspondence so Arthur would not be humiliated.",
+        "caused_by": [
+          "hidden_02"
+        ],
+        "establishes": [
+          "julian_shielded_prank"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "shared_locker_allocation",
+        "statement": "Locker 44 in the basement is allocated jointly to day porter Arthur Finch and night porter Julian Ward.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "arthur_savings_goal",
+        "statement": "Arthur Finch has saved eight hundred pounds in cash to purchase a half-share in Martin's Leeds joinery workshop.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "shift_handover_lockout",
+        "statement": "Hospital security regulations mandate that electronic basement doors deadbolt automatically at 07:00 and 19:00 to prevent shift overlap.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "locker_inspection_schedule",
+        "statement": "Supervisor Henderson inspects all basement porter lockers for contraband and shift infractions every Friday at dawn.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "boiler_flue_draft",
+        "statement": "An acoustic draft through the ventilation flue behind Locker 44 transmits audible conversations directly into the boiler room.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "arthur_resignation_deadline",
+        "statement": "Martin Finch will sell the Leeds joinery lease to an external buyer unless Arthur delivers eight hundred pounds by New Year's Eve.",
+        "caused_by": [
+          "arthur_savings_goal"
+        ]
+      },
+      {
+        "fact_ref": "stolen_ethanol_leverage",
+        "statement": "Julian Ward discovered Kieran Doyle hiding stolen pharmacy ethanol, giving Julian leverage to force Kieran's silence.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "kieran_originated_bait_note",
+        "statement": "Kieran Doyle planted the initial romantic card in Locker 44 as a workplace prank to mock Arthur Finch's reclusiveness.",
+        "caused_by": [
+          "shared_locker_allocation"
+        ]
+      },
+      {
+        "fact_ref": "julian_shielded_prank",
+        "statement": "Julian Ward answered Arthur's vulnerable reply under a pen name to protect him from Kieran's locker-room mockery.",
+        "caused_by": [
+          "kieran_originated_bait_note"
+        ]
+      },
+      {
+        "fact_ref": "julian_infirmary_care",
+        "statement": "Julian Ward is anchored to the city hospital because he provides daily palliative support to his bedridden uncle in the annex.",
+        "caused_by": []
+      }
+    ],
+    "stakes": [
+      {
+        "stake": "Arthur will lose his chance to buy into the Leeds workshop if he fails to deliver the deposit by New Year's Eve.",
+        "introduced_by": "ev_03_martin_ultimatum",
+        "resolved_by": "ev_14_lease_surrender"
+      },
+      {
+        "stake": "The correspondence will be confiscated and both porters dismissed if Henderson finds the notebook during Friday dawn locker inspections.",
+        "introduced_by": "ev_02_night_rounds",
+        "resolved_by": "ev_09_henderson_intercept"
+      },
+      {
+        "stake": "Arthur will be trapped and face immediate termination if he remains in the basement past the 19:00 shift handover lockout.",
+        "introduced_by": "ev_01_day_shift_close",
+        "resolved_by": "ev_11_cross_shift_breach"
+      },
+      {
+        "stake": "Kieran will expose the romantic exchange to ridicule Arthur unless Julian keeps him suppressed with evidence of the stolen ethanol.",
+        "introduced_by": "ev_05_prank_discovery",
+        "resolved_by": "ev_12_kieran_exposure"
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T17:34:59.278Z",
+    "started_at": "2026-09-29T17:34:27.658Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_cash_envelope",
+        "order": 1,
+        "event_ids": [
+          "ev_01_day_shift_close"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_graveyard_shift_begins",
+        "order": 2,
+        "event_ids": [
+          "ev_02_night_rounds"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_martins_deadline",
+        "order": 3,
+        "event_ids": [
+          "ev_03_martin_ultimatum"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_secret_card",
+        "order": 4,
+        "event_ids": [
+          "ev_04_first_reply"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_boiler_room",
+        "order": 5,
+        "event_ids": [
+          "ev_05_prank_discovery"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_blue_notebook",
+        "order": 6,
+        "event_ids": [
+          "ev_06_notebook_established"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_the_reply",
+        "order": 7,
+        "event_ids": [
+          "ev_07_intimate_exchanges"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_the_blizzard_shift",
+        "order": 8,
+        "event_ids": [
+          "ev_08_snowstorm_lockin"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_dawn_inspection",
+        "order": 9,
+        "event_ids": [
+          "ev_09_henderson_intercept"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_overheard_flue",
+        "order": 10,
+        "event_ids": [
+          "ev_10_boiler_room_confrontation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_the_evening_lockout",
+        "order": 11,
+        "event_ids": [
+          "ev_11_cross_shift_breach"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_the_loading_bay_confession",
+        "order": 12,
+        "event_ids": [
+          "ev_12_kieran_exposure",
+          "ev_13_dock_confrontation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_leeds_lease",
+        "order": 13,
+        "event_ids": [
+          "ev_14_lease_surrender"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_14_facing_burdens",
+        "order": 14,
+        "event_ids": [
+          "ev_15_mutual_confession"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_15_locker_forty_four",
+        "order": 15,
+        "event_ids": [
+          "ev_16_agreed_terms"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}
