@@ -171,3 +171,16 @@ model filling `conceals` on every intermediate event, which only one of the five
 - **The writer is told who already knows a withheld fact.** On the card itself, so it is never
   evicted with the tail: "Ruth already knows X. The narration must not state it, and Ruth must not
   discover it here."
+
+## Amendment (2026-09-29, later): the secret lint must be satisfiable at publish
+
+[#216](https://github.com/tschomay/axiom-weaver/issues/216). In the #204 re-run, `hidden_fact_never_revealed`
+refused 2 of 5 random arcs at publish: arc repair did not add a revealing event, and segmentation had nowhere to put
+the reveal. An error the pipeline cannot satisfy loses a whole generated story.
+
+- **Segmentation reveals such a fact on the first card of the brief's final phase** (`finalPhaseSceneId`, phases
+  recovered by count as `solutionEventIds` does; the last card when the brief has none) — after trying the card that
+  first pays it off, as before. It is withheld on every card up to there, like any other secret. The arc-level
+  repair target stays: an event that reveals the fact on purpose is still the better story.
+- **Withholding is extended again after `findWithholding`** (`extendWithholding`). A concealment that model pass adds
+  used to stop at its own card — `helen_sabotage_exposed` was hidden at scene 14, not 15, and revealed at 16.
