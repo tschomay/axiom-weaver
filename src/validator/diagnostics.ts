@@ -18,6 +18,11 @@ export const DIAGNOSTIC_CODES = [
   /** The amnesia guard: a change away from a committed value nothing asked for (§2). */
   'unentailed_reversion',
   /**
+   * A free-text column's description reworded by the engine and not committed (#203) — not a
+   * reversion, and nothing for anybody to act on.
+   */
+  'free_text_drift',
+  /**
    * A write to a column that carries no tier — `bag`, an id, a foreign key — or to a column
    * that does not exist on the table. ADR 0001 decision 2: "Bag columns carry no tier and are
    * never engine-writable." Not one of ADR 0005 §5's four named errors; it is the mechanical
@@ -129,6 +134,7 @@ const SEVERITY_BY_CODE: Record<DiagnosticCode, Severity> = {
   exit_state_contradiction: 'error',
   unauthorized_entity_update: 'error',
   unentailed_reversion: 'error',
+  free_text_drift: 'info',
   untiered_column_update: 'error',
   dropped_proposal: 'warn',
   accepted_proposal: 'info',
