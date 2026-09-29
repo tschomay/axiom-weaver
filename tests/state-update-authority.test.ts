@@ -581,3 +581,50 @@ describe('free-text status drift is not a reversion (#203, ADR 0018 amendment)',
     expect(result.diagnostics[0]?.code).toBe('unentailed_reversion');
   });
 });
+
+describe('one-word mood statuses are drift, not reversions (#217)', () => {
+  // Verbatim from the #204 re-run's after-04 run report.
+  const moods: Array<[string, string]> = [
+    ['chilled', 'alerted'],
+    ['exhausted', 'cornered'],
+    ['restless', 'cornered'],
+    ['stern', 'enraged'],
+    ['withdrawn and anxious', 'hopeful'],
+  ];
+
+  for (const [committed, proposed] of moods) {
+    it(`does not fire on "${committed}" → "${proposed}"`, () => {
+      const model = jimsWorld();
+      model.setColumn('char_jim', 'status', committed);
+      const result = validate(scene(), model, [
+        columnUpdate('character', 'char_jim', 'status', proposed),
+      ]);
+      expect(result.diagnostics.map((entry) => entry.code)).toEqual(['free_text_drift']);
+      expect(result.entries).toEqual([]);
+    });
+  }
+
+  it('keeps the guard whenever either side is a physical state', () => {
+    const cases: Array<[string, string]> = [
+      ['dead', 'alive'],
+      ['dead', 'hopeful'],
+      ['imprisoned', 'defiant'],
+      ['chilled', 'dead'],
+      ['Injured', 'furious'],
+    ];
+    for (const [committed, proposed] of cases) {
+      const model = jimsWorld();
+      model.setColumn('char_jim', 'status', committed);
+      const result = validate(scene(), model, [
+        columnUpdate('character', 'char_jim', 'status', proposed),
+      ]);
+      expect(result.diagnostics[0]?.code, `${committed} → ${proposed}`).toBe('unentailed_reversion');
+    }
+  });
+
+  it('asks the arc generator to keep status physical', async () => {
+    const { renderArcPrompt } = await import('@/arc/prompt');
+    const { briefsFor } = await import('@/arc/premises');
+    expect(renderArcPrompt(briefsFor('structured', 6)[0]!)).toContain('never a mood');
+  });
+});

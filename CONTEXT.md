@@ -279,8 +279,9 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   allegiances, feelings) may only be *proposed*. A property's tier is a column attribute.
   A P/E update is accepted only if it satisfies or merely extends the Scene Card's
   `exit_state` — never contradicts it, and never reverts a previously committed value the
-  card gave no grounds to touch (the **amnesia guard**). A multi-word `status` description
-  reworded into another description is **free-text drift**, not a reversion: it is not
+  card gave no grounds to touch (the **amnesia guard**). A `status` that is a description or a
+  one-word mood (anything but a physical state such as alive, injured, imprisoned) changing
+  into another is **free-text drift**, not a reversion: it is not
   committed, and is logged at `info` (ADR 0018 amendment). A volitional proposal is applied
   if compatible with the card's invariants, otherwise dropped; silence is always inaction,
   never invention, so cross-run divergence on a volitional column is accepted variance,
