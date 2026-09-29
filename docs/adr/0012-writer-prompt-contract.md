@@ -247,3 +247,20 @@ This amendment is about making it rarer and never mistaken for a prose-quality d
   concrete list of what a compile-diagnostics surface has to render.
 - `CONTEXT.md`'s Diagnostics section gains a pointer to this ADR's consolidated
   taxonomy rather than restating it.
+
+## Amendment (2026-09-29): continue the tail, hold the tense
+
+[#201](https://github.com/tschomay/axiom-weaver/issues/201), from Story Review Panel batch
+2026-09-29. Two writer-side slips, each seen once or twice per batch, each cheap to name:
+
+- **The verbatim tail is continued, never restated.** Its header now reads "continue from it
+  without a seam; never restate or paraphrase its final sentence". `01`'s scene 3 opened by
+  repeating scene 2's last sentence nearly word for word.
+- **The Voice Card's tense is repeated in the volatile tail**, after the scene tone (a one-line
+  `TENSE:` block). It was stated once, in the stable header, and `05`'s present-tense card got three
+  past-tense scenes out of eighteen.
+- **Two heuristic post-checks, diagnostics only** (`src/writer/prose-checks.ts`): `tail_echo`
+  (the opening sentence reuses ≥ 60% of the tail sentence's content words) and `tense_mismatch`
+  (more than 60% of the narration's finite-verb markers, dialogue excluded, in the other tense,
+  with at least 8 to judge by). Both are `warn`; neither retries. Over the whole batch they fire on
+  exactly the cases the panel found — `01` scene 3, and `05` scenes 1, 10 and 18 — and nowhere else.

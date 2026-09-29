@@ -11,6 +11,7 @@
  * author who is not there.
  */
 
+import { tailEcho, tenseMismatch } from './prose-checks';
 import type { SceneCard, StoryPackage } from '../schema/story-package';
 import type { WorldModel } from '../world-model/world-model';
 import type { DigestHierarchy } from '../digest/hierarchy';
@@ -443,6 +444,21 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
   for (const finding of findings) {
     if (finding.code === 'beat_unsatisfied') continue; // already logged from the self-report
     note(finding.code, finding.detail);
+  }
+
+  const echo = tailEcho(input.previousParagraph, response.prose);
+  if (echo !== null) {
+    note(
+      'tail_echo',
+      `${scene.id} opens by restating the previous scene's last sentence (${Math.round(echo.overlap * 100)}% of its words): "${echo.opening}"`,
+    );
+  }
+  const tense = tenseMismatch(response.prose, input.voiceCard.tense);
+  if (tense !== null) {
+    note(
+      'tense_mismatch',
+      `${scene.id} narrates mostly in the ${tense.found} tense (${tense.profile.past} past / ${tense.profile.present} present markers) against a ${input.voiceCard.tense}-tense Voice Card`,
+    );
   }
 
   const length = lengthVerdict(response.prose, scene.length_budget);

@@ -58,6 +58,13 @@ export const DIAGNOSTIC_CODES = [
    * reader has probably already read it. ADR 0006 §4 documents this as an accepted gap.
    */
   'must_stay_hidden_violation',
+  /**
+   * The scene's first sentence restates the previous scene's last one (#201) — the verbatim tail
+   * was meant to be continued, not repeated. A word-overlap heuristic; never retried.
+   */
+  'tail_echo',
+  /** The narration is mostly in the other tense from the Voice Card's (#201). A heuristic. */
+  'tense_mismatch',
 
   // --- Compiler, call-level (ADR 0012 item 7, ADR 0013 item 5) -------------------------------
 
@@ -132,6 +139,8 @@ const SEVERITY_BY_CODE: Record<DiagnosticCode, Severity> = {
   payoff_not_closed: 'warn',
   reader_must_learn_missed: 'warn',
   must_stay_hidden_violation: 'error',
+  tail_echo: 'warn',
+  tense_mismatch: 'warn',
   // `info`, not `error`: full recovery succeeded and nothing had to be guessed.
   truncated_scene: 'info',
   scene_generation_failed: 'error',
