@@ -98,6 +98,11 @@ export const FabulaEventSchema = z.looseObject({
    * Becomes the scene's `recounts` (ADR 0022's amendment). Best-effort, like `caused_by`.
    */
   recounts: z.array(z.string()).default([]),
+  /**
+   * When this happens in story time, in a reader's words ("day 2, dusk", "the next morning") —
+   * ADR 0019's 2026-09-29 amendment. Generation fills it; extraction may not.
+   */
+  story_time: z.string().optional(),
   pays_off: z.array(FabulaPayoffSchema).default([]),
   state_changes: z.array(StateChangeSchema).default([]),
 });
@@ -137,6 +142,8 @@ export const FabulaArcSchema = z.object({
   hidden_account: z.array(HiddenStepSchema).default([]),
   /** Statements for the arc's fact_refs (ADR 0022 decision 1). */
   facts: z.array(FactSchema).default([]),
+  /** The era and its technology, one line (ADR 0019's 2026-09-29 amendment). '' when unknown. */
+  period: z.string().default(''),
   /** #200: every stake the arc raises, and the event that answers it. */
   stakes: z.array(StakeSchema).default([]),
 });
@@ -178,7 +185,7 @@ export function readFabulaArc(envelope: unknown): FabulaRead {
   const block = record[FABULA_BLOCK] as
     | { events?: unknown; hidden_account?: unknown; facts?: unknown; stakes?: unknown }
     | undefined;
-  const metadata = record['metadata'] as { title?: unknown } | undefined;
+  const metadata = record['metadata'] as { title?: unknown; period?: unknown } | undefined;
   const known = new Set<string>(EVENT_STATE_COLUMNS);
 
   let dropped = 0;
@@ -203,6 +210,7 @@ export function readFabulaArc(envelope: unknown): FabulaRead {
       hidden_account: Array.isArray(block?.hidden_account) ? block.hidden_account : [],
       facts: Array.isArray(block?.facts) ? block.facts : [],
       stakes: Array.isArray(block?.stakes) ? block.stakes : [],
+      period: typeof metadata?.period === 'string' ? metadata.period : '',
     }),
     dropped_state_changes: dropped,
   };

@@ -156,6 +156,9 @@ export function projectFabulaArc(arc: FabulaArc, storyId: string): FabulaProject
       location_id: location,
       characters_present: characters,
       dramatic_function: dramaticFunction,
+      ...(event.story_time === undefined || event.story_time.trim() === ''
+        ? {}
+        : { story_time: event.story_time }),
       entry_state: {},
       exit_state: exitStateFor(event),
       required_beats: event.beats,

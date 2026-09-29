@@ -177,6 +177,9 @@ export function renderArcPrompt(brief: ArcBrief): string {
     '',
     renderPlotShape(brief),
     '',
+    'PERIOD — one line fixing the era and its technology ("1950s Yorkshire; no telephones in homes").',
+    'Nothing in the story may belong to another era.',
+    '',
     'WORLD MODEL SEED — the state of the world at the moment the story opens, and nothing later.',
     `About ${brief.cast.characters} characters, ${brief.cast.locations} locations, ${brief.cast.objects} objects.`,
     'Ids are lower_snake_case with a table prefix: char_…, loc_…, obj_…, rel_…, ck_….',
@@ -194,6 +197,8 @@ export function renderArcPrompt(brief: ArcBrief): string {
     '',
     `EVENTS — exactly ${brief.event_count} of them, sequence 1..${brief.event_count}, CHRONOLOGICAL.`,
     'Each event: what happens, where, who is there, whose experience it follows, what it makes true.',
+    '  - story_time: WHEN it happens, as a reader would say it ("day 1, dusk", "the next morning",',
+    '    "three weeks later"). Keep the calendar consistent: ages, years since, deadlines and seasons.',
     '  - beats: the 1–3 things that must happen in it. Never empty.',
     '  - caused_by: the earlier event ids this one follows FROM. Not merely after — caused by.',
     '    The first event has none; almost every other event has at least one.',
@@ -313,6 +318,11 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
     type: 'object',
     properties: {
       title: { type: 'string' },
+      period: {
+        type: 'string',
+        description:
+          'One line fixing the era and its technology, e.g. "1950s Yorkshire; no telephones in homes, letters and telegrams".',
+      },
       world_model_seed: {
         type: 'object',
         properties: {
@@ -477,6 +487,11 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
               items: factRef,
               description: 'Facts the reader already learned that this event retells. Usually empty.',
             },
+            story_time: {
+              type: 'string',
+              description:
+                'When this happens in story time, as a reader would say it: "day 1, dusk", "the next morning", "three weeks later".',
+            },
             state_changes: {
               type: 'array',
               items: {
@@ -511,6 +526,7 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
             'id',
             'sequence',
             'summary',
+            'story_time',
             'pov',
             'location_id',
             'characters_present',
@@ -527,6 +543,7 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
             'id',
             'sequence',
             'summary',
+            'story_time',
             'pov',
             'location_id',
             'characters_present',
@@ -580,7 +597,7 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
         },
       },
     },
-    required: ['title', 'world_model_seed', 'hidden_account', 'events', 'facts', 'stakes'],
-    propertyOrdering: ['title', 'world_model_seed', 'hidden_account', 'events', 'facts', 'stakes'],
+    required: ['title', 'period', 'world_model_seed', 'hidden_account', 'events', 'facts', 'stakes'],
+    propertyOrdering: ['title', 'period', 'world_model_seed', 'hidden_account', 'events', 'facts', 'stakes'],
   };
 }

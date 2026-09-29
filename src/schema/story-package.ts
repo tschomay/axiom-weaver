@@ -135,6 +135,8 @@ export const SceneCardSchema = z.object({
   force_reintroduce: z.array(z.string()).default([]),
   tone: z.string().optional(),
   length_budget: z.number().int().positive().optional(),
+  /** When the scene happens in story time (ADR 0019's 2026-09-29 amendment). */
+  story_time: z.string().optional(),
   invariants: z.array(z.string()).default([]),
   pays_off: z.array(PayoffSchema).default([]),
   /**

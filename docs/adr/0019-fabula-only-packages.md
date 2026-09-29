@@ -166,3 +166,24 @@ words; one scene of panel batch 2026-09-29 hit `MAX_TOKENS`.
   than pushing it elsewhere. It is a starting value an author edits like any other.
 - **An unbudgeted card (hand-authored) is sized for 800 words**, not 500
   (`UNBUDGETED_SCENE_WORDS`): output-token headroom is free unless used.
+
+## Amendment (2026-09-29, later): story time and period
+
+[#219](https://github.com/tschomay/axiom-weaver/issues/219). In the #204 re-run, 4 of 5 same-premise stories and 3
+of 4 random ones broke their own calendars: a November week that ends on New Year's Eve; a scene that reads as
+continuous with the morning but is the evening lockout; a flood ten years ago, then "three summers", then "twenty
+years"; a mobile phone among gaslamps. Nothing in a Fabula event, a Scene Card or the writer's prompt said *when*
+anything happened, or in what era.
+
+1. **A Fabula event gains optional `story_time`** — when it happens in story time, in words a reader would use and
+   relative where natural ("day 2, dusk", "the next morning", "eleven years after the flood"). Generation asks for it
+   on every event; extraction may leave it empty, like `pov` (decision 4's field split).
+2. **A Scene Card gains optional `story_time`**, carried by segmentation from its events: the first event's, or
+   "`first` → `last`" when the scene spans two different times. It is Syuzhet data like `order` — authored, never
+   written by the engine — and optional, so every existing package parses unchanged.
+3. **A package gains optional `metadata.period`** — one line fixing the era and its technology ("1950s Yorkshire; no
+   telephones in homes, letters and telegrams"). Generation asks for it; `draftPackage` puts it in the metadata the
+   header already renders. The metadata block is a loose object, so this needs no schema version bump.
+4. **The writer is told.** The header renders `PERIOD: … — nothing in the prose may belong to another era`; each card
+   renders `WHEN: …`; and the verbatim-tail header names the previous scene's time, so a jump between them has to be
+   marked on the page.
