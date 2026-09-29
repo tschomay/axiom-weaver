@@ -1,0 +1,66 @@
+{
+  "title": "Toll",
+  "plot_shape_preset": "reckoning",
+  "premise": {
+    "logline": "A woman whose farm was flooded to build a reservoir takes a job on the dam, to learn how it could be made to fail.",
+    "modules": {
+      "theme": "whether revenge on a thing can ever reach the people behind it",
+      "setting_time": "twenty years after the valley was flooded",
+      "setting_place": "a hydroelectric dam above a drowned village",
+      "protagonist": "a maintenance engineer who grew up in the drowned valley",
+      "protagonist_want": "to make the reservoir give back what it took",
+      "antagonism": "the dam’s manager, who signed the flooding order young",
+      "complication": "the town below the dam now depends on it",
+      "ending_shape": "the vow is kept to the letter and broken in spirit"
+    }
+  },
+  "event_count_requested": 12,
+  "arc_events": 12,
+  "scenes": 9,
+  "words": 5742,
+  "run_id": "review-toll-20260929172646-7dd502f6",
+  "models": {
+    "arc": "gemini-3.7-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash"
+    ],
+    "other_calls": [
+      {
+        "scene": "scene_04_the_bargain",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_08_the_shelf_drained",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      }
+    ]
+  },
+  "truncated_scenes": [],
+  "tail_eviction_scenes": 0,
+  "cost_usd": 0.2181,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_02_the_hiring",
+      "code": "beat_unsatisfied",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "scene_02_the_hiring came in at 428 words against a 550-word budget (78%) — well under budget usually means a beat got cut"
+    }
+  ]
+}
