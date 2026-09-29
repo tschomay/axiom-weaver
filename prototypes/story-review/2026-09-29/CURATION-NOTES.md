@@ -94,3 +94,11 @@
   intermediate event).
 - 6/18 scenes over tail budget (char knowledge, met: slice, glossed terms).
 - All stories: length_budget null on every card.
+
+## Story 05 Understudy — repeated reveal traced to cards
+- hester_sabotaged_maren_cue in reader_must_learn on BOTH scene_06 and scene_08; scene_09 pays off
+  kemper_discovered_tampered_ledger; scene_12 recounts + pays_off it again. Fabula itself has 3 events that disclose the
+  same fact (Kemper, Maren, Hester's confession). → Prose presents it as news 4x (payoff reviewer).
+- No lint for "fact in reader_must_learn on two cards". 04 has the same shape (prank origin revealed S5, re-revealed S13).
+- Panel so far: engage 3, payoff 3, char 3, prose 2. Prose: light-on-water simile in all 18 scenes; tense flips 4x;
+  re-introductions (Toby etc.) — 6/18 scenes over tail budget dropped met: slice.
