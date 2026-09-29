@@ -178,7 +178,7 @@ describe('rendering to the writer (ADR 0022 decisions 2–3)', () => {
 
     expect(block).toContain('[resolve here] stop_blocks_removed');
     expect(block).toContain('[not yet told — do not state it] jesse_reversed');
-    expect(block).toContain('[reader already knows] rudder_jammed');
+    expect(block).toContain('[reader already knows — do not re-explain] rudder_jammed');
     expect(block).toContain('[reveal here] teague_admits');
     expect(block).toContain('(because of: stop_blocks_removed, jesse_reversed)');
     // Unlinked, so it lives only in its own card line.
@@ -340,9 +340,9 @@ describe('recounts (ADR 0022 amendment)', () => {
       ledger.touch(ref, 0);
     }
     const prompt = assemble(pkg, ledger);
-    expect(prompt).toContain('This scene retells');
+    expect(prompt).toContain('The reader already knows these — refer to them in a clause');
     const block = prompt.slice(prompt.indexOf('ESTABLISHED ACCOUNT'));
-    expect(block).toContain('[retold here — the reader already knows it] gland_torn');
+    expect(block).toContain('[the reader already knows it — a clause, never a re-narration] gland_torn');
     expect(block.indexOf('jesse_reversed:')).toBeLessThan(block.indexOf('rudder_jammed:'));
   });
 

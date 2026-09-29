@@ -100,6 +100,7 @@ export async function compileSceneIntoDraft(input: {
     imageryHistory: state.imageryHistory,
     previousParagraph: state.previousParagraph,
     details: state.details,
+    phraseHistory: state.phraseHistory,
     occasion: 'author_time',
   });
 

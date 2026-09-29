@@ -113,6 +113,11 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   it can't tell "don't repeat this phrasing" from "don't touch this domain," so it
   suppresses imagery the Voice Card wants kept. See
   [ADR 0010](docs/adr/0010-repetition-and-voice-drift-control.md).
+- **Phrase ledger** — the run's record of each scene's opening sentence and its narration
+  trigrams, built from the scene's own prose as the run advances. The writer is shown the last
+  three openings and the **worn phrases** (trigrams in three or more scenes, names and numbers
+  excluded) to vary — the repetition below the imagery ledger's domains: a character tag, a
+  recycled gesture, the same opening move. See ADR 0010's second 2026-09-29 amendment.
 - **Told-ledger** — a single table of `{fact_ref, first_learned_scene, last_touched_scene,
   centrality}`, driving introduce / assume / re-anchor decisions. A **fact** is an
   author-declared or auto-generated slug — not required to correspond to a World Model

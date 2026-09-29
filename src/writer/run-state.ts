@@ -30,6 +30,7 @@ import { DigestHierarchy, type Summarizer } from '../digest/hierarchy';
 import { joinSceneRows, presentEntityIds } from '../assembler/join';
 import { ToldLedger, metFact } from '../digest/told-ledger';
 import { DetailsLedger } from '../digest/details-ledger';
+import { recordPhrases, type RecordedPhrases } from '../voice/phrase-ledger';
 import type { SceneDigest } from '../digest/scene-digest';
 import type { RecordedImagery } from '../voice/imagery-ledger';
 import type { WriterStateUpdates } from './response-schema';
@@ -44,6 +45,8 @@ export class RunState {
   readonly imageryHistory: RecordedImagery[] = [];
   /** Concrete specifics the prose has committed to (#198, ADR 0003's 2026-09-29 amendment). */
   readonly details = new DetailsLedger();
+  /** Openings and trigrams of the scenes written so far (#220). */
+  readonly phraseHistory: RecordedPhrases[] = [];
   previousParagraph: string | null = null;
 
   constructor(
@@ -85,7 +88,10 @@ export class RunState {
       signature: digest.imagery_signature,
     });
     await this.hierarchy.push(digest, scene.id, scene.order);
-    if (prose !== null) this.previousParagraph = finalParagraph(prose);
+    if (prose !== null) {
+      this.previousParagraph = finalParagraph(prose);
+      this.phraseHistory.push(recordPhrases(prose, scene.order));
+    }
   }
 
   /**

@@ -13,6 +13,7 @@
  * The hierarchy and both tails ride the implicit per-request prefix cache instead.
  */
 
+import { renderPhraseLedger, type PhraseLedger } from '../voice/phrase-ledger';
 import { isDecisionText } from '../arc/decision-text';
 import { CANONICAL_DETAIL_ATTRIBUTES, type LedgerDetail } from '../digest/details-ledger';
 import type { SceneCard, StoryPackage } from '../schema/story-package';
@@ -97,6 +98,8 @@ export interface AssembleInput {
   readonly writerContract: string;
   /** ADR 0008 §6's fixed budget for the volatile tail. */
   readonly volatileTailBudget?: number;
+  /** Openings and worn phrases of earlier scenes (#220). */
+  readonly phraseLedger?: PhraseLedger;
   /** Details earlier scenes established that bear on this one (#198), from `DetailsLedger`. */
   readonly establishedDetails?: readonly LedgerDetail[];
 }
@@ -208,13 +211,16 @@ function buildVolatileTail(
   // ledger, tone, then the filtered rows the scene cannot be staged without. The established
   // account sits right after the card: a recap without it is how cause and effect get swapped.
   const coreBlocks = [
-    renderSceneCard(input.scene, facts, hiddenFactKnowers(input, rows)),
+    renderSceneCard(input.scene, facts, hiddenFactKnowers(input, rows), (ref) =>
+      input.ledger.row(ref)?.first_learned_scene ?? null,
+    ),
     renderEstablishedAccount(input, facts),
     renderEstablishedDetails(input.establishedDetails ?? [], input.model, presentEntityIds(rows)),
     renderPlantObligations(input.plantObligations, facts),
     renderPayoffInstructions(input.payoffInstructions, facts),
     renderReanchoring(input.reanchoring),
     renderImageryLedger(input.imageryLedger),
+    input.phraseLedger === undefined ? '' : renderPhraseLedger(input.phraseLedger),
     renderSceneTone(input.scene.tone),
     renderTenseReminder(input.voiceCard),
     renderCoreRows(rows),
@@ -508,6 +514,7 @@ function renderSceneCard(
   scene: SceneCard,
   facts: FactIndex,
   hiddenKnowers: ReadonlyArray<[string, string]> = [],
+  toldIn: (factRef: string) => number | null = () => null,
 ): string {
   const lines = [
     `SCENE CARD — ${scene.id} (order ${scene.order})`,
@@ -541,10 +548,14 @@ function renderSceneCard(
     }
   }
   if ((scene.recounts ?? []).length > 0) {
+    // #220: a retelling was re-narrated in full scene after scene. The reader has it; a clause does.
     pushFactList(
       lines,
-      'This scene retells (the reader already knows these — keep the established account\'s order)',
-      scene.recounts ?? [],
+      'The reader already knows these — refer to them in a clause, keep the established account\'s order, and never re-narrate them',
+      (scene.recounts ?? []).map((ref) => {
+        const scene = toldIn(ref);
+        return scene === null ? ref : `${ref} (told in scene ${scene})`;
+      }),
       facts,
     );
   }
@@ -601,8 +612,8 @@ function renderEstablishedAccount(input: AssembleInput, facts: FactIndex): strin
     if (hidden.has(ref)) return 'MUST STAY HIDDEN';
     if (learn.has(ref)) return 'reveal here';
     if (resolve.has(ref)) return 'resolve here';
-    if (recounts.has(ref)) return 'retold here — the reader already knows it';
-    if (input.ledger.row(ref) !== null) return 'reader already knows';
+    if (recounts.has(ref)) return 'the reader already knows it — a clause, never a re-narration';
+    if (input.ledger.row(ref) !== null) return 'reader already knows — do not re-explain';
     return 'not yet told — do not state it';
   };
 

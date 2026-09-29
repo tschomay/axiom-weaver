@@ -21,6 +21,7 @@ import type { SceneCard, StoryPackage } from '../schema/story-package';
 import { scenesInOrder } from '../schema/story-package';
 import { parseVoiceCard } from '../voice/voice-card';
 import { buildImageryLedger } from '../voice/imagery-ledger';
+import { buildPhraseLedger, nameWords, seedNames } from '../voice/phrase-ledger';
 import { obligationsFor, payoffInstructionsFor, walkPlantObligations } from '../plants/obligation-walk';
 import { writerContract } from '../writer/contract';
 import { RunState } from '../writer/run-state';
@@ -119,6 +120,7 @@ export async function promptWalk(
       payoffInstructions: payoffInstructionsFor(scene),
       previousParagraph: state.previousParagraph,
       writerContract: writerContract(),
+      phraseLedger: buildPhraseLedger(state.phraseHistory, { namedWords: nameWords(seedNames(pkg)) }),
       establishedDetails: state.details.forScene(new Set(presentEntityIds(rows)), (id) =>
         state.model.has(id),
       ),
