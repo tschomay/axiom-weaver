@@ -199,7 +199,7 @@ export function provisionalPackage(arc: FabulaArc, storyId: string): StoryPackag
 export function lintFabulaArc(arc: FabulaArc, storyId: string): FabulaProjectionLintResult {
   const projection = projectFabulaArc(arc, storyId);
   const lint = lintPackage(projection.package);
-  const hidden = hiddenAccountProblems(arc);
+  const hidden = [...hiddenAccountProblems(arc), ...stakeProblems(arc)];
   return {
     note: FABULA_PROJECTION_NOTE,
     problems: [...lint.problems, ...hidden],
@@ -253,6 +253,43 @@ export function hiddenAccountProblems(arc: FabulaArc): PackageProblem[] {
         code: 'hidden_step_establishes_nothing',
         path,
         message: 'establishes no fact_ref, so nothing it says can reach the writer',
+      });
+    }
+  });
+  return problems;
+}
+
+/**
+ * #200: every stake the arc raises is answered by a later event. Panel batch 2026-09-29 found a
+ * dropped stake in all five stories — the critic who never tastes the dish, the five thousand
+ * people downstream — and where the arc left the gap the writer filled it with an offstage
+ * invention. A stake with no answering event is an error, so it is a repair target.
+ */
+export function stakeProblems(arc: FabulaArc): PackageProblem[] {
+  const sequenceOf = new Map(arc.events.map((event) => [event.id, event.sequence]));
+  const problems: PackageProblem[] = [];
+  arc.stakes.forEach((stake, index) => {
+    const path = `_fabula.stakes[${index}]`;
+    const introduced = sequenceOf.get(stake.introduced_by);
+    const resolved = sequenceOf.get(stake.resolved_by);
+    if (resolved === undefined) {
+      problems.push({
+        severity: 'error',
+        code: 'stake_unresolved',
+        path,
+        message:
+          stake.resolved_by === ''
+            ? `"${stake.stake}" is raised${stake.introduced_by === '' ? '' : ` by ${stake.introduced_by}`} and no event resolves or abandons it`
+            : `"${stake.stake}" names resolved_by "${stake.resolved_by}", which is not an event`,
+      });
+      return;
+    }
+    if (introduced !== undefined && resolved <= introduced) {
+      problems.push({
+        severity: 'error',
+        code: 'stake_unresolved',
+        path,
+        message: `"${stake.stake}" is resolved by ${stake.resolved_by}, which does not come after ${stake.introduced_by}`,
       });
     }
   });

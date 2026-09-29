@@ -585,6 +585,7 @@ describe('the response schema', () => {
       'hidden_account',
       'events',
       'facts',
+      'stakes',
     ]);
   });
 });

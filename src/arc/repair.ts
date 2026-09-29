@@ -31,7 +31,7 @@
 import { z } from 'zod';
 
 import { lintPackage } from '../authoring/lint';
-import { hiddenAccountProblems, provisionalPackage } from '../authoring/lint-fabula';
+import { hiddenAccountProblems, provisionalPackage, stakeProblems } from '../authoring/lint-fabula';
 import { eventsInOrder, hiddenAccountFacts, type FabulaArc, type FabulaEvent } from '../schema/fabula';
 import { mergeHiddenAccount, reachesThroughCauses } from '../schema/facts';
 import type { Fact } from '../schema/story-package';
@@ -70,6 +70,7 @@ export function repairTargets(
   return [
     ...lint.errors,
     ...hiddenAccountProblems(arc).filter((problem) => problem.severity === 'error'),
+    ...stakeProblems(arc),
     ...lint.warnings.filter((warning) => promoted(warning.code)),
   ].map(({ code, path, message }) => ({ code, path, message }));
 }
@@ -250,6 +251,7 @@ export const ARC_EDIT_KINDS = [
   'add_beat',
   'seed_fact',
   'add_hidden_cause',
+  'resolve_stake',
 ] as const;
 
 export const ArcEditSchema = z.object({
@@ -262,7 +264,11 @@ export const ArcEditSchema = z.object({
    * For `add_hidden_cause`: the earlier hidden step the step follows from.
    */
   plant_event_id: z.string().default(''),
-  /** For `add_beat`; for `add_hidden_cause`, an optional rewritten summary that says why. */
+  /**
+   * For `add_beat`; for `add_hidden_cause`, an optional rewritten summary that says why; for
+   * `resolve_stake`, the beat that resolves or explicitly abandons the stake on the page.
+   * `resolve_stake` names the answering event in `event_id` and the stake's index in `fact_ref`.
+   */
   text: z.string().default(''),
   /** For `seed_fact`. */
   character_id: z.string().default(''),
@@ -346,6 +352,16 @@ export function repairPrompt(arc: FabulaArc, targets: readonly RepairTarget[]): 
     ...events,
     '',
     ...(hidden.length === 0 ? [] : ['THE HIDDEN ACCOUNT (what actually happened)', ...hidden, '']),
+    ...(arc.stakes.length === 0
+      ? []
+      : [
+          'STAKES (index. stake — raised by → answered by)',
+          ...arc.stakes.map(
+            (stake, index) =>
+              `${index}. ${stake.stake} — ${stake.introduced_by || '?'} → ${stake.resolved_by || 'NOTHING'}`,
+          ),
+          '',
+        ]),
     `Facts known from the seed (the only ones a plant_event_id of "" may rest on): ${
       seeded.length === 0 ? 'none' : seeded.join(', ')
     }`,
@@ -363,6 +379,9 @@ export function repairPrompt(arc: FabulaArc, targets: readonly RepairTarget[]): 
     'truth comes out.',
     'A hidden-account fact no event reveals (hidden_fact_never_revealed): declare_fact_at_event on',
     'the event whose summary discloses it to the reader — never on an event where it stays secret.',
+    'A stake nothing answers (stake_unresolved): resolve_stake — event_id is a LATER event, usually',
+    'in the final phase, fact_ref is the stake\'s index, and text is a beat that resolves it or has a',
+    'character explicitly let it go, on the page.',
     'A hidden step with no cause: add_hidden_cause — event_id is the step, plant_event_id the earlier',
     'step it follows from, and text a rewritten summary that says WHY, when a person acts.',
   ].join('\n');
@@ -379,6 +398,7 @@ export function applyEdits(arc: FabulaArc, edits: readonly ArcEdit[]): Mechanica
   }));
   let seed = arc.world_model_seed;
   const hiddenAccount = arc.hidden_account.map((step) => ({ ...step, caused_by: [...step.caused_by] }));
+  const stakes = arc.stakes.map((stake) => ({ ...stake }));
 
   const find = (id: string): FabulaEvent | undefined => events.find((event) => event.id === id);
 
@@ -445,6 +465,16 @@ export function applyEdits(arc: FabulaArc, edits: readonly ArcEdit[]): Mechanica
         note(`${step.id} now caused_by ${cause.id}`);
         break;
       }
+      case 'resolve_stake': {
+        const stake = stakes[Number.parseInt(edit.fact_ref, 10)];
+        if (target === undefined || stake === undefined || edit.text === '') break;
+        const introduced = events.find((event) => event.id === stake.introduced_by);
+        if (introduced !== undefined && introduced.sequence >= target.sequence) break;
+        stake.resolved_by = target.id;
+        target.beats.push(edit.text);
+        note(`${target.id} now answers "${stake.stake}"`);
+        break;
+      }
       case 'seed_fact': {
         if (edit.fact_ref === '' || edit.character_id === '') break;
         if (seed.character_knowledge.some((row) => row.fact_ref === edit.fact_ref)) break;
@@ -468,5 +498,8 @@ export function applyEdits(arc: FabulaArc, edits: readonly ArcEdit[]): Mechanica
   }
 
   events = events.map((event) => ({ ...event }));
-  return { arc: { ...arc, world_model_seed: seed, events, hidden_account: hiddenAccount }, applied };
+  return {
+    arc: { ...arc, world_model_seed: seed, events, hidden_account: hiddenAccount, stakes },
+    applied,
+  };
 }

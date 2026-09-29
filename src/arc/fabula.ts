@@ -28,6 +28,8 @@ import {
   type FabulaArc,
   type FabulaEvent,
   type HiddenStep,
+  StakeSchema,
+  type Stake,
 } from '../schema/fabula';
 import type { Fact } from '../schema/story-package';
 import { FactSchema, WorldModelSeedSchema } from '../schema/story-package';
@@ -47,6 +49,7 @@ export const GeneratedFabulaArcSchema = z.object({
   hidden_account: z.array(HiddenStepSchema).default([]),
   events: z.array(GeneratedFabulaEventSchema).min(1),
   facts: z.array(FactSchema).default([]),
+  stakes: z.array(StakeSchema).default([]),
 });
 
 export interface FabulaBlock {
@@ -58,6 +61,8 @@ export interface FabulaBlock {
   readonly events: FabulaEvent[];
   readonly hidden_account?: HiddenStep[];
   readonly facts?: Fact[];
+  /** #200: the stakes the arc raises and the events that answer them. */
+  readonly stakes?: Stake[];
   /** Atomic repairs applied after the first pass, in order. Empty when the arc linted clean. */
   readonly repairs: string[];
 }
@@ -74,7 +79,7 @@ export interface FabulaBlock {
 export function draftPackage(
   arc: FabulaArc,
   storyId: string,
-  block: Omit<FabulaBlock, 'events' | 'hidden_account' | 'facts'>,
+  block: Omit<FabulaBlock, 'events' | 'hidden_account' | 'facts' | 'stakes'>,
 ): Record<string, unknown> {
   return {
     schema_version: '1.0',
@@ -95,6 +100,7 @@ export function draftPackage(
       events: eventsInOrder(arc),
       hidden_account: arc.hidden_account,
       facts: arc.facts,
+      stakes: arc.stakes,
     },
   };
 }

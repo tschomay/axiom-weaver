@@ -166,3 +166,24 @@ that bear on it argue against it; the causal link was declared and the motive wa
   beat is a decision, the most recent cause its events name is staged before it. The scene-card
   pass is asked for the same ordering. With no stated cause nothing is invented.
 - **The writer is told to dramatise a decision on the page** whenever a card's beat is one.
+
+## Amendment (2026-09-29): every stake is answered
+
+[#200](https://github.com/tschomay/axiom-weaver/issues/200). All five stories of panel batch
+2026-09-29 raised a stake with weight and dropped it — the critic who never tastes the dish, the
+five thousand people downstream, the deed box — and where the arc left a gap the writer filled it
+with an offstage invention (`04`'s envelope swap, in no event and on no card).
+
+- **The generated arc gains `stakes: {stake, introduced_by, resolved_by}[]`** (the Fabula block,
+  `StakeSchema`, read back by `readFabulaArc`). The prompt asks for every deadline, threat, debt or
+  cost the story raises and the later event that resolves it or has a character explicitly let it
+  go. This makes the check mechanical rather than a judge call.
+- **`stake_unresolved`** (a Fabula-layer error, `stakeProblems`): a stake with no answering event,
+  an unknown one, or one that does not come after the stake. An error, so it is a repair target in
+  every plot shape; the repair vocabulary gains `resolve_stake`, which points the stake at a later
+  event and stages the answer there as a beat.
+- **The writer contract** says: if the card does not provide the mechanism for an outcome,
+  dramatise it in the scene; never report an offstage swap, visit, discovery or conversation.
+- Not done here: #200's third item, a continuity-pass check for a digest that introduces an event
+  or object no card has. Detecting it from digests needs a comparison this change has no
+  evidence for yet; it is tracked as a follow-up.
