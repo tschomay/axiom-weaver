@@ -187,3 +187,29 @@ with an offstage invention (`04`'s envelope swap, in no event and on no card).
 - Not done here: #200's third item, a continuity-pass check for a digest that introduces an event
   or object no card has. Detecting it from digests needs a comparison this change has no
   evidence for yet; it is tracked as a follow-up.
+
+## Amendment (2026-09-29, later): a sharper motivation gate, contradicted reveals, derived stakes
+
+[#218](https://github.com/tschomay/axiom-weaver/issues/218). In the #204 re-run the gate installed one motive beat per
+batch while character stayed at 3.0 and 2.75: arcs *state* a reason ("undone", "broken"), and the judge accepted a
+stated reason. Three random stories' climaxes contradicted a fact the story had just revealed (Toll drains a lake it
+has just established holds up a cavern; Terms of Sale clears a heroine the reader watched lie). And every declared
+stake had a `resolved_by`, while the stakes the stories actually dropped were ones the arc never declared, or were
+"resolved" by an event that only asserts the outcome.
+
+The gate stays one call, asking about the same events, and now asks three things instead of one:
+
+1. **Staged, not stated.** For each decisive act: which *earlier event* changes this character's mind, and is it on
+   the page? A reason that is only a summary word, or an antagonist's confession or collapse in the final phase with
+   no preceding pressure event, is flagged (`kind`: `stated_not_staged`, `no_reason`, `sudden_collapse`).
+2. **Contradicted reveals.** Does the act contradict or ignore a fact revealed earlier — a danger established, a lie
+   the reader saw? Flagged as `contradicts_reveal`; its `motive_beat` must confront the revealed fact on the page.
+3. **Derived stakes.** Candidate stakes are derived mechanically (`deriveCandidateStakes`) — every revealed fact
+   whose statement names a number, a deadline, a debt or a threat, and every seed object two or more event summaries
+   name — and listed for the judge beside the declared ones. For each that no later event resolves *on the page*, the
+   answer names the event that should, with a beat; the beat is added there and the stake joins `stakes` with that
+   `resolved_by`, so `stake_unresolved` holds it from then on.
+
+A card-level warning joins them: **`decision_party_absent`** — a beat that reconciles, forgives, confesses to or
+gives up for a named character who is not in `characters_present`. The sisters' reconciliation in the after batch's
+Borrowed Boat happened with Ruth off the card.
