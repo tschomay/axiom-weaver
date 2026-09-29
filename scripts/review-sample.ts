@@ -213,8 +213,22 @@ async function main(): Promise<void> {
             models: {
               arc: generated.model,
               segmentation: extraction.modelsUsed,
-              writer: [...new Set(report.scenes.flatMap((s) => s.calls.map((c) => c.model)))],
+              writer: [
+                ...new Set(
+                  report.scenes.flatMap((s) =>
+                    s.calls.filter((c) => c.purpose === 'writer').map((c) => c.model),
+                  ),
+                ),
+              ],
+              other_calls: report.scenes.flatMap((s) =>
+                s.calls
+                  .filter((c) => c.purpose !== 'writer')
+                  .map((c) => ({ scene: s.scene_id, purpose: c.purpose, model: c.model })),
+              ),
             },
+            truncated_scenes: report.scenes
+              .filter((s) => s.calls.some((c) => c.purpose === 'writer' && c.finish_reason === 'MAX_TOKENS'))
+              .map((s) => s.scene_id),
             cost_usd: Number(cost.toFixed(4)),
             lint_warnings: lint.warnings.map((w) => w.code),
             degraded_scenes: report.scenes.filter((s) => s.degraded).map((s) => s.scene_id),
@@ -229,7 +243,10 @@ async function main(): Promise<void> {
       const used = [
         generated.model,
         ...extraction.modelsUsed,
-        ...report.scenes.flatMap((s) => s.calls.map((c) => c.model)),
+        // Only calls that write story content. Digest rollups, digest fallbacks and continuity
+        // repairs run on the lite model by design (`src/digest/`, `compile-scene.ts`); they
+        // are bookkeeping, not prose, and are recorded in run.json rather than flagged.
+        ...report.scenes.flatMap((s) => s.calls.filter((c) => c.purpose === 'writer').map((c) => c.model)),
       ];
       const offModel = [...new Set(used.filter((m) => !ACCEPTED_MODELS.has(m)))];
       console.log(`  → ${dir}/story.md (${scenes.length} scenes, ${words} words, $${cost.toFixed(3)})`);
