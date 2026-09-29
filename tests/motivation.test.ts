@@ -7,7 +7,14 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { isDecisionText } from '@/arc/decision-text';
-import { motivationCandidates, motivationGate, motivationPrompt } from '@/arc/motivation';
+import {
+  MotivationResponseSchema,
+  deriveCandidateStakes,
+  motivationCandidates,
+  motivationGate,
+  motivationPrompt,
+} from '@/arc/motivation';
+import { lintPackage } from '@/authoring/lint';
 import { assemblePrompt, promptText } from '@/assembler/context-assembler';
 import { DigestHierarchy } from '@/digest/hierarchy';
 import { ToldLedger } from '@/digest/told-ledger';
@@ -215,5 +222,119 @@ describe('writer contract: dramatise the decision (#199)', () => {
       'dramatise the moment of decision on the page',
     );
     expect(text(['The tide comes in'])).not.toContain('dramatise the moment of decision');
+  });
+});
+
+describe('the sharper gate (#218)', () => {
+  const tollRandom = () => {
+    const dir = readdirSync(join(__dirname, '..', 'prototypes', 'story-review', '2026-09-29-random')).find((name) =>
+      name.startsWith('04-'),
+    )!;
+    return readFabulaArc(
+      JSON.parse(
+        readFileSync(join(__dirname, '..', 'prototypes', 'story-review', '2026-09-29-random', dir, 'package.json'), 'utf8'),
+      ) as Record<string, unknown>,
+    ).arc;
+  };
+
+  it('derives the stakes the stories dropped: random Toll\'s cavern collapse', () => {
+    const stakes = deriveCandidateStakes(tollRandom()).map((stake) => stake.stake);
+    expect(stakes.some((stake) => /cavern/.test(stake) && /collapse/.test(stake))).toBe(true);
+  });
+
+  it('asks staged-not-stated, contradicted reveals, and lists declared and derived stakes', () => {
+    const { arc, shares } = toll();
+    const prompt = motivationPrompt(arc, 'toll', motivationCandidates(arc, shares));
+    expect(prompt).toContain('WHICH EARLIER EVENT changes this character\'s mind');
+    expect(prompt).toContain('stated, not staged');
+    expect(prompt).toContain('sudden_collapse');
+    expect(prompt).toContain('CONTRADICTED REVEALS');
+    expect(prompt).toContain('STAKES.');
+    for (const stake of arc.stakes) expect(prompt).toContain(stake.stake);
+  });
+
+  it('accepts a kind, and falls back when the model invents one', () => {
+    const parsed = MotivationResponseSchema.parse({
+      unmotivated: [
+        { event: 'E01', kind: 'contradicts_reveal', action: 'a' },
+        { event: 'E02', kind: 'made_up', action: 'b' },
+      ],
+    });
+    expect(parsed.unmotivated.map((entry) => entry.kind)).toEqual(['contradicts_reveal', 'no_reason']);
+    expect(parsed.unresolved_stakes).toEqual([]);
+  });
+
+  it('stages an unresolved stake in its event and declares it, so stake_unresolved holds it', async () => {
+    const arc = tollRandom();
+    const cavern = deriveCandidateStakes(arc).find((stake) => /cavern/.test(stake.stake))!;
+    const last = eventsInOrder(arc)[eventsInOrder(arc).length - 1]!;
+    const label = `E${String(eventsInOrder(arc).length).padStart(2, '0')}`;
+    const gate = await motivationGate(arc, {
+      storyId: 'toll',
+      phaseShares: [0.5, 0.5],
+      model: 'm',
+      client: new ScriptedClient({
+        unmotivated: [],
+        unresolved_stakes: [
+          { stake: cavern.stake, event: label, resolution_beat: 'The ridge settles; the cavern holds on the silt that Teresa counted on' },
+        ],
+      }),
+    });
+    const resolved = gate.arc.stakes.find((stake) => stake.stake === cavern.stake);
+    expect(resolved).toEqual({ stake: cavern.stake, introduced_by: cavern.introduced_by, resolved_by: last.id });
+    const event = gate.arc.events.find((candidate) => candidate.id === last.id)!;
+    expect(event.beats[event.beats.length - 1]).toMatch(/cavern holds/);
+    expect(gate.applied.some((line) => line.startsWith('stakes:'))).toBe(true);
+  });
+
+  it('refuses a resolution placed before the stake is raised', async () => {
+    const arc = tollRandom();
+    const cavern = deriveCandidateStakes(arc).find((stake) => /cavern/.test(stake.stake))!;
+    const gate = await motivationGate(arc, {
+      storyId: 'toll',
+      phaseShares: [0.5, 0.5],
+      model: 'm',
+      client: new ScriptedClient({
+        unmotivated: [],
+        unresolved_stakes: [{ stake: cavern.stake, event: 'E01', resolution_beat: 'too early' }],
+      }),
+    });
+    expect(gate.arc.stakes.some((stake) => stake.stake === cavern.stake)).toBe(false);
+  });
+});
+
+describe('decision_party_absent (#218)', () => {
+  const base = {
+    schema_version: '1.0',
+    package_version: 1,
+    story_id: 'boat',
+    world_model_seed: {
+      characters: [
+        { id: 'char_ruth', name: 'Ruth Miller', location_id: 'loc_boat', status: 'alive' },
+        { id: 'char_cleo', name: 'Cleo Miller', location_id: 'loc_boat', status: 'alive' },
+        { id: 'char_gent', name: 'the portly gentleman', location_id: 'loc_boat', status: 'alive' },
+      ],
+      locations: [{ id: 'loc_boat', name: 'the boat' }],
+      objects: [],
+      relationships: [],
+      character_knowledge: [],
+    },
+    voice_card: {},
+    metadata: { title: 't' },
+  };
+  const scene = (present: string[], beat: string) => ({
+    ...base,
+    scene_cards: [
+      { id: 's6', order: 1, pov: 'char_cleo', location_id: 'loc_boat', characters_present: present, dramatic_function: 'f', entry_state: {}, exit_state: {}, required_beats: [beat] },
+    ],
+  });
+  const codes = (pkg: unknown) => lintPackage(pkg).warnings.map((warning) => warning.code);
+
+  it('warns when a reconciliation turns on someone not in the scene', () => {
+    expect(codes(scene(['char_cleo'], 'Cleo and Ruth reconcile over the urn'))).toContain('decision_party_absent');
+    expect(codes(scene(['char_cleo', 'char_ruth'], 'Cleo and Ruth reconcile over the urn'))).not.toContain('decision_party_absent');
+    expect(codes(scene(['char_cleo'], 'Cleo walks Ruth to the harbour'))).not.toContain('decision_party_absent');
+    // A name with no capitalised word is never matched ("the portly gentleman" → "the").
+    expect(codes(scene(['char_cleo'], 'Cleo apologizes to the gentleman'))).not.toContain('decision_party_absent');
   });
 });

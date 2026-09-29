@@ -49,6 +49,10 @@ import { WorldModel } from '../world-model/world-model';
 
 export type ProblemSeverity = 'error' | 'warn';
 
+/** A beat that settles something between two people (#218). */
+const RECONCILIATION_PATTERN =
+  /\b(reconcil\w*|forgiv\w*|forgave|confess\w*|apologi[sz]\w*|makes? (?:up|peace)|made (?:up|peace)|gives? up|gave up|embrac\w*)\b/i;
+
 export interface PackageProblem {
   readonly severity: ProblemSeverity;
   /** A stable machine name for the check that fired. */
@@ -398,6 +402,28 @@ function warnings(pkg: StoryPackage, model: WorldModel): PackageProblem[] {
           code: 'short_range_payoff',
           path: `scene_cards.${scene.id}.pays_off`,
           message: `pays off "${payoff.fact_ref}" from "${payoff.plant}", ${span} scene${span === 1 ? '' : 's'} away — rarely reads as earned rather than merely linked (ADR 0020)`,
+        });
+      }
+    }
+  }
+
+  // #218: a reconciliation, forgiveness, confession or sacrifice toward someone who is not in the
+  // scene happens off the page — the after batch's sisters made up with one of them off the card.
+  const firstNames = pkg.world_model_seed.characters
+    // The first capitalised word of the name: "Ruth Miller" → Ruth; "the portly gentleman" → none.
+    .map((row) => ({ id: row.id, name: /\b[A-Z][a-z'-]{2,}\b/.exec(row.name)?.[0] ?? '' }))
+    .filter((row) => row.name !== '');
+  for (const scene of scenes) {
+    const present = new Set([scene.pov, ...scene.characters_present]);
+    for (const beat of scene.required_beats) {
+      if (!RECONCILIATION_PATTERN.test(beat)) continue;
+      for (const row of firstNames) {
+        if (present.has(row.id) || !new RegExp(`\\b${row.name}\\b`).test(beat)) continue;
+        problems.push({
+          severity: 'warn',
+          code: 'decision_party_absent',
+          path: `scene_cards.${scene.id}.required_beats`,
+          message: `"${beat}" turns on ${row.name}, who is not in characters_present — the moment happens off the page`,
         });
       }
     }
