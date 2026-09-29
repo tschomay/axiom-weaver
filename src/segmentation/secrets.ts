@@ -24,6 +24,8 @@ import type { SceneCard } from '../schema/story-package';
 export interface SecretWiringReport {
   /** Hidden-account facts given a `reader_must_learn` on the card that first paid them off. */
   readonly revealed_at_payoff: number;
+  /** Hidden-account facts nothing revealed or paid off, revealed on the final-phase card (#216). */
+  readonly revealed_at_final_phase: number;
   /** Later `reader_must_learn` entries turned into `recounts`. */
   readonly reveals_made_recounts: number;
   /** `must_stay_hidden` entries added to carry a secret to its reveal. */
@@ -40,18 +42,35 @@ function surfaces(scene: SceneCard, fact: string): boolean {
 export function wireSecrets(
   scenes: SceneCard[],
   hiddenFacts: readonly string[],
+  options: {
+    /**
+     * Where a hidden-account fact that nothing reveals or pays off is revealed (#216): the first
+     * card of the brief's final phase, or the last card when the brief names no phases. Without
+     * it such a fact fails `hidden_fact_never_revealed`, which refused 2 of 5 random arcs at
+     * publish in the #204 re-run.
+     */
+    readonly fallbackRevealSceneId?: string;
+  } = {},
 ): SecretWiringReport {
   const ordered = [...scenes].sort((a, b) => a.order - b.order);
 
   let revealedAtPayoff = 0;
+  let revealedAtFallback = 0;
+  const fallback =
+    ordered.find((scene) => scene.id === options.fallbackRevealSceneId) ?? ordered[ordered.length - 1];
   for (const fact of new Set(hiddenFacts)) {
     if (ordered.some((scene) => scene.reader_must_learn.includes(fact))) continue;
     const surfacing = ordered.find((scene) =>
       scene.pays_off.some((payoff) => payoff.fact_ref === fact),
     );
-    if (surfacing === undefined) continue;
-    surfacing.reader_must_learn.push(fact);
-    revealedAtPayoff += 1;
+    if (surfacing !== undefined) {
+      surfacing.reader_must_learn.push(fact);
+      revealedAtPayoff += 1;
+      continue;
+    }
+    if (fallback === undefined) continue;
+    fallback.reader_must_learn.push(fact);
+    revealedAtFallback += 1;
   }
 
   let recounted = 0;
@@ -83,6 +102,24 @@ export function wireSecrets(
     });
   }
 
+  const withheld = extendWithholding(scenes, hiddenFacts);
+
+  return {
+    revealed_at_payoff: revealedAtPayoff,
+    revealed_at_final_phase: revealedAtFallback,
+    reveals_made_recounts: recounted,
+    withheld_entries: withheld,
+  };
+}
+
+/**
+ * Carry every concealment forward to its reveal (step 3 above), and withhold every hidden-account
+ * fact from scene 1. Idempotent, so it runs again after `findWithholding` (#216): a concealment
+ * that model pass adds would otherwise stop at its own scene — `helen_sabotage_exposed` was hidden
+ * at scene 14 and not 15, then revealed at 16.
+ */
+export function extendWithholding(scenes: SceneCard[], hiddenFacts: readonly string[]): number {
+  const ordered = [...scenes].sort((a, b) => a.order - b.order);
   let withheld = 0;
   const hide = (scene: SceneCard, fact: string): void => {
     if (scene.must_stay_hidden.includes(fact)) return;
@@ -104,9 +141,5 @@ export function wireSecrets(
     }
   }
 
-  return {
-    revealed_at_payoff: revealedAtPayoff,
-    reveals_made_recounts: recounted,
-    withheld_entries: withheld,
-  };
+  return withheld;
 }

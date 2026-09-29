@@ -91,7 +91,7 @@ import {
   type SignalAvailability,
   type TellingOrder,
 } from './signals';
-import { wireSecrets } from './secrets';
+import { extendWithholding, wireSecrets } from './secrets';
 import { isDecisionText } from '../arc/decision-text';
 import { replayStates, type StateReplayResult } from './state';
 
@@ -151,6 +151,8 @@ export interface SegmentationReport {
     readonly concealed_reveals_assigned: number;
     /** #196: hidden-account facts revealed on the card that first paid them off. */
     readonly hidden_revealed_at_payoff: number;
+    /** #216: hidden-account facts nothing revealed or paid off, revealed on the final-phase card. */
+    readonly hidden_revealed_at_final_phase: number;
     /** #196: repeat reveals turned into `recounts`. */
     readonly reveals_made_recounts: number;
     /** #196: `must_stay_hidden` entries added to carry each secret to its reveal. */
@@ -358,6 +360,37 @@ export function assembleScenes(
  * recoverable from its chronological position. Over the events actually returned, not the count
  * requested: the two can differ, and this is a fallback, not a measurement.
  */
+/**
+ * The first scene holding an event of the brief's final phase (#216) — where a hidden-account fact
+ * that nothing else reveals is revealed. Phases are recovered by count, as `solutionEventIds` does;
+ * with no phases in the brief, the last scene.
+ */
+export function finalPhaseSceneId(
+  envelope: unknown,
+  scenes: readonly SceneCard[],
+  sceneEvents: ReadonlyArray<readonly FabulaEvent[]>,
+): string | undefined {
+  const block = (envelope as Record<string, unknown> | null)?.[FABULA_BLOCK] as
+    | { brief?: { plot_shape?: { phases?: unknown } } }
+    | undefined;
+  const phases = block?.brief?.plot_shape?.phases;
+  const events = sceneEvents.flat();
+  if (Array.isArray(phases) && phases.length > 0) {
+    const shares = (phases as Array<{ share?: unknown }>).map((phase) =>
+      typeof phase.share === 'number' ? phase.share : 0,
+    );
+    const chronological = [...events].sort((a, b) => a.sequence - b.sequence);
+    const counts = phaseEventCounts(shares, chronological.length);
+    const finalCount = counts[counts.length - 1] ?? 0;
+    const finalIds = new Set(
+      chronological.slice(chronological.length - finalCount).map((event) => event.id),
+    );
+    const at = sceneEvents.findIndex((group) => group.some((event) => finalIds.has(event.id)));
+    if (at !== -1 && scenes[at] !== undefined) return scenes[at]!.id;
+  }
+  return scenes[scenes.length - 1]?.id;
+}
+
 export function solutionEventIds(envelope: unknown, events: readonly FabulaEvent[]): Set<string> {
   const block = (envelope as Record<string, unknown> | null)?.[FABULA_BLOCK] as
     | { brief?: { plot_shape?: { phases?: unknown } } }
@@ -611,7 +644,9 @@ export async function segmentFabulaPackage(
     grouped,
     solutionEventIds(envelope, events),
   );
-  const secrets = wireSecrets(scenes, hiddenAccountFacts(arc));
+  const secrets = wireSecrets(scenes, hiddenAccountFacts(arc), {
+    fallbackRevealSceneId: finalPhaseSceneId(envelope, scenes, grouped),
+  });
 
   const revealedAt = new Map<string, string>();
   for (const scene of scenes) {
@@ -634,6 +669,8 @@ export async function segmentFabulaPackage(
       }
     }
   }
+  // #216: a concealment the model pass added is carried to its reveal like any other.
+  withheldEntries += extendWithholding(scenes, hiddenAccountFacts(arc));
 
   const finishedAt = new Date().toISOString();
 
@@ -719,6 +756,7 @@ export async function segmentFabulaPackage(
         facts: revealedAt.size,
         concealed_reveals_assigned: concealedReveals,
         hidden_revealed_at_payoff: secrets.revealed_at_payoff,
+        hidden_revealed_at_final_phase: secrets.revealed_at_final_phase,
         reveals_made_recounts: secrets.reveals_made_recounts,
         mechanically_withheld_entries: secrets.withheld_entries,
         withheld_scene_entries: withheldEntries,
@@ -802,7 +840,9 @@ export function segmentMechanically(
   applyPlantGraph(scenes, pairs, seedFacts);
   assignConcealedReveals(scenes, grouped, solutionEventIds(envelope, arc.events));
   applyRecounts(scenes, grouped);
-  wireSecrets(scenes, hiddenAccountFacts(arc));
+  wireSecrets(scenes, hiddenAccountFacts(arc), {
+    fallbackRevealSceneId: finalPhaseSceneId(envelope, scenes, grouped),
+  });
 
   const pkg = StoryPackageSchema.parse({
     schema_version: '1.0',

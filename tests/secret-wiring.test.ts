@@ -13,10 +13,10 @@ import { assemblePrompt, promptText } from '@/assembler/context-assembler';
 import { writerContract } from '@/writer/contract';
 import { DigestHierarchy } from '@/digest/hierarchy';
 import { ToldLedger } from '@/digest/told-ledger';
-import { FABULA_BLOCK, FabulaArcSchema, hiddenAccountFactsOf, readFabulaArc } from '@/schema/fabula';
+import { FABULA_BLOCK, FabulaArcSchema, hiddenAccountFactsOf, readFabulaArc, type FabulaEvent } from '@/schema/fabula';
 import { StoryPackageSchema, type SceneCard, type StoryPackage } from '@/schema/story-package';
-import { segmentMechanically } from '@/segmentation/segment';
-import { wireSecrets } from '@/segmentation/secrets';
+import { finalPhaseSceneId, segmentMechanically } from '@/segmentation/segment';
+import { extendWithholding, wireSecrets } from '@/segmentation/secrets';
 import { cardFromPreset } from '@/voice/voice-card';
 import { buildImageryLedger } from '@/voice/imagery-ledger';
 import { WorldModel } from '@/world-model/world-model';
@@ -226,17 +226,70 @@ describe('panel batch 2026-09-29, re-segmented offline', () => {
     });
   }
 
-  it('02: what the arc never reveals is the one error left, and the arc repair targets it', () => {
+  it('02: a secret the arc never reveals is revealed on the final-phase card, so the package publishes (#216)', () => {
     const source = envelope('02-');
     const { package: segmented } = segmentMechanically(source);
-    const errors = lintPackage({ ...segmented, [FABULA_BLOCK]: source[FABULA_BLOCK] }).errors;
-    expect(errors.map((error) => `${error.code} ${error.path}`)).toEqual([
-      'hidden_fact_never_revealed _fabula.hidden_account["father_second_family_tern_bay"]',
-    ]);
+    expect(lintPackage({ ...segmented, [FABULA_BLOCK]: source[FABULA_BLOCK] }).errors).toEqual([]);
+
+    const scenes = [...segmented.scene_cards].sort((a, b) => a.order - b.order);
+    const at = scenes.findIndex((scene) => scene.reader_must_learn.includes('father_second_family_tern_bay'));
+    expect(at).toBeGreaterThan(0);
+    // Withheld on every card before that one.
+    for (const scene of scenes.slice(0, at)) {
+      expect(scene.must_stay_hidden).toContain('father_second_family_tern_bay');
+    }
+    // The arc-level repair still asks for a proper revealing event first.
     const { arc } = readFabulaArc(source);
     expect(repairTargets(arc, 'x').map((target) => target.path)).toContain(
       '_fabula.hidden_account["father_second_family_tern_bay"]',
     );
+  });
+});
+
+describe('#216: satisfiable at publish, and withholding after findWithholding', () => {
+  it('reveals an unrevealed, unpaid hidden fact on the named final-phase card, else the last', () => {
+    const scenes = [card('s1', 1), card('s2', 2), card('s3', 3)];
+    const report = wireSecrets(scenes, ['secret'], { fallbackRevealSceneId: 's2' });
+    expect(report.revealed_at_final_phase).toBe(1);
+    expect(scenes.map((scene) => scene.reader_must_learn)).toEqual([[], ['secret'], []]);
+    expect(scenes[0]!.must_stay_hidden).toEqual(['secret']);
+
+    const noPhase = [card('s1', 1), card('s2', 2)];
+    wireSecrets(noPhase, ['secret']);
+    expect(noPhase[1]!.reader_must_learn).toEqual(['secret']);
+  });
+
+  it('prefers a card that pays the fact off over the final-phase fallback', () => {
+    const scenes = [
+      card('s1', 1),
+      card('s2', 2, { pays_off: [{ fact_ref: 'secret', plant: null }] }),
+      card('s3', 3),
+    ];
+    const report = wireSecrets(scenes, ['secret'], { fallbackRevealSceneId: 's3' });
+    expect(report.revealed_at_final_phase).toBe(0);
+    expect(scenes[1]!.reader_must_learn).toEqual(['secret']);
+  });
+
+  it('extends a concealment added after wiring to its reveal (the after-05 S14/S15 gap)', () => {
+    const scenes = [
+      card('s14', 14, { must_stay_hidden: ['helen_sabotage_exposed'] }),
+      card('s15', 15),
+      card('s16', 16, { reader_must_learn: ['helen_sabotage_exposed'] }),
+    ];
+    expect(extendWithholding(scenes, [])).toBe(1);
+    expect(scenes[1]!.must_stay_hidden).toEqual(['helen_sabotage_exposed']);
+    expect(extendWithholding(scenes, [])).toBe(0);
+  });
+
+  it('finds the first card of the brief\'s final phase', () => {
+    const events = [1, 2, 3, 4].map((sequence) => ({ id: `ev_${sequence}`, sequence }) as unknown as FabulaEvent);
+    const scenes = [card('a', 1), card('b', 2), card('c', 3)];
+    const envelopeWithPhases = {
+      [FABULA_BLOCK]: { brief: { plot_shape: { phases: [{ share: 0.5 }, { share: 0.5 }] } } },
+    };
+    const grouped = [[events[0]!], [events[1]!, events[2]!], [events[3]!]];
+    expect(finalPhaseSceneId(envelopeWithPhases, scenes, grouped)).toBe('b');
+    expect(finalPhaseSceneId({}, scenes, grouped)).toBe('c');
   });
 });
 
