@@ -33,10 +33,22 @@ export interface ImageryLedger {
   readonly unused: string[];
   /** Images the writer recorded outside the palette (`domain: null`), most recent last. */
   readonly ad_hoc: string[];
+  /**
+   * Palette domains drawn from in at least `DOMAIN_REST_THRESHOLD` of the last
+   * `DOMAIN_REST_WINDOW` scenes — rendered as "rest this domain this scene" (ADR 0010, amendment
+   * 2026-09-29). Frequency, not phrasing: eighteen differently worded light-on-water similes
+   * never repeat a vehicle, yet read as a tic.
+   */
+  readonly resting: string[];
 }
 
 /** How many prior phrasings per domain the block shows. Enough to vary against, not a wall. */
 const RECENT_IMAGES_SHOWN = 3;
+
+/** The window, in most recent scenes, over which a domain's frequency is counted. */
+export const DOMAIN_REST_WINDOW = 3;
+/** Scenes within the window that drew from a domain before it is rested for the next scene. */
+export const DOMAIN_REST_THRESHOLD = 2;
 
 export interface RecordedImagery {
   readonly scene_order: number;
@@ -82,7 +94,36 @@ export function buildImageryLedger(
 
   const unused = card.imagery_palette.filter((domain) => !uses.has(domain));
 
-  return { used, unused, ad_hoc: adHoc };
+  return { used, unused, ad_hoc: adHoc, resting: overusedDomains(history) };
+}
+
+/**
+ * Domains drawn from in at least `threshold` of the last `window` scenes of `history`.
+ *
+ * The window is the most recent scene orders recorded, so a scene that recorded no palette image
+ * still counts as a scene that rested every domain.
+ */
+export function overusedDomains(
+  history: readonly RecordedImagery[],
+  window = DOMAIN_REST_WINDOW,
+  threshold = DOMAIN_REST_THRESHOLD,
+): string[] {
+  const orders = [...new Set(history.map((entry) => entry.scene_order))].sort((a, b) => a - b);
+  const recent = new Set(orders.slice(-window));
+  const scenesByDomain = new Map<string, Set<number>>();
+  for (const entry of history) {
+    if (!recent.has(entry.scene_order)) continue;
+    for (const signature of entry.signature) {
+      if (signature.domain === null) continue;
+      const scenes = scenesByDomain.get(signature.domain) ?? new Set<number>();
+      scenes.add(entry.scene_order);
+      scenesByDomain.set(signature.domain, scenes);
+    }
+  }
+  return [...scenesByDomain]
+    .filter(([, scenes]) => scenes.size >= threshold)
+    .map(([domain]) => domain)
+    .sort();
 }
 
 function lastScene(use: DomainUse): number {
@@ -98,13 +139,15 @@ function lastScene(use: DomainUse): number {
  *
  * The block degrades gracefully: once every palette domain has been used at least once there is
  * nothing left for a "not yet drawn from" list, and it becomes a pure "already drawn from" list —
- * still positive-framed, still never a blocklist.
+ * still positive-framed, still never a blocklist of phrasings. The one thing it does withhold is
+ * a whole domain for a single scene, when that domain has been drawn from too often lately
+ * (ADR 0010, amendment 2026-09-29): the domain comes back the scene after.
  */
 export function renderImageryLedger(ledger: ImageryLedger): string {
   if (ledger.used.length === 0 && ledger.unused.length === 0) return '';
 
   const lines = [
-    'IMAGERY LEDGER (vary the phrasing, not the domain — recurrence inside a domain is licensed, reusing the same wording is not):',
+    'IMAGERY LEDGER (vary the phrasing within a domain — occasional recurrence is a motif, reusing the same wording is not):',
   ];
 
   for (const use of ledger.used) {
@@ -120,6 +163,15 @@ export function renderImageryLedger(ledger: ImageryLedger): string {
   if (ledger.ad_hoc.length > 0) {
     const recent = ledger.ad_hoc.slice(-RECENT_IMAGES_SHOWN).map((image) => `"${image}"`);
     lines.push(`  - recorded outside the palette: ${recent.join('; ')}`);
+  }
+
+  const resting = ledger.resting;
+  if (resting.length > 0) {
+    lines.push(
+      `  - rest ${resting.length === 1 ? 'this domain' : 'these domains'} this scene` +
+        ` (drawn from in ${DOMAIN_REST_THRESHOLD} of the last ${DOMAIN_REST_WINDOW} scenes;` +
+        ` a motif lands by returning, not by being constant): ${resting.join('; ')}`,
+    );
   }
 
   return lines.join('\n');

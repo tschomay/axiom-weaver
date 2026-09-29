@@ -95,3 +95,31 @@ concrete prototype, not as settled ground to relitigate by default.
   it operates the same way on `{image, domain}` pairs as it did on bare strings.
 - Single-image callback scheduling (a motif narrower than a whole palette domain) stays fog,
   not a ticket — speculative until a fixture or a later Story Package actually needs it.
+
+## Amendment (2026-09-29): cap how often a domain recurs
+
+[#195](https://github.com/tschomay/axiom-weaver/issues/195), from Story Review Panel batch
+2026-09-29 (`prototypes/story-review/2026-09-29/CURATION.md` §1). In all five stories the most
+repeated image was the Voice Card's own palette: `05-review-understudy` put a light-on-water simile
+in all 18 scenes, each worded differently. Decision 4's rule — govern the vehicle, never the domain —
+could not see it, because no phrasing ever repeated. A domain drawn on every scene is not a motif;
+it is a tic. A motif lands by returning.
+
+1. **Decision 4 is narrowed, not reversed.** A palette domain is still a licensed motif, and the
+   phrasing rule stays. In addition, a domain drawn from in **2 of the last 3 scenes**
+   (`DOMAIN_REST_THRESHOLD` / `DOMAIN_REST_WINDOW`, `src/voice/imagery-ledger.ts`) is rendered in the
+   `IMAGERY LEDGER` block as "rest this domain this scene". The window is counted in scenes, so the
+   domain is back one or two scenes later; at most it can recur in about half of a story's scenes
+   by alternating, or three scenes in five in pairs. It is still domain-tag equality over
+   `imagery_signature` (decision 3): no new digest field, no extra call.
+2. **Decision 5's objection to a blocklist still holds for phrasings**, which the block never lists
+   as forbidden. Resting a whole domain for one scene is the thing the prototype's blocklist did by
+   accident and permanently; here it is deliberate, named, and lifts itself.
+3. **The Voice Card's palette line is reworded** (`renderVoiceCard`) from "draw fresh images from
+   within these before inventing new ones" to a pool to draw on sparingly: at most one domain in a
+   scene, many scenes need none, never a brief to fulfil every scene. The old wording, repeated in
+   every writer call, read as an instruction to use the palette in every scene.
+
+Not changed here: the default preset is still chosen from the plot shape
+(`defaultVoiceCardForPlotShape`), not the premise's tone. That is how a realist grief story got
+`fairy_tale_fable`; it is a separate change (#195's optional third item).

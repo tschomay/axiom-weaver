@@ -3,7 +3,7 @@ import { StoryPackageSchema, type SceneCard, type StoryPackage } from '@/schema/
 import { WorldModel } from '@/world-model/world-model';
 import { DigestHierarchy } from '@/digest/hierarchy';
 import { ToldLedger } from '@/digest/told-ledger';
-import { buildImageryLedger } from '@/voice/imagery-ledger';
+import { buildImageryLedger, type RecordedImagery } from '@/voice/imagery-ledger';
 import { cardFromPreset } from '@/voice/voice-card';
 import { assemblePrompt, estimateTokens, promptText } from '@/assembler/context-assembler';
 import { joinSceneRows, presentEntityIds, beatOnlyCharacters } from '@/assembler/join';
@@ -108,7 +108,7 @@ describe('the deterministic join (ADR 0008 decision 4)', () => {
   });
 });
 
-function assemble(budget?: number) {
+function assemble(budget?: number, imageryHistory: RecordedImagery[] = []) {
   const voiceCard = cardFromPreset('fairy_tale_fable');
   return assemblePrompt({
     pkg: PACKAGE,
@@ -117,7 +117,7 @@ function assemble(budget?: number) {
     voiceCard,
     hierarchy: new DigestHierarchy(4),
     ledger: ToldLedger.forPackage(PACKAGE),
-    imageryLedger: buildImageryLedger(voiceCard, []),
+    imageryLedger: buildImageryLedger(voiceCard, imageryHistory),
     reanchoring: [],
     plantObligations: [],
     payoffInstructions: [],
@@ -163,6 +163,18 @@ describe('payload order and cache boundaries (ADR 0008 decision 3)', () => {
     const { volatile_tail: tail } = assemble();
     expect(tail.text).toContain('SCENE TONE');
     expect(tail.text.indexOf('IMAGERY LEDGER')).toBeLessThan(tail.text.indexOf('SCENE TONE'));
+  });
+
+  it('tells the writer to rest a palette domain it has leaned on lately (#195)', () => {
+    const [domain] = cardFromPreset('fairy_tale_fable').imagery_palette as [string];
+    const history = [1, 2, 3].map((order) => ({
+      scene_order: order,
+      signature: [{ image: `a new way to say it, take ${order}`, domain }],
+    }));
+    expect(promptText(assemble(undefined, history))).toContain(`rest this domain this scene`);
+    expect(promptText(assemble())).not.toContain('rest this domain');
+    // The Voice Card itself frames the palette as a pool, not a per-scene brief.
+    expect(promptText(assemble())).toContain('at most one domain in a scene');
   });
 });
 

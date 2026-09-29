@@ -12,6 +12,7 @@ import {
 } from '@/voice/voice-card';
 import {
   buildImageryLedger,
+  overusedDomains,
   renderImageryLedger,
   staleImageryDomains,
   type RecordedImagery,
@@ -135,7 +136,7 @@ describe('the imagery ledger (ADR 0010)', () => {
 
   it('renders positively — prior phrasings to vary against, never a blocklist', () => {
     const rendered = renderImageryLedger(buildImageryLedger(card, history));
-    expect(rendered).toContain('vary the phrasing, not the domain');
+    expect(rendered).toContain('vary the phrasing within a domain');
     expect(rendered).toContain('already drawn from');
     expect(rendered).toContain('not yet drawn from');
     expect(rendered).not.toMatch(/do not use|avoid/i);
@@ -153,6 +154,46 @@ describe('the imagery ledger (ADR 0010)', () => {
 
   it('renders nothing at all when there is no palette and no history', () => {
     expect(renderImageryLedger(buildImageryLedger({ ...card, imagery_palette: [] }, []))).toBe('');
+  });
+
+  describe('domain frequency (ADR 0010, amendment 2026-09-29)', () => {
+    const scene = (order: number, domain: string | null, image = `image ${order}`) => ({
+      scene_order: order,
+      signature: [{ image, domain }],
+    });
+
+    it('rests a domain drawn from in three consecutive scenes, however it was phrased', () => {
+      const run = [
+        scene(1, first, 'light on the river'),
+        scene(2, first, 'a sheen like paraffin on ditch water'),
+        scene(3, first, 'an oily ring on stagnant water'),
+      ];
+      // Every phrasing differs, so the phrasing rule is silent — the frequency rule is not.
+      expect(staleImageryDomains(run)).toEqual([]);
+      expect(overusedDomains(run)).toEqual([first]);
+      expect(buildImageryLedger(card, run).resting).toEqual([first]);
+    });
+
+    it('does not rest a domain used once every few scenes', () => {
+      const sparse = [scene(1, first), scene(2, second), scene(3, null), scene(4, first), scene(5, second)];
+      expect(overusedDomains(sparse)).toEqual([]);
+      expect(renderImageryLedger(buildImageryLedger(card, sparse))).not.toContain('rest this domain');
+    });
+
+    it('counts only the last three scenes, so a rested domain comes back', () => {
+      const earlier = [scene(1, first), scene(2, first), scene(3, second), scene(4, second), scene(5, null)];
+      expect(overusedDomains(earlier)).toEqual([second]);
+      expect(overusedDomains([...earlier, scene(6, null)])).toEqual([]);
+    });
+
+    it('renders the rest line naming the domain, alongside the phrasing gist', () => {
+      const rendered = renderImageryLedger(
+        buildImageryLedger(card, [scene(1, first), scene(2, first)]),
+      );
+      expect(rendered).toContain(`rest this domain this scene`);
+      expect(rendered).toMatch(new RegExp(`rest this domain this scene .*: ${first}$`, 'm'));
+      expect(rendered).toContain('already drawn from');
+    });
   });
 
   it('flags a domain reused with identical phrasing, not one merely reused', () => {
