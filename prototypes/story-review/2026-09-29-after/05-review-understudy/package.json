@@ -1,0 +1,2535 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-understudy",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_helen_vane",
+        "name": "Helen Vane",
+        "location_id": "loc_kings_theatre_dunford",
+        "status": "exhausted but physically rigid",
+        "goal": "preserve her sole ownership of Lady Corisande",
+        "bag": {
+          "role": "the_unchanged",
+          "tenure_years": "11"
+        }
+      },
+      {
+        "id": "char_julian_crane",
+        "name": "Julian Crane",
+        "location_id": "loc_station_hotel_dunford",
+        "status": "calculating",
+        "goal": "replace Helen with cheaper understudy Clara",
+        "bag": {
+          "role": "summoner",
+          "occupation": "commercial_producer"
+        }
+      },
+      {
+        "id": "char_clara_oaks",
+        "name": "Clara Oaks",
+        "location_id": "loc_kings_theatre_dunford",
+        "status": "nervous and attentive",
+        "goal": "honor Helen while preparing to take the role",
+        "bag": {
+          "role": "understudy",
+          "training_years": "3"
+        }
+      },
+      {
+        "id": "char_arthur_penn",
+        "name": "Arthur Penn",
+        "location_id": "loc_kings_theatre_dunford",
+        "status": "arthritic and weary",
+        "goal": "keep the touring production running smoothly",
+        "bag": {
+          "role": "the_harmed",
+          "occupation": "stage_manager"
+        }
+      },
+      {
+        "id": "char_maren_faulkner",
+        "name": "Maren Faulkner",
+        "location_id": "loc_dressing_room_primary",
+        "status": "dutiful and observant",
+        "goal": "maintain costumes and keep peace backstage",
+        "bag": {
+          "role": "the_witness",
+          "occupation": "wardrobe_supervisor"
+        }
+      },
+      {
+        "id": "char_toby_greene",
+        "name": "Toby Greene",
+        "location_id": "loc_kings_theatre_dunford",
+        "status": "anxious",
+        "goal": "survive the regional tour without Helen's wrath",
+        "bag": {
+          "role": "co_star"
+        }
+      },
+      {
+        "id": "char_reese_lowe",
+        "name": "Reese Lowe",
+        "location_id": "loc_kings_theatre_dunford",
+        "status": "nostalgic",
+        "goal": "fill the King's Theatre seats for the closing run",
+        "bag": {
+          "role": "theatre_manager"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_kings_theatre_dunford",
+        "name": "King's Theatre, Dunford",
+        "bag": {
+          "type": "provincial_theatre"
+        }
+      },
+      {
+        "id": "loc_dressing_room_primary",
+        "name": "Helen's Touring Dressing Room",
+        "bag": {
+          "type": "backstage_private"
+        }
+      },
+      {
+        "id": "loc_green_room_dunford",
+        "name": "Dunford Green Room",
+        "bag": {
+          "type": "backstage_common"
+        }
+      },
+      {
+        "id": "loc_grand_pavilion_redcar",
+        "name": "The Grand Pavilion, Redcar",
+        "bag": {
+          "type": "coastal_tour_stop"
+        }
+      },
+      {
+        "id": "loc_civic_hall_burnley",
+        "name": "Burnley Civic Hall",
+        "bag": {
+          "type": "provincial_hall"
+        }
+      },
+      {
+        "id": "loc_station_hotel_dunford",
+        "name": "Station Hotel, Dunford",
+        "bag": {
+          "type": "lodging"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_silver_dagger_prop",
+        "name": "Silver-Hilted Prop Dagger",
+        "location_id": "loc_kings_theatre_dunford",
+        "status": "polished and weighted",
+        "bag": {
+          "usage": "climax_prop"
+        }
+      },
+      {
+        "id": "obj_velvet_script_ledger",
+        "name": "Annotated Rehearsal Ledger",
+        "location_id": "loc_dressing_room_primary",
+        "status": "dog-eared and annotated",
+        "bag": {
+          "contents": "eleven_years_of_stage_blocking"
+        }
+      },
+      {
+        "id": "obj_severance_notice",
+        "name": "Formal Replacement Notice",
+        "location_id": "loc_station_hotel_dunford",
+        "status": "sealed in envelope",
+        "bag": {
+          "signatory": "julian_crane"
+        }
+      },
+      {
+        "id": "obj_vintage_emerald_ring",
+        "name": "Corisande Stage Emerald Ring",
+        "location_id": "loc_dressing_room_primary",
+        "status": "loose safety clasp",
+        "bag": {
+          "provenance": "gift_from_playwright"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_helen_vane",
+        "to_id": "char_clara_oaks",
+        "kind": "mentor_to_rival",
+        "sentiment": "resentful condescension",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_clara_oaks",
+        "to_id": "char_helen_vane",
+        "kind": "understudy_to_mentor",
+        "sentiment": "reverent gratitude",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_julian_crane",
+        "to_id": "char_helen_vane",
+        "kind": "producer_to_contractor",
+        "sentiment": "mercenary impatience",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_arthur_penn",
+        "to_id": "char_helen_vane",
+        "kind": "stage_manager_to_star",
+        "sentiment": "quietly aggrieved endurance",
+        "bag": {}
+      },
+      {
+        "id": "rel_05",
+        "from_id": "char_maren_faulkner",
+        "to_id": "char_helen_vane",
+        "kind": "dresser_to_star",
+        "sentiment": "loyal weariness",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_helen_vane",
+        "fact_ref": "helen_eleven_year_record",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_julian_crane",
+        "fact_ref": "julian_budget_deficit_policy",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_arthur_penn",
+        "fact_ref": "corisande_final_curse_timing",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_maren_faulkner",
+        "fact_ref": "helen_eleven_year_record",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_curtain_and_cue",
+      "order": 1,
+      "pov": "char_helen_vane",
+      "location_id": "loc_kings_theatre_dunford",
+      "characters_present": [
+        "char_helen_vane",
+        "char_clara_oaks",
+        "char_toby_greene",
+        "char_arthur_penn"
+      ],
+      "dramatic_function": "Establishes Helen's tyrannical control over the company and introduces the technical vulnerability of the theatre's prompt cue mechanism.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Helen executes her performance with mechanical precision and blocks Clara from the footlights during bows before ordering Arthur to sweep the stage.",
+        "Backstage, Helen berates Arthur over a spotlight delay while he explains the theatre's three second mechanical prompt delay and rubs his inflamed wrists.",
+        "Helen tests the prompt cue bell herself and dismisses Arthur's physical pain as a lack of devotion.",
+        "Helen berates Arthur over a fraction-of-a-second delay on the death scene spotlight."
+      ],
+      "reader_must_learn": [
+        "dunford_prompt_bell_delay"
+      ],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour",
+        "arthur_penn_sacrificed_tour_pension"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_02_the_emerald_ring",
+      "order": 2,
+      "pov": "char_helen_vane",
+      "location_id": "loc_dressing_room_primary",
+      "characters_present": [
+        "char_helen_vane",
+        "char_maren_faulkner"
+      ],
+      "dramatic_function": "Establishes Helen's proprietary fixation on her costume jewels and reveals the faulty clasp on her emerald ring.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_dressing_room_primary"
+        }
+      },
+      "required_beats": [
+        "In her dressing room, Helen removes her greasepaint under Maren's silent watch.",
+        "Helen examines her vintage emerald ring and tests the emerald ring clasp, warning that it will tear silk bodice fabric if not secured.",
+        "Helen declares that no understudy will ever have the discipline to wear Corisande's jewels."
+      ],
+      "reader_must_learn": [
+        "corisande_ring_safety_catch"
+      ],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour",
+        "arthur_penn_sacrificed_tour_pension"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_the_green_room",
+      "order": 3,
+      "pov": "char_helen_vane",
+      "location_id": "loc_green_room_dunford",
+      "characters_present": [
+        "char_helen_vane",
+        "char_clara_oaks",
+        "char_toby_greene"
+      ],
+      "dramatic_function": "Demonstrates Helen's preemptive malice toward Clara and Clara's composed refusal to be provoked.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_dressing_room_primary"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_toby_greene": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_green_room_dunford"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_green_room_dunford"
+        },
+        "char_toby_greene": {
+          "location_id": "loc_green_room_dunford"
+        }
+      },
+      "required_beats": [
+        "Helen enters the green room and interrupts Clara and Toby while they are reviewing lines over tea.",
+        "Helen attacks Clara's rehearsal projection as soft and amateurish.",
+        "Clara receives the insults with quiet deference, leaving Helen frustrated by the lack of an emotional reaction."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour",
+        "arthur_penn_sacrificed_tour_pension"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_notice_of_replacement",
+      "order": 4,
+      "pov": "char_helen_vane",
+      "location_id": "loc_station_hotel_dunford",
+      "characters_present": [
+        "char_helen_vane",
+        "char_julian_crane"
+      ],
+      "dramatic_function": "Presents Helen with the existential threat of her impending dismissal, igniting her vow of retaliation.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_green_room_dunford",
+          "goal": "preserve her sole ownership of Lady Corisande"
+        },
+        "obj_severance_notice": {
+          "location_id": "loc_station_hotel_dunford"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_station_hotel_dunford",
+          "goal": "make the company regret replacing her before closing night"
+        },
+        "obj_severance_notice": {
+          "location_id": "char_helen_vane"
+        }
+      },
+      "required_beats": [
+        "Julian confronts Helen in the hotel lounge with a termination envelope, citing dwindling regional ticket sales.",
+        "Julian details that Arts Council touring subsidies require Clara to take over two matinees before replacing her as Lady Corisande.",
+        "Helen refuses the severance terms and promises Julian he will regret betting against her."
+      ],
+      "reader_must_learn": [
+        "julian_contract_understudy_stipulation"
+      ],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour",
+        "arthur_penn_sacrificed_tour_pension"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_blocking_rehearsal",
+      "order": 5,
+      "pov": "char_helen_vane",
+      "location_id": "loc_kings_theatre_dunford",
+      "characters_present": [
+        "char_helen_vane",
+        "char_clara_oaks",
+        "char_julian_crane",
+        "char_arthur_penn"
+      ],
+      "dramatic_function": "To demonstrate that Clara cannot be intimidated or rattled by Helen's aggressive stage tactics.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_station_hotel_dunford"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_green_room_dunford"
+        },
+        "char_julian_crane": {
+          "location_id": "loc_station_hotel_dunford"
+        },
+        "char_arthur_penn": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_julian_crane": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_arthur_penn": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "required_beats": [
+        "Julian observes from the stalls and takes notes as Helen and Clara run Act Three.",
+        "Helen steps in three beats early brandishing the silver dagger prop to crowd Clara's cues.",
+        "Clara adapts without faltering, matching Helen's pace and maintaining her rhythm."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour",
+        "arthur_penn_sacrificed_tour_pension"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_the_redcar_foyer",
+      "order": 6,
+      "pov": "char_helen_vane",
+      "location_id": "loc_grand_pavilion_redcar",
+      "characters_present": [
+        "char_helen_vane",
+        "char_julian_crane",
+        "char_maren_faulkner"
+      ],
+      "dramatic_function": "To force Helen into defensive sabotage after learning the theatre management is actively replacing her.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_julian_crane": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_maren_faulkner": {
+          "location_id": "loc_dressing_room_primary"
+        },
+        "obj_velvet_script_ledger": {
+          "location_id": "loc_dressing_room_primary"
+        },
+        "obj_silver_dagger_prop": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "char_julian_crane": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "char_maren_faulkner": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "obj_velvet_script_ledger": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "obj_silver_dagger_prop": {
+          "location_id": "loc_grand_pavilion_redcar"
+        }
+      },
+      "required_beats": [
+        "Helen discovers lobby posters and marquee banners advertising Clara Oaks as the lead for the upcoming city season.",
+        "Julian brushes off Helen's fury in the drafty foyer as mere commercial necessity.",
+        "Helen retreats to lock her personal prompt and annotated rehearsal ledger in her traveling trunk to protect her stage cuts."
+      ],
+      "reader_must_learn": [
+        "helen_rehearsal_ledger"
+      ],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour",
+        "arthur_penn_sacrificed_tour_pension"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_penns_reckoning",
+      "order": 7,
+      "pov": "char_helen_vane",
+      "location_id": "loc_grand_pavilion_redcar",
+      "characters_present": [
+        "char_helen_vane",
+        "char_arthur_penn"
+      ],
+      "dramatic_function": "To strip away Helen's rationalization of artistic purity by confronting her with the past damage she inflicted on Arthur.",
+      "entry_state": {
+        "char_arthur_penn": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "exit_state": {
+        "char_arthur_penn": {
+          "location_id": "loc_grand_pavilion_redcar"
+        }
+      },
+      "required_beats": [
+        "Helen pressures Arthur to manipulate the wing lights and ruin Clara's entrance.",
+        "Arthur refuses, revealing he lost his union acting pension eleven years ago when Helen demanded contract supremacy and drove him from the stage.",
+        "Helen is shaken as Arthur's resentment challenges her belief that her past ruthlessness was merely devotion to craft."
+      ],
+      "reader_must_learn": [
+        "arthur_penn_sacrificed_tour_pension"
+      ],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_in_the_wings",
+      "order": 8,
+      "pov": "char_helen_vane",
+      "location_id": "loc_grand_pavilion_redcar",
+      "characters_present": [
+        "char_helen_vane",
+        "char_clara_oaks",
+        "char_toby_greene"
+      ],
+      "dramatic_function": "To expose Helen to the emotional alienation caused by her leadership style compared to Clara's natural warmth.",
+      "entry_state": {
+        "char_clara_oaks": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_toby_greene": {
+          "location_id": "loc_green_room_dunford"
+        }
+      },
+      "exit_state": {
+        "char_clara_oaks": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "char_toby_greene": {
+          "location_id": "loc_grand_pavilion_redcar"
+        }
+      },
+      "required_beats": [
+        "Waiting for her cue in the damp wings, Helen watches Toby freeze with stage fright before his entrance.",
+        "Clara steadies Toby through a breathing rhythm and gently restores his composure.",
+        "Helen observes the troupe gravitate around Clara, feeling an unaccustomed pang of isolation."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_the_throat_syrup",
+      "order": 9,
+      "pov": "char_helen_vane",
+      "location_id": "loc_grand_pavilion_redcar",
+      "characters_present": [
+        "char_helen_vane",
+        "char_clara_oaks"
+      ],
+      "dramatic_function": "To expose Helen's worsening vocal decline and her paranoid hostility toward Clara's rising threat.",
+      "entry_state": {
+        "char_helen_vane": {
+          "status": "exhausted but physically rigid"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "status": "vocal cords strained and physically deteriorating"
+        }
+      },
+      "required_beats": [
+        "In her dressing room, Helen chokes on cold tea as severe vocal spasms rack cords raw from eleven years of unmodulated screaming.",
+        "Clara knocks softly to offer throat syrup and propose marking the morning rehearsal, but Helen violently slaps the jar away, accusing her of wishing her voice gone before closing night."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_10_the_replacement",
+      "order": 10,
+      "pov": "char_helen_vane",
+      "location_id": "loc_civic_hall_burnley",
+      "characters_present": [
+        "char_helen_vane",
+        "char_julian_crane",
+        "char_arthur_penn"
+      ],
+      "dramatic_function": "To strip Helen of her starring role by enforcing Clara's takeover for the Burnley matinee.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_grand_pavilion_redcar",
+          "status": "vocal cords strained and physically deteriorating"
+        },
+        "char_julian_crane": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "char_arthur_penn": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "char_maren_faulkner": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "char_toby_greene": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "obj_velvet_script_ledger": {
+          "location_id": "loc_grand_pavilion_redcar"
+        },
+        "obj_silver_dagger_prop": {
+          "location_id": "loc_grand_pavilion_redcar"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_civic_hall_burnley",
+          "status": "benched from the matinee performance"
+        },
+        "char_julian_crane": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "char_arthur_penn": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "char_maren_faulkner": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "char_toby_greene": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "obj_velvet_script_ledger": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "obj_silver_dagger_prop": {
+          "location_id": "loc_civic_hall_burnley"
+        }
+      },
+      "required_beats": [
+        "By the concrete fire exit, Helen demands Clara be dropped, arguing she lacks the venom for lady corisande, but Julian counters with rave regional clippings praising Clara's vitality over an ossified monument.",
+        "Citing the regional funding mandate, Julian has Arthur enter Clara on the call sheet, bars Helen from the dressing room, and has her stripped of costume and sent to the stalls."
+      ],
+      "reader_must_learn": [
+        "clara_critical_admiration"
+      ],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "julian_contract_understudy_stipulation",
+          "plant": "scene_04_notice_of_replacement"
+        }
+      ]
+    },
+    {
+      "id": "scene_11_the_matinee",
+      "order": 11,
+      "pov": "char_helen_vane",
+      "location_id": "loc_civic_hall_burnley",
+      "characters_present": [
+        "char_helen_vane",
+        "char_clara_oaks",
+        "char_toby_greene"
+      ],
+      "dramatic_function": "To shatter Helen's belief in her own artistic superiority as she witnesses Clara's triumphant, empathetic performance.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "From the shadow of the balcony, Helen watches the matinee waiting for Clara to butcher the second act monologue.",
+        "Clara plays lady corisande with sorrow rather than Helen's snarl, moving the provincial audience to rapt, tearful silence and leaving Helen shaken."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_12_the_prompt_copy",
+      "order": 12,
+      "pov": "char_helen_vane",
+      "location_id": "loc_civic_hall_burnley",
+      "characters_present": [
+        "char_helen_vane",
+        "char_maren_faulkner"
+      ],
+      "dramatic_function": "To reveal to Helen that Clara's ambition is grounded in profound veneration rather than malice.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Helen searches Clara's makeup station for signs of incompetence, but instead uncovers Clara's prompt copy filled with margin notes praising Helen's vocal control as masterclass artistry.",
+        "Maren catches Helen reading the notebook and remarks that Clara has always been Helen's most devoted student."
+      ],
+      "reader_must_learn": [
+        "clara_hidden_reverence"
+      ],
+      "must_stay_hidden": [
+        "clara_saved_helens_final_tour"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_13_the_empty_stage",
+      "order": 13,
+      "pov": "char_helen_vane",
+      "location_id": "loc_civic_hall_burnley",
+      "characters_present": [
+        "char_helen_vane",
+        "char_clara_oaks"
+      ],
+      "dramatic_function": "Turns Helen's antagonism by revealing Clara protected her farewell tour from Julian's dismissal.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Helen accuses Clara on the empty Burnley stage of using sycophantic notebooks to soften her up.",
+        "Clara breaks her silence to reveal that Julian tried to dismiss Helen before the tour and Clara refused to take the role unless Helen stayed.",
+        "Clara gently explains she only ever wanted to earn the role, leaving Helen paralyzed."
+      ],
+      "reader_must_learn": [
+        "clara_saved_helens_final_tour"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_14_the_snagged_sleeve",
+      "order": 14,
+      "pov": "char_helen_vane",
+      "location_id": "loc_kings_theatre_dunford",
+      "characters_present": [
+        "char_helen_vane",
+        "char_clara_oaks",
+        "char_julian_crane",
+        "char_maren_faulkner"
+      ],
+      "dramatic_function": "Establishes Helen's desperate, escalating effort to disqualify Clara over a technical rehearsal mishap.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "char_julian_crane": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "char_maren_faulkner": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "char_arthur_penn": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "char_toby_greene": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "obj_velvet_script_ledger": {
+          "location_id": "loc_civic_hall_burnley"
+        },
+        "obj_silver_dagger_prop": {
+          "location_id": "loc_civic_hall_burnley"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_julian_crane": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_maren_faulkner": {
+          "location_id": "loc_dressing_room_primary"
+        },
+        "char_arthur_penn": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_toby_greene": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "obj_velvet_script_ledger": {
+          "location_id": "loc_dressing_room_primary"
+        },
+        "obj_silver_dagger_prop": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "required_beats": [
+        "During closing week technical cues at Dunford, Clara catches her silk sleeve on the emerald ring's faulty clasp and fumbles the silver dagger.",
+        "Helen immediately screams to Julian that Clara lacks the technical precision to wear the emerald ring and Corisande's heirloom jewels."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "helen_sabotage_exposed"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "corisande_ring_safety_catch",
+          "plant": "scene_02_the_emerald_ring"
+        }
+      ]
+    },
+    {
+      "id": "scene_15_mirror_and_wig",
+      "order": 15,
+      "pov": "char_helen_vane",
+      "location_id": "loc_dressing_room_primary",
+      "characters_present": [
+        "char_helen_vane",
+        "char_maren_faulkner"
+      ],
+      "dramatic_function": "Strikes down Helen's self-justification when Maren refuses to support her vendetta and names the cost of her obsession.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_dressing_room_primary"
+        }
+      },
+      "required_beats": [
+        "In the dressing room, Helen furiously brushes her wig and demands Maren support her complaint against Clara.",
+        "Maren refuses, telling Helen that her eleven year record of never missing a show has yielded only loneliness, terrorizing the crew, and fear.",
+        "Maren points to Helen's shaking hands in the mirror, urging her to stop poisoning her own memories."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "helen_eleven_year_record",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_16_the_hidden_dagger",
+      "order": 16,
+      "pov": "char_helen_vane",
+      "location_id": "loc_green_room_dunford",
+      "characters_present": [
+        "char_helen_vane",
+        "char_arthur_penn"
+      ],
+      "dramatic_function": "Pays off Helen's destructive pride as Arthur catches her sabotaging Clara, prompting Helen's final surrender and restitution.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_dressing_room_primary",
+          "status": "benched from the matinee performance",
+          "goal": "make the company regret replacing her before closing night"
+        },
+        "char_arthur_penn": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "obj_silver_dagger_prop": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "obj_velvet_script_ledger": {
+          "location_id": "loc_dressing_room_primary"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_kings_theatre_dunford",
+          "status": "broken and ashamed",
+          "goal": "support Clara and leave the production with dignity"
+        },
+        "char_arthur_penn": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "obj_silver_dagger_prop": {
+          "location_id": "char_arthur_penn"
+        },
+        "obj_velvet_script_ledger": {
+          "location_id": "char_arthur_penn"
+        }
+      },
+      "required_beats": [
+        "Helen slips into the dark green room clutching the silver dagger to hide it beneath the sofa cushions, but Arthur turns on the lamp and catches her red-handed.",
+        "Arthur asks with sorrow rather than anger if this petty theft is how lady corisande ends.",
+        "Confronted by her actions, Helen surrenders the silver dagger and her eleven-year rehearsal ledger into Arthur's scarred hands, apologizing for the career, monologue, and pension she stole from him.",
+        "Arthur accepts the ledger with quiet relief, acknowledging her as a true colleague for the first time in a decade."
+      ],
+      "reader_must_learn": [
+        "helen_sabotage_exposed"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "arthur_penn_sacrificed_tour_pension",
+          "plant": "scene_07_penns_reckoning"
+        },
+        {
+          "fact_ref": "helen_rehearsal_ledger",
+          "plant": "scene_06_the_redcar_foyer"
+        }
+      ]
+    },
+    {
+      "id": "scene_17_passing_the_ring",
+      "order": 17,
+      "pov": "char_helen_vane",
+      "location_id": "loc_dressing_room_primary",
+      "characters_present": [
+        "char_helen_vane",
+        "char_clara_oaks",
+        "char_maren_faulkner"
+      ],
+      "dramatic_function": "Helen formally passes the mantle of Lady Corisande to Clara before the final performance.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "obj_vintage_emerald_ring": {
+          "location_id": "loc_dressing_room_primary"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_dressing_room_primary"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_dressing_room_primary"
+        },
+        "obj_vintage_emerald_ring": {
+          "location_id": "char_clara_oaks"
+        }
+      },
+      "required_beats": [
+        "Helen demonstrates how to secure the emerald ring's catch so it will not snag on silk, then fits it onto Clara's finger with vocal advice for \"closing night\".",
+        "Maren watches in quiet astonishment as Clara embraces Helen in gratitude."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "clara_hidden_reverence",
+          "plant": "scene_12_the_prompt_copy"
+        },
+        {
+          "fact_ref": "clara_saved_helens_final_tour",
+          "plant": "scene_13_the_empty_stage"
+        }
+      ]
+    },
+    {
+      "id": "scene_18_the_final_curtain",
+      "order": 18,
+      "pov": "char_helen_vane",
+      "location_id": "loc_kings_theatre_dunford",
+      "characters_present": [
+        "char_helen_vane",
+        "char_clara_oaks",
+        "char_arthur_penn",
+        "char_toby_greene"
+      ],
+      "dramatic_function": "Helen ensures Clara's stage triumph by timing the final curtain cue to perfection from the wings.",
+      "entry_state": {
+        "char_helen_vane": {
+          "location_id": "loc_dressing_room_primary"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_dressing_room_primary"
+        },
+        "char_toby_greene": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_clara_oaks": {
+          "location_id": "loc_kings_theatre_dunford"
+        },
+        "char_toby_greene": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "required_beats": [
+        "Clara delivers Corisande's final curse from the apron to a packed house.",
+        "Helen times the prompt bell's three-second delay against Clara's thirty-second apron freeze to cue the curtain.",
+        "The curtain drops on Clara's final breath, prompting thunderous applause through the \"king's theatre\"."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "dunford_prompt_bell_delay",
+          "plant": "scene_01_curtain_and_cue"
+        },
+        {
+          "fact_ref": "corisande_final_curse_timing",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_19_departure_in_rain",
+      "order": 19,
+      "pov": "char_helen_vane",
+      "location_id": "loc_kings_theatre_dunford",
+      "characters_present": [
+        "char_helen_vane",
+        "char_julian_crane",
+        "char_reese_lowe"
+      ],
+      "dramatic_function": "Helen severs ties with Julian on her own terms and walks away from the production with her pride intact.",
+      "entry_state": {
+        "char_helen_vane": {
+          "status": "broken and ashamed",
+          "goal": "support Clara and leave the production with dignity"
+        },
+        "char_julian_crane": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "exit_state": {
+        "char_helen_vane": {
+          "status": "peaceful and liberated",
+          "goal": null
+        },
+        "char_julian_crane": {
+          "location_id": "loc_kings_theatre_dunford"
+        }
+      },
+      "required_beats": [
+        "Julian offers Helen a severance check in the foyer to keep quiet about backstage friction.",
+        "Helen refuses Julian's check, telling him that Clara's triumph is worth more than his money.",
+        "Reese Lowe walks Helen to the doors as she steps out into the evening street."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "clara_critical_admiration",
+          "plant": "scene_10_the_replacement"
+        },
+        {
+          "fact_ref": "helen_sabotage_exposed",
+          "plant": "scene_16_the_hidden_dagger"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "present",
+    "narrative_distance": "close third, drifting into free indirect style",
+    "register": "attentive, unhurried, alert to small physical detail",
+    "sentence_rhythm": "clauses that turn and qualify; commas doing the work of pauses",
+    "imagery_palette": [
+      "light on water",
+      "hands and their small work",
+      "weather as mood"
+    ],
+    "dialogue_density": "moderate; speech is embedded in narration rather than set apart",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "lyrical_literary"
+  },
+  "metadata": {
+    "title": "The Last Corisande",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T17:47:26.676Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "arthur_penn_sacrificed_tour_pension",
+      "statement": "Arthur Penn sacrificed his union actor pension credits eleven years ago when Helen demanded sole top billing and had his acting scenes cut.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "clara_saved_helens_final_tour",
+      "statement": "Clara refused to sign the principal replacement contract unless Julian allowed Helen to complete her final regional tour unhindered.",
+      "caused_by": [
+        "julian_budget_deficit_policy",
+        "arthur_penn_sacrificed_tour_pension"
+      ]
+    },
+    {
+      "fact_ref": "dunford_prompt_bell_delay",
+      "statement": "The mechanical prompt bell at Dunford King's Theatre has a three-second lag between pull and curtain drop.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "corisande_ring_safety_catch",
+      "statement": "The vintage emerald ring has a loose safety catch that snags silk costumes unless turned inward.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "julian_contract_understudy_stipulation",
+      "statement": "Julian's regional Arts Council grant requires the understudy to perform two full solo matinees before funding is cleared.",
+      "caused_by": [
+        "julian_budget_deficit_policy"
+      ]
+    },
+    {
+      "fact_ref": "clara_critical_admiration",
+      "statement": "Regional press and trade reviews praise Clara's understudy showcase as more nuanced and emotionally resonant than Helen's veteran portrayal.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "clara_hidden_reverence",
+      "statement": "Clara's personal prompt copy is filled with notes revering Helen's vocal discipline and staging techniques.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "helen_sabotage_exposed",
+      "statement": "Helen was caught red-handed by Arthur attempting to conceal the silver prop dagger to prevent Clara's closing debut.",
+      "caused_by": [
+        "corisande_ring_safety_catch"
+      ]
+    },
+    {
+      "fact_ref": "helen_eleven_year_record",
+      "statement": "Helen has performed the role of Lady Corisande for eleven consecutive years without missing a single performance.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "julian_budget_deficit_policy",
+      "statement": "Julian cuts senior cast contracts whenever regional theatre attendance falls below forty percent.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "corisande_final_curse_timing",
+      "statement": "The climax of The Glass Scythe requires Lady Corisande to stand motionless on the apron for exactly thirty seconds following her final curse.",
+      "caused_by": []
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.7-flash",
+    "generated_at": "2026-09-29T17:46:57.227Z",
+    "brief": {
+      "story_id": "review-understudy",
+      "title": "Understudy",
+      "premise": {
+        "logline": "A touring actor who has played the same villain for eleven years is told she will be replaced by the understudy she trained.",
+        "modules": {
+          "theme": "what is left of someone who has only ever been one part",
+          "setting_time": "the final three weeks of a long regional tour",
+          "setting_place": "a string of half-empty provincial theatres",
+          "protagonist": "a lead actor who has never missed a performance",
+          "protagonist_want": "to make the company regret the decision before closing night",
+          "antagonism": "a producer who thinks loyalty is a cost",
+          "complication": "the understudy is better than she was, and kinder",
+          "ending_shape": "she lets go of the part and keeps something truer"
+        }
+      },
+      "plot_shape": {
+        "id": "transformation",
+        "name": "Transformation",
+        "central_question": "Can this person become someone else, and what has to be shown to them first?",
+        "phases": [
+          {
+            "name": "The settled self",
+            "purpose": "The protagonist at their most characteristic, and what it costs others.",
+            "share": 0.2
+          },
+          {
+            "name": "Summons",
+            "purpose": "Something forces a confrontation the protagonist cannot argue with.",
+            "share": 0.15
+          },
+          {
+            "name": "Shown",
+            "purpose": "A sequence of confrontations, each harder to dismiss than the last.",
+            "share": 0.35
+          },
+          {
+            "name": "Refusal and collapse",
+            "purpose": "The last defence of the old self fails.",
+            "share": 0.15
+          },
+          {
+            "name": "The altered self",
+            "purpose": "The change tested against the situation from the opening.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "the unchanged",
+            "purpose": "The protagonist, defined by a habit the story will break."
+          },
+          {
+            "role": "summoner",
+            "purpose": "Compels the confrontation; need not be sympathetic."
+          },
+          {
+            "role": "the harmed",
+            "purpose": "Bears the cost of the old self, visibly, from the first phase."
+          },
+          {
+            "role": "the witness",
+            "purpose": "Notices the change before the protagonist claims it."
+          }
+        ],
+        "obligatory_moves": [
+          "The opening establishes the exact behaviour the ending will contradict.",
+          "At least one confrontation shows the protagonist a consequence they caused and never saw.",
+          "The final phase revisits a specific person or place from the first phase."
+        ]
+      },
+      "event_count": 22,
+      "cast": {
+        "characters": 7,
+        "locations": 6,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 11
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "transformation",
+        "premise_preset": "Understudy"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_opening_triumph",
+        "sequence": 1,
+        "summary": "Helen performs Lady Corisande's entrance with unyielding ferocity, physically crowding Clara and Toby during curtain calls to maintain absolute dominance.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_kings_theatre_dunford",
+        "characters_present": [
+          "char_helen_vane",
+          "char_clara_oaks",
+          "char_toby_greene",
+          "char_arthur_penn"
+        ],
+        "dramatic_function": "Establish the protagonist's settled self: possessive of the role, tyrannical, and intolerant of sharing the stage.",
+        "beats": [
+          "Helen delivers her opening monologue with mechanical precision, ignoring the half-empty auditorium.",
+          "During the bow, Helen subtly shifts position to block Clara from the footlights.",
+          "Helen commands Arthur to sweep the stage immediately without offering thanks."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [
+          "clara_saved_helens_final_tour"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_02_prompt_bell_dispute",
+        "sequence": 2,
+        "summary": "Backstage after the show, Helen reprimands Arthur for a mistimed spotlight while checking the mechanical delay on the prompt cue bell.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_kings_theatre_dunford",
+        "characters_present": [
+          "char_helen_vane",
+          "char_arthur_penn"
+        ],
+        "dramatic_function": "Establish Arthur's physical suffering under Helen's perfectionism and plant the theatre's cue bell mechanic.",
+        "beats": [
+          "Helen berates Arthur over a fraction-of-a-second delay on the death scene spotlight.",
+          "Arthur rubs his inflamed wrists while explaining the theatre's three-second mechanical prompt delay.",
+          "Helen tests the prompt bell herself, dismissing Arthur's physical pain as mere lack of devotion."
+        ],
+        "caused_by": [
+          "ev_01_opening_triumph"
+        ],
+        "reveals": [
+          "dunford_prompt_bell_delay"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_03_dressing_room_ritual",
+        "sequence": 3,
+        "summary": "In her dressing room, Helen inspects her vintage emerald ring and reminds Maren how the loose safety catch must be secured so it will not snag on costume silk.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_dressing_room_primary",
+        "characters_present": [
+          "char_helen_vane",
+          "char_maren_faulkner"
+        ],
+        "dramatic_function": "Establish Helen's obsessive control over her stage wardrobe and plant the ring's faulty clasp mechanism.",
+        "beats": [
+          "Helen meticulously wipes her greasepaint under Maren's silent scrutiny.",
+          "Helen tests the emerald ring clasp, noting that if it catches on silk it will tear the bodice.",
+          "Helen tells Maren that no understudy will ever possess the discipline to wear Corisande's jewels."
+        ],
+        "caused_by": [
+          "ev_02_prompt_bell_dispute"
+        ],
+        "reveals": [
+          "corisande_ring_safety_catch"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_dressing_room_primary"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_green_room_critique",
+        "sequence": 4,
+        "summary": "Helen intercepts Clara and Toby in the green room, coldly dismantling Clara's understudy rehearsal performance to stifle any ambition.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_green_room_dunford",
+        "characters_present": [
+          "char_helen_vane",
+          "char_clara_oaks",
+          "char_toby_greene"
+        ],
+        "dramatic_function": "Conclude Phase 1 by demonstrating the emotional toll Helen's possessiveness inflicts on the young actors.",
+        "beats": [
+          "Helen interrupts Toby and Clara reviewing lines over tea.",
+          "Helen tears down Clara's vocal projection, calling her delivery soft and amateurish.",
+          "Clara listens respectfully without defending herself, leaving Helen unsatisfied by her lack of anger."
+        ],
+        "caused_by": [
+          "ev_03_dressing_room_ritual"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_green_room_dunford"
+          },
+          {
+            "entity_id": "char_clara_oaks",
+            "column": "location_id",
+            "value": "loc_green_room_dunford"
+          },
+          {
+            "entity_id": "char_toby_greene",
+            "column": "location_id",
+            "value": "loc_green_room_dunford"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_julian_serves_notice",
+        "sequence": 5,
+        "summary": "Producer Julian Crane corners Helen in the hotel lounge, serving her a formal notice that Clara will replace her as Lady Corisande at the tour's conclusion.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_station_hotel_dunford",
+        "characters_present": [
+          "char_helen_vane",
+          "char_julian_crane"
+        ],
+        "dramatic_function": "The Summons: Deliver the shock eviction from the role Helen considers hers by right, planting the Arts Council understudy clause.",
+        "beats": [
+          "Julian hands Helen the termination envelope, citing dwindling regional sales and rising star fees.",
+          "Julian explains that Arts Council touring subsidies mandate two solo matinees for Clara before the transfer.",
+          "Helen refuses to accept the severance gracefully, vowing to make Julian regret ever betting against her."
+        ],
+        "caused_by": [
+          "ev_04_green_room_critique"
+        ],
+        "reveals": [
+          "julian_contract_understudy_stipulation"
+        ],
+        "conceals": [
+          "clara_saved_helens_final_tour"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_station_hotel_dunford"
+          },
+          {
+            "entity_id": "char_helen_vane",
+            "column": "goal",
+            "value": "make the company regret replacing her before closing night"
+          },
+          {
+            "entity_id": "obj_severance_notice",
+            "column": "location_id",
+            "value": "char_helen_vane"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_forced_joint_rehearsal",
+        "sequence": 6,
+        "summary": "Julian enforces a joint blocking rehearsal where Helen deliberately accelerates her cues to break Clara's composure, only for Clara to match her stride.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_kings_theatre_dunford",
+        "characters_present": [
+          "char_helen_vane",
+          "char_clara_oaks",
+          "char_julian_crane",
+          "char_arthur_penn"
+        ],
+        "dramatic_function": "Show Helen testing her aggressive stage tactics against the summoner and understudy, discovering Clara cannot be easily intimidated.",
+        "beats": [
+          "Julian sits in the stalls taking notes while Helen and Clara run Act Three.",
+          "Helen cuts Clara's breathing pauses by stepping in three beats early with the silver dagger prop.",
+          "Clara pivots smoothly around Helen's aggressive blocking, maintaining her rhythm without faltering."
+        ],
+        "caused_by": [
+          "ev_05_julian_serves_notice"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "char_clara_oaks",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "char_julian_crane",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "char_arthur_penn",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_redcar_poster_discovery",
+        "sequence": 7,
+        "summary": "Arriving at the Redcar Pavilion, Helen discovers lobby posters displaying Clara's portrait as the incoming lead and furiously hides her personal prompt ledger.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_grand_pavilion_redcar",
+        "characters_present": [
+          "char_helen_vane",
+          "char_julian_crane",
+          "char_maren_faulkner"
+        ],
+        "dramatic_function": "Heighten protagonist's vindictive drive and transition the troupe into the touring road stops.",
+        "beats": [
+          "Helen arrives at Redcar to find new marquee banners promoting Clara Oaks for the upcoming city season.",
+          "Helen confronts Julian in the drafty foyer, but Julian dismisses her outrage as commercial reality.",
+          "Helen locks her annotated rehearsal ledger in her traveling trunk, refusing to share her stage cuts."
+        ],
+        "caused_by": [
+          "ev_06_forced_joint_rehearsal"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_grand_pavilion_redcar"
+          },
+          {
+            "entity_id": "char_julian_crane",
+            "column": "location_id",
+            "value": "loc_grand_pavilion_redcar"
+          },
+          {
+            "entity_id": "char_maren_faulkner",
+            "column": "location_id",
+            "value": "loc_grand_pavilion_redcar"
+          },
+          {
+            "entity_id": "obj_velvet_script_ledger",
+            "column": "location_id",
+            "value": "loc_grand_pavilion_redcar"
+          },
+          {
+            "entity_id": "obj_silver_dagger_prop",
+            "column": "location_id",
+            "value": "loc_grand_pavilion_redcar"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_arthur_past_revealed",
+        "sequence": 8,
+        "summary": "Helen corners Arthur backstage at Redcar demanding he alter Clara's stage spikes, but Arthur reveals he lost his actor pension eleven years ago because Helen demanded sole contract supremacy.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_grand_pavilion_redcar",
+        "characters_present": [
+          "char_helen_vane",
+          "char_arthur_penn"
+        ],
+        "dramatic_function": "Structural obligation: Confront protagonist with an unseen consequence she inflicted on Arthur years ago.",
+        "beats": [
+          "Helen attempts to bribe Arthur into resetting the wing lights to throw off Clara's entrance.",
+          "Arthur bitterly refuses, revealing that he sacrificed his union acting pension to become stage manager when Helen ousted him.",
+          "Helen is shaken by Arthur's revelation, struggling to maintain her belief that her ruthlessness was purely artistic devotion."
+        ],
+        "caused_by": [
+          "ev_07_redcar_poster_discovery"
+        ],
+        "reveals": [
+          "arthur_penn_sacrificed_tour_pension"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur_penn",
+            "column": "location_id",
+            "value": "loc_grand_pavilion_redcar"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_watching_clara_backstage",
+        "sequence": 9,
+        "summary": "During the Redcar evening performance, Helen watches from the wings as Clara gently coaches a trembling Toby through a stage fright panic.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_grand_pavilion_redcar",
+        "characters_present": [
+          "char_helen_vane",
+          "char_clara_oaks",
+          "char_toby_greene"
+        ],
+        "dramatic_function": "Confront Helen with Clara's organic leadership and kindness, undermining Helen's belief that fear produces better acting.",
+        "beats": [
+          "Helen stands waiting for her cue in the damp wings while Toby freezes before his entrance.",
+          "Clara quietly guides Toby through a breathing rhythm, restoring his confidence without humiliating him.",
+          "Helen feels a pang of isolation seeing the company draw toward Clara rather than cower before her."
+        ],
+        "caused_by": [
+          "ev_08_arthur_past_revealed"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_clara_oaks",
+            "column": "location_id",
+            "value": "loc_grand_pavilion_redcar"
+          },
+          {
+            "entity_id": "char_toby_greene",
+            "column": "location_id",
+            "value": "loc_grand_pavilion_redcar"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_vocal_strain_rejection",
+        "sequence": 10,
+        "summary": "In her dressing room, Helen struggles through severe vocal spasms, furiously turning away Clara who comes offering a medicinal herbal infusion.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_grand_pavilion_redcar",
+        "characters_present": [
+          "char_helen_vane",
+          "char_clara_oaks"
+        ],
+        "dramatic_function": "Demonstrate Helen's physical deterioration and her rejection of genuine care, escalating her internal crisis.",
+        "beats": [
+          "Helen chokes on a sip of cold tea, her vocal cords raw from eleven years of unmodulated screaming.",
+          "Clara knocks softly, presenting a jar of throat syrup and offering to mark the next morning's rehearsal for her.",
+          "Helen violently slaps the jar away, accusing Clara of hoping for her voice to fail before closing night."
+        ],
+        "caused_by": [
+          "ev_09_watching_clara_backstage"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "status",
+            "value": "vocal cords strained and physically deteriorating"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_burnley_critique_check",
+        "sequence": 11,
+        "summary": "At Burnley Civic Hall, Helen demands Julian pull Clara from future casting, but Julian shows her press write-ups praising Clara's vibrant talent.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_civic_hall_burnley",
+        "characters_present": [
+          "char_helen_vane",
+          "char_julian_crane"
+        ],
+        "dramatic_function": "Confront Helen with objective external proof that the world welcomes Clara's artistic interpretation over her own.",
+        "beats": [
+          "Helen corners Julian by the concrete fire exit, arguing that Clara lacks the venom needed for Lady Corisande.",
+          "Julian produces regional press clippings hailing Clara's workshop showcase as a revelation.",
+          "Julian reminds Helen that audiences want vitality, not an ossified monument."
+        ],
+        "caused_by": [
+          "ev_10_vocal_strain_rejection"
+        ],
+        "reveals": [
+          "clara_critical_admiration"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_civic_hall_burnley"
+          },
+          {
+            "entity_id": "char_julian_crane",
+            "column": "location_id",
+            "value": "loc_civic_hall_burnley"
+          },
+          {
+            "entity_id": "char_clara_oaks",
+            "column": "location_id",
+            "value": "loc_civic_hall_burnley"
+          },
+          {
+            "entity_id": "char_arthur_penn",
+            "column": "location_id",
+            "value": "loc_civic_hall_burnley"
+          },
+          {
+            "entity_id": "char_maren_faulkner",
+            "column": "location_id",
+            "value": "loc_civic_hall_burnley"
+          },
+          {
+            "entity_id": "char_toby_greene",
+            "column": "location_id",
+            "value": "loc_civic_hall_burnley"
+          },
+          {
+            "entity_id": "obj_velvet_script_ledger",
+            "column": "location_id",
+            "value": "loc_civic_hall_burnley"
+          },
+          {
+            "entity_id": "obj_silver_dagger_prop",
+            "column": "location_id",
+            "value": "loc_civic_hall_burnley"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_matinee_mandate",
+        "sequence": 12,
+        "summary": "Julian invokes the regional funding mandate, officially benching Helen and putting Clara on for the Burnley Thursday matinee.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_civic_hall_burnley",
+        "characters_present": [
+          "char_helen_vane",
+          "char_julian_crane",
+          "char_arthur_penn"
+        ],
+        "dramatic_function": "Break Helen's eleven-year streak of never missing a show, forcing her into the audience.",
+        "beats": [
+          "Julian bars Helen from the dressing room, ordering Arthur to sign Clara onto the official call sheet.",
+          "Arthur reluctantly confirms the Arts Council mandate requires Clara to perform the matinee.",
+          "Helen is stripped of her stage costume and banished to the auditorium stalls."
+        ],
+        "caused_by": [
+          "ev_11_burnley_critique_check"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "julian_contract_understudy_stipulation",
+            "plant": "ev_05_julian_serves_notice"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "status",
+            "value": "benched from the matinee performance"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_helen_watches_matinee",
+        "sequence": 13,
+        "summary": "Sitting alone in the Burnley stalls, Helen watches Clara transform Lady Corisande from a caricature of malice into a tragic, wounded human being.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_civic_hall_burnley",
+        "characters_present": [
+          "char_helen_vane",
+          "char_clara_oaks",
+          "char_toby_greene"
+        ],
+        "dramatic_function": "The core revelation of the complication: Helen realizes Clara's performance is profoundly superior to her own calcified portrayal.",
+        "beats": [
+          "Helen watches from the shadow of the balcony, expecting Clara to butcher the second act monologue.",
+          "Clara delivers the lines with heartbreaking sorrow rather than Helen's usual grating snarl.",
+          "The small provincial audience responds with rapt, tearful silence, leaving Helen deeply shaken."
+        ],
+        "caused_by": [
+          "ev_12_matinee_mandate"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_14_script_discovery",
+        "sequence": 14,
+        "summary": "Searching Clara's makeup station in Burnley, Helen discovers Clara's personal prompt copy filled with handwritten notes idolizing Helen's craft.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_civic_hall_burnley",
+        "characters_present": [
+          "char_helen_vane",
+          "char_maren_faulkner"
+        ],
+        "dramatic_function": "Disarm Helen's belief that Clara is a scheming usurper, showing Clara's genuine veneration.",
+        "beats": [
+          "Helen snoops through Clara's station looking for evidence of incompetence to report to Julian.",
+          "Helen finds Clara's notebook, reading margin notes that describe Helen's vocal control as masterclass artistry.",
+          "Maren enters and catches Helen reading, remarking that Clara has always been Helen's most devoted student."
+        ],
+        "caused_by": [
+          "ev_13_helen_watches_matinee"
+        ],
+        "reveals": [
+          "clara_hidden_reverence"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_15_clara_confrontation",
+        "sequence": 15,
+        "summary": "Helen confronts Clara on the empty Burnley stage, where Clara reveals she refused Julian's earlier firing attempts so Helen could finish her farewell tour.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_civic_hall_burnley",
+        "characters_present": [
+          "char_helen_vane",
+          "char_clara_oaks"
+        ],
+        "dramatic_function": "The climax of Phase 3 (Shown): Shatter Helen's victim narrative by revealing that Clara protected Helen from being unceremoniously sacked.",
+        "beats": [
+          "Helen accuses Clara of using sycophancy in her notebooks to soften her up.",
+          "Clara breaks her silence, revealing that Julian tried to dismiss Helen before the tour and Clara refused to take the job unless Helen remained.",
+          "Helen stands paralyzed as Clara gently explains she never wanted to steal the role, only to earn it."
+        ],
+        "caused_by": [
+          "ev_14_script_discovery"
+        ],
+        "reveals": [
+          "clara_saved_helens_final_tour"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_16_clara_ring_incident",
+        "sequence": 16,
+        "summary": "Back at Dunford for closing week technical rehearsals, Clara's costume snags on the loose emerald ring clasp, prompting Helen to launch a desperate bid to disqualify Clara.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_kings_theatre_dunford",
+        "characters_present": [
+          "char_helen_vane",
+          "char_clara_oaks",
+          "char_julian_crane",
+          "char_maren_faulkner"
+        ],
+        "dramatic_function": "The protagonist's last refusal of change: Helen seizes on a trivial prop mishap to demand Clara's dismissal.",
+        "beats": [
+          "The company returns to Dunford for closing week, running technical cues.",
+          "Clara catches her silk sleeve on the emerald ring's faulty clasp, fumbling the silver dagger.",
+          "Helen immediately screams to Julian that Clara lacks the technical precision to wear Corisande's heirloom jewels."
+        ],
+        "caused_by": [
+          "ev_15_clara_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "corisande_ring_safety_catch",
+            "plant": "ev_03_dressing_room_ritual"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "char_clara_oaks",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "char_julian_crane",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "char_maren_faulkner",
+            "column": "location_id",
+            "value": "loc_dressing_room_primary"
+          },
+          {
+            "entity_id": "char_arthur_penn",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "char_toby_greene",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "obj_velvet_script_ledger",
+            "column": "location_id",
+            "value": "loc_dressing_room_primary"
+          },
+          {
+            "entity_id": "obj_silver_dagger_prop",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          }
+        ]
+      },
+      {
+        "id": "ev_17_maren_dressing_truth",
+        "sequence": 17,
+        "summary": "In the Dunford dressing room, Maren confronts Helen, stating that holding onto her eleven-year record of unbroken performances has turned her into a bitter ghost who terrifies the stage crew.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_dressing_room_primary",
+        "characters_present": [
+          "char_helen_vane",
+          "char_maren_faulkner"
+        ],
+        "dramatic_function": "The Witness delivers the decisive personal indictment, collapsing Helen's remaining moral defense.",
+        "beats": [
+          "Helen furiously brushes her wig, demanding Maren support her complaint against Clara.",
+          "Maren refuses, telling Helen that her eleven years of never missing a show has brought her nothing but loneliness and fear.",
+          "Maren points to Helen's shaking hands in the mirror, urging her to stop poisoning her own memories."
+        ],
+        "caused_by": [
+          "ev_16_clara_ring_incident"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "helen_eleven_year_record",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_dressing_room_primary"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_dagger_sabotage_caught",
+        "sequence": 18,
+        "summary": "In a final panic before Clara's closing debut, Helen attempts to hide the silver prop dagger in the green room sofa, but Arthur catches her red-handed.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_green_room_dunford",
+        "characters_present": [
+          "char_helen_vane",
+          "char_arthur_penn"
+        ],
+        "dramatic_function": "The Collapse: Helen's absolute bottom — reduced to petty backstage sabotage, caught by the very man she harmed.",
+        "beats": [
+          "Helen slips into the dark green room clutching the silver dagger prop to prevent Clara's entrance.",
+          "Arthur turns on the lamp, catching Helen mid-act with the dagger concealed beneath sofa cushions.",
+          "Arthur looks at her with sorrow rather than anger, asking if this petty theft is how Lady Corisande ends."
+        ],
+        "caused_by": [
+          "ev_17_maren_dressing_truth"
+        ],
+        "reveals": [
+          "helen_sabotage_exposed"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_green_room_dunford"
+          },
+          {
+            "entity_id": "char_arthur_penn",
+            "column": "location_id",
+            "value": "loc_green_room_dunford"
+          },
+          {
+            "entity_id": "obj_silver_dagger_prop",
+            "column": "location_id",
+            "value": "char_helen_vane"
+          },
+          {
+            "entity_id": "char_helen_vane",
+            "column": "status",
+            "value": "broken and ashamed"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_surrendering_the_ledger",
+        "sequence": 19,
+        "summary": "Helen hands the silver dagger and her eleven-year rehearsal ledger to Arthur backstage, apologizing for the career she took from him.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_kings_theatre_dunford",
+        "characters_present": [
+          "char_helen_vane",
+          "char_arthur_penn"
+        ],
+        "dramatic_function": "The Altered Self begins amends: Helen takes responsibility for the past damage she caused Arthur, letting go of possessiveness.",
+        "beats": [
+          "Helen places the silver dagger into Arthur's scarred hands and hands over her velvet-bound script ledger.",
+          "Helen speaks Arthur's name with sincere remorse, acknowledging the monologue and pension she stole from him.",
+          "Arthur accepts the ledger with quiet relief, nodding to her as a true colleague for the first time in a decade."
+        ],
+        "caused_by": [
+          "ev_18_dagger_sabotage_caught"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "arthur_penn_sacrificed_tour_pension",
+            "plant": "ev_08_arthur_past_revealed"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "char_arthur_penn",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "obj_silver_dagger_prop",
+            "column": "location_id",
+            "value": "char_arthur_penn"
+          },
+          {
+            "entity_id": "obj_velvet_script_ledger",
+            "column": "location_id",
+            "value": "char_arthur_penn"
+          },
+          {
+            "entity_id": "char_helen_vane",
+            "column": "goal",
+            "value": "support Clara and leave the production with dignity"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_passing_the_emerald_ring",
+        "sequence": 20,
+        "summary": "In the dressing room, Helen adjusts the emerald ring's clasp safely and places it on Clara's finger, giving Clara her blessings and key vocal advice for closing night.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_dressing_room_primary",
+        "characters_present": [
+          "char_helen_vane",
+          "char_clara_oaks",
+          "char_maren_faulkner"
+        ],
+        "dramatic_function": "Directly contradict the opening behavior: Helen actively transfers the mantle to Clara with generosity and care.",
+        "beats": [
+          "Helen demonstrates to Clara how to secure the ring's catch so it will never snag on silk.",
+          "Helen fits the emerald ring onto Clara's finger, sharing the breathing trick for Corisande's difficult fourth act soliloquy.",
+          "Maren watches in quiet astonishment as Clara embraces Helen in profound gratitude."
+        ],
+        "caused_by": [
+          "ev_19_surrendering_the_ledger"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "clara_hidden_reverence",
+            "plant": "ev_14_script_discovery"
+          },
+          {
+            "fact_ref": "clara_saved_helens_final_tour",
+            "plant": "ev_15_clara_confrontation"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_dressing_room_primary"
+          },
+          {
+            "entity_id": "char_clara_oaks",
+            "column": "location_id",
+            "value": "loc_dressing_room_primary"
+          },
+          {
+            "entity_id": "obj_vintage_emerald_ring",
+            "column": "location_id",
+            "value": "char_clara_oaks"
+          }
+        ]
+      },
+      {
+        "id": "ev_21_prompt_cue_climax",
+        "sequence": 21,
+        "summary": "During closing night, Helen stands in the prompt corner and rings the cue bell three seconds early, allowing the mechanical curtain to drop on Clara's thirty-second curse with breathtaking perfection.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_kings_theatre_dunford",
+        "characters_present": [
+          "char_helen_vane",
+          "char_clara_oaks",
+          "char_arthur_penn",
+          "char_toby_greene"
+        ],
+        "dramatic_function": "The altered self in action: Helen uses her technical mastery not to monopolize the stage, but to make Clara's final triumph immortal.",
+        "beats": [
+          "Clara delivers Corisande's final curse from the apron, captivating the packed house.",
+          "Knowing the thirty-second apron freeze and the prompt bell's three-second delay, Helen signals the curtain cue at the exact instant.",
+          "The curtain falls precisely as Clara's final breath ends, unleashing thunderous applause across the King's Theatre."
+        ],
+        "caused_by": [
+          "ev_20_passing_the_emerald_ring"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "dunford_prompt_bell_delay",
+            "plant": "ev_02_prompt_bell_dispute"
+          },
+          {
+            "fact_ref": "corisande_final_curse_timing",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "char_clara_oaks",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          },
+          {
+            "entity_id": "char_toby_greene",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          }
+        ]
+      },
+      {
+        "id": "ev_22_foyer_farewell",
+        "sequence": 22,
+        "summary": "In the empty foyer of the King's Theatre as the crowd disperses, Helen turns down Julian's offer of a petty touring settlement and departs into the rain alongside manager Reese Lowe with her dignity intact.",
+        "pov": "char_helen_vane",
+        "location_id": "loc_kings_theatre_dunford",
+        "characters_present": [
+          "char_helen_vane",
+          "char_julian_crane",
+          "char_reese_lowe"
+        ],
+        "dramatic_function": "Resolution: The protagonist walks away from the identity that defined her for eleven years, having discovered who she is when she lets go of the role.",
+        "beats": [
+          "Julian approaches Helen in the foyer, grudgingly offering her an extra severance check to keep quiet about the backstage friction.",
+          "Helen calmly declines the check, telling Julian that Clara's triumph is worth more than his money.",
+          "Reese Lowe walks Helen to the theatre doors, where Helen steps into the evening street, unburdened by Lady Corisande."
+        ],
+        "caused_by": [
+          "ev_21_prompt_cue_climax"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "clara_critical_admiration",
+            "plant": "ev_11_burnley_critique_check"
+          },
+          {
+            "fact_ref": "helen_sabotage_exposed",
+            "plant": "ev_18_dagger_sabotage_caught"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_helen_vane",
+            "column": "status",
+            "value": "peaceful and liberated"
+          },
+          {
+            "entity_id": "char_helen_vane",
+            "column": "goal",
+            "value": null
+          },
+          {
+            "entity_id": "char_julian_crane",
+            "column": "location_id",
+            "value": "loc_kings_theatre_dunford"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_helen_eclipses_arthur",
+        "sequence": 1,
+        "summary": "Eleven years ago, Helen leveraged her rising star power to cut Arthur's major scenes and take sole top billing, costing him his actor pension credits.",
+        "caused_by": [],
+        "establishes": [
+          "arthur_penn_sacrificed_tour_pension"
+        ]
+      },
+      {
+        "id": "hidden_02_julian_attempts_firing",
+        "sequence": 2,
+        "summary": "Julian tried to terminate Helen before the regional tour began to cut production costs, but Clara refused to sign as lead unless Helen was granted her final contracted tour.",
+        "caused_by": [
+          "hidden_01_helen_eclipses_arthur"
+        ],
+        "establishes": [
+          "clara_saved_helens_final_tour"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "dunford_prompt_bell_delay",
+        "statement": "The mechanical prompt bell at Dunford King's Theatre has a three-second lag between pull and curtain drop.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "corisande_ring_safety_catch",
+        "statement": "The vintage emerald ring has a loose safety catch that snags silk costumes unless turned inward.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "julian_contract_understudy_stipulation",
+        "statement": "Julian's regional Arts Council grant requires the understudy to perform two full solo matinees before funding is cleared.",
+        "caused_by": [
+          "julian_budget_deficit_policy"
+        ]
+      },
+      {
+        "fact_ref": "arthur_penn_sacrificed_tour_pension",
+        "statement": "Arthur Penn sacrificed his union actor pension credits eleven years ago when Helen demanded sole top billing and had his acting scenes cut.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "clara_critical_admiration",
+        "statement": "Regional press and trade reviews praise Clara's understudy showcase as more nuanced and emotionally resonant than Helen's veteran portrayal.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "clara_hidden_reverence",
+        "statement": "Clara's personal prompt copy is filled with notes revering Helen's vocal discipline and staging techniques.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "clara_saved_helens_final_tour",
+        "statement": "Clara refused to sign the principal replacement contract unless Julian allowed Helen to complete her final regional tour unhindered.",
+        "caused_by": [
+          "julian_budget_deficit_policy"
+        ]
+      },
+      {
+        "fact_ref": "helen_sabotage_exposed",
+        "statement": "Helen was caught red-handed by Arthur attempting to conceal the silver prop dagger to prevent Clara's closing debut.",
+        "caused_by": [
+          "corisande_ring_safety_catch"
+        ]
+      },
+      {
+        "fact_ref": "helen_eleven_year_record",
+        "statement": "Helen has performed the role of Lady Corisande for eleven consecutive years without missing a single performance.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "julian_budget_deficit_policy",
+        "statement": "Julian cuts senior cast contracts whenever regional theatre attendance falls below forty percent.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "corisande_final_curse_timing",
+        "statement": "The climax of The Glass Scythe requires Lady Corisande to stand motionless on the apron for exactly thirty seconds following her final curse.",
+        "caused_by": []
+      }
+    ],
+    "stakes": [
+      {
+        "stake": "Helen will sabotage Clara's upcoming performances to force Julian to reinstate her contract.",
+        "introduced_by": "ev_05_julian_serves_notice",
+        "resolved_by": "ev_19_surrendering_the_ledger"
+      },
+      {
+        "stake": "Clara's solo matinee performance in Burnley will determine if the Arts Council continues funding the regional tour.",
+        "introduced_by": "ev_12_matinee_mandate",
+        "resolved_by": "ev_13_helen_watches_matinee"
+      },
+      {
+        "stake": "Helen's attempt to conceal the silver prop dagger will destroy the closing night performance and her reputation.",
+        "introduced_by": "ev_18_dagger_sabotage_caught",
+        "resolved_by": "ev_21_prompt_cue_climax"
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T17:47:26.676Z",
+    "started_at": "2026-09-29T17:46:57.227Z",
+    "scenes": [
+      {
+        "id": "scene_01_curtain_and_cue",
+        "order": 1,
+        "event_ids": [
+          "ev_01_opening_triumph",
+          "ev_02_prompt_bell_dispute"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_emerald_ring",
+        "order": 2,
+        "event_ids": [
+          "ev_03_dressing_room_ritual"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_green_room",
+        "order": 3,
+        "event_ids": [
+          "ev_04_green_room_critique"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_notice_of_replacement",
+        "order": 4,
+        "event_ids": [
+          "ev_05_julian_serves_notice"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_blocking_rehearsal",
+        "order": 5,
+        "event_ids": [
+          "ev_06_forced_joint_rehearsal"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_redcar_foyer",
+        "order": 6,
+        "event_ids": [
+          "ev_07_redcar_poster_discovery"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_penns_reckoning",
+        "order": 7,
+        "event_ids": [
+          "ev_08_arthur_past_revealed"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_in_the_wings",
+        "order": 8,
+        "event_ids": [
+          "ev_09_watching_clara_backstage"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_throat_syrup",
+        "order": 9,
+        "event_ids": [
+          "ev_10_vocal_strain_rejection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_replacement",
+        "order": 10,
+        "event_ids": [
+          "ev_11_burnley_critique_check",
+          "ev_12_matinee_mandate"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_the_matinee",
+        "order": 11,
+        "event_ids": [
+          "ev_13_helen_watches_matinee"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_the_prompt_copy",
+        "order": 12,
+        "event_ids": [
+          "ev_14_script_discovery"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_empty_stage",
+        "order": 13,
+        "event_ids": [
+          "ev_15_clara_confrontation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_14_the_snagged_sleeve",
+        "order": 14,
+        "event_ids": [
+          "ev_16_clara_ring_incident"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_15_mirror_and_wig",
+        "order": 15,
+        "event_ids": [
+          "ev_17_maren_dressing_truth"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_16_the_hidden_dagger",
+        "order": 16,
+        "event_ids": [
+          "ev_18_dagger_sabotage_caught",
+          "ev_19_surrendering_the_ledger"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_17_passing_the_ring",
+        "order": 17,
+        "event_ids": [
+          "ev_20_passing_the_emerald_ring"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_18_the_final_curtain",
+        "order": 18,
+        "event_ids": [
+          "ev_21_prompt_cue_climax"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_19_departure_in_rain",
+        "order": 19,
+        "event_ids": [
+          "ev_22_foyer_farewell"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}
