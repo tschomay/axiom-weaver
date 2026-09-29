@@ -174,3 +174,28 @@ Consequences: `SceneDigestSchema` and the writer's response schema gain the fiel
 read, defaulting to `[]`, so every stored digest still parses); the writer contract says what
 belongs in it; `RunState` holds the ledger; the context assembler renders it; `compileScene`
 checks drift. `CONTEXT.md`'s Scene Digest entry and `GLOSSARY.md` gain the term.
+
+## Amendment (2026-09-29, later): details that can collide
+
+[#215](https://github.com/tschomay/axiom-weaver/issues/215). In the #204 re-run every scene reported
+`established_details` — 205 across ten runs — and **no `(entity_id, attribute)` key was reported twice**, so the
+details ledger never held anything a later scene could contradict and `detail_drift` never fired. The writer
+recorded incidental texture ("peppermint lozenges") under ever-new keys, and never the load-bearing specifics that
+actually drifted (where the key hangs, where the cash is, the play's title, someone's years in a role). Decision 1–5 of
+the amendment above stand; three things change so that keys can collide:
+
+1. **Canonical attributes.** The ledger normalizes an attribute before keying it (`canonicalAttribute`): snake_case,
+   and a small synonym table folds the ways a writer names the same property — `location`, `kept_in`, `stored`,
+   `hiding_place` → `where_kept`; `colour` → `color`; `sum`, `total`, `amount_of_money` → `amount`; `name_of_play`,
+   `play_title` → `title`; and so on. The writer is shown the canonical names.
+2. **Suggested keys.** The ESTABLISHED DETAILS block is rendered even before anything is established, listing the
+   on-stage entities' ids (characters, the location, objects) with the canonical attributes, and asks that a detail
+   about one of them be recorded under that id. A thing with no World Model row is recorded under a coined slug that
+   is reused (unchanged).
+3. **What to record.** The contract and schema now ask for the details *most likely to be referenced again* — where
+   a plot object is kept, money, ages and durations, dates and times, titles and names — and to report the same key
+   again whenever a scene restates one, not only when it is new. Texture that no later scene will mention is not
+   recorded.
+
+Not done here: making `detail_drift` a continuity-pass repair target. The ledger has to collide first; whether a
+repair is worth its call can be measured once it does.

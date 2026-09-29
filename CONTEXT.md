@@ -94,7 +94,9 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   **`established_details`** (up to 8 `{entity_id, attribute, value}` specifics the prose
   committed to — a material, a number, a name, a backstory — kept in the run's **details
   ledger**, first value wins, shown to later scenes as "do not change", and a later
-  contradiction logged as `detail_drift`; ADR 0003's 2026-09-29 amendment). Target
+  contradiction logged as `detail_drift`; ADR 0003's 2026-09-29 amendment). Keys are made to
+  collide: attributes fold to canonical names (`where_kept`, `amount`, `years`, `title`…) and
+  each scene is shown the on-stage ids to record under. Target
   ~150–220 tokens. A **rollup** (Chapter/Part Digest)
   shares this schema but aggregates over its window rather than concatenating: event
   summary is freshly synthesized, list fields union, imagery signature re-caps to 3 by

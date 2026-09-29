@@ -8,7 +8,7 @@ import { describe, expect, it } from 'vitest';
 import { renderArcPrompt } from '@/arc/prompt';
 import { briefsFor } from '@/arc/premises';
 import { promptText } from '@/assembler/context-assembler';
-import { DetailsLedger, ESTABLISHED_DETAILS_SHOWN, normalizeDetailValue } from '@/digest/details-ledger';
+import { DetailsLedger, ESTABLISHED_DETAILS_SHOWN, canonicalAttribute, normalizeDetailValue } from '@/digest/details-ledger';
 import { SceneDigestSchema, rollUp, sceneDigestEntry } from '@/digest/scene-digest';
 import { readFixturePackage } from '@/fixtures/load';
 import { walkPlantObligations } from '@/plants/obligation-walk';
@@ -134,7 +134,7 @@ describe('through the run (#198)', () => {
     const { compiled } = await compile([]);
     const text = promptText(compiled.assembled);
     expect(text).toContain('ESTABLISHED DETAILS (the reader has been told these — do not change them):');
-    expect(text).toContain('prop_ash_urn — material: brass (scene 1)');
+    expect(text).toContain('prop_ash_urn — material [prop_ash_urn / material]: brass (scene 1)');
   });
 
   it('flags a contradiction as detail_drift, a warning', async () => {
@@ -158,5 +158,64 @@ describe('arc prompt: props that pass between events are tracked objects (#198)'
   it('asks for a seeded object for anything two or more events turn on', () => {
     const prompt = renderArcPrompt(briefsFor('structured', 5)[0]!);
     expect(prompt).toContain('Every physical object that two or more events turn on');
+  });
+});
+
+describe('keys that can collide (#215)', () => {
+  it('folds attribute synonyms and spelling to one canonical key', () => {
+    expect(canonicalAttribute('Location')).toBe('where_kept');
+    expect(canonicalAttribute('hiding place')).toBe('where_kept');
+    expect(canonicalAttribute('colour')).toBe('color');
+    expect(canonicalAttribute('current_total')).toBe('amount');
+    expect(canonicalAttribute('Play Title')).toBe('title');
+    expect(canonicalAttribute('years_in_role')).toBe('years');
+    expect(canonicalAttribute('table_number')).toBe('table_number');
+  });
+
+  it('catches drift reported under a synonym (after-04: the cash moves; random-02: eleven years become thirty)', () => {
+    const ledger = new DetailsLedger();
+    ledger.record(
+      [
+        { entity_id: 'obj_deposit_envelope', attribute: 'location', value: 'the toe of his left boot' },
+        { entity_id: 'char_hester', attribute: 'tenure', value: 'eleven years' },
+      ],
+      1,
+    );
+    const drifts = ledger.driftIn([
+      { entity_id: 'obj_deposit_envelope', attribute: 'hidden_in', value: 'the boiler flue' },
+      { entity_id: 'char_hester', attribute: 'years in role', value: 'thirty years' },
+    ]);
+    expect(drifts.map((drift) => drift.established.attribute)).toEqual(['where_kept', 'years']);
+    expect(ledger.all().map((detail) => detail.attribute)).toEqual(['where_kept', 'years']);
+  });
+
+  it('suggests the on-stage ids and attribute names even before anything is established', async () => {
+    const pkg = await readFixturePackage('cinderella');
+    const state = new RunState(pkg);
+    const [, second] = scenesInOrder(pkg);
+    const compiled = await compileScene({
+      pkg,
+      scene: second!,
+      model: state.model,
+      voiceCard: parseVoiceCard(pkg.voice_card),
+      hierarchy: state.hierarchy,
+      ledger: state.ledger,
+      plantWalk: walkPlantObligations(pkg),
+      client: new SyntheticWriterClient(pkg),
+      imageryHistory: state.imageryHistory,
+      previousParagraph: null,
+      details: state.details,
+      occasion: 'author_time',
+    });
+    const text = promptText(compiled.assembled);
+    expect(text).toContain('RECORDING DETAILS: when this scene states a specific');
+    expect(text).toContain(`= ${second!.pov}`);
+    expect(text).toContain('where_kept, amount, age, years');
+    expect(text).not.toContain('ESTABLISHED DETAILS (the reader has been told these');
+  });
+
+  it('asks the writer for load-bearing details and repeated keys', () => {
+    expect(writerContract()).toContain('most likely to mention');
+    expect(writerContract()).toContain('report a');
   });
 });
