@@ -244,6 +244,21 @@ export function stageDecisionTriggers(
   return added;
 }
 
+/**
+ * A scene's story time from its events (#219): the first event's, or "first → last" when the scene
+ * spans two different times. Nothing when no event says.
+ */
+export function storyTimeOf(events: readonly FabulaEvent[]): { story_time?: string } {
+  const times = [...events]
+    .sort((a, b) => a.sequence - b.sequence)
+    .map((event) => (event.story_time ?? '').trim())
+    .filter((time) => time !== '');
+  if (times.length === 0) return {};
+  const first = times[0]!;
+  const last = times[times.length - 1]!;
+  return { story_time: first === last ? first : `${first} → ${last}` };
+}
+
 /** The floor, ceiling, base and per-beat words of a segmented card's default `length_budget`. */
 export const LENGTH_BUDGET = { min: 400, max: 1200, base: 250, perBeat: 150 } as const;
 
@@ -331,6 +346,7 @@ export function assembleScenes(
       exit_state: state.exit_state,
       required_beats: [...props.required_beats],
       length_budget: defaultLengthBudget(props.required_beats.length),
+      ...storyTimeOf(events),
       reader_must_learn: [],
       must_stay_hidden: [],
       force_reintroduce: [],

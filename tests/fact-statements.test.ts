@@ -296,6 +296,7 @@ describe('generation (ADR 0022 decision 4)', () => {
     expect(prompt.indexOf('FACTS —')).toBeGreaterThan(prompt.indexOf('EVENTS —'));
     expect((arcResponseJsonSchema(8) as { propertyOrdering: string[] }).propertyOrdering).toEqual([
       'title',
+      'period',
       'world_model_seed',
       'hidden_account',
       'events',

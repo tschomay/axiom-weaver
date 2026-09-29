@@ -581,6 +581,7 @@ describe('the response schema', () => {
     // events that uncover it, and the fact statements after everything they describe (ADR 0022).
     expect(schema['propertyOrdering']).toEqual([
       'title',
+      'period',
       'world_model_seed',
       'hidden_account',
       'events',

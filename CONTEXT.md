@@ -35,7 +35,10 @@ World Model seed and Scene Cards.
   Cards, the Voice Card. The compiler's source input.
 - **Scene Card** — the unit the author authors. Order, POV, location, characters present,
   dramatic function, **required beats**, what the reader must learn here, what must stay
-  hidden, entry state → exit state, tone, length budget, and the scene's **invariants**.
+  hidden, entry state → exit state, tone, length budget, **story time** (when it happens, in a
+  reader's words — "day 2, dusk"; ADR 0019's 2026-09-29 amendment), and the scene's
+  **invariants**. A package's metadata may fix its **period** (era and technology), rendered to
+  the writer so nothing belongs to another era.
 - **Required beats** — the tuning dial. Few beats = the actors improvise widely between
   reads; many = tightly the same story every time. Also the *variance* dial (see below).
 - **Voice Card** — the narrator as a first-class object: person, tense, narrative

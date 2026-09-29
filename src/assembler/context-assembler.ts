@@ -147,7 +147,7 @@ export function assemblePrompt(input: AssembleInput): AssembledPrompt {
     'uncached verbatim tail',
     'none',
     'replaced every scene',
-    renderVerbatimTail(input.previousParagraph),
+    renderVerbatimTail(input.previousParagraph, previousStoryTime(input)),
   );
 
   const { text: volatileText, groups } = buildVolatileTail(input, rows, diagnostics);
@@ -345,7 +345,13 @@ function buildVolatileTail(
 
 function renderPackageMetadata(pkg: StoryPackage): string {
   const title = pkg.metadata.title;
-  return `STORY: "${title}" (package version ${pkg.package_version}).`;
+  const lines = [`STORY: "${title}" (package version ${pkg.package_version}).`];
+  // #219: an era the writer is never told is an era it drifts out of (a mobile phone among gaslamps).
+  const period = (pkg.metadata as { period?: unknown }).period;
+  if (typeof period === 'string' && period.trim() !== '') {
+    lines.push(`PERIOD: ${period.trim()} — nothing in the prose may belong to another era.`);
+  }
+  return lines.join('\n');
 }
 
 /**
@@ -459,7 +465,16 @@ function renderTenseReminder(voiceCard: VoiceCard): string {
   return `TENSE: narrate this scene in the ${tense} tense, like every scene of this telling (the Voice Card). Dialogue may use any tense; narration may not switch.`;
 }
 
-function renderVerbatimTail(paragraph: string | null): string {
+/** The story time of the scene before this one, if its card has one (#219). */
+function previousStoryTime(input: AssembleInput): string | null {
+  const previous = [...input.pkg.scene_cards]
+    .filter((card) => card.order < input.scene.order)
+    .sort((a, b) => b.order - a.order)[0];
+  const time = previous?.story_time?.trim() ?? '';
+  return time === '' ? null : time;
+}
+
+function renderVerbatimTail(paragraph: string | null, previousTime: string | null = null): string {
   if (paragraph === null || paragraph.trim() === '') return '';
   const trimmed = paragraph.trim();
   const text =
@@ -467,7 +482,7 @@ function renderVerbatimTail(paragraph: string | null): string {
       ? `...${trimmed.slice(trimmed.length - VERBATIM_TAIL_MAX_CHARS)}`
       : trimmed;
   return [
-    'PREVIOUS SCENE ENDED (the last words the reader actually read — continue from it without a seam; never restate or paraphrase its final sentence):',
+    `PREVIOUS SCENE ENDED${previousTime === null ? '' : ` (story time: ${previousTime})`} (the last words the reader actually read — continue from it without a seam; never restate or paraphrase its final sentence${previousTime === null ? '' : '; if this scene is at a different time, say so in its first lines'}):`,
     text,
   ].join('\n');
 }
@@ -521,6 +536,9 @@ function renderSceneCard(
     `POV: ${scene.pov}. Location: ${scene.location_id}. Present: ${scene.characters_present.join(', ')}.`,
     `Dramatic function: ${scene.dramatic_function}`,
   ];
+  if (scene.story_time !== undefined && scene.story_time.trim() !== '') {
+    lines.push(`WHEN: ${scene.story_time.trim()} — keep every date, season, age and elapsed time consistent with it.`);
+  }
   if (scene.required_beats.length > 0) {
     lines.push('Required beats:');
     for (const beat of scene.required_beats) lines.push(`  - ${beat}`);
