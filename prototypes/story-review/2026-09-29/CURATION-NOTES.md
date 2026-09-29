@@ -58,3 +58,9 @@
   change" for entities on stage.
 - Verbatim tail also invites echo: 01 Scene 3 opens with Scene 2's last line verbatim ("The great hand had failed.").
   Contract should say "continue from, do not repeat".
+
+## Story 04 Night Shift Letter — concealment WELL wired (contrast case)
+- neil_deceptive_replies: conceals ev_04–ev_08 → must_stay_hidden S4–S8; reveals ev_12 → S12. gary_prank_origin revealed S5.
+- neil_assigned_locker (hidden) never revealed — minor.
+- So hidden-account wiring varies by arc: 02 none, 03 partial (conceal only at the first event), 04 full. The arc generator
+  sometimes fills reveals/conceals and sometimes doesn't; nothing checks. → a lint/repair gate on the Fabula.
