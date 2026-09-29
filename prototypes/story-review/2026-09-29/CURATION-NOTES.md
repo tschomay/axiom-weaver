@@ -17,3 +17,15 @@
 ## Story 01 The Apprentice's Bill
 - Braise vs quince tart; Table 4 vs Table nine; critic dropped (never tastes); vow kept on a kitchen ticket never shown to carry the name.
 - Scene 3 opens repeating Scene 2's last line. "crypt" x3.
+
+## ROOT CAUSE (story 02): hidden account never wired into reveals/conceals
+- _fabula events: no event `conceals` anything; ev_07 (the revelation) `reveals: []`.
+- So segment.ts: carried reveals/conceals empty → revealedAt lacks the secret → findWithholding never asked about it →
+  every card must_stay_hidden: []; scene 5 reader_must_learn: [] (the reveal scene!) — secret paid off only as
+  `plant: null` seed-grounded payoffs (deathbed_confession_to_ruth, boat_buyer_deposit_tern_bay).
+  father_second_family_tern_bay appears in NO card's reader_must_learn.
+- Writer for scene 1: told "Ruth knows: deathbed confession" (priority-5 broader knowledge) but beat says she "spots
+  unusual mooring coordinates" and no concealment instruction → resolved by making Ruth ignorant.
+- Lint #180 (every concealed fact revealed) can't fire: nothing concealed. Missing check: hidden_account fact with no
+  revealing event / no reader_must_learn anywhere.
+- Also: all cards length_budget null; scene 5 hit MAX_TOKENS.
