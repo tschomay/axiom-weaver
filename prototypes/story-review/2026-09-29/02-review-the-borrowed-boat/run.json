@@ -1,0 +1,129 @@
+{
+  "title": "The Borrowed Boat",
+  "plot_shape_preset": "quest",
+  "premise": {
+    "logline": "Two estranged sisters sail their father’s old boat down the coast to scatter his ashes where he said, and neither believes him.",
+    "modules": {
+      "theme": "how the dead keep arguing through what they leave",
+      "setting_time": "a week of unreliable autumn weather",
+      "setting_place": "a rocky coastline of fishing harbours in decline",
+      "protagonist": "the younger sister, who stayed and nursed him",
+      "protagonist_want": "to finish the trip without admitting what he told her",
+      "antagonism": "the older sister, who wants to sell the boat at the end",
+      "complication": "the place he named is where he had a second family",
+      "ending_shape": "they arrive, and the destination is not what the trip was for"
+    }
+  },
+  "event_count_requested": 8,
+  "arc_events": 8,
+  "scenes": 6,
+  "words": 3577,
+  "run_id": "review-the-borrowed-boat-20260929121650-781fd454",
+  "models": {
+    "arc": "gemini-3.7-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash",
+      "gemini-3.5-flash-lite"
+    ]
+  },
+  "cost_usd": 0.1879,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_05_the_creek_cottage",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"terms already glossed (term: facts)\" (~29 tokens) from scene \"scene_05_the_creek_cottage\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_05_the_creek_cottage",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~85 tokens) from scene \"scene_05_the_creek_cottage\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_05_the_creek_cottage",
+      "code": "truncated_scene",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "scene_05_the_creek_cottage: primary call hit MAX_TOKENS after prose; digest recovered via fallback call"
+    },
+    {
+      "scene": "scene_05_the_creek_cottage",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_ruth",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_05_the_creek_cottage: scene_05_the_creek_cottage used band \"reanchor\" for \"char_ruth\" where the told-ledger implies \"assume\" — the scene assumes more than the reader has been given"
+    },
+    {
+      "scene": "scene_05_the_creek_cottage",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_05_the_creek_cottage: scene_05_the_creek_cottage used band \"reanchor\" for \"char_helen\" where the told-ledger implies \"assume\" — the scene assumes more than the reader has been given"
+    },
+    {
+      "scene": "scene_05_the_creek_cottage",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_shearwater",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_05_the_creek_cottage: scene_05_the_creek_cottage used band \"reanchor\" for \"obj_shearwater\" where the told-ledger implies \"assume\" — the scene assumes more than the reader has been given"
+    },
+    {
+      "scene": "scene_06_return_to_slipway",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_helen.goal; the proposal \"refit the Shearwater alongside Ruth\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_06_return_to_slipway",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_ruth",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_ruth.goal; the proposal \"refit the Shearwater alongside Helen\" was dropped and the prior value kept"
+    }
+  ]
+}

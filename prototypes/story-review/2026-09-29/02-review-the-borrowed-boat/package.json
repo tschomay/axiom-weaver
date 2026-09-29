@@ -1,0 +1,1156 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-the-borrowed-boat",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_ruth",
+        "name": "Ruth Miller",
+        "location_id": "loc_skiff_cove",
+        "status": "exhausted",
+        "goal": "scatter Arthur's ashes without exposing his deathbed confession",
+        "bag": {}
+      },
+      {
+        "id": "char_helen",
+        "name": "Helen Miller",
+        "location_id": "loc_skiff_cove",
+        "status": "guarded",
+        "goal": "deliver the boat to a Tern Bay buyer after scattering the ashes",
+        "bag": {}
+      },
+      {
+        "id": "char_donald",
+        "name": "Donald Crane",
+        "location_id": "loc_skiff_cove",
+        "status": "infirm",
+        "goal": "protect the slipway from uncertified vessel abandonments",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_skiff_cove",
+        "name": "Skiff Cove Harbour",
+        "bag": {}
+      },
+      {
+        "id": "loc_inshore_passage",
+        "name": "The Inshore Sound",
+        "bag": {}
+      },
+      {
+        "id": "loc_morren_head",
+        "name": "Morren Reach",
+        "bag": {}
+      },
+      {
+        "id": "loc_low_water_creek",
+        "name": "Tern Bay Creek",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_shearwater",
+        "name": "The Shearwater",
+        "location_id": "loc_skiff_cove",
+        "status": "weathered",
+        "bag": {}
+      },
+      {
+        "id": "obj_ash_urn",
+        "name": "Arthur's Ash Urn",
+        "location_id": "loc_skiff_cove",
+        "status": "sealed",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_ruth_helen",
+        "from_id": "char_ruth",
+        "to_id": "char_helen",
+        "kind": "sister",
+        "sentiment": "resentful",
+        "bag": {}
+      },
+      {
+        "id": "rel_helen_ruth",
+        "from_id": "char_helen",
+        "to_id": "char_ruth",
+        "kind": "sister",
+        "sentiment": "defensive",
+        "bag": {}
+      },
+      {
+        "id": "rel_donald_ruth",
+        "from_id": "char_donald",
+        "to_id": "char_ruth",
+        "kind": "neighbour",
+        "sentiment": "sympathetic",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_ruth",
+        "fact_ref": "deathbed_confession_to_ruth",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_ruth",
+        "fact_ref": "arthur_frail_care_burden",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_helen",
+        "fact_ref": "boat_buyer_deposit_tern_bay",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_departure",
+      "order": 1,
+      "pov": "char_ruth",
+      "location_id": "loc_skiff_cove",
+      "characters_present": [
+        "char_ruth",
+        "char_helen",
+        "char_donald"
+      ],
+      "dramatic_function": "Establishes the sisters' conflicting agendas for the voyage and Arthur's unresolved secret while placing a strict legal deadline on their journey.",
+      "entry_state": {
+        "char_ruth": {
+          "location_id": "loc_skiff_cove"
+        },
+        "char_helen": {
+          "location_id": "loc_skiff_cove"
+        },
+        "obj_shearwater": {
+          "location_id": "loc_skiff_cove"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_skiff_cove"
+        }
+      },
+      "exit_state": {
+        "char_ruth": {
+          "location_id": "loc_inshore_passage"
+        },
+        "char_helen": {
+          "location_id": "loc_inshore_passage"
+        },
+        "obj_shearwater": {
+          "location_id": "loc_inshore_passage"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_inshore_passage"
+        }
+      },
+      "required_beats": [
+        "Ruth stows Arthur's urn aboard the boat and spots unusual mooring coordinates for tern bay in his logbook before Helen arrives intent on selling the vessel down south.",
+        "Donald requires Helen to sign a provisional seven day waiver mandating the vessel return to skiff cove within the week.",
+        "Ruth casts off from skiff cove into the heavy grey chop."
+      ],
+      "reader_must_learn": [
+        "father_notebook_fuel_log",
+        "slipway_waiver_return_clause",
+        "arthur_urn_stowed",
+        "tern_bay_coordinates_in_logbook"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_02_the_cracked_stay",
+      "order": 2,
+      "pov": "char_ruth",
+      "location_id": "loc_inshore_passage",
+      "characters_present": [
+        "char_ruth",
+        "char_helen"
+      ],
+      "dramatic_function": "Introduces physical peril and demonstrates Ruth's willingness to gamble with their safety rather than abort the journey.",
+      "entry_state": {
+        "obj_shearwater": {
+          "status": "weathered",
+          "location_id": "loc_inshore_passage"
+        },
+        "char_ruth": {
+          "location_id": "loc_inshore_passage"
+        },
+        "char_helen": {
+          "location_id": "loc_inshore_passage"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_inshore_passage"
+        }
+      },
+      "exit_state": {
+        "obj_shearwater": {
+          "status": "compromised_rigging",
+          "location_id": "loc_morren_head"
+        },
+        "char_ruth": {
+          "location_id": "loc_morren_head"
+        },
+        "char_helen": {
+          "location_id": "loc_morren_head"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_morren_head"
+        }
+      },
+      "required_beats": [
+        "Helen fights the helm as the tide race pulls the keel toward the rocky bar.",
+        "Ruth finds a hairline fracture in the starboard forestay fitting on the groaning mast but chooses not to turn back."
+      ],
+      "reader_must_learn": [
+        "cracked_starboard_stay"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_loss_of_tender",
+      "order": 3,
+      "pov": "char_helen",
+      "location_id": "loc_morren_head",
+      "characters_present": [
+        "char_ruth",
+        "char_helen"
+      ],
+      "dramatic_function": "Catalyzes the sisters' repressed familial resentment into an open clash through the loss of their escape vessel.",
+      "entry_state": {
+        "char_helen": {
+          "status": "guarded",
+          "location_id": "loc_morren_head"
+        },
+        "char_ruth": {
+          "location_id": "loc_morren_head"
+        },
+        "obj_shearwater": {
+          "location_id": "loc_morren_head"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_morren_head"
+        }
+      },
+      "exit_state": {
+        "char_helen": {
+          "status": "rattled",
+          "location_id": "loc_inshore_passage"
+        },
+        "char_ruth": {
+          "location_id": "loc_inshore_passage"
+        },
+        "obj_shearwater": {
+          "location_id": "loc_inshore_passage"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_inshore_passage"
+        }
+      },
+      "required_beats": [
+        "Helen's hasty knot slips in the surge, letting the tender smash against the rocks at Morren Reach.",
+        "Ruth accuses Helen of leaving her to bear the sole burden of nursing their dying father."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "arthur_frail_care_burden",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_04_dismasted_in_storm",
+      "order": 4,
+      "pov": "char_ruth",
+      "location_id": "loc_inshore_passage",
+      "characters_present": [
+        "char_ruth",
+        "char_helen"
+      ],
+      "dramatic_function": "Forces the estranged sisters to cooperate in order to survive when the boat's compromised rigging catastrophically fails.",
+      "entry_state": {
+        "obj_shearwater": {
+          "status": "compromised_rigging",
+          "location_id": "loc_inshore_passage"
+        },
+        "char_ruth": {
+          "location_id": "loc_inshore_passage"
+        },
+        "char_helen": {
+          "location_id": "loc_inshore_passage"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_inshore_passage"
+        }
+      },
+      "exit_state": {
+        "obj_shearwater": {
+          "status": "dismasted_under_engine",
+          "location_id": "loc_low_water_creek"
+        },
+        "char_ruth": {
+          "location_id": "loc_low_water_creek"
+        },
+        "char_helen": {
+          "location_id": "loc_low_water_creek"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_low_water_creek"
+        }
+      },
+      "required_beats": [
+        "A sudden squall snaps the cracked stay and collapses the mast over the side deck.",
+        "Ruth and Helen cut free the tangled rigging and limp toward the southern inlet on the diesel engine in blinding rain."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "cracked_starboard_stay",
+          "plant": "scene_02_the_cracked_stay"
+        }
+      ]
+    },
+    {
+      "id": "scene_05_the_creek_cottage",
+      "order": 5,
+      "pov": "char_ruth",
+      "location_id": "loc_low_water_creek",
+      "characters_present": [
+        "char_ruth",
+        "char_helen"
+      ],
+      "dramatic_function": "To expose both sisters' hidden betrayals and dismantle Arthur's final manipulation, bringing them into shared defiance.",
+      "entry_state": {
+        "char_helen": {
+          "goal": "deliver the boat to a Tern Bay buyer after scattering the ashes",
+          "location_id": "loc_low_water_creek"
+        },
+        "obj_ash_urn": {
+          "status": "sealed",
+          "location_id": "loc_low_water_creek"
+        },
+        "char_ruth": {
+          "goal": "scatter Arthur's ashes without exposing his deathbed confession",
+          "location_id": "loc_low_water_creek"
+        },
+        "obj_shearwater": {
+          "location_id": "loc_low_water_creek"
+        }
+      },
+      "exit_state": {
+        "char_helen": {
+          "goal": "sail the boat back to Skiff Cove with Ruth",
+          "location_id": "loc_skiff_cove"
+        },
+        "obj_ash_urn": {
+          "status": "emptied",
+          "location_id": "loc_skiff_cove"
+        },
+        "char_ruth": {
+          "goal": "sail the boat back to Skiff Cove with Helen",
+          "location_id": "loc_skiff_cove"
+        },
+        "obj_shearwater": {
+          "location_id": "loc_skiff_cove"
+        }
+      },
+      "required_beats": [
+        "Ruth bypasses the harbour breakwater and follows Arthur's coordinates up a secluded tidal creek to an overgrown pontoon marked with his initials.",
+        "Helen confesses she accepted a buyer deposit from a Tern Bay breaker to pay off Arthur's debts.",
+        "Ruth reveals Arthur's secret second family in the cottage and his plan to burden them with his ashes.",
+        "Refusing Arthur his desired closure, the sisters unseal the urn and scatter his ashes across the overgrown lawn together."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "father_notebook_fuel_log",
+          "plant": "scene_01_the_departure"
+        },
+        {
+          "fact_ref": "deathbed_confession_to_ruth",
+          "plant": null
+        },
+        {
+          "fact_ref": "boat_buyer_deposit_tern_bay",
+          "plant": null
+        },
+        {
+          "fact_ref": "arthur_urn_stowed",
+          "plant": "scene_01_the_departure"
+        },
+        {
+          "fact_ref": "tern_bay_coordinates_in_logbook",
+          "plant": "scene_01_the_departure"
+        }
+      ]
+    },
+    {
+      "id": "scene_06_return_to_slipway",
+      "order": 6,
+      "pov": "char_helen",
+      "location_id": "loc_skiff_cove",
+      "characters_present": [
+        "char_ruth",
+        "char_helen",
+        "char_donald"
+      ],
+      "dramatic_function": "To resolve the countdown and unite the sisters in a shared commitment to the boat's future.",
+      "entry_state": {
+        "obj_shearwater": {
+          "status": "dismasted_under_engine"
+        },
+        "char_ruth": {
+          "status": "exhausted"
+        },
+        "char_helen": {
+          "status": "rattled"
+        }
+      },
+      "exit_state": {
+        "obj_shearwater": {
+          "status": "drydocked_for_repairs"
+        },
+        "char_ruth": {
+          "status": "reconciled"
+        },
+        "char_helen": {
+          "status": "reconciled"
+        }
+      },
+      "required_beats": [
+        "The battered Shearwater arrives at the Skiff Cove slipway hours before Donald's provisional waiver expires.",
+        "Donald clears the registration hold as Ruth and Helen agree to split yard fees and refit the vessel together."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "slipway_waiver_return_clause",
+          "plant": "scene_01_the_departure"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "omniscient, close-focused on the protagonist",
+    "register": "plain, warmly ironic, folk-narrator; understates cruelty and wonder alike",
+    "sentence_rhythm": "short declarative sentences; occasional triads (rule-of-three lists)",
+    "imagery_palette": [
+      "hearth and ash",
+      "finery and brocade",
+      "glass and candlelight"
+    ],
+    "dialogue_density": "low to moderate; the narrator reports more than it stages",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "fairy_tale_fable"
+  },
+  "metadata": {
+    "title": "The Northern Reach",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T12:16:50.461Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "father_second_family_tern_bay",
+      "statement": "Arthur maintained an unacknowledged partner and household at Tern Bay for twenty years.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "deathbed_confession_to_ruth",
+      "statement": "Arthur revealed his secret Tern Bay household to Ruth on his deathbed and instructed her to bring his ashes there.",
+      "caused_by": [
+        "father_second_family_tern_bay"
+      ]
+    },
+    {
+      "fact_ref": "boat_buyer_deposit_tern_bay",
+      "statement": "Helen accepted an advance deposit from a Tern Bay shipbreaker to sell The Shearwater immediately upon landfall.",
+      "caused_by": [
+        "father_second_family_tern_bay"
+      ]
+    },
+    {
+      "fact_ref": "arthur_frail_care_burden",
+      "statement": "Ruth spent three years providing solitary round-the-clock nursing care for Arthur during his terminal illness.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "father_notebook_fuel_log",
+      "statement": "Arthur's coastal logbook records domestic mooring coordinates at Tern Bay disguised as offshore fuel stops.",
+      "caused_by": [
+        "father_second_family_tern_bay"
+      ]
+    },
+    {
+      "fact_ref": "slipway_waiver_return_clause",
+      "statement": "The harbourmaster's provisional seaworthiness waiver mandates that The Shearwater must return to Skiff Cove within seven days or face impoundment.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "cracked_starboard_stay",
+      "statement": "The starboard forestay fitting developed a severe stress fracture while battling tidal races in the inshore sound.",
+      "caused_by": []
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.7-flash",
+    "generated_at": "2026-09-29T12:16:35.882Z",
+    "brief": {
+      "story_id": "review-the-borrowed-boat",
+      "title": "The Borrowed Boat",
+      "premise": {
+        "logline": "Two estranged sisters sail their father’s old boat down the coast to scatter his ashes where he said, and neither believes him.",
+        "modules": {
+          "theme": "how the dead keep arguing through what they leave",
+          "setting_time": "a week of unreliable autumn weather",
+          "setting_place": "a rocky coastline of fishing harbours in decline",
+          "protagonist": "the younger sister, who stayed and nursed him",
+          "protagonist_want": "to finish the trip without admitting what he told her",
+          "antagonism": "the older sister, who wants to sell the boat at the end",
+          "complication": "the place he named is where he had a second family",
+          "ending_shape": "they arrive, and the destination is not what the trip was for"
+        }
+      },
+      "plot_shape": {
+        "id": "quest",
+        "name": "Quest",
+        "central_question": "What does the journey turn out to have been for?",
+        "phases": [
+          {
+            "name": "Lack",
+            "purpose": "Something is missing, and the protagonist is the one who must go.",
+            "share": 0.15
+          },
+          {
+            "name": "Departure",
+            "purpose": "Leaving costs something that will be missed later.",
+            "share": 0.15
+          },
+          {
+            "name": "Trials",
+            "purpose": "Obstacles that each take something and each teach something.",
+            "share": 0.35
+          },
+          {
+            "name": "The object",
+            "purpose": "The thing is reached, and is not what it was thought to be.",
+            "share": 0.2
+          },
+          {
+            "name": "Return",
+            "purpose": "Home, altered, judged against the lack that started it.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "seeker",
+            "purpose": "Goes, and is changed by going."
+          },
+          {
+            "role": "giver",
+            "purpose": "Hands over the means, with a condition attached."
+          },
+          {
+            "role": "obstructor",
+            "purpose": "Wants the object, or wants the seeker not to have it."
+          },
+          {
+            "role": "the left behind",
+            "purpose": "Makes the return mean something."
+          }
+        ],
+        "obligatory_moves": [
+          "The means handed over early carries a limit that matters at the object.",
+          "At least one trial is lost, not won.",
+          "The return scene is set in the place the departure scene left."
+        ]
+      },
+      "event_count": 8,
+      "cast": {
+        "characters": 3,
+        "locations": 2,
+        "objects": 2
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 2,
+        "min_span": 2,
+        "long_range_edges": 1,
+        "long_range_span": 4
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "quest",
+        "premise_preset": "The Borrowed Boat"
+      }
+    },
+    "repairs": [
+      "model | add_hidden_cause: hidden_03_secret_boat_contract now caused_by hidden_01_secret_second_family"
+    ],
+    "events": [
+      {
+        "id": "ev_01_lack_in_harbour",
+        "sequence": 1,
+        "summary": "Ruth packs their father's ash urn onto the decrepit family boat and studies his coastal logbook before Helen arrives demanding to sell the vessel down south.",
+        "pov": "char_ruth",
+        "location_id": "loc_skiff_cove",
+        "characters_present": [
+          "char_ruth",
+          "char_helen"
+        ],
+        "dramatic_function": "Establishes the sisters' estrangement, Arthur's legacy of debt, and the conflicting objectives of the voyage.",
+        "beats": [
+          "Ruth studies Arthur's handwritten logbook and notices unusual domestic mooring coordinates listed for Tern Bay.",
+          "Helen arrives at the dock and announces her intention to sell the boat immediately upon reaching their destination."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "father_notebook_fuel_log"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_02_departure_skiff_cove",
+        "sequence": 2,
+        "summary": "Donald grants a provisional seven-day departure waiver requiring the boat's mandatory return to Skiff Cove before the sisters cast off into the autumn chop.",
+        "pov": "char_ruth",
+        "location_id": "loc_skiff_cove",
+        "characters_present": [
+          "char_ruth",
+          "char_helen",
+          "char_donald"
+        ],
+        "dramatic_function": "Hands over the means of passage with a strict legal constraint that forbids abandoning or selling the vessel down the coast.",
+        "beats": [
+          "Donald insists that Helen sign a temporary seaworthiness waiver requiring the boat to return to Skiff Cove within seven days.",
+          "Ruth casts off the bowline and steers The Shearwater out of the harbour into heavy grey swells."
+        ],
+        "caused_by": [
+          "ev_01_lack_in_harbour"
+        ],
+        "reveals": [
+          "slipway_waiver_return_clause"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_ruth",
+            "column": "location_id",
+            "value": "loc_inshore_passage"
+          },
+          {
+            "entity_id": "char_helen",
+            "column": "location_id",
+            "value": "loc_inshore_passage"
+          },
+          {
+            "entity_id": "obj_shearwater",
+            "column": "location_id",
+            "value": "loc_inshore_passage"
+          },
+          {
+            "entity_id": "obj_ash_urn",
+            "column": "location_id",
+            "value": "loc_inshore_passage"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_shoal_crossing",
+        "sequence": 3,
+        "summary": "While navigating treacherous shoals in rising winds, Ruth discovers a stress crack in the starboard rigging stay but opts not to turn back.",
+        "pov": "char_ruth",
+        "location_id": "loc_inshore_passage",
+        "characters_present": [
+          "char_ruth",
+          "char_helen"
+        ],
+        "dramatic_function": "Tests the sisters against the coastal elements and plants a mechanical vulnerability in the boat's rigging.",
+        "beats": [
+          "Helen struggles to keep the helm steady as the tide race drags the keel toward the rocky bar.",
+          "Ruth inspects the groaning mast and discovers a hairline fracture in the starboard forestay fitting."
+        ],
+        "caused_by": [
+          "ev_02_departure_skiff_cove"
+        ],
+        "reveals": [
+          "cracked_starboard_stay"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_shearwater",
+            "column": "status",
+            "value": "compromised_rigging"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "location_id",
+            "value": "loc_morren_head"
+          },
+          {
+            "entity_id": "char_helen",
+            "column": "location_id",
+            "value": "loc_morren_head"
+          },
+          {
+            "entity_id": "obj_shearwater",
+            "column": "location_id",
+            "value": "loc_morren_head"
+          },
+          {
+            "entity_id": "obj_ash_urn",
+            "column": "location_id",
+            "value": "loc_morren_head"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_lost_tender_morren",
+        "sequence": 4,
+        "summary": "A sudden rip current at Morren Reach rips their trailing tender free and destroys it on the rocks, prompting a bitter confrontation over Ruth's nursing burden.",
+        "pov": "char_ruth",
+        "location_id": "loc_morren_head",
+        "characters_present": [
+          "char_ruth",
+          "char_helen"
+        ],
+        "dramatic_function": "Delivers the lost trial of the quest, stripping the crew of their auxiliary escape craft and bringing caregiver resentment to the surface.",
+        "beats": [
+          "Helen's hasty tow knot slips in the surge, allowing the tender to drift into the breakers and smash against the headland rocks.",
+          "Ruth berates Helen for abandoning the family home while Ruth spent years nursing their deteriorating father alone."
+        ],
+        "caused_by": [
+          "ev_03_shoal_crossing"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "arthur_frail_care_burden",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_helen",
+            "column": "status",
+            "value": "rattled"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "location_id",
+            "value": "loc_inshore_passage"
+          },
+          {
+            "entity_id": "char_helen",
+            "column": "location_id",
+            "value": "loc_inshore_passage"
+          },
+          {
+            "entity_id": "obj_shearwater",
+            "column": "location_id",
+            "value": "loc_inshore_passage"
+          },
+          {
+            "entity_id": "obj_ash_urn",
+            "column": "location_id",
+            "value": "loc_inshore_passage"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_squall_rigging_failure",
+        "sequence": 5,
+        "summary": "An offshore squall snaps the weakened starboard stay and dismasts the boat, forcing the sisters to limp through blinding rain on the diesel engine.",
+        "pov": "char_ruth",
+        "location_id": "loc_inshore_passage",
+        "characters_present": [
+          "char_ruth",
+          "char_helen"
+        ],
+        "dramatic_function": "Forces the sisters into desperate cooperation as the physical vessel collapses beneath them.",
+        "beats": [
+          "The cracked stay gives way in a sudden wind gust, sending the mast collapsing across the side deck.",
+          "Ruth and Helen cut away the tangled rigging together and nurse the faltering diesel engine toward the southern inlet."
+        ],
+        "caused_by": [
+          "ev_04_lost_tender_morren"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "cracked_starboard_stay",
+            "plant": "ev_03_shoal_crossing"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_shearwater",
+            "column": "status",
+            "value": "dismasted_under_engine"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "location_id",
+            "value": "loc_low_water_creek"
+          },
+          {
+            "entity_id": "char_helen",
+            "column": "location_id",
+            "value": "loc_low_water_creek"
+          },
+          {
+            "entity_id": "obj_shearwater",
+            "column": "location_id",
+            "value": "loc_low_water_creek"
+          },
+          {
+            "entity_id": "obj_ash_urn",
+            "column": "location_id",
+            "value": "loc_low_water_creek"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_arrival_tern_bay",
+        "sequence": 6,
+        "summary": "They limp into Tern Bay, where Ruth bypasses the open coastal scattering water to steer the boat up a secluded tidal creek using Arthur's coordinates.",
+        "pov": "char_ruth",
+        "location_id": "loc_low_water_creek",
+        "characters_present": [
+          "char_ruth",
+          "char_helen"
+        ],
+        "dramatic_function": "Reaches the physical object of the quest and subverts expectations by demonstrating that Arthur's directions led to a domestic mooring.",
+        "beats": [
+          "Helen demands they drop the ashes at the harbour breakwater, but Ruth follows the notebook's coordinates into a private inlet.",
+          "They tie off at an overgrown pontoon marked with Arthur's initials in front of an occupied shore cottage."
+        ],
+        "caused_by": [
+          "ev_05_squall_rigging_failure"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "father_notebook_fuel_log",
+            "plant": "ev_01_lack_in_harbour"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_helen",
+            "column": "goal",
+            "value": "discover what Arthur hid at Tern Bay"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_revelation_and_scattering",
+        "sequence": 7,
+        "summary": "At the creek cottage, Helen confesses her secret buyer deposit while Ruth reveals Arthur's secret second family, and together they dump the ashes in the garden.",
+        "pov": "char_ruth",
+        "location_id": "loc_low_water_creek",
+        "characters_present": [
+          "char_ruth",
+          "char_helen"
+        ],
+        "dramatic_function": "The climax of the quest, where the destination is revealed as a final manipulation by the dead father and the sisters unite against it.",
+        "beats": [
+          "Helen admits she took money from a breaker in Tern Bay to erase Arthur's debts.",
+          "Ruth reveals that Arthur confessed to maintaining a second family in this cottage and wanted his ashes left here to burden them.",
+          "Refusing to give Arthur his tidy closure, the sisters unseal the urn and scatter the ashes over the overgrown lawn together."
+        ],
+        "caused_by": [
+          "ev_06_arrival_tern_bay"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "deathbed_confession_to_ruth",
+            "plant": null
+          },
+          {
+            "fact_ref": "boat_buyer_deposit_tern_bay",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_ash_urn",
+            "column": "status",
+            "value": "emptied"
+          },
+          {
+            "entity_id": "char_helen",
+            "column": "goal",
+            "value": "sail the boat back to Skiff Cove with Ruth"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "goal",
+            "value": "sail the boat back to Skiff Cove with Helen"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "location_id",
+            "value": "loc_skiff_cove"
+          },
+          {
+            "entity_id": "char_helen",
+            "column": "location_id",
+            "value": "loc_skiff_cove"
+          },
+          {
+            "entity_id": "obj_shearwater",
+            "column": "location_id",
+            "value": "loc_skiff_cove"
+          },
+          {
+            "entity_id": "obj_ash_urn",
+            "column": "location_id",
+            "value": "loc_skiff_cove"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_return_skiff_cove",
+        "sequence": 8,
+        "summary": "Ruth and Helen motor the battered Shearwater back onto Donald's slipway in Skiff Cove within the seven-day limit, agreeing to rebuild the boat together.",
+        "pov": "char_ruth",
+        "location_id": "loc_skiff_cove",
+        "characters_present": [
+          "char_ruth",
+          "char_helen",
+          "char_donald"
+        ],
+        "dramatic_function": "Closes the quest arc at the point of departure, measuring the altered sisters against their starting lack and resolving the legal constraint.",
+        "beats": [
+          "The crippled Shearwater pulls up to the Skiff Cove slipway hours before Donald's provisional waiver expires.",
+          "Donald clears the vessel's registration hold as Ruth and Helen agree to split the yard fees and refit the boat themselves."
+        ],
+        "caused_by": [
+          "ev_07_revelation_and_scattering"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "slipway_waiver_return_clause",
+            "plant": "ev_02_departure_skiff_cove"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_shearwater",
+            "column": "status",
+            "value": "drydocked_for_repairs"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "status",
+            "value": "reconciled"
+          },
+          {
+            "entity_id": "char_helen",
+            "column": "status",
+            "value": "reconciled"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_secret_second_family",
+        "sequence": 1,
+        "summary": "Arthur Miller established a secret second household at Tern Bay decades ago, concealing it from his daughters while quietly sending money south.",
+        "caused_by": [],
+        "establishes": [
+          "father_second_family_tern_bay"
+        ]
+      },
+      {
+        "id": "hidden_02_caregiver_confession",
+        "sequence": 2,
+        "summary": "Arthur confessed his secret Tern Bay ties to Ruth on his deathbed because he wanted his ashes brought to his second family rather than buried at sea.",
+        "caused_by": [
+          "hidden_01_secret_second_family"
+        ],
+        "establishes": [
+          "deathbed_confession_to_ruth"
+        ]
+      },
+      {
+        "id": "hidden_03_secret_boat_contract",
+        "sequence": 3,
+        "summary": "Because Arthur's secret second household drained the estate finances and left unpaid debts, Helen secretly accepted a deposit from a Tern Bay boatbreaker to liquidate The Shearwater upon arrival.",
+        "caused_by": [
+          "hidden_01_secret_second_family"
+        ],
+        "establishes": [
+          "boat_buyer_deposit_tern_bay"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "father_second_family_tern_bay",
+        "statement": "Arthur maintained an unacknowledged partner and household at Tern Bay for twenty years.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "deathbed_confession_to_ruth",
+        "statement": "Arthur revealed his secret Tern Bay household to Ruth on his deathbed and instructed her to bring his ashes there.",
+        "caused_by": [
+          "father_second_family_tern_bay"
+        ]
+      },
+      {
+        "fact_ref": "boat_buyer_deposit_tern_bay",
+        "statement": "Helen accepted an advance deposit from a Tern Bay shipbreaker to sell The Shearwater immediately upon landfall.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "arthur_frail_care_burden",
+        "statement": "Ruth spent three years providing solitary round-the-clock nursing care for Arthur during his terminal illness.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "father_notebook_fuel_log",
+        "statement": "Arthur's coastal logbook records domestic mooring coordinates at Tern Bay disguised as offshore fuel stops.",
+        "caused_by": [
+          "father_second_family_tern_bay"
+        ]
+      },
+      {
+        "fact_ref": "slipway_waiver_return_clause",
+        "statement": "The harbourmaster's provisional seaworthiness waiver mandates that The Shearwater must return to Skiff Cove within seven days or face impoundment.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "cracked_starboard_stay",
+        "statement": "The starboard forestay fitting developed a severe stress fracture while battling tidal races in the inshore sound.",
+        "caused_by": []
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T12:16:50.461Z",
+    "started_at": "2026-09-29T12:16:35.882Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_departure",
+        "order": 1,
+        "event_ids": [
+          "ev_01_lack_in_harbour",
+          "ev_02_departure_skiff_cove"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_cracked_stay",
+        "order": 2,
+        "event_ids": [
+          "ev_03_shoal_crossing"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_loss_of_tender",
+        "order": 3,
+        "event_ids": [
+          "ev_04_lost_tender_morren"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_dismasted_in_storm",
+        "order": 4,
+        "event_ids": [
+          "ev_05_squall_rigging_failure"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_creek_cottage",
+        "order": 5,
+        "event_ids": [
+          "ev_06_arrival_tern_bay",
+          "ev_07_revelation_and_scattering"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_return_to_slipway",
+        "order": 6,
+        "event_ids": [
+          "ev_08_return_skiff_cove"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}
