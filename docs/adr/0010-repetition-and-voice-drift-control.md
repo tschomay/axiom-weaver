@@ -123,3 +123,23 @@ it is a tic. A motif lands by returning.
 Not changed here: the default preset is still chosen from the plot shape
 (`defaultVoiceCardForPlotShape`), not the premise's tone. That is how a realist grief story got
 `fairy_tale_fable`; it is a separate change (#195's optional third item).
+
+## Amendment (2026-09-29, later): a phrase ledger, and retellings as clauses
+
+[#220](https://github.com/tschomay/axiom-weaver/issues/220). After the domain-rest rule above, the palette was no
+longer any story's top prose finding in the #204 re-run. What replaced it was repetition below the level of imagery,
+which `imagery_signature` does not record: 11 of Understudy's 19 scenes opened on a list of smells, "grease-burn scars
+along her jaw" tagged Teresa in four scenes, a chisel sat "against her ribs" in eight. And known facts were re-narrated
+in full — Kieran's dare in five scenes, the Kenneth pension story in three — though each was revealed on one card.
+
+1. **A phrase ledger** (`src/voice/phrase-ledger.ts`), kept by `RunState` from each scene's *own* prose as the run
+   advances (the same in-memory prose the verbatim tail is taken from; nothing is re-read later, so decision 1's
+   "nothing new is recorded in the digest" and the digest-only rule for past prose both stand). It records each
+   scene's first sentence and its narration trigrams (dialogue excluded; a trigram needs two content words, and one
+   holding a capitalised word, a number word, or two words of a World Model name is skipped — those repeat because the
+   story is about them). The writer is shown, in the volatile core after the imagery ledger, the last three openings
+   ("open with a different kind of sentence") and up to eight **worn phrases**: trigrams already in three or more
+   scenes. Like the imagery ledger it names what to vary, never a blocklist of the domain.
+2. **Retellings are rendered as clauses.** A card's `recounts` line now reads "the reader already knows these — refer
+   to them in a clause … never re-narrate them", naming the scene that told each; the established account labels a
+   known fact "reader already knows — do not re-explain". ADR 0022's `recounts` semantics are unchanged.

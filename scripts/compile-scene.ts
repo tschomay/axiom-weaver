@@ -72,6 +72,7 @@ async function compileOne(fixture: string, recordingName: string, verbose: boole
     imageryHistory: state.imageryHistory,
     previousParagraph: recording.previous_paragraph ?? state.previousParagraph,
     details: state.details,
+    phraseHistory: state.phraseHistory,
     occasion: 'read_time',
   });
 

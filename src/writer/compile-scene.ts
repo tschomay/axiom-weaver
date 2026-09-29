@@ -13,6 +13,7 @@
 
 import { tailEcho, tenseMismatch } from './prose-checks';
 import type { DetailsLedger } from '../digest/details-ledger';
+import { buildPhraseLedger, nameWords, seedNames, type RecordedPhrases } from '../voice/phrase-ledger';
 import type { SceneCard, StoryPackage } from '../schema/story-package';
 import type { WorldModel } from '../world-model/world-model';
 import type { DigestHierarchy } from '../digest/hierarchy';
@@ -140,6 +141,8 @@ export interface CompileSceneInput {
   readonly previousParagraph: string | null;
   /** The run's details ledger (#198): rendered into the prompt and checked for drift. */
   readonly details?: DetailsLedger;
+  /** Openings and trigrams of earlier scenes (#220). */
+  readonly phraseHistory?: readonly RecordedPhrases[];
   readonly occasion: 'author_time' | 'read_time';
   /**
    * Which model writes the scene. Defaults to `WRITER_MODEL`; overridden only deliberately, to
@@ -252,6 +255,9 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
     writerContract: writerContract(),
     establishedDetails:
       input.details?.forScene(new Set(onStage), (id) => input.model.has(id)) ?? [],
+    phraseLedger: buildPhraseLedger(input.phraseHistory ?? [], {
+      namedWords: nameWords(seedNames(pkg)),
+    }),
   });
 
   // A character with an on-page beat but no row in context is the same hole `missing_fact` would
