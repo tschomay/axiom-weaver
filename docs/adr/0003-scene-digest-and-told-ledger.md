@@ -117,3 +117,60 @@ Decision 2's field set gains `terms_glossed` (slugs of specialist terms the scen
 and decision 4's `met:` mechanism gains a sibling `term:<slug>` fact. See [ADR
 0007](0007-voice-card-and-style-presets.md)'s 2026-09-28 amendment. Like the other list fields,
 it unions across a rollup window.
+
+## Amendment (2026-09-29): `established_details`, and the details ledger
+
+[#198](https://github.com/tschomay/axiom-weaver/issues/198), from Story Review Panel batch
+2026-09-29 (`prototypes/story-review/2026-09-29/CURATION.md` §2). The consistency reviewer scored
+four of five stories 2/5, mostly for one thing: a concrete detail the prose invents is forgotten by
+the next scene, which invents it again. Helen left for "a ledger clerk's stool in Inverness" five
+winters back (scene 1) and spent "three years running railway timetables" in the south (scene 3);
+the urn is brass, then tin; Julien sits at Table 4, then calls Table nine; the escrow is £5,000,
+then £20,000. The writer sees earlier scenes only as digests plus the last paragraph, and no
+digest field records the specifics the prose committed to. `grounded_claims` (ADR 0018) records
+claims about World Model columns only — location, status — and most of these details have no
+column, and many of their entities have no row.
+
+This field earns its place the way every earlier extension did: it makes one more rubric mode
+(Amnesia, ADR 0002) detectable across scenes, for the attributes no column holds.
+
+1. **A new digest field: `established_details: {entity_id, attribute, value}[]`, capped at 8.**
+   The writer reports the concrete specifics this scene committed the reader to — a material, a
+   number, a name, a date, a duration, a piece of backstory — about any entity, tracked or not:
+   `obj_ash_urn / material / brass`, `char_helen / years_away / five winters, in Inverness`.
+   `entity_id` is a World Model id where one exists, and otherwise a short slug the writer coins
+   (`prop_quince_tart`), reused whenever the same thing recurs. `attribute` is a short snake_case
+   slug. Only what the prose *states*; not what it implies, and not what the card already fixes
+   (`exit_state`, facts) — those have their own mechanisms. Same call, per decision 3.
+2. **A separate field, not folded into `grounded_claims`.** Folding would mean
+   `column: "bag.<key>"` claims validated by the amnesia guard, which reads committed World Model
+   values. ADR 0018 scoped `grounded_claims` to tracked columns on purpose, and most of these
+   entities have no row to hold a bag. A separate field keeps that scope intact and needs no
+   World Model writes.
+3. **Accumulated in a run-scoped details ledger, first statement wins.** The run state keeps
+   every established detail, keyed by `(entity_id, attribute)`, with the scene that established
+   it. A later scene reporting a *different* value for the same key is **detail drift** —
+   diagnostic `detail_drift` (`warn`, never a retry); the ledger keeps the first value, because
+   that is what the reader read first. Values are compared case- and punctuation-insensitively,
+   so a rewording of the same value is not drift. The ledger is not a rollup shape (decision 6):
+   like the told-ledger it is flat and read at assembly time.
+4. **Rendered to later scenes as `ESTABLISHED DETAILS (the reader has been told these — do not
+   change them)`,** in the volatile tail's mandatory core, so eviction never drops it (ADR
+   0008's amendment of the same date). Scoped to what the scene can touch: every detail about an
+   entity on stage, then details about untracked entities (a prop or a backstory with no World
+   Model row, which the deterministic join cannot place on or off stage), most recently
+   established first, capped at 24 lines. A detail about a tracked entity who is off stage is
+   left out; it returns when they do.
+5. **Rollups carry no `established_details`** (decision 6): the ledger already holds every one,
+   and a window has no single statement of an attribute to aggregate.
+6. **Segmentation: props that pass between events become World Model objects.** Issue #198's
+   fourth item. The arc prompt asks for a `world_model_seed` object for every physical object that
+   two or more events turn on, so its `location_id` is tracked (ADR 0005) rather than moved
+   between scenes by nobody (`04`'s wren and confession letter, `03`'s pin). This is a prompt
+   requirement, not a text-mining pass over event summaries: naming "the object" in free text is
+   the model's job, and a second heuristic would guess.
+
+Consequences: `SceneDigestSchema` and the writer's response schema gain the field (optional on
+read, defaulting to `[]`, so every stored digest still parses); the writer contract says what
+belongs in it; `RunState` holds the ledger; the context assembler renders it; `compileScene`
+checks drift. `CONTEXT.md`'s Scene Digest entry and `GLOSSARY.md` gain the term.
