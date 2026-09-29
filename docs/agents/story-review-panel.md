@@ -66,7 +66,10 @@ this is enough:
 > Follow `.claude/agents/story-reviewer-grounding.md`. Review every
 > `prototypes/story-review/<batch>/*/story.md`.
 
-Each writes `reviews/<lens>.md` beside the story it reviewed.
+Each writes `reviews/<lens>.md` beside the story it reviewed, one file per story as soon as that
+story is done — the files on disk are the panel's output, not the agents' chat replies. Commit and
+push after each reviewer finishes, and start the panel on stories as they land rather than after
+the whole batch: a session that ends mid-batch then loses at most one reviewer's in-flight story.
 
 ### 3. Curate
 
