@@ -1,0 +1,848 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-the-apprentices-bill",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_julian_vance",
+        "name": "Julian Vance",
+        "location_id": "loc_kitchen_pass",
+        "status": "bitter and disenfranchised",
+        "goal": "force Arthur Kane to retract the industry blacklist",
+        "bag": {}
+      },
+      {
+        "id": "char_arthur_kane",
+        "name": "Arthur Kane",
+        "location_id": "loc_kitchen_pass",
+        "status": "failing and defensive",
+        "goal": "secure a decisive rave review from the visiting critic",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_kitchen_pass",
+        "name": "Restaurant Kane Kitchen Pass",
+        "bag": {}
+      },
+      {
+        "id": "loc_dining_room",
+        "name": "Restaurant Kane Dining Room",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_damson_plum_tart",
+        "name": "Damson Plum Tart",
+        "location_id": "loc_kitchen_pass",
+        "status": "unfired mise en place",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_julian_to_arthur",
+        "from_id": "char_julian_vance",
+        "to_id": "char_arthur_kane",
+        "kind": "former_apprentice",
+        "sentiment": "vengeful",
+        "bag": {}
+      },
+      {
+        "id": "rel_arthur_to_julian",
+        "from_id": "char_arthur_kane",
+        "to_id": "char_julian_vance",
+        "kind": "former_mentor",
+        "sentiment": "dismissive",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01_julian_blacklist",
+        "character_id": "char_julian_vance",
+        "fact_ref": "fact_blacklist_enforced",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02_arthur_blacklist",
+        "character_id": "char_arthur_kane",
+        "fact_ref": "fact_blacklist_enforced",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03_julian_formula",
+        "character_id": "char_julian_vance",
+        "fact_ref": "fact_stolen_reduction_formula",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04_arthur_formula",
+        "character_id": "char_arthur_kane",
+        "fact_ref": "fact_stolen_reduction_formula",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_stolen_tart",
+      "order": 1,
+      "pov": "char_julian_vance",
+      "location_id": "loc_kitchen_pass",
+      "characters_present": [
+        "char_julian_vance",
+        "char_arthur_kane"
+      ],
+      "dramatic_function": "Establishes Arthur Kane's theft of Julian's work and Julian's public humiliation before service.",
+      "entry_state": {
+        "char_julian_vance": {
+          "location_id": "loc_kitchen_pass",
+          "goal": "force Arthur Kane to retract the industry blacklist"
+        }
+      },
+      "exit_state": {
+        "char_julian_vance": {
+          "location_id": "loc_dining_room",
+          "goal": "ruin Arthur Kane's service in front of the critic"
+        }
+      },
+      "required_beats": [
+        "Julian confronts Arthur Kane at the kitchen pass with a written demand to end the industry blacklist.",
+        "Arthur rips the request, boasting that Julian's damson plum reduction and stolen plum tart will headline the critic tasting menu under Kane's name.",
+        "Arthur has the staff exile Julian to the dining room as a paying diner."
+      ],
+      "reader_must_learn": [
+        "fact_damson_tart_on_menu",
+        "fact_pectin_burning_point",
+        "fact_stolen_reduction_formula",
+        "fact_blacklist_enforced"
+      ],
+      "must_stay_hidden": [
+        "fact_kane_arthritic_tremor"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "fact_blacklist_enforced",
+          "plant": null
+        },
+        {
+          "fact_ref": "fact_stolen_reduction_formula",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_the_critics_seat",
+      "order": 2,
+      "pov": "char_julian_vance",
+      "location_id": "loc_dining_room",
+      "characters_present": [
+        "char_julian_vance"
+      ],
+      "dramatic_function": "Locks Julian into an active oath of vengeance as the critical stakes arrive.",
+      "entry_state": {
+        "char_julian_vance": {
+          "status": "bitter and disenfranchised"
+        }
+      },
+      "exit_state": {
+        "char_julian_vance": {
+          "status": "obsessively waiting"
+        }
+      },
+      "required_beats": [
+        "Julian watches the Michelin critic take a seat in the dining room.",
+        "Julian makes an explicit vow to force Arthur to choke down his stolen plum reduction before the meal concludes."
+      ],
+      "reader_must_learn": [
+        "fact_vow_condition_choke_on_sugar"
+      ],
+      "must_stay_hidden": [
+        "fact_kane_arthritic_tremor"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_the_burning_whisk",
+      "order": 3,
+      "pov": "char_julian_vance",
+      "location_id": "loc_kitchen_pass",
+      "characters_present": [
+        "char_julian_vance",
+        "char_arthur_kane"
+      ],
+      "dramatic_function": "Turns Julian from a saboteur seeking revenge into the protector of his own craft when he discovers Arthur's physical decline.",
+      "entry_state": {
+        "char_julian_vance": {
+          "location_id": "loc_dining_room"
+        },
+        "obj_damson_plum_tart": {
+          "status": "unfired mise en place"
+        },
+        "char_arthur_kane": {
+          "status": "failing and defensive"
+        }
+      },
+      "exit_state": {
+        "char_julian_vance": {
+          "location_id": "loc_kitchen_pass"
+        },
+        "obj_damson_plum_tart": {
+          "status": "perfectly plated and sent to critic"
+        },
+        "char_arthur_kane": {
+          "status": "physically incapacitated by tremor"
+        }
+      },
+      "required_beats": [
+        "Near the kitchen pass, Julian sees Arthur shield a frightened apprentice from blame for an accident.",
+        "Julian tampers with the service rail, rushing the damson plum tart ticket to overwhelm Arthur at peak rush.",
+        "Julian enters the pastry line to witness the failure, only to find Arthur weeping with severe tremors that cause him to drop the whisk.",
+        "When Arthur begs for the dish not to be ruined, Julian takes the whisk and salvages the burning reduction."
+      ],
+      "reader_must_learn": [
+        "fact_kane_defends_commis",
+        "fact_kane_arthritic_tremor",
+        "fact_julian_salvages_reduction"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "fact_damson_tart_on_menu",
+          "plant": "scene_01_the_stolen_tart"
+        },
+        {
+          "fact_ref": "fact_pectin_burning_point",
+          "plant": "scene_01_the_stolen_tart"
+        }
+      ]
+    },
+    {
+      "id": "scene_04_the_final_spoon",
+      "order": 4,
+      "pov": "char_julian_vance",
+      "location_id": "loc_dining_room",
+      "characters_present": [
+        "char_julian_vance",
+        "char_arthur_kane"
+      ],
+      "dramatic_function": "Resolves the rivalry through artistic mastery rather than destruction, freeing Julian to move forward.",
+      "entry_state": {
+        "char_julian_vance": {
+          "location_id": "loc_kitchen_pass",
+          "goal": "ruin Arthur Kane's service in front of the critic",
+          "status": "obsessively waiting"
+        },
+        "char_arthur_kane": {
+          "location_id": "loc_kitchen_pass",
+          "goal": "secure a decisive rave review from the visiting critic"
+        }
+      },
+      "exit_state": {
+        "char_julian_vance": {
+          "location_id": "loc_dining_room",
+          "goal": "found an independent kitchen",
+          "status": "at peace"
+        },
+        "char_arthur_kane": {
+          "location_id": "loc_dining_room",
+          "goal": "retire and cede culinary legacy"
+        }
+      },
+      "required_beats": [
+        "In the quiet dining room after service, Arthur brings Julian a spoonful of the plum reduction and admits Julian surpassed him long ago.",
+        "Remembering his vow to force Arthur to swallow his theft, Julian realizes that finishing the dish established his true mastery.",
+        "Julian walks out into the night to start his own kitchen, leaving Kane behind."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "fact_vow_condition_choke_on_sugar",
+          "plant": "scene_02_the_critics_seat"
+        },
+        {
+          "fact_ref": "fact_kane_defends_commis",
+          "plant": "scene_03_the_burning_whisk"
+        },
+        {
+          "fact_ref": "fact_kane_arthritic_tremor",
+          "plant": "scene_03_the_burning_whisk"
+        },
+        {
+          "fact_ref": "fact_julian_salvages_reduction",
+          "plant": "scene_03_the_burning_whisk"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "close third, pressed against the protagonist",
+    "register": "grave, ornate, foreboding; dwells where a plainer voice would move on",
+    "sentence_rhythm": "long accreting sentences broken by a short one that lands like a door",
+    "imagery_palette": [
+      "damp stone and rot",
+      "guttering light",
+      "cold weight and enclosure"
+    ],
+    "dialogue_density": "low; speech arrives rarely and carries weight when it does",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "gothic_brooding"
+  },
+  "metadata": {
+    "title": "The Reduction",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T17:11:55.285Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "fact_stolen_reduction_formula",
+      "statement": "Arthur Kane claimed exclusive credit for Julian Vance's proprietary damson plum reduction recipe.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "fact_blacklist_enforced",
+      "statement": "Arthur Kane barred Julian Vance from employment in regional kitchens to conceal the origin of his pastry menu.",
+      "caused_by": [
+        "fact_stolen_reduction_formula"
+      ]
+    },
+    {
+      "fact_ref": "fact_kane_arthritic_tremor",
+      "statement": "Arthur Kane suffers from advanced joint deterioration that causes sudden loss of motor control during fine whisking.",
+      "caused_by": [
+        "fact_stolen_reduction_formula",
+        "fact_blacklist_enforced"
+      ]
+    },
+    {
+      "fact_ref": "fact_damson_tart_on_menu",
+      "statement": "Arthur Kane listed the damson plum reduction tart as the premier dessert on the critic tasting menu.",
+      "caused_by": [
+        "fact_stolen_reduction_formula"
+      ]
+    },
+    {
+      "fact_ref": "fact_pectin_burning_point",
+      "statement": "The damson plum reduction curdles and scorches if its temperature exceeds seventy-two degrees Celsius without rapid whisking.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "fact_vow_condition_choke_on_sugar",
+      "statement": "Julian Vance swore to force Arthur Kane to swallow his stolen plum reduction before the critic concluded his meal.",
+      "caused_by": [
+        "fact_damson_tart_on_menu",
+        "fact_blacklist_enforced"
+      ]
+    },
+    {
+      "fact_ref": "fact_kane_defends_commis",
+      "statement": "Arthur Kane accepted full responsibility for a dropped appetizer tray to protect an apprentice from dismissal.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "fact_julian_salvages_reduction",
+      "statement": "Julian Vance intervened at the stove to balance the scorching plum reduction with cold acid and continuous whisking.",
+      "caused_by": [
+        "fact_kane_arthritic_tremor",
+        "fact_pectin_burning_point"
+      ]
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.7-flash",
+    "generated_at": "2026-09-29T17:11:46.126Z",
+    "brief": {
+      "story_id": "review-the-apprentices-bill",
+      "title": "The Apprentice’s Bill",
+      "premise": {
+        "logline": "A chef who was blacklisted by his mentor finally gets a table at the mentor’s restaurant on the night it is being reviewed.",
+        "modules": {
+          "theme": "what we owe the people who made us and then unmade us",
+          "setting_time": "a single service night, with years of history behind it",
+          "setting_place": "an acclaimed restaurant kitchen and dining room",
+          "protagonist": "a line cook who once ran that kitchen’s pastry section",
+          "protagonist_want": "to see his mentor fail in front of the critic",
+          "antagonism": "the mentor, older now, and frightened",
+          "complication": "the dish that ruined him is on tonight’s menu, credited to the mentor",
+          "ending_shape": "he could ruin the night, and what he does instead is the answer"
+        }
+      },
+      "plot_shape": {
+        "id": "reckoning",
+        "name": "Reckoning",
+        "central_question": "Does the debt get collected, and does collecting it help?",
+        "phases": [
+          {
+            "name": "The injury",
+            "purpose": "The original wrong, shown rather than reported.",
+            "share": 0.15
+          },
+          {
+            "name": "The vow",
+            "purpose": "A commitment made in a state the maker will not always be in.",
+            "share": 0.15
+          },
+          {
+            "name": "Preparation",
+            "purpose": "Means acquired, allies made and used, a self narrowed to a purpose.",
+            "share": 0.3
+          },
+          {
+            "name": "Contact",
+            "purpose": "The wrongdoer, close enough to be seen as a person.",
+            "share": 0.25
+          },
+          {
+            "name": "Aftermath",
+            "purpose": "What is left of the avenger once the purpose is gone.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "claimant",
+            "purpose": "Holds the debt and is deformed by holding it."
+          },
+          {
+            "role": "debtor",
+            "purpose": "Committed the wrong, and has a life that does not look like a villain's."
+          },
+          {
+            "role": "enabler",
+            "purpose": "Helps the claimant for reasons of their own."
+          },
+          {
+            "role": "the restraint",
+            "purpose": "Argues for the cost, and is not simply right."
+          }
+        ],
+        "obligatory_moves": [
+          "The vow is made with a specific, quotable condition attached.",
+          "The debtor is shown doing something that is not villainous before contact.",
+          "The aftermath addresses the vow's exact wording."
+        ]
+      },
+      "event_count": 5,
+      "cast": {
+        "characters": 2,
+        "locations": 2,
+        "objects": 1
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 1,
+        "min_span": 1,
+        "long_range_edges": 0,
+        "long_range_span": 4
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "reckoning",
+        "premise_preset": "The Apprentice’s Bill"
+      }
+    },
+    "repairs": [
+      "mechanical | declare_fact_at_event: hidden \"fact_stolen_reduction_formula\" installed in ev_01_the_rejection.reveals",
+      "mechanical | declare_fact_at_event: hidden \"fact_blacklist_enforced\" installed in ev_01_the_rejection.reveals"
+    ],
+    "events": [
+      {
+        "id": "ev_01_the_rejection",
+        "sequence": 1,
+        "summary": "Julian confronts Arthur at the kitchen pass before service to demand an end to the blacklist, but Arthur tears up his plea and shows him the stolen plum tart headlining tonight's critic tasting menu.",
+        "pov": "char_julian_vance",
+        "location_id": "loc_kitchen_pass",
+        "characters_present": [
+          "char_julian_vance",
+          "char_arthur_kane"
+        ],
+        "dramatic_function": "Establish the claimant's unresolved grievance and the debtor's public display of the stolen work.",
+        "beats": [
+          "Julian presents a formal withdrawal request demanding Arthur stop blacklisting him from regional kitchens.",
+          "Arthur rips the letter and boasts that Julian's damson plum reduction will be served tonight under Kane's name to secure the review.",
+          "Arthur orders front-of-house staff to seat Julian in the dining room as an ordinary paying customer."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "fact_damson_tart_on_menu",
+          "fact_pectin_burning_point",
+          "fact_stolen_reduction_formula",
+          "fact_blacklist_enforced"
+        ],
+        "conceals": [
+          "fact_kane_arthritic_tremor"
+        ],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "fact_blacklist_enforced",
+            "plant": null
+          },
+          {
+            "fact_ref": "fact_stolen_reduction_formula",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julian_vance",
+            "column": "location_id",
+            "value": "loc_dining_room"
+          },
+          {
+            "entity_id": "char_julian_vance",
+            "column": "goal",
+            "value": "ruin Arthur Kane's service in front of the critic"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_the_vow",
+        "sequence": 2,
+        "summary": "Seated in the dining room as the critic arrives, Julian binds himself to an explicit vow to force Arthur to swallow his own ruined theft before service ends.",
+        "pov": "char_julian_vance",
+        "location_id": "loc_dining_room",
+        "characters_present": [
+          "char_julian_vance"
+        ],
+        "dramatic_function": "The claimant commits to an exact standard of vengeance under extreme emotional pressure.",
+        "beats": [
+          "Julian watches the maître d' seat the Michelin critic at the center banquet table.",
+          "Julian whispers his exact vow: Arthur Kane will swallow his own stolen plum reduction before the critic writes a single word."
+        ],
+        "caused_by": [
+          "ev_01_the_rejection"
+        ],
+        "reveals": [
+          "fact_vow_condition_choke_on_sugar"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_julian_vance",
+            "column": "status",
+            "value": "obsessively waiting"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_the_preparation",
+        "sequence": 3,
+        "summary": "Julian steps back toward the kitchen pass to disrupt the order flow and observes Arthur protecting a terrified apprentice before Julian advances the critic's dessert ticket.",
+        "pov": "char_julian_vance",
+        "location_id": "loc_kitchen_pass",
+        "characters_present": [
+          "char_julian_vance",
+          "char_arthur_kane"
+        ],
+        "dramatic_function": "The claimant narrows his trap while witnessing an unvillainous act of mentorship from the debtor.",
+        "beats": [
+          "Julian watches Arthur calmly take personal blame for an apprentice cook's dropped tray rather than firing the youth.",
+          "Julian intercepts the service rail and rushes the damson plum tart ticket to force Arthur into firing the dessert under peak rush."
+        ],
+        "caused_by": [
+          "ev_02_the_vow"
+        ],
+        "reveals": [
+          "fact_kane_defends_commis"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "fact_damson_tart_on_menu",
+            "plant": "ev_01_the_rejection"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julian_vance",
+            "column": "location_id",
+            "value": "loc_kitchen_pass"
+          },
+          {
+            "entity_id": "obj_damson_plum_tart",
+            "column": "status",
+            "value": "fired on pastry station"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_the_contact",
+        "sequence": 4,
+        "summary": "Julian enters the pastry line to watch the dish fail, only to discover Arthur's hands are paralyzed by severe tremors, forcing Julian to step in and save the burning reduction.",
+        "pov": "char_julian_vance",
+        "location_id": "loc_kitchen_pass",
+        "characters_present": [
+          "char_julian_vance",
+          "char_arthur_kane"
+        ],
+        "dramatic_function": "The claimant confronts the debtor face-to-face, uncovers his vulnerability, and makes an unexpected choice.",
+        "beats": [
+          "Julian finds Arthur weeping over a smoking copper pan as severe arthritic tremors cause Arthur to drop the whisk.",
+          "Arthur admits he can no longer control the delicate heat and pleads for the dish not to go out ruined.",
+          "Julian takes the whisk, regulates the acid, and finishes the reduction to perfection."
+        ],
+        "caused_by": [
+          "ev_03_the_preparation"
+        ],
+        "reveals": [
+          "fact_kane_arthritic_tremor",
+          "fact_julian_salvages_reduction"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "fact_pectin_burning_point",
+            "plant": "ev_01_the_rejection"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur_kane",
+            "column": "status",
+            "value": "physically incapacitated by tremor"
+          },
+          {
+            "entity_id": "obj_damson_plum_tart",
+            "column": "status",
+            "value": "perfectly plated and sent to critic"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_the_aftermath",
+        "sequence": 5,
+        "summary": "In the empty dining room after service, Arthur tastes the finished reduction from Julian's spoon and acknowledges his former student's supremacy, leaving Julian free of his vengeance.",
+        "pov": "char_julian_vance",
+        "location_id": "loc_dining_room",
+        "characters_present": [
+          "char_julian_vance",
+          "char_arthur_kane"
+        ],
+        "dramatic_function": "Address the exact terms of the vow and resolve the claimant's deformed purpose.",
+        "beats": [
+          "Arthur brings the final spoonful of plum reduction to Julian at Table 4 and swallows it in silence, admitting Julian surpassed him years ago.",
+          "Julian recalls his vow to force Arthur to swallow the reduction, recognizing that saving the craft proved his ownership more than sabotage ever could.",
+          "Julian walks out into the night to begin his own kitchen, leaving Kane alone with his hollow review."
+        ],
+        "caused_by": [
+          "ev_04_the_contact"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "fact_vow_condition_choke_on_sugar",
+            "plant": "ev_02_the_vow"
+          },
+          {
+            "fact_ref": "fact_kane_defends_commis",
+            "plant": "ev_03_the_preparation"
+          },
+          {
+            "fact_ref": "fact_kane_arthritic_tremor",
+            "plant": "ev_04_the_contact"
+          },
+          {
+            "fact_ref": "fact_julian_salvages_reduction",
+            "plant": "ev_04_the_contact"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julian_vance",
+            "column": "location_id",
+            "value": "loc_dining_room"
+          },
+          {
+            "entity_id": "char_arthur_kane",
+            "column": "location_id",
+            "value": "loc_dining_room"
+          },
+          {
+            "entity_id": "char_julian_vance",
+            "column": "goal",
+            "value": "found an independent kitchen"
+          },
+          {
+            "entity_id": "char_arthur_kane",
+            "column": "goal",
+            "value": "retire and cede culinary legacy"
+          },
+          {
+            "entity_id": "char_julian_vance",
+            "column": "status",
+            "value": "at peace"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_recipe_theft",
+        "sequence": 1,
+        "summary": "Arthur Kane published Julian Vance's proprietary damson plum reduction recipe under his own name to win his second star and blacklisted Julian to bury the theft.",
+        "caused_by": [],
+        "establishes": [
+          "fact_stolen_reduction_formula",
+          "fact_blacklist_enforced"
+        ]
+      },
+      {
+        "id": "hidden_02_concealed_tremor",
+        "sequence": 2,
+        "summary": "Arthur Kane concealed his progressive joint tremors from his brigade because admitting physical weakness would trigger the forfeiture of his restaurant partnership.",
+        "caused_by": [
+          "hidden_01_recipe_theft"
+        ],
+        "establishes": [
+          "fact_kane_arthritic_tremor"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "fact_blacklist_enforced",
+        "statement": "Arthur Kane barred Julian Vance from employment in regional kitchens to conceal the origin of his pastry menu.",
+        "caused_by": [
+          "fact_stolen_reduction_formula"
+        ]
+      },
+      {
+        "fact_ref": "fact_stolen_reduction_formula",
+        "statement": "Arthur Kane claimed exclusive credit for Julian Vance's proprietary damson plum reduction recipe.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "fact_damson_tart_on_menu",
+        "statement": "Arthur Kane listed the damson plum reduction tart as the premier dessert on the critic tasting menu.",
+        "caused_by": [
+          "fact_stolen_reduction_formula"
+        ]
+      },
+      {
+        "fact_ref": "fact_pectin_burning_point",
+        "statement": "The damson plum reduction curdles and scorches if its temperature exceeds seventy-two degrees Celsius without rapid whisking.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "fact_vow_condition_choke_on_sugar",
+        "statement": "Julian Vance swore to force Arthur Kane to swallow his stolen plum reduction before the critic concluded his meal.",
+        "caused_by": [
+          "fact_damson_tart_on_menu",
+          "fact_blacklist_enforced"
+        ]
+      },
+      {
+        "fact_ref": "fact_kane_defends_commis",
+        "statement": "Arthur Kane accepted full responsibility for a dropped appetizer tray to protect an apprentice from dismissal.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "fact_kane_arthritic_tremor",
+        "statement": "Arthur Kane suffers from advanced joint deterioration that causes sudden loss of motor control during fine whisking.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "fact_julian_salvages_reduction",
+        "statement": "Julian Vance intervened at the stove to balance the scorching plum reduction with cold acid and continuous whisking.",
+        "caused_by": [
+          "fact_kane_arthritic_tremor",
+          "fact_pectin_burning_point"
+        ]
+      }
+    ],
+    "stakes": [
+      {
+        "stake": "Arthur Kane will permanently cement his reputation on Julian's stolen dessert if the critic's review succeeds without intervention.",
+        "introduced_by": "ev_01_the_rejection",
+        "resolved_by": "ev_05_the_aftermath"
+      },
+      {
+        "stake": "The damson plum reduction will scorch into an inedible paste if Arthur Kane cannot maintain rapid whisking during service.",
+        "introduced_by": "ev_03_the_preparation",
+        "resolved_by": "ev_04_the_contact"
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T17:11:55.285Z",
+    "started_at": "2026-09-29T17:11:46.127Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_stolen_tart",
+        "order": 1,
+        "event_ids": [
+          "ev_01_the_rejection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_critics_seat",
+        "order": 2,
+        "event_ids": [
+          "ev_02_the_vow"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_burning_whisk",
+        "order": 3,
+        "event_ids": [
+          "ev_03_the_preparation",
+          "ev_04_the_contact"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_final_spoon",
+        "order": 4,
+        "event_ids": [
+          "ev_05_the_aftermath"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}
