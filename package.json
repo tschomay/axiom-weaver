@@ -21,7 +21,8 @@
     "score-arc": "tsx scripts/score-arc.ts",
     "extract": "tsx scripts/extract-story.ts",
     "segment": "tsx scripts/segment-story.ts",
-    "segment-arcs": "tsx scripts/segment-arcs.ts"
+    "segment-arcs": "tsx scripts/segment-arcs.ts",
+    "review-sample": "tsx scripts/review-sample.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.0",

@@ -4,6 +4,12 @@
 
 Issues live as GitHub Issues on this repo, operated via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
+### Story Review Panel
+
+A reader-side eval of generated prose: six reviewer subagents in `.claude/agents/story-reviewer-*.md`
+(consistency, grounding, engagement, character, payoff, prose) plus `npm run review-sample` to
+generate a local batch for them. How to run it and curate the results: `docs/agents/story-review-panel.md`.
+
 ### Domain docs
 
 Single-context layout — `CONTEXT.md` + `docs/adr/` at the repo root, created lazily as terms and decisions resolve. See `docs/agents/domain.md`.
