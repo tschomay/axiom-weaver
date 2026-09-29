@@ -165,7 +165,11 @@ function RunRow({
         <span className="meta">
           package v{run.package_version} · {run.occasion} · {run.scenes_compiled} of{' '}
           {run.scene_count} scenes
-          {run.degraded_scene_count > 0 ? `, ${run.degraded_scene_count} to fallback` : ''} ·{' '}
+          {run.degraded_scene_count > 0 ? `, ${run.degraded_scene_count} to fallback` : ''}
+          {run.tail_eviction_scene_count > 0
+            ? `, ${run.tail_eviction_scene_count} dropped context to fit the tail budget`
+            : ''}{' '}
+          ·{' '}
           {seconds(run.duration_ms)} · {run.budget.output_tokens + run.budget.thoughts_tokens}{' '}
           output+thinking tokens against an expected {run.budget.expected_output_tokens}
           {run.budget.over_budget ? ' (over budget — logged, never enforced)' : ''} ·{' '}
