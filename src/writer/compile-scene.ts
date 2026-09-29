@@ -108,8 +108,15 @@ export const MIN_THINKING_RESERVE_TOKENS = 3000;
  */
 const OUTPUT_TOKEN_HEADROOM_MULTIPLIER = 1.5;
 
+/**
+ * The words an unbudgeted scene is sized for. 800, not the 500 it was: unbudgeted scenes in panel
+ * batch 2026-09-29 ran 550–800 words, and one hit `MAX_TOKENS` (#202). Headroom costs nothing
+ * unless it is used.
+ */
+export const UNBUDGETED_SCENE_WORDS = 800;
+
 export function maxOutputTokensFor(scene: SceneCard): number {
-  const words = scene.length_budget ?? 500;
+  const words = scene.length_budget ?? UNBUDGETED_SCENE_WORDS;
   const proseAndTail = Math.ceil(words * 2 * 1.4);
   const proportional = Math.ceil(
     proseAndTail * (THINKING_RESERVE_FRACTION / (1 - THINKING_RESERVE_FRACTION)),

@@ -205,6 +205,25 @@ function seedTables(seed: WorldModelSeed): {
   };
 }
 
+/** The floor, ceiling, base and per-beat words of a segmented card's default `length_budget`. */
+export const LENGTH_BUDGET = { min: 400, max: 1200, base: 250, perBeat: 150 } as const;
+
+/**
+ * A segmented card's default `length_budget` (#202): `250 + 150 × required beats`, clamped to
+ * 400–1200 words.
+ *
+ * Before this no segmented card had one, so the writer got no length instruction at all and
+ * `maxOutputTokensFor` sized the output ceiling for 500 words — one scene of panel batch
+ * 2026-09-29 hit `MAX_TOKENS`. The figures are what that batch's unbudgeted scenes actually ran
+ * to (about 550 words at two beats, 600 at three, 800 at four), so the budget names the length
+ * the writer already reaches for rather than pushing it somewhere new; #78 found scenes landing
+ * under an author's budget, and `lengthVerdict` reads a scene 20% under as a dropped beat.
+ */
+export function defaultLengthBudget(beats: number): number {
+  const words = LENGTH_BUDGET.base + LENGTH_BUDGET.perBeat * beats;
+  return Math.min(LENGTH_BUDGET.max, Math.max(LENGTH_BUDGET.min, words));
+}
+
 /**
  * Assemble Scene Cards from a grouping and the per-scene answers. No model, no I/O.
  *
@@ -272,6 +291,7 @@ export function assembleScenes(
       entry_state: state.entry_state,
       exit_state: state.exit_state,
       required_beats: [...props.required_beats],
+      length_budget: defaultLengthBudget(props.required_beats.length),
       reader_must_learn: [],
       must_stay_hidden: [],
       force_reintroduce: [],

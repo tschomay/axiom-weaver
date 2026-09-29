@@ -152,3 +152,17 @@ Event-level `caused_by` still stops at the package boundary. [ADR
 0022](0022-fact-statements-and-the-hidden-account.md) carries a *fact*-level causal graph across
 it instead: the `_fabula` block gains `hidden_account` and `facts`, and segmentation folds them
 into the package's `facts` table (issue #179).
+
+## Amendment (2026-09-29): segmentation sets a default `length_budget`
+
+[#202](https://github.com/tschomay/axiom-weaver/issues/202). No segmented Scene Card carried a
+`length_budget`, so the writer got no length instruction (ADR 0012's "aim for approximately N
+words" line is emitted only with one) and `maxOutputTokensFor` sized the output ceiling for 500
+words; one scene of panel batch 2026-09-29 hit `MAX_TOKENS`.
+
+- **Every segmented card gets `250 + 150 × required beats` words, clamped to 400–1200**
+  (`defaultLengthBudget`, `src/segmentation/segment.ts`). The figures are what that batch's
+  unbudgeted scenes already ran to, so the budget names the length the writer reaches for rather
+  than pushing it elsewhere. It is a starting value an author edits like any other.
+- **An unbudgeted card (hand-authored) is sized for 800 words**, not 500
+  (`UNBUDGETED_SCENE_WORDS`): output-token headroom is free unless used.
