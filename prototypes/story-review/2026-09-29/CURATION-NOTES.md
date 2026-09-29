@@ -29,3 +29,9 @@
 - Lint #180 (every concealed fact revealed) can't fire: nothing concealed. Missing check: hidden_account fact with no
   revealing event / no reader_must_learn anywhere.
 - Also: all cards length_budget null; scene 5 hit MAX_TOKENS.
+
+## Story 03 Toll — concealment partially wired
+- ev_01 conceals flooding_order_signed_under_duress; ev_08 reveals it → scene 1 must_stay_hidden, scene 7 reader_must_learn.
+  But scenes 2–6 must_stay_hidden: [] (withholding pass added nothing between conceal and reveal).
+- hidden valley_condemnation_executive_decree: never in any reveals / reader_must_learn.
+- Story 01 has no hidden account (5-event arc). Every card in 01–03 has length_budget null.
