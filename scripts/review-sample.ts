@@ -4,6 +4,13 @@
  *   env -u BLOB_READ_WRITE_TOKEN npm run review-sample
  *   env -u BLOB_READ_WRITE_TOKEN npm run review-sample -- --events 5,8,12,16,22
  *   env -u BLOB_READ_WRITE_TOKEN npm run review-sample -- --out prototypes/story-review/my-batch
+ *   env -u BLOB_READ_WRITE_TOKEN npm run review-sample -- --premises "Toll" --events 12 --first 3
+ *
+ * Stories run one after another with `--pause` minutes between them (default 3) so a batch does
+ * not burst into the key's per-minute limits. `--premises` names specific `RANDOM_PREMISES`
+ * titles instead of shuffling — the way to rerun one story — and `--first` numbers its folder.
+ * A story any stage of which was answered by a model outside `ACCEPTED_MODELS` is flagged in
+ * `index.json` as `rerun` rather than silently kept.
  *
  * One story per `--events` entry, each from a different `RANDOM_PREMISES` entry (the Generate
  * tab's "surprise me" list), taken through the same three stages an author's phone would drive:
@@ -47,6 +54,9 @@ import { WRITER_MODEL, writerModelFromEnv } from '../src/writer/model-client';
 
 const DEFAULT_EVENTS = [5, 8, 12, 16, 22];
 
+/** The writer model and its same-price capacity fallback; anything else is not judged. */
+const ACCEPTED_MODELS = new Set(['gemini-3.8-flash', 'gemini-3.7-flash']);
+
 function option(name: string): string | undefined {
   const index = process.argv.indexOf(`--${name}`);
   return index === -1 ? undefined : process.argv[index + 1];
@@ -89,15 +99,32 @@ async function main(): Promise<void> {
   const model = writerModelFromEnv();
   const client = liveClient();
   const repository = storyRepository();
-  const picks = shuffled(RANDOM_PREMISES).slice(0, events.length);
+  const named = option('premises');
+  const picks =
+    named === undefined
+      ? shuffled(RANDOM_PREMISES).slice(0, events.length)
+      : named.split(',').map((title) => {
+          const found = RANDOM_PREMISES.find((entry) => entry.title === title.trim());
+          if (found === undefined) throw new Error(`no RANDOM_PREMISES entry titled "${title}"`);
+          return found;
+        });
+  if (picks.length !== events.length) {
+    throw new Error(`${picks.length} premise(s) for ${events.length} --events value(s)`);
+  }
+  const first = Number.parseInt(option('first') ?? '1', 10);
+  const pauseMs = Number.parseFloat(option('pause') ?? '3') * 60_000;
 
   await mkdir(outDir, { recursive: true });
   const index: Array<Record<string, unknown>> = [];
 
   for (const [n, pick] of picks.entries()) {
+    if (n > 0 && pauseMs > 0) {
+      console.log(`  (pausing ${pauseMs / 60_000} min before the next story)`);
+      await new Promise((resolve) => setTimeout(resolve, pauseMs));
+    }
     const eventCount = events[n]!;
     const storyId = `review-${slug(pick.title)}`;
-    const label = `${String(n + 1).padStart(2, '0')}-${storyId}`;
+    const label = `${String(first + n).padStart(2, '0')}-${storyId}`;
     const dir = join(outDir, label);
     await mkdir(dir, { recursive: true });
     console.log(`\n[${label}] "${pick.title}" — ${pick.plot_shape_preset}, ${eventCount} events`);
@@ -199,8 +226,22 @@ async function main(): Promise<void> {
           2,
         )}\n`,
       );
+      const used = [
+        generated.model,
+        ...extraction.modelsUsed,
+        ...report.scenes.flatMap((s) => s.calls.map((c) => c.model)),
+      ];
+      const offModel = [...new Set(used.filter((m) => !ACCEPTED_MODELS.has(m)))];
       console.log(`  → ${dir}/story.md (${scenes.length} scenes, ${words} words, $${cost.toFixed(3)})`);
-      index.push({ label, title: pick.title, events: eventCount, scenes: scenes.length, words });
+      if (offModel.length > 0) console.log(`  RERUN — answered by ${offModel.join(', ')}`);
+      index.push({
+        label,
+        title: pick.title,
+        events: eventCount,
+        scenes: scenes.length,
+        words,
+        ...(offModel.length > 0 ? { rerun: `answered by ${offModel.join(', ')}` } : {}),
+      });
     } catch (error) {
       const detail = error instanceof Error ? error.message : String(error);
       console.log(`  FAILED — ${detail}`);
@@ -208,7 +249,7 @@ async function main(): Promise<void> {
     }
   }
 
-  await writeFile(join(outDir, 'index.json'), `${JSON.stringify({ model, writer_default: WRITER_MODEL, stories: index }, null, 2)}\n`);
+  await writeFile(join(outDir, named === undefined ? 'index.json' : `index-${first}.json`), `${JSON.stringify({ model, writer_default: WRITER_MODEL, stories: index }, null, 2)}\n`);
   console.log(`\nbatch written to ${outDir}`);
 }
 
