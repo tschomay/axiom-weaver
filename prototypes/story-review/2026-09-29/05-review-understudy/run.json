@@ -1,0 +1,426 @@
+{
+  "title": "Understudy",
+  "plot_shape_preset": "transformation",
+  "premise": {
+    "logline": "A touring actor who has played the same villain for eleven years is told she will be replaced by the understudy she trained.",
+    "modules": {
+      "theme": "what is left of someone who has only ever been one part",
+      "setting_time": "the final three weeks of a long regional tour",
+      "setting_place": "a string of half-empty provincial theatres",
+      "protagonist": "a lead actor who has never missed a performance",
+      "protagonist_want": "to make the company regret the decision before closing night",
+      "antagonism": "a producer who thinks loyalty is a cost",
+      "complication": "the understudy is better than she was, and kinder",
+      "ending_shape": "she lets go of the part and keeps something truer"
+    }
+  },
+  "event_count_requested": 22,
+  "arc_events": 22,
+  "scenes": 18,
+  "words": 10337,
+  "run_id": "review-understudy-20260929123752-b73a369f",
+  "models": {
+    "arc": "gemini-3.8-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash",
+      "gemini-3.5-flash-lite"
+    ]
+  },
+  "cost_usd": 0.3968,
+  "lint_warnings": [
+    "unused_seed_entity",
+    "unused_seed_entity",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_04_scorching_the_mantle",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_maren_gyles",
+      "column": "status",
+      "message": "char_maren_gyles.status is committed as \"stoic\"; the engine proposed \"furious\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_05_the_night_coach",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester_vance",
+      "column": "status",
+      "message": "char_hester_vance.status is committed as \"exhausted\"; the engine proposed \"isolated\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_06_the_ledger_revealed",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester_vance",
+      "column": "status",
+      "message": "char_hester_vance.status is committed as \"exhausted\"; the engine proposed \"disgraced\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_06_the_ledger_revealed",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_donald_kemper",
+      "column": "status",
+      "message": "char_donald_kemper.status is committed as \"calculating\"; the engine proposed \"triumphant\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_07_the_rehearsal_drill",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~424 tokens) from scene \"scene_07_the_rehearsal_drill\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_07_the_rehearsal_drill",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~112 tokens) from scene \"scene_07_the_rehearsal_drill\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_07_the_rehearsal_drill",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara_byrne",
+      "column": "status",
+      "message": "char_clara_byrne.status is committed as \"anxious\"; the engine proposed \"vocal_strain\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_08_the_prompt_book",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_maren_gyles",
+      "column": "status",
+      "message": "char_maren_gyles.status is committed as \"stoic\"; the engine proposed \"vindicated\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_08_the_prompt_book",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester_vance",
+      "column": "status",
+      "message": "char_hester_vance.status is committed as \"isolated\"; the engine proposed \"exposed\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_09_the_emergency_dress",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~509 tokens) from scene \"scene_09_the_emergency_dress\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_09_the_emergency_dress",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~94 tokens) from scene \"scene_09_the_emergency_dress\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_09_the_emergency_dress",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester_vance",
+      "column": "status",
+      "message": "char_hester_vance.status is committed as \"isolated\"; the engine proposed \"shattered\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_10_the_gaelic_ballad",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester_vance",
+      "column": "status",
+      "message": "char_hester_vance.status is committed as \"isolated\"; the engine proposed \"humbled\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_11_the_lost_voice",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~471 tokens) from scene \"scene_11_the_lost_voice\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_11_the_lost_voice",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~93 tokens) from scene \"scene_11_the_lost_voice\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_12_the_ledger_confession",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships between two present entities\" (~137 tokens) from scene \"scene_12_the_ledger_confession\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_12_the_ledger_confession",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships touching one present entity\" (~68 tokens) from scene \"scene_12_the_ledger_confession\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_12_the_ledger_confession",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"character_knowledge tied to this scene's facts\" (~150 tokens) from scene \"scene_12_the_ledger_confession\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_12_the_ledger_confession",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~595 tokens) from scene \"scene_12_the_ledger_confession\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_12_the_ledger_confession",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"terms already glossed (term: facts)\" (~30 tokens) from scene \"scene_12_the_ledger_confession\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_12_the_ledger_confession",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~93 tokens) from scene \"scene_12_the_ledger_confession\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_13_midnight_curse",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester_vance",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_hester_vance.goal; the proposal \"endure the emptiness of her lost identity\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_14_the_safety_curtain",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester_vance",
+      "column": "status",
+      "message": "char_hester_vance.status is committed as \"shattered\"; the engine proposed \"resigned\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_14_the_safety_curtain",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "rel_scene_14_the_safety_curtain_0",
+      "column": "_row",
+      "message": "rel_scene_14_the_safety_curtain_0 is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_15_packing_the_trunk",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur_phelan",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_arthur_phelan.goal; the proposal \"depart on the morning train to his Devon cottage\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_16_passing_the_voice",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester_vance",
+      "column": "status",
+      "message": "char_hester_vance.status is committed as \"shattered\"; the engine proposed \"at peace\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_17_passing_the_blade",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~552 tokens) from scene \"scene_17_passing_the_blade\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_17_passing_the_blade",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"terms already glossed (term: facts)\" (~30 tokens) from scene \"scene_17_passing_the_blade\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_17_passing_the_blade",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~154 tokens) from scene \"scene_17_passing_the_blade\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_17_passing_the_blade",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester_vance",
+      "column": "status",
+      "message": "char_hester_vance.status is committed as \"shattered\"; the engine proposed \"peaceful\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_18_in_the_wings",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"character_knowledge tied to this scene's facts\" (~57 tokens) from scene \"scene_18_in_the_wings\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_18_in_the_wings",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~780 tokens) from scene \"scene_18_in_the_wings\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_18_in_the_wings",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"terms already glossed (term: facts)\" (~30 tokens) from scene \"scene_18_in_the_wings\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_18_in_the_wings",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~132 tokens) from scene \"scene_18_in_the_wings\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_18_in_the_wings",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester_vance",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_hester_vance.goal; the proposal \"live peacefully beyond the shadow of Lady Malory\" was dropped and the prior value kept"
+    }
+  ]
+}

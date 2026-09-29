@@ -1,0 +1,2389 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-understudy",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_hester_vance",
+        "name": "Hester Vance",
+        "location_id": "loc_blackwood_dressing_room",
+        "status": "exhausted",
+        "goal": "preserve her sole ownership of Lady Malory",
+        "bag": {
+          "voice_condition": "gravelly",
+          "years_in_role": "11"
+        }
+      },
+      {
+        "id": "char_donald_kemper",
+        "name": "Donald Kemper",
+        "location_id": "loc_blackwood_dressing_room",
+        "status": "calculating",
+        "goal": "replace Hester with cheaper talent for the West End transfer",
+        "bag": {
+          "production_role": "tour_producer"
+        }
+      },
+      {
+        "id": "char_clara_byrne",
+        "name": "Clara Byrne",
+        "location_id": "loc_blackwood_stage",
+        "status": "anxious",
+        "goal": "master the lead role without losing her artistic integrity",
+        "bag": {
+          "vocal_training": "lyric"
+        }
+      },
+      {
+        "id": "char_maren_gyles",
+        "name": "Maren Gyles",
+        "location_id": "loc_blackwood_dressing_room",
+        "status": "stoic",
+        "goal": "complete the tour without reopening old wounds",
+        "bag": {
+          "wardrobe_role": "dresser"
+        }
+      },
+      {
+        "id": "char_arthur_phelan",
+        "name": "Arthur Phelan",
+        "location_id": "loc_blackwood_stage",
+        "status": "rheumatic",
+        "goal": "complete his final contracted tour before retiring to Devon",
+        "bag": {
+          "stage_role": "Lord Malory"
+        }
+      },
+      {
+        "id": "char_toby_finch",
+        "name": "Toby Finch",
+        "location_id": "loc_blackwood_stage",
+        "status": "harried",
+        "goal": "maintain stage safety despite deteriorating regional theatre equipment",
+        "bag": {
+          "crew_role": "company_stage_manager"
+        }
+      },
+      {
+        "id": "char_greg_callow",
+        "name": "Greg Callow",
+        "location_id": "loc_harrow_theatre_wings",
+        "status": "indifferent",
+        "goal": "enforce municipal hall curfews and fire safety limits",
+        "bag": {
+          "house_role": "resident_master_carpenter"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_blackwood_dressing_room",
+        "name": "Lyceum Dressing Room 1, Blackwood",
+        "bag": {
+          "theatre": "Lyceum Theatre"
+        }
+      },
+      {
+        "id": "loc_blackwood_stage",
+        "name": "Lyceum Main Stage, Blackwood",
+        "bag": {
+          "theatre": "Lyceum Theatre"
+        }
+      },
+      {
+        "id": "loc_tour_bus",
+        "name": "Company Sleeper Coach",
+        "bag": {
+          "route": "Midland Provincial Circuit"
+        }
+      },
+      {
+        "id": "loc_harrow_theatre_wings",
+        "name": "Harrowgate Empire Prompt Wings",
+        "bag": {
+          "theatre": "Harrowgate Empire"
+        }
+      },
+      {
+        "id": "loc_oakhaven_green_room",
+        "name": "Oakhaven Theatre Royal Green Room",
+        "bag": {
+          "theatre": "Theatre Royal Oakhaven"
+        }
+      },
+      {
+        "id": "loc_oakhaven_stage",
+        "name": "Oakhaven Theatre Royal Stage",
+        "bag": {
+          "theatre": "Theatre Royal Oakhaven"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_malory_dagger",
+        "name": "Lady Malory's weighted prop dagger",
+        "location_id": "loc_blackwood_dressing_room",
+        "status": "weighted",
+        "bag": {
+          "material": "cast_brass"
+        }
+      },
+      {
+        "id": "obj_tour_contract",
+        "name": "West End transfer recast rider",
+        "location_id": "loc_blackwood_dressing_room",
+        "status": "unexecuted",
+        "bag": {
+          "signatories": "Kemper_Enterprises"
+        }
+      },
+      {
+        "id": "obj_blackwood_archive_ledger",
+        "name": "1913 Lyceum production cue ledger",
+        "location_id": "loc_blackwood_dressing_room",
+        "status": "dog-eared",
+        "bag": {
+          "provenance": "Blackwood_Lyceum_Archive"
+        }
+      },
+      {
+        "id": "obj_safety_curtain_winch",
+        "name": "Stage iron hydraulic winch",
+        "location_id": "loc_blackwood_stage",
+        "status": "functional",
+        "bag": {
+          "lockout_mode": "mechanical_trip"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_hester_clara",
+        "from_id": "char_hester_vance",
+        "to_id": "char_clara_byrne",
+        "kind": "mentor",
+        "sentiment": "possessive",
+        "bag": {}
+      },
+      {
+        "id": "rel_clara_hester",
+        "from_id": "char_clara_byrne",
+        "to_id": "char_hester_vance",
+        "kind": "understudy",
+        "sentiment": "reverent",
+        "bag": {}
+      },
+      {
+        "id": "rel_hester_kemper",
+        "from_id": "char_hester_vance",
+        "to_id": "char_donald_kemper",
+        "kind": "adversary",
+        "sentiment": "scornful",
+        "bag": {}
+      },
+      {
+        "id": "rel_kemper_hester",
+        "from_id": "char_donald_kemper",
+        "to_id": "char_hester_vance",
+        "kind": "employer",
+        "sentiment": "transactional",
+        "bag": {}
+      },
+      {
+        "id": "rel_hester_maren",
+        "from_id": "char_hester_vance",
+        "to_id": "char_maren_gyles",
+        "kind": "patron",
+        "sentiment": "condescending",
+        "bag": {}
+      },
+      {
+        "id": "rel_maren_hester",
+        "from_id": "char_maren_gyles",
+        "to_id": "char_hester_vance",
+        "kind": "dresser",
+        "sentiment": "bitter",
+        "bag": {}
+      },
+      {
+        "id": "rel_arthur_hester",
+        "from_id": "char_arthur_phelan",
+        "to_id": "char_hester_vance",
+        "kind": "stage partner",
+        "sentiment": "protective",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_hester_vance",
+        "fact_ref": "hester_undefeated_run",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_donald_kemper",
+        "fact_ref": "hester_undefeated_run",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_maren_gyles",
+        "fact_ref": "maren_relegation_origin",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_hester_vance",
+        "fact_ref": "maren_relegation_origin",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_05",
+        "character_id": "char_donald_kemper",
+        "fact_ref": "kemper_cost_cutting_agenda",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_pre_show_ritual",
+      "order": 1,
+      "pov": "char_hester_vance",
+      "location_id": "loc_blackwood_dressing_room",
+      "characters_present": [
+        "char_hester_vance",
+        "char_maren_gyles",
+        "char_clara_byrne"
+      ],
+      "dramatic_function": "Establishes Hester's despotic control over her domain and introduces the Malory dagger prop.",
+      "entry_state": {
+        "char_clara_byrne": {
+          "location_id": "loc_blackwood_stage"
+        }
+      },
+      "exit_state": {
+        "char_clara_byrne": {
+          "location_id": "loc_blackwood_dressing_room"
+        }
+      },
+      "required_beats": [
+        "Inside the lyceum dressing room at the blackwood lyceum, Hester reprimands Maren for a misaligned velvet gown hem and banishes Clara to the cold corridor.",
+        "Hester checks the lead plug in the hilt of the Malory dagger, verifying its heavy metallic clatter."
+      ],
+      "reader_must_learn": [
+        "malory_dagger_lead_weight"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_02_testing_the_winch",
+      "order": 2,
+      "pov": "char_toby_finch",
+      "location_id": "loc_blackwood_stage",
+      "characters_present": [
+        "char_hester_vance",
+        "char_toby_finch",
+        "char_arthur_phelan",
+        "char_donald_kemper"
+      ],
+      "dramatic_function": "Establishes the irreversible mechanics of the iron curtain and Hester's physical and professional vulnerability.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_blackwood_dressing_room"
+        },
+        "char_donald_kemper": {
+          "location_id": "loc_blackwood_dressing_room"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_blackwood_stage"
+        },
+        "char_donald_kemper": {
+          "location_id": "loc_blackwood_stage"
+        }
+      },
+      "required_beats": [
+        "Backstage at the blackwood lyceum, Toby demonstrates the hydraulic safety release on the curtain winch, noting local code forbids resetting it until morning once dropped.",
+        "Arthur warns Hester about her labored breathing behind the flat, while Donald Kemper silently assesses her behind his audit files."
+      ],
+      "reader_must_learn": [
+        "iron_curtain_lockout_rule"
+      ],
+      "must_stay_hidden": [
+        "kemper_discovered_tampered_ledger"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_the_four_thousandth_bow",
+      "order": 3,
+      "pov": "char_clara_byrne",
+      "location_id": "loc_blackwood_dressing_room",
+      "characters_present": [
+        "char_hester_vance",
+        "char_clara_byrne",
+        "char_maren_gyles"
+      ],
+      "dramatic_function": "Reveals Hester's entrenched vanity alongside her hidden past while stoking Clara's quiet resentment.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_blackwood_stage"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_blackwood_dressing_room"
+        }
+      },
+      "required_beats": [
+        "After a solo bow at center stage celebrating four thousand shows, Hester returns flushed to the dressing room and lectures Clara on an understudy's invisible patience.",
+        "Clara unpins the heavy wig while Hester mocks modern acting and locks away her archival journal concealing her initial takeover."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "hester_sabotaged_maren_cue"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "hester_undefeated_run",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_04_scorching_the_mantle",
+      "order": 4,
+      "pov": "char_maren_gyles",
+      "location_id": "loc_blackwood_dressing_room",
+      "characters_present": [
+        "char_hester_vance",
+        "char_maren_gyles"
+      ],
+      "dramatic_function": "Exposes the deep-seated malice and lingering history between Hester and her former rival.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "Late at night in the dressing room, Maren irons the velvet mantle with trembling hands as Hester reminds her of her demotion.",
+        "Hester mocks Maren's stage nerve collapsing eleven years ago, and Maren maintains silent pressure on the hot iron until the fabric scorches with steam."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "hester_sabotaged_maren_cue"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "maren_relegation_origin",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_05_the_night_coach",
+      "order": 5,
+      "pov": "char_hester_vance",
+      "location_id": "loc_tour_bus",
+      "characters_present": [
+        "char_hester_vance",
+        "char_donald_kemper",
+        "char_arthur_phelan"
+      ],
+      "dramatic_function": "To isolate Hester professionally and personally by stripping away her London transfer and her longest-standing ally.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_blackwood_dressing_room"
+        },
+        "char_donald_kemper": {
+          "location_id": "loc_blackwood_stage"
+        },
+        "char_arthur_phelan": {
+          "location_id": "loc_blackwood_stage"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_tour_bus"
+        },
+        "char_donald_kemper": {
+          "location_id": "loc_tour_bus"
+        },
+        "char_arthur_phelan": {
+          "location_id": "loc_tour_bus"
+        }
+      },
+      "required_beats": [
+        "In the vibrating lounge of the night sleeper bus to Harrowgate, Kemper hands Hester a contract rider naming Clara as the London lead to satisfy investors, ignoring Hester's reminder of the escrow forfeiture clause.",
+        "Hester confronts Arthur Phelan in the bus aisle to organize a strike, but Arthur reveals his non-refundable train ticket to Exmouth and a purchased cottage, refusing to act again."
+      ],
+      "reader_must_learn": [
+        "kemper_london_escrow_clause",
+        "arthur_secret_valediction"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "kemper_cost_cutting_agenda",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_06_the_ledger_revealed",
+      "order": 6,
+      "pov": "char_hester_vance",
+      "location_id": "loc_harrow_theatre_wings",
+      "characters_present": [
+        "char_hester_vance",
+        "char_donald_kemper",
+        "char_greg_callow"
+      ],
+      "dramatic_function": "To neutralize Hester's authority by exposing documented evidence of her past treachery.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_tour_bus"
+        },
+        "char_donald_kemper": {
+          "location_id": "loc_tour_bus"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_harrow_theatre_wings"
+        },
+        "char_donald_kemper": {
+          "location_id": "loc_harrow_theatre_wings"
+        }
+      },
+      "required_beats": [
+        "When Hester threatens a walkout under actor guild seniority at the Harrowgate Empire, Kemper corners her in the prompt corner and cites the 1913 Lyceum archive ledger documenting her altered cue for Maren's entrance.",
+        "Greg Callow carries counterweight iron past them, oblivious as Hester loses her color."
+      ],
+      "reader_must_learn": [
+        "kemper_discovered_tampered_ledger"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_the_rehearsal_drill",
+      "order": 7,
+      "pov": "char_hester_vance",
+      "location_id": "loc_harrow_theatre_wings",
+      "characters_present": [
+        "char_hester_vance",
+        "char_clara_byrne",
+        "char_toby_finch",
+        "char_greg_callow"
+      ],
+      "dramatic_function": "To demonstrate Hester's desperate escalation into sabotage and her subsequent loss of control over the backstage crew.",
+      "entry_state": {
+        "char_clara_byrne": {
+          "location_id": "loc_blackwood_dressing_room"
+        },
+        "char_toby_finch": {
+          "location_id": "loc_blackwood_stage"
+        },
+        "char_hester_vance": {
+          "status": "exhausted"
+        }
+      },
+      "exit_state": {
+        "char_clara_byrne": {
+          "location_id": "loc_harrow_theatre_wings"
+        },
+        "char_toby_finch": {
+          "location_id": "loc_harrow_theatre_wings"
+        },
+        "char_hester_vance": {
+          "status": "isolated"
+        }
+      },
+      "required_beats": [
+        "During an unscheduled afternoon drill at Harrowgate, Hester forces Clara through lady malory's curse twelve times until Clara's pitch cracks into a painful dry rasp.",
+        "Toby Finch intervenes from the prompt desk before Clara loses her voice entirely.",
+        "Hester orders Toby and Greg to pull down Clara's lighting marks and dim the stage-right follow-spot, but Greg refuses and Toby walks away in disgust.",
+        "The crew defies her, leaving Hester standing alone beside the cold iron fly lines."
+      ],
+      "reader_must_learn": [
+        "clara_chronic_vocal_strain"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_the_prompt_book",
+      "order": 8,
+      "pov": "char_maren_gyles",
+      "location_id": "loc_harrow_theatre_wings",
+      "characters_present": [
+        "char_hester_vance",
+        "char_maren_gyles"
+      ],
+      "dramatic_function": "To confront Hester with the human cost of her original sin and strip away her self-justifying delusions.",
+      "entry_state": {
+        "char_maren_gyles": {
+          "location_id": "loc_blackwood_dressing_room"
+        }
+      },
+      "exit_state": {
+        "char_maren_gyles": {
+          "location_id": "loc_harrow_theatre_wings"
+        }
+      },
+      "required_beats": [
+        "In the Harrowgate wings, Maren confronts Hester with the yellowed prompt sheet bearing Hester's erased pencil marks over the Act I cue.",
+        "Maren recounts how the shame of that missed entrance ended her acting career and bound her to eleven years of ironing Hester's gowns.",
+        "Hester stammers that she thought Maren preferred wardrobe, but Maren departs, leaving the truth of the cruelty laid bare."
+      ],
+      "reader_must_learn": [
+        "hester_sabotaged_maren_cue"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_the_emergency_dress",
+      "order": 9,
+      "pov": "char_hester_vance",
+      "location_id": "loc_harrow_theatre_wings",
+      "characters_present": [
+        "char_hester_vance",
+        "char_clara_byrne",
+        "char_arthur_phelan"
+      ],
+      "dramatic_function": "To shatter Hester's artistic certainty by confronting her with Clara's superior emotional resonance and Arthur's abandonment.",
+      "entry_state": {
+        "char_clara_byrne": {
+          "status": "anxious"
+        },
+        "char_arthur_phelan": {
+          "location_id": "loc_tour_bus"
+        }
+      },
+      "exit_state": {
+        "char_clara_byrne": {
+          "status": "acclaimed"
+        },
+        "char_arthur_phelan": {
+          "location_id": "loc_harrow_theatre_wings"
+        }
+      },
+      "required_beats": [
+        "From the prompt wing, Hester watches Clara play Lady Malory's death scene as a heartbroken mother seeking pardon, drawing tenderness from Arthur and spontaneous applause from the audience.",
+        "Beside the prop bins, Hester demands Arthur denounce Clara for turning Lady Malory into a sentimental weakling.",
+        "Arthur tells Hester her performance became a dead caricature eight years ago, revealing he knowingly let Kemper's ledger audit proceed without defending her."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "kemper_discovered_tampered_ledger",
+          "plant": "scene_06_the_ledger_revealed"
+        }
+      ]
+    },
+    {
+      "id": "scene_10_the_gaelic_ballad",
+      "order": 10,
+      "pov": "char_hester_vance",
+      "location_id": "loc_oakhaven_stage",
+      "characters_present": [
+        "char_hester_vance",
+        "char_clara_byrne"
+      ],
+      "dramatic_function": "To force Hester to recognize the effortless, innate nature of Clara's talent in stark contrast to her own manufactured artifice.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_harrow_theatre_wings"
+        },
+        "char_clara_byrne": {
+          "location_id": "loc_harrow_theatre_wings"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_oakhaven_stage"
+        },
+        "char_clara_byrne": {
+          "location_id": "loc_oakhaven_stage"
+        }
+      },
+      "required_beats": [
+        "Hester slips into the darkened auditorium of the Oakhaven Theatre Royal and finds Clara resting on the edge of the stage apron.",
+        "Clara sings an unadorned Gaelic ballad with soaring clarity and warmth, exposing an innate lyric gift Hester cannot match."
+      ],
+      "reader_must_learn": [
+        "clara_natural_lyric_soprano"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_11_the_lost_voice",
+      "order": 11,
+      "pov": "char_clara_byrne",
+      "location_id": "loc_oakhaven_stage",
+      "characters_present": [
+        "char_hester_vance",
+        "char_clara_byrne",
+        "char_toby_finch"
+      ],
+      "dramatic_function": "To expose the physical impossibility and damage of forcing Clara into Hester's monstrous vocal mold.",
+      "entry_state": {
+        "char_clara_byrne": {
+          "status": "acclaimed"
+        },
+        "char_toby_finch": {
+          "location_id": "loc_harrow_theatre_wings"
+        }
+      },
+      "exit_state": {
+        "char_clara_byrne": {
+          "status": "aphonic"
+        },
+        "char_toby_finch": {
+          "location_id": "loc_oakhaven_stage"
+        }
+      },
+      "required_beats": [
+        "During dress rehearsal at Oakhaven, Clara forces her larynx down into Hester's guttural register during the Act III confrontation.",
+        "Clara's vocal cords seize into voiceless aphonia, reducing her voice to a whisper.",
+        "Clara collapses in tears, apologizing to Hester for failing to become the monster the script required."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "clara_chronic_vocal_strain",
+          "plant": "scene_07_the_rehearsal_drill"
+        }
+      ]
+    },
+    {
+      "id": "scene_12_the_ledger_confession",
+      "order": 12,
+      "pov": "char_hester_vance",
+      "location_id": "loc_oakhaven_green_room",
+      "characters_present": [
+        "char_hester_vance",
+        "char_arthur_phelan",
+        "char_maren_gyles",
+        "char_donald_kemper"
+      ],
+      "dramatic_function": "To bring Hester to full ruin through her admission of past sabotage and Kemper's contractual checkmate.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_oakhaven_stage"
+        },
+        "char_arthur_phelan": {
+          "location_id": "loc_harrow_theatre_wings"
+        },
+        "char_maren_gyles": {
+          "location_id": "loc_harrow_theatre_wings"
+        },
+        "char_donald_kemper": {
+          "location_id": "loc_harrow_theatre_wings"
+        },
+        "obj_tour_contract": {
+          "status": "unexecuted"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_oakhaven_green_room"
+        },
+        "char_arthur_phelan": {
+          "location_id": "loc_oakhaven_green_room"
+        },
+        "char_maren_gyles": {
+          "location_id": "loc_oakhaven_green_room"
+        },
+        "char_donald_kemper": {
+          "location_id": "loc_oakhaven_green_room"
+        },
+        "obj_tour_contract": {
+          "status": "executed"
+        }
+      },
+      "required_beats": [
+        "In the Oakhaven green room, Hester confesses to Maren and Arthur that she altered the prompt ledger in 1913 out of fear of Maren's natural elegance.",
+        "Arthur listens in silence as Hester's facade of invulnerability crumbles.",
+        "Hester threatens Kemper with the escrow clause, but Kemper presents Clara's signed solo contract and London transfer agreement, leaving Hester legally finished."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "hester_sabotaged_maren_cue",
+          "plant": "scene_08_the_prompt_book"
+        },
+        {
+          "fact_ref": "kemper_london_escrow_clause",
+          "plant": "scene_05_the_night_coach"
+        }
+      ],
+      "recounts": [
+        "hester_sabotaged_maren_cue"
+      ]
+    },
+    {
+      "id": "scene_13_midnight_curse",
+      "order": 13,
+      "pov": "char_hester_vance",
+      "location_id": "loc_oakhaven_stage",
+      "characters_present": [
+        "char_hester_vance"
+      ],
+      "dramatic_function": "To dramatize Hester's realization that her career-defining persona is completely dead to her.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_oakhaven_green_room",
+          "status": "isolated"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_oakhaven_stage",
+          "status": "shattered"
+        }
+      },
+      "required_beats": [
+        "Standing alone on the dark stage in the work light at midnight, Hester tries to summon Lady Malory's iconic fiery cadence.",
+        "The lines sound hollow and grotesque in her ears, feeling like an alien skin she can no longer inhabit.",
+        "Hester drops to her knees on the bare timber, weeping for the eleven years she spent avoiding herself."
+      ],
+      "reader_must_learn": [
+        "hester_inner_identity_void"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_14_the_safety_curtain",
+      "order": 14,
+      "pov": "char_hester_vance",
+      "location_id": "loc_oakhaven_stage",
+      "characters_present": [
+        "char_hester_vance",
+        "char_toby_finch"
+      ],
+      "dramatic_function": "To show Hester consciously choosing not to sabotage Clara's performance.",
+      "entry_state": {
+        "char_hester_vance": {
+          "goal": "preserve her sole ownership of Lady Malory"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "goal": "ensure Clara's success and make peace with the role"
+        }
+      },
+      "required_beats": [
+        "Hester stands beside the safety curtain winch, ready to pull the lever and shut the theatre until morning.",
+        "Toby enters the prompt box with a flashlight and freezes upon seeing Hester's hand on the lever.",
+        "Hester uncurls her fingers, steps back from the mechanism, and asks Toby to help Clara with warm steam."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "iron_curtain_lockout_rule",
+          "plant": "scene_02_testing_the_winch"
+        }
+      ]
+    },
+    {
+      "id": "scene_15_packing_the_trunk",
+      "order": 15,
+      "pov": "char_hester_vance",
+      "location_id": "loc_oakhaven_green_room",
+      "characters_present": [
+        "char_hester_vance",
+        "char_arthur_phelan"
+      ],
+      "dramatic_function": "To resolve Hester and Arthur's long partnership with mutual grace and gratitude.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_oakhaven_stage"
+        },
+        "char_arthur_phelan": {
+          "status": "rheumatic"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_oakhaven_green_room"
+        },
+        "char_arthur_phelan": {
+          "status": "retired"
+        }
+      },
+      "required_beats": [
+        "Hester folds Arthur's velvet Duke mantle into his wicker travel basket in the green room.",
+        "Arthur observes in quiet wonder that the tension has left Hester's face.",
+        "Hester puts Arthur's Devon railway ticket into his coat pocket and thanks him for shielding her for eleven years."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "arthur_secret_valediction",
+          "plant": "scene_05_the_night_coach"
+        }
+      ]
+    },
+    {
+      "id": "scene_16_passing_the_voice",
+      "order": 16,
+      "pov": "char_hester_vance",
+      "location_id": "loc_tour_bus",
+      "characters_present": [
+        "char_hester_vance",
+        "char_clara_byrne"
+      ],
+      "dramatic_function": "To complete Hester's mentorship of Clara and her release of Lady Malory.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_oakhaven_green_room"
+        },
+        "char_clara_byrne": {
+          "location_id": "loc_oakhaven_stage",
+          "status": "aphonic"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_tour_bus"
+        },
+        "char_clara_byrne": {
+          "location_id": "loc_tour_bus",
+          "status": "recovered"
+        }
+      },
+      "required_beats": [
+        "On the bus journey back to Blackwood, Hester places her hands on Clara's ribs to guide her breathing away from her throat.",
+        "Hester instructs Clara never to imitate Hester's harsh rasp and tells her to let Lady Malory sing with tragic softness.",
+        "Clara produces a clear, painless note, illuminated with relief and gratitude."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "clara_natural_lyric_soprano",
+          "plant": "scene_10_the_gaelic_ballad"
+        }
+      ]
+    },
+    {
+      "id": "scene_17_passing_the_blade",
+      "order": 17,
+      "pov": "char_hester_vance",
+      "location_id": "loc_blackwood_dressing_room",
+      "characters_present": [
+        "char_hester_vance",
+        "char_clara_byrne",
+        "char_maren_gyles"
+      ],
+      "dramatic_function": "To resolve Hester's grievances and bestow the restored dagger upon Clara as a gesture of artistic succession and reconciliation.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_tour_bus"
+        },
+        "char_clara_byrne": {
+          "location_id": "loc_tour_bus"
+        },
+        "char_maren_gyles": {
+          "location_id": "loc_oakhaven_green_room",
+          "status": "stoic"
+        },
+        "obj_malory_dagger": {
+          "status": "weighted"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_blackwood_dressing_room"
+        },
+        "char_clara_byrne": {
+          "location_id": "loc_blackwood_dressing_room"
+        },
+        "char_maren_gyles": {
+          "location_id": "loc_blackwood_dressing_room",
+          "status": "reconciled"
+        },
+        "obj_malory_dagger": {
+          "status": "balanced"
+        }
+      },
+      "required_beats": [
+        "In Dressing Room 1, Hester uses pliers to remove the illicit lead cylinder from the Malory dagger's hilt, restoring its balance.",
+        "Hester places the balanced dagger in Clara's hands, telling her the role belongs to whatever truth she brings to it.",
+        "Hester buttons Maren's cuffs and offers a sincere apology, which Maren silently accepts with a nod."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "malory_dagger_lead_weight",
+          "plant": "scene_01_the_pre_show_ritual"
+        }
+      ]
+    },
+    {
+      "id": "scene_18_in_the_wings",
+      "order": 18,
+      "pov": "char_hester_vance",
+      "location_id": "loc_blackwood_stage",
+      "characters_present": [
+        "char_hester_vance",
+        "char_clara_byrne",
+        "char_toby_finch",
+        "char_donald_kemper"
+      ],
+      "dramatic_function": "To complete Hester's transition away from the spotlight as she yields the stage and glory to Clara.",
+      "entry_state": {
+        "char_hester_vance": {
+          "location_id": "loc_blackwood_dressing_room",
+          "status": "shattered"
+        },
+        "char_clara_byrne": {
+          "location_id": "loc_blackwood_dressing_room"
+        },
+        "char_toby_finch": {
+          "location_id": "loc_oakhaven_stage"
+        },
+        "char_donald_kemper": {
+          "location_id": "loc_oakhaven_green_room"
+        }
+      },
+      "exit_state": {
+        "char_hester_vance": {
+          "location_id": "loc_blackwood_stage",
+          "status": "liberated"
+        },
+        "char_clara_byrne": {
+          "location_id": "loc_blackwood_stage"
+        },
+        "char_toby_finch": {
+          "location_id": "loc_blackwood_stage"
+        },
+        "char_donald_kemper": {
+          "location_id": "loc_blackwood_stage"
+        }
+      },
+      "required_beats": [
+        "In the stage-left prompt wing, Hester fastens the velvet mantle around Clara's shoulders with gentle care.",
+        "Clara delivers a luminous closing performance that earns a thundering standing ovation from the Blackwood audience.",
+        "When Toby gestures for Hester to step into the center light for the final bow, Hester smiles, shakes her head, and remains peacefully in the dark."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "hester_inner_identity_void",
+          "plant": "scene_13_midnight_curse"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "present",
+    "narrative_distance": "close third, drifting into free indirect style",
+    "register": "attentive, unhurried, alert to small physical detail",
+    "sentence_rhythm": "clauses that turn and qualify; commas doing the work of pauses",
+    "imagery_palette": [
+      "light on water",
+      "hands and their small work",
+      "weather as mood"
+    ],
+    "dialogue_density": "moderate; speech is embedded in narration rather than set apart",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "lyrical_literary"
+  },
+  "metadata": {
+    "title": "The Last Soliloquy of Lady Malory",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T12:37:52.766Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "hester_sabotaged_maren_cue",
+      "statement": "Hester Vance intentionally altered the prompt book timing cues eleven years ago to orchestrate Maren Gyles's missed entrance.",
+      "caused_by": [
+        "maren_relegation_origin"
+      ]
+    },
+    {
+      "fact_ref": "kemper_discovered_tampered_ledger",
+      "statement": "Donald Kemper uncovered Hester's forged handwriting in the archived prompt book and used it as legal cause to terminate her contract.",
+      "caused_by": [
+        "hester_sabotaged_maren_cue"
+      ]
+    },
+    {
+      "fact_ref": "hester_undefeated_run",
+      "statement": "Hester Vance has performed four thousand one hundred and twelve consecutive shows as Lady Malory without ever ceding the stage to an understudy.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "maren_relegation_origin",
+      "statement": "Maren Gyles was demoted from alternate lead to wardrobe mistress eleven years ago following a missed stage entrance.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "kemper_cost_cutting_agenda",
+      "statement": "Donald Kemper prioritizes lowering operational tour overhead over honoring veteran actor loyalty.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "malory_dagger_lead_weight",
+      "statement": "The brass prop dagger contains a concealed lead counterweight in the hilt that produces an exaggerated resonant crash when dropped.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "iron_curtain_lockout_rule",
+      "statement": "Provincial theatre safety protocols dictate that lowering the hydraulic iron curtain locks the winch until certified morning inspection.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "kemper_london_escrow_clause",
+      "statement": "The West End transfer agreement contains an escrow forfeiture penalty if the touring production fails to complete its provincial itinerary.",
+      "caused_by": [
+        "kemper_cost_cutting_agenda"
+      ]
+    },
+    {
+      "fact_ref": "arthur_secret_valediction",
+      "statement": "Arthur Phelan purchased a coastal retirement cottage in Devon and planned his immediate departure following the tour's final curtain.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "clara_chronic_vocal_strain",
+      "statement": "Clara Byrne developed acute vocal cord swelling from forcing her throat to imitate Hester Vance's low guttural delivery.",
+      "caused_by": [
+        "hester_undefeated_run"
+      ]
+    },
+    {
+      "fact_ref": "clara_natural_lyric_soprano",
+      "statement": "Clara Byrne possesses a radiant natural soprano singing range that conveys tragic sorrow far more effectively than Hester's harsh growl.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "hester_inner_identity_void",
+      "statement": "Hester Vance realizes that stripped of Lady Malory's memorized lines and theatrical malice, she possesses no authentic personal identity.",
+      "caused_by": [
+        "hester_undefeated_run",
+        "hester_sabotaged_maren_cue"
+      ]
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-29T12:37:22.046Z",
+    "brief": {
+      "story_id": "review-understudy",
+      "title": "Understudy",
+      "premise": {
+        "logline": "A touring actor who has played the same villain for eleven years is told she will be replaced by the understudy she trained.",
+        "modules": {
+          "theme": "what is left of someone who has only ever been one part",
+          "setting_time": "the final three weeks of a long regional tour",
+          "setting_place": "a string of half-empty provincial theatres",
+          "protagonist": "a lead actor who has never missed a performance",
+          "protagonist_want": "to make the company regret the decision before closing night",
+          "antagonism": "a producer who thinks loyalty is a cost",
+          "complication": "the understudy is better than she was, and kinder",
+          "ending_shape": "she lets go of the part and keeps something truer"
+        }
+      },
+      "plot_shape": {
+        "id": "transformation",
+        "name": "Transformation",
+        "central_question": "Can this person become someone else, and what has to be shown to them first?",
+        "phases": [
+          {
+            "name": "The settled self",
+            "purpose": "The protagonist at their most characteristic, and what it costs others.",
+            "share": 0.2
+          },
+          {
+            "name": "Summons",
+            "purpose": "Something forces a confrontation the protagonist cannot argue with.",
+            "share": 0.15
+          },
+          {
+            "name": "Shown",
+            "purpose": "A sequence of confrontations, each harder to dismiss than the last.",
+            "share": 0.35
+          },
+          {
+            "name": "Refusal and collapse",
+            "purpose": "The last defence of the old self fails.",
+            "share": 0.15
+          },
+          {
+            "name": "The altered self",
+            "purpose": "The change tested against the situation from the opening.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "the unchanged",
+            "purpose": "The protagonist, defined by a habit the story will break."
+          },
+          {
+            "role": "summoner",
+            "purpose": "Compels the confrontation; need not be sympathetic."
+          },
+          {
+            "role": "the harmed",
+            "purpose": "Bears the cost of the old self, visibly, from the first phase."
+          },
+          {
+            "role": "the witness",
+            "purpose": "Notices the change before the protagonist claims it."
+          }
+        ],
+        "obligatory_moves": [
+          "The opening establishes the exact behaviour the ending will contradict.",
+          "At least one confrontation shows the protagonist a consequence they caused and never saw.",
+          "The final phase revisits a specific person or place from the first phase."
+        ]
+      },
+      "event_count": 22,
+      "cast": {
+        "characters": 7,
+        "locations": 6,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 11
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "transformation",
+        "premise_preset": "Understudy"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_dressing_room_ritual",
+        "sequence": 1,
+        "summary": "In the Blackwood Lyceum dressing room, Hester enforces her pre-show ritual, barring Clara from touching the costume or stage.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_blackwood_dressing_room",
+        "characters_present": [
+          "char_hester_vance",
+          "char_maren_gyles",
+          "char_clara_byrne"
+        ],
+        "dramatic_function": "Establish the protagonist's settled self: territorial, tyrannical, and fiercely protective of her sole ownership of the part.",
+        "beats": [
+          "Hester inspects the velvet gown and snaps at Maren for leaving the hem half an inch off her mark.",
+          "Clara asks to observe Hester's vocal warmup from the doorway, but Hester orders her to wait in the cold corridor.",
+          "Hester checks the lead plug inside the hilt of the Malory dagger, verifying its heavy metallic clatter."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "malory_dagger_lead_weight"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_clara_byrne",
+            "column": "location_id",
+            "value": "loc_blackwood_dressing_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_iron_curtain_warning",
+        "sequence": 2,
+        "summary": "Backstage at Blackwood Lyceum, Toby Finch tests the iron curtain winch while warning Donald and Hester of provincial safety curfews.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_blackwood_stage",
+        "characters_present": [
+          "char_hester_vance",
+          "char_toby_finch",
+          "char_arthur_phelan",
+          "char_donald_kemper"
+        ],
+        "dramatic_function": "Plant the municipal theatre rule regarding the hydraulic safety curtain lockout while establishing Kemper's presence.",
+        "beats": [
+          "Toby demonstrates the hydraulic safety release, reminding the cast that once dropped, local code forbids resetting the winch until morning.",
+          "Arthur warns Hester to conserve her breathing for Act IV, noticing her labored gasps behind the flat.",
+          "Donald Kemper observes Hester with tight-lipped appraisal, concealing his audit files behind his clipboard."
+        ],
+        "caused_by": [
+          "ev_01_dressing_room_ritual"
+        ],
+        "reveals": [
+          "iron_curtain_lockout_rule"
+        ],
+        "conceals": [
+          "kemper_discovered_tampered_ledger"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_blackwood_stage"
+          },
+          {
+            "entity_id": "char_donald_kemper",
+            "column": "location_id",
+            "value": "loc_blackwood_stage"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_undefeated_curtain",
+        "sequence": 3,
+        "summary": "Following the performance, Hester takes the center stage solo bow and boasts about her unbroken record of four thousand shows.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_blackwood_dressing_room",
+        "characters_present": [
+          "char_hester_vance",
+          "char_clara_byrne",
+          "char_maren_gyles"
+        ],
+        "dramatic_function": "Highlight the cost Hester's unbroken run inflicts on Clara and Maren, establishing her absolute vanity.",
+        "beats": [
+          "Hester returns to the dressing room flushed with pride, reminding Clara that an understudy's sole virtue is invisible patience.",
+          "Clara silently unpins Hester's heavy wig while absorbing Hester's mocking dismissal of modern naturalistic acting.",
+          "Hester locks her archival journal away, concealing the memory of how she engineered her initial takeover."
+        ],
+        "caused_by": [
+          "ev_02_iron_curtain_warning"
+        ],
+        "reveals": [],
+        "conceals": [
+          "hester_sabotaged_maren_cue"
+        ],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "hester_undefeated_run",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_blackwood_dressing_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_maren_silence",
+        "sequence": 4,
+        "summary": "Late at night in the Lyceum dressing room, Hester catches Maren staring at the wardrobe trunks and reminds her of her demotion.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_blackwood_dressing_room",
+        "characters_present": [
+          "char_hester_vance",
+          "char_maren_gyles"
+        ],
+        "dramatic_function": "Show the visible emotional damage borne by the harmed character, Maren, whose stage career Hester erased.",
+        "beats": [
+          "Maren irons the velvet mantle, her hands shaking slightly from chronic joint inflammation.",
+          "Hester tells Maren that wardrobe was always her true calling after her stage nerve collapsed eleven years ago.",
+          "Maren refuses to answer, holding the hot iron steady until the fabric scorches with steam."
+        ],
+        "caused_by": [
+          "ev_03_undefeated_curtain"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "maren_relegation_origin",
+            "plant": null
+          }
+        ],
+        "state_changes": []
+      },
+      {
+        "id": "ev_05_bus_notice",
+        "sequence": 5,
+        "summary": "Aboard the night sleeper bus to Harrowgate, Donald Kemper hands Hester a contract rider naming Clara as the London lead.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_tour_bus",
+        "characters_present": [
+          "char_hester_vance",
+          "char_donald_kemper",
+          "char_arthur_phelan"
+        ],
+        "dramatic_function": "The Summons: Deliver the shock notice that forces Hester into an unavoidable existential struggle.",
+        "beats": [
+          "Donald Kemper sits across from Hester in the vibrating bus lounge and slides the contract rider across the table.",
+          "Kemper states that provincial nostalgia is dead and that London investors require Clara's fresh, affordable casting.",
+          "Hester points out that the contract's escrow forfeiture clause penalizes Kemper if the provincial run is interrupted."
+        ],
+        "caused_by": [
+          "ev_04_maren_silence"
+        ],
+        "reveals": [
+          "kemper_london_escrow_clause"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "kemper_cost_cutting_agenda",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_tour_bus"
+          },
+          {
+            "entity_id": "char_donald_kemper",
+            "column": "location_id",
+            "value": "loc_tour_bus"
+          },
+          {
+            "entity_id": "char_arthur_phelan",
+            "column": "location_id",
+            "value": "loc_tour_bus"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_arthur_confession",
+        "sequence": 6,
+        "summary": "In the bus aisle, Arthur Phelan refuses to join Hester's proposed revolt, revealing his purchased retirement tickets to Devon.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_tour_bus",
+        "characters_present": [
+          "char_hester_vance",
+          "char_arthur_phelan"
+        ],
+        "dramatic_function": "Deprive Hester of her customary ally and plant Arthur's impending departure.",
+        "beats": [
+          "Hester demands that Arthur threaten to strike alongside her to protect their eleven-year stage partnership.",
+          "Arthur pulls out his non-refundable train ticket to Exmouth, confessing he has bought a cottage and will act no more.",
+          "Hester accuses him of cowardice, but Arthur gently tells her she has mistaken exhaustion for immortality."
+        ],
+        "caused_by": [
+          "ev_05_bus_notice"
+        ],
+        "reveals": [
+          "arthur_secret_valediction"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_07_kemper_threat",
+        "sequence": 7,
+        "summary": "At the Harrowgate Empire, Kemper corners Hester in the prompt corner and reveals he has documented proof of her past cue tampering.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_harrow_theatre_wings",
+        "characters_present": [
+          "char_hester_vance",
+          "char_donald_kemper",
+          "char_greg_callow"
+        ],
+        "dramatic_function": "Escalate the summons by shattering Hester's illusion of moral entitlement.",
+        "beats": [
+          "Hester threatens to pull the company out of Harrowgate, citing actor guild seniority.",
+          "Kemper leans in close and cites the 1913 Lyceum archive ledger, stating he knows exactly whose handwriting altered Maren's entrance.",
+          "Greg Callow passes by with counterweight iron, oblivious to Hester's sudden loss of color."
+        ],
+        "caused_by": [
+          "ev_05_bus_notice"
+        ],
+        "reveals": [
+          "kemper_discovered_tampered_ledger"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_harrow_theatre_wings"
+          },
+          {
+            "entity_id": "char_donald_kemper",
+            "column": "location_id",
+            "value": "loc_harrow_theatre_wings"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_punishing_rehearsal",
+        "sequence": 8,
+        "summary": "During an unscheduled afternoon drill at Harrowgate, Hester drills Clara mercilessly, noticing Clara's throat catching in pain.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_harrow_theatre_wings",
+        "characters_present": [
+          "char_hester_vance",
+          "char_clara_byrne",
+          "char_toby_finch"
+        ],
+        "dramatic_function": "Begin the 'Shown' phase: Hester attempts to break Clara technically, but uncovers the physical harm she is causing.",
+        "beats": [
+          "Hester forces Clara to repeat Lady Malory's curse twelve times, demanding the same guttural rasp that took Hester years to forge.",
+          "Clara's pitch cracks into a painful dry rasp as she struggles to suppress a coughing fit.",
+          "Toby Finch intervenes from the prompt desk, insisting the company take a break before Clara loses her voice entirely."
+        ],
+        "caused_by": [
+          "ev_07_kemper_threat"
+        ],
+        "reveals": [
+          "clara_chronic_vocal_strain"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_clara_byrne",
+            "column": "location_id",
+            "value": "loc_harrow_theatre_wings"
+          },
+          {
+            "entity_id": "char_toby_finch",
+            "column": "location_id",
+            "value": "loc_harrow_theatre_wings"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_crew_repulsion",
+        "sequence": 9,
+        "summary": "Backstage at Harrowgate, Hester orders Toby and Greg to pull down Clara's lighting marks, but the stage crew openly defies her.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_harrow_theatre_wings",
+        "characters_present": [
+          "char_hester_vance",
+          "char_toby_finch",
+          "char_greg_callow"
+        ],
+        "dramatic_function": "Show Hester that her authority over the theatrical environment has decayed completely.",
+        "beats": [
+          "Hester commands Toby to dim the stage-right follow-spot during Clara's walking drill so Clara cannot find her key light.",
+          "Greg Callow refuses to touch the dimmer board, telling Hester her bullying has worn thin across twelve counties.",
+          "Toby walks away in disgust, leaving Hester standing alone beside the cold iron fly lines."
+        ],
+        "caused_by": [
+          "ev_08_punishing_rehearsal"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "status",
+            "value": "isolated"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_maren_confrontation",
+        "sequence": 10,
+        "summary": "In the Harrowgate wings, Maren Gyles produces the archived prompt book and forces Hester to acknowledge eleven years of stolen life.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_harrow_theatre_wings",
+        "characters_present": [
+          "char_hester_vance",
+          "char_maren_gyles"
+        ],
+        "dramatic_function": "Structural obligation: Confrontation showing Hester a consequence she caused and refused to see.",
+        "beats": [
+          "Maren presents the yellowed prompt sheet bearing Hester's faint erased pencil strokes over the Act I cue.",
+          "Maren explains that the shame of that missed entrance shattered her nerve, confining her to eleven years of ironing Hester's gowns.",
+          "Hester stammers that she believed Maren preferred wardrobe, but Maren leaves her with the undeniable truth of her cruelty."
+        ],
+        "caused_by": [
+          "ev_09_crew_repulsion"
+        ],
+        "reveals": [
+          "hester_sabotaged_maren_cue"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_maren_gyles",
+            "column": "location_id",
+            "value": "loc_harrow_theatre_wings"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_shadow_observation",
+        "sequence": 11,
+        "summary": "From the Harrowgate prompt wing, Hester watches Clara step in for an emergency dress scene and sees the audience moved to tears.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_harrow_theatre_wings",
+        "characters_present": [
+          "char_hester_vance",
+          "char_clara_byrne",
+          "char_arthur_phelan"
+        ],
+        "dramatic_function": "Confrontation: Hester is shown that Clara is not merely an imitation, but genuinely superior and more compassionate.",
+        "beats": [
+          "Clara plays Lady Malory's death scene not as a snarling villain, but as a heartbroken mother seeking pardon.",
+          "Arthur responds to Clara's vulnerability with an emotional tenderness he hasn't shown Hester in five years.",
+          "The sparse regional audience breaks into spontaneous mid-scene applause, cutting Hester to the bone."
+        ],
+        "caused_by": [
+          "ev_08_punishing_rehearsal",
+          "ev_10_maren_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_clara_byrne",
+            "column": "status",
+            "value": "acclaimed"
+          },
+          {
+            "entity_id": "char_arthur_phelan",
+            "column": "location_id",
+            "value": "loc_harrow_theatre_wings"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_arthur_verdict",
+        "sequence": 12,
+        "summary": "Beside the prop bins, Hester begs Arthur to denounce Clara's casting, but Arthur tells Hester her Malory has become a dead caricature.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_harrow_theatre_wings",
+        "characters_present": [
+          "char_hester_vance",
+          "char_arthur_phelan"
+        ],
+        "dramatic_function": "The witness role: Arthur delivers an unvarnished assessment of Hester's stagnation and Kemper's leverage.",
+        "beats": [
+          "Hester insists that Clara lacks classical diction and has turned Lady Malory into a sentimental weakling.",
+          "Arthur tells Hester that her own performance stopped breathing eight years ago when she chose repetition over truth.",
+          "Hester realizes Arthur has known about Kemper's ledger audit all along and chose not to defend her."
+        ],
+        "caused_by": [
+          "ev_07_kemper_threat",
+          "ev_11_shadow_observation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "kemper_discovered_tampered_ledger",
+            "plant": "ev_07_kemper_threat"
+          }
+        ],
+        "state_changes": []
+      },
+      {
+        "id": "ev_13_overheard_lament",
+        "sequence": 13,
+        "summary": "On the bare stage of the Oakhaven Theatre Royal, Hester overhears Clara singing a traditional Gaelic ballad in her natural soprano.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_oakhaven_stage",
+        "characters_present": [
+          "char_hester_vance",
+          "char_clara_byrne"
+        ],
+        "dramatic_function": "Confrontation: Hester discovers Clara's true artistic gift, which Hester's coaching was actively suffocating.",
+        "beats": [
+          "Hester slips into the darkened auditorium to find Clara resting on the edge of the stage apron.",
+          "Clara sings an unadorned folk lament with soaring clarity and effortless warmth.",
+          "Hester recognizes that Clara's lyric gift is innate, gentle, and utterly antithetical to Hester's manufactured rage."
+        ],
+        "caused_by": [
+          "ev_11_shadow_observation"
+        ],
+        "reveals": [
+          "clara_natural_lyric_soprano"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_oakhaven_stage"
+          },
+          {
+            "entity_id": "char_clara_byrne",
+            "column": "location_id",
+            "value": "loc_oakhaven_stage"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_vocal_collapse",
+        "sequence": 14,
+        "summary": "During dress rehearsal at Oakhaven, Clara attempts Hester's low roar and completely loses her voice, collapsing in tears.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_oakhaven_stage",
+        "characters_present": [
+          "char_hester_vance",
+          "char_clara_byrne",
+          "char_toby_finch"
+        ],
+        "dramatic_function": "The climax of the 'Shown' phase: Hester sees the direct physical destruction her coaching has wrought upon Clara.",
+        "beats": [
+          "Clara strains to force her larynx down into Hester's guttural register during the Act III confrontation.",
+          "Clara's vocal cords lock into sudden voiceless aphonia, leaving her unable to utter more than a whisper.",
+          "Clara weeps, apologizing to Hester for failing to become the monster the script required."
+        ],
+        "caused_by": [
+          "ev_08_punishing_rehearsal",
+          "ev_13_overheard_lament"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "clara_chronic_vocal_strain",
+            "plant": "ev_08_punishing_rehearsal"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_clara_byrne",
+            "column": "status",
+            "value": "aphonic"
+          },
+          {
+            "entity_id": "char_toby_finch",
+            "column": "location_id",
+            "value": "loc_oakhaven_stage"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_green_room_confession",
+        "sequence": 15,
+        "summary": "In the Oakhaven green room, Hester sits with Arthur and Maren, breaking down to confess her original sabotage of Maren's cue.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_oakhaven_green_room",
+        "characters_present": [
+          "char_hester_vance",
+          "char_arthur_phelan",
+          "char_maren_gyles"
+        ],
+        "dramatic_function": "Hester shatters her eleven-year defense, speaking the hidden truth aloud to the two people she hurt most.",
+        "beats": [
+          "Hester sets her teacup down with trembling hands and looks directly into Maren's eyes.",
+          "Hester admits she altered the prompt ledger in 1913 because she knew Maren's natural elegance would outshine her.",
+          "Arthur watches Hester in silence, realizing that her legendary invulnerability was built on terror."
+        ],
+        "caused_by": [
+          "ev_10_maren_confrontation",
+          "ev_14_vocal_collapse"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [
+          "hester_sabotaged_maren_cue"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "hester_sabotaged_maren_cue",
+            "plant": "ev_10_maren_confrontation"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_oakhaven_green_room"
+          },
+          {
+            "entity_id": "char_arthur_phelan",
+            "column": "location_id",
+            "value": "loc_oakhaven_green_room"
+          },
+          {
+            "entity_id": "char_maren_gyles",
+            "column": "location_id",
+            "value": "loc_oakhaven_green_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_contract_failure",
+        "sequence": 16,
+        "summary": "In the green room, Hester attempts a final contractual stand with Kemper, who produces Clara's signed solo contract.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_oakhaven_green_room",
+        "characters_present": [
+          "char_hester_vance",
+          "char_donald_kemper"
+        ],
+        "dramatic_function": "Phase 4 (Refusal and Collapse): Hester's last formal defence and leverage fail completely.",
+        "beats": [
+          "Hester warns Kemper that invoking the escrow clause will bankrupt the regional company if she refuses to finish the week.",
+          "Kemper displays Clara's countersigned London transfer agreement, showing that the West End syndicate has already assumed all liabilities.",
+          "Kemper informs Hester she is legally finished whether she cooperates or walks."
+        ],
+        "caused_by": [
+          "ev_05_bus_notice",
+          "ev_12_arthur_verdict"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "kemper_london_escrow_clause",
+            "plant": "ev_05_bus_notice"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_donald_kemper",
+            "column": "location_id",
+            "value": "loc_oakhaven_green_room"
+          },
+          {
+            "entity_id": "obj_tour_contract",
+            "column": "status",
+            "value": "executed"
+          }
+        ]
+      },
+      {
+        "id": "ev_17_midnight_soliloquy",
+        "sequence": 17,
+        "summary": "Standing alone on the dark Oakhaven stage at midnight, Hester attempts to recite Lady Malory's curse and discovers only emptiness.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_oakhaven_stage",
+        "characters_present": [
+          "char_hester_vance"
+        ],
+        "dramatic_function": "The internal collapse: Hester confronts the void of having no self outside the part.",
+        "beats": [
+          "Hester takes center stage in the work light and tries to summon Lady Malory's iconic fiery cadence.",
+          "The lines sound hollow and grotesque in her ears, feeling like an alien skin she can no longer inhabit.",
+          "Hester drops to her knees on the bare timber, weeping for the eleven years she spent avoiding herself."
+        ],
+        "caused_by": [
+          "ev_15_green_room_confession",
+          "ev_16_contract_failure"
+        ],
+        "reveals": [
+          "hester_inner_identity_void"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_oakhaven_stage"
+          },
+          {
+            "entity_id": "char_hester_vance",
+            "column": "status",
+            "value": "shattered"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_abandoned_winch",
+        "sequence": 18,
+        "summary": "Beside the stage iron winch, Hester grips the emergency trip handle to shut down Clara's showcase, but consciously releases it.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_oakhaven_stage",
+        "characters_present": [
+          "char_hester_vance",
+          "char_toby_finch"
+        ],
+        "dramatic_function": "The pivotal choice: Hester refuses her habitual sabotage and decides to release the role.",
+        "beats": [
+          "Hester stands beside the safety curtain winch, knowing that pulling the lever will drop the iron and shut the theatre until morning.",
+          "Toby enters the prompt box with a flashlight, freezing as he spots Hester's white hand on the lever.",
+          "Hester slowly uncurls her fingers, steps back from the mechanism, and asks Toby to help Clara with warm steam."
+        ],
+        "caused_by": [
+          "ev_02_iron_curtain_warning",
+          "ev_17_midnight_soliloquy"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "iron_curtain_lockout_rule",
+            "plant": "ev_02_iron_curtain_warning"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "goal",
+            "value": "ensure Clara's success and make peace with the role"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_arthur_farewell",
+        "sequence": 19,
+        "summary": "In the Oakhaven green room, Hester helps Arthur pack his stage trunk, offering him a peaceful, ungrudging farewell.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_oakhaven_green_room",
+        "characters_present": [
+          "char_hester_vance",
+          "char_arthur_phelan"
+        ],
+        "dramatic_function": "The altered self: Hester demonstrates genuine care for her stage partner rather than possessiveness.",
+        "beats": [
+          "Hester carefully folds Arthur's velvet Duke mantle into his wicker travel basket.",
+          "Arthur watches her with quiet wonder, noticing the tension has vanished from her brow.",
+          "Hester places Arthur's Devon railway ticket in his coat pocket and thanks him for shielding her for eleven years."
+        ],
+        "caused_by": [
+          "ev_06_arthur_confession",
+          "ev_18_abandoned_winch"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "arthur_secret_valediction",
+            "plant": "ev_06_arthur_confession"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_oakhaven_green_room"
+          },
+          {
+            "entity_id": "char_arthur_phelan",
+            "column": "status",
+            "value": "retired"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_vocal_tutelage",
+        "sequence": 20,
+        "summary": "On the bus return journey to Blackwood, Hester teaches Clara diaphragmatic breathing to release Clara's natural singing range.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_tour_bus",
+        "characters_present": [
+          "char_hester_vance",
+          "char_clara_byrne"
+        ],
+        "dramatic_function": "The altered self: Hester acts as a true, generous teacher rather than a jealous guardian of technique.",
+        "beats": [
+          "Hester sits beside Clara on the bus bench, placing her hands on Clara's ribs to guide her breath away from the throat.",
+          "Hester instructs Clara never to imitate Hester's harsh rasp, urging her to let Lady Malory sing with tragic softness.",
+          "Clara produces a clear, painless note, her face illuminating with relief and gratitude."
+        ],
+        "caused_by": [
+          "ev_13_overheard_lament",
+          "ev_14_vocal_collapse",
+          "ev_18_abandoned_winch"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "clara_natural_lyric_soprano",
+            "plant": "ev_13_overheard_lament"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_tour_bus"
+          },
+          {
+            "entity_id": "char_clara_byrne",
+            "column": "location_id",
+            "value": "loc_tour_bus"
+          },
+          {
+            "entity_id": "char_clara_byrne",
+            "column": "status",
+            "value": "recovered"
+          }
+        ]
+      },
+      {
+        "id": "ev_21_relinquishing_the_blade",
+        "sequence": 21,
+        "summary": "Back in Dressing Room 1 at Blackwood Lyceum, Hester unscrews the lead weight from the dagger and gifts the blade to Clara.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_blackwood_dressing_room",
+        "characters_present": [
+          "char_hester_vance",
+          "char_clara_byrne",
+          "char_maren_gyles"
+        ],
+        "dramatic_function": "Structural obligation: Revisit the opening room and person (Maren), dismantling the foundational prop of the settled self.",
+        "beats": [
+          "Hester uses pliers to remove the illicit lead cylinder from the Malory dagger's hilt, restoring the prop's natural balance.",
+          "Hester places the balanced dagger into Clara's hands, telling her the role belongs to whatever truth she brings to it.",
+          "Hester turns to Maren and quietly buttons Maren's cuffs, offering a sincere apology that Maren silently accepts with a nod."
+        ],
+        "caused_by": [
+          "ev_01_dressing_room_ritual",
+          "ev_15_green_room_confession",
+          "ev_20_vocal_tutelage"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "malory_dagger_lead_weight",
+            "plant": "ev_01_dressing_room_ritual"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_blackwood_dressing_room"
+          },
+          {
+            "entity_id": "char_clara_byrne",
+            "column": "location_id",
+            "value": "loc_blackwood_dressing_room"
+          },
+          {
+            "entity_id": "char_maren_gyles",
+            "column": "location_id",
+            "value": "loc_blackwood_dressing_room"
+          },
+          {
+            "entity_id": "obj_malory_dagger",
+            "column": "status",
+            "value": "balanced"
+          },
+          {
+            "entity_id": "char_maren_gyles",
+            "column": "status",
+            "value": "reconciled"
+          }
+        ]
+      },
+      {
+        "id": "ev_22_the_final_bow",
+        "sequence": 22,
+        "summary": "On closing night at Blackwood, Hester watches Clara triumph from the wings, adjusting Clara's mantle and declining the curtain call.",
+        "pov": "char_hester_vance",
+        "location_id": "loc_blackwood_stage",
+        "characters_present": [
+          "char_hester_vance",
+          "char_clara_byrne",
+          "char_toby_finch",
+          "char_donald_kemper"
+        ],
+        "dramatic_function": "The transformation tested against the opening: Hester contradicts her opening behavior by yielding the spotlight and finding peace.",
+        "beats": [
+          "From the stage-left prompt wing, Hester fastens the velvet mantle around Clara's shoulders with gentle care.",
+          "Clara delivers a breathtaking, luminous closing performance that earns a thundering standing ovation from the Blackwood audience.",
+          "When Toby gestures for Hester to step into the center light for the final bow, Hester smiles, shakes her head, and remains peacefully in the dark."
+        ],
+        "caused_by": [
+          "ev_18_abandoned_winch",
+          "ev_21_relinquishing_the_blade"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "hester_inner_identity_void",
+            "plant": "ev_17_midnight_soliloquy"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester_vance",
+            "column": "location_id",
+            "value": "loc_blackwood_stage"
+          },
+          {
+            "entity_id": "char_clara_byrne",
+            "column": "location_id",
+            "value": "loc_blackwood_stage"
+          },
+          {
+            "entity_id": "char_toby_finch",
+            "column": "location_id",
+            "value": "loc_blackwood_stage"
+          },
+          {
+            "entity_id": "char_donald_kemper",
+            "column": "location_id",
+            "value": "loc_blackwood_stage"
+          },
+          {
+            "entity_id": "char_hester_vance",
+            "column": "status",
+            "value": "liberated"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_cue_tampering",
+        "sequence": 1,
+        "summary": "Eleven years ago at Blackwood Lyceum, Hester Vance shaved thirty seconds off Maren Gyles's lighting cue in the prompt book to make Maren miss her entrance and secure the lead role.",
+        "caused_by": [],
+        "establishes": [
+          "hester_sabotaged_maren_cue"
+        ]
+      },
+      {
+        "id": "hidden_02_kemper_audit",
+        "sequence": 2,
+        "summary": "Two months before the tour, Donald Kemper inspected the Blackwood archive and identified Hester's handwriting on the altered cue, giving him grounds to terminate her tenure.",
+        "caused_by": [
+          "hidden_01_cue_tampering"
+        ],
+        "establishes": [
+          "kemper_discovered_tampered_ledger"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "hester_undefeated_run",
+        "statement": "Hester Vance has performed four thousand one hundred and twelve consecutive shows as Lady Malory without ever ceding the stage to an understudy.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "maren_relegation_origin",
+        "statement": "Maren Gyles was demoted from alternate lead to wardrobe mistress eleven years ago following a missed stage entrance.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "kemper_cost_cutting_agenda",
+        "statement": "Donald Kemper prioritizes lowering operational tour overhead over honoring veteran actor loyalty.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "malory_dagger_lead_weight",
+        "statement": "The brass prop dagger contains a concealed lead counterweight in the hilt that produces an exaggerated resonant crash when dropped.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "iron_curtain_lockout_rule",
+        "statement": "Provincial theatre safety protocols dictate that lowering the hydraulic iron curtain locks the winch until certified morning inspection.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "hester_sabotaged_maren_cue",
+        "statement": "Hester Vance intentionally altered the prompt book timing cues eleven years ago to orchestrate Maren Gyles's missed entrance.",
+        "caused_by": [
+          "maren_relegation_origin"
+        ]
+      },
+      {
+        "fact_ref": "kemper_discovered_tampered_ledger",
+        "statement": "Donald Kemper uncovered Hester's forged handwriting in the archived prompt book and used it as legal cause to terminate her contract.",
+        "caused_by": [
+          "hester_sabotaged_maren_cue"
+        ]
+      },
+      {
+        "fact_ref": "kemper_london_escrow_clause",
+        "statement": "The West End transfer agreement contains an escrow forfeiture penalty if the touring production fails to complete its provincial itinerary.",
+        "caused_by": [
+          "kemper_cost_cutting_agenda"
+        ]
+      },
+      {
+        "fact_ref": "arthur_secret_valediction",
+        "statement": "Arthur Phelan purchased a coastal retirement cottage in Devon and planned his immediate departure following the tour's final curtain.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "clara_chronic_vocal_strain",
+        "statement": "Clara Byrne developed acute vocal cord swelling from forcing her throat to imitate Hester Vance's low guttural delivery.",
+        "caused_by": [
+          "hester_undefeated_run"
+        ]
+      },
+      {
+        "fact_ref": "clara_natural_lyric_soprano",
+        "statement": "Clara Byrne possesses a radiant natural soprano singing range that conveys tragic sorrow far more effectively than Hester's harsh growl.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "hester_inner_identity_void",
+        "statement": "Hester Vance realizes that stripped of Lady Malory's memorized lines and theatrical malice, she possesses no authentic personal identity.",
+        "caused_by": [
+          "hester_undefeated_run",
+          "hester_sabotaged_maren_cue"
+        ]
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T12:37:52.766Z",
+    "started_at": "2026-09-29T12:37:22.046Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_pre_show_ritual",
+        "order": 1,
+        "event_ids": [
+          "ev_01_dressing_room_ritual"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_testing_the_winch",
+        "order": 2,
+        "event_ids": [
+          "ev_02_iron_curtain_warning"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_four_thousandth_bow",
+        "order": 3,
+        "event_ids": [
+          "ev_03_undefeated_curtain"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_scorching_the_mantle",
+        "order": 4,
+        "event_ids": [
+          "ev_04_maren_silence"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_night_coach",
+        "order": 5,
+        "event_ids": [
+          "ev_05_bus_notice",
+          "ev_06_arthur_confession"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_ledger_revealed",
+        "order": 6,
+        "event_ids": [
+          "ev_07_kemper_threat"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_the_rehearsal_drill",
+        "order": 7,
+        "event_ids": [
+          "ev_08_punishing_rehearsal",
+          "ev_09_crew_repulsion"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_the_prompt_book",
+        "order": 8,
+        "event_ids": [
+          "ev_10_maren_confrontation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_emergency_dress",
+        "order": 9,
+        "event_ids": [
+          "ev_11_shadow_observation",
+          "ev_12_arthur_verdict"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_gaelic_ballad",
+        "order": 10,
+        "event_ids": [
+          "ev_13_overheard_lament"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_the_lost_voice",
+        "order": 11,
+        "event_ids": [
+          "ev_14_vocal_collapse"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_the_ledger_confession",
+        "order": 12,
+        "event_ids": [
+          "ev_15_green_room_confession",
+          "ev_16_contract_failure"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_midnight_curse",
+        "order": 13,
+        "event_ids": [
+          "ev_17_midnight_soliloquy"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_14_the_safety_curtain",
+        "order": 14,
+        "event_ids": [
+          "ev_18_abandoned_winch"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_15_packing_the_trunk",
+        "order": 15,
+        "event_ids": [
+          "ev_19_arthur_farewell"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_16_passing_the_voice",
+        "order": 16,
+        "event_ids": [
+          "ev_20_vocal_tutelage"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_17_passing_the_blade",
+        "order": 17,
+        "event_ids": [
+          "ev_21_relinquishing_the_blade"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_18_in_the_wings",
+        "order": 18,
+        "event_ids": [
+          "ev_22_the_final_bow"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}
