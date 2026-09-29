@@ -82,6 +82,9 @@ Hard rules on the beats:
   consequence the events do not state.
 - Compress. Several events usually collapse into one beat. Do not restate each event.
 - Do not name a beat the story has not reached yet.
+- A beat that is a decision ("realizes", "decides", "chooses", "confesses", "forgives", "refuses")
+  comes AFTER a beat, on the same scene, that stages what triggers it — the pressure, discovery
+  or cost the events give for it. A scene must never open on a decision already made.
 - Compress events, never qualifiers. Keep WHEN something happens ("at dead low tide", "after the
   last ferry"), WHERE, and the sensory detail a witness reports ("an explosive thump"): a later
   scene may depend on exactly that detail, and a card that drops it leaves the writer to invent

@@ -147,3 +147,22 @@ source ever measured) checked before any call is made, and a raw-text source
 (`pastedSource` in `src/extraction/sources.ts`) in place of the manifest lookup the CLI uses.
 Its POST also accepts one of the three known-good fixture sources by id, so a UI run can be
 compared against `fixtures/extraction/runs/` before being trusted on novel text.
+
+## Amendment (2026-09-29): a motivation gate on generated arcs, decision beats on the card
+
+[#199](https://github.com/tschomay/axiom-weaver/issues/199). In all five stories of Story Review
+Panel batch 2026-09-29, the character reviewer's top finding was a decisive turn made between
+scenes or for no visible reason. In `03`, Hettie trips the scour straight after the only two events
+that bear on it argue against it; the causal link was declared and the motive was not.
+
+- **Generation runs a motivation gate after repair** (`motivationGate`, `src/arc/motivation.ts`):
+  one call, reusing the judge's blind arc view (#192), asks about the final phase's events and any
+  event whose summary or beats turn on a decision ("decides", "realizes", "confesses", "refuses"…),
+  and for each unmotivated act returns a beat that stages the reason, built from the arc's own
+  people and events. The beat is installed first among that event's beats. A failed call or an
+  unparseable answer leaves the arc as it was. `GeneratedArc.motivation` reports what was checked
+  and found; the call is recorded with stage `motivation`.
+- **Segmentation never opens a card on a decision** (`stageDecisionTriggers`): if a card's first
+  beat is a decision, the most recent cause its events name is staged before it. The scene-card
+  pass is asked for the same ordering. With no stated cause nothing is invented.
+- **The writer is told to dramatise a decision on the page** whenever a card's beat is one.

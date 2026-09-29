@@ -13,6 +13,7 @@
  * The hierarchy and both tails ride the implicit per-request prefix cache instead.
  */
 
+import { isDecisionText } from '../arc/decision-text';
 import type { LedgerDetail } from '../digest/details-ledger';
 import type { SceneCard, StoryPackage } from '../schema/story-package';
 import type { WorldModel } from '../world-model/world-model';
@@ -496,6 +497,12 @@ function renderSceneCard(
   if (scene.required_beats.length > 0) {
     lines.push('Required beats:');
     for (const beat of scene.required_beats) lines.push(`  - ${beat}`);
+    // #199: the decision is the scene. Opening after it is how a turn happens off the page.
+    if (scene.required_beats.some((beat) => isDecisionText(beat))) {
+      lines.push(
+        'A beat here is a decision: dramatise the moment of decision on the page — the pressure, the weighing, then the choice. Do not open the scene after it has been made.',
+      );
+    }
   }
   if (scene.reader_must_learn.length > 0) {
     pushFactList(lines, 'The reader must learn', scene.reader_must_learn, facts);

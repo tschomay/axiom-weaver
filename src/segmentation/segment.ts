@@ -92,6 +92,7 @@ import {
   type TellingOrder,
 } from './signals';
 import { wireSecrets } from './secrets';
+import { isDecisionText } from '../arc/decision-text';
 import { replayStates, type StateReplayResult } from './state';
 
 export const SEGMENTATION_BLOCK = '_segmentation';
@@ -129,6 +130,8 @@ export interface SegmentationReport {
   readonly grouping: Omit<GroupingReport, 'groups'>;
   readonly scene_properties: Omit<ScenePropertiesResult, 'scenes'>;
   readonly substitutions: SegmentationSubstitutions;
+  /** #199: decision beats that opened their card and were given a staged trigger before them. */
+  readonly decision_triggers_added: number;
   readonly state: Omit<StateReplayResult, 'states'>;
   readonly plants: {
     readonly carried_from_fabula: number;
@@ -203,6 +206,40 @@ function seedTables(seed: WorldModelSeed): {
     characters: new Set(seed.characters.map((row) => row.id)),
     locations: new Set(seed.locations.map((row) => row.id)),
   };
+}
+
+/**
+ * A decision beat never opens its card (#199). Panel batch 2026-09-29's `04` card
+ * `scene_14_the_lease_choice` had one beat — "Julian realizes leaving would be running from reality
+ * and confesses he cannot go" — and the writer opened the scene after the decision. Where the
+ * decision is the card's first beat, the most recent cause its events name is staged before it;
+ * with no stated cause nothing is invented, and the arc's motivation gate (`src/arc/motivation.ts`)
+ * is where that gap is closed. Returns how many trigger beats were added.
+ */
+export function stageDecisionTriggers(
+  scenes: SceneCard[],
+  sceneEvents: ReadonlyArray<readonly FabulaEvent[]>,
+  allEvents: readonly FabulaEvent[],
+): number {
+  const byId = new Map(allEvents.map((event) => [event.id, event]));
+  let added = 0;
+  scenes.forEach((scene, index) => {
+    const first = scene.required_beats[0];
+    if (first === undefined || !isDecisionText(first)) return;
+    const events = sceneEvents[index] ?? [];
+    const own = new Set(events.map((event) => event.id));
+    const causes = events
+      .flatMap((event) => event.caused_by)
+      .map((id) => byId.get(id))
+      .filter((event): event is FabulaEvent => event !== undefined && !own.has(event.id))
+      .sort((a, b) => b.sequence - a.sequence);
+    const cause = causes[0];
+    if (cause === undefined) return;
+    scene.required_beats = [`What pushes this decision now, staged first: ${cause.summary}`, ...scene.required_beats];
+    scene.length_budget = defaultLengthBudget(scene.required_beats.length);
+    added += 1;
+  });
+  return added;
 }
 
 /** The floor, ceiling, base and per-beat words of a segmented card's default `length_budget`. */
@@ -487,6 +524,7 @@ export async function segmentFabulaPackage(
   const states = replayStates(arc.world_model_seed, grouped);
 
   const { scenes, substitutions } = assembleScenes(arc, grouped, properties, states);
+  const decisionTriggers = stageDecisionTriggers(scenes, grouped, events);
 
   progress('pass 4/4 — plant/payoff graph and told-ledger');
   const carried = carryForward(
@@ -663,6 +701,7 @@ export async function segmentFabulaPackage(
       grouping: groupingReport,
       scene_properties: propertiesReport,
       substitutions,
+      decision_triggers_added: decisionTriggers,
       state: stateReport,
       plants: {
         carried_from_fabula: carriedPairs.length,
@@ -736,6 +775,7 @@ export function segmentMechanically(
 
   const states = replayStates(arc.world_model_seed, grouped);
   const { scenes } = assembleScenes(arc, grouped, properties, states);
+  stageDecisionTriggers(scenes, grouped, arc.events);
 
   const carried = carryForward(
     scenes.map((scene, index) => ({ id: scene.id, events: grouped[index]! })),
