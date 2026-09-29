@@ -1,0 +1,1034 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-the-borrowed-boat",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_cleo",
+        "name": "Cleo Varner",
+        "location_id": "loc_skiff_haven",
+        "status": "exhausted from months of solitary nursing",
+        "goal": "deliver Arthur's ashes to Lowood without disclosing his deathbed confession",
+        "bag": {}
+      },
+      {
+        "id": "char_ruth",
+        "name": "Ruth Varner",
+        "location_id": "loc_skiff_haven",
+        "status": "impatient and detached",
+        "goal": "deliver the Cormorant to the Lowood marine buyer to liquidate Arthur's estate",
+        "bag": {}
+      },
+      {
+        "id": "char_toby",
+        "name": "Toby Fenn",
+        "location_id": "loc_skiff_haven",
+        "status": "arthritic and watchful",
+        "goal": "recover Arthur's overdue slipway mooring fees before the boat leaves harbour",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_skiff_haven",
+        "name": "Skiff Haven Harbour",
+        "bag": {}
+      },
+      {
+        "id": "loc_grey_reach",
+        "name": "The Grey Reach Waters",
+        "bag": {}
+      },
+      {
+        "id": "loc_lowood_bight",
+        "name": "Lowood Bight Slipway",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_ash_urn",
+        "name": "Arthur's Bronze Ash Urn",
+        "location_id": "loc_skiff_haven",
+        "status": "sealed with pitch",
+        "bag": {}
+      },
+      {
+        "id": "obj_buyer_contract",
+        "name": "Conditional Bill of Sale",
+        "location_id": "loc_skiff_haven",
+        "status": "countersigned pending mechanical inspection",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_cleo_ruth",
+        "from_id": "char_cleo",
+        "to_id": "char_ruth",
+        "kind": "estranged sister",
+        "sentiment": "guarded resentment",
+        "bag": {}
+      },
+      {
+        "id": "rel_ruth_cleo",
+        "from_id": "char_ruth",
+        "to_id": "char_cleo",
+        "kind": "estranged sister",
+        "sentiment": "condescending suspicion",
+        "bag": {}
+      },
+      {
+        "id": "rel_toby_cleo",
+        "from_id": "char_toby",
+        "to_id": "char_cleo",
+        "kind": "harbour creditor",
+        "sentiment": "sympathetic firmness",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_cleo_slip_debt",
+        "character_id": "char_cleo",
+        "fact_ref": "arthur_slip_debt",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_ruth_slip_debt",
+        "character_id": "char_ruth",
+        "fact_ref": "arthur_slip_debt",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_toby_slip_debt",
+        "character_id": "char_toby",
+        "fact_ref": "arthur_slip_debt",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_conditional_departure",
+      "order": 1,
+      "pov": "char_cleo",
+      "location_id": "loc_skiff_haven",
+      "characters_present": [
+        "char_cleo",
+        "char_ruth",
+        "char_toby"
+      ],
+      "dramatic_function": "Establishes the sisters' conflicting financial and emotional stakes for the voyage and strips them of essential safety gear before departure.",
+      "entry_state": {
+        "obj_buyer_contract": {
+          "status": "countersigned pending mechanical inspection",
+          "location_id": "loc_skiff_haven"
+        },
+        "char_cleo": {
+          "goal": "deliver Arthur's ashes to Lowood without disclosing his deathbed confession",
+          "location_id": "loc_skiff_haven"
+        },
+        "char_ruth": {
+          "location_id": "loc_skiff_haven"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_skiff_haven"
+        }
+      },
+      "exit_state": {
+        "obj_buyer_contract": {
+          "status": "active_conditional_transit",
+          "location_id": "loc_grey_reach"
+        },
+        "char_cleo": {
+          "goal": "reach Lowood without breaching the buyer contract or revealing Arthur's confession",
+          "location_id": "loc_grey_reach"
+        },
+        "char_ruth": {
+          "location_id": "loc_grey_reach"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_grey_reach"
+        }
+      },
+      "required_beats": [
+        "In arthur's workshop at skiff haven, Ruth demands a scrap sale of the Cormorant, agreeing to deliver the boat only on the condition that its drive train remains operational, while Cleo insists on carrying the boat and urn to lowood bight.",
+        "On the slipway, Toby Fenn halts their departure over unpaid mooring arrears, forcing Cleo to forfeit the heavy storm anchor and rely solely on an undersized kedging anchor.",
+        "Toby warns Cleo that gull shoal offers only a strict twenty-minute slack water window before an impassable rip tide forms over the rocks."
+      ],
+      "reader_must_learn": [
+        "buyer_engine_clause",
+        "shoal_tide_window",
+        "undersized_kedge_anchor",
+        "arthurs_ash_urn"
+      ],
+      "must_stay_hidden": [
+        "arthur_second_family"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "arthur_slip_debt",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_the_squall",
+      "order": 2,
+      "pov": "char_cleo",
+      "location_id": "loc_grey_reach",
+      "characters_present": [
+        "char_cleo",
+        "char_ruth"
+      ],
+      "dramatic_function": "Tests the sisters' ability to sail together under life-threatening pressure, exposing Ruth's helplessness at sea.",
+      "entry_state": {
+        "char_cleo": {
+          "status": "exhausted from months of solitary nursing"
+        },
+        "char_ruth": {
+          "status": "impatient and detached"
+        }
+      },
+      "exit_state": {
+        "char_cleo": {
+          "status": "battered and saltwater-chapped"
+        },
+        "char_ruth": {
+          "status": "seasick and unnerved"
+        }
+      },
+      "required_beats": [
+        "A sudden squall hefts the Cormorant onto her gunwales when the mainsail jams, while Ruth freezes in terror at the helm.",
+        "Cleo crawls across the wash on the foredeck and cuts the fouled halyard with a rigging knife to prevent the mast from breaking."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "arthur_second_family"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_the_missing_logs",
+      "order": 3,
+      "pov": "char_ruth",
+      "location_id": "loc_grey_reach",
+      "characters_present": [
+        "char_cleo",
+        "char_ruth"
+      ],
+      "dramatic_function": "Ignites direct confrontation between the sisters over Arthur's finances while the vessel suffers a critical mechanical crisis.",
+      "entry_state": {
+        "char_cleo": {
+          "status": "battered and saltwater-chapped"
+        }
+      },
+      "exit_state": {
+        "char_cleo": {
+          "status": "blistered from scalding engine brine"
+        }
+      },
+      "required_beats": [
+        "The diesel engine alarms sound as driftweed chokes the raw-water intake pipes off Crow Point.",
+        "While Cleo scalds her hands clearing the clogged sea-chest, Ruth discovers excised Lowood pages in Arthur's logbook and accuses Cleo of stealing his pension money."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "arthur_second_family"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_the_granite_shoal",
+      "order": 4,
+      "pov": "char_cleo",
+      "location_id": "loc_grey_reach",
+      "characters_present": [
+        "char_cleo",
+        "char_ruth"
+      ],
+      "dramatic_function": "Destroys the sisters' compromise and breaches Ruth's condition by wrecking the boat's propulsion against the shoals.",
+      "entry_state": {
+        "char_cleo": {
+          "location_id": "loc_grey_reach"
+        },
+        "char_ruth": {
+          "location_id": "loc_grey_reach"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_grey_reach"
+        },
+        "obj_buyer_contract": {
+          "location_id": "loc_grey_reach"
+        }
+      },
+      "exit_state": {
+        "char_cleo": {
+          "location_id": "loc_lowood_bight"
+        },
+        "char_ruth": {
+          "location_id": "loc_lowood_bight"
+        },
+        "obj_ash_urn": {
+          "location_id": "loc_lowood_bight"
+        },
+        "obj_buyer_contract": {
+          "location_id": "loc_lowood_bight"
+        }
+      },
+      "required_beats": [
+        "Arriving at Gull Shoal after the slack water window has expired, the Cormorant is swept toward the reef by an outgoing tidal race.",
+        "The light kedging anchor fails to hold on the shale bottom without the storm anchor's weight.",
+        "To save the hull from smashing against the granite ledges, Cleo throws the engine hard astern, striking the rock shelf and snapping the drive shaft."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "arthur_second_family"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "shoal_tide_window",
+          "plant": "scene_01_the_conditional_departure"
+        },
+        {
+          "fact_ref": "undersized_kedge_anchor",
+          "plant": "scene_01_the_conditional_departure"
+        }
+      ]
+    },
+    {
+      "id": "scene_05_the_delivery",
+      "order": 5,
+      "pov": "char_ruth",
+      "location_id": "loc_lowood_bight",
+      "characters_present": [
+        "char_cleo",
+        "char_ruth"
+      ],
+      "dramatic_function": "To expose Arthur's secret family and force Ruth to forfeit both the sale and the ashes to Arthur's unacknowledged son.",
+      "entry_state": {
+        "char_ruth": {
+          "goal": "deliver the Cormorant to the Lowood marine buyer to liquidate Arthur's estate"
+        },
+        "obj_buyer_contract": {
+          "status": "active_conditional_transit"
+        },
+        "obj_ash_urn": {
+          "status": "sealed with pitch"
+        }
+      },
+      "exit_state": {
+        "char_ruth": {
+          "goal": "confront the collapse of her inheritance plans"
+        },
+        "obj_buyer_contract": {
+          "status": "cancelled_for_defect"
+        },
+        "obj_ash_urn": {
+          "status": "relinquished_to_david"
+        }
+      },
+      "required_beats": [
+        "The crippled boat beaches against the Lowood slipway, met by David Miller holding Arthur's spare workshop key.",
+        "Cleo confesses that Arthur ordered them to deliver the boat and urn directly to David, revealing David is Arthur's secret son.",
+        "The marine surveyor confirms the sheared drive shaft and cancels Ruth's purchase contract under the mechanical integrity clause.",
+        "David offers to haul the boat up his slipway and rebuild it, prompting Ruth to place the ash urn into his hands and walk away."
+      ],
+      "reader_must_learn": [
+        "arthur_second_family"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "buyer_engine_clause",
+          "plant": "scene_01_the_conditional_departure"
+        },
+        {
+          "fact_ref": "arthurs_ash_urn",
+          "plant": "scene_01_the_conditional_departure"
+        }
+      ]
+    },
+    {
+      "id": "scene_06_the_refusal",
+      "order": 6,
+      "pov": "char_cleo",
+      "location_id": "loc_skiff_haven",
+      "characters_present": [
+        "char_cleo",
+        "char_ruth",
+        "char_toby"
+      ],
+      "dramatic_function": "To sever the sisters' ties to Arthur's legacy and conclude his waterfront feud.",
+      "entry_state": {
+        "char_cleo": {
+          "location_id": "loc_lowood_bight",
+          "goal": "reach Lowood without breaching the buyer contract or revealing Arthur's confession"
+        },
+        "char_ruth": {
+          "location_id": "loc_lowood_bight",
+          "goal": "confront the collapse of her inheritance plans"
+        }
+      },
+      "exit_state": {
+        "char_cleo": {
+          "location_id": "loc_skiff_haven",
+          "goal": "start an independent life unburdened by Arthur's estate"
+        },
+        "char_ruth": {
+          "location_id": "loc_skiff_haven",
+          "goal": "rebuild sisterhood with Cleo"
+        }
+      },
+      "required_beats": [
+        "Cleo and Ruth return by coastal carrier to the Skiff Haven pontoon, where Toby Fenn stands by the vacant berth holding Arthur's forfeited anchor.",
+        "Cleo informs Toby that Arthur's boat and ashes were left with his son David in Lowood, exposing Arthur's double life.",
+        "Toby offers to renew Arthur's workshop lease in Cleo's name, but Cleo declines and leaves the waterfront with Ruth."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "arthur_second_family",
+          "plant": "scene_05_the_delivery"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "omniscient, close-focused on the protagonist",
+    "register": "plain, warmly ironic, folk-narrator; understates cruelty and wonder alike",
+    "sentence_rhythm": "short declarative sentences; occasional triads (rule-of-three lists)",
+    "imagery_palette": [
+      "hearth and ash",
+      "finery and brocade",
+      "glass and candlelight"
+    ],
+    "dialogue_density": "low to moderate; the narrator reports more than it stages",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "fairy_tale_fable"
+  },
+  "metadata": {
+    "title": "The Drift Gauge",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T17:18:11.573Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "arthur_second_family",
+      "statement": "Arthur maintained a secret second family and raised a son named David in Lowood Bight.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "buyer_engine_clause",
+      "statement": "The buyer's contract stipulates that the purchase agreement is void and the deposit forfeited if the boat arrives without an operable engine and intact drive shaft.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "arthur_slip_debt",
+      "statement": "Arthur accumulated three seasons of unpaid mooring fees owed to harbourmaster Toby Fenn at Skiff Haven.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "shoal_tide_window",
+      "statement": "The passage through Gull Shoal is only navigable during a twenty-minute slack water window before the ebb tide forms dangerous rip surges over the granite reef.",
+      "caused_by": []
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-29T17:17:56.568Z",
+    "brief": {
+      "story_id": "review-the-borrowed-boat",
+      "title": "The Borrowed Boat",
+      "premise": {
+        "logline": "Two estranged sisters sail their father’s old boat down the coast to scatter his ashes where he said, and neither believes him.",
+        "modules": {
+          "theme": "how the dead keep arguing through what they leave",
+          "setting_time": "a week of unreliable autumn weather",
+          "setting_place": "a rocky coastline of fishing harbours in decline",
+          "protagonist": "the younger sister, who stayed and nursed him",
+          "protagonist_want": "to finish the trip without admitting what he told her",
+          "antagonism": "the older sister, who wants to sell the boat at the end",
+          "complication": "the place he named is where he had a second family",
+          "ending_shape": "they arrive, and the destination is not what the trip was for"
+        }
+      },
+      "plot_shape": {
+        "id": "quest",
+        "name": "Quest",
+        "central_question": "What does the journey turn out to have been for?",
+        "phases": [
+          {
+            "name": "Lack",
+            "purpose": "Something is missing, and the protagonist is the one who must go.",
+            "share": 0.15
+          },
+          {
+            "name": "Departure",
+            "purpose": "Leaving costs something that will be missed later.",
+            "share": 0.15
+          },
+          {
+            "name": "Trials",
+            "purpose": "Obstacles that each take something and each teach something.",
+            "share": 0.35
+          },
+          {
+            "name": "The object",
+            "purpose": "The thing is reached, and is not what it was thought to be.",
+            "share": 0.2
+          },
+          {
+            "name": "Return",
+            "purpose": "Home, altered, judged against the lack that started it.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "seeker",
+            "purpose": "Goes, and is changed by going."
+          },
+          {
+            "role": "giver",
+            "purpose": "Hands over the means, with a condition attached."
+          },
+          {
+            "role": "obstructor",
+            "purpose": "Wants the object, or wants the seeker not to have it."
+          },
+          {
+            "role": "the left behind",
+            "purpose": "Makes the return mean something."
+          }
+        ],
+        "obligatory_moves": [
+          "The means handed over early carries a limit that matters at the object.",
+          "At least one trial is lost, not won.",
+          "The return scene is set in the place the departure scene left."
+        ]
+      },
+      "event_count": 8,
+      "cast": {
+        "characters": 3,
+        "locations": 2,
+        "objects": 2
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 2,
+        "min_span": 2,
+        "long_range_edges": 1,
+        "long_range_span": 4
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "quest",
+        "premise_preset": "The Borrowed Boat"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_lack_of_clearance",
+        "sequence": 1,
+        "summary": "In Arthur's workshop at Skiff Haven, Ruth presents Cleo with a buyer's conditional purchase agreement for the Cormorant, consenting to let Cleo sail south with the ashes only on the condition that the boat arrives with an operational drive train.",
+        "pov": "char_cleo",
+        "location_id": "loc_skiff_haven",
+        "characters_present": [
+          "char_cleo",
+          "char_ruth"
+        ],
+        "dramatic_function": "Establish the lack of freedom and means: Arthur's ashes must reach Lowood, but Ruth controls the passage through a commercial contract.",
+        "beats": [
+          "Ruth announces she has negotiated a scrap sale in Lowood to settle Arthur's liabilities.",
+          "Cleo insists that Arthur's explicit final instruction was to deliver the boat and urn to Lowood Bight.",
+          "Ruth hands Cleo the ignition key on the strict contractual condition that any mechanical failure voids the sale and leaves Cleo liable for towing costs."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "buyer_engine_clause"
+        ],
+        "conceals": [
+          "arthur_second_family"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_buyer_contract",
+            "column": "status",
+            "value": "active_conditional_transit"
+          },
+          {
+            "entity_id": "char_cleo",
+            "column": "goal",
+            "value": "reach Lowood without breaching the buyer contract or revealing Arthur's confession"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_departure_cost",
+        "sequence": 2,
+        "summary": "Toby Fenn intercepts the sisters on the Skiff Haven slipway and impounds Arthur's heavy storm anchor to settle unpaid mooring fees, warning Cleo about the tidal gate at Gull Shoal before they cast off.",
+        "pov": "char_cleo",
+        "location_id": "loc_skiff_haven",
+        "characters_present": [
+          "char_cleo",
+          "char_ruth",
+          "char_toby"
+        ],
+        "dramatic_function": "Departure: leaving costs the boat's primary safety gear, while planting the environmental constraint governing the passage.",
+        "beats": [
+          "Toby halts the departure by refusing to cast off the stern line until Arthur's three-season mooring arrears are settled.",
+          "Cleo hands over the Cormorant's heavy storm anchor as forfeiture to clear the debt, leaving them with only an undersized kedging anchor.",
+          "Toby warns Cleo that Gull Shoal has a strict twenty-minute slack water window before the ebb tide forms an impassable rip over the rocks."
+        ],
+        "caused_by": [
+          "ev_01_lack_of_clearance"
+        ],
+        "reveals": [
+          "shoal_tide_window"
+        ],
+        "conceals": [
+          "arthur_second_family"
+        ],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "arthur_slip_debt",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_cleo",
+            "column": "location_id",
+            "value": "loc_grey_reach"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "location_id",
+            "value": "loc_grey_reach"
+          },
+          {
+            "entity_id": "obj_ash_urn",
+            "column": "location_id",
+            "value": "loc_grey_reach"
+          },
+          {
+            "entity_id": "obj_buyer_contract",
+            "column": "location_id",
+            "value": "loc_grey_reach"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_gale_offshore",
+        "sequence": 3,
+        "summary": "When an offshore squall strikes the Grey Reach, Ruth panics at the tiller and Cleo must risk being thrown overboard to sever a fouled halyard that threatens to roll the vessel.",
+        "pov": "char_cleo",
+        "location_id": "loc_grey_reach",
+        "characters_present": [
+          "char_cleo",
+          "char_ruth"
+        ],
+        "dramatic_function": "Trial 1: an obstacle strips Ruth's pretense of competence and forces Cleo to take physical command.",
+        "beats": [
+          "A sudden autumn squall throws the Cormorant onto her gunwales as the mainsail jams in the mast track.",
+          "Ruth freezes in terror at the helm, unable to respond to Cleo's commands to head into the wind.",
+          "Cleo crawls onto the foredeck through pounding wash and slices the halyard with a rigging knife to save the mast."
+        ],
+        "caused_by": [
+          "ev_02_departure_cost"
+        ],
+        "reveals": [],
+        "conceals": [
+          "arthur_second_family"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_cleo",
+            "column": "status",
+            "value": "battered and saltwater-chapped"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "status",
+            "value": "seasick and unnerved"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_engine_confrontation",
+        "sequence": 4,
+        "summary": "As raw-water intake pipes choke with driftweed off Crow Point, Ruth discovers pages ripped from Arthur's coastal logbook and accuses Cleo of embezzling his pension.",
+        "pov": "char_cleo",
+        "location_id": "loc_grey_reach",
+        "characters_present": [
+          "char_cleo",
+          "char_ruth"
+        ],
+        "dramatic_function": "Trial 2: an obstacle strains the sisters' fragile alliance, revealing Arthur's paper trail of deceit while testing Cleo's resolve.",
+        "beats": [
+          "The diesel engine alarms shriek as floating kelp clogs the cooling strainer, threatening to crack the cylinder head.",
+          "While Cleo works below, Ruth discovers Arthur's logbook has every Lowood entry excised and accuses Cleo of pocketing his maintenance money.",
+          "Cleo burns her palms clearing scalding weed from the sea-chest by hand, refusing to answer Ruth's accusations."
+        ],
+        "caused_by": [
+          "ev_03_gale_offshore"
+        ],
+        "reveals": [],
+        "conceals": [
+          "arthur_second_family"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_cleo",
+            "column": "status",
+            "value": "blistered from scalding engine brine"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_shoal_crossing_failure",
+        "sequence": 5,
+        "summary": "Delayed by the squall and engine stoppage, the sisters reach Gull Shoal after slack water, where the rip tide drags their light kedging anchor and forces Cleo to shear the propeller shaft on granite ledges.",
+        "pov": "char_cleo",
+        "location_id": "loc_grey_reach",
+        "characters_present": [
+          "char_cleo",
+          "char_ruth"
+        ],
+        "dramatic_function": "Trial 3 (Lost): the earlier loss of the heavy anchor causes a structural failure, sacrificing propulsion and breaching the buyer's condition.",
+        "beats": [
+          "The Cormorant arrives at Gull Shoal after the slack water window has closed, encountering a violent outgoing tidal race.",
+          "Cleo casts the light kedging anchor, but without the storm anchor's weight it skips across the shale bottom as the current sweeps them toward the reef.",
+          "Cleo throws the transmission hard astern to stave off hull destruction; the propeller strikes the granite shelf, shearing the drive shaft and destroying the propulsion."
+        ],
+        "caused_by": [
+          "ev_04_engine_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [
+          "arthur_second_family"
+        ],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "shoal_tide_window",
+            "plant": "ev_02_departure_cost"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_cleo",
+            "column": "location_id",
+            "value": "loc_lowood_bight"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "location_id",
+            "value": "loc_lowood_bight"
+          },
+          {
+            "entity_id": "obj_ash_urn",
+            "column": "location_id",
+            "value": "loc_lowood_bight"
+          },
+          {
+            "entity_id": "obj_buyer_contract",
+            "column": "location_id",
+            "value": "loc_lowood_bight"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_destination_discovery",
+        "sequence": 6,
+        "summary": "Drifting into Lowood Bight under bare poles, Cleo confesses Arthur's deathbed revelation to Ruth as a young man holding Arthur's spare workshop key meets them on the quay.",
+        "pov": "char_cleo",
+        "location_id": "loc_lowood_bight",
+        "characters_present": [
+          "char_cleo",
+          "char_ruth"
+        ],
+        "dramatic_function": "The Object: arrival reveals that the voyage was never about scattering ashes at sea, uncovering Arthur's secret family.",
+        "beats": [
+          "The crippled boat beaches against the Lowood slipway, met by David Miller, whose face and brass keyring mirror Arthur's.",
+          "Cleo admits to Ruth that Arthur sent them to deliver the boat and urn directly to David, his unacknowledged son.",
+          "Ruth stands paralyzed as she realizes Arthur used his final instructions to force his legitimate children into serving his secret household."
+        ],
+        "caused_by": [
+          "ev_05_shoal_crossing_failure"
+        ],
+        "reveals": [
+          "arthur_second_family"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_ruth",
+            "column": "goal",
+            "value": "confront the collapse of her inheritance plans"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_buyer_rejection",
+        "sequence": 7,
+        "summary": "The Lowood marine surveyor inspects the Cormorant, discovers the sheared drive shaft, and tears up Ruth's purchase contract, prompting Ruth to surrender the ash urn to David.",
+        "pov": "char_cleo",
+        "location_id": "loc_lowood_bight",
+        "characters_present": [
+          "char_cleo",
+          "char_ruth"
+        ],
+        "dramatic_function": "The Object: the early contractual limit detonates, extinguishing Ruth's commercial goal and reorienting their relationship to Arthur's legacy.",
+        "beats": [
+          "The marine surveyor tests the transmission, confirms the sheared drive shaft and bent strut, and cancels the contract under the mechanical integrity clause.",
+          "David Miller offers to drag the boat up his slipway and rebuild the drive shaft himself using Arthur's old spare parts.",
+          "Ruth looks at the ruined vessel, laughs bitterly at Arthur's posthumous trap, and places the ash urn into David's hands before walking away."
+        ],
+        "caused_by": [
+          "ev_06_destination_discovery"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "buyer_engine_clause",
+            "plant": "ev_01_lack_of_clearance"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_buyer_contract",
+            "column": "status",
+            "value": "cancelled_for_defect"
+          },
+          {
+            "entity_id": "obj_ash_urn",
+            "column": "status",
+            "value": "relinquished_to_david"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_empty_berth_return",
+        "sequence": 8,
+        "summary": "Cleo and Ruth return by coastal carrier to the empty slipway at Skiff Haven, where Cleo tells Toby about Arthur's second family and the sisters refuse to continue Arthur's feud.",
+        "pov": "char_cleo",
+        "location_id": "loc_skiff_haven",
+        "characters_present": [
+          "char_cleo",
+          "char_ruth",
+          "char_toby"
+        ],
+        "dramatic_function": "Return: back in the departure harbour, empty-handed and judged against the initial lack, the sisters unite by shedding Arthur's control.",
+        "beats": [
+          "Cleo and Ruth walk onto the Skiff Haven pontoon where Toby stands beside the vacant berth holding Arthur's forfeited anchor.",
+          "Cleo tells Toby that Arthur's boat and ashes remain in Lowood with his son David, exposing Arthur's double life to the harbour.",
+          "Toby offers to renew Arthur's workshop lease in Cleo's name, but Cleo turns it down and leaves the waterfront alongside Ruth."
+        ],
+        "caused_by": [
+          "ev_07_buyer_rejection"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "arthur_second_family",
+            "plant": "ev_06_destination_discovery"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_cleo",
+            "column": "location_id",
+            "value": "loc_skiff_haven"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "location_id",
+            "value": "loc_skiff_haven"
+          },
+          {
+            "entity_id": "char_cleo",
+            "column": "goal",
+            "value": "start an independent life unburdened by Arthur's estate"
+          },
+          {
+            "entity_id": "char_ruth",
+            "column": "goal",
+            "value": "rebuild sisterhood with Cleo"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_arthur_secret_household",
+        "sequence": 1,
+        "summary": "Arthur established a second domestic household with Maeve Miller in Lowood Bight twenty years ago to escape his compounding financial failures in Skiff Haven.",
+        "caused_by": [],
+        "establishes": [
+          "arthur_second_family"
+        ]
+      },
+      {
+        "id": "hidden_02_arthur_deathbed_confession",
+        "sequence": 2,
+        "summary": "Arthur confessed the existence of his second son David to Cleo on his deathbed because he wanted the Cormorant and his remains given to David rather than liquidated by Ruth.",
+        "caused_by": [
+          "hidden_01_arthur_secret_household"
+        ],
+        "establishes": []
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "buyer_engine_clause",
+        "statement": "The buyer's contract stipulates that the purchase agreement is void and the deposit forfeited if the boat arrives without an operable engine and intact drive shaft.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "arthur_slip_debt",
+        "statement": "Arthur accumulated three seasons of unpaid mooring fees owed to harbourmaster Toby Fenn at Skiff Haven.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "shoal_tide_window",
+        "statement": "The passage through Gull Shoal is only navigable during a twenty-minute slack water window before the ebb tide forms dangerous rip surges over the granite reef.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "arthur_second_family",
+        "statement": "Arthur maintained a secret second family and raised a son named David in Lowood Bight.",
+        "caused_by": []
+      }
+    ],
+    "stakes": [
+      {
+        "stake": "Ruth's commercial sale will fall through and leave the sisters financially liable if the boat suffers mechanical failure during the voyage.",
+        "introduced_by": "ev_01_lack_of_clearance",
+        "resolved_by": "ev_07_buyer_rejection"
+      },
+      {
+        "stake": "The boat will be wrecked in Gull Shoal's tidal rip if they cannot cross within the twenty-minute slack water window.",
+        "introduced_by": "ev_02_departure_cost",
+        "resolved_by": "ev_05_shoal_crossing_failure"
+      },
+      {
+        "stake": "Cleo will be consumed by Arthur's posthumous guilt if she continues carrying his secret alone.",
+        "introduced_by": "ev_01_lack_of_clearance",
+        "resolved_by": "ev_08_empty_berth_return"
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T17:18:11.573Z",
+    "started_at": "2026-09-29T17:17:56.568Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_conditional_departure",
+        "order": 1,
+        "event_ids": [
+          "ev_01_lack_of_clearance",
+          "ev_02_departure_cost"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_squall",
+        "order": 2,
+        "event_ids": [
+          "ev_03_gale_offshore"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_missing_logs",
+        "order": 3,
+        "event_ids": [
+          "ev_04_engine_confrontation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_granite_shoal",
+        "order": 4,
+        "event_ids": [
+          "ev_05_shoal_crossing_failure"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_delivery",
+        "order": 5,
+        "event_ids": [
+          "ev_06_destination_discovery",
+          "ev_07_buyer_rejection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_refusal",
+        "order": 6,
+        "event_ids": [
+          "ev_08_empty_berth_return"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}
