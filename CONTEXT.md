@@ -100,7 +100,9 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   domains already drawn from (with a short gist), plus palette items not yet drawn from.
   Governs reuse of the *vehicle within* a domain — a palette domain is itself a licensed
   **motif** and may recur across the whole telling on purpose; the ledger never suppresses
-  a domain, only nudges away from repeating the same phrasing inside it. Framed positively
+  a domain for good, only nudges away from repeating the same phrasing inside it — except
+  that a domain drawn from in 2 of the last 3 scenes is **rested** for the next scene, since a
+  domain used every scene is a tic, not a motif (ADR 0010 amendment 2026-09-29). Framed positively
   ("already drawn from" + "not yet drawn from"); a raw blocklist was tried and rejected —
   it can't tell "don't repeat this phrasing" from "don't touch this domain," so it
   suppresses imagery the Voice Card wants kept. See
