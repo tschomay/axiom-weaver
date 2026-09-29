@@ -78,7 +78,9 @@
   envelope re-explained in ~9 scenes (reanchoring over-firing?). Names drift: Miller/Fromm; Gable he/she; £5/£20 notes.
 
 ## Engine diagnostics that fired but didn't change the prose
-- 04: 46 missing_fact = volatile-tail budget (2000 tok) exhausted → dropped "character_knowledge", "broader told-ledger
+- 04: 11/16 scenes over tail budget (other stories: 02 1/6, 01 & 03 0). Dropped: other character_knowledge x11,
+  met: recency slice x11, character_knowledge tied to scene facts x6, told-ledger rows for THIS scene's facts x6,
+  relationships x10. 46 missing_fact = volatile-tail budget (2000 tok) exhausted → dropped "character_knowledge", "broader told-ledger
   recency slice (met: facts)", etc. Those are exactly the segments that stop re-introductions & knowledge errors.
 - unentailed_reversion (04: 8, 03: 8) all on free-text `status` (e.g. "resigned to eviction" vs "resigned refugee…") —
   looks like noise from comparing free-text status strings, not real reversions.
