@@ -1,0 +1,1286 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-toll",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_hettie",
+        "name": "Hettie Rann",
+        "location_id": "loc_low_valley",
+        "status": "displaced and furious",
+        "goal": "Prevent the water board from seizing her family farm.",
+        "bag": {}
+      },
+      {
+        "id": "char_arthur",
+        "name": "Arthur Vane",
+        "location_id": "loc_dam_crest",
+        "status": "strained under ministry directives",
+        "goal": "Enforce the valley evacuation before reservoir impoundment begins.",
+        "bag": {}
+      },
+      {
+        "id": "char_clara",
+        "name": "Clara Pike",
+        "location_id": "loc_low_valley",
+        "status": "resigned to eviction",
+        "goal": "Salvage the family livestock and household goods before the water rises.",
+        "bag": {}
+      },
+      {
+        "id": "char_orson",
+        "name": "Orson Dale",
+        "location_id": "loc_dam_crest",
+        "status": "indifferent contractor",
+        "goal": "Complete sluice valve installation to collect his project completion bonus.",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_low_valley",
+        "name": "Low Meadow Farmstead",
+        "bag": {}
+      },
+      {
+        "id": "loc_dam_crest",
+        "name": "Sullivant Dam Crest and Control House",
+        "bag": {}
+      },
+      {
+        "id": "loc_powerhouse_gallery",
+        "name": "Lower Powerhouse and Scour Tunnel Gallery",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_eviction_scroll",
+        "name": "Signed Valley Condemnation Scroll",
+        "location_id": "loc_low_valley",
+        "status": "endorsed by ministerial seal",
+        "bag": {}
+      },
+      {
+        "id": "obj_scour_key",
+        "name": "Sediment Bypass Spindle Pin",
+        "location_id": "loc_dam_crest",
+        "status": "locked in emergency bypass harness",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_hettie_arthur",
+        "from_id": "char_hettie",
+        "to_id": "char_arthur",
+        "kind": "adversary",
+        "sentiment": "burning resentment",
+        "bag": {}
+      },
+      {
+        "id": "rel_arthur_hettie",
+        "from_id": "char_arthur",
+        "to_id": "char_hettie",
+        "kind": "bureaucratic ward",
+        "sentiment": "regretful paternalism",
+        "bag": {}
+      },
+      {
+        "id": "rel_hettie_clara",
+        "from_id": "char_hettie",
+        "to_id": "char_clara",
+        "kind": "sister",
+        "sentiment": "strained loyalty",
+        "bag": {}
+      },
+      {
+        "id": "rel_orson_arthur",
+        "from_id": "char_orson",
+        "to_id": "char_arthur",
+        "kind": "subordinate",
+        "sentiment": "disdainful compliance",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_arthur",
+        "fact_ref": "valley_condemnation_executive_decree",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_hettie",
+        "fact_ref": "rann_homestead_four_generations",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_clara",
+        "fact_ref": "rann_homestead_four_generations",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_arthur",
+        "fact_ref": "flooding_order_signed_under_duress",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_clearance_order",
+      "order": 1,
+      "pov": "char_hettie",
+      "location_id": "loc_low_valley",
+      "characters_present": [
+        "char_hettie",
+        "char_clara",
+        "char_arthur"
+      ],
+      "dramatic_function": "Establishes Arthur's expropriation of the valley and Hettie's defiance as her family is evicted.",
+      "entry_state": {
+        "char_arthur": {
+          "location_id": "loc_dam_crest"
+        },
+        "char_hettie": {
+          "status": "displaced and furious"
+        }
+      },
+      "exit_state": {
+        "char_arthur": {
+          "location_id": "loc_low_valley"
+        },
+        "char_hettie": {
+          "status": "displaced and furious"
+        }
+      },
+      "required_beats": [
+        "Arthur arrives at the farmstead with a clearance squad to present the ministerial expropriation order before the diversion gates drop.",
+        "Clara packs the family wagon while Hettie refuses to acknowledge the legitimacy of the order."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "flooding_order_signed_under_duress"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_02_lowering_the_gates",
+      "order": 2,
+      "pov": "char_arthur",
+      "location_id": "loc_dam_crest",
+      "characters_present": [
+        "char_arthur",
+        "char_hettie",
+        "char_orson"
+      ],
+      "dramatic_function": "Shows the irreversible sealing of the river canyon and the drowning of the valley.",
+      "entry_state": {
+        "char_arthur": {
+          "location_id": "loc_low_valley"
+        },
+        "char_hettie": {
+          "location_id": "loc_low_valley"
+        }
+      },
+      "exit_state": {
+        "char_arthur": {
+          "location_id": "loc_dam_crest"
+        },
+        "char_hettie": {
+          "location_id": "loc_dam_crest"
+        }
+      },
+      "required_beats": [
+        "Arthur operates the hoists at the dam crest while sealing the canyon bulkheads and confirming the sediment scour valve counterweights lock irrevocably into position.",
+        "From the perimeter, Hettie watches the water swell toward her family barn."
+      ],
+      "reader_must_learn": [
+        "scour_gate_counterbalance_lock"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_the_drowned_hearth",
+      "order": 3,
+      "pov": "char_hettie",
+      "location_id": "loc_dam_crest",
+      "characters_present": [
+        "char_hettie",
+        "char_clara"
+      ],
+      "dramatic_function": "Solidifies Hettie's lifelong obsession and vow to reverse the flooding of her family home.",
+      "entry_state": {
+        "char_clara": {
+          "location_id": "loc_low_valley"
+        },
+        "char_hettie": {
+          "goal": "Prevent the water board from seizing her family farm."
+        }
+      },
+      "exit_state": {
+        "char_clara": {
+          "location_id": "loc_dam_crest"
+        },
+        "char_hettie": {
+          "goal": "Master dam engineering to force the reservoir to uncover her drowned farm."
+        }
+      },
+      "required_beats": [
+        "Clara urges Hettie to accept the resettlement stipend, but Hettie burns the voucher as the reservoir covers her chimney.",
+        "Hettie swears aloud not to lay down her tools until her hearthstones stand in open air.",
+        "Hettie pockets a stone from the foundation and boards the transit truck."
+      ],
+      "reader_must_learn": [
+        "hearthstone_vow_tools"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_the_turbine_galleries",
+      "order": 4,
+      "pov": "char_hettie",
+      "location_id": "loc_powerhouse_gallery",
+      "characters_present": [
+        "char_hettie"
+      ],
+      "dramatic_function": "Launches Hettie's covert infiltration of the dam's vital operational systems two decades later.",
+      "entry_state": {
+        "char_hettie": {
+          "location_id": "loc_dam_crest",
+          "status": "displaced and furious"
+        }
+      },
+      "exit_state": {
+        "char_hettie": {
+          "location_id": "loc_powerhouse_gallery",
+          "status": "licensed hydraulic maintenance specialist"
+        }
+      },
+      "required_beats": [
+        "Twenty years later, Hettie conducts a structural walkdown of the lower penstocks disguised as an efficiency inspection.",
+        "Hettie notes that the downstream intake canal depends on a minimum reservoir pool elevation of two hundred meters."
+      ],
+      "reader_must_learn": [
+        "canal_sill_elevation_minimum"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_scour_trade",
+      "order": 5,
+      "pov": "char_hettie",
+      "location_id": "loc_powerhouse_gallery",
+      "characters_present": [
+        "char_hettie",
+        "char_orson"
+      ],
+      "dramatic_function": "To establish Hettie securing illicit access to the dam's drainage infrastructure through corruption.",
+      "entry_state": {
+        "char_orson": {
+          "location_id": "loc_dam_crest"
+        }
+      },
+      "exit_state": {
+        "char_orson": {
+          "location_id": "loc_powerhouse_gallery"
+        }
+      },
+      "required_beats": [
+        "Orson Dale offers duplicate release spindle pins for the sediment scour gates in exchange for Hettie approving his padded turbine invoices.",
+        "Hettie signs the fraudulent work orders and takes possession of the emergency bypass pin."
+      ],
+      "reader_must_learn": [
+        "scour_gate_bypass_pin"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_watching_the_crest",
+      "order": 6,
+      "pov": "char_hettie",
+      "location_id": "loc_dam_crest",
+      "characters_present": [
+        "char_hettie",
+        "char_arthur"
+      ],
+      "dramatic_function": "To challenge Hettie's perception of Arthur by revealing his spartan life and genuine dedication to downstream safety.",
+      "entry_state": {
+        "char_hettie": {
+          "location_id": "loc_powerhouse_gallery"
+        }
+      },
+      "exit_state": {
+        "char_hettie": {
+          "location_id": "loc_dam_crest"
+        }
+      },
+      "required_beats": [
+        "At dusk, Hettie observes Arthur Vane living in an unheated trailer on the crest while laboring into the evening to repair manual spillway locks for downstream farms.",
+        "Hettie watches Arthur mend his frayed coat and decline corporate bonuses, confounding her expectations of a predatory tyrant."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_the_archive_discovery",
+      "order": 7,
+      "pov": "char_hettie",
+      "location_id": "loc_dam_crest",
+      "characters_present": [
+        "char_hettie"
+      ],
+      "dramatic_function": "To uncover the ministerial coercion that forced Arthur's fateful decision twenty years earlier.",
+      "entry_state": {
+        "char_hettie": {
+          "status": "licensed hydraulic maintenance specialist"
+        }
+      },
+      "exit_state": {
+        "char_hettie": {
+          "status": "burdened by the discovery of Vane's coerced signature"
+        }
+      },
+      "required_beats": [
+        "Hettie bypasses the records room lock in the dam crest archives while searching for original bedrock drainage schematics.",
+        "In the legacy maintenance dockets, Hettie discovers an unredacted ministry telex ordering immediate unannounced demolition diversions if Arthur refused to sign the clearance order."
+      ],
+      "reader_must_learn": [
+        "flooding_order_signed_under_duress"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_cavitation_inspection",
+      "order": 8,
+      "pov": "char_hettie",
+      "location_id": "loc_powerhouse_gallery",
+      "characters_present": [
+        "char_hettie",
+        "char_arthur"
+      ],
+      "dramatic_function": "To bring Hettie and Arthur into intimate technical collaboration while exposing his vulnerability and terror of catastrophe.",
+      "entry_state": {
+        "char_hettie": {
+          "location_id": "loc_dam_crest"
+        },
+        "char_arthur": {
+          "location_id": "loc_dam_crest"
+        }
+      },
+      "exit_state": {
+        "char_hettie": {
+          "location_id": "loc_powerhouse_gallery"
+        },
+        "char_arthur": {
+          "location_id": "loc_powerhouse_gallery"
+        }
+      },
+      "required_beats": [
+        "Arthur summons Hettie to the lower powerhouse to inspect turbine vibration data and troubleshoot cavitation damage, praising her technical precision.",
+        "While collaborating, Hettie notes Arthur's severe tremor and his palpable dread of an uncontrolled downstream dam failure."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_the_confrontation",
+      "order": 9,
+      "pov": "char_hettie",
+      "location_id": "loc_dam_crest",
+      "characters_present": [
+        "char_hettie",
+        "char_clara"
+      ],
+      "dramatic_function": "To test Hettie's resolve by confronting her with the humanitarian cost of emptying the reservoir.",
+      "entry_state": {
+        "char_hettie": {
+          "location_id": "loc_powerhouse_gallery"
+        }
+      },
+      "exit_state": {
+        "char_hettie": {
+          "location_id": "loc_dam_crest"
+        }
+      },
+      "required_beats": [
+        "Clara confronts Hettie in the crest control room after discovering stolen hydraulic blueprints in Hettie's lodgings.",
+        "Clara begs Hettie not to compromise the reservoir, warning that five thousand downstream residents depend on the pool staying above the canal sill."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "canal_sill_elevation_minimum",
+          "plant": "scene_04_the_turbine_galleries"
+        }
+      ]
+    },
+    {
+      "id": "scene_10_tripping_the_scour",
+      "order": 10,
+      "pov": "char_hettie",
+      "location_id": "loc_powerhouse_gallery",
+      "characters_present": [
+        "char_hettie",
+        "char_arthur"
+      ],
+      "dramatic_function": "To execute Hettie's long-planned sabotage and force Arthur into complicity and reckoning.",
+      "entry_state": {
+        "char_hettie": {
+          "location_id": "loc_dam_crest"
+        },
+        "obj_scour_key": {
+          "status": "locked in emergency bypass harness"
+        }
+      },
+      "exit_state": {
+        "char_hettie": {
+          "location_id": "loc_powerhouse_gallery"
+        },
+        "obj_scour_key": {
+          "status": "tripped into open purge position"
+        }
+      },
+      "required_beats": [
+        "During a midnight flood alert in the scour gallery, Hettie corners Arthur, reveals her identity as the girl from Low Meadow, and produces the twenty-year-old coercion telex.",
+        "Hettie drives the bypass pin into the sediment scour trip-lever, releasing the counterweights to drain the basin.",
+        "Arthur refrains from fighting back and braces the manual damper wheel beside her to absorb shock waves and protect the valley culverts."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "scour_gate_counterbalance_lock",
+          "plant": "scene_02_lowering_the_gates"
+        },
+        {
+          "fact_ref": "flooding_order_signed_under_duress",
+          "plant": "scene_07_the_archive_discovery"
+        },
+        {
+          "fact_ref": "scour_gate_bypass_pin",
+          "plant": "scene_05_the_scour_trade"
+        }
+      ]
+    },
+    {
+      "id": "scene_11_the_dry_hearth",
+      "order": 11,
+      "pov": "char_hettie",
+      "location_id": "loc_low_valley",
+      "characters_present": [
+        "char_hettie",
+        "char_arthur"
+      ],
+      "dramatic_function": "To reveal the emotional futility of Hettie's revenge amid the exposed ruins of her past.",
+      "entry_state": {
+        "char_hettie": {
+          "location_id": "loc_powerhouse_gallery",
+          "goal": "Master dam engineering to force the reservoir to uncover her drowned farm.",
+          "status": "burdened by the discovery of Vane's coerced signature"
+        },
+        "char_arthur": {
+          "location_id": "loc_powerhouse_gallery"
+        }
+      },
+      "exit_state": {
+        "char_hettie": {
+          "location_id": "loc_low_valley",
+          "goal": null,
+          "status": "unburdened of vendetta but hollowed by desolation"
+        },
+        "char_arthur": {
+          "location_id": "loc_low_valley"
+        }
+      },
+      "required_beats": [
+        "Hettie crosses the toxic gray silt bed of the drained reservoir to the dry chimney and hearthstones of the Rann farmhouse.",
+        "Arthur joins her at the ruin and vows to claim sole responsibility before the state inquiry to shield her from imprisonment.",
+        "Standing over the mud with her wrench and calipers, Hettie realizes that settling the debt has restored nothing of her lost life."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "hearthstone_vow_tools",
+          "plant": "scene_03_the_drowned_hearth"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "close third, pressed against the protagonist",
+    "register": "grave, ornate, foreboding; dwells where a plainer voice would move on",
+    "sentence_rhythm": "long accreting sentences broken by a short one that lands like a door",
+    "imagery_palette": [
+      "damp stone and rot",
+      "guttering light",
+      "cold weight and enclosure"
+    ],
+    "dialogue_density": "low; speech arrives rarely and carries weight when it does",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "gothic_brooding"
+  },
+  "metadata": {
+    "title": "The Silt and the Hearth",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T12:20:46.545Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "valley_condemnation_executive_decree",
+      "statement": "The provincial water ministry issued an irrevocable expropriation order for the entire river basin to construct the hydro dam.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "flooding_order_signed_under_duress",
+      "statement": "Arthur Vane signed the valley flooding order under ministry threats of an unannounced high-explosive river diversion.",
+      "caused_by": [
+        "valley_condemnation_executive_decree"
+      ]
+    },
+    {
+      "fact_ref": "rann_homestead_four_generations",
+      "statement": "The Rann family held and cultivated the Low Meadow farmstead continuously across four generations.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "scour_gate_counterbalance_lock",
+      "statement": "The deep sediment scour valve opens irrevocably when its mechanical counterweight trip-pin is disengaged under full reservoir pressure.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "canal_sill_elevation_minimum",
+      "statement": "The downstream municipal water canal requires a reservoir pool elevation of at least two hundred meters to maintain gravity flow.",
+      "caused_by": []
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-29T12:20:27.373Z",
+    "brief": {
+      "story_id": "review-toll",
+      "title": "Toll",
+      "premise": {
+        "logline": "A woman whose farm was flooded to build a reservoir takes a job on the dam, to learn how it could be made to fail.",
+        "modules": {
+          "theme": "whether revenge on a thing can ever reach the people behind it",
+          "setting_time": "twenty years after the valley was flooded",
+          "setting_place": "a hydroelectric dam above a drowned village",
+          "protagonist": "a maintenance engineer who grew up in the drowned valley",
+          "protagonist_want": "to make the reservoir give back what it took",
+          "antagonism": "the dam’s manager, who signed the flooding order young",
+          "complication": "the town below the dam now depends on it",
+          "ending_shape": "the vow is kept to the letter and broken in spirit"
+        }
+      },
+      "plot_shape": {
+        "id": "reckoning",
+        "name": "Reckoning",
+        "central_question": "Does the debt get collected, and does collecting it help?",
+        "phases": [
+          {
+            "name": "The injury",
+            "purpose": "The original wrong, shown rather than reported.",
+            "share": 0.15
+          },
+          {
+            "name": "The vow",
+            "purpose": "A commitment made in a state the maker will not always be in.",
+            "share": 0.15
+          },
+          {
+            "name": "Preparation",
+            "purpose": "Means acquired, allies made and used, a self narrowed to a purpose.",
+            "share": 0.3
+          },
+          {
+            "name": "Contact",
+            "purpose": "The wrongdoer, close enough to be seen as a person.",
+            "share": 0.25
+          },
+          {
+            "name": "Aftermath",
+            "purpose": "What is left of the avenger once the purpose is gone.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "claimant",
+            "purpose": "Holds the debt and is deformed by holding it."
+          },
+          {
+            "role": "debtor",
+            "purpose": "Committed the wrong, and has a life that does not look like a villain's."
+          },
+          {
+            "role": "enabler",
+            "purpose": "Helps the claimant for reasons of their own."
+          },
+          {
+            "role": "the restraint",
+            "purpose": "Argues for the cost, and is not simply right."
+          }
+        ],
+        "obligatory_moves": [
+          "The vow is made with a specific, quotable condition attached.",
+          "The debtor is shown doing something that is not villainous before contact.",
+          "The aftermath addresses the vow's exact wording."
+        ]
+      },
+      "event_count": 12,
+      "cast": {
+        "characters": 4,
+        "locations": 3,
+        "objects": 2
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 2,
+        "min_span": 3,
+        "long_range_edges": 1,
+        "long_range_span": 6
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "reckoning",
+        "premise_preset": "Toll"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_eviction_served",
+        "sequence": 1,
+        "summary": "Arthur Vane arrives at the Rann farmstead with a clearance squad, forcing Hettie and Clara to vacate their land before the diversion gates drop.",
+        "pov": "char_hettie",
+        "location_id": "loc_low_valley",
+        "characters_present": [
+          "char_hettie",
+          "char_clara",
+          "char_arthur"
+        ],
+        "dramatic_function": "Introduce the original injury by dramatizing the eviction of the Rann family from their ancestral valley.",
+        "beats": [
+          "Arthur presents the ministerial expropriation order to Hettie in her farmhouse yard.",
+          "Clara loads the family wagon while Hettie refuses to acknowledge the legitimacy of the order."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [
+          "flooding_order_signed_under_duress"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_low_valley"
+          },
+          {
+            "entity_id": "char_hettie",
+            "column": "status",
+            "value": "displaced and furious"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_sluice_closure",
+        "sequence": 2,
+        "summary": "Arthur lowers the primary river diversion gates at the dam crest while Hettie watches the water begin backing up across the pastures.",
+        "pov": "char_hettie",
+        "location_id": "loc_dam_crest",
+        "characters_present": [
+          "char_arthur",
+          "char_hettie",
+          "char_orson"
+        ],
+        "dramatic_function": "Show the physical execution of the wrong and plant the permanent mechanical locking rule of the deep scour gate.",
+        "beats": [
+          "Arthur engages the diversion shutoff hoists, sealing the river canyon with concrete bulkheads.",
+          "Arthur verifies that the deep sediment scour valve counterweights lock irrevocably into position once water head exceeds thirty meters.",
+          "Hettie watches from the security perimeter as the muddy river swells toward her family barn."
+        ],
+        "caused_by": [
+          "ev_01_eviction_served"
+        ],
+        "reveals": [
+          "scour_gate_counterbalance_lock"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          },
+          {
+            "entity_id": "char_hettie",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_pasture_submersion",
+        "sequence": 3,
+        "summary": "In the muddy relocation camp on the reservoir rim, Hettie watches the reservoir rise to submerge the rafters of her home.",
+        "pov": "char_hettie",
+        "location_id": "loc_dam_crest",
+        "characters_present": [
+          "char_hettie",
+          "char_clara"
+        ],
+        "dramatic_function": "Depict the emotional weight of displacement and show the diverging paths between the claimant and the restraint.",
+        "beats": [
+          "Clara urges Hettie to accept the board resettlement stipend and move downstream to the orchard settlement.",
+          "Hettie burns her relocation voucher and watches the water cover the chimney of the Rann farmhouse."
+        ],
+        "caused_by": [
+          "ev_02_sluice_closure"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_clara",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_hettie_vow",
+        "sequence": 4,
+        "summary": "Standing at the reservoir high-water mark, Hettie speaks a solemn oath to master the dam's machinery and uncover her drowned home.",
+        "pov": "char_hettie",
+        "location_id": "loc_dam_crest",
+        "characters_present": [
+          "char_hettie"
+        ],
+        "dramatic_function": "Establish the claimant's vow with an exact, quotable condition before she departs to acquire technical means.",
+        "beats": [
+          "Hettie speaks an oath aloud that she will not lay down her tools until the reservoir floor is dry to the bedrock and her hearthstones stand in open air.",
+          "Hettie pockets a stone from the drowned foundation and boards the transit truck out of the valley."
+        ],
+        "caused_by": [
+          "ev_03_pasture_submersion"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hettie",
+            "column": "goal",
+            "value": "Master dam engineering to force the reservoir to uncover her drowned farm."
+          }
+        ]
+      },
+      {
+        "id": "ev_05_intake_inspection",
+        "sequence": 5,
+        "summary": "Twenty years later, Hettie begins work as chief turbine mechanic at Sullivant Dam, inspecting the lower galleries to map the bypass infrastructure.",
+        "pov": "char_hettie",
+        "location_id": "loc_powerhouse_gallery",
+        "characters_present": [
+          "char_hettie"
+        ],
+        "dramatic_function": "Begin the preparation phase twenty years later and plant the minimum operational elevation threshold for downstream town water.",
+        "beats": [
+          "Hettie conducts a structural walkdown of the lower penstocks under cover of an efficiency inspection.",
+          "Hettie observes that the downstream municipal water intake canal relies on a minimum reservoir pool elevation of two hundred meters."
+        ],
+        "caused_by": [
+          "ev_04_hettie_vow"
+        ],
+        "reveals": [
+          "canal_sill_elevation_minimum"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hettie",
+            "column": "location_id",
+            "value": "loc_powerhouse_gallery"
+          },
+          {
+            "entity_id": "char_hettie",
+            "column": "status",
+            "value": "licensed hydraulic maintenance specialist"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_contraband_access",
+        "sequence": 6,
+        "summary": "Hettie barters falsified maintenance signoffs with Orson Dale in exchange for off-log bypass keys to the sediment scour tunnels.",
+        "pov": "char_hettie",
+        "location_id": "loc_powerhouse_gallery",
+        "characters_present": [
+          "char_hettie",
+          "char_orson"
+        ],
+        "dramatic_function": "Demonstrate the claimant corrupting her professional integrity to acquire sabotage tools from an opportunistic enabler.",
+        "beats": [
+          "Orson offers Hettie duplicate release spindle pins for the sediment scour gates in exchange for approving his padded turbine invoices.",
+          "Hettie signs the fraudulent work orders and takes possession of the emergency bypass pin."
+        ],
+        "caused_by": [
+          "ev_05_intake_inspection"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_orson",
+            "column": "location_id",
+            "value": "loc_powerhouse_gallery"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_manager_vigil",
+        "sequence": 7,
+        "summary": "Hettie surveils Arthur Vane at dusk, discovering that he lives in an unheated trailer on the crest while maintaining downstream flood barriers.",
+        "pov": "char_hettie",
+        "location_id": "loc_dam_crest",
+        "characters_present": [
+          "char_hettie",
+          "char_arthur"
+        ],
+        "dramatic_function": "Show the debtor performing unvillainous, selfless maintenance before direct contact occurs.",
+        "beats": [
+          "Hettie watches Arthur personally labor into the evening repairing manual spillway locks to ensure steady irrigation flows to downstream farms.",
+          "Hettie observes Arthur patch his frayed coat and decline corporate bonuses, confounding her expectations of a predatory tyrant."
+        ],
+        "caused_by": [
+          "ev_05_intake_inspection"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hettie",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_archive_discovery",
+        "sequence": 8,
+        "summary": "While searching legacy maintenance dockets in the dam crest archives, Hettie uncovers the secret ministerial ultimatum Arthur faced twenty years ago.",
+        "pov": "char_hettie",
+        "location_id": "loc_dam_crest",
+        "characters_present": [
+          "char_hettie"
+        ],
+        "dramatic_function": "Reveal the hidden backstory that Arthur acted under coercive threat rather than malice.",
+        "beats": [
+          "Hettie bypasses the records room lock to search for original bedrock drainage schematics.",
+          "Hettie discovers the unredacted ministry telex ordering immediate unannounced demolition diversions if Arthur refused to sign the clearance order."
+        ],
+        "caused_by": [
+          "ev_06_contraband_access"
+        ],
+        "reveals": [
+          "flooding_order_signed_under_duress"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hettie",
+            "column": "status",
+            "value": "burdened by the discovery of Vane's coerced signature"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_bearing_summons",
+        "sequence": 9,
+        "summary": "Arthur summons Hettie to the lower powerhouse to troubleshoot cavitation damage, bringing them into direct professional collaboration.",
+        "pov": "char_hettie",
+        "location_id": "loc_powerhouse_gallery",
+        "characters_present": [
+          "char_hettie",
+          "char_arthur"
+        ],
+        "dramatic_function": "Establish contact between claimant and debtor, forcing Hettie to observe Arthur's genuine dedication and declining health.",
+        "beats": [
+          "Arthur inspects turbine vibration data alongside Hettie, praising her technical precision without knowing her true identity.",
+          "Hettie observes Arthur's severe tremor and his palpable dread of an uncontrolled downstream dam failure."
+        ],
+        "caused_by": [
+          "ev_05_intake_inspection"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hettie",
+            "column": "location_id",
+            "value": "loc_powerhouse_gallery"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_powerhouse_gallery"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_sister_intervention",
+        "sequence": 10,
+        "summary": "Clara arrives at the crest control room representing the downstream water district and begs Hettie not to compromise the town reservoir.",
+        "pov": "char_hettie",
+        "location_id": "loc_dam_crest",
+        "characters_present": [
+          "char_hettie",
+          "char_clara"
+        ],
+        "dramatic_function": "Collect the plant regarding the canal threshold and dramatize the restraint pleading for the innocent town.",
+        "beats": [
+          "Clara confronts Hettie after finding stolen hydraulic blueprints in Hettie's lodgings.",
+          "Clara reminds Hettie that five thousand residents in the downstream town rely entirely on the reservoir pool remaining above the canal sill."
+        ],
+        "caused_by": [
+          "ev_06_contraband_access",
+          "ev_09_bearing_summons"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "canal_sill_elevation_minimum",
+            "plant": "ev_05_intake_inspection"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hettie",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_scour_detonation",
+        "sequence": 11,
+        "summary": "During a midnight flood alert, Hettie corners Arthur in the scour gallery, confronts him with the past, and trips the bottom drain counterweights.",
+        "pov": "char_hettie",
+        "location_id": "loc_powerhouse_gallery",
+        "characters_present": [
+          "char_hettie",
+          "char_arthur"
+        ],
+        "dramatic_function": "Execute the confrontation and the physical sabotage while paying off the counterweight lock and the hidden duress facts.",
+        "beats": [
+          "Hettie presents the twenty-year-old coercion telex and declares her identity as the girl from Low Meadow.",
+          "Hettie drives the bypass pin into the sediment scour trip-lever, dropping the irrevocable counterweights to purge the reservoir basin.",
+          "Arthur does not fight back, choosing instead to brace the manual damper wheel beside her to prevent shock waves from bursting the valley culverts."
+        ],
+        "caused_by": [
+          "ev_08_archive_discovery",
+          "ev_10_sister_intervention"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "scour_gate_counterbalance_lock",
+            "plant": "ev_02_sluice_closure"
+          },
+          {
+            "fact_ref": "flooding_order_signed_under_duress",
+            "plant": "ev_08_archive_discovery"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hettie",
+            "column": "location_id",
+            "value": "loc_powerhouse_gallery"
+          },
+          {
+            "entity_id": "obj_scour_key",
+            "column": "status",
+            "value": "tripped into open purge position"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_mud_hearth",
+        "sequence": 12,
+        "summary": "As the emptied reservoir reveals the barren, silt-choked valley floor, Hettie stands before her dry, ruined childhood hearth in hollow silence.",
+        "pov": "char_hettie",
+        "location_id": "loc_low_valley",
+        "characters_present": [
+          "char_hettie",
+          "char_arthur"
+        ],
+        "dramatic_function": "Conclude the Reckoning by showing the vow fulfilled to the letter and shattered in spirit.",
+        "beats": [
+          "Hettie walks across the barren, toxic gray silt bed where the Rann farmhouse chimney and hearthstones stand dry in open air.",
+          "Arthur arrives beside the ruin, accepting full official responsibility before the arriving state inquiry to spare Hettie from imprisonment.",
+          "Hettie holds her wrench and calipers over the dead mud, realizing the fulfilled debt has reclaimed nothing of her lost life."
+        ],
+        "caused_by": [
+          "ev_11_scour_detonation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hettie",
+            "column": "location_id",
+            "value": "loc_low_valley"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_low_valley"
+          },
+          {
+            "entity_id": "char_hettie",
+            "column": "goal",
+            "value": null
+          },
+          {
+            "entity_id": "char_hettie",
+            "column": "status",
+            "value": "unburdened of vendetta but hollowed by desolation"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_ministry_condemnation_mandate",
+        "sequence": 1,
+        "summary": "The provincial water ministry issued an irrevocable decree condemning the Low Meadow valley to build a regional hydroelectric reservoir.",
+        "caused_by": [],
+        "establishes": [
+          "valley_condemnation_executive_decree"
+        ]
+      },
+      {
+        "id": "hidden_02_vane_coerced_clearance",
+        "sequence": 2,
+        "summary": "Arthur Vane signed the eviction and impoundment order because the ministry threatened to blast the river diversion with high explosives without civilian evacuation if he delayed.",
+        "caused_by": [
+          "hidden_01_ministry_condemnation_mandate"
+        ],
+        "establishes": [
+          "flooding_order_signed_under_duress"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "valley_condemnation_executive_decree",
+        "statement": "The provincial water ministry issued an irrevocable expropriation order for the entire river basin to construct the hydro dam.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "flooding_order_signed_under_duress",
+        "statement": "Arthur Vane signed the valley flooding order under ministry threats of an unannounced high-explosive river diversion.",
+        "caused_by": [
+          "valley_condemnation_executive_decree"
+        ]
+      },
+      {
+        "fact_ref": "rann_homestead_four_generations",
+        "statement": "The Rann family held and cultivated the Low Meadow farmstead continuously across four generations.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "scour_gate_counterbalance_lock",
+        "statement": "The deep sediment scour valve opens irrevocably when its mechanical counterweight trip-pin is disengaged under full reservoir pressure.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "canal_sill_elevation_minimum",
+        "statement": "The downstream municipal water canal requires a reservoir pool elevation of at least two hundred meters to maintain gravity flow.",
+        "caused_by": []
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T12:20:46.545Z",
+    "started_at": "2026-09-29T12:20:27.373Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_clearance_order",
+        "order": 1,
+        "event_ids": [
+          "ev_01_eviction_served"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_lowering_the_gates",
+        "order": 2,
+        "event_ids": [
+          "ev_02_sluice_closure"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_drowned_hearth",
+        "order": 3,
+        "event_ids": [
+          "ev_03_pasture_submersion",
+          "ev_04_hettie_vow"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_turbine_galleries",
+        "order": 4,
+        "event_ids": [
+          "ev_05_intake_inspection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_scour_trade",
+        "order": 5,
+        "event_ids": [
+          "ev_06_contraband_access"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_watching_the_crest",
+        "order": 6,
+        "event_ids": [
+          "ev_07_manager_vigil"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_the_archive_discovery",
+        "order": 7,
+        "event_ids": [
+          "ev_08_archive_discovery"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_cavitation_inspection",
+        "order": 8,
+        "event_ids": [
+          "ev_09_bearing_summons"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_confrontation",
+        "order": 9,
+        "event_ids": [
+          "ev_10_sister_intervention"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_tripping_the_scour",
+        "order": 10,
+        "event_ids": [
+          "ev_11_scour_detonation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_the_dry_hearth",
+        "order": 11,
+        "event_ids": [
+          "ev_12_mud_hearth"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}
