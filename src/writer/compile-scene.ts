@@ -12,6 +12,7 @@
  */
 
 import { tailEcho, tenseMismatch } from './prose-checks';
+import { offstageInventions } from '../continuity/offstage';
 import type { DetailsLedger } from '../digest/details-ledger';
 import { buildPhraseLedger, nameWords, seedNames, type RecordedPhrases } from '../voice/phrase-ledger';
 import type { SceneCard, StoryPackage } from '../schema/story-package';
@@ -472,6 +473,16 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
         `"${drift.established.value}"`,
       drift.reported.entity_id,
     );
+  }
+
+  for (const finding of offstageInventions({
+    pkg,
+    scene,
+    prose: response.prose,
+    digest: response.scene_digest,
+    isTracked: (id) => input.model.has(id),
+  })) {
+    note('offstage_invention', `${scene.id}: ${finding.detail}`);
   }
 
   const echo = tailEcho(input.previousParagraph, response.prose);
