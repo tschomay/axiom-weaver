@@ -139,3 +139,24 @@ that states all of them; `imagery_swap` stays one call per finding, since each n
 phrase in a distinct place — which is why decision 5 kept two shapes rather than one. Decision 7's
 per-scene bound is unchanged and is the reason this matters: a bound that scales with findings that
 all touch one paragraph is not a bound.
+
+## Amendment (2026-09-29): flagging an offstage invention
+
+[#213](https://github.com/tschomay/axiom-weaver/issues/213), split out of #200. Where an arc leaves a gap between two
+beats, the writer fills it with an event the reader never sees — in the baseline Night Shift Letter, scene 16's
+"Clara took an envelope stuffed with yesterday's manifest duplicates", a swap in no event and on no card, reported by
+a character to explain an outcome. The writer contract now forbids it (ADR 0021's #200 amendment); this is the check
+that says when it happened anyway.
+
+- **Two cheap detectors, no model call** (`offstageInventions`, `src/continuity/offstage.ts`), run on the scene just
+  written — its own prose and digest, the same same-scene scope ADR 0018 established, never earlier prose:
+  1. **An offstage report**: a sentence that names a seed character who is not in the card's `characters_present`,
+     with a past-tense action verb (took, swapped, stole, hid, signed, sold, visited, met, …) that appears in none of
+     the package's cards, in any inflection. The act is attributed to someone off the page and nothing authored it.
+  2. **An invented prop**: an `established_details` entity that is not a World Model row and whose slug's words appear
+     on no card — a load-bearing object the prose introduced that the story's authored structure never had.
+- **A diagnostic, not a repair**: `offstage_invention` (`warn`), one per finding, quoting the sentence or naming the
+  prop. The continuity pass's repair authority (decision 4, prose plus opening/imagery fields) cannot add an event, and
+  inventing one is what the finding is about. The count is what a re-run measures.
+- Heuristic by construction: it misses an offstage act by a character the card lists, and one phrased with a verb the
+  list lacks. Both limits are recorded here rather than papered over with a model pass nobody has measured yet.
