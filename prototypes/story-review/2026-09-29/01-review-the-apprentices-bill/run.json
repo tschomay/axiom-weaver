@@ -1,0 +1,40 @@
+{
+  "title": "The Apprentice’s Bill",
+  "plot_shape_preset": "reckoning",
+  "premise": {
+    "logline": "A chef who was blacklisted by his mentor finally gets a table at the mentor’s restaurant on the night it is being reviewed.",
+    "modules": {
+      "theme": "what we owe the people who made us and then unmade us",
+      "setting_time": "a single service night, with years of history behind it",
+      "setting_place": "an acclaimed restaurant kitchen and dining room",
+      "protagonist": "a line cook who once ran that kitchen’s pastry section",
+      "protagonist_want": "to see his mentor fail in front of the critic",
+      "antagonism": "the mentor, older now, and frightened",
+      "complication": "the dish that ruined him is on tonight’s menu, credited to the mentor",
+      "ending_shape": "he could ruin the night, and what he does instead is the answer"
+    }
+  },
+  "event_count_requested": 5,
+  "arc_events": 5,
+  "scenes": 3,
+  "words": 1508,
+  "run_id": "review-the-apprentices-bill-20260929121052-7927119f",
+  "models": {
+    "arc": "gemini-3.7-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash"
+    ]
+  },
+  "cost_usd": 0.076,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "short_range_payoff",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": []
+}

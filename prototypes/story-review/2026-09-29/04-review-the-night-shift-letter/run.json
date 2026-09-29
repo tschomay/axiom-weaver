@@ -1,0 +1,688 @@
+{
+  "title": "The Night Shift Letter",
+  "plot_shape_preset": "courtship",
+  "premise": {
+    "logline": "Two hospital porters on opposite shifts fall for each other through notes left in a shared locker, and one of them is not who the notes suggest.",
+    "modules": {
+      "theme": "whether you can love someone you have only ever read",
+      "setting_time": "a hard winter of staff shortages",
+      "setting_place": "a large city hospital, its basements and loading bays",
+      "protagonist": "a day porter saving to leave the city",
+      "protagonist_want": "to meet the night porter without ruining it",
+      "antagonism": "a rota that never lets them overlap, and a supervisor who reads the notes",
+      "complication": "the notes were started by someone else, as a joke",
+      "ending_shape": "they meet as themselves and choose each other anyway"
+    }
+  },
+  "event_count_requested": 16,
+  "arc_events": 16,
+  "scenes": 16,
+  "words": 9003,
+  "run_id": "review-the-night-shift-letter-20260929122933-32a51b67",
+  "models": {
+    "arc": "gemini-3.7-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash",
+      "gemini-3.5-flash-lite"
+    ]
+  },
+  "cost_usd": 0.3393,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "unused_seed_entity",
+    "unused_seed_entity",
+    "short_range_payoff",
+    "short_range_payoff",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_04_a_quiet_dream",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"character_knowledge tied to this scene's facts\" (~21 tokens) from scene \"scene_04_a_quiet_dream\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_04_a_quiet_dream",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~208 tokens) from scene \"scene_04_a_quiet_dream\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_04_a_quiet_dream",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~111 tokens) from scene \"scene_04_a_quiet_dream\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_06_the_inspection",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~147 tokens) from scene \"scene_06_the_inspection\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_06_the_inspection",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~128 tokens) from scene \"scene_06_the_inspection\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_06_the_inspection",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_neil",
+      "column": "status",
+      "message": "char_neil.status is committed as \"withdrawn and anxious\"; the engine proposed \"alarmed by impending locker sweep\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_06_the_inspection",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_gable",
+      "column": "status",
+      "message": "char_gable.status is committed as \"stern and authoritative\"; the engine proposed \"enforcing upcoming inspection protocol\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_07_the_token",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~260 tokens) from scene \"scene_07_the_token\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_07_the_token",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~111 tokens) from scene \"scene_07_the_token\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_08_guilt_and_solvent",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_neil",
+      "column": "status",
+      "message": "char_neil.status is committed as \"withdrawn and anxious\"; the engine proposed \"guilt-ridden and conflicted\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_09_the_confession",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~184 tokens) from scene \"scene_09_the_confession\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_09_the_confession",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~111 tokens) from scene \"scene_09_the_confession\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_09_the_confession",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_neil",
+      "column": "status",
+      "message": "char_neil.status is committed as \"withdrawn and anxious\"; the engine proposed \"resigned and resolute\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_10_the_locker_raid",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "scene \"scene_10_the_locker_raid\" needs a larger volatile-tail allowance: its mandatory core alone is ~2107 tokens against a 2000-token budget"
+    },
+    {
+      "scene": "scene_10_the_locker_raid",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"told-ledger rows for this scene's own facts\" (~123 tokens) from scene \"scene_10_the_locker_raid\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_10_the_locker_raid",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships between two present entities\" (~33 tokens) from scene \"scene_10_the_locker_raid\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_10_the_locker_raid",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships touching one present entity\" (~48 tokens) from scene \"scene_10_the_locker_raid\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_10_the_locker_raid",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"character_knowledge tied to this scene's facts\" (~97 tokens) from scene \"scene_10_the_locker_raid\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_10_the_locker_raid",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~322 tokens) from scene \"scene_10_the_locker_raid\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_10_the_locker_raid",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~129 tokens) from scene \"scene_10_the_locker_raid\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_10_the_locker_raid",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_tin_cigar_box",
+      "column": "status",
+      "message": "obj_tin_cigar_box.status is committed as \"tucked beneath the bottom shelf of locker B-14\"; the engine proposed \"salvaged by Julian and carried into dispatch office\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_10_the_locker_raid",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "prose_grounding_mismatch repaired in scene_10_the_locker_raid: scene_10_the_locker_raid asserts obj_tin_cigar_box.status = \"salvaged by Julian and carried into dispatch office\" in its prose, but the World Model holds \"tucked beneath the bottom shelf of locker B-14\" — this appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_11_the_lockout_trap",
+      "code": "entry_state_mismatch",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_julian",
+      "column": "location_id",
+      "message": "entry_state asserts char_julian.location_id = \"loc_basement_locker_room\", but the World Model holds \"loc_dispatch_office\""
+    },
+    {
+      "scene": "scene_11_the_lockout_trap",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"told-ledger rows for this scene's own facts\" (~83 tokens) from scene \"scene_11_the_lockout_trap\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_11_the_lockout_trap",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships between two present entities\" (~33 tokens) from scene \"scene_11_the_lockout_trap\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_11_the_lockout_trap",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships touching one present entity\" (~48 tokens) from scene \"scene_11_the_lockout_trap\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_11_the_lockout_trap",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"character_knowledge tied to this scene's facts\" (~119 tokens) from scene \"scene_11_the_lockout_trap\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_11_the_lockout_trap",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~340 tokens) from scene \"scene_11_the_lockout_trap\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_11_the_lockout_trap",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~90 tokens) from scene \"scene_11_the_lockout_trap\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_11_the_lockout_trap",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_tin_cigar_box",
+      "column": "location_id",
+      "message": "obj_tin_cigar_box is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_12_the_boiler_encounter",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"told-ledger rows for this scene's own facts\" (~122 tokens) from scene \"scene_12_the_boiler_encounter\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_12_the_boiler_encounter",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships touching one present entity\" (~98 tokens) from scene \"scene_12_the_boiler_encounter\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_12_the_boiler_encounter",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"character_knowledge tied to this scene's facts\" (~94 tokens) from scene \"scene_12_the_boiler_encounter\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_12_the_boiler_encounter",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~526 tokens) from scene \"scene_12_the_boiler_encounter\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_12_the_boiler_encounter",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~72 tokens) from scene \"scene_12_the_boiler_encounter\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_13_the_prank_revealed",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "scene \"scene_13_the_prank_revealed\" needs a larger volatile-tail allowance: its mandatory core alone is ~2098 tokens against a 2000-token budget"
+    },
+    {
+      "scene": "scene_13_the_prank_revealed",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"told-ledger rows for this scene's own facts\" (~127 tokens) from scene \"scene_13_the_prank_revealed\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_13_the_prank_revealed",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships between two present entities\" (~37 tokens) from scene \"scene_13_the_prank_revealed\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_13_the_prank_revealed",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships touching one present entity\" (~71 tokens) from scene \"scene_13_the_prank_revealed\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_13_the_prank_revealed",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"character_knowledge tied to this scene's facts\" (~144 tokens) from scene \"scene_13_the_prank_revealed\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_13_the_prank_revealed",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~565 tokens) from scene \"scene_13_the_prank_revealed\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_13_the_prank_revealed",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~87 tokens) from scene \"scene_13_the_prank_revealed\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_14_the_lease_choice",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~489 tokens) from scene \"scene_14_the_lease_choice\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_14_the_lease_choice",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~90 tokens) from scene \"scene_14_the_lease_choice\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_14_the_lease_choice",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_julian",
+      "column": "status",
+      "message": "char_julian.status is committed as \"heartbroken and feeling betrayed\"; the engine proposed \"torn between family duty and unresolved feelings for Neil\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_14_the_lease_choice",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara",
+      "column": "status",
+      "message": "char_clara.status is committed as \"focused and impatient\"; the engine proposed \"shocked and infuriated by Julian's refusal to leave\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_15_neils_departure",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"told-ledger rows for this scene's own facts\" (~119 tokens) from scene \"scene_15_neils_departure\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_15_neils_departure",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships touching one present entity\" (~53 tokens) from scene \"scene_15_neils_departure\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_15_neils_departure",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~227 tokens) from scene \"scene_15_neils_departure\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_15_neils_departure",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~93 tokens) from scene \"scene_15_neils_departure\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_15_neils_departure",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_neil",
+      "column": "status",
+      "message": "char_neil.status is committed as \"withdrawn and anxious\"; the engine proposed \"resigned and resolute\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_15_neils_departure",
+      "code": "continuity_repair_rejected",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "prose_grounding_mismatch in scene_15_neils_departure was caught but not repaired (the repair named a phrase that is not in the prose (\"resigned and resolute\")); the seam stands and is logged"
+    },
+    {
+      "scene": "scene_16_a_real_beginning",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"told-ledger rows for this scene's own facts\" (~218 tokens) from scene \"scene_16_a_real_beginning\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_16_a_real_beginning",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships between two present entities\" (~27 tokens) from scene \"scene_16_a_real_beginning\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_16_a_real_beginning",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"relationships touching one present entity\" (~120 tokens) from scene \"scene_16_a_real_beginning\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_16_a_real_beginning",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"character_knowledge tied to this scene's facts\" (~160 tokens) from scene \"scene_16_a_real_beginning\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_16_a_real_beginning",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"other character_knowledge for present characters\" (~642 tokens) from scene \"scene_16_a_real_beginning\" — volatile-tail budget of 2000 exhausted"
+    },
+    {
+      "scene": "scene_16_a_real_beginning",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": null,
+      "column": null,
+      "message": "dropped \"broader told-ledger recency slice (met: facts)\" (~71 tokens) from scene \"scene_16_a_real_beginning\" — volatile-tail budget of 2000 exhausted"
+    }
+  ]
+}

@@ -1,0 +1,2004 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-the-night-shift-letter",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_julian",
+        "name": "Julian Miller",
+        "location_id": "loc_basement_locker_room",
+        "status": "healthy but physically fatigued",
+        "goal": "Julian seeks to save enough money to leave the city and open a joinery shop in Hull with his sister Clara.",
+        "bag": {}
+      },
+      {
+        "id": "char_neil",
+        "name": "Neil Hallowell",
+        "location_id": "loc_boiler_substation",
+        "status": "withdrawn and anxious",
+        "goal": "Neil seeks to endure the night porter shift quietly while paying down inherited family debt.",
+        "bag": {}
+      },
+      {
+        "id": "char_clara",
+        "name": "Clara Miller",
+        "location_id": "loc_dispatch_office",
+        "status": "focused and impatient",
+        "goal": "Clara seeks to secure Julian's half of the workshop deposit before the month-end lease deadline.",
+        "bag": {}
+      },
+      {
+        "id": "char_gary",
+        "name": "Gary Vance",
+        "location_id": "loc_boiler_substation",
+        "status": "restless and jovial",
+        "goal": "Gary seeks to avoid supervisor scrutiny after transferring to hospital laundry.",
+        "bag": {}
+      },
+      {
+        "id": "char_gable",
+        "name": "Supervisor Irene Gable",
+        "location_id": "loc_loading_bay",
+        "status": "stern and authoritative",
+        "goal": "Supervisor Gable seeks to eliminate shift overlap and enforce strict staff efficiency during winter shortages.",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_basement_locker_room",
+        "name": "Basement Porter Locker Room",
+        "bag": {}
+      },
+      {
+        "id": "loc_loading_bay",
+        "name": "Sub-Basement Loading Bay",
+        "bag": {}
+      },
+      {
+        "id": "loc_boiler_substation",
+        "name": "Boiler Substation and Chemical Waste Alcove",
+        "bag": {}
+      },
+      {
+        "id": "loc_dispatch_office",
+        "name": "Logistics Dispatch Office",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_locker_b14",
+        "name": "Locker B-14",
+        "location_id": "loc_basement_locker_room",
+        "status": "padlocked with loose bottom ventilation slat",
+        "bag": {}
+      },
+      {
+        "id": "obj_tin_cigar_box",
+        "name": "Blue Tin Cigar Box",
+        "location_id": "loc_basement_locker_room",
+        "status": "tucked beneath the bottom shelf of locker B-14",
+        "bag": {}
+      },
+      {
+        "id": "obj_relocation_envelope",
+        "name": "Relocation Savings Envelope",
+        "location_id": "loc_basement_locker_room",
+        "status": "stashed in Julian's coat pocket containing cash notes",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_julian_clara",
+        "from_id": "char_julian",
+        "to_id": "char_clara",
+        "kind": "sibling",
+        "sentiment": "loving but strained by financial promises",
+        "bag": {}
+      },
+      {
+        "id": "rel_clara_julian",
+        "from_id": "char_clara",
+        "to_id": "char_julian",
+        "kind": "sibling",
+        "sentiment": "protective and demanding commitment",
+        "bag": {}
+      },
+      {
+        "id": "rel_neil_gary",
+        "from_id": "char_neil",
+        "to_id": "char_gary",
+        "kind": "former shift partner",
+        "sentiment": "wary of Gary's recklessness yet reliant on his discretion",
+        "bag": {}
+      },
+      {
+        "id": "rel_gable_julian",
+        "from_id": "char_gable",
+        "to_id": "char_julian",
+        "kind": "supervisor",
+        "sentiment": "suspicious of his punctuality and focus",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_julian",
+        "fact_ref": "clara_lease_deadline",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_clara",
+        "fact_ref": "clara_lease_deadline",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_gary",
+        "fact_ref": "gary_prank_origin",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_neil",
+        "fact_ref": "neil_assigned_locker",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_shared_locker",
+      "order": 1,
+      "pov": "char_julian",
+      "location_id": "loc_basement_locker_room",
+      "characters_present": [
+        "char_julian"
+      ],
+      "dramatic_function": "Establishes Julian's discovery of the hidden correspondence channel inside his work locker.",
+      "entry_state": {
+        "char_julian": {
+          "goal": "Julian seeks to save enough money to leave the city and open a joinery shop in Hull with his sister Clara."
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "goal": "Julian seeks to build a savings cushion for his move to Hull while enduring the winter shift."
+        }
+      },
+      "required_beats": [
+        "Julian unpacks his day-shift kit into locker b 14, testing the stiff lock and accidentally displacing the loose ventilation louver.",
+        "From under the bottom shelf, Julian pulls out a blue tin cigar box containing a florid handwritten poetic note addressed to whoever shares the tin box."
+      ],
+      "reader_must_learn": [
+        "locker_vent_loose_baffle",
+        "blue_tin_cigar_box"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_02_the_evening_lockout",
+      "order": 2,
+      "pov": "char_gable",
+      "location_id": "loc_loading_bay",
+      "characters_present": [
+        "char_julian",
+        "char_gable"
+      ],
+      "dramatic_function": "Establishes the strict operational curfew threatening any unauthorized overlap between shifts.",
+      "entry_state": {
+        "char_julian": {
+          "location_id": "loc_basement_locker_room"
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "required_beats": [
+        "Supervisor Gable inspects the day porters on the cold loading dock, warning them against lingering between shifts under strict winter handover rules.",
+        "Gable announces that any day porter found on hospital property past the six o'clock shift lockout faces disciplinary suspension."
+      ],
+      "reader_must_learn": [
+        "shift_lockout_protocol"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_the_lease_deposit",
+      "order": 3,
+      "pov": "char_julian",
+      "location_id": "loc_dispatch_office",
+      "characters_present": [
+        "char_julian",
+        "char_clara"
+      ],
+      "dramatic_function": "Establishes Julian's financial stakes and deadline regarding the shared workshop lease.",
+      "entry_state": {
+        "char_julian": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "location_id": "loc_dispatch_office"
+        }
+      },
+      "required_beats": [
+        "Clara confronts Julian outside the dispatch office, warning that their Hull landlord will forfeit the workshop lease if his deposit installment is late.",
+        "Julian pats the cash envelope in his coat and promises to deliver his remaining portion before the month ends."
+      ],
+      "reader_must_learn": [
+        "julian_savings_target",
+        "hull_lease_deposit_envelope"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "clara_lease_deadline",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_04_a_quiet_dream",
+      "order": 4,
+      "pov": "char_julian",
+      "location_id": "loc_basement_locker_room",
+      "characters_present": [
+        "char_julian"
+      ],
+      "dramatic_function": "Turns Julian from a curious discoverer into an active participant in an anonymous correspondence.",
+      "entry_state": {
+        "char_julian": {
+          "location_id": "loc_dispatch_office",
+          "goal": "Julian seeks to build a savings cushion for his move to Hull while enduring the winter shift."
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "location_id": "loc_basement_locker_room",
+          "goal": "Julian seeks to connect with the mysterious night writer through locker B-14."
+        }
+      },
+      "required_beats": [
+        "Julian writes a letter confessing his exhaustion and his dream of woodworking on the coast, believing his locker mate is a cultured surgical technician.",
+        "Julian slides the letter into the cigar box and shuts locker b 14 before the evening lockout."
+      ],
+      "reader_must_learn": [
+        "julian_misjudged_admiration"
+      ],
+      "must_stay_hidden": [
+        "neil_deceptive_replies"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "blue_tin_cigar_box",
+          "plant": "scene_01_the_shared_locker"
+        }
+      ]
+    },
+    {
+      "id": "scene_05_the_pact",
+      "order": 5,
+      "pov": "char_neil",
+      "location_id": "loc_boiler_substation",
+      "characters_present": [
+        "char_neil",
+        "char_gary"
+      ],
+      "dramatic_function": "To threaten Neil's correspondence by revealing Gary originated the gag, forcing Neil to plead for Gary's silence.",
+      "entry_state": {
+        "char_neil": {
+          "goal": "Neil seeks to endure the night porter shift quietly while paying down inherited family debt."
+        }
+      },
+      "exit_state": {
+        "char_neil": {
+          "goal": "Neil seeks to maintain the correspondence with Julian without exposing his ordinary identity."
+        }
+      },
+      "required_beats": [
+        "Gary catches Neil reading Julian's letter in the boiler room and recognizes the handwriting, mocking him for answering a locker gag.",
+        "Neil pleads with Gary not to shatter the connection, and Gary promises to keep quiet."
+      ],
+      "reader_must_learn": [
+        "gary_prank_origin"
+      ],
+      "must_stay_hidden": [
+        "neil_deceptive_replies"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_the_inspection",
+      "order": 6,
+      "pov": "char_neil",
+      "location_id": "loc_basement_locker_room",
+      "characters_present": [
+        "char_neil",
+        "char_gable"
+      ],
+      "dramatic_function": "To introduce a looming deadline and risk of exposure to the correspondence through an upcoming contraband sweep.",
+      "entry_state": {
+        "char_neil": {
+          "location_id": "loc_boiler_substation"
+        },
+        "char_gable": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "exit_state": {
+        "char_neil": {
+          "location_id": "loc_basement_locker_room"
+        },
+        "char_gable": {
+          "location_id": "loc_basement_locker_room"
+        }
+      },
+      "required_beats": [
+        "Supervisor Gable inspects padlocks during a patrol of the basement locker room and catches Neil lingering by locker b 14 before his night route.",
+        "Gable warns Neil that all locks will be bolt-clipped during an upcoming sweep scheduled for the following week."
+      ],
+      "reader_must_learn": [
+        "gable_inspection_sweep"
+      ],
+      "must_stay_hidden": [
+        "neil_deceptive_replies"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_the_token",
+      "order": 7,
+      "pov": "char_julian",
+      "location_id": "loc_basement_locker_room",
+      "characters_present": [
+        "char_julian"
+      ],
+      "dramatic_function": "To show Julian deepening his attachment by leaving an intimate handmade gift in the hidden drop.",
+      "entry_state": {
+        "char_julian": {
+          "status": "healthy but physically fatigued"
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "status": "exhausted from double shifts but emotionally invested"
+        }
+      },
+      "required_beats": [
+        "Julian inspects his carved cedar wren before wrapping the carved cedar bird in brown tissue.",
+        "Julian slides the gift through the loose louver into the tin cigar box, depositing it in the cigar box."
+      ],
+      "reader_must_learn": [
+        "julian_cedar_carving",
+        "cedar_wren_gift"
+      ],
+      "must_stay_hidden": [
+        "neil_deceptive_replies"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_guilt_and_solvent",
+      "order": 8,
+      "pov": "char_neil",
+      "location_id": "loc_boiler_substation",
+      "characters_present": [
+        "char_neil"
+      ],
+      "dramatic_function": "To dramatize the agonizing contrast between Neil's grim physical reality and Julian's idealized perception of him.",
+      "entry_state": {
+        "char_neil": {
+          "location_id": "loc_basement_locker_room"
+        }
+      },
+      "exit_state": {
+        "char_neil": {
+          "location_id": "loc_boiler_substation"
+        }
+      },
+      "required_beats": [
+        "Neil hauls heavy solvent drums alone into the holding alcove beneath humming pipes in the boiler substation.",
+        "Touching the carved cedar bird in his coat, Neil is overwhelmed by guilt over not being the refined technician Julian imagines."
+      ],
+      "reader_must_learn": [
+        "neil_boiler_routine"
+      ],
+      "must_stay_hidden": [
+        "neil_deceptive_replies"
+      ],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "cedar_wren_gift",
+          "plant": "scene_07_the_token"
+        }
+      ]
+    },
+    {
+      "id": "scene_09_the_confession",
+      "order": 9,
+      "pov": "char_neil",
+      "location_id": "loc_basement_locker_room",
+      "characters_present": [
+        "char_neil"
+      ],
+      "dramatic_function": "To expose Neil's true identity and end his deception by leaving behind the truth for Julian.",
+      "entry_state": {
+        "char_neil": {
+          "location_id": "loc_boiler_substation",
+          "goal": "Neil seeks to maintain the correspondence with Julian without exposing his ordinary identity."
+        }
+      },
+      "exit_state": {
+        "char_neil": {
+          "location_id": "loc_basement_locker_room",
+          "goal": "Neil seeks to confess his true identity to Julian before supervisor sweeps discover the notes."
+        }
+      },
+      "required_beats": [
+        "Neil writes a confession letter admitting that Gary authored the initial note and that he is merely an uncredentialed, tired night porter.",
+        "Neil stows the confession letter inside the blue tin cigar box beneath the locker shelf, leaving the tin box behind."
+      ],
+      "reader_must_learn": [
+        "neil_confession_letter"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_10_the_locker_raid",
+      "order": 10,
+      "pov": "char_julian",
+      "location_id": "loc_basement_locker_room",
+      "characters_present": [
+        "char_julian",
+        "char_gable"
+      ],
+      "dramatic_function": "To force Julian to retrieve the secret cache seconds before Gable's raid destroys their line of contact.",
+      "entry_state": {
+        "obj_tin_cigar_box": {
+          "location_id": "loc_basement_locker_room"
+        }
+      },
+      "exit_state": {
+        "obj_tin_cigar_box": {
+          "location_id": "loc_dispatch_office"
+        }
+      },
+      "required_beats": [
+        "Supervisor Gable marches into the basement locker room with maintenance staff carrying bolt cutters.",
+        "Julian reaches through the loose louver of the basement locker to extract the cigar box and hide it inside his jacket just before Gable reaches locker B-14."
+      ],
+      "reader_must_learn": [
+        "cigar_box_salvaged"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "locker_vent_loose_baffle",
+          "plant": "scene_01_the_shared_locker"
+        },
+        {
+          "fact_ref": "gable_inspection_sweep",
+          "plant": "scene_06_the_inspection"
+        }
+      ]
+    },
+    {
+      "id": "scene_11_the_lockout_trap",
+      "order": 11,
+      "pov": "char_julian",
+      "location_id": "loc_dispatch_office",
+      "characters_present": [
+        "char_julian",
+        "char_gable"
+      ],
+      "dramatic_function": "To cost Julian his position when he risks everything to intercept his anonymous correspondent.",
+      "entry_state": {
+        "char_julian": {
+          "location_id": "loc_basement_locker_room",
+          "status": "exhausted from double shifts but emotionally invested"
+        },
+        "char_gable": {
+          "location_id": "loc_basement_locker_room"
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "location_id": "loc_dispatch_office",
+          "status": "disciplined and placed on suspension warning for protocol violation"
+        },
+        "char_gable": {
+          "location_id": "loc_dispatch_office"
+        }
+      },
+      "required_beats": [
+        "Julian lingers past eight o'clock in the dispatch corridor hoping to catch the writer arriving for the night shift.",
+        "Gable confronts Julian over the lockout violation and places him on formal suspension pending review."
+      ],
+      "reader_must_learn": [
+        "julian_shift_suspension"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "shift_lockout_protocol",
+          "plant": "scene_02_the_evening_lockout"
+        }
+      ]
+    },
+    {
+      "id": "scene_12_the_boiler_encounter",
+      "order": 12,
+      "pov": "char_julian",
+      "location_id": "loc_boiler_substation",
+      "characters_present": [
+        "char_julian",
+        "char_neil"
+      ],
+      "dramatic_function": "To finally bring the two correspondents face-to-face in hiding.",
+      "entry_state": {
+        "char_julian": {
+          "location_id": "loc_dispatch_office",
+          "goal": "Julian seeks to connect with the mysterious night writer through locker B-14."
+        },
+        "char_neil": {
+          "location_id": "loc_basement_locker_room"
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "location_id": "loc_boiler_substation",
+          "goal": "Julian seeks the truth about who authored the notes."
+        },
+        "char_neil": {
+          "location_id": "loc_boiler_substation"
+        }
+      },
+      "required_beats": [
+        "Julian hides in the warm boiler substation during the two o'clock chemical run to evade Gable, tracking the sounds of shifting drums.",
+        "Julian discovers Neil sitting beside the pipes, reading the correspondence notes next to the carved cedar wren."
+      ],
+      "reader_must_learn": [
+        "neil_deceptive_replies"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "neil_boiler_routine",
+          "plant": "scene_08_guilt_and_solvent"
+        },
+        {
+          "fact_ref": "julian_misjudged_admiration",
+          "plant": "scene_04_a_quiet_dream"
+        }
+      ]
+    },
+    {
+      "id": "scene_13_the_prank_revealed",
+      "order": 13,
+      "pov": "char_julian",
+      "location_id": "loc_loading_bay",
+      "characters_present": [
+        "char_julian",
+        "char_neil",
+        "char_gary"
+      ],
+      "dramatic_function": "To shatter Julian's belief in the correspondence by exposing its origins as a cruel prank.",
+      "entry_state": {
+        "char_julian": {
+          "location_id": "loc_boiler_substation",
+          "status": "disciplined and placed on suspension warning for protocol violation"
+        },
+        "char_neil": {
+          "location_id": "loc_boiler_substation"
+        },
+        "char_gary": {
+          "location_id": "loc_boiler_substation"
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "location_id": "loc_loading_bay",
+          "status": "heartbroken and feeling betrayed"
+        },
+        "char_neil": {
+          "location_id": "loc_loading_bay"
+        },
+        "char_gary": {
+          "location_id": "loc_loading_bay"
+        }
+      },
+      "required_beats": [
+        "Julian confronts Neil and Gary on the loading dock.",
+        "Gary arrives with laundry bins and blurts out that the first letter was an old prank.",
+        "Neil hands Julian his unsent confession letter, but Julian reels from learning the romance began as a farce."
+      ],
+      "reader_must_learn": [
+        "julian_feeling_betrayed"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "gary_prank_origin",
+          "plant": "scene_05_the_pact"
+        },
+        {
+          "fact_ref": "neil_confession_letter",
+          "plant": "scene_09_the_confession"
+        }
+      ],
+      "recounts": [
+        "neil_deceptive_replies"
+      ]
+    },
+    {
+      "id": "scene_14_the_lease_choice",
+      "order": 14,
+      "pov": "char_julian",
+      "location_id": "loc_dispatch_office",
+      "characters_present": [
+        "char_julian",
+        "char_clara"
+      ],
+      "dramatic_function": "To force Julian to sacrifice his long-planned escape to Hull in order to confront his real feelings in the city.",
+      "entry_state": {
+        "char_julian": {
+          "location_id": "loc_loading_bay",
+          "goal": "Julian seeks the truth about who authored the notes."
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "location_id": "loc_dispatch_office",
+          "goal": "Julian seeks to decide whether to leave for Hull or remain to confront his feelings for Neil."
+        }
+      },
+      "required_beats": [
+        "Clara arrives at dispatch with the final Hull workshop agreement and demands the savings envelope.",
+        "Julian realizes leaving would be running from reality and confesses he cannot go."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "clara_lease_deadline",
+          "plant": null
+        },
+        {
+          "fact_ref": "julian_savings_target",
+          "plant": "scene_03_the_lease_deposit"
+        }
+      ]
+    },
+    {
+      "id": "scene_15_neils_departure",
+      "order": 15,
+      "pov": "char_neil",
+      "location_id": "loc_basement_locker_room",
+      "characters_present": [
+        "char_neil"
+      ],
+      "dramatic_function": "To show Neil relinquishing the romance and sacrificing his job to protect Julian from dismissal.",
+      "entry_state": {
+        "char_neil": {
+          "location_id": "loc_loading_bay",
+          "goal": "Neil seeks to confess his true identity to Julian before supervisor sweeps discover the notes."
+        }
+      },
+      "exit_state": {
+        "char_neil": {
+          "location_id": "loc_basement_locker_room",
+          "goal": "Neil seeks to clear Julian's path by resigning and returning Julian's carving."
+        }
+      },
+      "required_beats": [
+        "Neil places the carved cedar wren back into the tin box inside the locker in the basement locker room.",
+        "Neil leaves his folded resignation letter on the bench to take the blame and protect Julian."
+      ],
+      "reader_must_learn": [
+        "neil_resignation_letter"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "julian_cedar_carving",
+          "plant": "scene_07_the_token"
+        },
+        {
+          "fact_ref": "cigar_box_salvaged",
+          "plant": "scene_10_the_locker_raid"
+        }
+      ]
+    },
+    {
+      "id": "scene_16_a_real_beginning",
+      "order": 16,
+      "pov": "char_julian",
+      "location_id": "loc_loading_bay",
+      "characters_present": [
+        "char_julian",
+        "char_neil"
+      ],
+      "dramatic_function": "To resolve their separation by tearing up the resignation and committing to an honest relationship outside the notes.",
+      "entry_state": {
+        "char_julian": {
+          "location_id": "loc_dispatch_office",
+          "goal": "Julian seeks to decide whether to leave for Hull or remain to confront his feelings for Neil.",
+          "status": "heartbroken and feeling betrayed"
+        },
+        "char_neil": {
+          "location_id": "loc_basement_locker_room",
+          "status": "withdrawn and anxious"
+        }
+      },
+      "exit_state": {
+        "char_julian": {
+          "location_id": "loc_loading_bay",
+          "goal": "Julian chooses to remain in the city to build a real relationship with Neil.",
+          "status": "reconciled and staying"
+        },
+        "char_neil": {
+          "location_id": "loc_loading_bay",
+          "status": "reconciled and committed to honesty"
+        }
+      },
+      "required_beats": [
+        "Julian intercepts Neil at the waste dock on the morning loading dock and tears the resignation form in two.",
+        "Julian admits he forfeited his Hull deposit, and both agree to start over honestly without the locker notes."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "julian_shift_suspension",
+          "plant": "scene_11_the_lockout_trap"
+        },
+        {
+          "fact_ref": "neil_deceptive_replies",
+          "plant": "scene_12_the_boiler_encounter"
+        },
+        {
+          "fact_ref": "julian_feeling_betrayed",
+          "plant": "scene_13_the_prank_revealed"
+        },
+        {
+          "fact_ref": "neil_resignation_letter",
+          "plant": "scene_15_neils_departure"
+        },
+        {
+          "fact_ref": "hull_lease_deposit_envelope",
+          "plant": "scene_03_the_lease_deposit"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "omniscient and openly amused, willing to address the reader",
+    "register": "light, digressive, fond of its own asides",
+    "sentence_rhythm": "springy sentences with parenthetical swerves; frequent dashes",
+    "imagery_palette": [
+      "kitchen clutter",
+      "weather with opinions",
+      "animals behaving as people"
+    ],
+    "dialogue_density": "high; characters talk over each other and the narrator enjoys it",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "whimsical_playful"
+  },
+  "metadata": {
+    "title": "The Slat in Locker Fourteen",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T12:29:33.583Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "gary_prank_origin",
+      "statement": "Gary Vance planted an overly dramatic romantic letter in locker B-14 before transferring shifts as a practical joke on the incoming porters.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "neil_assigned_locker",
+      "statement": "Neil Hallowell was assigned the night-shift share of locker B-14 in the basement locker room.",
+      "caused_by": [
+        "gary_prank_origin"
+      ]
+    },
+    {
+      "fact_ref": "neil_deceptive_replies",
+      "statement": "Neil Hallowell concealed his identity as an uncredentialed night porter and sustained the romantic correspondence started by Gary.",
+      "caused_by": [
+        "gary_prank_origin",
+        "neil_assigned_locker"
+      ]
+    },
+    {
+      "fact_ref": "locker_vent_loose_baffle",
+      "statement": "The bottom metal louver of locker B-14's ventilation grille is unbolted and can be slid aside without unlocking the padlock.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "shift_lockout_protocol",
+      "statement": "Hospital administration strictly forbids off-shift porters from remaining on hospital premises past shift handover under threat of immediate disciplinary dismissal.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "clara_lease_deadline",
+      "statement": "Clara Miller signed a commercial lease for a joinery shop in Hull that requires Julian's matching cash deposit before the final day of January.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "julian_savings_target",
+      "statement": "Julian has accumulated nearly the full deposit sum inside a relocation envelope to join his sister Clara in Hull.",
+      "caused_by": [
+        "clara_lease_deadline"
+      ]
+    },
+    {
+      "fact_ref": "julian_misjudged_admiration",
+      "statement": "Julian believed his correspondent was a seasoned senior technician who shared his poetic disposition and loneliness.",
+      "caused_by": [
+        "neil_deceptive_replies"
+      ]
+    },
+    {
+      "fact_ref": "gable_inspection_sweep",
+      "statement": "Supervisor Gable scheduled a comprehensive locker inspection to confiscate contraband and cut unauthorized padlocks.",
+      "caused_by": [
+        "shift_lockout_protocol"
+      ]
+    },
+    {
+      "fact_ref": "julian_cedar_carving",
+      "statement": "Julian placed a hand-carved cedar wren inside the shared tin cigar box as a token of devotion for the night writer.",
+      "caused_by": [
+        "julian_misjudged_admiration",
+        "locker_vent_loose_baffle"
+      ]
+    },
+    {
+      "fact_ref": "neil_boiler_routine",
+      "statement": "Neil is assigned the solitary 02:00 chemical solvent transport route through the hazardous basement boiler substation.",
+      "caused_by": [
+        "shift_lockout_protocol"
+      ]
+    },
+    {
+      "fact_ref": "neil_confession_letter",
+      "statement": "Neil wrote an unvarnished confession letter explaining his real identity and sincere feelings to be placed in the tin box.",
+      "caused_by": [
+        "neil_deceptive_replies",
+        "gable_inspection_sweep"
+      ]
+    },
+    {
+      "fact_ref": "cigar_box_salvaged",
+      "statement": "Julian rescued the tin cigar box through the loose locker louver before Supervisor Gable's inspection team arrived.",
+      "caused_by": [
+        "locker_vent_loose_baffle",
+        "gable_inspection_sweep"
+      ]
+    },
+    {
+      "fact_ref": "julian_shift_suspension",
+      "statement": "Supervisor Gable placed Julian on disciplinary suspension after catching him on hospital grounds after his shift had ended.",
+      "caused_by": [
+        "shift_lockout_protocol"
+      ]
+    },
+    {
+      "fact_ref": "julian_feeling_betrayed",
+      "statement": "Julian experienced profound betrayal upon learning that the correspondence began as a workplace prank.",
+      "caused_by": [
+        "gary_prank_origin",
+        "neil_deceptive_replies"
+      ]
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.7-flash",
+    "generated_at": "2026-09-29T12:29:04.770Z",
+    "brief": {
+      "story_id": "review-the-night-shift-letter",
+      "title": "The Night Shift Letter",
+      "premise": {
+        "logline": "Two hospital porters on opposite shifts fall for each other through notes left in a shared locker, and one of them is not who the notes suggest.",
+        "modules": {
+          "theme": "whether you can love someone you have only ever read",
+          "setting_time": "a hard winter of staff shortages",
+          "setting_place": "a large city hospital, its basements and loading bays",
+          "protagonist": "a day porter saving to leave the city",
+          "protagonist_want": "to meet the night porter without ruining it",
+          "antagonism": "a rota that never lets them overlap, and a supervisor who reads the notes",
+          "complication": "the notes were started by someone else, as a joke",
+          "ending_shape": "they meet as themselves and choose each other anyway"
+        }
+      },
+      "plot_shape": {
+        "id": "courtship",
+        "name": "Courtship",
+        "central_question": "What has to be given up for these two to be honest with each other?",
+        "phases": [
+          {
+            "name": "Two worlds",
+            "purpose": "Both parties established separately, each with a commitment in the way.",
+            "share": 0.2
+          },
+          {
+            "name": "Collision",
+            "purpose": "Forced proximity; a misjudgement each makes about the other.",
+            "share": 0.2
+          },
+          {
+            "name": "Concealment",
+            "purpose": "Something true is withheld, for a reason that is not cowardice.",
+            "share": 0.25
+          },
+          {
+            "name": "Exposure",
+            "purpose": "The withheld thing surfaces at the worst available moment.",
+            "share": 0.2
+          },
+          {
+            "name": "Terms",
+            "purpose": "What each actually gives up, stated plainly.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "first party",
+            "purpose": "Withholds something, and has a good reason."
+          },
+          {
+            "role": "second party",
+            "purpose": "Misjudges the first, on evidence."
+          },
+          {
+            "role": "obligation",
+            "purpose": "A person embodying what one of them owes elsewhere."
+          },
+          {
+            "role": "confidant",
+            "purpose": "Knows the withheld thing and is bound not to say it."
+          }
+        ],
+        "obligatory_moves": [
+          "The reader learns the withheld thing before the second party does.",
+          "The misjudgement is reasonable given what that character has been shown.",
+          "Neither party gets what they wanted without naming what it costs."
+        ]
+      },
+      "event_count": 16,
+      "cast": {
+        "characters": 5,
+        "locations": 4,
+        "objects": 3
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 3,
+        "min_span": 3,
+        "long_range_edges": 1,
+        "long_range_span": 8
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "courtship",
+        "premise_preset": "The Night Shift Letter"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_locker_assignment",
+        "sequence": 1,
+        "summary": "Julian unpacks his day-shift kit into locker B-14 and discovers both a loose ventilation louver and a florid note in a tin box.",
+        "pov": "char_julian",
+        "location_id": "loc_basement_locker_room",
+        "characters_present": [
+          "char_julian"
+        ],
+        "dramatic_function": "Establishes Julian's daily environment and plants the physical mechanism of the shared locker.",
+        "beats": [
+          "Julian tests the stiff combination lock and accidentally displaces the bottom ventilation louver.",
+          "Julian pulls the blue tin cigar box from under the bottom shelf and finds a handwritten poetic note addressed to whoever shares the locker."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "locker_vent_loose_baffle"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "goal",
+            "value": "Julian seeks to build a savings cushion for his move to Hull while enduring the winter shift."
+          }
+        ]
+      },
+      {
+        "id": "ev_02_winter_muster",
+        "sequence": 2,
+        "summary": "Supervisor Gable announces strict winter handover rules forbidding day porters from remaining on hospital property after six o'clock.",
+        "pov": "char_julian",
+        "location_id": "loc_loading_bay",
+        "characters_present": [
+          "char_julian",
+          "char_gable"
+        ],
+        "dramatic_function": "Establishes the structural barrier keeping day and night shifts from ever meeting.",
+        "beats": [
+          "Gable inspects the day porters on the cold loading dock and warns against lingering between shifts.",
+          "Gable states that any staff member found on premises past shift lockout will face disciplinary suspension."
+        ],
+        "caused_by": [
+          "ev_01_locker_assignment"
+        ],
+        "reveals": [
+          "shift_lockout_protocol"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_hull_dispatch_call",
+        "sequence": 3,
+        "summary": "Clara meets Julian outside the dispatch office to demand his portion of the lease deposit before the month ends.",
+        "pov": "char_julian",
+        "location_id": "loc_dispatch_office",
+        "characters_present": [
+          "char_julian",
+          "char_clara"
+        ],
+        "dramatic_function": "Establishes the external obligation driving the protagonist away from the city.",
+        "beats": [
+          "Clara reminds Julian that the landlord in Hull will forfeit their workshop lease if the deposit is late.",
+          "Julian pats the cash envelope in his coat and promises to have the final installment ready on time."
+        ],
+        "caused_by": [
+          "ev_01_locker_assignment"
+        ],
+        "reveals": [
+          "julian_savings_target"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "clara_lease_deadline",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_dispatch_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_julian_first_reply",
+        "sequence": 4,
+        "summary": "Julian leaves a vulnerable letter in the cigar box, assuming his opposite shift partner is a cultured surgical technician.",
+        "pov": "char_julian",
+        "location_id": "loc_basement_locker_room",
+        "characters_present": [
+          "char_julian"
+        ],
+        "dramatic_function": "Initiates the correspondence with an earnest misjudgement based on the prank note.",
+        "beats": [
+          "Julian writes about his exhaustion and his quiet dream of working wood along the coast.",
+          "Julian slides the letter into the cigar box and closes locker B-14 before the evening lockout."
+        ],
+        "caused_by": [
+          "ev_01_locker_assignment"
+        ],
+        "reveals": [
+          "julian_misjudged_admiration"
+        ],
+        "conceals": [
+          "neil_deceptive_replies"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_basement_locker_room"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "goal",
+            "value": "Julian seeks to connect with the mysterious night writer through locker B-14."
+          }
+        ]
+      },
+      {
+        "id": "ev_05_gary_confession",
+        "sequence": 5,
+        "summary": "Gary Vance catches Neil reading Julian's letter in the boiler room and swears to keep quiet about starting the joke.",
+        "pov": "char_neil",
+        "location_id": "loc_boiler_substation",
+        "characters_present": [
+          "char_neil",
+          "char_gary"
+        ],
+        "dramatic_function": "Shows the confidant discovering that his prank has grown into an earnest romance and agreeing to withhold the truth.",
+        "beats": [
+          "Gary recognizes Julian's handwriting and mocks Neil for replying to what was originally a locker gag.",
+          "Neil begs Gary not to shatter the connection, and Gary agrees to say nothing."
+        ],
+        "caused_by": [
+          "ev_04_julian_first_reply"
+        ],
+        "reveals": [
+          "gary_prank_origin"
+        ],
+        "conceals": [
+          "neil_deceptive_replies"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_neil",
+            "column": "goal",
+            "value": "Neil seeks to maintain the correspondence with Julian without exposing his ordinary identity."
+          }
+        ]
+      },
+      {
+        "id": "ev_06_gable_warning",
+        "sequence": 6,
+        "summary": "Supervisor Gable patrols the basement locker room and announces an unannounced contraband sweep for the following week.",
+        "pov": "char_neil",
+        "location_id": "loc_basement_locker_room",
+        "characters_present": [
+          "char_neil",
+          "char_gable"
+        ],
+        "dramatic_function": "Escalates institutional pressure by putting the physical repository of the letters in jeopardy.",
+        "beats": [
+          "Gable inspects the padlocks and catches Neil lingering by locker B-14 before his night route.",
+          "Gable informs Neil that all locker locks will be bolt-clipped during the upcoming sweep."
+        ],
+        "caused_by": [
+          "ev_02_winter_muster"
+        ],
+        "reveals": [
+          "gable_inspection_sweep"
+        ],
+        "conceals": [
+          "neil_deceptive_replies"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_neil",
+            "column": "location_id",
+            "value": "loc_basement_locker_room"
+          },
+          {
+            "entity_id": "char_gable",
+            "column": "location_id",
+            "value": "loc_basement_locker_room"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_cedar_bird_deposit",
+        "sequence": 7,
+        "summary": "Julian deposits a hand-carved cedar bird in the cigar box through the loose vent slat as a sign of affection.",
+        "pov": "char_julian",
+        "location_id": "loc_basement_locker_room",
+        "characters_present": [
+          "char_julian"
+        ],
+        "dramatic_function": "Deepens the romantic stakes with a handmade physical token.",
+        "beats": [
+          "Julian inspects his hand-carved cedar wren before wrapping it in brown tissue.",
+          "Julian slides the carving into the tin cigar box through the loose locker louver."
+        ],
+        "caused_by": [
+          "ev_04_julian_first_reply"
+        ],
+        "reveals": [
+          "julian_cedar_carving"
+        ],
+        "conceals": [
+          "neil_deceptive_replies"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "status",
+            "value": "exhausted from double shifts but emotionally invested"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_night_substation_routine",
+        "sequence": 8,
+        "summary": "Neil hauls hazardous solvent drums through the boiler substation alone while agonising over the deception he is maintaining.",
+        "pov": "char_neil",
+        "location_id": "loc_boiler_substation",
+        "characters_present": [
+          "char_neil"
+        ],
+        "dramatic_function": "Plants Neil's solitary night location and highlights his internal conflict.",
+        "beats": [
+          "Neil maneuvers heavy solvent drums into the chemical holding alcove beneath the humming pipes.",
+          "Neil touches the carved cedar bird in his coat, wracked with guilt over not being the refined technician Julian imagines."
+        ],
+        "caused_by": [
+          "ev_05_gary_confession"
+        ],
+        "reveals": [
+          "neil_boiler_routine"
+        ],
+        "conceals": [
+          "neil_deceptive_replies"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_neil",
+            "column": "location_id",
+            "value": "loc_boiler_substation"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_neil_writes_confession",
+        "sequence": 9,
+        "summary": "Neil drafts a full confession explaining his identity as an uncredentialed porter and leaves it in the tin box.",
+        "pov": "char_neil",
+        "location_id": "loc_basement_locker_room",
+        "characters_present": [
+          "char_neil"
+        ],
+        "dramatic_function": "Moves the withheld truth into the physical world before the impending collision.",
+        "beats": [
+          "Neil writes a letter confessing that Gary wrote the first note and that he himself is just a tired night porter.",
+          "Neil places the confession letter inside the blue tin cigar box beneath the locker shelf."
+        ],
+        "caused_by": [
+          "ev_06_gable_warning",
+          "ev_08_night_substation_routine"
+        ],
+        "reveals": [
+          "neil_confession_letter"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_neil",
+            "column": "location_id",
+            "value": "loc_basement_locker_room"
+          },
+          {
+            "entity_id": "char_neil",
+            "column": "goal",
+            "value": "Neil seeks to confess his true identity to Julian before supervisor sweeps discover the notes."
+          }
+        ]
+      },
+      {
+        "id": "ev_10_gable_locker_raid",
+        "sequence": 10,
+        "summary": "Julian uses the loose ventilation slat to rescue the cigar box just before Supervisor Gable raids the locker room with bolt cutters.",
+        "pov": "char_julian",
+        "location_id": "loc_basement_locker_room",
+        "characters_present": [
+          "char_julian",
+          "char_gable"
+        ],
+        "dramatic_function": "Resolves the physical threat to the letters by utilizing the loose locker louver.",
+        "beats": [
+          "Gable enters the basement locker bay with maintenance workers bearing bolt cutters.",
+          "Julian slips his hand through the loose louver, pulls out the cigar box, and conceals it in his jacket before Gable reaches locker B-14."
+        ],
+        "caused_by": [
+          "ev_06_gable_warning",
+          "ev_07_cedar_bird_deposit"
+        ],
+        "reveals": [
+          "cigar_box_salvaged"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "locker_vent_loose_baffle",
+            "plant": "ev_01_locker_assignment"
+          },
+          {
+            "fact_ref": "gable_inspection_sweep",
+            "plant": "ev_06_gable_warning"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_tin_cigar_box",
+            "column": "location_id",
+            "value": "loc_dispatch_office"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_overtime_confrontation",
+        "sequence": 11,
+        "summary": "Julian deliberately breaks the lockout rule by lingering into the night shift to find the writer, only to be caught and suspended by Gable.",
+        "pov": "char_julian",
+        "location_id": "loc_dispatch_office",
+        "characters_present": [
+          "char_julian",
+          "char_gable"
+        ],
+        "dramatic_function": "Forces the protagonist into institutional jeopardy as a direct consequence of defying the lockout rules.",
+        "beats": [
+          "Julian waits in the dispatch corridor past eight o'clock hoping to intercept his correspondent.",
+          "Gable intercepts Julian, cites the lockout violation, and places him on formal suspension pending review."
+        ],
+        "caused_by": [
+          "ev_02_winter_muster",
+          "ev_10_gable_locker_raid"
+        ],
+        "reveals": [
+          "julian_shift_suspension"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "shift_lockout_protocol",
+            "plant": "ev_02_winter_muster"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_dispatch_office"
+          },
+          {
+            "entity_id": "char_gable",
+            "column": "location_id",
+            "value": "loc_dispatch_office"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "status",
+            "value": "disciplined and placed on suspension warning for protocol violation"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_substation_encounter",
+        "sequence": 12,
+        "summary": "Julian ducks into the boiler substation during the two o'clock chemical run and discovers Neil working alone with the correspondence notes.",
+        "pov": "char_julian",
+        "location_id": "loc_boiler_substation",
+        "characters_present": [
+          "char_julian",
+          "char_neil"
+        ],
+        "dramatic_function": "The physical collision where the true identity is exposed face-to-face.",
+        "beats": [
+          "Julian slips into the warm boiler substation to evade Gable and hears a porter shifting chemical drums.",
+          "Julian finds Neil sitting by the pipes rereading Julian's letters alongside the carved cedar wren."
+        ],
+        "caused_by": [
+          "ev_08_night_substation_routine",
+          "ev_11_overtime_confrontation"
+        ],
+        "reveals": [
+          "neil_deceptive_replies"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "neil_boiler_routine",
+            "plant": "ev_08_night_substation_routine"
+          },
+          {
+            "fact_ref": "julian_misjudged_admiration",
+            "plant": "ev_04_julian_first_reply"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_boiler_substation"
+          },
+          {
+            "entity_id": "char_neil",
+            "column": "location_id",
+            "value": "loc_boiler_substation"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "goal",
+            "value": "Julian seeks the truth about who authored the notes."
+          }
+        ]
+      },
+      {
+        "id": "ev_13_revelation_fallout",
+        "sequence": 13,
+        "summary": "Julian confronts Neil and Gary on the loading dock, discovering the romantic correspondence originated as Gary's prank.",
+        "pov": "char_julian",
+        "location_id": "loc_loading_bay",
+        "characters_present": [
+          "char_julian",
+          "char_neil",
+          "char_gary"
+        ],
+        "dramatic_function": "The climax of exposure where the full deception surfaces and wounds Julian.",
+        "beats": [
+          "Gary arrives with laundry bins and blurts out that the first letter was just an old prank.",
+          "Neil hands Julian his unsent confession letter, but Julian reels from the knowledge that his feelings were built on a farce."
+        ],
+        "caused_by": [
+          "ev_12_substation_encounter"
+        ],
+        "reveals": [
+          "julian_feeling_betrayed"
+        ],
+        "conceals": [],
+        "recounts": [
+          "neil_deceptive_replies"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "gary_prank_origin",
+            "plant": "ev_05_gary_confession"
+          },
+          {
+            "fact_ref": "neil_confession_letter",
+            "plant": "ev_09_neil_writes_confession"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          },
+          {
+            "entity_id": "char_neil",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          },
+          {
+            "entity_id": "char_gary",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "status",
+            "value": "heartbroken and feeling betrayed"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_sister_ultimatum",
+        "sequence": 14,
+        "summary": "Clara arrives at dispatch with the final lease contract, forcing Julian to choose between funding his escape to Hull or staying in the city.",
+        "pov": "char_julian",
+        "location_id": "loc_dispatch_office",
+        "characters_present": [
+          "char_julian",
+          "char_clara"
+        ],
+        "dramatic_function": "Forces the protagonist to confront the real cost of his external obligation.",
+        "beats": [
+          "Clara holds out the final Hull workshop agreement and demands the savings envelope.",
+          "Julian realizes that leaving the city now would be running away from something real, and confesses he cannot go."
+        ],
+        "caused_by": [
+          "ev_03_hull_dispatch_call",
+          "ev_11_overtime_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "clara_lease_deadline",
+            "plant": null
+          },
+          {
+            "fact_ref": "julian_savings_target",
+            "plant": "ev_03_hull_dispatch_call"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_dispatch_office"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "goal",
+            "value": "Julian seeks to decide whether to leave for Hull or remain to confront his feelings for Neil."
+          }
+        ]
+      },
+      {
+        "id": "ev_15_cigar_box_return",
+        "sequence": 15,
+        "summary": "Neil returns the carved cedar bird to the salvaged cigar box in the basement locker room and leaves a signed resignation notice.",
+        "pov": "char_neil",
+        "location_id": "loc_basement_locker_room",
+        "characters_present": [
+          "char_neil"
+        ],
+        "dramatic_function": "The first party offers up his livelihood to protect the other from further shame.",
+        "beats": [
+          "Neil places the carved cedar wren back into the tin box inside the locker.",
+          "Neil folds his resignation letter on the bench, intending to leave the hospital so Julian will not be fired."
+        ],
+        "caused_by": [
+          "ev_10_gable_locker_raid",
+          "ev_13_revelation_fallout"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "julian_cedar_carving",
+            "plant": "ev_07_cedar_bird_deposit"
+          },
+          {
+            "fact_ref": "cigar_box_salvaged",
+            "plant": "ev_10_gable_locker_raid"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_neil",
+            "column": "location_id",
+            "value": "loc_basement_locker_room"
+          },
+          {
+            "entity_id": "char_neil",
+            "column": "goal",
+            "value": "Neil seeks to clear Julian's path by resigning and returning Julian's carving."
+          }
+        ]
+      },
+      {
+        "id": "ev_16_morning_dock_reckoning",
+        "sequence": 16,
+        "summary": "Julian catches Neil on the morning loading dock, tears up the resignation, and agrees to start over honestly in the waking world.",
+        "pov": "char_julian",
+        "location_id": "loc_loading_bay",
+        "characters_present": [
+          "char_julian",
+          "char_neil"
+        ],
+        "dramatic_function": "The resolution where both parties state their costs and choose each other as themselves.",
+        "beats": [
+          "Julian intercepts Neil at the waste dock and tears the resignation form in two.",
+          "Julian admits he forfeited his Hull deposit, and both agree to know each other without the fiction of the locker notes."
+        ],
+        "caused_by": [
+          "ev_13_revelation_fallout",
+          "ev_14_sister_ultimatum",
+          "ev_15_cigar_box_return"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "julian_shift_suspension",
+            "plant": "ev_11_overtime_confrontation"
+          },
+          {
+            "fact_ref": "neil_deceptive_replies",
+            "plant": "ev_12_substation_encounter"
+          },
+          {
+            "fact_ref": "julian_feeling_betrayed",
+            "plant": "ev_13_revelation_fallout"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julian",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          },
+          {
+            "entity_id": "char_neil",
+            "column": "location_id",
+            "value": "loc_loading_bay"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "goal",
+            "value": "Julian chooses to remain in the city to build a real relationship with Neil."
+          },
+          {
+            "entity_id": "char_neil",
+            "column": "status",
+            "value": "reconciled and committed to honesty"
+          },
+          {
+            "entity_id": "char_julian",
+            "column": "status",
+            "value": "reconciled and staying"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_gary_prank_placed",
+        "sequence": 1,
+        "summary": "Gary Vance leaves an exaggerated romantic note in shared locker B-14 before transferring shifts to amuse himself at the next occupant's expense.",
+        "caused_by": [],
+        "establishes": [
+          "gary_prank_origin"
+        ]
+      },
+      {
+        "id": "hidden_02_neil_locker_reassignment",
+        "sequence": 2,
+        "summary": "Supervisor Gable reassigns the night share of locker B-14 to Neil Hallowell when Gary leaves the porter pool.",
+        "caused_by": [
+          "hidden_01_gary_prank_placed"
+        ],
+        "establishes": [
+          "neil_assigned_locker"
+        ]
+      },
+      {
+        "id": "hidden_03_neil_takes_up_correspondence",
+        "sequence": 3,
+        "summary": "Neil finds Julian's earnest reply to Gary's initial joke note and decides to keep writing back because Julian's honesty eases his isolation.",
+        "caused_by": [
+          "hidden_02_neil_locker_reassignment"
+        ],
+        "establishes": [
+          "neil_deceptive_replies"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "locker_vent_loose_baffle",
+        "statement": "The bottom metal louver of locker B-14's ventilation grille is unbolted and can be slid aside without unlocking the padlock.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "shift_lockout_protocol",
+        "statement": "Hospital administration strictly forbids off-shift porters from remaining on hospital premises past shift handover under threat of immediate disciplinary dismissal.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "clara_lease_deadline",
+        "statement": "Clara Miller signed a commercial lease for a joinery shop in Hull that requires Julian's matching cash deposit before the final day of January.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "julian_savings_target",
+        "statement": "Julian has accumulated nearly the full deposit sum inside a relocation envelope to join his sister Clara in Hull.",
+        "caused_by": [
+          "clara_lease_deadline"
+        ]
+      },
+      {
+        "fact_ref": "neil_deceptive_replies",
+        "statement": "Neil Hallowell concealed his identity as an uncredentialed night porter and sustained the romantic correspondence started by Gary.",
+        "caused_by": [
+          "gary_prank_origin",
+          "neil_assigned_locker"
+        ]
+      },
+      {
+        "fact_ref": "julian_misjudged_admiration",
+        "statement": "Julian believed his correspondent was a seasoned senior technician who shared his poetic disposition and loneliness.",
+        "caused_by": [
+          "neil_deceptive_replies"
+        ]
+      },
+      {
+        "fact_ref": "gary_prank_origin",
+        "statement": "Gary Vance planted an overly dramatic romantic letter in locker B-14 before transferring shifts as a practical joke on the incoming porters.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "gable_inspection_sweep",
+        "statement": "Supervisor Gable scheduled a comprehensive locker inspection to confiscate contraband and cut unauthorized padlocks.",
+        "caused_by": [
+          "shift_lockout_protocol"
+        ]
+      },
+      {
+        "fact_ref": "julian_cedar_carving",
+        "statement": "Julian placed a hand-carved cedar wren inside the shared tin cigar box as a token of devotion for the night writer.",
+        "caused_by": [
+          "julian_misjudged_admiration",
+          "locker_vent_loose_baffle"
+        ]
+      },
+      {
+        "fact_ref": "neil_boiler_routine",
+        "statement": "Neil is assigned the solitary 02:00 chemical solvent transport route through the hazardous basement boiler substation.",
+        "caused_by": [
+          "shift_lockout_protocol"
+        ]
+      },
+      {
+        "fact_ref": "neil_confession_letter",
+        "statement": "Neil wrote an unvarnished confession letter explaining his real identity and sincere feelings to be placed in the tin box.",
+        "caused_by": [
+          "neil_deceptive_replies",
+          "gable_inspection_sweep"
+        ]
+      },
+      {
+        "fact_ref": "cigar_box_salvaged",
+        "statement": "Julian rescued the tin cigar box through the loose locker louver before Supervisor Gable's inspection team arrived.",
+        "caused_by": [
+          "locker_vent_loose_baffle",
+          "gable_inspection_sweep"
+        ]
+      },
+      {
+        "fact_ref": "julian_shift_suspension",
+        "statement": "Supervisor Gable placed Julian on disciplinary suspension after catching him on hospital grounds after his shift had ended.",
+        "caused_by": [
+          "shift_lockout_protocol"
+        ]
+      },
+      {
+        "fact_ref": "julian_feeling_betrayed",
+        "statement": "Julian experienced profound betrayal upon learning that the correspondence began as a workplace prank.",
+        "caused_by": [
+          "gary_prank_origin",
+          "neil_deceptive_replies"
+        ]
+      },
+      {
+        "fact_ref": "neil_assigned_locker",
+        "statement": "Neil Hallowell was assigned the night-shift share of locker B-14 in the basement locker room.",
+        "caused_by": []
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T12:29:33.583Z",
+    "started_at": "2026-09-29T12:29:04.770Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_shared_locker",
+        "order": 1,
+        "event_ids": [
+          "ev_01_locker_assignment"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_evening_lockout",
+        "order": 2,
+        "event_ids": [
+          "ev_02_winter_muster"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_lease_deposit",
+        "order": 3,
+        "event_ids": [
+          "ev_03_hull_dispatch_call"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_a_quiet_dream",
+        "order": 4,
+        "event_ids": [
+          "ev_04_julian_first_reply"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_pact",
+        "order": 5,
+        "event_ids": [
+          "ev_05_gary_confession"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_inspection",
+        "order": 6,
+        "event_ids": [
+          "ev_06_gable_warning"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_the_token",
+        "order": 7,
+        "event_ids": [
+          "ev_07_cedar_bird_deposit"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_guilt_and_solvent",
+        "order": 8,
+        "event_ids": [
+          "ev_08_night_substation_routine"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_confession",
+        "order": 9,
+        "event_ids": [
+          "ev_09_neil_writes_confession"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_locker_raid",
+        "order": 10,
+        "event_ids": [
+          "ev_10_gable_locker_raid"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_the_lockout_trap",
+        "order": 11,
+        "event_ids": [
+          "ev_11_overtime_confrontation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_the_boiler_encounter",
+        "order": 12,
+        "event_ids": [
+          "ev_12_substation_encounter"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_prank_revealed",
+        "order": 13,
+        "event_ids": [
+          "ev_13_revelation_fallout"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_14_the_lease_choice",
+        "order": 14,
+        "event_ids": [
+          "ev_14_sister_ultimatum"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_15_neils_departure",
+        "order": 15,
+        "event_ids": [
+          "ev_15_cigar_box_return"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_16_a_real_beginning",
+        "order": 16,
+        "event_ids": [
+          "ev_16_morning_dock_reckoning"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}

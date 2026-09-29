@@ -1,0 +1,658 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-the-apprentices-bill",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_julien",
+        "name": "Julien Mercier",
+        "location_id": "loc_dining_room",
+        "status": "tense and watchful",
+        "goal": "Witness Andre fail publicly before the restaurant critic",
+        "bag": {}
+      },
+      {
+        "id": "char_andre",
+        "name": "Andre Laurent",
+        "location_id": "loc_kitchen",
+        "status": "exhausted and anxious",
+        "goal": "Secure a career-saving three-star review from the dining critic",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_dining_room",
+        "name": "L'Hiver Dining Room",
+        "bag": {}
+      },
+      {
+        "id": "loc_kitchen",
+        "name": "L'Hiver Kitchen Pass",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_service_ticket",
+        "name": "Critic's VIP Service Ticket",
+        "location_id": "loc_kitchen",
+        "status": "pinned at the pastry station",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_julien",
+        "to_id": "char_andre",
+        "kind": "former apprentice",
+        "sentiment": "vindictive",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_andre",
+        "to_id": "char_julien",
+        "kind": "former mentor",
+        "sentiment": "guilt-ridden",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_julien",
+        "fact_ref": "mentor_stole_quince_recipe",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_andre",
+        "fact_ref": "mentor_stole_quince_recipe",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_julien",
+        "fact_ref": "blacklist_destroyed_career",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_stolen_recipe",
+      "order": 1,
+      "pov": "char_julien",
+      "location_id": "loc_dining_room",
+      "characters_present": [
+        "char_julien"
+      ],
+      "dramatic_function": "Establishes Julien's discovery of Andre's theft and his resolve to witness Andre's downfall.",
+      "entry_state": {
+        "char_julien": {
+          "status": "tense and watchful",
+          "goal": "Witness Andre fail publicly before the restaurant critic"
+        }
+      },
+      "exit_state": {
+        "char_julien": {
+          "status": "seething with bitter focus",
+          "goal": "Enter the kitchen to ensure the quince dessert collapses before the critic"
+        }
+      },
+      "required_beats": [
+        "Julien reads the gilded tasting menu at Table 4 and discovers his signature smoked quince tart claimed under Andre's exclusive name while noting the chief restaurant critic seated nearby.",
+        "Smelling burnt wood chips leaking from an overheated smoker past the kitchen doors, Julien recalls his exile from the industry.",
+        "Julien sets down his napkin and pledges to see Andre's name burned off the ticket before the final course clears the pass."
+      ],
+      "reader_must_learn": [
+        "hay_smoke_infusion_defect",
+        "vow_to_burn_the_pass",
+        "presence_of_restaurant_critic"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "mentor_stole_quince_recipe",
+          "plant": null
+        },
+        {
+          "fact_ref": "blacklist_destroyed_career",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_behind_the_pass",
+      "order": 2,
+      "pov": "char_julien",
+      "location_id": "loc_kitchen",
+      "characters_present": [
+        "char_julien",
+        "char_andre"
+      ],
+      "dramatic_function": "Reveals Andre's hidden vulnerability and protective demeanor toward his staff, complicating Julien's desire for revenge.",
+      "entry_state": {
+        "char_julien": {
+          "location_id": "loc_dining_room"
+        },
+        "char_andre": {
+          "status": "exhausted and anxious"
+        }
+      },
+      "exit_state": {
+        "char_julien": {
+          "location_id": "loc_kitchen"
+        },
+        "char_andre": {
+          "status": "physically compromised by severe tremors"
+        }
+      },
+      "required_beats": [
+        "Julien slips into the service area and observes Andre shielding a junior commis cook by absorbing the blame for a spilled glaze.",
+        "Behind the pass divider, Andre dry-swallows medication while his hands tremble violently against the stainless steel."
+      ],
+      "reader_must_learn": [
+        "andre_failing_hand_tremor"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_the_final_course",
+      "order": 3,
+      "pov": "char_julien",
+      "location_id": "loc_kitchen",
+      "characters_present": [
+        "char_julien",
+        "char_andre"
+      ],
+      "dramatic_function": "Resolves Julien's vendetta as he claims true ownership of the craft and lets go of his hatred.",
+      "entry_state": {
+        "char_andre": {
+          "goal": "Secure a career-saving three-star review from the dining critic",
+          "status": "physically compromised by severe tremors"
+        },
+        "char_julien": {
+          "status": "seething with bitter focus",
+          "goal": "Enter the kitchen to ensure the quince dessert collapses before the critic"
+        },
+        "obj_service_ticket": {
+          "status": "pinned at the pastry station"
+        }
+      },
+      "exit_state": {
+        "char_andre": {
+          "goal": "Prevent the critic's signature dessert from failing at the pass",
+          "status": "humbled and devastated with gratitude"
+        },
+        "char_julien": {
+          "status": "unburdened and detached",
+          "goal": "Build his own craft away from his mentor's shadow"
+        },
+        "obj_service_ticket": {
+          "status": "scorched and fulfilled"
+        }
+      },
+      "required_beats": [
+        "Julien confronts Andre at the pastry line as the critic's quince tart begins to liquefy and Andre's trembling fingers fail to steady the plating tongs.",
+        "Julien sears Andre's printed name off the VIP service ticket using the station blowtorch.",
+        "Julien stabilizes the smoke emulsion with cold cream, finishes the spun-sugar dome, and sends the flawless plate to the critic before walking out into the alley."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "hay_smoke_infusion_defect",
+          "plant": "scene_01_the_stolen_recipe"
+        },
+        {
+          "fact_ref": "vow_to_burn_the_pass",
+          "plant": "scene_01_the_stolen_recipe"
+        },
+        {
+          "fact_ref": "andre_failing_hand_tremor",
+          "plant": "scene_02_behind_the_pass"
+        },
+        {
+          "fact_ref": "presence_of_restaurant_critic",
+          "plant": "scene_01_the_stolen_recipe"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "close third, pressed against the protagonist",
+    "register": "grave, ornate, foreboding; dwells where a plainer voice would move on",
+    "sentence_rhythm": "long accreting sentences broken by a short one that lands like a door",
+    "imagery_palette": [
+      "damp stone and rot",
+      "guttering light",
+      "cold weight and enclosure"
+    ],
+    "dialogue_density": "low; speech arrives rarely and carries weight when it does",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "gothic_brooding"
+  },
+  "metadata": {
+    "title": "The Smoke and the Quince",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T12:10:52.727Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "mentor_stole_quince_recipe",
+      "statement": "Andre took sole credit for Julien's signature smoked quince dessert recipe.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "blacklist_destroyed_career",
+      "statement": "Andre used his influence with dining syndicates to ensure Julien could not secure a head pastry position.",
+      "caused_by": [
+        "mentor_stole_quince_recipe"
+      ]
+    },
+    {
+      "fact_ref": "hay_smoke_infusion_defect",
+      "statement": "The kitchen smoking apparatus ran too hot, destabilizing the pectin matrix of the quince tart.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "vow_to_burn_the_pass",
+      "statement": "Julien swore to see Andre's name burned off the ticket before the final course cleared the pass.",
+      "caused_by": [
+        "blacklist_destroyed_career"
+      ]
+    },
+    {
+      "fact_ref": "andre_failing_hand_tremor",
+      "statement": "Andre developed severe nerve tremors in his hands that made fine pastry assembly impossible under pressure.",
+      "caused_by": []
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.7-flash",
+    "generated_at": "2026-09-29T12:10:43.390Z",
+    "brief": {
+      "story_id": "review-the-apprentices-bill",
+      "title": "The Apprentice’s Bill",
+      "premise": {
+        "logline": "A chef who was blacklisted by his mentor finally gets a table at the mentor’s restaurant on the night it is being reviewed.",
+        "modules": {
+          "theme": "what we owe the people who made us and then unmade us",
+          "setting_time": "a single service night, with years of history behind it",
+          "setting_place": "an acclaimed restaurant kitchen and dining room",
+          "protagonist": "a line cook who once ran that kitchen’s pastry section",
+          "protagonist_want": "to see his mentor fail in front of the critic",
+          "antagonism": "the mentor, older now, and frightened",
+          "complication": "the dish that ruined him is on tonight’s menu, credited to the mentor",
+          "ending_shape": "he could ruin the night, and what he does instead is the answer"
+        }
+      },
+      "plot_shape": {
+        "id": "reckoning",
+        "name": "Reckoning",
+        "central_question": "Does the debt get collected, and does collecting it help?",
+        "phases": [
+          {
+            "name": "The injury",
+            "purpose": "The original wrong, shown rather than reported.",
+            "share": 0.15
+          },
+          {
+            "name": "The vow",
+            "purpose": "A commitment made in a state the maker will not always be in.",
+            "share": 0.15
+          },
+          {
+            "name": "Preparation",
+            "purpose": "Means acquired, allies made and used, a self narrowed to a purpose.",
+            "share": 0.3
+          },
+          {
+            "name": "Contact",
+            "purpose": "The wrongdoer, close enough to be seen as a person.",
+            "share": 0.25
+          },
+          {
+            "name": "Aftermath",
+            "purpose": "What is left of the avenger once the purpose is gone.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "claimant",
+            "purpose": "Holds the debt and is deformed by holding it."
+          },
+          {
+            "role": "debtor",
+            "purpose": "Committed the wrong, and has a life that does not look like a villain's."
+          },
+          {
+            "role": "enabler",
+            "purpose": "Helps the claimant for reasons of their own."
+          },
+          {
+            "role": "the restraint",
+            "purpose": "Argues for the cost, and is not simply right."
+          }
+        ],
+        "obligatory_moves": [
+          "The vow is made with a specific, quotable condition attached.",
+          "The debtor is shown doing something that is not villainous before contact.",
+          "The aftermath addresses the vow's exact wording."
+        ]
+      },
+      "event_count": 5,
+      "cast": {
+        "characters": 2,
+        "locations": 2,
+        "objects": 1
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 1,
+        "min_span": 1,
+        "long_range_edges": 0,
+        "long_range_span": 4
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "reckoning",
+        "premise_preset": "The Apprentice’s Bill"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_menu_discovery",
+        "sequence": 1,
+        "summary": "Julien reviews tonight's tasting menu at Table 4 and discovers his stolen smoked quince recipe featured under Andre's exclusive name.",
+        "pov": "char_julien",
+        "location_id": "loc_dining_room",
+        "characters_present": [
+          "char_julien"
+        ],
+        "dramatic_function": "Confronts the claimant with the raw injury of his stolen work presented on review night.",
+        "beats": [
+          "Julien reads the gilded tasting menu and finds his signature smoked quince tart claimed solely by Andre.",
+          "He notes the chief restaurant critic seated two tables away preparing for the dessert flight.",
+          "He catches the acrid smell of burnt wood chips leaking past the kitchen doors, noticing the smoker is running too hot."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "hay_smoke_infusion_defect"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "mentor_stole_quince_recipe",
+            "plant": null
+          },
+          {
+            "fact_ref": "blacklist_destroyed_career",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julien",
+            "column": "status",
+            "value": "seething with bitter focus"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_the_vow",
+        "sequence": 2,
+        "summary": "Julien commits himself to witnessing Andre's public ruin at the pass before the final dessert is served.",
+        "pov": "char_julien",
+        "location_id": "loc_dining_room",
+        "characters_present": [
+          "char_julien"
+        ],
+        "dramatic_function": "Articulates the claimant's exact vow and narrowing purpose.",
+        "beats": [
+          "Julien remembers being cast out of the industry when Andre told owners across the city that Julien was unstable.",
+          "He sets down his napkin and pledges his vow: 'I will see his name burned off that ticket before the final course clears the pass.'"
+        ],
+        "caused_by": [
+          "ev_01_menu_discovery"
+        ],
+        "reveals": [
+          "vow_to_burn_the_pass"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_julien",
+            "column": "goal",
+            "value": "Enter the kitchen to ensure the quince dessert collapses before the critic"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_the_kitchen_glimpse",
+        "sequence": 3,
+        "summary": "Julien slips into the service area and observes Andre shielding a flustered junior commis while hiding his own severe hand tremor.",
+        "pov": "char_julien",
+        "location_id": "loc_kitchen",
+        "characters_present": [
+          "char_julien",
+          "char_andre"
+        ],
+        "dramatic_function": "Humanizes the debtor by showing his quiet decency and physical vulnerability before direct contact.",
+        "beats": [
+          "Julien steps through the swing doors and watches Andre calmly absorb the blame for a commis cook's spilled glaze.",
+          "He watches Andre step behind the pass divider to dry-swallow medication as his hands tremble violently against the stainless steel."
+        ],
+        "caused_by": [
+          "ev_02_the_vow"
+        ],
+        "reveals": [
+          "andre_failing_hand_tremor"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_julien",
+            "column": "location_id",
+            "value": "loc_kitchen"
+          },
+          {
+            "entity_id": "char_andre",
+            "column": "status",
+            "value": "physically compromised by severe tremors"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_contact_at_the_pass",
+        "sequence": 4,
+        "summary": "Julien confronts Andre at the pastry line as the critic's quince tart begins to separate from the scorched smoke infusion.",
+        "pov": "char_julien",
+        "location_id": "loc_kitchen",
+        "characters_present": [
+          "char_julien",
+          "char_andre"
+        ],
+        "dramatic_function": "Brings claimant and debtor into direct confrontation over the failing dish.",
+        "beats": [
+          "Andre turns, recognizes his ruined apprentice standing over the pastry pass, and freezes in shock.",
+          "The quince pectin begins to weep and liquefy because the overheated hay smoke ruined the gelatin matrix.",
+          "Andre reaches out with trembling plating tongs to salvage the tart, visibly unable to steady his fingers."
+        ],
+        "caused_by": [
+          "ev_03_the_kitchen_glimpse"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "hay_smoke_infusion_defect",
+            "plant": "ev_01_menu_discovery"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_andre",
+            "column": "goal",
+            "value": "Prevent the critic's signature dessert from failing at the pass"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_the_aftermath",
+        "sequence": 5,
+        "summary": "Julien takes the station blowtorch to sear Andre's name off the VIP ticket, stabilizes the dessert with cold emulsion, and leaves the kitchen unburdened.",
+        "pov": "char_julien",
+        "location_id": "loc_kitchen",
+        "characters_present": [
+          "char_julien",
+          "char_andre"
+        ],
+        "dramatic_function": "Fulfills the exact wording of the vow while releasing the claimant from his consuming vengeance.",
+        "beats": [
+          "Julien takes the culinary torch, ignites it, and burns Andre's printed name off the VIP service ticket.",
+          "Using his steady hands, Julien blends cold cream to rescue the smoke emulsion and completes the delicate spun-sugar dome.",
+          "Julien sets the flawless plate on the runner's tray for the critic and walks out into the alley, leaving his hatred behind."
+        ],
+        "caused_by": [
+          "ev_04_contact_at_the_pass"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "vow_to_burn_the_pass",
+            "plant": "ev_02_the_vow"
+          },
+          {
+            "fact_ref": "andre_failing_hand_tremor",
+            "plant": "ev_03_the_kitchen_glimpse"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_julien",
+            "column": "status",
+            "value": "unburdened and detached"
+          },
+          {
+            "entity_id": "char_julien",
+            "column": "goal",
+            "value": "Build his own craft away from his mentor's shadow"
+          },
+          {
+            "entity_id": "char_andre",
+            "column": "status",
+            "value": "humbled and devastated with gratitude"
+          },
+          {
+            "entity_id": "obj_service_ticket",
+            "column": "status",
+            "value": "scorched and fulfilled"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [],
+    "facts": [
+      {
+        "fact_ref": "mentor_stole_quince_recipe",
+        "statement": "Andre took sole credit for Julien's signature smoked quince dessert recipe.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "blacklist_destroyed_career",
+        "statement": "Andre used his influence with dining syndicates to ensure Julien could not secure a head pastry position.",
+        "caused_by": [
+          "mentor_stole_quince_recipe"
+        ]
+      },
+      {
+        "fact_ref": "hay_smoke_infusion_defect",
+        "statement": "The kitchen smoking apparatus ran too hot, destabilizing the pectin matrix of the quince tart.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "vow_to_burn_the_pass",
+        "statement": "Julien swore to see Andre's name burned off the ticket before the final course cleared the pass.",
+        "caused_by": [
+          "blacklist_destroyed_career"
+        ]
+      },
+      {
+        "fact_ref": "andre_failing_hand_tremor",
+        "statement": "Andre developed severe nerve tremors in his hands that made fine pastry assembly impossible under pressure.",
+        "caused_by": []
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T12:10:52.727Z",
+    "started_at": "2026-09-29T12:10:43.391Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_stolen_recipe",
+        "order": 1,
+        "event_ids": [
+          "ev_01_menu_discovery",
+          "ev_02_the_vow"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_behind_the_pass",
+        "order": 2,
+        "event_ids": [
+          "ev_03_the_kitchen_glimpse"
+        ],
+        "forced_by_plant_span": true,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_final_course",
+        "order": 3,
+        "event_ids": [
+          "ev_04_contact_at_the_pass",
+          "ev_05_the_aftermath"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}
