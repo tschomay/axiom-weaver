@@ -64,3 +64,15 @@
 - neil_assigned_locker (hidden) never revealed — minor.
 - So hidden-account wiring varies by arc: 02 none, 03 partial (conceal only at the first event), 04 full. The arc generator
   sometimes fills reveals/conceals and sometimes doesn't; nothing checks. → a lint/repair gate on the Fabula.
+
+## Story 04 Night Shift Letter — panel: ground 2, engage 2, char 3, payoff 3, prose 2 (cons pending)
+- Envelope decoy (payoff/engage/char): NOT in Fabula or cards. S14 beat "Clara… demands the savings envelope / Julian
+  confesses he cannot go"; S16 beat "admits he forfeited his Hull deposit". Arc never says what happens to the money →
+  writer invents an offstage swap to reconcile. Pattern: writer patches Fabula gaps with unseen offstage mechanics
+  (cf. 01 cold-cream rescue, 03 pin mechanics).
+- Romance told not shown: none of Neil's letters on the page. Fabula has ev_04 "Julian first reply" etc. but beats
+  summarise correspondence; nothing asks the writer to show a letter.
+- S13→S14 reversal off-page: S14 has 2 beats; decision "Julian realizes leaving would be running from reality" is a
+  narrator-able beat with no trigger event.
+- Prose: "petulant" weather-tantrum simile opens all 16 scenes (imagery ledger not catching a *structural* repeat);
+  envelope re-explained in ~9 scenes (reanchoring over-firing?). Names drift: Miller/Fromm; Gable he/she; £5/£20 notes.
