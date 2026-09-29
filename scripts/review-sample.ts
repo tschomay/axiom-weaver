@@ -157,6 +157,9 @@ async function main(): Promise<void> {
       const candidate = { ...segmentation.package, story_id: storyId, package_version: 1 };
       const lint = lintPackage(candidate);
       if (!lint.publishable) {
+        // Keep what was refused, so the failure can be traced rather than regenerated blind.
+        await writeFile(join(dir, 'refused-package.json'), `${JSON.stringify(candidate, null, 2)}\n`);
+        await writeFile(join(dir, 'refused-lint.json'), `${JSON.stringify(lint.errors, null, 2)}\n`);
         throw new Error(`lint refused the package: ${lint.errors.map((e) => e.code).join(', ')}`);
       }
       const pkg = parseStoryPackage(candidate);
