@@ -256,8 +256,35 @@ function isEntailedByCard(value: StateValue, scene: SceneCard, model: WorldModel
 /** Columns whose values are sometimes an enumerable state (`alive`) and sometimes a description. */
 export const FREE_TEXT_COLUMNS: ReadonlySet<string> = new Set(['status']);
 
+/**
+ * The physical states a `status` value can take when it is enumerable (#217). A value in this set
+ * is a state the amnesia guard protects: `dead` → `alive` is a reversion. Any other one-word value
+ * — "chilled", "cornered", "hopeful" — is a mood, and a mood changing is not a reversion.
+ */
+export const PHYSICAL_STATUS_WORDS: ReadonlySet<string> = new Set([
+  'alive', 'dead', 'dying', 'deceased', 'injured', 'wounded', 'hurt', 'bleeding', 'unconscious',
+  'conscious', 'asleep', 'awake', 'sick', 'ill', 'healthy', 'recovered', 'healed', 'blind',
+  'missing', 'lost', 'found', 'captured', 'imprisoned', 'jailed', 'arrested', 'free', 'freed',
+  'escaped', 'hidden', 'exiled', 'departed', 'absent', 'present', 'pregnant', 'drowned', 'poisoned',
+  'intact', 'broken', 'damaged', 'destroyed', 'repaired', 'burnt', 'burned', 'burning', 'flooded',
+  'open', 'closed', 'locked', 'unlocked', 'sealed', 'unsealed', 'empty', 'full', 'stolen',
+  'buried', 'sunk', 'sinking', 'afloat', 'wrecked', 'collapsed', 'working', 'jammed', 'active',
+  'inactive', 'lit', 'unlit', 'extinguished', 'signed', 'unsigned', 'torn', 'forged', 'spent',
+]);
+
 function isDescription(value: StateValue): value is string {
   return typeof value === 'string' && value.trim().split(/\s+/).length >= 2;
+}
+
+/** A one-word `status` outside the physical vocabulary: a mood, not a state (#217). */
+function isMoodWord(value: StateValue): value is string {
+  if (typeof value !== 'string') return false;
+  const words = value.trim().toLowerCase().split(/\s+/);
+  return words.length === 1 && words[0] !== '' && !PHYSICAL_STATUS_WORDS.has(words[0]!.replace(/[^a-z]/g, ''));
+}
+
+function isFreeText(value: StateValue): boolean {
+  return isDescription(value) || isMoodWord(value);
 }
 
 /**
@@ -266,12 +293,16 @@ function isDescription(value: StateValue): value is string {
  * so an enumerable status still gets the full amnesia guard: `dead` → `alive` is a reversion,
  * and so is `dead` → `alive and well`.
  *
+ * #217 widens "description" to include a one-word mood: a single word outside
+ * `PHYSICAL_STATUS_WORDS` ("chilled" → "alerted"). A one-word *physical* state on either side
+ * still keeps the guard.
+ *
  * Panel batch 2026-09-29's run reports carried 28 `unentailed_reversion` diagnostics, all on
  * `status`, all paraphrases: "resigned to eviction" → "resigned refugee heading to resettlement
  * camp". Equality is the right test for an id and the wrong one for a sentence.
  */
 export function isFreeTextDrift(column: string, current: StateValue, proposed: StateValue): boolean {
-  return FREE_TEXT_COLUMNS.has(column) && isDescription(current) && isDescription(proposed);
+  return FREE_TEXT_COLUMNS.has(column) && isFreeText(current) && isFreeText(proposed);
 }
 
 // --- Checkpoint 1: pre-generation entry check ----------------------------------------------

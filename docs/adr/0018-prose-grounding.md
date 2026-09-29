@@ -199,3 +199,18 @@ exemption is taken, scoped by the values rather than the column alone:
   test: a prose rewording of a description is not a `prose_grounding_mismatch`.
 - **Token overlap was not taken** because the batch's own examples defeat it: "withdrawn and
   anxious" → "alarmed by impending locker sweep" share no word and are still not a reversion.
+
+## Amendment (2026-09-29, later): a one-word mood is free text too
+
+[#217](https://github.com/tschomay/axiom-weaver/issues/217). The #204 re-run still carried 12 `unentailed_reversion`
+diagnostics on `status`, all one-word moods: "chilled" → "alerted", "exhausted" → "cornered". The amendment above
+treated every one-word value as enumerable.
+
+Both options the issue named are taken:
+
+- **A closed physical vocabulary** (`PHYSICAL_STATUS_WORDS`): alive, dead, injured, asleep, imprisoned, missing, broken,
+  locked, open, sealed, and similar. A change is free-text drift when *neither* side is enumerable, where enumerable
+  now means a single word from that list. A description of several words or a one-word mood outside the list is free text.
+  So `dead` → `hopeful` and `imprisoned` → `defiant` still fire, and `chilled` → `alerted` does not.
+- **The arc prompt keeps `status` physical** ("alive, injured, asleep, imprisoned — never a mood"), so fewer moods
+  reach the column in the first place.
