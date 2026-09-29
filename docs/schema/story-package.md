@@ -157,6 +157,7 @@ not a bug to reconcile.
 | `force_reintroduce` | TEXT[] | no, default `[]` | fact-refs/entity ids forced into the `reintroduce` re-anchoring band on this scene regardless of the computed band; [ADR 0009](../adr/0009-reanchoring-policy.md) |
 | `tone` | TEXT | no | |
 | `length_budget` | INTEGER | no | target word count |
+| `story_time` | TEXT | no | when the scene happens in story time, e.g. "day 2, dusk" or "the next morning"; set by segmentation from its events, [ADR 0019](../adr/0019-fabula-only-packages.md) |
 | `invariants` | TEXT[] | no, default `[]` | constraints beyond entry/exit that must hold throughout |
 | `pays_off` | `{fact_ref: TEXT, plant: TEXT FK → scene_card.id \| null}[]` | no, default `[]` | facts this scene resolves and where each was planted (`null` = grounded in the World Model seed, not any scene); drives the backward plant-obligation walk, [ADR 0004](../adr/0004-plant-obligation-walk.md) |
 
@@ -185,6 +186,8 @@ invariants it doesn't have.
   "facts": [ { "fact_ref": "cinderella_is_the_ball_girl", "statement": "The girl at the ball was Cinderella.", "caused_by": [] } ]
 }
 ```
+
+`metadata.period` (optional TEXT) fixes the era and its technology for the writer, e.g. "1950s Yorkshire; no telephones in homes" ([ADR 0019](../adr/0019-fabula-only-packages.md)).
 
 `facts` is optional ([ADR 0022](../adr/0022-fact-statements-and-the-hidden-account.md)): the claim
 each `fact_ref` stands for, and the facts it follows from. The slug stays the identity. The
