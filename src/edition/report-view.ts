@@ -16,6 +16,7 @@ import {
   aggregateByCard,
   costForScenes,
   isPromotable,
+  tailEvictionSceneCount,
   type CardAggregate,
   type RunCost,
   type RunReport,
@@ -43,7 +44,8 @@ export function renderRunReport(report: RunReport, options: { verbose?: boolean 
     `  scenes           ${report.scenes.length} of ${report.scene_count}` +
       (report.degraded_scene_count > 0
         ? `, ${report.degraded_scene_count} degraded to fallback`
-        : ''),
+        : '') +
+      tailEvictionNote(tailEvictionSceneCount(report.scenes)),
     `  wall clock       ${(report.duration_ms / 1000).toFixed(1)}s`,
     `  promotable       ${report.status === 'complete' && !report.degraded ? 'yes' : 'no — a degraded or unfinished run is never promoted to Baked'}`,
     '',
@@ -96,6 +98,10 @@ export function renderRunReport(report: RunReport, options: { verbose?: boolean 
   return lines.join('\n');
 }
 
+function tailEvictionNote(count: number): string {
+  return count === 0 ? '' : `, ${count} dropped context to fit the volatile-tail budget`;
+}
+
 /**
  * ADR 0014 §8's cross-run view: "Scene 13 has degraded on 4 of 20 reads" — the signal that names
  * which cards are underspecified.
@@ -139,6 +145,8 @@ export interface RunSummaryView {
   readonly status: RunReport['status'];
   readonly degraded: boolean;
   readonly degraded_scene_count: number;
+  /** Scenes whose volatile tail dropped a group to fit its budget (#197). */
+  readonly tail_eviction_scene_count: number;
   readonly scene_count: number;
   readonly scenes_compiled: number;
   readonly duration_ms: number;
@@ -178,6 +186,7 @@ export async function buildRunReportView(
       status: report.status,
       degraded: report.degraded,
       degraded_scene_count: report.degraded_scene_count,
+      tail_eviction_scene_count: tailEvictionSceneCount(report.scenes),
       scene_count: report.scene_count,
       scenes_compiled: report.scenes.length,
       duration_ms: report.duration_ms,

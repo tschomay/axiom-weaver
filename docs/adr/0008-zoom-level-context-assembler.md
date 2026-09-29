@@ -155,3 +155,32 @@ accumulated cache to throw away each time.
   fork this ADR rejects, not a gap to fill later.
 - `CONTEXT.md`'s "Zoom levels" bullet is updated to describe the recursive hierarchy and the
   corrected growth claim, with a pointer here.
+
+## Amendment (2026-09-29): a larger tail, and "the reader already knows" outlives relationships
+
+[#197](https://github.com/tschomay/axiom-weaver/issues/197), from Story Review Panel batch
+2026-09-29 (`prototypes/story-review/2026-09-29/CURATION.md` §6). On the two long stories the
+prose re-introduced people and re-explained things the reader already knew — locker B-14, the
+relocation envelope, "Toby, the company stage manager whose…" three times. The run reports showed
+why: 11 of 16 scenes in `04` and 6 of 18 in `05` evicted tail groups, including this scene's own
+told-ledger rows (priority 1) in six scenes of `04`. The core had grown (the established account,
+ADR 0022; the imagery ledger; fact statements) since the 2000-token budget was set, and nobody saw
+the `missing_fact` diagnostics that said so.
+
+1. **`DEFAULT_VOLATILE_TAIL_BUDGET` goes from 2000 to 4000.** Still a constant, still per decision
+   6. The tail sits after the cache boundary, so the change touches no cached prefix; its cost is
+   a few thousand uncached input tokens per scene at Flash prices.
+2. **Decision 6's order changes.** Groups that tell the writer what the reader already knows now
+   outlive the relationship edges, because losing them costs a re-introduction the reader sees and
+   losing an edge costs at most a line of staging:
+
+   1. Told-ledger rows for this scene's own fact-refs (unchanged).
+   2. The broader told-ledger recency slice (`met:` facts) — was 6th, then 7th.
+   3. `character_knowledge` rows tied to this scene's own facts — was 4th.
+   4. Terms already glossed (`term:` facts, ADR 0003's amendment) — was 6th.
+   5. Relationships between two present entities — was 2nd.
+   6. Other `character_knowledge` rows for present characters — was 5th.
+   7. Relationships touching one present entity — was 3rd.
+3. **Evictions are counted.** The run report's summary line, the Runs screen and
+   `review-sample`'s `run.json` carry the number of scenes that dropped a tail group
+   (`tailEvictionSceneCount`), so a regression is visible without reading the diagnostics.

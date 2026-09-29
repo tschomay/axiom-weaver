@@ -44,7 +44,7 @@ import { generateArc, liveClient } from '../src/arc/generator';
 import { RANDOM_PREMISES } from '../src/arc/random-premises';
 import { lintPackage } from '../src/authoring/lint';
 import { costOfGenerationCalls } from '../src/authoring/generate-run';
-import { costForScenes } from '../src/edition/run-report';
+import { costForScenes, tailEvictionSceneCount } from '../src/edition/run-report';
 import { runTelling } from '../src/edition/run-loop';
 import { ExtractionModel } from '../src/extraction/call';
 import { storyRepository } from '../src/persistence';
@@ -229,6 +229,7 @@ async function main(): Promise<void> {
             truncated_scenes: report.scenes
               .filter((s) => s.calls.some((c) => c.purpose === 'writer' && c.finish_reason === 'MAX_TOKENS'))
               .map((s) => s.scene_id),
+            tail_eviction_scenes: tailEvictionSceneCount(report.scenes),
             cost_usd: Number(cost.toFixed(4)),
             lint_warnings: lint.warnings.map((w) => w.code),
             degraded_scenes: report.scenes.filter((s) => s.degraded).map((s) => s.scene_id),

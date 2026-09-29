@@ -97,8 +97,19 @@ export interface AssembleInput {
   readonly volatileTailBudget?: number;
 }
 
-/** A starting budget for the volatile tail, in estimated tokens. A constant, per ADR 0008 §6. */
-export const DEFAULT_VOLATILE_TAIL_BUDGET = 2000;
+/**
+ * A starting budget for the volatile tail, in estimated tokens. A constant, per ADR 0008 §6.
+ *
+ * 4000 since #197: at 2000, the core of a long story's scene (card, established account, rows)
+ * left so little room that 11 of 16 scenes in panel batch 2026-09-29's `04` dropped the groups
+ * telling the writer what the reader already knows — and the prose re-introduced people and
+ * re-explained things in nine scenes. Each group is ~20–200 tokens; the tail sits after the
+ * cache boundary, so the cost is uncached input at Flash prices, cents per telling.
+ */
+export const DEFAULT_VOLATILE_TAIL_BUDGET = 4000;
+
+/** The marker every tail-eviction diagnostic carries, so a report can count them. */
+export const TAIL_EVICTION_MARKER = 'volatile-tail budget of';
 
 export function assemblePrompt(input: AssembleInput): AssembledPrompt {
   const rows = joinSceneRows(input.scene, input.model);
@@ -212,6 +223,9 @@ function buildVolatileTail(
     });
   }
 
+  // Eviction order (#197): what tells the writer "the reader already knows this" outlives who
+  // relates to whom. Losing a told-ledger row or the "met:" slice costs a re-introduction the
+  // reader sees; losing a relationship edge costs, at worst, a line of staging.
   const candidates: Array<Omit<TailGroup, 'included'>> = [
     {
       priority: 1,
@@ -225,26 +239,15 @@ function buildVolatileTail(
     },
     {
       priority: 2,
-      name: 'relationships between two present entities',
-      text: renderRelationships(
-        'RELATIONSHIPS (both parties on stage):',
-        rows.relationships_both_present,
-        input.model,
+      name: 'broader told-ledger recency slice (met: facts)',
+      text: renderToldLedgerRows(
+        'TOLD-LEDGER SLICE (has the reader met these, and how recently):',
+        input.ledger.metSlice(presentEntityIds(rows)),
       ),
       estimated_tokens: 0,
     },
     {
       priority: 3,
-      name: 'relationships touching one present entity',
-      text: renderRelationships(
-        'RELATIONSHIPS (one party on stage):',
-        rows.relationships_one_present,
-        input.model,
-      ),
-      estimated_tokens: 0,
-    },
-    {
-      priority: 4,
       name: "character_knowledge tied to this scene's facts",
       text: renderKnowledge(
         "WHO KNOWS WHAT — this scene's own facts:",
@@ -255,7 +258,25 @@ function buildVolatileTail(
       estimated_tokens: 0,
     },
     {
+      // Forgetting a term was glossed costs a repeated lecture — the same failure as a lost
+      // told-ledger row, so it sits with them rather than below the relationships.
+      priority: 4,
+      name: 'terms already glossed (term: facts)',
+      text: renderGlossedTerms(input.ledger.termSlice()),
+      estimated_tokens: 0,
+    },
+    {
       priority: 5,
+      name: 'relationships between two present entities',
+      text: renderRelationships(
+        'RELATIONSHIPS (both parties on stage):',
+        rows.relationships_both_present,
+        input.model,
+      ),
+      estimated_tokens: 0,
+    },
+    {
+      priority: 6,
       name: 'other character_knowledge for present characters',
       text: renderKnowledge(
         'WHO KNOWS WHAT — broader epistemic context:',
@@ -266,19 +287,12 @@ function buildVolatileTail(
       estimated_tokens: 0,
     },
     {
-      // Just above the broadest slice: forgetting a term was glossed costs a repeated lecture, a
-      // cheaper failure than losing who is in the room.
-      priority: 6,
-      name: 'terms already glossed (term: facts)',
-      text: renderGlossedTerms(input.ledger.termSlice()),
-      estimated_tokens: 0,
-    },
-    {
       priority: 7,
-      name: 'broader told-ledger recency slice (met: facts)',
-      text: renderToldLedgerRows(
-        'TOLD-LEDGER SLICE (has the reader met these, and how recently):',
-        input.ledger.metSlice(presentEntityIds(rows)),
+      name: 'relationships touching one present entity',
+      text: renderRelationships(
+        'RELATIONSHIPS (one party on stage):',
+        rows.relationships_one_present,
+        input.model,
       ),
       estimated_tokens: 0,
     },
@@ -308,7 +322,7 @@ function buildVolatileTail(
     groups.push({ ...candidate, estimated_tokens: tokens, included: false });
     diagnostics.push({
       type: 'tail_group_dropped',
-      detail: `dropped "${candidate.name}" (~${tokens} tokens) from scene "${input.scene.id}" — volatile-tail budget of ${budget} exhausted`,
+      detail: `dropped "${candidate.name}" (~${tokens} tokens) from scene "${input.scene.id}" — ${TAIL_EVICTION_MARKER} ${budget} exhausted`,
     });
   }
 

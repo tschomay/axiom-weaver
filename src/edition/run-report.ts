@@ -23,6 +23,7 @@ import {
   type Diagnostic,
   type Surface,
 } from '../validator/diagnostics';
+import { TAIL_EVICTION_MARKER } from '../assembler/context-assembler';
 import { FINDING_MODES } from '../continuity/continuity-pass';
 import type { Occasion } from '../validator/state-update-authority';
 import { FINISH_REASONS, MODEL_PRICING } from '../writer/model-client';
@@ -207,6 +208,19 @@ export function costForCalls(calls: readonly CallRecordDocument[]): RunCost {
   }
 
   return { total_usd: total, complete };
+}
+
+/**
+ * Scenes whose volatile tail dropped at least one group to fit its budget (#197). The diagnostics
+ * were always in the report; a count is what makes a regression visible without reading them.
+ */
+export function tailEvictionSceneCount(scenes: readonly RunReportScene[]): number {
+  return scenes.filter((scene) =>
+    scene.diagnostics.some(
+      (diagnostic) =>
+        diagnostic.code === 'missing_fact' && diagnostic.message.includes(TAIL_EVICTION_MARKER),
+    ),
+  ).length;
 }
 
 export function costForScenes(scenes: readonly RunReportScene[]): RunCost {
