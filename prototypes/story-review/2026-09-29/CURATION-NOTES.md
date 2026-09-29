@@ -85,3 +85,12 @@
 - unentailed_reversion (04: 8, 03: 8) all on free-text `status` (e.g. "resigned to eviction" vs "resigned refugee…") —
   looks like noise from comparing free-text status strings, not real reversions.
 - 04 objects: wren and confession letter are not World Model objects → untrackable; tin's S15 return never in exit_state.
+
+## Story 05 Understudy — package
+- Concealment again only at the conceal-event scenes (cards 2–4), then nothing until the reveal scenes
+  (hester_sabotaged: conceal ev_03 → reveal ev_10; kemper ledger: conceal ev_02 → reveal ev_07). Same as 03.
+  → the gap between "concealed at" and "revealed at" is not carried forward by segmentation; findWithholding adds
+  nothing. Across 5 stories: 02 none, 03/05 first-scene-only, 04 full (because the arc itself listed `conceals` on every
+  intermediate event).
+- 6/18 scenes over tail budget (char knowledge, met: slice, glossed terms).
+- All stories: length_budget null on every card.
