@@ -8,6 +8,7 @@
  * as failing rather than ground against the validator until it passes.
  */
 
+import { motivationGate } from './motivation';
 import { GeminiClient, type ModelClient } from '../writer/model-client';
 import type { FabulaArc } from '../schema/fabula';
 import { GeneratedFabulaArcSchema } from './fabula';
@@ -37,7 +38,7 @@ export const ARC_MAX_OUTPUT_TOKENS = 60_000;
 export const REPAIR_MAX_OUTPUT_TOKENS = 4_000;
 
 export interface GenerationCall {
-  readonly stage: 'arc' | 'repair';
+  readonly stage: 'arc' | 'repair' | 'motivation';
   /** What actually answered — not necessarily what was asked for (capacity fallback). */
   readonly model: string;
   readonly finish_reason: string;
@@ -58,6 +59,8 @@ export interface GeneratedArc {
   readonly initial_problems: RepairTarget[];
   /** Defects left after the one bounded repair round. Empty is the goal. */
   readonly remaining_problems: RepairTarget[];
+  /** #199: decisive events the motivation gate checked, and how many it found unmotivated. */
+  readonly motivation: { checked: number; unmotivated: number };
   /**
    * What the brief asked for versus what came back.
    *
@@ -97,6 +100,8 @@ export interface GenerateOptions {
   readonly model: string;
   /** Off for the A/B arm that measures whether repair is carrying the gate numbers. */
   readonly repair?: boolean;
+  /** The #199 motivation gate. On unless `repair` is off, since it repairs too. */
+  readonly motivationGate?: boolean;
 }
 
 export async function generateArc(
@@ -173,9 +178,25 @@ export async function generateArc(
     }
   }
 
+  // #199: a decisive act needs a reason the arc states (`./motivation.ts`).
+  let motivation = { checked: 0, unmotivated: 0 };
+  if (options.repair !== false && options.motivationGate !== false) {
+    const gate = await motivationGate(arc, {
+      storyId: brief.story_id,
+      phaseShares: brief.plot_shape.phases.map((phase) => phase.share),
+      client: options.client,
+      model: options.model,
+    });
+    arc = gate.arc;
+    repairs.push(...gate.applied.map((line) => `model | ${line}`));
+    if (gate.call !== null) calls.push(gate.call);
+    motivation = { checked: gate.checked, unmotivated: gate.unmotivated };
+  }
+
   return {
     brief,
     arc,
+    motivation,
     // The model that actually answered the generation call, per AGENTS.md: a result that does not
     // say which model produced it is not a measurement.
     model: calls[0]?.model ?? options.model,
