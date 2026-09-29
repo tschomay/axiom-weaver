@@ -193,7 +193,7 @@ function buildVolatileTail(
   // ledger, tone, then the filtered rows the scene cannot be staged without. The established
   // account sits right after the card: a recap without it is how cause and effect get swapped.
   const coreBlocks = [
-    renderSceneCard(input.scene, facts),
+    renderSceneCard(input.scene, facts, hiddenFactKnowers(input, rows)),
     renderEstablishedAccount(input, facts),
     renderPlantObligations(input.plantObligations, facts),
     renderPayoffInstructions(input.payoffInstructions, facts),
@@ -416,7 +416,33 @@ function pushFactList(lines: string[], label: string, refs: readonly string[], f
   for (const ref of refs) lines.push(`  - ${factLine(ref, facts)}`);
 }
 
-function renderSceneCard(scene: SceneCard, facts: FactIndex): string {
+/**
+ * Present characters who already know a fact this scene must keep hidden (#196), as
+ * `[name, fact_ref]` pairs.
+ *
+ * Without this the writer is told "Ruth knows: …" in the tail and "MUST STAY HIDDEN" on the card,
+ * and has no way to honour both — panel batch 2026-09-29 resolved it by making Ruth ignorant, then
+ * had her confess she had known all along. It is rendered on the card itself, so it is core and
+ * never evicted with the tail's knowledge groups.
+ */
+function hiddenFactKnowers(input: AssembleInput, rows: JoinedRows): Array<[string, string]> {
+  const hidden = new Set(input.scene.must_stay_hidden);
+  const pairs: Array<[string, string]> = [];
+  for (const row of [...rows.knowledge_scene_facts, ...rows.knowledge_other]) {
+    if (!hidden.has(row.fact_ref)) continue;
+    const name = input.model.nameOf(row.character_id) ?? row.character_id;
+    if (!pairs.some(([who, fact]) => who === name && fact === row.fact_ref)) {
+      pairs.push([name, row.fact_ref]);
+    }
+  }
+  return pairs;
+}
+
+function renderSceneCard(
+  scene: SceneCard,
+  facts: FactIndex,
+  hiddenKnowers: ReadonlyArray<[string, string]> = [],
+): string {
   const lines = [
     `SCENE CARD — ${scene.id} (order ${scene.order})`,
     `POV: ${scene.pov}. Location: ${scene.location_id}. Present: ${scene.characters_present.join(', ')}.`,
@@ -436,6 +462,11 @@ function renderSceneCard(scene: SceneCard, facts: FactIndex): string {
       scene.must_stay_hidden,
       facts,
     );
+    for (const [who, fact] of hiddenKnowers) {
+      lines.push(
+        `  ${who} already knows ${fact}. The narration must not state it, and ${who} must not discover it here — ${who} may act on it only in ways the reader cannot yet decode.`,
+      );
+    }
   }
   if ((scene.recounts ?? []).length > 0) {
     pushFactList(

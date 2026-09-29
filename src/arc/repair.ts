@@ -32,7 +32,7 @@ import { z } from 'zod';
 
 import { lintPackage } from '../authoring/lint';
 import { hiddenAccountProblems, provisionalPackage } from '../authoring/lint-fabula';
-import { eventsInOrder, type FabulaArc, type FabulaEvent } from '../schema/fabula';
+import { eventsInOrder, hiddenAccountFacts, type FabulaArc, type FabulaEvent } from '../schema/fabula';
 import { mergeHiddenAccount, reachesThroughCauses } from '../schema/facts';
 import type { Fact } from '../schema/story-package';
 
@@ -86,7 +86,60 @@ export interface MechanicalRepairResult {
 export function mechanicalRepairs(arc: FabulaArc): MechanicalRepairResult {
   const facts = factTableRepairs(arc);
   const plants = plantDeclarationRepairs(facts.arc);
-  return { arc: plants.arc, applied: [...facts.applied, ...plants.applied] };
+  const secrets = secretRevealRepairs(plants.arc);
+  return { arc: secrets.arc, applied: [...facts.applied, ...plants.applied, ...secrets.applied] };
+}
+
+/**
+ * The two secret-reveal defects with a uniquely determined fix (#196), after plant declarations
+ * (which can themselves add a reveal):
+ *
+ * - A hidden-account fact no event reveals, but an event pays off: that event is where the secret
+ *   surfaces, so it is declared there. Nothing is inferred — the generator already put the fact
+ *   on that event.
+ * - A fact two events reveal: the first reveal stands and the later event retells it
+ *   (`recounts`); a payoff planted at the later event is re-pointed at the first.
+ */
+export function secretRevealRepairs(arc: FabulaArc): MechanicalRepairResult {
+  const applied: string[] = [];
+  const events = eventsInOrder(arc).map((event) => ({
+    ...event,
+    reveals: [...event.reveals],
+    recounts: [...event.recounts],
+    pays_off: event.pays_off.map((payoff) => ({ ...payoff })),
+  }));
+
+  for (const fact of hiddenAccountFacts(arc)) {
+    if (events.some((event) => event.reveals.includes(fact))) continue;
+    const surfacing = events.find((event) => event.pays_off.some((payoff) => payoff.fact_ref === fact));
+    if (surfacing === undefined) continue;
+    surfacing.reveals.push(fact);
+    applied.push(`declare_fact_at_event: hidden "${fact}" installed in ${surfacing.id}.reveals`);
+  }
+
+  const firstReveal = new Map<string, string>();
+  const movedTo = new Map<string, string>();
+  for (const event of events) {
+    event.reveals = [...new Set(event.reveals)].filter((fact) => {
+      const first = firstReveal.get(fact);
+      if (first === undefined) {
+        firstReveal.set(fact, event.id);
+        return true;
+      }
+      if (!event.recounts.includes(fact)) event.recounts.push(fact);
+      movedTo.set(`${fact}@${event.id}`, first);
+      applied.push(`revealed_twice: ${event.id} now recounts "${fact}", first revealed in ${first}`);
+      return false;
+    });
+  }
+  for (const event of events) {
+    event.pays_off = event.pays_off.map((payoff) => {
+      const first = payoff.plant === null ? undefined : movedTo.get(`${payoff.fact_ref}@${payoff.plant}`);
+      return first === undefined ? payoff : { ...payoff, plant: first };
+    });
+  }
+
+  return applied.length === 0 ? { arc, applied } : { arc: { ...arc, events }, applied };
 }
 
 /**
@@ -308,6 +361,8 @@ export function repairPrompt(arc: FabulaArc, targets: readonly RepairTarget[]): 
     'add_beat is only for an event with no beats at all.',
     'A concealed fact no later event reveals: declare_fact_at_event on the later event where the',
     'truth comes out.',
+    'A hidden-account fact no event reveals (hidden_fact_never_revealed): declare_fact_at_event on',
+    'the event whose summary discloses it to the reader — never on an event where it stays secret.',
     'A hidden step with no cause: add_hidden_cause — event_id is the step, plant_event_id the earlier',
     'step it follows from, and text a rewritten summary that says WHY, when a person acts.',
   ].join('\n');

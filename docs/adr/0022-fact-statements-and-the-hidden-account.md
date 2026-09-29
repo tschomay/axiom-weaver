@@ -140,3 +140,34 @@ order matters most.
 - **Why not a new label on `pays_off`**: making a payoff out of a retelling turns the earlier
   reveal into a plant, and the plant instruction ("make the reader register it without dwelling
   on it") is wrong for a confession or a climax.
+
+## Amendment (2026-09-29): secrets are withheld to their reveal, and revealed once
+
+[#196](https://github.com/tschomay/axiom-weaver/issues/196), from Story Review Panel batch
+2026-09-29 (`prototypes/story-review/2026-09-29/CURATION.md` §3). Four of five generated stories
+mishandled their central secret: a hidden-account fact that no event revealed and no card withheld,
+so the POV character who knew it "discovered" it in scene 1 and confessed she had known all along
+in scene 5; and one secret revealed as news on several cards. Wiring depended entirely on the arc
+model filling `conceals` on every intermediate event, which only one of the five did.
+
+- **Segmentation withholds mechanically** (`wireSecrets`, `src/segmentation/secrets.ts`). A fact
+  concealed at scene A is in `must_stay_hidden` on every scene from A up to the first one that
+  reveals or pays it off; a hidden-account fact, from scene 1. A generated arc knows both ends, so
+  this needs no model call. `findWithholding` stays for what it can add beyond that.
+- **A hidden-account fact that no card reveals but some card pays off is revealed on that card** —
+  it is where the secret surfaces, and the told-ledger must record it there.
+- **One reveal per fact.** A fact in `reader_must_learn` on a later card becomes that card's
+  `recounts` (the amendment above); a payoff planted at the later card is re-pointed at the first.
+- **Two lint errors.** `revealed_twice`: a fact in `reader_must_learn` on two cards.
+  `hidden_fact_never_revealed`: a fact the hidden account establishes that no card reveals — read
+  from the `_fabula` block, so a hand-authored package without one is never held to it. The
+  Fabula projection carries the hidden account, so both are arc repair targets in every plot shape,
+  not only `mystery`. `unpaid_fact` no longer fires on a revealed hidden-account fact: as with a
+  concealed one, the reveal is the payoff.
+- **Arc repair.** `secretRevealRepairs` fixes the two uniquely determined cases without a model: a
+  hidden fact an event already pays off is declared revealed there, and a second revealing event
+  retells instead. Anything left goes to the model pass as `declare_fact_at_event` on the event
+  whose summary discloses it.
+- **The writer is told who already knows a withheld fact.** On the card itself, so it is never
+  evicted with the tail: "Ruth already knows X. The narration must not state it, and Ruth must not
+  discover it here."

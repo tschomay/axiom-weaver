@@ -117,7 +117,9 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   causally linked facts render as one ordered **established account**, so a scene that retells
   an earlier event paraphrases a fixed claim instead of rebuilding it from recaps. A generated
   arc's **hidden account** — the concealed incident as its own chronological chain, separate
-  from the on-page events that uncover it — is folded into those statements at segmentation.
+  from the on-page events that uncover it — is folded into those statements at segmentation,
+  and each of its facts is withheld (`must_stay_hidden`) on every card until the one card that
+  reveals it; a fact is revealed once, and later cards retell it (`recounts`).
   See [ADR 0022](docs/adr/0022-fact-statements-and-the-hidden-account.md).
   Entity introduction ("has the reader met Marcus?") rides the same mechanism via an
   auto-generated `met:<entity_id>` fact, not a parallel structure — and so does vocabulary: a

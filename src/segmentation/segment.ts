@@ -55,6 +55,7 @@ import type { ExtractionModel, CallRecord } from '../extraction/call';
 import {
   FABULA_BLOCK,
   eventsInOrder,
+  hiddenAccountFacts,
   readFabulaArc,
   storyIdOf,
   voiceCardOf,
@@ -90,6 +91,7 @@ import {
   type SignalAvailability,
   type TellingOrder,
 } from './signals';
+import { wireSecrets } from './secrets';
 import { replayStates, type StateReplayResult } from './state';
 
 export const SEGMENTATION_BLOCK = '_segmentation';
@@ -144,6 +146,12 @@ export interface SegmentationReport {
     readonly facts: number;
     /** Concealed facts given a reveal scene by `assignConcealedReveals` (#180). */
     readonly concealed_reveals_assigned: number;
+    /** #196: hidden-account facts revealed on the card that first paid them off. */
+    readonly hidden_revealed_at_payoff: number;
+    /** #196: repeat reveals turned into `recounts`. */
+    readonly reveals_made_recounts: number;
+    /** #196: `must_stay_hidden` entries added to carry each secret to its reveal. */
+    readonly mechanically_withheld_entries: number;
     readonly withheld_scene_entries: number;
     readonly rejected_out_of_range: number;
     readonly failed_batches: number;
@@ -545,6 +553,7 @@ export async function segmentFabulaPackage(
     grouped,
     solutionEventIds(envelope, events),
   );
+  const secrets = wireSecrets(scenes, hiddenAccountFacts(arc));
 
   const revealedAt = new Map<string, string>();
   for (const scene of scenes) {
@@ -650,6 +659,9 @@ export async function segmentFabulaPackage(
       told_ledger: {
         facts: revealedAt.size,
         concealed_reveals_assigned: concealedReveals,
+        hidden_revealed_at_payoff: secrets.revealed_at_payoff,
+        reveals_made_recounts: secrets.reveals_made_recounts,
+        mechanically_withheld_entries: secrets.withheld_entries,
         withheld_scene_entries: withheldEntries,
         rejected_out_of_range: withholding.rejected_out_of_range,
         failed_batches: withholding.failed_batches,
@@ -730,6 +742,7 @@ export function segmentMechanically(
   applyPlantGraph(scenes, pairs, seedFacts);
   assignConcealedReveals(scenes, grouped, solutionEventIds(envelope, arc.events));
   applyRecounts(scenes, grouped);
+  wireSecrets(scenes, hiddenAccountFacts(arc));
 
   const pkg = StoryPackageSchema.parse({
     schema_version: '1.0',
