@@ -220,6 +220,25 @@ export function packageFacts(arc: FabulaArc): { facts?: Fact[] } {
   return facts.length === 0 ? {} : { facts };
 }
 
+/** Every fact the hidden account establishes (ADR 0022 decision 4), in step order, once each. */
+export function hiddenAccountFacts(arc: { hidden_account: readonly HiddenStep[] }): string[] {
+  const steps = [...arc.hidden_account].sort((a, b) => a.sequence - b.sequence);
+  return [...new Set(steps.flatMap((step) => step.establishes))];
+}
+
+/**
+ * The hidden account's facts as a package carries them: in the `_fabula` block a generated or
+ * extracted package keeps, and a Fabula projection repeats. A hand-authored package has none.
+ */
+export function hiddenAccountFactsOf(pkg: unknown): string[] {
+  const block = (pkg as Record<string, unknown> | null)?.[FABULA_BLOCK] as
+    | { hidden_account?: unknown }
+    | null
+    | undefined;
+  const steps = HiddenStepSchema.array().safeParse(block?.hidden_account ?? []);
+  return steps.success ? hiddenAccountFacts({ hidden_account: steps.data }) : [];
+}
+
 /** Events in Fabula order. `sequence` is the field; array position is incidental. */
 export function eventsInOrder(arc: FabulaArc): FabulaEvent[] {
   return [...arc.events].sort((a, b) => a.sequence - b.sequence);

@@ -30,6 +30,7 @@
  */
 
 import { z } from 'zod';
+import { hiddenAccountFactsOf } from '../schema/fabula';
 import { factTableProblems, factsOf } from '../schema/facts';
 
 import {
@@ -308,7 +309,11 @@ function warnings(pkg: StoryPackage, model: WorldModel): PackageProblem[] {
   );
   // A fact an earlier scene withheld is paid off by being revealed: the reveal is what closes the
   // concealment, and asking for a further payoff scene would punish a mystery for its solution.
+  // A hidden-account fact is the same case: the reveal is the payoff of a secret the whole story
+  // was keeping (#196).
+  const hiddenAccount = new Set(hiddenAccountFactsOf(pkg));
   const concealedBefore = (fact: string, order: number): boolean =>
+    hiddenAccount.has(fact) ||
     scenes.some((earlier) => earlier.order < order && earlier.must_stay_hidden.includes(fact));
   for (const scene of scenes) {
     for (const fact of scene.reader_must_learn) {
@@ -483,10 +488,53 @@ export function lintStoryPackage(pkg: StoryPackage): LintResult {
       message: error.message,
     })),
     ...stateChaining(pkg),
+    ...secretReveals(pkg),
     ...factTable(pkg),
     ...warnings(pkg, model),
   ];
   return result(problems);
+}
+
+/**
+ * #196: each secret is revealed exactly once, and a hidden-account secret is revealed at all.
+ *
+ * Both are errors because both were measured reaching the reader as broken stories (panel batch
+ * 2026-09-29): the same forgery revealed as news on four cards, and a hidden account whose central
+ * fact no card ever revealed — so the writer, told nothing, had the POV character "discover" what
+ * she had known all along. Segmentation now wires both mechanically (`wireSecrets`); these catch a
+ * hand edit or an arc that gives it nothing to wire.
+ */
+function secretReveals(pkg: StoryPackage): PackageProblem[] {
+  const problems: PackageProblem[] = [];
+  const scenes = scenesInOrder(pkg);
+
+  const firstReveal = new Map<string, string>();
+  for (const scene of scenes) {
+    for (const fact of new Set(scene.reader_must_learn)) {
+      const first = firstReveal.get(fact);
+      if (first === undefined) {
+        firstReveal.set(fact, scene.id);
+        continue;
+      }
+      problems.push({
+        severity: 'error',
+        code: 'revealed_twice',
+        path: `scene_cards.${scene.id}.reader_must_learn`,
+        message: `"${fact}" was already revealed in "${first}" — retell it here with recounts instead`,
+      });
+    }
+  }
+
+  for (const fact of hiddenAccountFactsOf(pkg)) {
+    if (firstReveal.has(fact)) continue;
+    problems.push({
+      severity: 'error',
+      code: 'hidden_fact_never_revealed',
+      path: `_fabula.hidden_account["${fact}"]`,
+      message: `the hidden account establishes "${fact}", but no scene reveals it (reader_must_learn)`,
+    });
+  }
+  return problems;
 }
 
 /**

@@ -28,6 +28,7 @@
  */
 
 import {
+  FABULA_BLOCK,
   eventsInOrder,
   exitStateFor,
   packageFacts,
@@ -177,6 +178,8 @@ export function projectFabulaArc(arc: FabulaArc, storyId: string): FabulaProject
       voice_card: {},
       metadata: { title: arc.title },
       ...packageFacts(arc),
+      // The hidden account rides along so the package linter can hold the arc to it (#196).
+      ...(arc.hidden_account.length === 0 ? {} : { [FABULA_BLOCK]: { hidden_account: arc.hidden_account } }),
     },
     substitutions,
   };
