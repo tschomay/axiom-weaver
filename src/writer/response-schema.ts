@@ -233,7 +233,8 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
                 },
                 attribute: {
                   type: 'string',
-                  description: 'A short snake_case attribute, e.g. "material", "table_number".',
+                  description:
+                    'snake_case; prefer where_kept, amount, age, years, date, time, title, name, material, color, size, count, origin.',
                 },
                 value: {
                   type: 'string',
@@ -244,9 +245,10 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
               propertyOrdering: ['entity_id', 'attribute', 'value'],
             },
             description:
-              'Up to 8 concrete specifics this scene\'s prose stated for the first time and a ' +
-              'later scene could contradict: a material, a number, an amount, a name, a date, a ' +
-              'duration, a place in someone\'s past. Only what the prose states. Empty if none.',
+              'Up to 8 specifics this scene states that a later scene is likely to mention again: where a ' +
+              'plot object is kept, money, ages and durations, dates and times, titles and names. Reuse the ' +
+              'ids and attributes you are given, and report a listed detail again when you restate it. ' +
+              'Not passing texture. Empty if none.',
           },
         },
         required: [

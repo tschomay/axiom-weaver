@@ -14,7 +14,7 @@
  */
 
 import { isDecisionText } from '../arc/decision-text';
-import type { LedgerDetail } from '../digest/details-ledger';
+import { CANONICAL_DETAIL_ATTRIBUTES, type LedgerDetail } from '../digest/details-ledger';
 import type { SceneCard, StoryPackage } from '../schema/story-package';
 import type { WorldModel } from '../world-model/world-model';
 import type { ToldLedger, ToldLedgerRow } from '../digest/told-ledger';
@@ -210,7 +210,7 @@ function buildVolatileTail(
   const coreBlocks = [
     renderSceneCard(input.scene, facts, hiddenFactKnowers(input, rows)),
     renderEstablishedAccount(input, facts),
-    renderEstablishedDetails(input.establishedDetails ?? [], input.model),
+    renderEstablishedDetails(input.establishedDetails ?? [], input.model, presentEntityIds(rows)),
     renderPlantObligations(input.plantObligations, facts),
     renderPayoffInstructions(input.payoffInstructions, facts),
     renderReanchoring(input.reanchoring),
@@ -411,13 +411,33 @@ const VERBATIM_TAIL_MAX_CHARS = 1200;
  * ADR 0003's 2026-09-29 amendment: what the reader has already been told, specifically. In the
  * core, so it is never evicted — dropping it is exactly how a brass urn became a tin one.
  */
-function renderEstablishedDetails(details: readonly LedgerDetail[], model: WorldModel): string {
-  if (details.length === 0) return '';
-  const lines = ['ESTABLISHED DETAILS (the reader has been told these — do not change them):'];
-  for (const detail of details) {
-    const name = model.nameOf(detail.entity_id);
-    const who = name === null || name === undefined ? detail.entity_id : `${name} (${detail.entity_id})`;
-    lines.push(`  - ${who} — ${detail.attribute.replace(/_/g, ' ')}: ${detail.value} (scene ${detail.scene_order})`);
+function renderEstablishedDetails(
+  details: readonly LedgerDetail[],
+  model: WorldModel,
+  onStage: readonly string[] = [],
+): string {
+  const lines: string[] = [];
+  if (details.length > 0) {
+    lines.push('ESTABLISHED DETAILS (the reader has been told these — do not change them):');
+    for (const detail of details) {
+      const name = model.nameOf(detail.entity_id);
+      const who = name === null || name === undefined ? detail.entity_id : `${name} (${detail.entity_id})`;
+      lines.push(
+        `  - ${who} — ${detail.attribute.replace(/_/g, ' ')} [${detail.entity_id} / ${detail.attribute}]: ${detail.value} (scene ${detail.scene_order})`,
+      );
+    }
+  }
+  // #215: suggested keys, so a detail restated in a later scene lands on the same key and can be
+  // checked. Rendered even before anything is established.
+  const named = onStage
+    .map((id) => ({ id, name: model.nameOf(id) }))
+    .filter((entry): entry is { id: string; name: string } => typeof entry.name === 'string');
+  if (named.length > 0) {
+    lines.push(
+      'RECORDING DETAILS: when this scene states a specific about one of these, record it in established_details under its id — ' +
+        named.map((entry) => `${entry.name} = ${entry.id}`).join(', ') +
+        `. Use these attribute names where they fit: ${CANONICAL_DETAIL_ATTRIBUTES.join(', ')}. Restating a listed detail? Report the same key again.`,
+    );
   }
   return lines.join('\n');
 }

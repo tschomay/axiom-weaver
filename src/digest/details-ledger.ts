@@ -26,8 +26,76 @@ export interface DetailDrift {
 /** Lines of `ESTABLISHED DETAILS` a scene is shown, at most. */
 export const ESTABLISHED_DETAILS_SHOWN = 24;
 
+/**
+ * The attribute names the writer is shown (#215). Not a closed set — any snake_case attribute is
+ * accepted — but these are the properties that drifted in the #204 re-run, and naming them is what
+ * makes two scenes report the same key.
+ */
+export const CANONICAL_DETAIL_ATTRIBUTES = [
+  'where_kept',
+  'amount',
+  'age',
+  'years',
+  'date',
+  'time',
+  'title',
+  'name',
+  'material',
+  'color',
+  'size',
+  'count',
+  'origin',
+] as const;
+
+/** Ways a writer names the same property, folded to one canonical attribute (#215). */
+const ATTRIBUTE_SYNONYMS: Record<string, string> = {
+  location: 'where_kept',
+  kept_in: 'where_kept',
+  kept: 'where_kept',
+  stored: 'where_kept',
+  stored_in: 'where_kept',
+  storage: 'where_kept',
+  hiding_place: 'where_kept',
+  hidden_in: 'where_kept',
+  place: 'where_kept',
+  whereabouts: 'where_kept',
+  colour: 'color',
+  sum: 'amount',
+  total: 'amount',
+  current_total: 'amount',
+  price: 'amount',
+  cost: 'amount',
+  amount_of_money: 'amount',
+  play_title: 'title',
+  name_of_play: 'title',
+  book_title: 'title',
+  years_away: 'years',
+  duration: 'years',
+  tenure: 'years',
+  years_in_role: 'years',
+  time_of_day: 'time',
+  hour: 'time',
+  day: 'date',
+  deadline: 'date',
+  deadline_date: 'date',
+  made_of: 'material',
+  quantity: 'count',
+  hometown: 'origin',
+  came_from: 'origin',
+};
+
+/** snake_case, then folded through the synonym table. */
+export function canonicalAttribute(attribute: string): string {
+  const snake = attribute
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+  return ATTRIBUTE_SYNONYMS[snake] ?? snake;
+}
+
 function key(entityId: string, attribute: string): string {
-  return `${entityId}\u0000${attribute.trim().toLowerCase()}`;
+  return `${entityId.trim()}\u0000${canonicalAttribute(attribute)}`;
 }
 
 /** Case, punctuation and spacing do not make a value different. */
@@ -66,7 +134,11 @@ export class DetailsLedger {
     for (const detail of reported) {
       const at = key(detail.entity_id, detail.attribute);
       if (this.details.has(at)) continue;
-      this.details.set(at, { ...detail, scene_order: sceneOrder });
+      this.details.set(at, {
+        ...detail,
+        attribute: canonicalAttribute(detail.attribute),
+        scene_order: sceneOrder,
+      });
     }
   }
 
