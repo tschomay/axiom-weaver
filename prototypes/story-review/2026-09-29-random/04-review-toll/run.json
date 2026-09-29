@@ -1,0 +1,88 @@
+{
+  "title": "Toll",
+  "plot_shape_preset": "reckoning",
+  "premise": {
+    "logline": "A woman whose farm was flooded to build a reservoir takes a job on the dam, to learn how it could be made to fail.",
+    "modules": {
+      "theme": "whether revenge on a thing can ever reach the people behind it",
+      "setting_time": "twenty years after the valley was flooded",
+      "setting_place": "a hydroelectric dam above a drowned village",
+      "protagonist": "a maintenance engineer who grew up in the drowned valley",
+      "protagonist_want": "to make the reservoir give back what it took",
+      "antagonism": "the dam’s manager, who signed the flooding order young",
+      "complication": "the town below the dam now depends on it",
+      "ending_shape": "the vow is kept to the letter and broken in spirit"
+    }
+  },
+  "event_count_requested": 16,
+  "arc_events": 16,
+  "scenes": 13,
+  "words": 9012,
+  "run_id": "review-toll-20260929181432-00944c1e",
+  "models": {
+    "arc": "gemini-3.8-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash"
+    ],
+    "other_calls": [
+      {
+        "scene": "scene_04_the_gallery_keys",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_08_night_inspection_encounter",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_10_the_sister_s_dissent",
+        "purpose": "continuity_repair",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_12_the_hearth_revealed",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      }
+    ]
+  },
+  "truncated_scenes": [],
+  "tail_eviction_scenes": 0,
+  "cost_usd": 0.3602,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_09_the_parapet_confession",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_teresa_vance",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_teresa_vance.goal; the proposal \"verify_karst_subsidence_logs\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_10_the_sister_s_dissent",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "karst_subsidence_threat",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_10_the_sister_s_dissent: scene_10_the_sister_s_dissent reveals \"karst_subsidence_threat\", which the reader first learned in scene 9 and was last shown in scene 9"
+    }
+  ]
+}

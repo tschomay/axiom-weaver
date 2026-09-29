@@ -1,0 +1,1776 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-toll",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_teresa_vance",
+        "name": "Teresa Vance",
+        "location_id": "loc_vance_farmstead",
+        "status": "evicted_farmer",
+        "goal": "protect_family_farmstead",
+        "bag": {
+          "vocation": "hydraulic_fitter"
+        }
+      },
+      {
+        "id": "char_arthur_kroll",
+        "name": "Arthur Kroll",
+        "location_id": "loc_vance_farmstead",
+        "status": "junior_project_director",
+        "goal": "execute_emergency_impoundment",
+        "bag": {
+          "authority": "hydroelectric_board"
+        }
+      },
+      {
+        "id": "char_nomi_vance",
+        "name": "Nomi Vance",
+        "location_id": "loc_vance_farmstead",
+        "status": "farmer",
+        "goal": "salvage_family_possessions",
+        "bag": {
+          "vocation": "orchardist"
+        }
+      },
+      {
+        "id": "char_julian_pike",
+        "name": "Julian Pike",
+        "location_id": "loc_dam_crest",
+        "status": "diver_technician",
+        "goal": "maintain_penstock_valves",
+        "bag": {
+          "temperament": "disgruntled"
+        }
+      },
+      {
+        "id": "char_roy_callow",
+        "name": "Roy Callow",
+        "location_id": "loc_dam_crest",
+        "status": "chief_operator",
+        "goal": "supervise_daily_dam_operations",
+        "bag": {
+          "rank": "shift_supervisor"
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_vance_farmstead",
+        "name": "Vance Farmstead Basin",
+        "bag": {
+          "elevation": "740_ft"
+        }
+      },
+      {
+        "id": "loc_dam_crest",
+        "name": "Crestview Hydroelectric Dam",
+        "bag": {
+          "elevation": "1020_ft"
+        }
+      },
+      {
+        "id": "loc_turbine_gallery",
+        "name": "Sub-level Four Turbine Gallery",
+        "bag": {
+          "elevation": "680_ft"
+        }
+      },
+      {
+        "id": "loc_orchard_flat",
+        "name": "Low Meadow Orchard Settlement",
+        "bag": {
+          "elevation": "620_ft"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_eviction_warrant",
+        "name": "Accelerated Eviction Warrant",
+        "location_id": "loc_vance_farmstead",
+        "status": "issued",
+        "bag": {
+          "signatory": "kroll"
+        }
+      },
+      {
+        "id": "obj_hearth_chisel",
+        "name": "Masonry Hearth Chisel",
+        "location_id": "loc_vance_farmstead",
+        "status": "intact",
+        "bag": {
+          "material": "forged_carbon_steel"
+        }
+      },
+      {
+        "id": "obj_scour_bypass_key",
+        "name": "Brass Scour Bypass Key",
+        "location_id": "loc_turbine_gallery",
+        "status": "locked_in_cabinet",
+        "bag": {
+          "interlock": "hydraulic_secondary"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_teresa_kroll",
+        "from_id": "char_teresa_vance",
+        "to_id": "char_arthur_kroll",
+        "kind": "adversary",
+        "sentiment": "vengeful",
+        "bag": {}
+      },
+      {
+        "id": "rel_kroll_teresa",
+        "from_id": "char_arthur_kroll",
+        "to_id": "char_teresa_vance",
+        "kind": "displaced_tenant",
+        "sentiment": "guilt_ridden",
+        "bag": {}
+      },
+      {
+        "id": "rel_teresa_nomi",
+        "from_id": "char_teresa_vance",
+        "to_id": "char_nomi_vance",
+        "kind": "sister",
+        "sentiment": "protective",
+        "bag": {}
+      },
+      {
+        "id": "rel_nomi_teresa",
+        "from_id": "char_nomi_vance",
+        "to_id": "char_teresa_vance",
+        "kind": "sister",
+        "sentiment": "concerned",
+        "bag": {}
+      },
+      {
+        "id": "rel_julian_kroll",
+        "from_id": "char_julian_pike",
+        "to_id": "char_arthur_kroll",
+        "kind": "subordinate",
+        "sentiment": "resentful",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_teresa_vance",
+        "fact_ref": "vance_family_eviction_deadline",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_arthur_kroll",
+        "fact_ref": "vance_family_eviction_deadline",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_early_eviction",
+      "order": 1,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_vance_farmstead",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_arthur_kroll",
+        "char_nomi_vance"
+      ],
+      "dramatic_function": "Establishes the ruthless displacement of the Vance family by Arthur Kroll ahead of the valley's impoundment.",
+      "entry_state": {
+        "obj_eviction_warrant": {
+          "status": "issued"
+        },
+        "char_arthur_kroll": {
+          "location_id": "loc_vance_farmstead"
+        }
+      },
+      "exit_state": {
+        "obj_eviction_warrant": {
+          "status": "served"
+        },
+        "char_arthur_kroll": {
+          "location_id": "loc_dam_crest"
+        }
+      },
+      "required_beats": [
+        "Arthur Kroll arrives at the homestead to serve an accelerated civil eviction notice forty-eight hours ahead of schedule.",
+        "Teresa Vance protests that the valley harvest requires two more days to complete.",
+        "Kroll denies any extension and orders his work crews to seal the diversion tunnels immediately."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "karst_subsidence_threat"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_02_the_drowned_hearth",
+      "order": 2,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_dam_crest",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_nomi_vance"
+      ],
+      "dramatic_function": "Shows the catastrophic flooding of the homestead and establishes Teresa's lifelong vow to reclaim it.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "status": "evicted_farmer",
+          "location_id": "loc_vance_farmstead",
+          "goal": "protect_family_farmstead"
+        },
+        "char_nomi_vance": {
+          "status": "farmer",
+          "location_id": "loc_vance_farmstead"
+        },
+        "obj_hearth_chisel": {
+          "location_id": "loc_vance_farmstead"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "status": "displaced",
+          "location_id": "loc_dam_crest",
+          "goal": "drain_reservoir_to_hearth"
+        },
+        "char_nomi_vance": {
+          "status": "displaced",
+          "location_id": "loc_dam_crest"
+        },
+        "obj_hearth_chisel": {
+          "location_id": "loc_dam_crest"
+        }
+      },
+      "required_beats": [
+        "Rising turbid water breaches the orchard ditches and fills the lower cellar while Nomi bundles family linens.",
+        "Teresa retrieves her father's chisel from the hearth before the sisters retreat up the rocky slope as muddy water covers the kitchen threshold.",
+        "From the dam rim, Teresa watches the rising green water swallow the farmhouse chimney.",
+        "Using the chisel, Teresa carves the datum elevation of their hearth into the rock and vows to make the reservoir give back every foot of water until the Vance stone hearth stands dry under the open sky."
+      ],
+      "reader_must_learn": [
+        "vance_hearth_datum_level",
+        "fathers_chisel",
+        "vow_of_the_dry_hearth"
+      ],
+      "must_stay_hidden": [
+        "karst_subsidence_threat"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "vance_family_eviction_deadline",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_03_the_ditch_digger",
+      "order": 3,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_orchard_flat",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_arthur_kroll"
+      ],
+      "dramatic_function": "Reveals Kroll's reduced, solitary state ten years later while solidifying Teresa's unyielding drive for retribution.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_dam_crest"
+        },
+        "char_arthur_kroll": {
+          "location_id": "loc_dam_crest",
+          "status": "junior_project_director"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_orchard_flat"
+        },
+        "char_arthur_kroll": {
+          "location_id": "loc_orchard_flat",
+          "status": "exhausted"
+        }
+      },
+      "required_beats": [
+        "Tracking Kroll away from an anniversary celebration dais, Teresa finds him alone in hip waders clearing gravel from an obstructed drainage culvert.",
+        "Taking in his visible exhaustion and grey hair, Teresa hardens her resolve to hold him to account."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "karst_subsidence_threat"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_the_gallery_keys",
+      "order": 4,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_dam_crest",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_roy_callow"
+      ],
+      "dramatic_function": "Infiltrates Teresa into the dam's inner hydraulic controls under the guise of maintenance technician.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_orchard_flat",
+          "status": "displaced"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_dam_crest",
+          "status": "employed_as_engineer"
+        }
+      },
+      "required_beats": [
+        "Roy Callow verifies Teresa's union credentials, gives her a control gallery key ring, and outlines the two-stage hydraulic interlocking safety protocol on the scour valves.",
+        "Teresa examines the control station blueprints to map the manual bypass sequence for the valves."
+      ],
+      "reader_must_learn": [
+        "scour_conduit_hydraulic_interlock"
+      ],
+      "must_stay_hidden": [
+        "karst_subsidence_threat"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_valve_keys",
+      "order": 5,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_turbine_gallery",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_julian_pike"
+      ],
+      "dramatic_function": "Establishes Julian Pike as an inside ally willing to help Teresa breach the dam's secured mechanisms.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_dam_crest"
+        },
+        "char_julian_pike": {
+          "location_id": "loc_dam_crest",
+          "goal": "maintain_penstock_valves"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_turbine_gallery"
+        },
+        "char_julian_pike": {
+          "location_id": "loc_turbine_gallery",
+          "goal": "sabotage_dam_penstocks"
+        }
+      },
+      "required_beats": [
+        "Julian catches Teresa tracing hydraulic lines behind the turbine housing in sub-level four.",
+        "Julian expresses his contempt for Kroll's budget freezes and reveals where the high pressure brass keys are locked.",
+        "Julian offers to stage maintenance distractions to give Teresa access to the discharge tunnel."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "karst_subsidence_threat"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_the_orchard_warning",
+      "order": 6,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_orchard_flat",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_nomi_vance"
+      ],
+      "dramatic_function": "Confronts Teresa with the collateral damage her mission will inflict on downstream settlement families.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_turbine_gallery"
+        },
+        "char_nomi_vance": {
+          "location_id": "loc_dam_crest"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_orchard_flat"
+        },
+        "char_nomi_vance": {
+          "location_id": "loc_orchard_flat"
+        }
+      },
+      "required_beats": [
+        "Teresa visits Nomi's fruit packing shed amidst a healthy autumn apple harvest.",
+        "Nomi explains that dried-up mountain brooks leave the valley wells entirely dependent on the dam's alluvial seepage.",
+        "Nomi pleads with Teresa to abandon her quest before she destroys their neighbors' livelihood."
+      ],
+      "reader_must_learn": [
+        "alluvial_well_aquifer_dependency"
+      ],
+      "must_stay_hidden": [
+        "karst_subsidence_threat"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_stealing_the_key",
+      "order": 7,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_turbine_gallery",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_julian_pike"
+      ],
+      "dramatic_function": "Advances Teresa's sabotage plan through the theft of the critical bypass key under cover of darkness.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_orchard_flat"
+        },
+        "obj_scour_bypass_key": {
+          "status": "locked_in_cabinet"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_turbine_gallery"
+        },
+        "obj_scour_bypass_key": {
+          "status": "stolen_by_teresa"
+        }
+      },
+      "required_beats": [
+        "Julian cuts the secondary lighting breaker, plunging the lower inspection passage into gloom.",
+        "Teresa levers her father's chisel beneath the emergency cabinet until the metal seal snaps.",
+        "Teresa conceals the heavy brass scour bypass key inside her canvas tool roll."
+      ],
+      "reader_must_learn": [
+        "stolen_brass_scour_key"
+      ],
+      "must_stay_hidden": [
+        "karst_subsidence_threat"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "fathers_chisel",
+          "plant": "scene_02_the_drowned_hearth"
+        }
+      ]
+    },
+    {
+      "id": "scene_08_night_inspection_encounter",
+      "order": 8,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_turbine_gallery",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_arthur_kroll"
+      ],
+      "dramatic_function": "Tests Teresa's cover under direct interrogation while revealing Kroll's physical frailty.",
+      "entry_state": {
+        "char_arthur_kroll": {
+          "location_id": "loc_orchard_flat",
+          "status": "exhausted"
+        }
+      },
+      "exit_state": {
+        "char_arthur_kroll": {
+          "location_id": "loc_turbine_gallery",
+          "status": "failing_health"
+        }
+      },
+      "required_beats": [
+        "Kroll surprises Teresa with his inspection lantern as she closes the empty key cabinet.",
+        "Kroll suffers a sudden fit of breathlessness and supports himself against the damp penstock pipe.",
+        "Teresa fabricates an excuse about inspecting sump pumps, which a weary Kroll accepts without suspicion."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "karst_subsidence_threat"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_09_the_parapet_confession",
+      "order": 9,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_dam_crest",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_arthur_kroll"
+      ],
+      "dramatic_function": "To reveal the geological threat that motivated Kroll's flood and challenge Teresa's vendetta.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_turbine_gallery"
+        },
+        "char_arthur_kroll": {
+          "location_id": "loc_turbine_gallery"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_dam_crest"
+        },
+        "char_arthur_kroll": {
+          "location_id": "loc_dam_crest"
+        }
+      },
+      "required_beats": [
+        "Kroll calls Teresa to the parapet during an approaching storm and reveals he recognized her family name weeks ago.",
+        "Kroll confesses that twenty years earlier, core samples revealed an eroding karst cavity under the western ridge.",
+        "Kroll explains he accelerated the flooding to weigh down the rock and avert a catastrophic collapse."
+      ],
+      "reader_must_learn": [
+        "karst_subsidence_threat"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_10_the_sister_s_dissent",
+      "order": 10,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_orchard_flat",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_nomi_vance"
+      ],
+      "dramatic_function": "To isolate Teresa by pitting her sister's pragmatic forgiveness against her pursuit of revenge.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_dam_crest"
+        },
+        "char_nomi_vance": {
+          "goal": "salvage_family_possessions"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_orchard_flat"
+        },
+        "char_nomi_vance": {
+          "goal": "protect_town_water_supply"
+        }
+      },
+      "required_beats": [
+        "Teresa returns to the lower valley and tells Nomi that Kroll flooded their orchard to seal an unmapped limestone fault.",
+        "Nomi counters that Kroll's actions prevented a cataclysmic mudslide that would have killed thousands.",
+        "Nomi warns that sabotaging the reservoir is a vain act of vengeance that will harm innocent people."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_11_breach_in_the_gallery",
+      "order": 11,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_turbine_gallery",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_julian_pike",
+        "char_arthur_kroll"
+      ],
+      "dramatic_function": "To force Teresa to choose between total catastrophic destruction and a deliberate drainage that risks everything.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_orchard_flat"
+        },
+        "char_julian_pike": {
+          "status": "diver_technician"
+        },
+        "char_arthur_kroll": {
+          "location_id": "loc_dam_crest",
+          "goal": "execute_emergency_impoundment"
+        },
+        "obj_scour_bypass_key": {
+          "status": "stolen_by_teresa"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_turbine_gallery"
+        },
+        "char_julian_pike": {
+          "status": "incapacitated"
+        },
+        "char_arthur_kroll": {
+          "location_id": "loc_turbine_gallery",
+          "goal": "prevent_complete_canyon_scour"
+        },
+        "obj_scour_bypass_key": {
+          "status": "engaged_in_interlock"
+        }
+      },
+      "required_beats": [
+        "What pushes this decision now, staged first: On the dam crest during an approaching storm, Kroll reveals he knows Teresa's heritage and explains the hidden sinkhole that dictated the flood.",
+        "Teresa discovers Julian in the gallery wiring blasting caps to the intake collar, realizing his plan to demolish the wall will wipe out the settlement below.",
+        "When Kroll arrives and Julian attacks him with a spanner, Teresa severs the fuses with her chisel and knocks Julian into the turbine pit.",
+        "Defying Kroll's warnings about twenty years of sediment, Teresa turns the stolen key in the interlock and forces the bottom scour valve wide open."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "scour_conduit_hydraulic_interlock",
+          "plant": "scene_04_the_gallery_keys"
+        },
+        {
+          "fact_ref": "karst_subsidence_threat",
+          "plant": "scene_09_the_parapet_confession"
+        },
+        {
+          "fact_ref": "stolen_brass_scour_key",
+          "plant": "scene_07_stealing_the_key"
+        }
+      ]
+    },
+    {
+      "id": "scene_12_the_hearth_revealed",
+      "order": 12,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_dam_crest",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_arthur_kroll",
+        "char_roy_callow"
+      ],
+      "dramatic_function": "To bring the submerged past back into view as the reservoir drains to its true foundation.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_turbine_gallery"
+        },
+        "char_arthur_kroll": {
+          "location_id": "loc_turbine_gallery"
+        },
+        "obj_scour_bypass_key": {
+          "status": "engaged_in_interlock"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_dam_crest"
+        },
+        "char_arthur_kroll": {
+          "location_id": "loc_dam_crest"
+        },
+        "obj_scour_bypass_key": {
+          "status": "jammed_open"
+        }
+      },
+      "required_beats": [
+        "Roy Callow reports from the gatehouse that the jammed scour valve cannot be reset.",
+        "The lake level drops overnight down to seven hundred and forty feet along the exposed canyon walls.",
+        "Teresa watches the falling waterline expose the stone chimney and hearthstone of her family's drowned home."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "vance_hearth_datum_level",
+          "plant": "scene_02_the_drowned_hearth"
+        }
+      ]
+    },
+    {
+      "id": "scene_13_the_dry_hearthstone",
+      "order": 13,
+      "pov": "char_teresa_vance",
+      "location_id": "loc_vance_farmstead",
+      "characters_present": [
+        "char_teresa_vance",
+        "char_nomi_vance"
+      ],
+      "dramatic_function": "To confront Teresa with the total ruin of her family land and the collapse of the valley's water supply.",
+      "entry_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_dam_crest",
+          "goal": "drain_reservoir_to_hearth",
+          "status": "employed_as_engineer"
+        },
+        "char_nomi_vance": {
+          "location_id": "loc_orchard_flat"
+        }
+      },
+      "exit_state": {
+        "char_teresa_vance": {
+          "location_id": "loc_vance_farmstead",
+          "goal": "none",
+          "status": "reckoned"
+        },
+        "char_nomi_vance": {
+          "location_id": "loc_vance_farmstead"
+        }
+      },
+      "required_beats": [
+        "Teresa steps onto the uncovered hearthstone standing bone-dry under the morning sun amidst miles of dead grey silt, putrid silt, dead carp, and smothered orchards.",
+        "Nomi arrives to report that the lower valley wells have failed.",
+        "Confronted with the failure across the valley, Teresa faces Nomi on the barren ground, left holding an empty vow."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "alluvial_well_aquifer_dependency",
+          "plant": "scene_06_the_orchard_warning"
+        },
+        {
+          "fact_ref": "vow_of_the_dry_hearth",
+          "plant": "scene_02_the_drowned_hearth"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "close third, pressed against the protagonist",
+    "register": "grave, ornate, foreboding; dwells where a plainer voice would move on",
+    "sentence_rhythm": "long accreting sentences broken by a short one that lands like a door",
+    "imagery_palette": [
+      "damp stone and rot",
+      "guttering light",
+      "cold weight and enclosure"
+    ],
+    "dialogue_density": "low; speech arrives rarely and carries weight when it does",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "gothic_brooding"
+  },
+  "metadata": {
+    "title": "The Silt Datum",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T18:14:32.036Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "karst_subsidence_threat",
+      "statement": "A deep gypsum cavern in the northern canyon wall threatened immediate collapse unless stabilized by hydrostatic water pressure.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "vance_family_eviction_deadline",
+      "statement": "The official civil eviction notice originally granted the Vance family seventy-two hours before the river diversion commenced.",
+      "caused_by": [
+        "karst_subsidence_threat"
+      ]
+    },
+    {
+      "fact_ref": "vance_hearth_datum_level",
+      "statement": "The top of the Vance farmhouse stone hearth sits at precisely seven hundred and forty feet above sea level.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "scour_conduit_hydraulic_interlock",
+      "statement": "The dam's emergency bottom scour gate cannot move unless an interlocking brass key engages the secondary pressure release cylinder.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "alluvial_well_aquifer_dependency",
+      "statement": "The downstream town's drinking wells and fruit orchards rely entirely on continuous groundwater seepage generated by the reservoir's hydrostatic head.",
+      "caused_by": []
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-29T18:14:06.859Z",
+    "brief": {
+      "story_id": "review-toll",
+      "title": "Toll",
+      "premise": {
+        "logline": "A woman whose farm was flooded to build a reservoir takes a job on the dam, to learn how it could be made to fail.",
+        "modules": {
+          "theme": "whether revenge on a thing can ever reach the people behind it",
+          "setting_time": "twenty years after the valley was flooded",
+          "setting_place": "a hydroelectric dam above a drowned village",
+          "protagonist": "a maintenance engineer who grew up in the drowned valley",
+          "protagonist_want": "to make the reservoir give back what it took",
+          "antagonism": "the dam’s manager, who signed the flooding order young",
+          "complication": "the town below the dam now depends on it",
+          "ending_shape": "the vow is kept to the letter and broken in spirit"
+        }
+      },
+      "plot_shape": {
+        "id": "reckoning",
+        "name": "Reckoning",
+        "central_question": "Does the debt get collected, and does collecting it help?",
+        "phases": [
+          {
+            "name": "The injury",
+            "purpose": "The original wrong, shown rather than reported.",
+            "share": 0.15
+          },
+          {
+            "name": "The vow",
+            "purpose": "A commitment made in a state the maker will not always be in.",
+            "share": 0.15
+          },
+          {
+            "name": "Preparation",
+            "purpose": "Means acquired, allies made and used, a self narrowed to a purpose.",
+            "share": 0.3
+          },
+          {
+            "name": "Contact",
+            "purpose": "The wrongdoer, close enough to be seen as a person.",
+            "share": 0.25
+          },
+          {
+            "name": "Aftermath",
+            "purpose": "What is left of the avenger once the purpose is gone.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "claimant",
+            "purpose": "Holds the debt and is deformed by holding it."
+          },
+          {
+            "role": "debtor",
+            "purpose": "Committed the wrong, and has a life that does not look like a villain's."
+          },
+          {
+            "role": "enabler",
+            "purpose": "Helps the claimant for reasons of their own."
+          },
+          {
+            "role": "the restraint",
+            "purpose": "Argues for the cost, and is not simply right."
+          }
+        ],
+        "obligatory_moves": [
+          "The vow is made with a specific, quotable condition attached.",
+          "The debtor is shown doing something that is not villainous before contact.",
+          "The aftermath addresses the vow's exact wording."
+        ]
+      },
+      "event_count": 16,
+      "cast": {
+        "characters": 5,
+        "locations": 4,
+        "objects": 3
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 3,
+        "min_span": 3,
+        "long_range_edges": 1,
+        "long_range_span": 8
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "reckoning",
+        "premise_preset": "Toll"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_condemnation_warrant",
+        "sequence": 1,
+        "summary": "Arthur Kroll delivers an accelerated civil eviction notice to the Vance homestead forty-eight hours ahead of the scheduled impoundment.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_vance_farmstead",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_arthur_kroll",
+          "char_nomi_vance"
+        ],
+        "dramatic_function": "The injury phase begins as the authority imposes an unexpected and devastating dispossession.",
+        "beats": [
+          "Kroll presents the accelerated eviction order signed under civil emergency powers.",
+          "Teresa points out that the valley harvest is still two days from completion.",
+          "Kroll refuses to grant an extension and orders his work crews to seal the diversion tunnels."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [
+          "karst_subsidence_threat"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_eviction_warrant",
+            "column": "status",
+            "value": "served"
+          },
+          {
+            "entity_id": "char_arthur_kroll",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_sluice_closure",
+        "sequence": 2,
+        "summary": "The river diversion gates drop into place and rising water inundates the orchard while the sisters abandon their home.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_vance_farmstead",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_nomi_vance"
+        ],
+        "dramatic_function": "The physical destruction of the home is enacted, forcing the protagonist into exile.",
+        "beats": [
+          "Turbid water breaches the orchard boundary ditches and fills the lower cellar.",
+          "Nomi bundles the family linens while Teresa extracts her father's chisel from the hearth.",
+          "The sisters retreat up the rocky valley slope as muddy water covers the kitchen threshold."
+        ],
+        "caused_by": [
+          "ev_01_condemnation_warrant"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "vance_family_eviction_deadline",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "status",
+            "value": "displaced"
+          },
+          {
+            "entity_id": "char_nomi_vance",
+            "column": "status",
+            "value": "displaced"
+          },
+          {
+            "entity_id": "obj_hearth_chisel",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_the_hearth_vow",
+        "sequence": 3,
+        "summary": "Overlooking the submerged valley from the dam rim, Teresa scores a mark into the rock and swears to dry out the drowned hearth.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_dam_crest",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_nomi_vance"
+        ],
+        "dramatic_function": "The vow phase establishes the binding commitment that narrows the claimant's life.",
+        "beats": [
+          "Teresa watches the lake rise until the chimney top of the farmhouse disappears under green water.",
+          "She uses the masonry chisel to carve the exact datum elevation of their home hearth into the rim rock.",
+          "She vows aloud: 'I will make the reservoir give back every foot of water until the Vance stone hearth stands dry under the open sky.'"
+        ],
+        "caused_by": [
+          "ev_02_sluice_closure"
+        ],
+        "reveals": [
+          "vance_hearth_datum_level"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          },
+          {
+            "entity_id": "char_nomi_vance",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          },
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "goal",
+            "value": "drain_reservoir_to_hearth"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_krolls_solitary_vigil",
+        "sequence": 4,
+        "summary": "Ten years later, Teresa observes Arthur Kroll wading through a ditch in the lower settlement to clear silt from the school culvert.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_orchard_flat",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_arthur_kroll"
+        ],
+        "dramatic_function": "The debtor is shown engaging in an unglamorous, non-villainous act of civic stewardship before contact.",
+        "beats": [
+          "Teresa tracks Kroll during a public anniversary and discovers him absent from the celebration dais.",
+          "She finds him alone in hip waders, manually shoveling gravel to clear an obstructed town drainage channel.",
+          "Teresa observes his exhaustion and grey hair, but hardens her resolve to hold him to account."
+        ],
+        "caused_by": [
+          "ev_03_the_hearth_vow"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_orchard_flat"
+          },
+          {
+            "entity_id": "char_arthur_kroll",
+            "column": "location_id",
+            "value": "loc_orchard_flat"
+          },
+          {
+            "entity_id": "char_arthur_kroll",
+            "column": "status",
+            "value": "exhausted"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_engineering_appointment",
+        "sequence": 5,
+        "summary": "Now a certified hydraulic technician, Teresa joins the maintenance staff and inspects the bottom-drain interlock manuals.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_dam_crest",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_roy_callow"
+        ],
+        "dramatic_function": "Preparation begins as the claimant infiltrates the structure and acquires operational technical knowledge.",
+        "beats": [
+          "Roy Callow checks Teresa's union credentials and issues her a control gallery key ring.",
+          "Roy explains that the massive low-level scour valves are kept under a two-stage hydraulic interlocking safety protocol.",
+          "Teresa studies the valve blueprints in the control station to trace the manual bypass sequence."
+        ],
+        "caused_by": [
+          "ev_04_krolls_solitary_vigil"
+        ],
+        "reveals": [
+          "scour_conduit_hydraulic_interlock"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          },
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "status",
+            "value": "employed_as_engineer"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_enabler_recruited",
+        "sequence": 6,
+        "summary": "Deep in sub-level four, Teresa meets diver Julian Pike, who shares his malice toward management and points out the valve keys.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_turbine_gallery",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_julian_pike"
+        ],
+        "dramatic_function": "The enabler role enters, offering means and technical vulnerability motivated by his own grievances.",
+        "beats": [
+          "Julian catches Teresa tracing the hydraulic lines behind the turbine housing.",
+          "Julian confesses his contempt for Kroll's budget freezes and shows her where the high-pressure brass keys are locked.",
+          "He offers to create maintenance distractions whenever Teresa needs access to the discharge tunnel."
+        ],
+        "caused_by": [
+          "ev_05_engineering_appointment"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_turbine_gallery"
+          },
+          {
+            "entity_id": "char_julian_pike",
+            "column": "location_id",
+            "value": "loc_turbine_gallery"
+          },
+          {
+            "entity_id": "char_julian_pike",
+            "column": "goal",
+            "value": "sabotage_dam_penstocks"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_the_sister_restraint",
+        "sequence": 7,
+        "summary": "In the valley orchards below, Nomi warns Teresa that the entire downstream community now relies on the reservoir's steady seepage.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_orchard_flat",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_nomi_vance"
+        ],
+        "dramatic_function": "The restraint articulates the human cost and establishes the central complication opposing total vengeance.",
+        "beats": [
+          "Teresa visits Nomi's fruit packing shed and examines the healthy autumn apple harvest.",
+          "Nomi explains that the mountain brooks dried up years ago, leaving the settlement wells dependent on the dam's alluvial seepage.",
+          "Nomi pleads with Teresa to drop her quest before she destroys the livelihood of their neighbors."
+        ],
+        "caused_by": [
+          "ev_06_enabler_recruited"
+        ],
+        "reveals": [
+          "alluvial_well_aquifer_dependency"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_orchard_flat"
+          },
+          {
+            "entity_id": "char_nomi_vance",
+            "column": "location_id",
+            "value": "loc_orchard_flat"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_bypass_key_acquired",
+        "sequence": 8,
+        "summary": "During an auxiliary electrical shutdown, Teresa uses her father's chisel to pry open the secured valve box and steal the interlock key.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_turbine_gallery",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_julian_pike"
+        ],
+        "dramatic_function": "The claimant secures the physical mechanism required to execute her vow.",
+        "beats": [
+          "Julian cuts the secondary lighting breaker, plunging the lower inspection passage into gloom.",
+          "Teresa levers the chisel beneath the metal lip of the emergency cabinet until the seal snaps.",
+          "She conceals the heavy brass scour bypass key inside her canvas tool roll."
+        ],
+        "caused_by": [
+          "ev_06_enabler_recruited"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_turbine_gallery"
+          },
+          {
+            "entity_id": "obj_scour_bypass_key",
+            "column": "status",
+            "value": "stolen_by_teresa"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_krolls_intercept",
+        "sequence": 9,
+        "summary": "Arthur Kroll confronts Teresa in the lower drainage gallery during his night inspection, questioning her presence at the discharge conduits.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_turbine_gallery",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_arthur_kroll"
+        ],
+        "dramatic_function": "The claimant and debtor meet in a tense encounter that reveals the debtor's physical frailty.",
+        "beats": [
+          "Kroll surprises Teresa as she closes the empty key cabinet, shining an inspection lantern on her face.",
+          "Kroll suffers a sudden fit of breathlessness and leans against the damp penstock pipe for support.",
+          "Teresa fabricates a story about checking sump pumps, and Kroll accepts it with weary trust."
+        ],
+        "caused_by": [
+          "ev_08_bypass_key_acquired"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur_kroll",
+            "column": "location_id",
+            "value": "loc_turbine_gallery"
+          },
+          {
+            "entity_id": "char_arthur_kroll",
+            "column": "status",
+            "value": "failing_health"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_crest_confrontation",
+        "sequence": 10,
+        "summary": "On the dam crest during an approaching storm, Kroll reveals he knows Teresa's heritage and explains the hidden sinkhole that dictated the flood.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_dam_crest",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_arthur_kroll"
+        ],
+        "dramatic_function": "Contact phase brings the revelation of the concealed backstory and shows the debtor's human burden.",
+        "beats": [
+          "Kroll calls Teresa to the parapet and reveals he identified her family name weeks ago.",
+          "He confesses that twenty years earlier, core samples detected an eroding karst cavity beneath the western ridge.",
+          "He admits he accelerated the inundation to weight the rock and save the valley from sudden tectonic collapse."
+        ],
+        "caused_by": [
+          "ev_09_krolls_intercept"
+        ],
+        "reveals": [
+          "karst_subsidence_threat"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          },
+          {
+            "entity_id": "char_arthur_kroll",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_restraint_plea",
+        "sequence": 11,
+        "summary": "Teresa returns to the lower valley to tell Nomi of Kroll's confession, but Nomi insists the valley's present life outweighs past grievances.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_orchard_flat",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_nomi_vance"
+        ],
+        "dramatic_function": "The restraint challenges the claimant's obsession in light of the revealed truth.",
+        "beats": [
+          "Teresa explains that Kroll drowned their childhood orchard to seal an unmapped limestone fault.",
+          "Nomi responds that Kroll's choice saved thousands of people from a cataclysmic mudslide.",
+          "Nomi asserts that attacking the reservoir now is an act of blind vanity that will only punish the innocent."
+        ],
+        "caused_by": [
+          "ev_10_crest_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_orchard_flat"
+          },
+          {
+            "entity_id": "char_nomi_vance",
+            "column": "goal",
+            "value": "protect_town_water_supply"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_pike_sabotage_plot",
+        "sequence": 12,
+        "summary": "Julian Pike corners Teresa in the gallery and discloses he has planted demolition charges to blow out the penstocks entirely.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_turbine_gallery",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_julian_pike"
+        ],
+        "dramatic_function": "The enabler's destructive escalation forces the claimant to confront the difference between restitution and carnage.",
+        "beats": [
+          "Teresa finds Julian wiring industrial blasting caps onto the high-pressure penstock intake collar.",
+          "Julian sneers that draining the reservoir slowly is pointless and insists on leveling the dam wall.",
+          "Teresa realizes Julian's hatred will unleash a tidal wave on Nomi and the settlement below."
+        ],
+        "caused_by": [
+          "ev_08_bypass_key_acquired",
+          "ev_10_crest_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_turbine_gallery"
+          },
+          {
+            "entity_id": "char_julian_pike",
+            "column": "status",
+            "value": "armed_with_explosives"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_disarming_the_charges",
+        "sequence": 13,
+        "summary": "When Kroll enters the lower tunnel, Julian lunges at him, but Teresa uses the hearth chisel to slice the explosive fuses and incapacitate Julian.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_turbine_gallery",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_julian_pike",
+          "char_arthur_kroll"
+        ],
+        "dramatic_function": "The claimant protects her wrongdoer from lethal violence, separating her vow from sheer nihilism.",
+        "beats": [
+          "Kroll descends the steel stairs and Julian charges him with a spanner.",
+          "Teresa strikes the chisel through the ignition leads, severing the blasting circuits.",
+          "Teresa knocks Julian into the dry turbine pit, leaving him disarmed and concussed."
+        ],
+        "caused_by": [
+          "ev_12_pike_sabotage_plot"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_arthur_kroll",
+            "column": "location_id",
+            "value": "loc_turbine_gallery"
+          },
+          {
+            "entity_id": "char_julian_pike",
+            "column": "status",
+            "value": "incapacitated"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_scour_gate_release",
+        "sequence": 14,
+        "summary": "Ignoring Kroll's desperate appeals, Teresa inserts the stolen brass key into the interlock and cranks the bottom scour valve wide open.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_turbine_gallery",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_arthur_kroll"
+        ],
+        "dramatic_function": "The claimant executes her technical purpose, releasing the reservoir through its deepest outlet.",
+        "beats": [
+          "Kroll begs Teresa to remember that twenty years of sediment will choke the lower riverbed.",
+          "Teresa follows the two-stage interlock sequence and turns the stolen key into the valve cylinder.",
+          "High-pressure hydraulic pistons slide the scouring gate back, unleashing millions of gallons into the discharge flume."
+        ],
+        "caused_by": [
+          "ev_10_crest_confrontation",
+          "ev_13_disarming_the_charges"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "scour_conduit_hydraulic_interlock",
+            "plant": "ev_05_engineering_appointment"
+          },
+          {
+            "fact_ref": "karst_subsidence_threat",
+            "plant": "ev_10_crest_confrontation"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_scour_bypass_key",
+            "column": "status",
+            "value": "engaged_in_interlock"
+          },
+          {
+            "entity_id": "char_arthur_kroll",
+            "column": "goal",
+            "value": "prevent_complete_canyon_scour"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_lake_datum_reached",
+        "sequence": 15,
+        "summary": "As the valve mechanism shears and jams open, the reservoir drains down until the lake level matches Teresa's carved rock datum.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_dam_crest",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_arthur_kroll",
+          "char_roy_callow"
+        ],
+        "dramatic_function": "The vow reaches its literal fulfillment as the water line recedes to the exact historical height.",
+        "beats": [
+          "Roy Callow reports from the gatehouse that the bent scour valve cannot be reset from the console.",
+          "The impounded lake drops through the night, exposing the grey canyon walls down to seven hundred and forty feet.",
+          "Teresa watches the receding waterline uncover the stone chimney and hearthstone of her family farmhouse."
+        ],
+        "caused_by": [
+          "ev_14_scour_gate_release"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "vance_hearth_datum_level",
+            "plant": "ev_03_the_hearth_vow"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          },
+          {
+            "entity_id": "char_arthur_kroll",
+            "column": "location_id",
+            "value": "loc_dam_crest"
+          },
+          {
+            "entity_id": "obj_scour_bypass_key",
+            "column": "status",
+            "value": "jammed_open"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_the_dry_hearth",
+        "sequence": 16,
+        "summary": "Teresa walks out across the dead grey silt to stand on the dry hearthstone, facing Nomi amidst the ruin of the town's water supply.",
+        "pov": "char_teresa_vance",
+        "location_id": "loc_vance_farmstead",
+        "characters_present": [
+          "char_teresa_vance",
+          "char_nomi_vance"
+        ],
+        "dramatic_function": "The aftermath addresses the vow's exact wording, revealing the hollow and destructive nature of the victory.",
+        "beats": [
+          "Teresa steps onto the uncovered hearthstone, finding it standing bone-dry under the morning sun.",
+          "Around the stone lies a toxic waste of putrid silt, dead carp, and smothered orchards stretching for miles.",
+          "Nomi arrives to report that the lower valley wells have failed, leaving Teresa holding an empty vow on barren ground."
+        ],
+        "caused_by": [
+          "ev_15_lake_datum_reached"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "alluvial_well_aquifer_dependency",
+            "plant": "ev_07_the_sister_restraint"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "location_id",
+            "value": "loc_vance_farmstead"
+          },
+          {
+            "entity_id": "char_nomi_vance",
+            "column": "location_id",
+            "value": "loc_vance_farmstead"
+          },
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "goal",
+            "value": "none"
+          },
+          {
+            "entity_id": "char_teresa_vance",
+            "column": "status",
+            "value": "reckoned"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_gypsum_void_detected",
+        "sequence": 1,
+        "summary": "Deep core drills along the western abutment uncovered a massive karst fissure that would cave in under normal seasonal rains.",
+        "caused_by": [],
+        "establishes": []
+      },
+      {
+        "id": "hidden_02_kroll_emergency_calculation",
+        "sequence": 2,
+        "summary": "Arthur Kroll concluded the entire canyon wall would disintegrate unless hydrostatic counter-pressure was applied immediately across the basin.",
+        "caused_by": [
+          "hidden_01_gypsum_void_detected"
+        ],
+        "establishes": []
+      },
+      {
+        "id": "hidden_03_accelerated_eviction_order",
+        "sequence": 3,
+        "summary": "Kroll ordered the premature inundation of the Vance farmstead because revealing the structural sinkhole would have sparked unmanageable valley panic.",
+        "caused_by": [
+          "hidden_02_kroll_emergency_calculation"
+        ],
+        "establishes": [
+          "karst_subsidence_threat"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "karst_subsidence_threat",
+        "statement": "A deep gypsum cavern in the northern canyon wall threatened immediate collapse unless stabilized by hydrostatic water pressure.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "vance_family_eviction_deadline",
+        "statement": "The official civil eviction notice originally granted the Vance family seventy-two hours before the river diversion commenced.",
+        "caused_by": [
+          "karst_subsidence_threat"
+        ]
+      },
+      {
+        "fact_ref": "vance_hearth_datum_level",
+        "statement": "The top of the Vance farmhouse stone hearth sits at precisely seven hundred and forty feet above sea level.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "scour_conduit_hydraulic_interlock",
+        "statement": "The dam's emergency bottom scour gate cannot move unless an interlocking brass key engages the secondary pressure release cylinder.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "alluvial_well_aquifer_dependency",
+        "statement": "The downstream town's drinking wells and fruit orchards rely entirely on continuous groundwater seepage generated by the reservoir's hydrostatic head.",
+        "caused_by": []
+      }
+    ],
+    "stakes": [
+      {
+        "stake": "Arthur Kroll's vigilance over the dam crest threatens to expose Teresa's identity before she can access the emergency drainage schematics.",
+        "introduced_by": "ev_05_engineering_appointment",
+        "resolved_by": "ev_10_crest_confrontation"
+      },
+      {
+        "stake": "Julian Pike's radical demolition plot threatens to trigger an uncontainable structural collapse of the dam wall.",
+        "introduced_by": "ev_12_pike_sabotage_plot",
+        "resolved_by": "ev_13_disarming_the_charges"
+      },
+      {
+        "stake": "Purging the reservoir to expose the submerged homestead threatens to destroy the downstream town's only agricultural aquifer.",
+        "introduced_by": "ev_07_the_sister_restraint",
+        "resolved_by": "ev_16_the_dry_hearth"
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T18:14:32.036Z",
+    "started_at": "2026-09-29T18:14:06.859Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_early_eviction",
+        "order": 1,
+        "event_ids": [
+          "ev_01_condemnation_warrant"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_drowned_hearth",
+        "order": 2,
+        "event_ids": [
+          "ev_02_sluice_closure",
+          "ev_03_the_hearth_vow"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_ditch_digger",
+        "order": 3,
+        "event_ids": [
+          "ev_04_krolls_solitary_vigil"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_gallery_keys",
+        "order": 4,
+        "event_ids": [
+          "ev_05_engineering_appointment"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_valve_keys",
+        "order": 5,
+        "event_ids": [
+          "ev_06_enabler_recruited"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_orchard_warning",
+        "order": 6,
+        "event_ids": [
+          "ev_07_the_sister_restraint"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_stealing_the_key",
+        "order": 7,
+        "event_ids": [
+          "ev_08_bypass_key_acquired"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_night_inspection_encounter",
+        "order": 8,
+        "event_ids": [
+          "ev_09_krolls_intercept"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_parapet_confession",
+        "order": 9,
+        "event_ids": [
+          "ev_10_crest_confrontation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_sister_s_dissent",
+        "order": 10,
+        "event_ids": [
+          "ev_11_restraint_plea"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_breach_in_the_gallery",
+        "order": 11,
+        "event_ids": [
+          "ev_12_pike_sabotage_plot",
+          "ev_13_disarming_the_charges",
+          "ev_14_scour_gate_release"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_the_hearth_revealed",
+        "order": 12,
+        "event_ids": [
+          "ev_15_lake_datum_reached"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_dry_hearthstone",
+        "order": 13,
+        "event_ids": [
+          "ev_16_the_dry_hearth"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}
