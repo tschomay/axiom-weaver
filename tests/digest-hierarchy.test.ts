@@ -15,6 +15,7 @@ function digest(overrides: Partial<SceneDigest> = {}): SceneDigest {
     reanchor_used: [],
     grounded_claims: [],
     terms_glossed: [],
+    established_details: [],
     ...overrides,
   };
 }

@@ -99,6 +99,7 @@ export async function compileSceneIntoDraft(input: {
     writerModel: input.writerModel,
     imageryHistory: state.imageryHistory,
     previousParagraph: state.previousParagraph,
+    details: state.details,
     occasion: 'author_time',
   });
 

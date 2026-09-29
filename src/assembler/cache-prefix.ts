@@ -119,6 +119,9 @@ export async function promptWalk(
       payoffInstructions: payoffInstructionsFor(scene),
       previousParagraph: state.previousParagraph,
       writerContract: writerContract(),
+      establishedDetails: state.details.forScene(new Set(presentEntityIds(rows)), (id) =>
+        state.model.has(id),
+      ),
     });
 
     prompts.push({

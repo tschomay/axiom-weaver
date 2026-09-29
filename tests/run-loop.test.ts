@@ -504,6 +504,7 @@ describe('the told-ledger learns presence from the join, not only the self-repor
         reanchor_used: [],
         grounded_claims: [],
         terms_glossed: [],
+        established_details: [],
       },
       null,
     );

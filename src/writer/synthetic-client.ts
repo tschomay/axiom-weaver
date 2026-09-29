@@ -168,6 +168,7 @@ export class SyntheticWriterClient implements ModelClient {
       // scrutiny of what it just wrote, so it has nothing honest to claim here either.
       grounded_claims: [],
       terms_glossed: [],
+      established_details: [],
     };
   }
 }
