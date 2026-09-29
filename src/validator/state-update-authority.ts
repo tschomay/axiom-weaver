@@ -253,6 +253,27 @@ function isEntailedByCard(value: StateValue, scene: SceneCard, model: WorldModel
   );
 }
 
+/** Columns whose values are sometimes an enumerable state (`alive`) and sometimes a description. */
+export const FREE_TEXT_COLUMNS: ReadonlySet<string> = new Set(['status']);
+
+function isDescription(value: StateValue): value is string {
+  return typeof value === 'string' && value.trim().split(/\s+/).length >= 2;
+}
+
+/**
+ * Whether a change is a free-text description being reworded rather than a state reverting
+ * (#203). Both the committed and the proposed value must be descriptions — several words each —
+ * so an enumerable status still gets the full amnesia guard: `dead` → `alive` is a reversion,
+ * and so is `dead` → `alive and well`.
+ *
+ * Panel batch 2026-09-29's run reports carried 28 `unentailed_reversion` diagnostics, all on
+ * `status`, all paraphrases: "resigned to eviction" → "resigned refugee heading to resettlement
+ * camp". Equality is the right test for an id and the wrong one for a sentence.
+ */
+export function isFreeTextDrift(column: string, current: StateValue, proposed: StateValue): boolean {
+  return FREE_TEXT_COLUMNS.has(column) && isDescription(current) && isDescription(proposed);
+}
+
 // --- Checkpoint 1: pre-generation entry check ----------------------------------------------
 
 /**
@@ -479,6 +500,7 @@ export function checkGroundedClaims(
     // `resolveAutoCommitted`'s amnesia guard makes below for a column that was null.
     if (current === null) continue;
     if (current === claim.asserted_value) continue;
+    if (isFreeTextDrift(claim.column, current, claim.asserted_value)) continue;
     if (isEntailedByCard(claim.asserted_value, scene, model)) continue;
 
     mismatches.push({
@@ -533,6 +555,26 @@ function resolveAutoCommitted(
 
   if (current === value) {
     return { outcome: 'unchanged', status: null, diagnostic: null };
+  }
+
+  // A reworded free-text description is not a reversion (#203, ADR 0018's amendment). It is not
+  // committed either — the committed wording is what later cards' entry_state was replayed from —
+  // and it is recorded at `info`, off every live surface.
+  if (current !== null && isFreeTextDrift(column, current, value as StateValue) &&
+      !isEntailedByCard(value as StateValue, scene, model)) {
+    return {
+      outcome: 'rejected',
+      status: null,
+      diagnostic: diagnostic('free_text_drift', {
+        entity_id: entityId,
+        column,
+        scene_id: scene.id,
+        scene_index: scene.order,
+        message:
+          `${entityId}.${column} stays ${JSON.stringify(current)}; the engine's rewording ` +
+          `${JSON.stringify(value)} was not committed`,
+      }),
+    };
   }
 
   // The amnesia guard. Only a change *away from* a committed value can be a reversion — filling

@@ -172,3 +172,30 @@ bounded repair call.
 - No change to the read-time run loop's (#19) invocation shape: both new findings ride the
   existing per-scene continuity-pass invocation and the existing post-generation validator
   checkpoint — there's no new pipeline stage to wire in.
+
+## Amendment (2026-09-29): a reworded description is not a reversion
+
+[#203](https://github.com/tschomay/axiom-weaver/issues/203). Across panel batch 2026-09-29 the run
+reports carried 28 `unentailed_reversion` diagnostics, and all 28 were on `status`, all
+paraphrases: `char_clara.status` committed as "resigned to eviction", proposed as "resigned refugee
+heading to resettlement camp". The amnesia guard's equality test is right for an enumerable
+column (`location_id`, or a `status` of `alive`/`dead`/`intact`) and wrong for a sentence, and the
+noise buried exactly the signal the panel was looking for.
+
+Of the issue's two options — exempt the free-text columns or compare them by token overlap — the
+exemption is taken, scoped by the values rather than the column alone:
+
+- **A change is free-text drift when the column is `status` and both the committed and the
+  proposed value are descriptions of two words or more** (`isFreeTextDrift`,
+  `src/validator/state-update-authority.ts`). `goal` needs nothing: it is volitional and already
+  goes through the proposal path (ADR 0005 §3), never the amnesia guard.
+- **Anything else keeps the full guard.** A one-word status on either side is enumerable, so
+  `dead` → `alive` and `dead` → `alive and well` are still `unentailed_reversion`.
+- **Drift is not committed, and it is recorded at `info`** as `free_text_drift`, a new code rather
+  than a per-instance downgrade (severity is a property of the check, `lint.ts`). The committed
+  wording stays because later cards' `entry_state` was replayed from it; committing a paraphrase
+  would turn each one into an `entry_state_mismatch` on the next scene instead.
+- **Decision 2's `grounded_claims` checkpoint applies the same carve-out**, since it runs the same
+  test: a prose rewording of a description is not a `prose_grounding_mismatch`.
+- **Token overlap was not taken** because the batch's own examples defeat it: "withdrawn and
+  anxious" → "alarmed by impending locker sweep" share no word and are still not a reversion.

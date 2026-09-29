@@ -525,3 +525,59 @@ describe('checkGroundedClaims — prose grounding (ADR 0018 decision 2)', () => 
     expect(mismatches).toEqual([]);
   });
 });
+
+describe('free-text status drift is not a reversion (#203, ADR 0018 amendment)', () => {
+  // Verbatim from panel batch 2026-09-29's run reports: all 28 unentailed_reversion hits were these.
+  const paraphrases: Array<[string, string]> = [
+    ['resigned to eviction', 'resigned refugee heading to resettlement camp'],
+    ['strained under ministry directives', 'strained under solitary spillway maintenance'],
+    ['withdrawn and anxious', 'alarmed by impending locker sweep'],
+  ];
+
+  for (const [committed, proposed] of paraphrases) {
+    it(`does not fire on "${committed}" → "${proposed}", and keeps the committed wording`, () => {
+      const model = jimsWorld();
+      model.setColumn('char_jim', 'status', committed);
+      const result = validate(scene(), model, [
+        columnUpdate('character', 'char_jim', 'status', proposed),
+      ]);
+
+      expect(result.diagnostics.map((entry) => entry.code)).toEqual(['free_text_drift']);
+      expect(result.diagnostics[0]?.severity).toBe('info');
+      expect(result.entries).toEqual([]);
+      expect(
+        checkGroundedClaims(
+          scene(),
+          { grounded_claims: [{ entity_id: 'char_jim', column: 'status', asserted_value: proposed }] },
+          model,
+        ),
+      ).toEqual([]);
+    });
+  }
+
+  it('still fires on an enumerable status, even when the new value is a phrase', () => {
+    const cases: Array<[string, string]> = [
+      ['dead', 'alive'],
+      ['dead', 'alive and well'],
+      ['injured', 'alive'],
+    ];
+    for (const [committed, proposed] of cases) {
+      const model = jimsWorld();
+      model.setColumn('char_jim', 'status', committed);
+      const result = validate(scene(), model, [
+        columnUpdate('character', 'char_jim', 'status', proposed),
+      ]);
+      expect(result.diagnostics[0]?.code, `${committed} → ${proposed}`).toBe('unentailed_reversion');
+    }
+  });
+
+  it('still fires on a location reversion', () => {
+    const model = jimsWorld();
+    // No exit_state and no beat names the office, so this is the plain amnesia-guard case.
+    const card = scene({ exit_state: {}, required_beats: ['Jim waits at home'] });
+    const result = validate(card, model, [
+      columnUpdate('character', 'char_jim', 'location_id', 'loc_office'),
+    ]);
+    expect(result.diagnostics[0]?.code).toBe('unentailed_reversion');
+  });
+});
