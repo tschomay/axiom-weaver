@@ -211,6 +211,7 @@ function buildVolatileTail(
     renderReanchoring(input.reanchoring),
     renderImageryLedger(input.imageryLedger),
     renderSceneTone(input.scene.tone),
+    renderTenseReminder(input.voiceCard),
     renderCoreRows(rows),
   ].filter((block) => block !== '');
   const coreText = coreBlocks.join('\n\n');
@@ -401,6 +402,17 @@ function renderLeveledDigest(entry: LeveledDigest): string {
  */
 const VERBATIM_TAIL_MAX_CHARS = 1200;
 
+/**
+ * The Voice Card's tense, repeated in the per-scene tail (#201). The header states it once, far
+ * above; a scene that has just read a past-tense verbatim tail or a past-tense digest drifts to
+ * match them unless the scene's own instructions say otherwise.
+ */
+function renderTenseReminder(voiceCard: VoiceCard): string {
+  const tense = voiceCard.tense.trim();
+  if (tense === '') return '';
+  return `TENSE: narrate this scene in the ${tense} tense, like every scene of this telling (the Voice Card). Dialogue may use any tense; narration may not switch.`;
+}
+
 function renderVerbatimTail(paragraph: string | null): string {
   if (paragraph === null || paragraph.trim() === '') return '';
   const trimmed = paragraph.trim();
@@ -409,7 +421,7 @@ function renderVerbatimTail(paragraph: string | null): string {
       ? `...${trimmed.slice(trimmed.length - VERBATIM_TAIL_MAX_CHARS)}`
       : trimmed;
   return [
-    'PREVIOUS SCENE ENDED (the last words the reader actually read — open without a seam):',
+    'PREVIOUS SCENE ENDED (the last words the reader actually read — continue from it without a seam; never restate or paraphrase its final sentence):',
     text,
   ].join('\n');
 }
