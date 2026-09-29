@@ -1,0 +1,93 @@
+{
+  "title": "Understudy",
+  "plot_shape_preset": "transformation",
+  "premise": {
+    "logline": "A touring actor who has played the same villain for eleven years is told she will be replaced by the understudy she trained.",
+    "modules": {
+      "theme": "what is left of someone who has only ever been one part",
+      "setting_time": "the final three weeks of a long regional tour",
+      "setting_place": "a string of half-empty provincial theatres",
+      "protagonist": "a lead actor who has never missed a performance",
+      "protagonist_want": "to make the company regret the decision before closing night",
+      "antagonism": "a producer who thinks loyalty is a cost",
+      "complication": "the understudy is better than she was, and kinder",
+      "ending_shape": "she lets go of the part and keeps something truer"
+    }
+  },
+  "event_count_requested": 8,
+  "arc_events": 8,
+  "scenes": 5,
+  "words": 4092,
+  "run_id": "review-understudy-20260929180300-79a594f3",
+  "models": {
+    "arc": "gemini-3.8-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash"
+    ],
+    "other_calls": [
+      {
+        "scene": "scene_04_the_closing_night",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      }
+    ]
+  },
+  "truncated_scenes": [],
+  "tail_eviction_scenes": 0,
+  "cost_usd": 0.2092,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_03_the_trapdoor_rescue",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester",
+      "column": "status",
+      "message": "char_hester.status stays \"shaken by the revelation of Maisie's sacrifice\"; the engine's rewording \"fiercely protective and resolute\" was not committed"
+    },
+    {
+      "scene": "scene_03_the_trapdoor_rescue",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_maisie",
+      "column": "status",
+      "message": "char_maisie.status stays \"paralyzed by guilt and anxiety\"; the engine's rewording \"shaken but safely delivered through the descent\" was not committed"
+    },
+    {
+      "scene": "scene_05_passing_the_mantle",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hester",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_hester.goal; the proposal \"watch Maisie succeed from the wings\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_05_passing_the_mantle",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_maisie",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_maisie.goal; the proposal \"command the stage as Duke Malcor\" was dropped and the prior value kept"
+    }
+  ]
+}
