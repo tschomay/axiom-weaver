@@ -1,0 +1,393 @@
+{
+  "title": "Understudy",
+  "plot_shape_preset": "transformation",
+  "premise": {
+    "logline": "A touring actor who has played the same villain for eleven years is told she will be replaced by the understudy she trained.",
+    "modules": {
+      "theme": "what is left of someone who has only ever been one part",
+      "setting_time": "the final three weeks of a long regional tour",
+      "setting_place": "a string of half-empty provincial theatres",
+      "protagonist": "a lead actor who has never missed a performance",
+      "protagonist_want": "to make the company regret the decision before closing night",
+      "antagonism": "a producer who thinks loyalty is a cost",
+      "complication": "the understudy is better than she was, and kinder",
+      "ending_shape": "she lets go of the part and keeps something truer"
+    }
+  },
+  "event_count_requested": 22,
+  "arc_events": 22,
+  "scenes": 19,
+  "words": 13301,
+  "run_id": "review-understudy-20260929174726-0c08b2a7",
+  "models": {
+    "arc": "gemini-3.7-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash"
+    ],
+    "other_calls": [
+      {
+        "scene": "scene_04_notice_of_replacement",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_08_in_the_wings",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_12_the_prompt_copy",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_16_the_hidden_dagger",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_16_the_hidden_dagger",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_17_passing_the_ring",
+        "purpose": "continuity_repair",
+        "model": "gemini-3.5-flash-lite"
+      }
+    ]
+  },
+  "truncated_scenes": [],
+  "tail_eviction_scenes": 0,
+  "cost_usd": 0.4798,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_03_the_green_room",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "status",
+      "message": "char_helen_vane.status stays \"exhausted but physically rigid\"; the engine's rewording \"spiteful and thwarted\" was not committed"
+    },
+    {
+      "scene": "scene_03_the_green_room",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara_oaks",
+      "column": "status",
+      "message": "char_clara_oaks.status stays \"nervous and attentive\"; the engine's rewording \"composed and deferent\" was not committed"
+    },
+    {
+      "scene": "scene_05_the_blocking_rehearsal",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "status",
+      "message": "char_helen_vane.status stays \"exhausted but physically rigid\"; the engine's rewording \"combative and unsettled\" was not committed"
+    },
+    {
+      "scene": "scene_05_the_blocking_rehearsal",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara_oaks",
+      "column": "status",
+      "message": "char_clara_oaks.status stays \"nervous and attentive\"; the engine's rewording \"steely and unyielding\" was not committed"
+    },
+    {
+      "scene": "scene_05_the_blocking_rehearsal",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_julian_crane",
+      "column": "status",
+      "message": "char_julian_crane.status is committed as \"calculating\"; the engine proposed \"triumphant and vindicated\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_06_the_redcar_foyer",
+      "code": "missing_fact",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara_oaks",
+      "column": null,
+      "message": "\"Clara Oaks\" has an on-page beat in scene_06_the_redcar_foyer but is absent from characters_present, so the deterministic join never surfaced their World Model row"
+    },
+    {
+      "scene": "scene_06_the_redcar_foyer",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "status",
+      "message": "char_helen_vane.status stays \"exhausted but physically rigid\"; the engine's rewording \"defiant and protective of her stagecraft\" was not committed"
+    },
+    {
+      "scene": "scene_06_the_redcar_foyer",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_helen_vane.goal; the proposal \"withhold her proprietary stage cuts and prompt notes from Clara\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_07_penns_reckoning",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "status",
+      "message": "char_helen_vane.status stays \"exhausted but physically rigid\"; the engine's rewording \"shaken and morally unmoored\" was not committed"
+    },
+    {
+      "scene": "scene_08_in_the_wings",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_toby_greene",
+      "column": "status",
+      "message": "char_toby_greene.status is committed as \"anxious\"; the engine proposed \"steady and performing\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_08_in_the_wings",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "status",
+      "message": "char_helen_vane.status stays \"exhausted but physically rigid\"; the engine's rewording \"isolated and brooding\" was not committed"
+    },
+    {
+      "scene": "scene_11_the_matinee",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "status",
+      "message": "char_helen_vane.status stays \"benched from the matinee performance\"; the engine's rewording \"shaken and artistically unseated\" was not committed"
+    },
+    {
+      "scene": "scene_11_the_matinee",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara_oaks",
+      "column": "status",
+      "message": "char_clara_oaks.status stays \"nervous and attentive\"; the engine's rewording \"triumphant and emotionally commanding\" was not committed"
+    },
+    {
+      "scene": "scene_12_the_prompt_copy",
+      "code": "untiered_column_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "sentiment",
+      "message": "\"sentiment\" is not a character column"
+    },
+    {
+      "scene": "scene_12_the_prompt_copy",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "rel_scene_12_the_prompt_copy_0",
+      "column": "_row",
+      "message": "rel_scene_12_the_prompt_copy_0 is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_13_the_empty_stage",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "status",
+      "message": "char_helen_vane.status stays \"benched from the matinee performance\"; the engine's rewording \"stunned and paralyzed by Clara's revelation\" was not committed"
+    },
+    {
+      "scene": "scene_13_the_empty_stage",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara_oaks",
+      "column": "status",
+      "message": "char_clara_oaks.status stays \"nervous and attentive\"; the engine's rewording \"composed and firm\" was not committed"
+    },
+    {
+      "scene": "scene_13_the_empty_stage",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_helen_vane.goal; the proposal \"comprehend Clara's loyalty and her own misjudgment\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_14_the_snagged_sleeve",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_helen_vane.goal; the proposal \"discredit Clara's technical competence before the final performance\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_15_mirror_and_wig",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "status",
+      "message": "char_helen_vane.status stays \"benched from the matinee performance\"; the engine's rewording \"shaken by Maren's defiance\" was not committed"
+    },
+    {
+      "scene": "scene_15_mirror_and_wig",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_helen_vane.goal; the proposal \"confront the truth of her isolation before closing night\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_15_mirror_and_wig",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_maren_faulkner",
+      "column": "status",
+      "message": "char_maren_faulkner.status stays \"dutiful and observant\"; the engine's rewording \"openly defiant of Helen's vendetta\" was not committed"
+    },
+    {
+      "scene": "scene_16_the_hidden_dagger",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "rel_scene_16_the_hidden_dagger_1",
+      "column": "_row",
+      "message": "rel_scene_16_the_hidden_dagger_1 is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_17_passing_the_ring",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "status",
+      "message": "char_helen_vane.status stays \"broken and ashamed\"; the engine's rewording \"graceful and reconciled\" was not committed"
+    },
+    {
+      "scene": "scene_17_passing_the_ring",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara_oaks",
+      "column": "status",
+      "message": "char_clara_oaks.status stays \"nervous and attentive\"; the engine's rewording \"empowered and deeply moved\" was not committed"
+    },
+    {
+      "scene": "scene_17_passing_the_ring",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "clara_hidden_reverence",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_17_passing_the_ring: scene_17_passing_the_ring reveals \"clara_hidden_reverence\", which the reader first learned in scene 12 and was last shown in scene 12"
+    },
+    {
+      "scene": "scene_17_passing_the_ring",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "clara_saved_helens_final_tour",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_17_passing_the_ring: scene_17_passing_the_ring reveals \"clara_saved_helens_final_tour\", which the reader first learned in scene 13 and was last shown in scene 13"
+    },
+    {
+      "scene": "scene_18_the_final_curtain",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_helen_vane",
+      "column": "status",
+      "message": "char_helen_vane.status stays \"broken and ashamed\"; the engine's rewording \"reconciled and released\" was not committed"
+    },
+    {
+      "scene": "scene_18_the_final_curtain",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara_oaks",
+      "column": "status",
+      "message": "char_clara_oaks.status stays \"nervous and attentive\"; the engine's rewording \"triumphant and vindicated\" was not committed"
+    }
+  ]
+}

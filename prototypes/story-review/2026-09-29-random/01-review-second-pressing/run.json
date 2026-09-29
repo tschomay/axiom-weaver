@@ -1,0 +1,75 @@
+{
+  "title": "Second Pressing",
+  "plot_shape_preset": "mystery",
+  "premise": {
+    "logline": "A vineyard’s whole vintage turns in the barrel, and the cellar hand who topped it up has to work out what went in.",
+    "modules": {
+      "theme": "how a family decides which member is expendable",
+      "setting_time": "the winter after a hailstorm took half the crop",
+      "setting_place": "a hillside winery run by three siblings who share one cellar",
+      "protagonist": "a seasonal cellar hand who is not family",
+      "protagonist_want": "to keep her job by proving the spoilage was not her mistake",
+      "antagonism": "a sibling who would rather lose the vintage than the argument",
+      "complication": "the barrels were spoiled to force a sale she would have wanted",
+      "ending_shape": "the truth comes out, and nobody is better off for it"
+    }
+  },
+  "event_count_requested": 5,
+  "arc_events": 5,
+  "scenes": 5,
+  "words": 3192,
+  "run_id": "review-second-pressing-20260929175838-3e846cbc",
+  "models": {
+    "arc": "gemini-3.7-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash"
+    ],
+    "other_calls": [
+      {
+        "scene": "scene_04_the_developer_contract",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      }
+    ]
+  },
+  "truncated_scenes": [],
+  "tail_eviction_scenes": 0,
+  "cost_usd": 0.1519,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "unused_seed_entity",
+    "short_range_payoff",
+    "short_range_payoff",
+    "short_range_payoff",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_03_clipping_the_blame",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_bruno",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_bruno.goal; the proposal \"divert scrutiny by accepting Clara's incompetence charge and blaming Tess\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_04_the_developer_contract",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_bruno",
+      "column": "status",
+      "message": "char_bruno.status is committed as \"defensive\"; the engine proposed \"cornered\", which appears in no entry_state, exit_state, or required beat"
+    }
+  ]
+}

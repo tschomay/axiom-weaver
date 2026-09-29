@@ -1,0 +1,1676 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-terms-of-sale",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_jean",
+        "name": "Jean Gallagher",
+        "location_id": "loc_agency",
+        "status": "financially desperate and physically exhausted",
+        "goal": "close the sale of The Redoubt to satisfy the agency bank loan",
+        "bag": {}
+      },
+      {
+        "id": "char_nico",
+        "name": "Nicholas Vance",
+        "location_id": "loc_anchorage",
+        "status": "vigilant and guarded",
+        "goal": "conduct an undercover structural inspection of The Redoubt",
+        "bag": {}
+      },
+      {
+        "id": "char_brenda",
+        "name": "Brenda Keel",
+        "location_id": "loc_agency",
+        "status": "impatient and demanding",
+        "goal": "recover the eighteen thousand pound commercial debt owed by Gallagher and Sons",
+        "bag": {}
+      },
+      {
+        "id": "char_toby",
+        "name": "Toby Lin",
+        "location_id": "loc_agency",
+        "status": "anxious and loyal",
+        "goal": "assist Jean in keeping the agency solvent",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_agency",
+        "name": "Gallagher and Sons Estate Office",
+        "bag": {}
+      },
+      {
+        "id": "loc_redoubt",
+        "name": "The Redoubt Villa",
+        "bag": {}
+      },
+      {
+        "id": "loc_anchorage",
+        "name": "The Anchorage Harbour Inn",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_ledger",
+        "name": "Redoubt listing ledger and waiver file",
+        "location_id": "loc_agency",
+        "status": "locked inside desk drawer",
+        "bag": {}
+      },
+      {
+        "id": "obj_plumb_line",
+        "name": "brass plumb line and crack gauge in pen case",
+        "location_id": "loc_anchorage",
+        "status": "concealed in breast pocket",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_jean",
+        "to_id": "char_nico",
+        "kind": "romantic_interest",
+        "sentiment": "cautiously attracted",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_nico",
+        "to_id": "char_jean",
+        "kind": "suspicious_target",
+        "sentiment": "drawn to yet distrustful",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_brenda",
+        "to_id": "char_jean",
+        "kind": "creditor",
+        "sentiment": "unsympathetic and demanding",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_toby",
+        "to_id": "char_jean",
+        "kind": "employee",
+        "sentiment": "protective and devoted",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_jean",
+        "fact_ref": "agency_debt_deadline",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_brenda",
+        "fact_ref": "agency_debt_deadline",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_nico",
+        "fact_ref": "undercover_survey_assignment",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_jean",
+        "fact_ref": "subsoil_slip_hidden_by_arising_damp",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_05",
+        "character_id": "char_toby",
+        "fact_ref": "subsoil_slip_hidden_by_arising_damp",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_06",
+        "character_id": "char_jean",
+        "fact_ref": "vendor_signed_waiver",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_demand_note",
+      "order": 1,
+      "pov": "char_jean",
+      "location_id": "loc_agency",
+      "characters_present": [
+        "char_jean",
+        "char_brenda"
+      ],
+      "dramatic_function": "Establishes the existential financial threat hanging over Jean and sets her desperate timeline for selling The Redoubt.",
+      "entry_state": {
+        "char_brenda": {
+          "location_id": "loc_agency"
+        },
+        "char_jean": {
+          "status": "financially desperate and physically exhausted"
+        }
+      },
+      "exit_state": {
+        "char_brenda": {
+          "location_id": "loc_anchorage"
+        },
+        "char_jean": {
+          "status": "under formal thirty-day foreclosure notice"
+        }
+      },
+      "required_beats": [
+        "Brenda Keel serves Jean with a formal thirty-day demand note for the eighteen thousand pound loan on the agency premises.",
+        "Jean promises that the pending commission on The Redoubt will settle the entire debt in full.",
+        "Jean consults the tide board and notes the four o'clock tidal sluice schedule for the cliff road."
+      ],
+      "reader_must_learn": [
+        "tidal_sluice_schedule"
+      ],
+      "must_stay_hidden": [
+        "chalk_shelf_subsidence",
+        "subsoil_slip_hidden_by_arising_damp",
+        "vendor_signed_waiver",
+        "undercover_survey_assignment",
+        "trust_whistleblower_mandate"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "agency_debt_deadline",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_tools_of_entrapment",
+      "order": 2,
+      "pov": "char_nico",
+      "location_id": "loc_anchorage",
+      "characters_present": [
+        "char_nico"
+      ],
+      "dramatic_function": "Establishes Nicholas's covert mission to expose the agency's fraudulent listing despite his personal reservations.",
+      "entry_state": {
+        "char_nico": {
+          "status": "vigilant and guarded"
+        }
+      },
+      "exit_state": {
+        "char_nico": {
+          "status": "prepared for covert field survey"
+        }
+      },
+      "required_beats": [
+        "At the harbour inn, Nicholas reviews the Marine Trust dossier targeting the suspicious listing of The Redoubt.",
+        "Nicholas conceals a calibrated brass crack gauge inside an antique fountain pen.",
+        "Nicholas suppresses his misgivings about entrapping a struggling seaside agency."
+      ],
+      "reader_must_learn": [
+        "brass_gauge_in_pen_case",
+        "undercover_survey_assignment"
+      ],
+      "must_stay_hidden": [
+        "trust_whistleblower_mandate",
+        "chalk_shelf_subsidence",
+        "subsoil_slip_hidden_by_arising_damp",
+        "vendor_signed_waiver"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "undercover_survey_assignment",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_03_the_redoubt_tour",
+      "order": 3,
+      "pov": "char_jean",
+      "location_id": "loc_redoubt",
+      "characters_present": [
+        "char_jean",
+        "char_nico"
+      ],
+      "dramatic_function": "Sparks mutual attraction between Jean and Nicholas while forcing Jean to conceal structural defects from him.",
+      "entry_state": {
+        "char_jean": {
+          "location_id": "loc_agency",
+          "status": "under formal thirty-day foreclosure notice"
+        },
+        "char_nico": {
+          "location_id": "loc_anchorage"
+        },
+        "obj_plumb_line": {
+          "location_id": "loc_anchorage"
+        }
+      },
+      "exit_state": {
+        "char_jean": {
+          "location_id": "loc_redoubt",
+          "status": "infatuated yet anxious over basement concealment"
+        },
+        "char_nico": {
+          "location_id": "loc_redoubt"
+        },
+        "obj_plumb_line": {
+          "location_id": "loc_redoubt"
+        }
+      },
+      "required_beats": [
+        "Jean welcomes Nicholas to The Redoubt and feels an immediate rapport with his perceptive architectural comments.",
+        "Jean struggles with the sticking south bay sash window and laughs off the flaw as seaside humidity.",
+        "When Nicholas asks to see the cellar, Jean steers him out to the clifftop garden terrace instead."
+      ],
+      "reader_must_learn": [
+        "bay_window_binding"
+      ],
+      "must_stay_hidden": [
+        "trust_whistleblower_mandate",
+        "chalk_shelf_subsidence",
+        "subsoil_slip_hidden_by_arising_damp",
+        "vendor_signed_waiver"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_overheard_ruin",
+      "order": 4,
+      "pov": "char_nico",
+      "location_id": "loc_anchorage",
+      "characters_present": [
+        "char_nico",
+        "char_toby"
+      ],
+      "dramatic_function": "Presents Nicholas with proof of the agency's desperation, hardening his belief that Jean is running a deliberate scam.",
+      "entry_state": {
+        "char_nico": {
+          "location_id": "loc_redoubt",
+          "goal": "conduct an undercover structural inspection of The Redoubt"
+        },
+        "obj_plumb_line": {
+          "location_id": "loc_redoubt"
+        },
+        "char_toby": {
+          "location_id": "loc_agency"
+        }
+      },
+      "exit_state": {
+        "char_nico": {
+          "location_id": "loc_anchorage",
+          "goal": "confirm whether Jean is deliberately selling a condemned property"
+        },
+        "obj_plumb_line": {
+          "location_id": "loc_anchorage"
+        },
+        "char_toby": {
+          "location_id": "loc_anchorage"
+        }
+      },
+      "required_beats": [
+        "Nicholas watches Toby Lin at the bar drinking and sorting through delinquent agency invoices.",
+        "Nicholas overhears Toby tell the innkeeper that Gallagher and Sons will collapse unless The Redoubt closes this week.",
+        "Nicholas decides Jean is an unprincipled broker intentionally trying to offload an unsafe ruin onto him."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "trust_whistleblower_mandate",
+        "chalk_shelf_subsidence",
+        "subsoil_slip_hidden_by_arising_damp",
+        "vendor_signed_waiver"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_locking_the_ledger",
+      "order": 5,
+      "pov": "char_jean",
+      "location_id": "loc_agency",
+      "characters_present": [
+        "char_jean",
+        "char_toby"
+      ],
+      "dramatic_function": "Establishes Jean's refusal to resort to outright crime to save her failing agency, preserving the critical paper trail.",
+      "entry_state": {
+        "char_jean": {
+          "location_id": "loc_redoubt",
+          "goal": "close the sale of The Redoubt to satisfy the agency bank loan"
+        },
+        "char_toby": {
+          "location_id": "loc_anchorage"
+        }
+      },
+      "exit_state": {
+        "char_jean": {
+          "location_id": "loc_agency",
+          "goal": "sell The Redoubt without misrepresenting the disclosure file"
+        },
+        "char_toby": {
+          "location_id": "loc_agency"
+        }
+      },
+      "required_beats": [
+        "Toby begs Jean to burn Arkwright's signed waiver before conveyancing searches are ordered.",
+        "Jean refuses to commit fraud and returns Arkwright's signed waiver to the listing ledger.",
+        "Jean locks the ledger in her desk drawer using the combination nineteen forty eight."
+      ],
+      "reader_must_learn": [
+        "ledger_drawer_combination",
+        "arkwright_waiver_preserved"
+      ],
+      "must_stay_hidden": [
+        "trust_whistleblower_mandate",
+        "chalk_shelf_subsidence",
+        "subsoil_slip_hidden_by_arising_damp",
+        "vendor_signed_waiver"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_twilight_at_redoubt",
+      "order": 6,
+      "pov": "char_nico",
+      "location_id": "loc_redoubt",
+      "characters_present": [
+        "char_nico",
+        "char_jean"
+      ],
+      "dramatic_function": "Develops the personal connection between Nicholas and Jean while securing the physical evidence of the villa's structural failure.",
+      "entry_state": {
+        "char_nico": {
+          "location_id": "loc_anchorage",
+          "status": "prepared for covert field survey",
+          "goal": "confirm whether Jean is deliberately selling a condemned property"
+        },
+        "obj_plumb_line": {
+          "location_id": "loc_anchorage",
+          "status": "concealed in breast pocket"
+        },
+        "char_jean": {
+          "location_id": "loc_agency"
+        }
+      },
+      "exit_state": {
+        "char_nico": {
+          "location_id": "loc_redoubt",
+          "status": "emotionally conflicted between duty and affection",
+          "goal": "force Jean to openly acknowledge the structural failure"
+        },
+        "obj_plumb_line": {
+          "location_id": "loc_redoubt",
+          "status": "deployed against bay window frame"
+        },
+        "char_jean": {
+          "location_id": "loc_redoubt"
+        }
+      },
+      "required_beats": [
+        "On the salon balcony at twilight, Jean and Nicholas bond over lonely careers and her struggle to uphold her father's straight-dealing reputation.",
+        "Nicholas feels guilt over the deceptive surveyor gauge resting against his chest in his breast pocket pen case.",
+        "When Jean steps onto the driveway to take a bank call, Nicholas deploys his brass plumb line against the south bay window casing.",
+        "Nicholas records a critical two-degree structural shear confirming the chalk shelf has dropped."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "trust_whistleblower_mandate",
+        "chalk_shelf_subsidence",
+        "subsoil_slip_hidden_by_arising_damp",
+        "vendor_signed_waiver"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "brass_gauge_in_pen_case",
+          "plant": "scene_02_tools_of_entrapment"
+        },
+        {
+          "fact_ref": "bay_window_binding",
+          "plant": "scene_03_the_redoubt_tour"
+        }
+      ]
+    },
+    {
+      "id": "scene_07_the_basement_confrontation",
+      "order": 7,
+      "pov": "char_jean",
+      "location_id": "loc_redoubt",
+      "characters_present": [
+        "char_jean",
+        "char_nico"
+      ],
+      "dramatic_function": "Blows open Nicholas's deception and confronts Jean with the physical reality of the building's collapse.",
+      "entry_state": {
+        "char_jean": {
+          "status": "infatuated yet anxious over basement concealment"
+        },
+        "char_nico": {
+          "status": "emotionally conflicted between duty and affection"
+        },
+        "obj_plumb_line": {
+          "status": "deployed against bay window frame"
+        }
+      },
+      "exit_state": {
+        "char_jean": {
+          "status": "exposed and defensive"
+        },
+        "char_nico": {
+          "status": "disillusioned and furious"
+        },
+        "obj_plumb_line": {
+          "status": "openly displayed as surveyor evidence"
+        }
+      },
+      "required_beats": [
+        "The harbour siren sounds at four o'clock as the tidal sluice gate closes, stranding Jean and Nicholas as storm water surges into the basement and buckles the cedar panels.",
+        "Nicholas warns Jean that public duty demands a formal condemnation notice if the house is compromised, then wrenches a soaked cedar board free to expose the sheared chalk masonry beneath.",
+        "Nicholas reveals his surveyor credentials and accuses Jean of endangering lives for a commission.",
+        "Jean tearfully defends herself, insisting she kept full legal records and never lied about the house."
+      ],
+      "reader_must_learn": [
+        "trust_whistleblower_mandate",
+        "subsoil_slip_hidden_by_arising_damp",
+        "chalk_shelf_subsidence"
+      ],
+      "must_stay_hidden": [
+        "vendor_signed_waiver"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "tidal_sluice_schedule",
+          "plant": "scene_01_the_demand_note"
+        },
+        {
+          "fact_ref": "subsoil_slip_hidden_by_arising_damp",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_08_surrendering_the_agency",
+      "order": 8,
+      "pov": "char_jean",
+      "location_id": "loc_agency",
+      "characters_present": [
+        "char_jean",
+        "char_brenda"
+      ],
+      "dramatic_function": "Pays off Jean's arc of integrity as she chooses financial ruin and closure over complicity in a dangerous sale.",
+      "entry_state": {
+        "char_jean": {
+          "location_id": "loc_redoubt",
+          "goal": "sell The Redoubt without misrepresenting the disclosure file",
+          "status": "exposed and defensive"
+        },
+        "char_brenda": {
+          "location_id": "loc_anchorage"
+        }
+      },
+      "exit_state": {
+        "char_jean": {
+          "location_id": "loc_agency",
+          "goal": "surrender the agency premises with clear conscience",
+          "status": "bankrupt and relieved"
+        },
+        "char_brenda": {
+          "location_id": "loc_agency"
+        }
+      },
+      "required_beats": [
+        "Jean cancels the listing for The Redoubt on grounds of severe cliff subsidence.",
+        "Brenda Keel serves Jean with the final warrant of repossession for Gallagher and Sons.",
+        "Jean signs the eviction acknowledgment and accepts the ruin of her business with clean hands."
+      ],
+      "reader_must_learn": [
+        "vendor_signed_waiver"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "vendor_signed_waiver",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_09_the_signed_waiver",
+      "order": 9,
+      "pov": "char_nico",
+      "location_id": "loc_agency",
+      "characters_present": [
+        "char_nico",
+        "char_jean"
+      ],
+      "dramatic_function": "Nicholas discovers proof of Jean's integrity, reversing his assumption about her complicity.",
+      "entry_state": {
+        "char_nico": {
+          "location_id": "loc_redoubt",
+          "status": "disillusioned and furious"
+        },
+        "obj_plumb_line": {
+          "location_id": "loc_redoubt"
+        },
+        "obj_ledger": {
+          "status": "locked inside desk drawer"
+        }
+      },
+      "exit_state": {
+        "char_nico": {
+          "location_id": "loc_agency",
+          "status": "contrite and humbled"
+        },
+        "obj_plumb_line": {
+          "location_id": "loc_agency"
+        },
+        "obj_ledger": {
+          "status": "unlocked and reviewed by Nico"
+        }
+      },
+      "required_beats": [
+        "Nicholas enters the stripped office as Jean packs the agency archives into cardboard boxes.",
+        "Jean gives Nicholas the code nineteen forty-eight to unlock her desk drawer.",
+        "Nicholas reads Arkwright's signed waiver from the ledger and realizes Jean preserved the truth at her own expense."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "ledger_drawer_combination",
+          "plant": "scene_05_locking_the_ledger"
+        },
+        {
+          "fact_ref": "arkwright_waiver_preserved",
+          "plant": "scene_05_locking_the_ledger"
+        }
+      ]
+    },
+    {
+      "id": "scene_10_the_new_terms",
+      "order": 10,
+      "pov": "char_jean",
+      "location_id": "loc_anchorage",
+      "characters_present": [
+        "char_jean",
+        "char_nico"
+      ],
+      "dramatic_function": "Jean and Nicholas resolve their professional conflicts by exchanging sacrifices and founding an independent partnership.",
+      "entry_state": {
+        "char_jean": {
+          "location_id": "loc_agency",
+          "goal": "surrender the agency premises with clear conscience",
+          "status": "bankrupt and relieved"
+        },
+        "char_nico": {
+          "location_id": "loc_agency",
+          "goal": "force Jean to openly acknowledge the structural failure",
+          "status": "contrite and humbled"
+        }
+      },
+      "exit_state": {
+        "char_jean": {
+          "location_id": "loc_anchorage",
+          "goal": "build an honest partnership with Nico",
+          "status": "reconciled and hopeful"
+        },
+        "char_nico": {
+          "location_id": "loc_anchorage",
+          "goal": "build an honest partnership with Jean",
+          "status": "resigned from Trust and committed to Jean"
+        }
+      },
+      "required_beats": [
+        "Nicholas presents his formal resignation from the Marine Trust to Jean, nullifying the condemnation report.",
+        "Jean and Nicholas name the exact costs of her lost agency and his forfeited professional standing.",
+        "Jean accepts Nicholas's proposal to form an independent coastal valuation partnership founded on total disclosure."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "trust_whistleblower_mandate",
+          "plant": "scene_07_the_basement_confrontation"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "omniscient and openly amused, willing to address the reader",
+    "register": "light, digressive, fond of its own asides",
+    "sentence_rhythm": "springy sentences with parenthetical swerves; frequent dashes",
+    "imagery_palette": [
+      "kitchen clutter",
+      "weather with opinions",
+      "animals behaving as people"
+    ],
+    "dialogue_density": "high; characters talk over each other and the narrator enjoys it",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "whimsical_playful"
+  },
+  "metadata": {
+    "title": "The Level and the Chalk",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T18:28:57.813Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "chalk_shelf_subsidence",
+      "statement": "Winter storms eroded the lower chalk beds beneath The Redoubt causing the seaward footings to drop three inches.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "subsoil_slip_hidden_by_arising_damp",
+      "statement": "Arthur Arkwright masked the sheared cellar foundation with treated timber wainscoting to conceal active coastal subsidence.",
+      "caused_by": [
+        "chalk_shelf_subsidence"
+      ]
+    },
+    {
+      "fact_ref": "vendor_signed_waiver",
+      "statement": "Arthur Arkwright signed a binding disclosure waiver admitting knowledge of ground subsidence and refusing structural underpinning.",
+      "caused_by": [
+        "subsoil_slip_hidden_by_arising_damp"
+      ]
+    },
+    {
+      "fact_ref": "undercover_survey_assignment",
+      "statement": "The East Coast Marine Trust contracted Nicholas Vance to inspect The Redoubt under cover as a private cash buyer.",
+      "caused_by": [
+        "chalk_shelf_subsidence"
+      ]
+    },
+    {
+      "fact_ref": "trust_whistleblower_mandate",
+      "statement": "Nicholas Vance is bound under his institutional surveyor contract to publish a statutory condemnation notice on any structurally compromised listing.",
+      "caused_by": [
+        "undercover_survey_assignment",
+        "chalk_shelf_subsidence"
+      ]
+    },
+    {
+      "fact_ref": "agency_debt_deadline",
+      "statement": "Brenda Keel holds an overdue eighteen thousand pound commercial call note against Gallagher and Sons requiring immediate settlement.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "tidal_sluice_schedule",
+      "statement": "The Portling tidal sluice gate automatically closes at four in the afternoon on storm warning days, cutting off road access to The Redoubt spit.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "brass_gauge_in_pen_case",
+      "statement": "Nicholas Vance carries a calibrated brass crack width gauge concealed inside a vintage fountain pen casing.",
+      "caused_by": [
+        "undercover_survey_assignment"
+      ]
+    },
+    {
+      "fact_ref": "bay_window_binding",
+      "statement": "The southern bay sash window of The Redoubt jams in its frame due to a two degree seaward tilt of the chalk footing.",
+      "caused_by": [
+        "chalk_shelf_subsidence"
+      ]
+    },
+    {
+      "fact_ref": "ledger_drawer_combination",
+      "statement": "The combination to the locked agency drawer containing the Arkwright disclosure waiver is nineteen forty-eight.",
+      "caused_by": [
+        "vendor_signed_waiver"
+      ]
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-29T18:28:36.623Z",
+    "brief": {
+      "story_id": "review-terms-of-sale",
+      "title": "Terms of Sale",
+      "premise": {
+        "logline": "An estate agent falls for the one buyer who can see what is wrong with the house she is desperate to sell.",
+        "modules": {
+          "theme": "honesty as a thing that costs money",
+          "setting_time": "a falling property market",
+          "setting_place": "a seaside town where every other house is for sale",
+          "protagonist": "an estate agent one bad month from losing the agency",
+          "protagonist_want": "to close the sale without lying outright",
+          "antagonism": "her own need for the commission",
+          "complication": "the buyer is a surveyor pretending not to be one",
+          "ending_shape": "the sale falls through and the relationship does not"
+        }
+      },
+      "plot_shape": {
+        "id": "courtship",
+        "name": "Courtship",
+        "central_question": "What has to be given up for these two to be honest with each other?",
+        "phases": [
+          {
+            "name": "Two worlds",
+            "purpose": "Both parties established separately, each with a commitment in the way.",
+            "share": 0.2
+          },
+          {
+            "name": "Collision",
+            "purpose": "Forced proximity; a misjudgement each makes about the other.",
+            "share": 0.2
+          },
+          {
+            "name": "Concealment",
+            "purpose": "Something true is withheld, for a reason that is not cowardice.",
+            "share": 0.25
+          },
+          {
+            "name": "Exposure",
+            "purpose": "The withheld thing surfaces at the worst available moment.",
+            "share": 0.2
+          },
+          {
+            "name": "Terms",
+            "purpose": "What each actually gives up, stated plainly.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "first party",
+            "purpose": "Withholds something, and has a good reason."
+          },
+          {
+            "role": "second party",
+            "purpose": "Misjudges the first, on evidence."
+          },
+          {
+            "role": "obligation",
+            "purpose": "A person embodying what one of them owes elsewhere."
+          },
+          {
+            "role": "confidant",
+            "purpose": "Knows the withheld thing and is bound not to say it."
+          }
+        ],
+        "obligatory_moves": [
+          "The reader learns the withheld thing before the second party does.",
+          "The misjudgement is reasonable given what that character has been shown.",
+          "Neither party gets what they wanted without naming what it costs."
+        ]
+      },
+      "event_count": 12,
+      "cast": {
+        "characters": 4,
+        "locations": 3,
+        "objects": 2
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 2,
+        "min_span": 3,
+        "long_range_edges": 1,
+        "long_range_span": 6
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "courtship",
+        "premise_preset": "Terms of Sale"
+      }
+    },
+    "repairs": [
+      "mechanical | declare_fact_at_event: hidden \"subsoil_slip_hidden_by_arising_damp\" installed in ev_09_panel_confrontation.reveals",
+      "mechanical | declare_fact_at_event: hidden \"vendor_signed_waiver\" installed in ev_10_listing_withdrawal.reveals",
+      "mechanical | declare_fact_at_event: hidden \"undercover_survey_assignment\" installed in ev_02_surveyor_briefing.reveals",
+      "model | declare_fact_at_event: \"chalk_shelf_subsidence\" installed in ev_09_panel_confrontation.reveals"
+    ],
+    "events": [
+      {
+        "id": "ev_01_foreclosure_demand",
+        "sequence": 1,
+        "summary": "Brenda Keel serves Jean with a thirty-day foreclosure notice on the agency premises unless the overdue commercial debt is paid in full.",
+        "pov": "char_jean",
+        "location_id": "loc_agency",
+        "characters_present": [
+          "char_jean",
+          "char_brenda"
+        ],
+        "dramatic_function": "Establish the protagonist's financial crisis, her family commitment, and the setting's coastal access rule.",
+        "beats": [
+          "Brenda Keel serves Jean with the formal thirty-day demand note for the eighteen thousand pound loan.",
+          "Jean promises that the pending commission on The Redoubt will settle the entire account.",
+          "Jean checks the tide board and notes the four o'clock tidal sluice schedule for accessing the cliff road."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "tidal_sluice_schedule"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "agency_debt_deadline",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_brenda",
+            "column": "location_id",
+            "value": "loc_anchorage"
+          },
+          {
+            "entity_id": "char_jean",
+            "column": "status",
+            "value": "under formal thirty-day foreclosure notice"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_surveyor_briefing",
+        "sequence": 2,
+        "summary": "Nicholas Vance readies his disguised inspection tools at the harbour inn to investigate suspected broker deception.",
+        "pov": "char_nico",
+        "location_id": "loc_anchorage",
+        "characters_present": [
+          "char_nico"
+        ],
+        "dramatic_function": "Establish the second party's undercover assignment and concealed professional tools.",
+        "beats": [
+          "Nicholas reviews the Marine Trust dossier targeting the suspicious listing of The Redoubt.",
+          "Nicholas slips a calibrated brass crack gauge into the body of an antique fountain pen.",
+          "Nicholas suppresses his misgivings about entrapping a struggling seaside agency."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "brass_gauge_in_pen_case",
+          "undercover_survey_assignment"
+        ],
+        "conceals": [
+          "trust_whistleblower_mandate"
+        ],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "undercover_survey_assignment",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_nico",
+            "column": "status",
+            "value": "prepared for covert field survey"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_first_walkthrough",
+        "sequence": 3,
+        "summary": "Jean conducts Nicholas through The Redoubt, experiencing an instant mutual attraction while deflecting him away from the basement.",
+        "pov": "char_jean",
+        "location_id": "loc_redoubt",
+        "characters_present": [
+          "char_jean",
+          "char_nico"
+        ],
+        "dramatic_function": "First collision of the courtship where personal spark conflicts with professional concealment.",
+        "beats": [
+          "Jean welcomes Nicholas to The Redoubt and feels an immediate rapport with his perceptive architectural remarks.",
+          "Jean struggles to open the sticking south bay sash window and laughs off the resistance as seaside humidity.",
+          "When Nicholas requests to view the cellar, Jean smoothly redirects him to the clifftop garden terrace."
+        ],
+        "caused_by": [
+          "ev_01_foreclosure_demand",
+          "ev_02_surveyor_briefing"
+        ],
+        "reveals": [
+          "bay_window_binding"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jean",
+            "column": "location_id",
+            "value": "loc_redoubt"
+          },
+          {
+            "entity_id": "char_nico",
+            "column": "location_id",
+            "value": "loc_redoubt"
+          },
+          {
+            "entity_id": "obj_plumb_line",
+            "column": "location_id",
+            "value": "loc_redoubt"
+          },
+          {
+            "entity_id": "char_jean",
+            "column": "status",
+            "value": "infatuated yet anxious over basement concealment"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_pub_overhearing",
+        "sequence": 4,
+        "summary": "Nicholas overhears Toby lamenting the agency's imminent ruin at the pub and forms a harsh judgement of Jean's motives.",
+        "pov": "char_nico",
+        "location_id": "loc_anchorage",
+        "characters_present": [
+          "char_nico",
+          "char_toby"
+        ],
+        "dramatic_function": "Establish the second party's reasonable misjudgement based on overheard circumstantial evidence.",
+        "beats": [
+          "Nicholas watches Toby Lin drinking at the bar while desperately sorting delinquent agency invoices.",
+          "Toby reveals to the innkeeper that Gallagher and Sons will collapse unless The Redoubt closes this week.",
+          "Nicholas concludes that Jean is an unprincipled broker knowingly trying to offload an unsafe ruin onto him."
+        ],
+        "caused_by": [
+          "ev_03_first_walkthrough"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_nico",
+            "column": "location_id",
+            "value": "loc_anchorage"
+          },
+          {
+            "entity_id": "obj_plumb_line",
+            "column": "location_id",
+            "value": "loc_anchorage"
+          },
+          {
+            "entity_id": "char_toby",
+            "column": "location_id",
+            "value": "loc_anchorage"
+          },
+          {
+            "entity_id": "char_nico",
+            "column": "goal",
+            "value": "confirm whether Jean is deliberately selling a condemned property"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_confidential_refusal",
+        "sequence": 5,
+        "summary": "Jean rejects Toby's plea to destroy Arkwright's signed waiver, locking it in the agency drawer rather than committing active fraud.",
+        "pov": "char_jean",
+        "location_id": "loc_agency",
+        "characters_present": [
+          "char_jean",
+          "char_toby"
+        ],
+        "dramatic_function": "Establish the protagonist's ethical boundary in conversation with her confidant.",
+        "beats": [
+          "Toby begs Jean to burn Arkwright's signed waiver before the prospective buyer orders conveyancing searches.",
+          "Jean refuses to commit outright fraud and returns the document to the listing ledger.",
+          "Jean secures the ledger in her desk drawer using the combination nineteen forty-eight."
+        ],
+        "caused_by": [
+          "ev_01_foreclosure_demand",
+          "ev_03_first_walkthrough"
+        ],
+        "reveals": [
+          "ledger_drawer_combination"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jean",
+            "column": "location_id",
+            "value": "loc_agency"
+          },
+          {
+            "entity_id": "char_toby",
+            "column": "location_id",
+            "value": "loc_agency"
+          },
+          {
+            "entity_id": "char_jean",
+            "column": "goal",
+            "value": "sell The Redoubt without misrepresenting the disclosure file"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_terrace_confession",
+        "sequence": 6,
+        "summary": "During a twilight walkthrough at The Redoubt, Nicholas and Jean bond over their shared family losses, heightening Nicholas's inner conflict.",
+        "pov": "char_nico",
+        "location_id": "loc_redoubt",
+        "characters_present": [
+          "char_nico",
+          "char_jean"
+        ],
+        "dramatic_function": "Intensify romantic vulnerability and inner dissonance before the exposure.",
+        "beats": [
+          "Jean and Nicholas sit on the salon balcony watching the sea and speak openly of their lonely careers.",
+          "Jean speaks passionately of preserving her father's reputation for straight dealing in a ruined market.",
+          "Nicholas touches his breast pocket pen case, agonized by the deceptive surveyor gauge resting against his chest."
+        ],
+        "caused_by": [
+          "ev_03_first_walkthrough",
+          "ev_05_confidential_refusal"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "brass_gauge_in_pen_case",
+            "plant": "ev_02_surveyor_briefing"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_nico",
+            "column": "location_id",
+            "value": "loc_redoubt"
+          },
+          {
+            "entity_id": "obj_plumb_line",
+            "column": "location_id",
+            "value": "loc_redoubt"
+          },
+          {
+            "entity_id": "char_jean",
+            "column": "location_id",
+            "value": "loc_redoubt"
+          },
+          {
+            "entity_id": "char_nico",
+            "column": "status",
+            "value": "emotionally conflicted between duty and affection"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_window_measurement",
+        "sequence": 7,
+        "summary": "Nicholas covertly measures the distorted bay window while Jean takes a call, securing proof of severe structural failure.",
+        "pov": "char_nico",
+        "location_id": "loc_redoubt",
+        "characters_present": [
+          "char_nico",
+          "char_jean"
+        ],
+        "dramatic_function": "The investigator obtains definitive physical confirmation that substantiates his misjudgement.",
+        "beats": [
+          "Jean steps onto the driveway to answer an urgent telephone call from the bank.",
+          "Nicholas examines the binding south bay window and deploys his brass plumb line against the casing.",
+          "Nicholas records a critical two-degree structural shear, confirming the chalk shelf has dropped."
+        ],
+        "caused_by": [
+          "ev_06_terrace_confession"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "bay_window_binding",
+            "plant": "ev_03_first_walkthrough"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_plumb_line",
+            "column": "status",
+            "value": "deployed against bay window frame"
+          },
+          {
+            "entity_id": "char_nico",
+            "column": "goal",
+            "value": "force Jean to openly acknowledge the structural failure"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_storm_stranding",
+        "sequence": 8,
+        "summary": "An afternoon storm closes the tidal sluice gate, trapping Jean and Nicholas together as water begins to seep through the basement wainscoting.",
+        "pov": "char_jean",
+        "location_id": "loc_redoubt",
+        "characters_present": [
+          "char_jean",
+          "char_nico"
+        ],
+        "dramatic_function": "Forced entrapment by the setting rule precipitates the crisis and exposes Nicholas's mandate.",
+        "beats": [
+          "The harbour siren sounds at four o'clock as the tidal sluice gate closes, stranding both of them on the spit.",
+          "Storm waters surge into the basement drains and cause Arkwright's fresh cedar panels to buckle with dark water.",
+          "Nicholas admits to Jean that if this property is structurally compromised, his public duty requires a formal condemnation notice."
+        ],
+        "caused_by": [
+          "ev_06_terrace_confession",
+          "ev_07_window_measurement"
+        ],
+        "reveals": [
+          "trust_whistleblower_mandate"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "tidal_sluice_schedule",
+            "plant": "ev_01_foreclosure_demand"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jean",
+            "column": "status",
+            "value": "stranded by storm tide at The Redoubt"
+          },
+          {
+            "entity_id": "char_nico",
+            "column": "status",
+            "value": "stranded by storm tide at The Redoubt"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_panel_confrontation",
+        "sequence": 9,
+        "summary": "Nicholas rips away the buckled basement wainscoting, reveals his true identity, and accuses Jean of marketing a dangerous ruin.",
+        "pov": "char_nico",
+        "location_id": "loc_redoubt",
+        "characters_present": [
+          "char_nico",
+          "char_jean"
+        ],
+        "dramatic_function": "The explosive confrontation where all pretenses fall and the misjudgement is voiced.",
+        "beats": [
+          "Nicholas wrenches a soaked cedar board free to expose the sheared chalk masonry beneath.",
+          "Nicholas produces his surveyor credentials and accuses Jean of risking buyers' lives for a commission.",
+          "Jean retaliates with bitter tears, declaring she never lied about the house and kept full legal records."
+        ],
+        "caused_by": [
+          "ev_08_storm_stranding"
+        ],
+        "reveals": [
+          "subsoil_slip_hidden_by_arising_damp",
+          "chalk_shelf_subsidence"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "subsoil_slip_hidden_by_arising_damp",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_plumb_line",
+            "column": "status",
+            "value": "openly displayed as surveyor evidence"
+          },
+          {
+            "entity_id": "char_jean",
+            "column": "status",
+            "value": "exposed and defensive"
+          },
+          {
+            "entity_id": "char_nico",
+            "column": "status",
+            "value": "disillusioned and furious"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_listing_withdrawal",
+        "sequence": 10,
+        "summary": "Jean returns to her office and surrenders her business to Brenda Keel rather than completing a dishonest sale.",
+        "pov": "char_jean",
+        "location_id": "loc_agency",
+        "characters_present": [
+          "char_jean",
+          "char_brenda"
+        ],
+        "dramatic_function": "The first party faces the ultimate financial cost of choosing total honesty.",
+        "beats": [
+          "Jean officially cancels the listing for The Redoubt on grounds of severe cliff subsidence.",
+          "Brenda Keel serves Jean with the final warrant of repossession for Gallagher and Sons.",
+          "Jean signs the eviction acknowledgment, accepting the loss of her agency with clean hands."
+        ],
+        "caused_by": [
+          "ev_09_panel_confrontation"
+        ],
+        "reveals": [
+          "vendor_signed_waiver"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "vendor_signed_waiver",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jean",
+            "column": "location_id",
+            "value": "loc_agency"
+          },
+          {
+            "entity_id": "char_brenda",
+            "column": "location_id",
+            "value": "loc_agency"
+          },
+          {
+            "entity_id": "char_jean",
+            "column": "goal",
+            "value": "surrender the agency premises with clear conscience"
+          },
+          {
+            "entity_id": "char_jean",
+            "column": "status",
+            "value": "bankrupt and relieved"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_waiver_inspection",
+        "sequence": 11,
+        "summary": "Nicholas comes to the closing agency and discovers the signed waiver, realizing he completely misjudged Jean's integrity.",
+        "pov": "char_nico",
+        "location_id": "loc_agency",
+        "characters_present": [
+          "char_nico",
+          "char_jean"
+        ],
+        "dramatic_function": "The second party is disabused of his misjudgement by documented evidence.",
+        "beats": [
+          "Nicholas enters the stripped office to find Jean packing the agency archives into cardboard boxes.",
+          "Jean gives Nicholas the code nineteen forty-eight to unlock her desk drawer and inspect the ledger.",
+          "Nicholas reads Arkwright's signed waiver and realizes Jean had preserved the truth at her own expense."
+        ],
+        "caused_by": [
+          "ev_09_panel_confrontation",
+          "ev_10_listing_withdrawal"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "ledger_drawer_combination",
+            "plant": "ev_05_confidential_refusal"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_nico",
+            "column": "location_id",
+            "value": "loc_agency"
+          },
+          {
+            "entity_id": "obj_plumb_line",
+            "column": "location_id",
+            "value": "loc_agency"
+          },
+          {
+            "entity_id": "obj_ledger",
+            "column": "status",
+            "value": "unlocked and reviewed by Nico"
+          },
+          {
+            "entity_id": "char_nico",
+            "column": "status",
+            "value": "contrite and humbled"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_partnership_terms",
+        "sequence": 12,
+        "summary": "Nicholas and Jean meet at the harbour inn where Nicholas forfeits his retainer to protect her record, and the two establish new terms together.",
+        "pov": "char_jean",
+        "location_id": "loc_anchorage",
+        "characters_present": [
+          "char_jean",
+          "char_nico"
+        ],
+        "dramatic_function": "Resolution where both parties acknowledge what honesty cost them and commit to each other.",
+        "beats": [
+          "Nicholas shows Jean his formal resignation from the Marine Trust, nullifying the condemnation report.",
+          "Jean names the exact cost of losing her agency and Nicholas names the cost of his forfeited professional standing.",
+          "Jean accepts Nicholas's proposal to form an independent coastal valuation partnership founded on total disclosure."
+        ],
+        "caused_by": [
+          "ev_10_listing_withdrawal",
+          "ev_11_waiver_inspection"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "trust_whistleblower_mandate",
+            "plant": "ev_08_storm_stranding"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jean",
+            "column": "location_id",
+            "value": "loc_anchorage"
+          },
+          {
+            "entity_id": "char_nico",
+            "column": "location_id",
+            "value": "loc_anchorage"
+          },
+          {
+            "entity_id": "char_jean",
+            "column": "goal",
+            "value": "build an honest partnership with Nico"
+          },
+          {
+            "entity_id": "char_nico",
+            "column": "goal",
+            "value": "build an honest partnership with Jean"
+          },
+          {
+            "entity_id": "char_jean",
+            "column": "status",
+            "value": "reconciled and hopeful"
+          },
+          {
+            "entity_id": "char_nico",
+            "column": "status",
+            "value": "resigned from Trust and committed to Jean"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_cliff_subsidence",
+        "sequence": 1,
+        "summary": "Winter storms eroded the lower chalk beds beneath The Redoubt causing the seaward footings to drop three inches.",
+        "caused_by": [],
+        "establishes": [
+          "chalk_shelf_subsidence"
+        ]
+      },
+      {
+        "id": "hidden_02_vendor_coverup",
+        "sequence": 2,
+        "summary": "Arthur Arkwright installed cedar wainscoting across the cellar to hide the subsidence fissures so he could list the house for sale.",
+        "caused_by": [
+          "hidden_01_cliff_subsidence"
+        ],
+        "establishes": [
+          "subsoil_slip_hidden_by_arising_damp"
+        ]
+      },
+      {
+        "id": "hidden_03_signed_waiver",
+        "sequence": 3,
+        "summary": "Jean Gallagher inspected the basement and compelled Arkwright to sign a formal disclosure waiver acknowledging the structural movement before agreeing to list it.",
+        "caused_by": [
+          "hidden_02_vendor_coverup"
+        ],
+        "establishes": [
+          "vendor_signed_waiver"
+        ]
+      },
+      {
+        "id": "hidden_04_trust_retainer",
+        "sequence": 4,
+        "summary": "The East Coast Marine Trust hired Nicholas Vance under a confidential retainer requiring mandatory public blacklisting of any unsafe property he inspected.",
+        "caused_by": [
+          "hidden_01_cliff_subsidence"
+        ],
+        "establishes": [
+          "undercover_survey_assignment",
+          "trust_whistleblower_mandate"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "agency_debt_deadline",
+        "statement": "Brenda Keel holds an overdue eighteen thousand pound commercial call note against Gallagher and Sons requiring immediate settlement.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "chalk_shelf_subsidence",
+        "statement": "Winter storms eroded the lower chalk beds beneath The Redoubt causing the seaward footings to drop three inches.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "subsoil_slip_hidden_by_arising_damp",
+        "statement": "Arthur Arkwright masked the sheared cellar foundation with treated timber wainscoting to conceal active coastal subsidence.",
+        "caused_by": [
+          "chalk_shelf_subsidence"
+        ]
+      },
+      {
+        "fact_ref": "vendor_signed_waiver",
+        "statement": "Arthur Arkwright signed a binding disclosure waiver admitting knowledge of ground subsidence and refusing structural underpinning.",
+        "caused_by": [
+          "subsoil_slip_hidden_by_arising_damp"
+        ]
+      },
+      {
+        "fact_ref": "undercover_survey_assignment",
+        "statement": "The East Coast Marine Trust contracted Nicholas Vance to inspect The Redoubt under cover as a private cash buyer.",
+        "caused_by": [
+          "chalk_shelf_subsidence"
+        ]
+      },
+      {
+        "fact_ref": "trust_whistleblower_mandate",
+        "statement": "Nicholas Vance is bound under his institutional surveyor contract to publish a statutory condemnation notice on any structurally compromised listing.",
+        "caused_by": [
+          "undercover_survey_assignment"
+        ]
+      },
+      {
+        "fact_ref": "tidal_sluice_schedule",
+        "statement": "The Portling tidal sluice gate automatically closes at four in the afternoon on storm warning days, cutting off road access to The Redoubt spit.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "brass_gauge_in_pen_case",
+        "statement": "Nicholas Vance carries a calibrated brass crack width gauge concealed inside a vintage fountain pen casing.",
+        "caused_by": [
+          "undercover_survey_assignment"
+        ]
+      },
+      {
+        "fact_ref": "bay_window_binding",
+        "statement": "The southern bay sash window of The Redoubt jams in its frame due to a two degree seaward tilt of the chalk footing.",
+        "caused_by": [
+          "chalk_shelf_subsidence"
+        ]
+      },
+      {
+        "fact_ref": "ledger_drawer_combination",
+        "statement": "The combination to the locked agency drawer containing the Arkwright disclosure waiver is nineteen forty-eight.",
+        "caused_by": [
+          "vendor_signed_waiver"
+        ]
+      }
+    ],
+    "stakes": [
+      {
+        "stake": "Gallagher and Sons will be foreclosed upon and evicted by the bank if Jean cannot deposit the full commission within thirty days.",
+        "introduced_by": "ev_01_foreclosure_demand",
+        "resolved_by": "ev_10_listing_withdrawal"
+      },
+      {
+        "stake": "Nicholas will file a statutory condemnation report on The Redoubt that permanently discredits Gallagher and Sons.",
+        "introduced_by": "ev_04_pub_overhearing",
+        "resolved_by": "ev_12_partnership_terms"
+      },
+      {
+        "stake": "Jean will compromise her personal integrity by completing the deceptive sale of an unstable house to save her family firm.",
+        "introduced_by": "ev_03_first_walkthrough",
+        "resolved_by": "ev_10_listing_withdrawal"
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T18:28:57.813Z",
+    "started_at": "2026-09-29T18:28:36.625Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_demand_note",
+        "order": 1,
+        "event_ids": [
+          "ev_01_foreclosure_demand"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_tools_of_entrapment",
+        "order": 2,
+        "event_ids": [
+          "ev_02_surveyor_briefing"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_redoubt_tour",
+        "order": 3,
+        "event_ids": [
+          "ev_03_first_walkthrough"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_overheard_ruin",
+        "order": 4,
+        "event_ids": [
+          "ev_04_pub_overhearing"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_locking_the_ledger",
+        "order": 5,
+        "event_ids": [
+          "ev_05_confidential_refusal"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_twilight_at_redoubt",
+        "order": 6,
+        "event_ids": [
+          "ev_06_terrace_confession",
+          "ev_07_window_measurement"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_the_basement_confrontation",
+        "order": 7,
+        "event_ids": [
+          "ev_08_storm_stranding",
+          "ev_09_panel_confrontation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_surrendering_the_agency",
+        "order": 8,
+        "event_ids": [
+          "ev_10_listing_withdrawal"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_signed_waiver",
+        "order": 9,
+        "event_ids": [
+          "ev_11_waiver_inspection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_the_new_terms",
+        "order": 10,
+        "event_ids": [
+          "ev_12_partnership_terms"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}

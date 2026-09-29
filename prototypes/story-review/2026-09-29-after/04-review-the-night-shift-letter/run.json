@@ -1,0 +1,350 @@
+{
+  "title": "The Night Shift Letter",
+  "plot_shape_preset": "courtship",
+  "premise": {
+    "logline": "Two hospital porters on opposite shifts fall for each other through notes left in a shared locker, and one of them is not who the notes suggest.",
+    "modules": {
+      "theme": "whether you can love someone you have only ever read",
+      "setting_time": "a hard winter of staff shortages",
+      "setting_place": "a large city hospital, its basements and loading bays",
+      "protagonist": "a day porter saving to leave the city",
+      "protagonist_want": "to meet the night porter without ruining it",
+      "antagonism": "a rota that never lets them overlap, and a supervisor who reads the notes",
+      "complication": "the notes were started by someone else, as a joke",
+      "ending_shape": "they meet as themselves and choose each other anyway"
+    }
+  },
+  "event_count_requested": 16,
+  "arc_events": 16,
+  "scenes": 15,
+  "words": 8820,
+  "run_id": "review-the-night-shift-letter-20260929173459-be603f1a",
+  "models": {
+    "arc": "gemini-3.8-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash"
+    ],
+    "other_calls": [
+      {
+        "scene": "scene_04_the_secret_card",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_06_the_blue_notebook",
+        "purpose": "writer_retry",
+        "model": "gemini-3.8-flash"
+      },
+      {
+        "scene": "scene_08_the_blizzard_shift",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_09_the_dawn_inspection",
+        "purpose": "continuity_repair",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_12_the_loading_bay_confession",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      }
+    ]
+  },
+  "truncated_scenes": [
+    "scene_06_the_blue_notebook"
+  ],
+  "tail_eviction_scenes": 0,
+  "cost_usd": 0.4136,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "unused_seed_entity",
+    "unused_seed_entity",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_01_the_cash_envelope",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_deposit_envelope",
+      "column": "status",
+      "message": "obj_deposit_envelope is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_02_graveyard_shift_begins",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_julian",
+      "column": "status",
+      "message": "char_julian.status is committed as \"chilled\"; the engine proposed \"alerted\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_03_martins_deadline",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_deposit_envelope",
+      "column": "status",
+      "message": "obj_deposit_envelope is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_03_martins_deadline",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur",
+      "column": "status",
+      "message": "char_arthur.status is committed as \"exhausted\"; the engine proposed \"cornered\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_05_the_boiler_room",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_kieran",
+      "column": "status",
+      "message": "char_kieran.status is committed as \"restless\"; the engine proposed \"cornered\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_05_the_boiler_room",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_julian",
+      "column": "status",
+      "message": "char_julian.status is committed as \"chilled\"; the engine proposed \"protective\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_05_the_boiler_room",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_kieran",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_kieran.goal; the proposal \"keep quiet and protect his job after Julian caught him with the ethanol\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_07_the_reply",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur",
+      "column": "status",
+      "message": "char_arthur.status is committed as \"exhausted\"; the engine proposed \"hopeful\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_08_the_blizzard_shift",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_julian",
+      "column": "status",
+      "message": "char_julian.status is committed as \"chilled\"; the engine proposed \"exhausted\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_09_the_dawn_inspection",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "locker_inspection_schedule",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_09_the_dawn_inspection: scene_09_the_dawn_inspection reveals \"locker_inspection_schedule\", which the reader first learned in scene 2 and was last shown in scene 2"
+    },
+    {
+      "scene": "scene_09_the_dawn_inspection",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "blue_notebook_introduced",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_09_the_dawn_inspection: scene_09_the_dawn_inspection reveals \"blue_notebook_introduced\", which the reader first learned in scene 6 and was last shown in scene 6"
+    },
+    {
+      "scene": "scene_10_the_overheard_flue",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur",
+      "column": "status",
+      "message": "char_arthur.status is committed as \"exhausted\"; the engine proposed \"humiliated\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_11_the_evening_lockout",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur",
+      "column": "status",
+      "message": "char_arthur.status is committed as \"exhausted\"; the engine proposed \"defiant\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_11_the_evening_lockout",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_arthur.goal; the proposal \"confront Julian Ward face-to-face over the locker mockery\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_11_the_evening_lockout",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_henderson",
+      "column": "status",
+      "message": "char_henderson.status is committed as \"stern\"; the engine proposed \"enraged\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_12_the_loading_bay_confession",
+      "code": "entry_state_mismatch",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_julian",
+      "column": "location_id",
+      "message": "entry_state asserts char_julian.location_id = \"loc_loading_bay\", but the World Model holds \"loc_boiler_room\""
+    },
+    {
+      "scene": "scene_12_the_loading_bay_confession",
+      "code": "entry_state_mismatch",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_kieran",
+      "column": "location_id",
+      "message": "entry_state asserts char_kieran.location_id = \"loc_loading_bay\", but the World Model holds \"loc_boiler_room\""
+    },
+    {
+      "scene": "scene_13_the_leeds_lease",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_martin",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_martin.goal; the proposal \"deal with the Hunslet cooperage firm after Arthur's refusal\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_13_the_leeds_lease",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "rel_scene_13_the_leeds_lease_1",
+      "column": "_row",
+      "message": "rel_scene_13_the_leeds_lease_1 is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_14_facing_burdens",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_arthur.goal; the proposal \"support Julian and build an honest life together in the city\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_14_facing_burdens",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_julian",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_julian.goal; the proposal \"accept Arthur's presence while caring for his dying uncle\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_15_locker_forty_four",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_arthur.goal; the proposal \"build a shared life with Julian in the city\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_15_locker_forty_four",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_julian",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_julian.goal; the proposal \"support Arthur and endure hospital duties together\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_15_locker_forty_four",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_blue_notebook",
+      "column": "location_id",
+      "message": "obj_blue_notebook is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_15_locker_forty_four",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_blue_notebook",
+      "column": "status",
+      "message": "obj_blue_notebook is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    }
+  ]
+}

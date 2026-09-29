@@ -1,0 +1,109 @@
+{
+  "title": "Terms of Sale",
+  "plot_shape_preset": "courtship",
+  "premise": {
+    "logline": "An estate agent falls for the one buyer who can see what is wrong with the house she is desperate to sell.",
+    "modules": {
+      "theme": "honesty as a thing that costs money",
+      "setting_time": "a falling property market",
+      "setting_place": "a seaside town where every other house is for sale",
+      "protagonist": "an estate agent one bad month from losing the agency",
+      "protagonist_want": "to close the sale without lying outright",
+      "antagonism": "her own need for the commission",
+      "complication": "the buyer is a surveyor pretending not to be one",
+      "ending_shape": "the sale falls through and the relationship does not"
+    }
+  },
+  "event_count_requested": 12,
+  "arc_events": 12,
+  "scenes": 10,
+  "words": 7612,
+  "run_id": "review-terms-of-sale-20260929182857-ef2e212c",
+  "models": {
+    "arc": "gemini-3.8-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash"
+    ],
+    "other_calls": [
+      {
+        "scene": "scene_04_overheard_ruin",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_08_surrendering_the_agency",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      }
+    ]
+  },
+  "truncated_scenes": [],
+  "tail_eviction_scenes": 0,
+  "cost_usd": 0.3255,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_04_overheard_ruin",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "rel_scene_04_overheard_ruin_0",
+      "column": "_row",
+      "message": "rel_scene_04_overheard_ruin_0 is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_05_locking_the_ledger",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_ledger",
+      "column": "location_id",
+      "message": "obj_ledger is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_05_locking_the_ledger",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_ledger",
+      "column": "status",
+      "message": "obj_ledger is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_08_surrendering_the_agency",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_ledger",
+      "column": "status",
+      "message": "obj_ledger is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_09_the_signed_waiver",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_nico",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_nico.goal; the proposal \"make amends to Jean for wrongful suspicion\" was dropped and the prior value kept"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "title": "The Borrowed Boat",
+  "plot_shape_preset": "quest",
+  "premise": {
+    "logline": "Two estranged sisters sail their father’s old boat down the coast to scatter his ashes where he said, and neither believes him.",
+    "modules": {
+      "theme": "how the dead keep arguing through what they leave",
+      "setting_time": "a week of unreliable autumn weather",
+      "setting_place": "a rocky coastline of fishing harbours in decline",
+      "protagonist": "the younger sister, who stayed and nursed him",
+      "protagonist_want": "to finish the trip without admitting what he told her",
+      "antagonism": "the older sister, who wants to sell the boat at the end",
+      "complication": "the place he named is where he had a second family",
+      "ending_shape": "they arrive, and the destination is not what the trip was for"
+    }
+  },
+  "event_count_requested": 8,
+  "arc_events": 8,
+  "scenes": 6,
+  "words": 4518,
+  "run_id": "review-the-borrowed-boat-20260929171811-8dc7d82f",
+  "models": {
+    "arc": "gemini-3.8-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash"
+    ],
+    "other_calls": [
+      {
+        "scene": "scene_04_the_granite_shoal",
+        "purpose": "continuity_repair",
+        "model": "gemini-3.5-flash-lite"
+      },
+      {
+        "scene": "scene_04_the_granite_shoal",
+        "purpose": "digest_rollup",
+        "model": "gemini-3.5-flash-lite"
+      }
+    ]
+  },
+  "truncated_scenes": [],
+  "tail_eviction_scenes": 0,
+  "cost_usd": 0.2302,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "short_range_payoff",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_03_the_missing_logs",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_ruth",
+      "column": "status",
+      "message": "char_ruth.status stays \"seasick and unnerved\"; the engine's rewording \"suspicious and shaken\" was not committed"
+    },
+    {
+      "scene": "scene_04_the_granite_shoal",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_cleo",
+      "column": "status",
+      "message": "char_cleo.status stays \"blistered from scalding engine brine\"; the engine's rewording \"exhausted with trembling scalded hands\" was not committed"
+    },
+    {
+      "scene": "scene_04_the_granite_shoal",
+      "code": "free_text_drift",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_ruth",
+      "column": "status",
+      "message": "char_ruth.status stays \"seasick and unnerved\"; the engine's rewording \"stunned and ruined\" was not committed"
+    },
+    {
+      "scene": "scene_04_the_granite_shoal",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "obj_buyer_contract",
+      "column": "status",
+      "message": "obj_buyer_contract.status is committed as \"active_conditional_transit\"; the engine proposed \"breached_drive_shaft_destroyed\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_04_the_granite_shoal",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "shoal_tide_window",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_04_the_granite_shoal: scene_04_the_granite_shoal reveals \"shoal_tide_window\", which the reader first learned in scene 1 and was last shown in scene 1"
+    },
+    {
+      "scene": "scene_04_the_granite_shoal",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "undersized_kedge_anchor",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_04_the_granite_shoal: scene_04_the_granite_shoal reveals \"undersized_kedge_anchor\", which the reader first learned in scene 1 and was last shown in scene 1"
+    },
+    {
+      "scene": "scene_06_the_refusal",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_toby",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_toby.goal; the proposal \"settle Arthur's debts by liquidating the workshop\" was dropped and the prior value kept"
+    }
+  ]
+}

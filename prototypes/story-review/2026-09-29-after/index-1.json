@@ -1,0 +1,41 @@
+{
+  "model": "gemini-3.8-flash",
+  "writer_default": "gemini-3.8-flash",
+  "stories": [
+    {
+      "label": "01-review-the-apprentices-bill",
+      "title": "The Apprentice’s Bill",
+      "events": 5,
+      "scenes": 4,
+      "words": 2748
+    },
+    {
+      "label": "02-review-the-borrowed-boat",
+      "title": "The Borrowed Boat",
+      "events": 8,
+      "scenes": 6,
+      "words": 4518
+    },
+    {
+      "label": "03-review-toll",
+      "title": "Toll",
+      "events": 12,
+      "scenes": 9,
+      "words": 5742
+    },
+    {
+      "label": "04-review-the-night-shift-letter",
+      "title": "The Night Shift Letter",
+      "events": 16,
+      "scenes": 15,
+      "words": 8820
+    },
+    {
+      "label": "05-review-understudy",
+      "title": "Understudy",
+      "events": 22,
+      "scenes": 19,
+      "words": 13301
+    }
+  ]
+}

@@ -1,0 +1,955 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-understudy",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_hester",
+        "name": "Hester Vane",
+        "location_id": "loc_dunmere_theatre",
+        "status": "physically stiff and emotionally guarded",
+        "goal": "protect her exclusive ownership of the role of Duke Malcor",
+        "bag": {}
+      },
+      {
+        "id": "char_maisie",
+        "name": "Maisie Callow",
+        "location_id": "loc_dunmere_theatre",
+        "status": "meek and perpetually apologetic",
+        "goal": "satisfy Hester's exacting technical standards without inciting her temper",
+        "bag": {}
+      },
+      {
+        "id": "char_roland",
+        "name": "Roland Ghyll",
+        "location_id": "loc_dunmere_theatre",
+        "status": "financially harried and impatient",
+        "goal": "curtail touring overhead to prevent company insolvency",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_dunmere_theatre",
+        "name": "Dunmere Assembly Rooms",
+        "bag": {}
+      },
+      {
+        "id": "loc_crossbeck_theatre",
+        "name": "Crossbeck Civic Theatre",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_iron_signet",
+        "name": "Duke Malcor's iron signet ring",
+        "location_id": "loc_dunmere_theatre",
+        "status": "worn tightly on Hester's right ring finger",
+        "bag": {}
+      },
+      {
+        "id": "obj_prompt_ledger",
+        "name": "Annotated prompt ledger",
+        "location_id": "loc_dunmere_theatre",
+        "status": "held under Hester's strict custody",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_hester_maisie",
+        "from_id": "char_hester",
+        "to_id": "char_maisie",
+        "kind": "mentor and tyrant",
+        "sentiment": "possessive condescension",
+        "bag": {}
+      },
+      {
+        "id": "rel_maisie_hester",
+        "from_id": "char_maisie",
+        "to_id": "char_hester",
+        "kind": "understudy and apprentice",
+        "sentiment": "fearful deference and quiet gratitude",
+        "bag": {}
+      },
+      {
+        "id": "rel_roland_hester",
+        "from_id": "char_roland",
+        "to_id": "char_hester",
+        "kind": "producer to star",
+        "sentiment": "resentful exhaustion",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01_maisie_voice",
+        "character_id": "char_maisie",
+        "fact_ref": "maisie_voice_suppression",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_final_notice",
+      "order": 1,
+      "pov": "char_hester",
+      "location_id": "loc_dunmere_theatre",
+      "characters_present": [
+        "char_hester",
+        "char_maisie",
+        "char_roland"
+      ],
+      "dramatic_function": "Establishes Hester's arrogant grip on her signature role and strips it from her in favor of her understudy.",
+      "entry_state": {
+        "char_hester": {
+          "status": "physically stiff and emotionally guarded",
+          "goal": "protect her exclusive ownership of the role of Duke Malcor"
+        },
+        "char_roland": {
+          "goal": "curtail touring overhead to prevent company insolvency"
+        },
+        "char_maisie": {
+          "status": "meek and perpetually apologetic"
+        }
+      },
+      "exit_state": {
+        "char_hester": {
+          "status": "physically drained but fiercely proud",
+          "goal": "sabotage Maisie's performance to retain the role of Duke Malcor"
+        },
+        "char_roland": {
+          "goal": "terminate Hester's contract to balance the regional books"
+        },
+        "char_maisie": {
+          "status": "paralyzed by guilt and anxiety"
+        }
+      },
+      "required_beats": [
+        "In the dressing room after finishing her soliloquy as duke malcor to thin applause, Hester scolds Maisie for touching the prompt ledger while nursing the knuckle groove from duke malcor's heavy iron signet ring.",
+        "Backstage, Hester inspects the trapdoor's stiff counterweight and dismisses Roland's warnings regarding the tour's financial failure.",
+        "Roland serves Hester notice of her termination and reveals Maisie has already accepted the lead for Crossbeck, leaving Hester furious as Maisie stands silent."
+      ],
+      "reader_must_learn": [
+        "signet_callus_mark",
+        "stage_trapdoor_counterweight",
+        "provincial_tour_deficit",
+        "prompt_ledger_possession"
+      ],
+      "must_stay_hidden": [
+        "roland_secret_contract"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_02_the_broken_mantle",
+      "order": 2,
+      "pov": "char_hester",
+      "location_id": "loc_crossbeck_theatre",
+      "characters_present": [
+        "char_hester",
+        "char_maisie",
+        "char_roland"
+      ],
+      "dramatic_function": "Confronts Hester with the emotional damage of her mentorship and the financial vanity of her stardom.",
+      "entry_state": {
+        "char_hester": {
+          "location_id": "loc_dunmere_theatre",
+          "status": "physically drained but fiercely proud"
+        },
+        "char_maisie": {
+          "location_id": "loc_dunmere_theatre"
+        },
+        "obj_iron_signet": {
+          "location_id": "loc_dunmere_theatre"
+        },
+        "obj_prompt_ledger": {
+          "location_id": "loc_dunmere_theatre"
+        },
+        "char_roland": {
+          "location_id": "loc_dunmere_theatre"
+        }
+      },
+      "exit_state": {
+        "char_hester": {
+          "location_id": "loc_crossbeck_theatre",
+          "status": "shaken by the revelation of Maisie's sacrifice"
+        },
+        "char_maisie": {
+          "location_id": "loc_crossbeck_theatre"
+        },
+        "obj_iron_signet": {
+          "location_id": "loc_crossbeck_theatre"
+        },
+        "obj_prompt_ledger": {
+          "location_id": "loc_crossbeck_theatre"
+        },
+        "char_roland": {
+          "location_id": "loc_crossbeck_theatre"
+        }
+      },
+      "required_beats": [
+        "At Crossbeck, Hester discovers Maisie rehearsing duke malcor's soliloquy and reads the rehearsal notebook recording years of punishing corrections.",
+        "Maisie breaks down and confesses that Hester's relentless reprimands forced her to strangle her natural voice into a harsh snarl.",
+        "When Hester mocks Maisie onstage, Roland reveals Maisie accepted a half-salary contract to stop him from abandoning the tour and leaving stagehands unpaid, exposing Hester's role in the company's ruin."
+      ],
+      "reader_must_learn": [
+        "roland_secret_contract"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "maisie_voice_suppression",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_03_the_trapdoor_rescue",
+      "order": 3,
+      "pov": "char_hester",
+      "location_id": "loc_crossbeck_theatre",
+      "characters_present": [
+        "char_hester",
+        "char_maisie"
+      ],
+      "dramatic_function": "Forces Hester to acknowledge Maisie's artistry and physically act to protect her.",
+      "entry_state": {
+        "char_hester": {
+          "goal": "sabotage Maisie's performance to retain the role of Duke Malcor"
+        }
+      },
+      "exit_state": {
+        "char_hester": {
+          "goal": "protect Maisie from harm and confront Roland"
+        }
+      },
+      "required_beats": [
+        "What pushes this decision now, staged first: During Crossbeck blocking, Hester accuses Roland of staging a cheap usurpation, only for Roland to reveal Maisie took the cut-rate contract to save the company.",
+        "Watching from the wings, Hester realizes Maisie's vulnerability makes duke malcor genuinely tragic.",
+        "Maisie steps onto the trapdoor without the momentum needed to trip the stiff counterweight mechanism.",
+        "Hester throws the release lever manually from the backstage platform, preventing Maisie from suffering a violent fall."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "stage_trapdoor_counterweight",
+          "plant": "scene_01_the_final_notice"
+        }
+      ]
+    },
+    {
+      "id": "scene_04_the_closing_night",
+      "order": 4,
+      "pov": "char_hester",
+      "location_id": "loc_crossbeck_theatre",
+      "characters_present": [
+        "char_hester",
+        "char_roland"
+      ],
+      "dramatic_function": "Extinguishes Hester's last bid for control and leaves her to face the isolation caused by her career.",
+      "entry_state": {
+        "char_hester": {
+          "status": "shaken by the revelation of Maisie's sacrifice",
+          "goal": "protect Maisie from harm and confront Roland"
+        }
+      },
+      "exit_state": {
+        "char_hester": {
+          "status": "stripped of pride and emotionally vacant",
+          "goal": "relinquish Duke Malcor to Maisie"
+        }
+      },
+      "required_beats": [
+        "Hester offers Roland her personal savings to buy back closing night as Duke Malcor.",
+        "Roland refuses, stating that Maisie's sacrifice secured the regional council subsidy and saved the crew.",
+        "Hester breaks down backstage, facing the isolation wrought by eleven years of ruthless possessiveness."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "roland_secret_contract",
+          "plant": "scene_02_the_broken_mantle"
+        }
+      ]
+    },
+    {
+      "id": "scene_05_passing_the_mantle",
+      "order": 5,
+      "pov": "char_hester",
+      "location_id": "loc_crossbeck_theatre",
+      "characters_present": [
+        "char_hester",
+        "char_maisie"
+      ],
+      "dramatic_function": "To complete Hester's release from Duke Malcor's hold by passing her authority and role to Maisie.",
+      "entry_state": {
+        "obj_iron_signet": {
+          "status": "worn tightly on Hester's right ring finger"
+        },
+        "obj_prompt_ledger": {
+          "status": "held under Hester's strict custody"
+        },
+        "char_hester": {
+          "status": "stripped of pride and emotionally vacant"
+        },
+        "char_maisie": {
+          "status": "paralyzed by guilt and anxiety"
+        }
+      },
+      "exit_state": {
+        "obj_iron_signet": {
+          "status": "transferred to Maisie Callow"
+        },
+        "obj_prompt_ledger": {
+          "status": "bequeathed to Maisie Callow"
+        },
+        "char_hester": {
+          "status": "unburdened and at peace"
+        },
+        "char_maisie": {
+          "status": "empowered and composed"
+        }
+      },
+      "required_beats": [
+        "In the Crossbeck dressing room before opening curtain, Hester invites Maisie inside and presents her with the prompt ledger annotated with encouraging notes.",
+        "Hester slides Duke Malcor's heavy iron signet ring off her knuckle, confronting the deep, bloodless groove left after eleven years.",
+        "Hester yields the signet ring into Maisie's hand and steps quietly into the wings as Maisie takes command of the stage."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "signet_callus_mark",
+          "plant": "scene_01_the_final_notice"
+        },
+        {
+          "fact_ref": "prompt_ledger_possession",
+          "plant": "scene_01_the_final_notice"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "present",
+    "narrative_distance": "close third, drifting into free indirect style",
+    "register": "attentive, unhurried, alert to small physical detail",
+    "sentence_rhythm": "clauses that turn and qualify; commas doing the work of pauses",
+    "imagery_palette": [
+      "light on water",
+      "hands and their small work",
+      "weather as mood"
+    ],
+    "dialogue_density": "moderate; speech is embedded in narration rather than set apart",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "lyrical_literary"
+  },
+  "metadata": {
+    "title": "The Last Duke",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T18:03:00.857Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "provincial_tour_deficit",
+      "statement": "The regional tour operates under a crippling financial deficit caused by dwindling provincial ticket sales.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "roland_secret_contract",
+      "statement": "Roland Ghyll contracted Maisie Callow to replace Hester at half-salary to preserve the tour's budget and protect crew wages.",
+      "caused_by": [
+        "provincial_tour_deficit"
+      ]
+    },
+    {
+      "fact_ref": "signet_callus_mark",
+      "statement": "Hester Vane's right ring finger bears a permanent bloodless depression from eleven unbroken years of wearing Duke Malcor's iron ring.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "stage_trapdoor_counterweight",
+      "statement": "The stage trapdoor counterweight in provincial touring theatres requires an actor's full bodily momentum to release without jamming.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "maisie_voice_suppression",
+      "statement": "Maisie Callow suppressed her own natural vocal register for six years out of fear of Hester Vane's punitive corrections.",
+      "caused_by": []
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.8-flash",
+    "generated_at": "2026-09-29T18:02:39.078Z",
+    "brief": {
+      "story_id": "review-understudy",
+      "title": "Understudy",
+      "premise": {
+        "logline": "A touring actor who has played the same villain for eleven years is told she will be replaced by the understudy she trained.",
+        "modules": {
+          "theme": "what is left of someone who has only ever been one part",
+          "setting_time": "the final three weeks of a long regional tour",
+          "setting_place": "a string of half-empty provincial theatres",
+          "protagonist": "a lead actor who has never missed a performance",
+          "protagonist_want": "to make the company regret the decision before closing night",
+          "antagonism": "a producer who thinks loyalty is a cost",
+          "complication": "the understudy is better than she was, and kinder",
+          "ending_shape": "she lets go of the part and keeps something truer"
+        }
+      },
+      "plot_shape": {
+        "id": "transformation",
+        "name": "Transformation",
+        "central_question": "Can this person become someone else, and what has to be shown to them first?",
+        "phases": [
+          {
+            "name": "The settled self",
+            "purpose": "The protagonist at their most characteristic, and what it costs others.",
+            "share": 0.2
+          },
+          {
+            "name": "Summons",
+            "purpose": "Something forces a confrontation the protagonist cannot argue with.",
+            "share": 0.15
+          },
+          {
+            "name": "Shown",
+            "purpose": "A sequence of confrontations, each harder to dismiss than the last.",
+            "share": 0.35
+          },
+          {
+            "name": "Refusal and collapse",
+            "purpose": "The last defence of the old self fails.",
+            "share": 0.15
+          },
+          {
+            "name": "The altered self",
+            "purpose": "The change tested against the situation from the opening.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "the unchanged",
+            "purpose": "The protagonist, defined by a habit the story will break."
+          },
+          {
+            "role": "summoner",
+            "purpose": "Compels the confrontation; need not be sympathetic."
+          },
+          {
+            "role": "the harmed",
+            "purpose": "Bears the cost of the old self, visibly, from the first phase."
+          },
+          {
+            "role": "the witness",
+            "purpose": "Notices the change before the protagonist claims it."
+          }
+        ],
+        "obligatory_moves": [
+          "The opening establishes the exact behaviour the ending will contradict.",
+          "At least one confrontation shows the protagonist a consequence they caused and never saw.",
+          "The final phase revisits a specific person or place from the first phase."
+        ]
+      },
+      "event_count": 8,
+      "cast": {
+        "characters": 3,
+        "locations": 2,
+        "objects": 2
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 2,
+        "min_span": 2,
+        "long_range_edges": 1,
+        "long_range_span": 4
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "transformation",
+        "premise_preset": "Understudy"
+      }
+    },
+    "repairs": [
+      "model | declare_fact_at_event: \"provincial_tour_deficit\" installed in ev_02_ledger_audit.reveals"
+    ],
+    "events": [
+      {
+        "id": "ev_01_dunmere_ovation",
+        "sequence": 1,
+        "summary": "Hester finishes her performance as Duke Malcor to thin provincial applause, brutally scolding Maisie backstage for touching the prompt table.",
+        "pov": "char_hester",
+        "location_id": "loc_dunmere_theatre",
+        "characters_present": [
+          "char_hester",
+          "char_maisie"
+        ],
+        "dramatic_function": "Establish Hester's obsessive, domineering habit of control and the unacknowledged toll it takes on Maisie.",
+        "beats": [
+          "Hester delivers the final villainous soliloquy of Duke Malcor to a scattering of bored provincial patrons.",
+          "In the dressing room, Hester sharply rebukes Maisie for touching the prompt ledger without permission.",
+          "Hester rubs her hand and notes the deep groove pressed into her knuckle by Duke Malcor's heavy iron signet ring."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "signet_callus_mark"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hester",
+            "column": "status",
+            "value": "physically drained but fiercely proud"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_ledger_audit",
+        "sequence": 2,
+        "summary": "Hester inspects the Dunmere stage mechanics, brushing aside Roland's grim warnings regarding the tour's mounting financial failure.",
+        "pov": "char_hester",
+        "location_id": "loc_dunmere_theatre",
+        "characters_present": [
+          "char_hester",
+          "char_roland"
+        ],
+        "dramatic_function": "Show the external fragility of Hester's position as Roland pushes back against her financial entitlement.",
+        "beats": [
+          "Hester examines Dunmere's backstage trapdoor, testing the stiff counterweight mechanism that requires an actor's entire momentum to trigger.",
+          "Roland demands Hester accept lower billing and a reduced guarantee due to empty regional houses.",
+          "Hester dismisses Roland's warnings, declaring that provincial audiences only buy tickets to witness her signature role."
+        ],
+        "caused_by": [
+          "ev_01_dunmere_ovation"
+        ],
+        "reveals": [
+          "stage_trapdoor_counterweight",
+          "provincial_tour_deficit"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_roland",
+            "column": "goal",
+            "value": "terminate Hester's contract to balance the regional books"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_cast_dismissal",
+        "sequence": 3,
+        "summary": "Roland officially serves Hester notice that she is being replaced by Maisie for the final week at Crossbeck.",
+        "pov": "char_hester",
+        "location_id": "loc_dunmere_theatre",
+        "characters_present": [
+          "char_hester",
+          "char_roland",
+          "char_maisie"
+        ],
+        "dramatic_function": "Force the unavoidable crisis by formally notifying Hester of her replacement by Maisie.",
+        "beats": [
+          "Roland presents Hester with a formal termination rider, stripping her of the role of Duke Malcor for the Crossbeck run.",
+          "Hester mocks the idea of an understudy carrying the show, but Roland reveals that Maisie has already accepted the lead contract.",
+          "Maisie cowers before Hester's outraged glare, keeping silent about why she accepted the promotion."
+        ],
+        "caused_by": [
+          "ev_02_ledger_audit"
+        ],
+        "reveals": [],
+        "conceals": [
+          "roland_secret_contract"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_hester",
+            "column": "goal",
+            "value": "sabotage Maisie's performance to retain the role of Duke Malcor"
+          },
+          {
+            "entity_id": "char_maisie",
+            "column": "status",
+            "value": "paralyzed by guilt and anxiety"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_notebook_discovery",
+        "sequence": 4,
+        "summary": "At Crossbeck Civic Theatre, Hester confronts Maisie during private rehearsals and discovers the lasting vocal damage her mentorship inflicted.",
+        "pov": "char_hester",
+        "location_id": "loc_crossbeck_theatre",
+        "characters_present": [
+          "char_hester",
+          "char_maisie"
+        ],
+        "dramatic_function": "Confront Hester with the hidden damage her tyranny inflicted on Maisie's artistic confidence.",
+        "beats": [
+          "Hester arrives early at Crossbeck to discover Maisie rehearsing Duke Malcor's soliloquy with unexpected subtlety.",
+          "Hester finds Maisie's private rehearsal notebook, documenting years of Hester's punishing vocal critiques and stifling corrections.",
+          "Maisie confesses in tears that years of Hester's reprimands forced her to strangle her natural voice into a harsh theatrical snarl."
+        ],
+        "caused_by": [
+          "ev_03_cast_dismissal"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "maisie_voice_suppression",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester",
+            "column": "location_id",
+            "value": "loc_crossbeck_theatre"
+          },
+          {
+            "entity_id": "char_maisie",
+            "column": "location_id",
+            "value": "loc_crossbeck_theatre"
+          },
+          {
+            "entity_id": "obj_iron_signet",
+            "column": "location_id",
+            "value": "loc_crossbeck_theatre"
+          },
+          {
+            "entity_id": "obj_prompt_ledger",
+            "column": "location_id",
+            "value": "loc_crossbeck_theatre"
+          },
+          {
+            "entity_id": "char_hester",
+            "column": "status",
+            "value": "disoriented by Maisie's artistic talent"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_rehearsal_clash",
+        "sequence": 5,
+        "summary": "During Crossbeck blocking, Hester accuses Roland of staging a cheap usurpation, only for Roland to reveal Maisie took the cut-rate contract to save the company.",
+        "pov": "char_hester",
+        "location_id": "loc_crossbeck_theatre",
+        "characters_present": [
+          "char_hester",
+          "char_roland",
+          "char_maisie"
+        ],
+        "dramatic_function": "Expose the truth of Maisie's sacrifice and shatter Hester's delusion of moral superiority.",
+        "beats": [
+          "Hester interrupts the onstage run-through to mock Maisie's authority in Duke Malcor's heavy velvet mantle.",
+          "Roland reveals that Maisie only signed the contract at half-salary because he threatened to abandon the tour and leave the stagehands unpaid.",
+          "Hester stands humiliated before the stagehands, realizing her own wage demands had pushed the company to insolvency."
+        ],
+        "caused_by": [
+          "ev_04_notebook_discovery"
+        ],
+        "reveals": [
+          "roland_secret_contract"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_roland",
+            "column": "location_id",
+            "value": "loc_crossbeck_theatre"
+          },
+          {
+            "entity_id": "char_hester",
+            "column": "status",
+            "value": "shaken by the revelation of Maisie's sacrifice"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_dress_rehearsal",
+        "sequence": 6,
+        "summary": "Hester watches Maisie's dress rehearsal from the dark wings and intervenes to save her from a dangerous trapdoor malfunction.",
+        "pov": "char_hester",
+        "location_id": "loc_crossbeck_theatre",
+        "characters_present": [
+          "char_hester",
+          "char_maisie"
+        ],
+        "dramatic_function": "Compel Hester to choose between her vindictive ego and Maisie's physical and artistic flourishing.",
+        "beats": [
+          "Hester watches Maisie's climax from the wings, acknowledging that Maisie's vulnerability makes Duke Malcor genuinely tragic.",
+          "Maisie steps onto the Crossbeck trapdoor without applying the full body momentum necessary to release the stiff counterweight.",
+          "Hester lunges onto the backstage platform to throw the release lever manually, keeping Maisie safe from a violent fall."
+        ],
+        "caused_by": [
+          "ev_05_rehearsal_clash"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "stage_trapdoor_counterweight",
+            "plant": "ev_02_ledger_audit"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester",
+            "column": "goal",
+            "value": "protect Maisie from harm and confront Roland"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_producer_refusal",
+        "sequence": 7,
+        "summary": "Hester makes a desperate bid to buy back her closing night performance, but Roland refuses and forces her to accept the end of her reign.",
+        "pov": "char_hester",
+        "location_id": "loc_crossbeck_theatre",
+        "characters_present": [
+          "char_hester",
+          "char_roland"
+        ],
+        "dramatic_function": "Break Hester's final transactional defense, leaving her stripped of her former identity.",
+        "beats": [
+          "Hester offers Roland her entire personal tour savings in exchange for one final night as Duke Malcor.",
+          "Roland turns her down flat, explaining that Maisie's sacrifice secured the regional council subsidy and ensured the crew's future.",
+          "Hester breaks down backstage, realizing that her eleven years of ruthless stage possessiveness have left her completely isolated."
+        ],
+        "caused_by": [
+          "ev_06_dress_rehearsal"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "roland_secret_contract",
+            "plant": "ev_05_rehearsal_clash"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_hester",
+            "column": "status",
+            "value": "stripped of pride and emotionally vacant"
+          },
+          {
+            "entity_id": "char_hester",
+            "column": "goal",
+            "value": "relinquish Duke Malcor to Maisie"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_crossbeck_handover",
+        "sequence": 8,
+        "summary": "In the Crossbeck dressing room before opening curtain, Hester surrenders Duke Malcor's ring and prompt ledger to Maisie with genuine grace.",
+        "pov": "char_hester",
+        "location_id": "loc_crossbeck_theatre",
+        "characters_present": [
+          "char_hester",
+          "char_maisie"
+        ],
+        "dramatic_function": "Demonstrate Hester's permanent transformation by having her voluntarily relinquish the role to Maisie.",
+        "beats": [
+          "Hester invites Maisie into the dressing room and presents her with the prompt ledger, filled with gentle, encouraging notes.",
+          "Hester slides the heavy iron signet ring off her knuckle, staring at the deep, bloodless groove where the metal clamped her skin for eleven years.",
+          "Hester places the ring into Maisie's hand and takes her place quietly in the wings as Maisie commands the stage."
+        ],
+        "caused_by": [
+          "ev_07_producer_refusal"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "signet_callus_mark",
+            "plant": "ev_01_dunmere_ovation"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_iron_signet",
+            "column": "status",
+            "value": "transferred to Maisie Callow"
+          },
+          {
+            "entity_id": "obj_prompt_ledger",
+            "column": "status",
+            "value": "bequeathed to Maisie Callow"
+          },
+          {
+            "entity_id": "char_hester",
+            "column": "status",
+            "value": "unburdened and at peace"
+          },
+          {
+            "entity_id": "char_maisie",
+            "column": "status",
+            "value": "empowered and composed"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_tour_deficit",
+        "sequence": 1,
+        "summary": "Roland Ghyll accumulated severe operational debt across the provinces because audiences stopped buying tickets for Hester's repetitive performance.",
+        "caused_by": [],
+        "establishes": [
+          "provincial_tour_deficit"
+        ]
+      },
+      {
+        "id": "hidden_02_roland_secret_contract",
+        "sequence": 2,
+        "summary": "Roland Ghyll coerced Maisie into signing a cut-rate contract to replace Hester at Crossbeck by threatening to abandon the tour and forfeit the crew's back pay.",
+        "caused_by": [
+          "hidden_01_tour_deficit"
+        ],
+        "establishes": [
+          "roland_secret_contract"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "signet_callus_mark",
+        "statement": "Hester Vane's right ring finger bears a permanent bloodless depression from eleven unbroken years of wearing Duke Malcor's iron ring.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "stage_trapdoor_counterweight",
+        "statement": "The stage trapdoor counterweight in provincial touring theatres requires an actor's full bodily momentum to release without jamming.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "provincial_tour_deficit",
+        "statement": "The regional tour operates under a crippling financial deficit caused by dwindling provincial ticket sales.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "roland_secret_contract",
+        "statement": "Roland Ghyll contracted Maisie Callow to replace Hester at half-salary to preserve the tour's budget and protect crew wages.",
+        "caused_by": [
+          "provincial_tour_deficit"
+        ]
+      },
+      {
+        "fact_ref": "maisie_voice_suppression",
+        "statement": "Maisie Callow suppressed her own natural vocal register for six years out of fear of Hester Vane's punitive corrections.",
+        "caused_by": []
+      }
+    ],
+    "stakes": [
+      {
+        "stake": "Roland will terminate Hester's tenure before closing night without honoring her legacy.",
+        "introduced_by": "ev_02_ledger_audit",
+        "resolved_by": "ev_07_producer_refusal"
+      },
+      {
+        "stake": "Hester will sabotage Maisie's staging to prove the company cannot mount the production without her.",
+        "introduced_by": "ev_03_cast_dismissal",
+        "resolved_by": "ev_06_dress_rehearsal"
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T18:03:00.857Z",
+    "started_at": "2026-09-29T18:02:39.078Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_final_notice",
+        "order": 1,
+        "event_ids": [
+          "ev_01_dunmere_ovation",
+          "ev_02_ledger_audit",
+          "ev_03_cast_dismissal"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_broken_mantle",
+        "order": 2,
+        "event_ids": [
+          "ev_04_notebook_discovery",
+          "ev_05_rehearsal_clash"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_trapdoor_rescue",
+        "order": 3,
+        "event_ids": [
+          "ev_06_dress_rehearsal"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_closing_night",
+        "order": 4,
+        "event_ids": [
+          "ev_07_producer_refusal"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_passing_the_mantle",
+        "order": 5,
+        "event_ids": [
+          "ev_08_crossbeck_handover"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}

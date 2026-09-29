@@ -1,0 +1,1031 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-second-pressing",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_tess",
+        "name": "Tess Vance",
+        "location_id": "loc_barrel_cellar",
+        "status": "employed",
+        "goal": "clear herself of spoiling the barrels",
+        "bag": {}
+      },
+      {
+        "id": "char_bruno",
+        "name": "Bruno Callow",
+        "location_id": "loc_barrel_cellar",
+        "status": "composed",
+        "goal": "blame cellar handling for the spoiled barrels",
+        "bag": {}
+      },
+      {
+        "id": "char_clara",
+        "name": "Clara Callow",
+        "location_id": "loc_press_shed",
+        "status": "distressed",
+        "goal": "save the remaining wine stock",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_barrel_cellar",
+        "name": "Lower Barrel Cellar",
+        "bag": {}
+      },
+      {
+        "id": "loc_press_shed",
+        "name": "Upper Press Shed",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_topping_carboy",
+        "name": "Glass Topping Carboy",
+        "location_id": "loc_barrel_cellar",
+        "status": "half_empty",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_bruno_tess",
+        "from_id": "char_bruno",
+        "to_id": "char_tess",
+        "kind": "employer",
+        "sentiment": "critical",
+        "bag": {}
+      },
+      {
+        "id": "rel_tess_bruno",
+        "from_id": "char_tess",
+        "to_id": "char_bruno",
+        "kind": "worker",
+        "sentiment": "wary",
+        "bag": {}
+      },
+      {
+        "id": "rel_clara_bruno",
+        "from_id": "char_clara",
+        "to_id": "char_bruno",
+        "kind": "sibling",
+        "sentiment": "distrustful",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_tess_topping",
+        "character_id": "char_tess",
+        "fact_ref": "tess_topped_all_twelve_barrels",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_wage_clause",
+        "character_id": "char_tess",
+        "fact_ref": "cellar_spoilage_costs_tess_wage",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_bruno_mortgage",
+        "character_id": "char_bruno",
+        "fact_ref": "bruno_holds_estate_mortgage",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_tainted_casks",
+      "order": 1,
+      "pov": "char_tess",
+      "location_id": "loc_barrel_cellar",
+      "characters_present": [
+        "char_tess",
+        "char_bruno"
+      ],
+      "dramatic_function": "Establishes the catastrophic ruin of the vintage and shifts suspicion from cellar mismanagement to deliberate tampering.",
+      "entry_state": {
+        "char_tess": {
+          "goal": "clear herself of spoiling the barrels"
+        }
+      },
+      "exit_state": {
+        "char_tess": {
+          "goal": "prove the topping carboy was tampered with"
+        }
+      },
+      "required_beats": [
+        "Bruno pulls bungs from three barrels, discovers volatile acetic acid taint across every cask, and accuses Tess of ruining the lots during topping-up.",
+        "Tess inspects the topping carboy bung and notices a sweet aroma instead of sanitizing sulphur."
+      ],
+      "reader_must_learn": [
+        "all_twelve_casks_turned",
+        "carboy_bung_smells_sweet"
+      ],
+      "must_stay_hidden": [
+        "carboy_dosed_with_acetic_wash",
+        "hail_ruined_harvest",
+        "resort_buyout_offer"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "tess_topped_all_twelve_barrels",
+          "plant": null
+        },
+        {
+          "fact_ref": "cellar_spoilage_costs_tess_wage",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_the_drained_tank",
+      "order": 2,
+      "pov": "char_clara",
+      "location_id": "loc_press_shed",
+      "characters_present": [
+        "char_tess",
+        "char_clara"
+      ],
+      "dramatic_function": "Reveals that the topping supply was contaminated with unpasteurized pressings, framing Bruno's actions as desperate corner-cutting.",
+      "entry_state": {
+        "char_tess": {
+          "location_id": "loc_barrel_cellar"
+        },
+        "char_clara": {
+          "goal": "save the remaining wine stock"
+        }
+      },
+      "exit_state": {
+        "char_tess": {
+          "location_id": "loc_press_shed"
+        },
+        "char_clara": {
+          "goal": "confront Bruno about taking her press wine"
+        }
+      },
+      "required_beats": [
+        "In the press shed, Tess finds the metabisulphite dispenser locked inside Clara's cabinet.",
+        "Clara discovers her experimental tank of unpasteurized pressings was emptied into the carboys and assumes Bruno stole them to stretch volume after the crop loss."
+      ],
+      "reader_must_learn": [
+        "sulphur_dispenser_locked",
+        "clara_press_tank_empty"
+      ],
+      "must_stay_hidden": [
+        "carboy_dosed_with_acetic_wash",
+        "hail_ruined_harvest",
+        "resort_buyout_offer"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_clipping_the_blame",
+      "order": 3,
+      "pov": "char_tess",
+      "location_id": "loc_barrel_cellar",
+      "characters_present": [
+        "char_tess",
+        "char_bruno",
+        "char_clara"
+      ],
+      "dramatic_function": "Deepens the mystery as Bruno readily accepts Clara's charge of incompetence to deflect deeper inquiry.",
+      "entry_state": {
+        "char_tess": {
+          "location_id": "loc_press_shed"
+        },
+        "char_clara": {
+          "location_id": "loc_press_shed"
+        },
+        "char_bruno": {
+          "status": "composed"
+        }
+      },
+      "exit_state": {
+        "char_tess": {
+          "location_id": "loc_barrel_cellar"
+        },
+        "char_clara": {
+          "location_id": "loc_barrel_cellar"
+        },
+        "char_bruno": {
+          "status": "defensive"
+        }
+      },
+      "required_beats": [
+        "In the barrel cellar, Clara confronts Bruno for topping fine wine with raw, unstabilized pressings to mask hailstorm losses.",
+        "Bruno accepts the blame for poor cellar judgment while insisting Tess should have spotted the bacterial film, appearing oddly relieved by the accusation."
+      ],
+      "reader_must_learn": [
+        "clara_believes_bruno_blundered"
+      ],
+      "must_stay_hidden": [
+        "resort_buyout_offer",
+        "carboy_dosed_with_acetic_wash",
+        "hail_ruined_harvest"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "carboy_bung_smells_sweet",
+          "plant": "scene_01_the_tainted_casks"
+        },
+        {
+          "fact_ref": "clara_press_tank_empty",
+          "plant": "scene_02_the_drained_tank"
+        }
+      ]
+    },
+    {
+      "id": "scene_04_the_developer_contract",
+      "order": 4,
+      "pov": "char_tess",
+      "location_id": "loc_press_shed",
+      "characters_present": [
+        "char_tess",
+        "char_bruno"
+      ],
+      "dramatic_function": "Exposes Bruno's deliberate sabotage of the vintage and resolves Tess's loyalty through self-preservation.",
+      "entry_state": {
+        "char_tess": {
+          "location_id": "loc_barrel_cellar",
+          "goal": "prove the topping carboy was tampered with"
+        },
+        "char_bruno": {
+          "location_id": "loc_barrel_cellar"
+        }
+      },
+      "exit_state": {
+        "char_tess": {
+          "location_id": "loc_press_shed",
+          "goal": "force Bruno to sign her wage release in exchange for silence"
+        },
+        "char_bruno": {
+          "location_id": "loc_press_shed"
+        }
+      },
+      "required_beats": [
+        "Tess discovers the developer contract stipulating mortgage assumption only if winemaking terminates this winter.",
+        "Bruno admits he intentionally used Clara's sour press wash to ruin the stock so Clara would abandon the vineyard.",
+        "Tess leverages the contract to demand her full seasonal wages and a written discharge."
+      ],
+      "reader_must_learn": [
+        "resort_buyout_offer",
+        "carboy_dosed_with_acetic_wash",
+        "hail_ruined_harvest",
+        "tess_demands_severance_and_discharge",
+        "developer_contract_document"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "all_twelve_casks_turned",
+          "plant": "scene_01_the_tainted_casks"
+        },
+        {
+          "fact_ref": "sulphur_dispenser_locked",
+          "plant": "scene_02_the_drained_tank"
+        },
+        {
+          "fact_ref": "clara_believes_bruno_blundered",
+          "plant": "scene_03_clipping_the_blame"
+        }
+      ]
+    },
+    {
+      "id": "scene_05_the_ruined_vintage",
+      "order": 5,
+      "pov": "char_tess",
+      "location_id": "loc_barrel_cellar",
+      "characters_present": [
+        "char_tess",
+        "char_bruno",
+        "char_clara"
+      ],
+      "dramatic_function": "Exposes Bruno's deliberate sabotage of the harvest to Clara as Tess quietly secures her severance and departs.",
+      "entry_state": {
+        "char_tess": {
+          "location_id": "loc_press_shed",
+          "status": "employed",
+          "goal": "force Bruno to sign her wage release in exchange for silence"
+        },
+        "char_bruno": {
+          "location_id": "loc_press_shed"
+        },
+        "char_clara": {
+          "status": "distressed"
+        }
+      },
+      "exit_state": {
+        "char_tess": {
+          "location_id": "loc_barrel_cellar",
+          "status": "discharged",
+          "goal": "leave the hillside valley"
+        },
+        "char_bruno": {
+          "location_id": "loc_barrel_cellar"
+        },
+        "char_clara": {
+          "status": "devastated"
+        }
+      },
+      "required_beats": [
+        "In front of the sour barrels, Bruno hands Tess her final endorsed paycheck and reference letter, remarking callously that Clara was destined to lose the estate anyway.",
+        "While Clara frantically tests the sour casks, Tess quietly slips the developer contract out of her coat and leaves it face-up on the tasting table beside Clara's testing kit.",
+        "Clara finds the contract on the table and realizes her brother intentionally poisoned her harvest.",
+        "Tess leaves the cellar with her money, leaving Clara and Bruno standing amidst the ruined wine in bitter silence."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "bruno_holds_estate_mortgage",
+          "plant": null
+        },
+        {
+          "fact_ref": "resort_buyout_offer",
+          "plant": "scene_04_the_developer_contract"
+        },
+        {
+          "fact_ref": "carboy_dosed_with_acetic_wash",
+          "plant": "scene_04_the_developer_contract"
+        },
+        {
+          "fact_ref": "hail_ruined_harvest",
+          "plant": "scene_04_the_developer_contract"
+        },
+        {
+          "fact_ref": "tess_demands_severance_and_discharge",
+          "plant": "scene_04_the_developer_contract"
+        },
+        {
+          "fact_ref": "developer_contract_document",
+          "plant": "scene_04_the_developer_contract"
+        }
+      ],
+      "recounts": [
+        "carboy_dosed_with_acetic_wash",
+        "resort_buyout_offer"
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "close third, locked to the viewpoint character; knows only what they know",
+    "register": "alert, concrete, quietly tense; lets a detail sit wrong before explaining it",
+    "sentence_rhythm": "lean sentences that tighten as pressure builds; a short line to land each discovery",
+    "imagery_palette": [
+      "cold water and weather",
+      "worn machinery under strain",
+      "small wrong details"
+    ],
+    "dialogue_density": "moderate to high; people talk around what they are hiding",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "suspense_taut"
+  },
+  "metadata": {
+    "title": "The Acetous Vintage",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T17:58:38.504Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "hail_ruined_harvest",
+      "statement": "An early winter hailstorm destroyed fifty percent of the hillside vineyard's fruit yield.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "resort_buyout_offer",
+      "statement": "A commercial resort developer offered to pay off all estate debt on the condition that winemaking ceases permanently.",
+      "caused_by": [
+        "hail_ruined_harvest",
+        "bruno_holds_estate_mortgage"
+      ]
+    },
+    {
+      "fact_ref": "carboy_dosed_with_acetic_wash",
+      "statement": "Bruno intentionally filled the glass carboy with active vinegar mother from Clara's pressings to ruin the wine.",
+      "caused_by": [
+        "resort_buyout_offer"
+      ]
+    },
+    {
+      "fact_ref": "tess_topped_all_twelve_barrels",
+      "statement": "Tess performed the routine topping-up of all twelve oak barrels on Tuesday afternoon.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "cellar_spoilage_costs_tess_wage",
+      "statement": "Tess's seasonal employment agreement docks wages and forfeits industry references if spoilage is ruled worker error.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "bruno_holds_estate_mortgage",
+      "statement": "Bruno carries personal liability for the estate's bank loan notes.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "sulphur_dispenser_locked",
+      "statement": "The cellar's potassium metabisulphite dosing unit remained locked inside Clara's cabinet throughout the week.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "carboy_bung_smells_sweet",
+      "statement": "The bung on the topping carboy smelled of unpreserved dessert pressings rather than sulphited cellar wine.",
+      "caused_by": [
+        "carboy_dosed_with_acetic_wash"
+      ]
+    },
+    {
+      "fact_ref": "clara_press_tank_empty",
+      "statement": "Clara's separate tank containing unpasteurized dessert pressings was emptied into the topping vessels without authorization.",
+      "caused_by": [
+        "carboy_dosed_with_acetic_wash"
+      ]
+    },
+    {
+      "fact_ref": "all_twelve_casks_turned",
+      "statement": "All twelve oak barrels across separate lots succumbed simultaneously to an acute acetic acid bloom.",
+      "caused_by": [
+        "carboy_dosed_with_acetic_wash",
+        "tess_topped_all_twelve_barrels"
+      ]
+    },
+    {
+      "fact_ref": "clara_believes_bruno_blundered",
+      "statement": "Clara believed Bruno ruined the vintage through incompetent volume-stretching rather than calculated sabotage.",
+      "caused_by": [
+        "clara_press_tank_empty",
+        "all_twelve_casks_turned"
+      ]
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.7-flash",
+    "generated_at": "2026-09-29T17:58:19.041Z",
+    "brief": {
+      "story_id": "review-second-pressing",
+      "title": "Second Pressing",
+      "premise": {
+        "logline": "A vineyard’s whole vintage turns in the barrel, and the cellar hand who topped it up has to work out what went in.",
+        "modules": {
+          "theme": "how a family decides which member is expendable",
+          "setting_time": "the winter after a hailstorm took half the crop",
+          "setting_place": "a hillside winery run by three siblings who share one cellar",
+          "protagonist": "a seasonal cellar hand who is not family",
+          "protagonist_want": "to keep her job by proving the spoilage was not her mistake",
+          "antagonism": "a sibling who would rather lose the vintage than the argument",
+          "complication": "the barrels were spoiled to force a sale she would have wanted",
+          "ending_shape": "the truth comes out, and nobody is better off for it"
+        }
+      },
+      "plot_shape": {
+        "id": "mystery",
+        "name": "Mystery",
+        "central_question": "What actually happened, and who is willing to say so?",
+        "phases": [
+          {
+            "name": "Disturbance",
+            "purpose": "A wrong surfaces and someone is obliged to look into it.",
+            "share": 0.2
+          },
+          {
+            "name": "Inquiry",
+            "purpose": "Evidence accumulates, most of it true and misread.",
+            "share": 0.35
+          },
+          {
+            "name": "Wrong turn",
+            "purpose": "A reading of the evidence that is coherent and wrong collapses.",
+            "share": 0.2
+          },
+          {
+            "name": "Solution",
+            "purpose": "The true account, assembled only from what the reader has already been shown.",
+            "share": 0.15
+          },
+          {
+            "name": "Cost",
+            "purpose": "What knowing costs the person who found out.",
+            "share": 0.1
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "investigator",
+            "purpose": "Carries the reader through the inquiry and pays its cost."
+          },
+          {
+            "role": "concealer",
+            "purpose": "Has a reason to keep the true account from being assembled."
+          },
+          {
+            "role": "witness",
+            "purpose": "Holds one true piece and misunderstands its meaning."
+          },
+          {
+            "role": "wronged party",
+            "purpose": "The reason the question matters at all."
+          }
+        ],
+        "obligatory_moves": [
+          "Every element of the true account is on the page before it is stated.",
+          "At least one true detail is shown early in a context that makes it look irrelevant.",
+          "The wrong reading is defensible on the evidence available when it is made."
+        ]
+      },
+      "event_count": 5,
+      "cast": {
+        "characters": 2,
+        "locations": 2,
+        "objects": 1
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 1,
+        "min_span": 1,
+        "long_range_edges": 0,
+        "long_range_span": 4
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "mystery",
+        "premise_preset": "Second Pressing"
+      }
+    },
+    "repairs": [
+      "model | declare_fact_at_event: \"hail_ruined_harvest\" installed in ev_04_buyer_clause_revealed.reveals",
+      "model | add_payoff: ev_05_final_settlement now pays off \"hail_ruined_harvest\"",
+      "model | motivation: ev_05_final_settlement gained a motive beat for \"Tess leaves the developer contract on the tasting table for Clara to find.\""
+    ],
+    "events": [
+      {
+        "id": "ev_01_spoilage_discovered",
+        "sequence": 1,
+        "summary": "Bruno tests the maturing barrels in the cellar, discovering volatile vinegar in every cask and immediately blaming Tess's topping-up technique.",
+        "pov": "char_tess",
+        "location_id": "loc_barrel_cellar",
+        "characters_present": [
+          "char_tess",
+          "char_bruno"
+        ],
+        "dramatic_function": "Disturbance: Establishes the crisis of total vintage spoilage and threatens the protagonist with financial liability.",
+        "beats": [
+          "Bruno pulls bungs from three separate barrels and finds intense acetic acid taint in each.",
+          "Bruno accuses Tess of contaminating the lots during her routine weekly topping session.",
+          "Tess inspects the bung of the glass topping carboy and notices a sweet aroma instead of sanitizing sulphur."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "all_twelve_casks_turned",
+          "carboy_bung_smells_sweet"
+        ],
+        "conceals": [
+          "carboy_dosed_with_acetic_wash"
+        ],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "tess_topped_all_twelve_barrels",
+            "plant": null
+          },
+          {
+            "fact_ref": "cellar_spoilage_costs_tess_wage",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_tess",
+            "column": "goal",
+            "value": "prove the topping carboy was tampered with"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_press_shed_inspection",
+        "sequence": 2,
+        "summary": "Tess goes to the press shed to check the wine supply and finds the metabisulphite dispenser locked away while Clara's reserve pressings tank sits drained.",
+        "pov": "char_tess",
+        "location_id": "loc_press_shed",
+        "characters_present": [
+          "char_tess",
+          "char_clara"
+        ],
+        "dramatic_function": "Inquiry: Establishes physical contradictions in the cellar supplies and gathers crucial evidence on topping wine origins.",
+        "beats": [
+          "Tess checks the chemical station and finds the metabisulphite dispenser locked inside Clara's cabinet.",
+          "Clara discovers her experimental press tank of unpasteurized pressings was emptied into the cellar carboys without permission.",
+          "Clara assumes Bruno stole her pressings merely to stretch volume after the crop loss."
+        ],
+        "caused_by": [
+          "ev_01_spoilage_discovered"
+        ],
+        "reveals": [
+          "sulphur_dispenser_locked",
+          "clara_press_tank_empty"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_tess",
+            "column": "location_id",
+            "value": "loc_press_shed"
+          },
+          {
+            "entity_id": "char_clara",
+            "column": "goal",
+            "value": "confront Bruno about taking her press wine"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_clara_confronts_bruno",
+        "sequence": 3,
+        "summary": "Clara confronts Bruno in the barrel cellar, accusing him of reckless penny-pinching by topping fine wine with raw pressings.",
+        "pov": "char_tess",
+        "location_id": "loc_barrel_cellar",
+        "characters_present": [
+          "char_tess",
+          "char_bruno",
+          "char_clara"
+        ],
+        "dramatic_function": "Wrong Turn: Offers a convincing, coherent explanation that fits the evidence while completely misjudging the intent.",
+        "beats": [
+          "Clara accuses Bruno of using raw pressings to mask ullage losses from the hailstorm without stabilizing them.",
+          "Bruno accepts the blame for poor cellar judgment but insists Tess should have caught the bacterial film before pouring.",
+          "Tess notes that Bruno seems oddly relieved by Clara's accusation of mere incompetence."
+        ],
+        "caused_by": [
+          "ev_02_press_shed_inspection"
+        ],
+        "reveals": [
+          "clara_believes_bruno_blundered"
+        ],
+        "conceals": [
+          "resort_buyout_offer"
+        ],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "carboy_bung_smells_sweet",
+            "plant": "ev_01_spoilage_discovered"
+          },
+          {
+            "fact_ref": "clara_press_tank_empty",
+            "plant": "ev_02_press_shed_inspection"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_tess",
+            "column": "location_id",
+            "value": "loc_barrel_cellar"
+          },
+          {
+            "entity_id": "char_clara",
+            "column": "location_id",
+            "value": "loc_barrel_cellar"
+          },
+          {
+            "entity_id": "char_bruno",
+            "column": "status",
+            "value": "defensive"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_buyer_clause_revealed",
+        "sequence": 4,
+        "summary": "Tess discovers the resort developer's contract in the press shed office, exposing Bruno's deliberate sabotage of the vintage to trigger the land sale.",
+        "pov": "char_tess",
+        "location_id": "loc_press_shed",
+        "characters_present": [
+          "char_tess",
+          "char_bruno"
+        ],
+        "dramatic_function": "Solution: Uncovers the true motive behind the spoilage and shatters the assumption of accidental negligence.",
+        "beats": [
+          "Tess finds the developer contract stipulating full mortgage assumption only if winemaking operations terminate this winter.",
+          "Bruno enters and admits he intentionally used Clara's sour press wash to ruin the entire stock so Clara would abandon the vineyard.",
+          "Tess demands her full seasonal wages and written discharge in return for not presenting the contract to Clara immediately."
+        ],
+        "caused_by": [
+          "ev_03_clara_confronts_bruno"
+        ],
+        "reveals": [
+          "resort_buyout_offer",
+          "carboy_dosed_with_acetic_wash",
+          "hail_ruined_harvest"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "all_twelve_casks_turned",
+            "plant": "ev_01_spoilage_discovered"
+          },
+          {
+            "fact_ref": "sulphur_dispenser_locked",
+            "plant": "ev_02_press_shed_inspection"
+          },
+          {
+            "fact_ref": "clara_believes_bruno_blundered",
+            "plant": "ev_03_clara_confronts_bruno"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_tess",
+            "column": "location_id",
+            "value": "loc_press_shed"
+          },
+          {
+            "entity_id": "char_bruno",
+            "column": "location_id",
+            "value": "loc_press_shed"
+          },
+          {
+            "entity_id": "char_tess",
+            "column": "goal",
+            "value": "force Bruno to sign her wage release in exchange for silence"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_final_settlement",
+        "sequence": 5,
+        "summary": "Tess collects her signed paycheck in the barrel cellar while Clara learns the truth of her brother's deliberate betrayal and the inevitable sale of the land.",
+        "pov": "char_tess",
+        "location_id": "loc_barrel_cellar",
+        "characters_present": [
+          "char_tess",
+          "char_bruno",
+          "char_clara"
+        ],
+        "dramatic_function": "Cost & Resolution: Concludes the mystery with financial survival for the outsider and complete ruin for the family.",
+        "beats": [
+          "As Bruno hands over the endorsed check with a callous remark that Clara was destined to lose the estate anyway, Tess watches Clara frantically testing the sour casks, quietly slips the developer contract out of her coat, and leaves it face-up on the tasting table beside Clara's testing kit.",
+          "Bruno hands Tess her final endorsed paycheck and reference letter in front of the sour barrels.",
+          "Clara finds the contract left on the tasting table and realizes her brother intentionally poisoned her harvest.",
+          "Tess leaves the cellar with her money as Clara and Bruno stand amidst the ruined wine in bitter silence."
+        ],
+        "caused_by": [
+          "ev_04_buyer_clause_revealed"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [
+          "carboy_dosed_with_acetic_wash",
+          "resort_buyout_offer"
+        ],
+        "pays_off": [
+          {
+            "fact_ref": "bruno_holds_estate_mortgage",
+            "plant": null
+          },
+          {
+            "fact_ref": "resort_buyout_offer",
+            "plant": "ev_04_buyer_clause_revealed"
+          },
+          {
+            "fact_ref": "carboy_dosed_with_acetic_wash",
+            "plant": "ev_04_buyer_clause_revealed"
+          },
+          {
+            "fact_ref": "hail_ruined_harvest",
+            "plant": "ev_04_buyer_clause_revealed"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_tess",
+            "column": "location_id",
+            "value": "loc_barrel_cellar"
+          },
+          {
+            "entity_id": "char_bruno",
+            "column": "location_id",
+            "value": "loc_barrel_cellar"
+          },
+          {
+            "entity_id": "char_tess",
+            "column": "status",
+            "value": "discharged"
+          },
+          {
+            "entity_id": "char_tess",
+            "column": "goal",
+            "value": "leave the hillside valley"
+          },
+          {
+            "entity_id": "char_clara",
+            "column": "status",
+            "value": "devastated"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_hail_ruined_crop",
+        "sequence": 1,
+        "summary": "An early winter hailstorm battered the hillside and ruined half the estate harvest, making debt repayment impossible without emergency liquidation.",
+        "caused_by": [],
+        "establishes": [
+          "hail_ruined_harvest"
+        ]
+      },
+      {
+        "id": "hidden_02_resort_solicitation",
+        "sequence": 2,
+        "summary": "Bruno negotiated a secret buyout with a resort developer who conditioned purchase on the winery closing down permanently rather than refinancing.",
+        "caused_by": [
+          "hidden_01_hail_ruined_crop"
+        ],
+        "establishes": [
+          "resort_buyout_offer"
+        ]
+      },
+      {
+        "id": "hidden_03_bruno_spoils_wine",
+        "sequence": 3,
+        "summary": "Bruno filled the cellar topping carboy with wild acetic press wash so the entire vintage would spoil when topped up, forcing Clara into agreeing to the sale.",
+        "caused_by": [
+          "hidden_02_resort_solicitation"
+        ],
+        "establishes": [
+          "carboy_dosed_with_acetic_wash"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "tess_topped_all_twelve_barrels",
+        "statement": "Tess performed the routine topping-up of all twelve oak barrels on Tuesday afternoon.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "cellar_spoilage_costs_tess_wage",
+        "statement": "Tess's seasonal employment agreement docks wages and forfeits industry references if spoilage is ruled worker error.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "bruno_holds_estate_mortgage",
+        "statement": "Bruno carries personal liability for the estate's bank loan notes.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "hail_ruined_harvest",
+        "statement": "An early winter hailstorm destroyed fifty percent of the hillside vineyard's fruit yield.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "sulphur_dispenser_locked",
+        "statement": "The cellar's potassium metabisulphite dosing unit remained locked inside Clara's cabinet throughout the week.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "resort_buyout_offer",
+        "statement": "A commercial resort developer offered to pay off all estate debt on the condition that winemaking ceases permanently.",
+        "caused_by": [
+          "hail_ruined_harvest",
+          "bruno_holds_estate_mortgage"
+        ]
+      },
+      {
+        "fact_ref": "carboy_dosed_with_acetic_wash",
+        "statement": "Bruno intentionally filled the glass carboy with active vinegar mother from Clara's pressings to ruin the wine.",
+        "caused_by": [
+          "resort_buyout_offer"
+        ]
+      },
+      {
+        "fact_ref": "carboy_bung_smells_sweet",
+        "statement": "The bung on the topping carboy smelled of unpreserved dessert pressings rather than sulphited cellar wine.",
+        "caused_by": [
+          "carboy_dosed_with_acetic_wash"
+        ]
+      },
+      {
+        "fact_ref": "clara_press_tank_empty",
+        "statement": "Clara's separate tank containing unpasteurized dessert pressings was emptied into the topping vessels without authorization.",
+        "caused_by": [
+          "carboy_dosed_with_acetic_wash"
+        ]
+      },
+      {
+        "fact_ref": "all_twelve_casks_turned",
+        "statement": "All twelve oak barrels across separate lots succumbed simultaneously to an acute acetic acid bloom.",
+        "caused_by": [
+          "carboy_dosed_with_acetic_wash",
+          "tess_topped_all_twelve_barrels"
+        ]
+      },
+      {
+        "fact_ref": "clara_believes_bruno_blundered",
+        "statement": "Clara believed Bruno ruined the vintage through incompetent volume-stretching rather than calculated sabotage.",
+        "caused_by": [
+          "clara_press_tank_empty",
+          "all_twelve_casks_turned"
+        ]
+      }
+    ],
+    "stakes": [
+      {
+        "stake": "Tess will forfeit her seasonal wages and her career reference if she cannot prove the vinegar bloom was not her operational fault.",
+        "introduced_by": "ev_01_spoilage_discovered",
+        "resolved_by": "ev_05_final_settlement"
+      },
+      {
+        "stake": "Clara will lose her family vineyard to foreclosure unless the remaining vintage can be salvaged and sold.",
+        "introduced_by": "ev_02_press_shed_inspection",
+        "resolved_by": "ev_05_final_settlement"
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T17:58:38.504Z",
+    "started_at": "2026-09-29T17:58:19.042Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_tainted_casks",
+        "order": 1,
+        "event_ids": [
+          "ev_01_spoilage_discovered"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_drained_tank",
+        "order": 2,
+        "event_ids": [
+          "ev_02_press_shed_inspection"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_clipping_the_blame",
+        "order": 3,
+        "event_ids": [
+          "ev_03_clara_confronts_bruno"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_developer_contract",
+        "order": 4,
+        "event_ids": [
+          "ev_04_buyer_clause_revealed"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_ruined_vintage",
+        "order": 5,
+        "event_ids": [
+          "ev_05_final_settlement"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}

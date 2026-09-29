@@ -1,0 +1,2330 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-salt-road",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_jory",
+        "name": "Jory",
+        "location_id": "loc_ocher_sink_infirmary",
+        "status": "uninjured",
+        "goal": "procure blue lichen medicine before Mina's fever turns",
+        "bag": {}
+      },
+      {
+        "id": "char_mina",
+        "name": "Mina",
+        "location_id": "loc_ocher_sink_infirmary",
+        "status": "delirious with salt-lung fever",
+        "goal": "survive the fever",
+        "bag": {}
+      },
+      {
+        "id": "char_haddon",
+        "name": "Apothecary Haddon",
+        "location_id": "loc_ocher_sink_infirmary",
+        "status": "exhausted",
+        "goal": "find a courier willing to run the salt flats",
+        "bag": {}
+      },
+      {
+        "id": "char_varo",
+        "name": "Trader Varo",
+        "location_id": "loc_deep_well_town",
+        "status": "healthy",
+        "goal": "corner the town supply of clean water and medicine",
+        "bag": {}
+      },
+      {
+        "id": "char_talia",
+        "name": "Warden Talia",
+        "location_id": "loc_town_gate_shallows",
+        "status": "healthy",
+        "goal": "maintain the town perimeter and ration salt gear",
+        "bag": {}
+      },
+      {
+        "id": "char_orla",
+        "name": "Herbalist Orla",
+        "location_id": "loc_herbalist_storehouse",
+        "status": "healthy",
+        "goal": "distribute coastal remedies to independent refugees",
+        "bag": {}
+      },
+      {
+        "id": "char_burl",
+        "name": "Burl",
+        "location_id": "loc_pelican_wharf",
+        "status": "healthy",
+        "goal": "help arrivals settle safely on the coast",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_ocher_sink_infirmary",
+        "name": "Ocher Sink Infirmary",
+        "bag": {}
+      },
+      {
+        "id": "loc_deep_well_town",
+        "name": "Ocher Sink Market Square",
+        "bag": {}
+      },
+      {
+        "id": "loc_town_gate_shallows",
+        "name": "Basin Gate",
+        "bag": {}
+      },
+      {
+        "id": "loc_white_expanse",
+        "name": "The White Expanse",
+        "bag": {}
+      },
+      {
+        "id": "loc_brine_crevasse",
+        "name": "Brine Crevasse Field",
+        "bag": {}
+      },
+      {
+        "id": "loc_pelican_wharf",
+        "name": "Pelican Wharf",
+        "bag": {}
+      },
+      {
+        "id": "loc_herbalist_storehouse",
+        "name": "Coastal Storehouse",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_brass_token",
+        "name": "Mining Syndicate Guild Token",
+        "location_id": "loc_ocher_sink_infirmary",
+        "status": "intact",
+        "bag": {}
+      },
+      {
+        "id": "obj_filter_mask",
+        "name": "Brass Respirator Mask",
+        "location_id": "loc_ocher_sink_infirmary",
+        "status": "partially worn filter wax",
+        "bag": {}
+      },
+      {
+        "id": "obj_salt_sled",
+        "name": "Wheeled Salt Sled",
+        "location_id": "loc_town_gate_shallows",
+        "status": "rigged and operational",
+        "bag": {}
+      },
+      {
+        "id": "obj_fever_tincture",
+        "name": "Blue Lichen Fever Tincture",
+        "location_id": "loc_herbalist_storehouse",
+        "status": "sealed in clay flask",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_jory",
+        "to_id": "char_mina",
+        "kind": "sibling",
+        "sentiment": "devoted protector",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_mina",
+        "to_id": "char_jory",
+        "kind": "sibling",
+        "sentiment": "trusting",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_jory",
+        "to_id": "char_haddon",
+        "kind": "ward_to_elder",
+        "sentiment": "deferential",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_haddon",
+        "to_id": "char_jory",
+        "kind": "patron_to_courier",
+        "sentiment": "guilty desperation",
+        "bag": {}
+      },
+      {
+        "id": "rel_05",
+        "from_id": "char_varo",
+        "to_id": "char_jory",
+        "kind": "predator_to_mark",
+        "sentiment": "contemptuous",
+        "bag": {}
+      },
+      {
+        "id": "rel_06",
+        "from_id": "char_talia",
+        "to_id": "char_jory",
+        "kind": "protector_to_youth",
+        "sentiment": "sympathetic",
+        "bag": {}
+      },
+      {
+        "id": "rel_07",
+        "from_id": "char_burl",
+        "to_id": "char_jory",
+        "kind": "mentor_to_seeker",
+        "sentiment": "protective",
+        "bag": {}
+      },
+      {
+        "id": "rel_08",
+        "from_id": "char_orla",
+        "to_id": "char_jory",
+        "kind": "healer_to_patient",
+        "sentiment": "compassionate",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_jory",
+        "fact_ref": "varo_black_market_monopoly",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_haddon",
+        "fact_ref": "town_debt_to_syndicate",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_03",
+        "character_id": "char_talia",
+        "fact_ref": "town_debt_to_syndicate",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_04",
+        "character_id": "char_varo",
+        "fact_ref": "varo_black_market_monopoly",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_medicine_jar",
+      "order": 1,
+      "pov": "char_jory",
+      "location_id": "loc_ocher_sink_infirmary",
+      "characters_present": [
+        "char_jory",
+        "char_mina",
+        "char_haddon"
+      ],
+      "dramatic_function": "Establishes Mina's fatal illness and the strict time limit before salt-lung fever kills her.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "In the ocher sink infirmary, Jory sponges brine sweat from Mina's forehead as her cough thickens.",
+        "Apothecary Haddon scrapes the bottom of the medicine jar to show the blue lichen is entirely gone.",
+        "Haddon warns that salt-lung fever becomes fatal on the fourth day without treatment."
+      ],
+      "reader_must_learn": [
+        "mine_fever_lethal_window",
+        "town_debt_to_syndicate"
+      ],
+      "must_stay_hidden": [
+        "caravan_cargo_intact_tracks",
+        "child_runner_collateral",
+        "varo_black_market_monopoly"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "town_debt_to_syndicate",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_the_market_square",
+      "order": 2,
+      "pov": "char_jory",
+      "location_id": "loc_deep_well_town",
+      "characters_present": [
+        "char_jory",
+        "char_haddon",
+        "char_varo"
+      ],
+      "dramatic_function": "Reveals the town's resource crisis and provides the critical operational limitation of the respirator mask.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_ocher_sink_infirmary"
+        },
+        "char_haddon": {
+          "location_id": "loc_ocher_sink_infirmary"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_ocher_sink_infirmary"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_ocher_sink_infirmary"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_deep_well_town"
+        },
+        "char_haddon": {
+          "location_id": "loc_deep_well_town"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_deep_well_town"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_deep_well_town"
+        }
+      },
+      "required_beats": [
+        "What pushes this decision now, staged first: In the Ocher Sink infirmary, Jory watches his sister Mina struggle for breath as Apothecary Haddon reveals their supply of coastal blue lichen is gone.",
+        "Trader Varo refuses to share filtered brine from his private cistern without deed rights, mocking the town's dry pump.",
+        "Haddon rejects the predatory terms and inspects an old brass respirator mask.",
+        "Haddon observes that the mask's wax filter breaks down twice as fast in midday heat as in cold night air."
+      ],
+      "reader_must_learn": [
+        "filter_wax_degrades_fast",
+        "varo_black_market_monopoly"
+      ],
+      "must_stay_hidden": [
+        "caravan_cargo_intact_tracks",
+        "child_runner_collateral"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "varo_black_market_monopoly",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_03_the_guild_token",
+      "order": 3,
+      "pov": "char_jory",
+      "location_id": "loc_ocher_sink_infirmary",
+      "characters_present": [
+        "char_jory",
+        "char_mina",
+        "char_haddon"
+      ],
+      "dramatic_function": "Forces Jory to take on the perilous solo journey across the flats to save his sister.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_deep_well_town",
+          "goal": "procure blue lichen medicine before Mina's fever turns"
+        },
+        "char_haddon": {
+          "location_id": "loc_deep_well_town"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_deep_well_town"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_deep_well_town"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_ocher_sink_infirmary",
+          "goal": "cross the salt flats to purchase blue lichen with the brass token"
+        },
+        "char_haddon": {
+          "location_id": "loc_ocher_sink_infirmary"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_ocher_sink_infirmary"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_ocher_sink_infirmary"
+        }
+      },
+      "required_beats": [
+        "Haddon explains that no adult miner will venture across the flats after the caravan vanished.",
+        "Haddon entrusts the syndicate token—a heavy brass guild token—and the respirator mask to Jory.",
+        "Jory tells Mina he will return before the fourth nightfall."
+      ],
+      "reader_must_learn": [
+        "promise_return_before_fourth_nightfall",
+        "syndicate_token_entrusted"
+      ],
+      "must_stay_hidden": [
+        "child_runner_collateral",
+        "caravan_cargo_intact_tracks"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_the_basin_gate",
+      "order": 4,
+      "pov": "char_jory",
+      "location_id": "loc_town_gate_shallows",
+      "characters_present": [
+        "char_jory",
+        "char_talia"
+      ],
+      "dramatic_function": "Launches Jory into the wastes equipped with the sled and vital survival constraints regarding the salt crust.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_ocher_sink_infirmary"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_ocher_sink_infirmary"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_ocher_sink_infirmary"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_town_gate_shallows"
+        }
+      },
+      "required_beats": [
+        "At the basin gate, Talia checks the tow harness and bearings of a lightweight salt sled.",
+        "Talia warns that the fragile white salt crust gives way under more than eighty pounds, making Jory's light weight essential.",
+        "Talia opens the timber barrier and sends Jory out toward the coastal scrub."
+      ],
+      "reader_must_learn": [
+        "brine_crust_shear_strength"
+      ],
+      "must_stay_hidden": [
+        "child_runner_collateral",
+        "caravan_cargo_intact_tracks"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_salt_chase",
+      "order": 5,
+      "pov": "char_jory",
+      "location_id": "loc_white_expanse",
+      "characters_present": [
+        "char_jory",
+        "char_varo"
+      ],
+      "dramatic_function": "Establishes Jory's perilous equipment vulnerability while allowing him to temporarily outmaneuver Varo's pursuit across the salt flats.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "obj_salt_sled": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "char_varo": {
+          "location_id": "loc_deep_well_town",
+          "goal": "corner the town supply of clean water and medicine",
+          "status": "healthy"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_white_expanse"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_white_expanse"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_white_expanse"
+        },
+        "obj_salt_sled": {
+          "location_id": "loc_white_expanse"
+        },
+        "char_varo": {
+          "location_id": "loc_white_expanse",
+          "goal": "intercept Jory and take the guild token",
+          "status": "mired on foot in salt mud"
+        }
+      },
+      "required_beats": [
+        "What pushes this decision now, staged first: At the basin gate, Talia outfits Jory with a lightweight salt sled and warns him about the crust's load limits.",
+        "Jory steps onto the blinding white crust and equips his respirator, noticing ditch brine etching his spare quartz goggles and realizing his wax filter is dangerously degraded.",
+        "Trader Varo pursues him on an iron-framed outrigger sail-skiff, shouting across the flats to demand the syndicate token and brass token.",
+        "Jory lures the pursuit across the thin crust, where his lightweight sled traverses cleanly while Varo's heavy iron skiff breaks through and mires, forcing Varo to give chase on foot."
+      ],
+      "reader_must_learn": [
+        "caustic_sludge_corrosion"
+      ],
+      "must_stay_hidden": [
+        "child_runner_collateral",
+        "caravan_cargo_intact_tracks"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "brine_crust_shear_strength",
+          "plant": "scene_04_the_basin_gate"
+        }
+      ]
+    },
+    {
+      "id": "scene_06_the_blinding_squall",
+      "order": 6,
+      "pov": "char_jory",
+      "location_id": "loc_white_expanse",
+      "characters_present": [
+        "char_jory"
+      ],
+      "dramatic_function": "Escalates environmental pressure on Jory's dwindling physical endurance and failing respirator.",
+      "entry_state": {
+        "char_jory": {
+          "status": "uninjured"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "status": "fatigued and coughing from caustic dust"
+        }
+      },
+      "required_beats": [
+        "A violent midday storm whips alkaline dust into blinding white squalls across the basin.",
+        "Jory restricts his respirator valve to protect his fragile wax filter from melting under the grit and heat, pressing forward blindly by compass through coughing fits."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "child_runner_collateral",
+        "caravan_cargo_intact_tracks"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_the_crevasse_ambush",
+      "order": 7,
+      "pov": "char_jory",
+      "location_id": "loc_brine_crevasse",
+      "characters_present": [
+        "char_jory",
+        "char_varo"
+      ],
+      "dramatic_function": "Reveals the deliberate abandonment of the missing caravan and strips Jory of his supplies before he disables Varo in a desperate confrontation.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_white_expanse",
+          "status": "fatigued and coughing from caustic dust"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_white_expanse"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_white_expanse"
+        },
+        "obj_salt_sled": {
+          "location_id": "loc_white_expanse",
+          "status": "rigged and operational"
+        },
+        "char_varo": {
+          "location_id": "loc_white_expanse",
+          "status": "mired on foot in salt mud"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_brine_crevasse",
+          "status": "dehydrated and bruised"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_brine_crevasse"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_brine_crevasse"
+        },
+        "obj_salt_sled": {
+          "location_id": "loc_brine_crevasse",
+          "status": "destroyed in brine chasm"
+        },
+        "char_varo": {
+          "location_id": "loc_brine_crevasse",
+          "status": "temporarily blinded by etched goggles"
+        }
+      },
+      "required_beats": [
+        "Jory descends into the sunken crevasse field and finds the missing caravan wagons neatly unpacked and the draft beasts intentionally unhitched rather than destroyed.",
+        "A sudden sinkhole collapse swallows Jory's sled, canteen, and supplies into a deep chasm, leaving him stranded with only his mask and the brass token.",
+        "Varo arrives brandishing a heavy iron scraper, trapping Jory against a boiling brine pool to demand the guild token in exchange for water.",
+        "Jory splashes caustic ditch brine into Varo's quartz goggles to etch them blind in the glare, escaping up the salt ledge as Varo stumbles back into the ravine."
+      ],
+      "reader_must_learn": [
+        "caravan_cargo_intact_tracks"
+      ],
+      "must_stay_hidden": [
+        "child_runner_collateral"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "caustic_sludge_corrosion",
+          "plant": "scene_05_the_salt_chase"
+        }
+      ]
+    },
+    {
+      "id": "scene_08_the_scrubline_collapse",
+      "order": 8,
+      "pov": "char_jory",
+      "location_id": "loc_pelican_wharf",
+      "characters_present": [
+        "char_jory"
+      ],
+      "dramatic_function": "Brings Jory to safety at the edge of the coast at the absolute limit of his physical survival.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_brine_crevasse",
+          "status": "dehydrated and bruised"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_brine_crevasse",
+          "status": "partially worn filter wax"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_brine_crevasse"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_pelican_wharf",
+          "status": "unconscious from salt smoke inhalation"
+        },
+        "obj_filter_mask": {
+          "location_id": "loc_pelican_wharf",
+          "status": "filter wax completely dissolved"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_pelican_wharf"
+        }
+      },
+      "required_beats": [
+        "Intense heat liquefies the remaining mineral wax in Jory's respirator, flooding his lungs with caustic gas as he climbs the final salt ridge.",
+        "Jory reaches the coastal scrub and collapses unconscious by the boundary marker, still clutching the guild token."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [
+        "child_runner_collateral"
+      ],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "filter_wax_degrades_fast",
+          "plant": "scene_02_the_market_square"
+        }
+      ]
+    },
+    {
+      "id": "scene_09_the_waking_wharf",
+      "order": 9,
+      "pov": "char_jory",
+      "location_id": "loc_pelican_wharf",
+      "characters_present": [
+        "char_jory",
+        "char_burl"
+      ],
+      "dramatic_function": "To expose Haddon's manipulative exploitation of Jory's loyalty and shatter his belief in the syndicate's mission.",
+      "entry_state": {
+        "char_jory": {
+          "status": "unconscious from salt smoke inhalation"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "status": "recovering under coastal care"
+        }
+      },
+      "required_beats": [
+        "Jory wakes to clean sea air and fresh water at pelican wharf under the care of Burl, the vanished caravan driver.",
+        "Burl explains that the drivers defected to escape debt slavery rather than die in poison pits.",
+        "Burl reveals Haddon deliberately sent a child because only a boy bound to a dying sister would return instead of fleeing to the coast.",
+        "Jory realizes the town used his love for Mina as a hostage chain to haul medicine across the flats."
+      ],
+      "reader_must_learn": [
+        "child_runner_collateral"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "caravan_cargo_intact_tracks",
+          "plant": "scene_07_the_crevasse_ambush"
+        }
+      ]
+    },
+    {
+      "id": "scene_10_refusing_sanctuary",
+      "order": 10,
+      "pov": "char_jory",
+      "location_id": "loc_herbalist_storehouse",
+      "characters_present": [
+        "char_jory",
+        "char_orla",
+        "char_burl"
+      ],
+      "dramatic_function": "To test Jory's resolve with an offer of escape and establish his commitment to rescue his sister and free his people.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_pelican_wharf",
+          "goal": "cross the salt flats to purchase blue lichen with the brass token"
+        },
+        "obj_fever_tincture": {
+          "location_id": "loc_herbalist_storehouse"
+        },
+        "char_burl": {
+          "location_id": "loc_pelican_wharf"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_herbalist_storehouse",
+          "goal": "return to Ocher Sink to cure Mina and reveal the coast's freedom"
+        },
+        "obj_fever_tincture": {
+          "location_id": "loc_herbalist_storehouse"
+        },
+        "char_burl": {
+          "location_id": "loc_herbalist_storehouse"
+        }
+      },
+      "required_beats": [
+        "Orla seals a flask of blue lichen fever tincture, rejects the syndicate's brass token, and shows Jory how sea kelp strips serve as kelp filters against salt dust toxicity.",
+        "Orla offers Jory permanent sanctuary at the coast, urging him to abandon the greedy mining town to its fate.",
+        "Jory packs the blue lichen flask and wet sea kelp strips, declaring that abandoning Mina and the children pays the syndicate's price.",
+        "Jory refuses sanctuary and vows to return with the medicine to lead the townspeople out."
+      ],
+      "reader_must_learn": [
+        "coastal_kelp_neutralizer"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_11_the_return_departure",
+      "order": 11,
+      "pov": "char_jory",
+      "location_id": "loc_pelican_wharf",
+      "characters_present": [
+        "char_jory",
+        "char_burl"
+      ],
+      "dramatic_function": "To establish an escape corridor and pact of mutual aid between the coast and the mining settlement.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_herbalist_storehouse"
+        },
+        "char_burl": {
+          "location_id": "loc_herbalist_storehouse"
+        },
+        "obj_fever_tincture": {
+          "location_id": "loc_herbalist_storehouse"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_pelican_wharf"
+        },
+        "char_burl": {
+          "location_id": "loc_pelican_wharf"
+        },
+        "obj_fever_tincture": {
+          "location_id": "loc_pelican_wharf"
+        }
+      },
+      "required_beats": [
+        "At pelican wharf, Burl tightens Jory's sea kelp wraps and provides a compass bearing along the firm salt ridge.",
+        "Burl promises the coastal docks will receive the refugees whenever Jory leads them out from ocher sink.",
+        "Jory steps back onto the salt pan at twilight to begin the return crossing."
+      ],
+      "reader_must_learn": [
+        "solid_ridge_bearing_navigation"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_12_crossing_by_night",
+      "order": 12,
+      "pov": "char_jory",
+      "location_id": "loc_white_expanse",
+      "characters_present": [
+        "char_jory"
+      ],
+      "dramatic_function": "To show Jory successfully mastering the deadly expanse using coastal knowledge and tools.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_pelican_wharf"
+        },
+        "obj_fever_tincture": {
+          "location_id": "loc_pelican_wharf"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_white_expanse"
+        },
+        "obj_fever_tincture": {
+          "location_id": "loc_white_expanse"
+        }
+      },
+      "required_beats": [
+        "Jory breathes easily through the moist sea kelp filters in the night brine haze without suffering lung damage.",
+        "Jory navigates along solid ridge lines to bypass the fragile sinkholes under the stars.",
+        "Before dawn, Jory sights the distant torches of ocher sink glowing along the basin rim."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "coastal_kelp_neutralizer",
+          "plant": "scene_10_refusing_sanctuary"
+        },
+        {
+          "fact_ref": "solid_ridge_bearing_navigation",
+          "plant": "scene_11_the_return_departure"
+        }
+      ]
+    },
+    {
+      "id": "scene_13_the_basin_gate",
+      "order": 13,
+      "pov": "char_jory",
+      "location_id": "loc_town_gate_shallows",
+      "characters_present": [
+        "char_jory",
+        "char_talia",
+        "char_varo"
+      ],
+      "dramatic_function": "Turns Talia against Varo by exposing the truth of the coast, winning Jory passage through the basin gate.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_white_expanse"
+        },
+        "char_talia": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "char_varo": {
+          "location_id": "loc_brine_crevasse",
+          "status": "temporarily blinded by etched goggles"
+        },
+        "obj_fever_tincture": {
+          "location_id": "loc_white_expanse"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "char_talia": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "char_varo": {
+          "location_id": "loc_town_gate_shallows",
+          "status": "disarmed and detained by gate guards"
+        },
+        "obj_fever_tincture": {
+          "location_id": "loc_town_gate_shallows"
+        }
+      },
+      "required_beats": [
+        "Varo, with acid-burned eyes, demands Talia seize the medicine flask from Jory at the basin gate.",
+        "Jory refuses Varo's bribe, displays the sea-kelp filters, and reveals to Talia that the caravan drivers live freely at Pelican Wharf.",
+        "Talia orders the guards to disarm Varo and clears the gate path for Jory."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_14_the_fever_breaks",
+      "order": 14,
+      "pov": "char_jory",
+      "location_id": "loc_ocher_sink_infirmary",
+      "characters_present": [
+        "char_jory",
+        "char_mina",
+        "char_haddon"
+      ],
+      "dramatic_function": "Pays off Jory's quest by saving Mina, exposing Haddon's complicity, and committing the settlement to flee the mines for the coast.",
+      "entry_state": {
+        "char_jory": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "char_mina": {
+          "status": "delirious with salt-lung fever"
+        },
+        "char_haddon": {
+          "location_id": "loc_ocher_sink_infirmary",
+          "status": "exhausted"
+        },
+        "obj_fever_tincture": {
+          "location_id": "loc_town_gate_shallows"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_pelican_wharf"
+        }
+      },
+      "exit_state": {
+        "char_jory": {
+          "location_id": "loc_ocher_sink_infirmary"
+        },
+        "char_mina": {
+          "status": "recovering as fever breaks"
+        },
+        "char_haddon": {
+          "location_id": "loc_ocher_sink_infirmary",
+          "status": "disgraced and remorseful"
+        },
+        "obj_fever_tincture": {
+          "location_id": "loc_ocher_sink_infirmary"
+        },
+        "obj_brass_token": {
+          "location_id": "loc_ocher_sink_infirmary"
+        }
+      },
+      "required_beats": [
+        "In the infirmary before the fourth day deadline, Jory administers the blue lichen drops to Mina as her fever breaks and her breathing steadies.",
+        "Jory throws the useless syndicate token at Haddon's feet, confronting him with his betrayal and exposing how the town spent its children as hostages.",
+        "As Mina opens her eyes, Jory tells Haddon the mines are finished and the town will cross the flats together."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "mine_fever_lethal_window",
+          "plant": "scene_01_the_medicine_jar"
+        },
+        {
+          "fact_ref": "child_runner_collateral",
+          "plant": "scene_09_the_waking_wharf"
+        },
+        {
+          "fact_ref": "promise_return_before_fourth_nightfall",
+          "plant": "scene_03_the_guild_token"
+        },
+        {
+          "fact_ref": "syndicate_token_entrusted",
+          "plant": "scene_03_the_guild_token"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "omniscient, close-focused on the protagonist",
+    "register": "plain, warmly ironic, folk-narrator; understates cruelty and wonder alike",
+    "sentence_rhythm": "short declarative sentences; occasional triads (rule-of-three lists)",
+    "imagery_palette": [
+      "hearth and ash",
+      "finery and brocade",
+      "glass and candlelight"
+    ],
+    "dialogue_density": "low to moderate; the narrator reports more than it stages",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "fairy_tale_fable"
+  },
+  "metadata": {
+    "title": "The Salt Courier",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T18:40:09.033Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "town_debt_to_syndicate",
+      "statement": "Ocher Sink operates under perpetual bonded labor contracts owed to the salt-mining syndicate.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "caravan_cargo_intact_tracks",
+      "statement": "The missing caravan wagons were not pillaged by bandits but unpacked orderly with draft harness unhitched.",
+      "caused_by": [
+        "town_debt_to_syndicate"
+      ]
+    },
+    {
+      "fact_ref": "child_runner_collateral",
+      "statement": "Apothecary Haddon chose Jory because an adult runner would defect whereas a boy with a dying sister is bound to return.",
+      "caused_by": [
+        "caravan_cargo_intact_tracks",
+        "town_debt_to_syndicate"
+      ]
+    },
+    {
+      "fact_ref": "varo_black_market_monopoly",
+      "statement": "Trader Varo hoards clean water and remedies to force the town into extortionate debt.",
+      "caused_by": [
+        "town_debt_to_syndicate",
+        "child_runner_collateral"
+      ]
+    },
+    {
+      "fact_ref": "mine_fever_lethal_window",
+      "statement": "Salt-lung fever turns fatal on the fourth day without coastal blue lichen.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "filter_wax_degrades_fast",
+      "statement": "Calibrated mineral wax filters dissolve twice as fast in midday heat than in night air.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "brine_crust_shear_strength",
+      "statement": "Thin white salt crust collapses under loads over eighty pounds but supports a light runner.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "caustic_sludge_corrosion",
+      "statement": "Concentrated ditch brine rapidly clouds and etches untreated quartz safety goggles.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "coastal_kelp_neutralizer",
+      "statement": "Fresh sea-kelp strips neutralize salt-lung toxins and can sustain an unmasked runner on the salt pan.",
+      "caused_by": []
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.7-flash",
+    "generated_at": "2026-09-29T18:39:42.900Z",
+    "brief": {
+      "story_id": "review-salt-road",
+      "title": "Salt Road",
+      "premise": {
+        "logline": "A boy sent to fetch medicine across the salt flats learns the town sent him because no one else would come back.",
+        "modules": {
+          "theme": "what a community owes the people it spends",
+          "setting_time": "the dry season, after the last caravan failed to return",
+          "setting_place": "a salt-flat crossing between a mining town and a coast",
+          "protagonist": "a twelve-year-old who has never left town",
+          "protagonist_want": "to bring the medicine back before his sister’s fever turns",
+          "antagonism": "the flats themselves, and a trader who profits from the shortage",
+          "complication": "the medicine is real, but so is the reason nobody else went",
+          "ending_shape": "he returns changed, and the town must change to take him back"
+        }
+      },
+      "plot_shape": {
+        "id": "quest",
+        "name": "Quest",
+        "central_question": "What does the journey turn out to have been for?",
+        "phases": [
+          {
+            "name": "Lack",
+            "purpose": "Something is missing, and the protagonist is the one who must go.",
+            "share": 0.15
+          },
+          {
+            "name": "Departure",
+            "purpose": "Leaving costs something that will be missed later.",
+            "share": 0.15
+          },
+          {
+            "name": "Trials",
+            "purpose": "Obstacles that each take something and each teach something.",
+            "share": 0.35
+          },
+          {
+            "name": "The object",
+            "purpose": "The thing is reached, and is not what it was thought to be.",
+            "share": 0.2
+          },
+          {
+            "name": "Return",
+            "purpose": "Home, altered, judged against the lack that started it.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "seeker",
+            "purpose": "Goes, and is changed by going."
+          },
+          {
+            "role": "giver",
+            "purpose": "Hands over the means, with a condition attached."
+          },
+          {
+            "role": "obstructor",
+            "purpose": "Wants the object, or wants the seeker not to have it."
+          },
+          {
+            "role": "the left behind",
+            "purpose": "Makes the return mean something."
+          }
+        ],
+        "obligatory_moves": [
+          "The means handed over early carries a limit that matters at the object.",
+          "At least one trial is lost, not won.",
+          "The return scene is set in the place the departure scene left."
+        ]
+      },
+      "event_count": 22,
+      "cast": {
+        "characters": 7,
+        "locations": 6,
+        "objects": 4
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 4,
+        "min_span": 3,
+        "long_range_edges": 2,
+        "long_range_span": 11
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "quest",
+        "premise_preset": "Salt Road"
+      }
+    },
+    "repairs": [
+      "mechanical | declare_fact_at_event: hidden \"town_debt_to_syndicate\" installed in ev_01_infirmary_crisis.reveals",
+      "mechanical | declare_fact_at_event: hidden \"varo_black_market_monopoly\" installed in ev_02_market_confrontation.reveals",
+      "model | repoint_plant: ev_07_thin_crust_gambit pays off \"brine_crust_shear_strength\" from ev_04_gate_provisioning",
+      "model | repoint_plant: ev_13_sludge_defense pays off \"caustic_sludge_corrosion\" from ev_05_margin_inspection",
+      "model | repoint_plant: ev_14_filter_burnout pays off \"filter_wax_degrades_fast\" from ev_02_market_confrontation",
+      "model | repoint_plant: ev_16_caravan_truth pays off \"caravan_cargo_intact_tracks\" from ev_10_caravan_inspection",
+      "model | repoint_plant: ev_20_night_ridge_crossing pays off \"coastal_kelp_neutralizer\" from ev_17_medicine_receipt",
+      "model | repoint_plant: ev_22_infirmary_transformation pays off \"mine_fever_lethal_window\" from ev_01_infirmary_crisis",
+      "model | repoint_plant: ev_22_infirmary_transformation pays off \"child_runner_collateral\" from ev_16_caravan_truth"
+    ],
+    "events": [
+      {
+        "id": "ev_01_infirmary_crisis",
+        "sequence": 1,
+        "summary": "In the Ocher Sink infirmary, Jory watches his sister Mina struggle for breath as Apothecary Haddon reveals their supply of coastal blue lichen is gone.",
+        "pov": "char_jory",
+        "location_id": "loc_ocher_sink_infirmary",
+        "characters_present": [
+          "char_jory",
+          "char_mina",
+          "char_haddon"
+        ],
+        "dramatic_function": "Establish the protagonist's emotional stake, the impending deadline of the salt fever, and the town's resource crisis.",
+        "beats": [
+          "Jory sponges brine sweat from Mina's forehead as her cough thickens.",
+          "Haddon scrapes the bottom of the medicine jar, finding only dry mold.",
+          "Haddon states that salt-lung fever turns fatal on the fourth day without blue lichen."
+        ],
+        "caused_by": [],
+        "reveals": [
+          "mine_fever_lethal_window",
+          "town_debt_to_syndicate"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "town_debt_to_syndicate",
+            "plant": null
+          }
+        ],
+        "state_changes": []
+      },
+      {
+        "id": "ev_02_market_confrontation",
+        "sequence": 2,
+        "summary": "Jory and Haddon go to the town square where Trader Varo refuses to share his private cistern and Haddon inspects the remaining respirator mask.",
+        "pov": "char_jory",
+        "location_id": "loc_deep_well_town",
+        "characters_present": [
+          "char_jory",
+          "char_haddon",
+          "char_varo"
+        ],
+        "dramatic_function": "Introduce the obstructor's leverage over the town and plant the physical vulnerability of the crossing equipment.",
+        "beats": [
+          "Varo mocks the town's dry communal pump and demands deed rights for his filtered brine.",
+          "Haddon refuses Varo's predatory trade and examines an old brass respirator mask.",
+          "Haddon notes that the mask's calibrated wax filter dissolves twice as fast in midday heat than in cold night air."
+        ],
+        "caused_by": [
+          "ev_01_infirmary_crisis"
+        ],
+        "reveals": [
+          "filter_wax_degrades_fast",
+          "varo_black_market_monopoly"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "varo_black_market_monopoly",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_deep_well_town"
+          },
+          {
+            "entity_id": "char_haddon",
+            "column": "location_id",
+            "value": "loc_deep_well_town"
+          },
+          {
+            "entity_id": "obj_filter_mask",
+            "column": "location_id",
+            "value": "loc_deep_well_town"
+          },
+          {
+            "entity_id": "obj_brass_token",
+            "column": "location_id",
+            "value": "loc_deep_well_town"
+          }
+        ]
+      },
+      {
+        "id": "ev_03_commission_of_the_child",
+        "sequence": 3,
+        "summary": "Back at the infirmary, Haddon tasks Jory with crossing the flats alone, handing him the syndicate token while hiding why no adult was chosen.",
+        "pov": "char_jory",
+        "location_id": "loc_ocher_sink_infirmary",
+        "characters_present": [
+          "char_jory",
+          "char_mina",
+          "char_haddon"
+        ],
+        "dramatic_function": "Complete the call to adventure and seal the contract between giver and seeker under false pretenses.",
+        "beats": [
+          "Haddon explains that no adult miner will volunteer to cross after the caravan vanished.",
+          "Haddon presses the heavy brass guild token and the respirator into Jory's hands.",
+          "Jory promises Mina he will return before the fourth nightfall."
+        ],
+        "caused_by": [
+          "ev_02_market_confrontation"
+        ],
+        "reveals": [],
+        "conceals": [
+          "child_runner_collateral"
+        ],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_ocher_sink_infirmary"
+          },
+          {
+            "entity_id": "char_haddon",
+            "column": "location_id",
+            "value": "loc_ocher_sink_infirmary"
+          },
+          {
+            "entity_id": "obj_filter_mask",
+            "column": "location_id",
+            "value": "loc_ocher_sink_infirmary"
+          },
+          {
+            "entity_id": "obj_brass_token",
+            "column": "location_id",
+            "value": "loc_ocher_sink_infirmary"
+          },
+          {
+            "entity_id": "char_jory",
+            "column": "goal",
+            "value": "cross the salt flats to purchase blue lichen with the brass token"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_gate_provisioning",
+        "sequence": 4,
+        "summary": "At the basin gate, Talia outfits Jory with a lightweight salt sled and warns him about the crust's load limits.",
+        "pov": "char_jory",
+        "location_id": "loc_town_gate_shallows",
+        "characters_present": [
+          "char_jory",
+          "char_talia"
+        ],
+        "dramatic_function": "Equip the seeker with travel means while planting the physical law of the salt flats.",
+        "beats": [
+          "Talia checks the wheel bearings and tow harness of the lightweight salt sled.",
+          "Talia instructs Jory that the thin white salt crust collapses under loads over eighty pounds but safely bears a light boy.",
+          "Talia opens the timber barrier, bidding Jory make for the coastal scrub."
+        ],
+        "caused_by": [
+          "ev_03_commission_of_the_child"
+        ],
+        "reveals": [
+          "brine_crust_shear_strength"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_town_gate_shallows"
+          },
+          {
+            "entity_id": "obj_filter_mask",
+            "column": "location_id",
+            "value": "loc_town_gate_shallows"
+          },
+          {
+            "entity_id": "obj_brass_token",
+            "column": "location_id",
+            "value": "loc_town_gate_shallows"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_margin_inspection",
+        "sequence": 5,
+        "summary": "Stepping onto the white expanse, Jory notices caustic brine eating into his spare quartz goggles and realizes the respirator filter is already degraded.",
+        "pov": "char_jory",
+        "location_id": "loc_white_expanse",
+        "characters_present": [
+          "char_jory"
+        ],
+        "dramatic_function": "Establish the harsh environmental stakes and plant the caustic property of ditch brine.",
+        "beats": [
+          "Jory steps onto the blinding white crust and straps on the respirator mask.",
+          "He observes ditch brine rapidly clouding and etching his spare quartz goggles.",
+          "He realizes the wax filter inside the mask is already half-thinned from prior use."
+        ],
+        "caused_by": [
+          "ev_04_gate_provisioning"
+        ],
+        "reveals": [
+          "caustic_sludge_corrosion"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_white_expanse"
+          },
+          {
+            "entity_id": "obj_filter_mask",
+            "column": "location_id",
+            "value": "loc_white_expanse"
+          },
+          {
+            "entity_id": "obj_brass_token",
+            "column": "location_id",
+            "value": "loc_white_expanse"
+          },
+          {
+            "entity_id": "obj_salt_sled",
+            "column": "location_id",
+            "value": "loc_white_expanse"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_varo_ambush_pursuit",
+        "sequence": 6,
+        "summary": "Trader Varo pursues Jory onto the flats aboard a heavy outrigger skiff, intending to seize the brass token.",
+        "pov": "char_jory",
+        "location_id": "loc_white_expanse",
+        "characters_present": [
+          "char_jory",
+          "char_varo"
+        ],
+        "dramatic_function": "Introduce direct active opposition from the obstructor as the journey begins.",
+        "beats": [
+          "Varo appears on the horizon steering an iron-framed outrigger sail-skiff.",
+          "Varo shouts across the pan demanding Jory surrender the syndicate token.",
+          "Jory leans into his harness and races toward the brittle salt flats."
+        ],
+        "caused_by": [
+          "ev_05_margin_inspection"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_varo",
+            "column": "location_id",
+            "value": "loc_white_expanse"
+          },
+          {
+            "entity_id": "char_varo",
+            "column": "goal",
+            "value": "intercept Jory and take the guild token"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_thin_crust_gambit",
+        "sequence": 7,
+        "summary": "Jory leads Varo onto the thin crust zone, where his lightweight sled passes safely while Varo's heavy iron skiff shatters the crust and mires.",
+        "pov": "char_jory",
+        "location_id": "loc_white_expanse",
+        "characters_present": [
+          "char_jory",
+          "char_varo"
+        ],
+        "dramatic_function": "Pay off the crust load limit plant as Jory wins his first tactical escape.",
+        "beats": [
+          "Jory sprints across the blinding white crust, listening to it creak beneath his boots.",
+          "Varo's heavy outrigger crashes through the brittle crust and jams into the sticky mud beneath.",
+          "Jory pulls ahead as Varo is forced to abandon the broken rig on foot."
+        ],
+        "caused_by": [
+          "ev_06_varo_ambush_pursuit"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "brine_crust_shear_strength",
+            "plant": "ev_04_gate_provisioning"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_varo",
+            "column": "status",
+            "value": "mired on foot in salt mud"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_salt_storm_endurance",
+        "sequence": 8,
+        "summary": "A violent midday salt storm sweeps across the basin, forcing Jory to choke his respirator airflow to conserve the fragile wax filter.",
+        "pov": "char_jory",
+        "location_id": "loc_white_expanse",
+        "characters_present": [
+          "char_jory"
+        ],
+        "dramatic_function": "Escalate the physical trial, inflicting respiratory toll on the protagonist.",
+        "beats": [
+          "Gale winds whip caustic alkaline dust into blinding white squalls.",
+          "Jory narrows the respirator valve to prevent the heat and grit from liquefying the wax.",
+          "He struggles forward through coughing fits, marking his path by compass."
+        ],
+        "caused_by": [
+          "ev_07_thin_crust_gambit"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "status",
+            "value": "fatigued and coughing from caustic dust"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_crevasse_approach",
+        "sequence": 9,
+        "summary": "Jory reaches the brine crevasse field and discovers the missing caravan's wagons resting intact in a dry salt trench.",
+        "pov": "char_jory",
+        "location_id": "loc_brine_crevasse",
+        "characters_present": [
+          "char_jory"
+        ],
+        "dramatic_function": "Transition to the halfway obstacle and introduce the physical remnants of the mystery.",
+        "beats": [
+          "Jory guides his salt sled down a jagged ramp into the sunken crevasse field.",
+          "He spots three massive syndicate freight wagons wedged between salt pillars.",
+          "He approaches the silent wreckage to search for leftover water."
+        ],
+        "caused_by": [
+          "ev_08_salt_storm_endurance"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_brine_crevasse"
+          },
+          {
+            "entity_id": "obj_filter_mask",
+            "column": "location_id",
+            "value": "loc_brine_crevasse"
+          },
+          {
+            "entity_id": "obj_brass_token",
+            "column": "location_id",
+            "value": "loc_brine_crevasse"
+          },
+          {
+            "entity_id": "obj_salt_sled",
+            "column": "location_id",
+            "value": "loc_brine_crevasse"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_caravan_inspection",
+        "sequence": 10,
+        "summary": "Examining the caravan wagons, Jory discovers the freight was unpacked methodically and the draft beasts were unhitched rather than lost to disaster.",
+        "pov": "char_jory",
+        "location_id": "loc_brine_crevasse",
+        "characters_present": [
+          "char_jory"
+        ],
+        "dramatic_function": "Plant the physical clues proving the caravan did not perish but willingly walked away.",
+        "beats": [
+          "Jory searches the wagon beds and finds empty crates neatly stacked without signs of violence.",
+          "He notices cut tether straps indicating the draft beasts were unhitched intentionally.",
+          "He finds boot tracks leading cleanly toward the coastal ridge."
+        ],
+        "caused_by": [
+          "ev_09_crevasse_approach"
+        ],
+        "reveals": [
+          "caravan_cargo_intact_tracks"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": []
+      },
+      {
+        "id": "ev_11_crevasse_collapse",
+        "sequence": 11,
+        "summary": "A treacherous brine sinkhole collapses beneath Jory, swallowing his salt sled, spare provisions, and canteen.",
+        "pov": "char_jory",
+        "location_id": "loc_brine_crevasse",
+        "characters_present": [
+          "char_jory"
+        ],
+        "dramatic_function": "Execute the lost trial requirement, stripping the seeker of survival gear and raising stakes.",
+        "beats": [
+          "The salt crust fractures violently beneath the sled's runners.",
+          "Jory scrambles clear as the sled, water flasks, and spare supplies plunge into a deep brine chasm.",
+          "Jory is left clinging to the ridge with only his mask and the brass token in his coat."
+        ],
+        "caused_by": [
+          "ev_10_caravan_inspection"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "obj_salt_sled",
+            "column": "status",
+            "value": "destroyed in brine chasm"
+          },
+          {
+            "entity_id": "char_jory",
+            "column": "status",
+            "value": "dehydrated and bruised"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_crevasse_cornering",
+        "sequence": 12,
+        "summary": "Varo catches up on foot at the crevasse rim, cornering the unarmed Jory against a boiling brine pool.",
+        "pov": "char_jory",
+        "location_id": "loc_brine_crevasse",
+        "characters_present": [
+          "char_jory",
+          "char_varo"
+        ],
+        "dramatic_function": "Bring the obstructor to bear at the protagonist's lowest physical moment.",
+        "beats": [
+          "Varo appears at the trench ledge wielding a heavy iron scraper.",
+          "Varo corners Jory against a pool of bubbling concentrated brine.",
+          "Varo demands Jory hand over the brass guild token in exchange for water."
+        ],
+        "caused_by": [
+          "ev_11_crevasse_collapse"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_varo",
+            "column": "location_id",
+            "value": "loc_brine_crevasse"
+          }
+        ]
+      },
+      {
+        "id": "ev_13_sludge_defense",
+        "sequence": 13,
+        "summary": "Jory scoops concentrated ditch brine onto Varo's quartz goggles, etching them instantly and allowing Jory to escape up the crevasse wall.",
+        "pov": "char_jory",
+        "location_id": "loc_brine_crevasse",
+        "characters_present": [
+          "char_jory",
+          "char_varo"
+        ],
+        "dramatic_function": "Pay off the corrosive sludge plant to overcome the obstructor in close combat.",
+        "beats": [
+          "Jory dips his glove into the caustic sludge and flings it straight into Varo's face.",
+          "The acidic brine instantly clouds and etches Varo's quartz lenses, blinding him in the white glare.",
+          "Jory scrambles up the salt ledge while Varo stumbles blindly into the ravine."
+        ],
+        "caused_by": [
+          "ev_12_crevasse_cornering"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "caustic_sludge_corrosion",
+            "plant": "ev_05_margin_inspection"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_varo",
+            "column": "status",
+            "value": "temporarily blinded by etched goggles"
+          }
+        ]
+      },
+      {
+        "id": "ev_14_filter_burnout",
+        "sequence": 14,
+        "summary": "As Jory reaches the scrubline bordering the coast, the midday heat completely liquefies his mask's wax filter and he collapses from caustic fumes.",
+        "pov": "char_jory",
+        "location_id": "loc_pelican_wharf",
+        "characters_present": [
+          "char_jory"
+        ],
+        "dramatic_function": "Pay off the filter degradation plant, concluding the trials phase with physical collapse.",
+        "beats": [
+          "The afternoon heat dissolves the remaining mineral wax in the respirator, letting alkaline gas flood Jory's throat.",
+          "Jory staggers across the last salt ridge onto green coastal scrub.",
+          "He drops unconscious at the boundary marker, clutching the guild token."
+        ],
+        "caused_by": [
+          "ev_13_sludge_defense"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "filter_wax_degrades_fast",
+            "plant": "ev_02_market_confrontation"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_pelican_wharf"
+          },
+          {
+            "entity_id": "obj_filter_mask",
+            "column": "location_id",
+            "value": "loc_pelican_wharf"
+          },
+          {
+            "entity_id": "obj_brass_token",
+            "column": "location_id",
+            "value": "loc_pelican_wharf"
+          },
+          {
+            "entity_id": "obj_filter_mask",
+            "column": "status",
+            "value": "filter wax completely dissolved"
+          },
+          {
+            "entity_id": "char_jory",
+            "column": "status",
+            "value": "unconscious from salt smoke inhalation"
+          }
+        ]
+      },
+      {
+        "id": "ev_15_wharf_awakening",
+        "sequence": 15,
+        "summary": "Jory awakens on the breezy docks of Pelican Wharf, cared for by Burl, the vanished caravan driver.",
+        "pov": "char_jory",
+        "location_id": "loc_pelican_wharf",
+        "characters_present": [
+          "char_jory",
+          "char_burl"
+        ],
+        "dramatic_function": "Reorient the protagonist in the new world and reveal the survivor's true fate.",
+        "beats": [
+          "Jory wakes to clean sea air and fresh water pressed against his lips.",
+          "He recognizes Burl, the veteran driver who vanished with the last freight.",
+          "Burl assures Jory that he is safe from the flats and the mining syndicate."
+        ],
+        "caused_by": [
+          "ev_14_filter_burnout"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "status",
+            "value": "recovering under coastal care"
+          }
+        ]
+      },
+      {
+        "id": "ev_16_caravan_truth",
+        "sequence": 16,
+        "summary": "Burl explains that the caravan did not perish but defected to escape debt slavery, revealing that Haddon sent a child because only a boy bound to a dying sister would return.",
+        "pov": "char_jory",
+        "location_id": "loc_pelican_wharf",
+        "characters_present": [
+          "char_jory",
+          "char_burl"
+        ],
+        "dramatic_function": "Deliver the core thematic revelation and pay off the intact caravan tracks plant.",
+        "beats": [
+          "Burl explains that the drivers abandoned their wagons to live as free folk rather than die in the poison pits.",
+          "Burl tells Jory that Haddon knew every adult courier would choose the coast, making an expendable boy with a sick sister their only hostage.",
+          "Jory realizes his town used his love for Mina as a chain to pull medicine across the flats."
+        ],
+        "caused_by": [
+          "ev_15_wharf_awakening"
+        ],
+        "reveals": [
+          "child_runner_collateral"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "caravan_cargo_intact_tracks",
+            "plant": "ev_10_caravan_inspection"
+          }
+        ],
+        "state_changes": []
+      },
+      {
+        "id": "ev_17_medicine_receipt",
+        "sequence": 17,
+        "summary": "In the coastal storehouse, Herbalist Orla prepares the blue lichen tincture, offering Jory permanent sanctuary while equipping him with kelp filters.",
+        "pov": "char_jory",
+        "location_id": "loc_herbalist_storehouse",
+        "characters_present": [
+          "char_jory",
+          "char_orla"
+        ],
+        "dramatic_function": "Grant the seeker the physical quest object while providing the means for a safe return.",
+        "beats": [
+          "Orla seals a vial of blue lichen fever tincture and refuses the syndicate's worthless brass token.",
+          "Orla demonstrates how fresh sea-kelp strips neutralize salt dust toxicity without relying on mineral wax respirators.",
+          "Orla urges Jory to remain at the coast and let the mining town collapse on its own greed."
+        ],
+        "caused_by": [
+          "ev_16_caravan_truth"
+        ],
+        "reveals": [
+          "coastal_kelp_neutralizer"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_herbalist_storehouse"
+          },
+          {
+            "entity_id": "obj_fever_tincture",
+            "column": "location_id",
+            "value": "loc_herbalist_storehouse"
+          },
+          {
+            "entity_id": "char_jory",
+            "column": "goal",
+            "value": "decide whether to stay at the coast or carry the tincture back"
+          }
+        ]
+      },
+      {
+        "id": "ev_18_choice_to_return",
+        "sequence": 18,
+        "summary": "Jory rejects the coast's sanctuary, choosing to take the medicine back to save Mina and break the town's cycle of silence.",
+        "pov": "char_jory",
+        "location_id": "loc_herbalist_storehouse",
+        "characters_present": [
+          "char_jory",
+          "char_orla",
+          "char_burl"
+        ],
+        "dramatic_function": "Protagonist redefines his motivation: returning not as a compliant errand boy, but as an agent of change.",
+        "beats": [
+          "Jory straps the tincture flask and wet sea-kelp breathing strips into his tunic.",
+          "He tells Burl and Orla that leaving Mina and the town's children to die pays the syndicate's price for them.",
+          "He declares he will return with the cure and lead the town out to the coast."
+        ],
+        "caused_by": [
+          "ev_17_medicine_receipt"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_burl",
+            "column": "location_id",
+            "value": "loc_herbalist_storehouse"
+          },
+          {
+            "entity_id": "char_jory",
+            "column": "goal",
+            "value": "return to Ocher Sink to cure Mina and reveal the coast's freedom"
+          }
+        ]
+      },
+      {
+        "id": "ev_19_return_departure",
+        "sequence": 19,
+        "summary": "At the wharf margin, Burl equips Jory for the return crossing and promises to hold the coastal trail open for Ocher Sink refugees.",
+        "pov": "char_jory",
+        "location_id": "loc_pelican_wharf",
+        "characters_present": [
+          "char_jory",
+          "char_burl"
+        ],
+        "dramatic_function": "Initiate the return journey with newfound support and purpose.",
+        "beats": [
+          "Burl secures Jory's sea-kelp wraps and gives him a compass bearing along the firm salt ridge.",
+          "Burl promises that when Jory returns with the townspeople, the coastal docks will receive them.",
+          "Jory steps back onto the salt pan as twilight sets over the flats."
+        ],
+        "caused_by": [
+          "ev_18_choice_to_return"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_pelican_wharf"
+          },
+          {
+            "entity_id": "char_burl",
+            "column": "location_id",
+            "value": "loc_pelican_wharf"
+          },
+          {
+            "entity_id": "obj_fever_tincture",
+            "column": "location_id",
+            "value": "loc_pelican_wharf"
+          }
+        ]
+      },
+      {
+        "id": "ev_20_night_ridge_crossing",
+        "sequence": 20,
+        "summary": "Guided by his new understanding of the salt ridges and sustained by the kelp filters, Jory crosses the expanse under the stars without suffering lung damage.",
+        "pov": "char_jory",
+        "location_id": "loc_white_expanse",
+        "characters_present": [
+          "char_jory"
+        ],
+        "dramatic_function": "Demonstrate mastery over the environment and pay off the coastal kelp neutralizer plant.",
+        "beats": [
+          "Jory breathes easily through the moist sea-kelp strips despite the thick night brine haze.",
+          "He strides along the solid ridge lines, easily avoiding the fragile sinkholes.",
+          "He sights the torches of Ocher Sink glowing along the basin rim before dawn."
+        ],
+        "caused_by": [
+          "ev_19_return_departure"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "coastal_kelp_neutralizer",
+            "plant": "ev_17_medicine_receipt"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_white_expanse"
+          },
+          {
+            "entity_id": "obj_fever_tincture",
+            "column": "location_id",
+            "value": "loc_white_expanse"
+          }
+        ]
+      },
+      {
+        "id": "ev_21_gate_reckoning",
+        "sequence": 21,
+        "summary": "At the basin gate, Jory confronts Talia and a scarred Varo, refusing Varo's bribe and rallying the gate guards with the truth of the coast.",
+        "pov": "char_jory",
+        "location_id": "loc_town_gate_shallows",
+        "characters_present": [
+          "char_jory",
+          "char_talia",
+          "char_varo"
+        ],
+        "dramatic_function": "Defeat the obstructor politically at the threshold of home.",
+        "beats": [
+          "Varo, with acid-burned eyes, demands Talia seize the medicine flask from Jory.",
+          "Jory displays the sea-kelp filters and reveals to Talia that the caravan drivers live freely at Pelican Wharf.",
+          "Talia orders the guards to disarm Varo and clears the gate path for Jory."
+        ],
+        "caused_by": [
+          "ev_20_night_ridge_crossing"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_town_gate_shallows"
+          },
+          {
+            "entity_id": "char_talia",
+            "column": "location_id",
+            "value": "loc_town_gate_shallows"
+          },
+          {
+            "entity_id": "char_varo",
+            "column": "location_id",
+            "value": "loc_town_gate_shallows"
+          },
+          {
+            "entity_id": "obj_fever_tincture",
+            "column": "location_id",
+            "value": "loc_town_gate_shallows"
+          },
+          {
+            "entity_id": "char_varo",
+            "column": "status",
+            "value": "disarmed and detained by gate guards"
+          }
+        ]
+      },
+      {
+        "id": "ev_22_infirmary_transformation",
+        "sequence": 22,
+        "summary": "In the infirmary where his journey began, Jory doses Mina before the fever's fourth day deadline, confronts Haddon with his betrayal, and commits the town to march for the coast.",
+        "pov": "char_jory",
+        "location_id": "loc_ocher_sink_infirmary",
+        "characters_present": [
+          "char_jory",
+          "char_mina",
+          "char_haddon"
+        ],
+        "dramatic_function": "Resolve the central quest, deliver the final thematic reckoning, and pay off the deadline and collateral plants.",
+        "beats": [
+          "Jory administers the blue lichen drops to Mina as her fourth-day fever breaks and her breathing steadies.",
+          "He throws the useless syndicate token at Haddon's feet, exposing how the town spent its children as hostages.",
+          "As Mina opens her eyes, Jory tells Haddon the mines are finished and the town will cross the flats together."
+        ],
+        "caused_by": [
+          "ev_21_gate_reckoning"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "mine_fever_lethal_window",
+            "plant": "ev_01_infirmary_crisis"
+          },
+          {
+            "fact_ref": "child_runner_collateral",
+            "plant": "ev_16_caravan_truth"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_jory",
+            "column": "location_id",
+            "value": "loc_ocher_sink_infirmary"
+          },
+          {
+            "entity_id": "char_mina",
+            "column": "status",
+            "value": "recovering as fever breaks"
+          },
+          {
+            "entity_id": "char_haddon",
+            "column": "location_id",
+            "value": "loc_ocher_sink_infirmary"
+          },
+          {
+            "entity_id": "char_haddon",
+            "column": "status",
+            "value": "disgraced and remorseful"
+          },
+          {
+            "entity_id": "obj_fever_tincture",
+            "column": "location_id",
+            "value": "loc_ocher_sink_infirmary"
+          },
+          {
+            "entity_id": "obj_brass_token",
+            "column": "location_id",
+            "value": "loc_ocher_sink_infirmary"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [
+      {
+        "id": "hidden_01_syndicate_debt",
+        "sequence": 1,
+        "summary": "The salt-mining syndicate in Ocher Sink placed all adult miners in unpayable debt bondage to prevent emigration to the coast.",
+        "caused_by": [],
+        "establishes": [
+          "town_debt_to_syndicate"
+        ]
+      },
+      {
+        "id": "hidden_02_caravan_defection",
+        "sequence": 2,
+        "summary": "Burl and his caravan drivers deserted the syndicate wagons at Pelican Wharf because they refused to return to perpetual labor in the mines.",
+        "caused_by": [
+          "hidden_01_syndicate_debt"
+        ],
+        "establishes": [
+          "caravan_cargo_intact_tracks"
+        ]
+      },
+      {
+        "id": "hidden_03_haddon_strategy",
+        "sequence": 3,
+        "summary": "Apothecary Haddon concealed the caravan's defection and decided to send a child courier because an adult would simply stay at the coast while Jory would return for his sister.",
+        "caused_by": [
+          "hidden_02_caravan_defection"
+        ],
+        "establishes": [
+          "child_runner_collateral"
+        ]
+      },
+      {
+        "id": "hidden_04_varo_scheme",
+        "sequence": 4,
+        "summary": "Trader Varo planned to seize the syndicate payment token and coastal medicine so he could force Ocher Sink into purchasing his private water reserves.",
+        "caused_by": [
+          "hidden_03_haddon_strategy"
+        ],
+        "establishes": [
+          "varo_black_market_monopoly"
+        ]
+      }
+    ],
+    "facts": [
+      {
+        "fact_ref": "mine_fever_lethal_window",
+        "statement": "Salt-lung fever turns fatal on the fourth day without coastal blue lichen.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "filter_wax_degrades_fast",
+        "statement": "Calibrated mineral wax filters dissolve twice as fast in midday heat than in night air.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "brine_crust_shear_strength",
+        "statement": "Thin white salt crust collapses under loads over eighty pounds but supports a light runner.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "caustic_sludge_corrosion",
+        "statement": "Concentrated ditch brine rapidly clouds and etches untreated quartz safety goggles.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "caravan_cargo_intact_tracks",
+        "statement": "The missing caravan wagons were not pillaged by bandits but unpacked orderly with draft harness unhitched.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "child_runner_collateral",
+        "statement": "Apothecary Haddon chose Jory because an adult runner would defect whereas a boy with a dying sister is bound to return.",
+        "caused_by": [
+          "caravan_cargo_intact_tracks",
+          "town_debt_to_syndicate"
+        ]
+      },
+      {
+        "fact_ref": "coastal_kelp_neutralizer",
+        "statement": "Fresh sea-kelp strips neutralize salt-lung toxins and can sustain an unmasked runner on the salt pan.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "town_debt_to_syndicate",
+        "statement": "Ocher Sink operates under perpetual bonded labor contracts owed to the salt-mining syndicate.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "varo_black_market_monopoly",
+        "statement": "Trader Varo hoards clean water and remedies to force the town into extortionate debt.",
+        "caused_by": [
+          "town_debt_to_syndicate"
+        ]
+      }
+    ],
+    "stakes": [
+      {
+        "stake": "Mina will die of salt-lung fever if medicine is not brought back before the fourth nightfall.",
+        "introduced_by": "ev_01_infirmary_crisis",
+        "resolved_by": "ev_22_infirmary_transformation"
+      },
+      {
+        "stake": "Trader Varo will intercept the guild token and seize control of all external medicine shipments.",
+        "introduced_by": "ev_06_varo_ambush_pursuit",
+        "resolved_by": "ev_21_gate_reckoning"
+      },
+      {
+        "stake": "Jory will suffocate on the salt flats if his deteriorating mask filter fails before reaching safety.",
+        "introduced_by": "ev_05_margin_inspection",
+        "resolved_by": "ev_15_wharf_awakening"
+      },
+      {
+        "stake": "The townspeople of Ocher Sink will remain trapped in lethal debt servitude under the syndicate's lies.",
+        "introduced_by": "ev_16_caravan_truth",
+        "resolved_by": "ev_22_infirmary_transformation"
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T18:40:09.033Z",
+    "started_at": "2026-09-29T18:39:42.900Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_medicine_jar",
+        "order": 1,
+        "event_ids": [
+          "ev_01_infirmary_crisis"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_market_square",
+        "order": 2,
+        "event_ids": [
+          "ev_02_market_confrontation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_guild_token",
+        "order": 3,
+        "event_ids": [
+          "ev_03_commission_of_the_child"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_basin_gate",
+        "order": 4,
+        "event_ids": [
+          "ev_04_gate_provisioning"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_salt_chase",
+        "order": 5,
+        "event_ids": [
+          "ev_05_margin_inspection",
+          "ev_06_varo_ambush_pursuit",
+          "ev_07_thin_crust_gambit"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_the_blinding_squall",
+        "order": 6,
+        "event_ids": [
+          "ev_08_salt_storm_endurance"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_the_crevasse_ambush",
+        "order": 7,
+        "event_ids": [
+          "ev_09_crevasse_approach",
+          "ev_10_caravan_inspection",
+          "ev_11_crevasse_collapse",
+          "ev_12_crevasse_cornering",
+          "ev_13_sludge_defense"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_the_scrubline_collapse",
+        "order": 8,
+        "event_ids": [
+          "ev_14_filter_burnout"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_waking_wharf",
+        "order": 9,
+        "event_ids": [
+          "ev_15_wharf_awakening",
+          "ev_16_caravan_truth"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_10_refusing_sanctuary",
+        "order": 10,
+        "event_ids": [
+          "ev_17_medicine_receipt",
+          "ev_18_choice_to_return"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_11_the_return_departure",
+        "order": 11,
+        "event_ids": [
+          "ev_19_return_departure"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_crossing_by_night",
+        "order": 12,
+        "event_ids": [
+          "ev_20_night_ridge_crossing"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_13_the_basin_gate",
+        "order": 13,
+        "event_ids": [
+          "ev_21_gate_reckoning"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_14_the_fever_breaks",
+        "order": 14,
+        "event_ids": [
+          "ev_22_infirmary_transformation"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}

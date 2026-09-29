@@ -1,0 +1,1317 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "review-toll",
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_teresa",
+        "name": "Teresa Vane",
+        "location_id": "loc_blackwood_basin",
+        "status": "evicted_farmer",
+        "goal": "resist_valley_eviction",
+        "bag": {}
+      },
+      {
+        "id": "char_arthur",
+        "name": "Arthur Finch",
+        "location_id": "loc_blackwood_basin",
+        "status": "junior_dam_engineer",
+        "goal": "enforce_valley_impoundment",
+        "bag": {}
+      },
+      {
+        "id": "char_kester",
+        "name": "Kester Holt",
+        "location_id": "loc_dam_control",
+        "status": "electrical_technician",
+        "goal": "maintain_dam_systems",
+        "bag": {}
+      },
+      {
+        "id": "char_myra",
+        "name": "Myra Vance",
+        "location_id": "loc_blackwood_basin",
+        "status": "valley_nurse",
+        "goal": "protect_evacuated_kin",
+        "bag": {}
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_blackwood_basin",
+        "name": "Blackwood Valley Basin",
+        "bag": {}
+      },
+      {
+        "id": "loc_dam_gallery",
+        "name": "High Reach Dam Deep Gallery",
+        "bag": {}
+      },
+      {
+        "id": "loc_dam_control",
+        "name": "High Reach Dam Control Room",
+        "bag": {}
+      },
+      {
+        "id": "loc_oakhaven_town",
+        "name": "Oakhaven Settlement and Clinic",
+        "bag": {}
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_sluice_key",
+        "name": "Bronze Manual Spindle Override Key",
+        "location_id": "loc_dam_gallery",
+        "status": "locked_in_cage",
+        "bag": {}
+      },
+      {
+        "id": "obj_eviction_notice",
+        "name": "Valley Condemnation and Inundation Order",
+        "location_id": "loc_blackwood_basin",
+        "status": "served",
+        "bag": {}
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_01",
+        "from_id": "char_teresa",
+        "to_id": "char_arthur",
+        "kind": "adversary",
+        "sentiment": "bitter resentment",
+        "bag": {}
+      },
+      {
+        "id": "rel_02",
+        "from_id": "char_arthur",
+        "to_id": "char_teresa",
+        "kind": "regret",
+        "sentiment": "bureaucratic guilt",
+        "bag": {}
+      },
+      {
+        "id": "rel_03",
+        "from_id": "char_myra",
+        "to_id": "char_teresa",
+        "kind": "cousin",
+        "sentiment": "protective caution",
+        "bag": {}
+      },
+      {
+        "id": "rel_04",
+        "from_id": "char_kester",
+        "to_id": "char_teresa",
+        "kind": "coworker",
+        "sentiment": "opportunistic ally",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_01",
+        "character_id": "char_teresa",
+        "fact_ref": "valley_flooding_order",
+        "learned_at_scene": null,
+        "bag": {}
+      },
+      {
+        "id": "ck_02",
+        "character_id": "char_arthur",
+        "fact_ref": "valley_flooding_order",
+        "learned_at_scene": null,
+        "bag": {}
+      }
+    ]
+  },
+  "scene_cards": [
+    {
+      "id": "scene_01_the_condemnation",
+      "order": 1,
+      "pov": "char_teresa",
+      "location_id": "loc_blackwood_basin",
+      "characters_present": [
+        "char_teresa",
+        "char_arthur",
+        "char_myra"
+      ],
+      "dramatic_function": "Establishes the loss of the Blackwood homestead to the rising reservoir and plants Teresa's lifelong vow to reclaim it.",
+      "entry_state": {
+        "char_teresa": {
+          "status": "evicted_farmer",
+          "location_id": "loc_blackwood_basin",
+          "goal": "resist_valley_eviction"
+        },
+        "char_arthur": {
+          "status": "junior_dam_engineer"
+        },
+        "char_myra": {
+          "location_id": "loc_blackwood_basin"
+        },
+        "obj_eviction_notice": {
+          "location_id": "loc_blackwood_basin"
+        }
+      },
+      "exit_state": {
+        "char_teresa": {
+          "status": "dispossessed",
+          "location_id": "loc_oakhaven_town",
+          "goal": "drain_the_reservoir"
+        },
+        "char_arthur": {
+          "status": "overseeing_impoundment"
+        },
+        "char_myra": {
+          "location_id": "loc_oakhaven_town"
+        },
+        "obj_eviction_notice": {
+          "location_id": null
+        }
+      },
+      "required_beats": [
+        "Arthur presents the condemnation order to the blackwood farmhouse doorstep, where Teresa rejects the compensation draft as crews seal the perimeter.",
+        "The diversion gates drop and the rising river forces Myra to drag Teresa from the parlor until the roof vanishes beneath thirty fathoms of water.",
+        "From the ridge overlooking the flooded valley, Teresa rejects Myra's plea to settle in town and vows the lake will yield back blackwood farm until its hearth stones stand dry under open sky."
+      ],
+      "reader_must_learn": [
+        "hearth_stones_vow"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "valley_flooding_order",
+          "plant": null
+        }
+      ]
+    },
+    {
+      "id": "scene_02_the_hiring",
+      "order": 2,
+      "pov": "char_teresa",
+      "location_id": "loc_dam_control",
+      "characters_present": [
+        "char_teresa",
+        "char_arthur"
+      ],
+      "dramatic_function": "Brings Teresa inside the facility that drowned her home to begin her campaign of sabotage from within.",
+      "entry_state": {
+        "char_teresa": {
+          "location_id": "loc_oakhaven_town",
+          "status": "dispossessed"
+        },
+        "char_arthur": {
+          "location_id": "loc_blackwood_basin",
+          "status": "overseeing_impoundment"
+        }
+      },
+      "exit_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_control",
+          "status": "maintenance_engineer"
+        },
+        "char_arthur": {
+          "location_id": "loc_dam_control",
+          "status": "dam_manager"
+        }
+      },
+      "required_beats": [
+        "Twenty years after the flood, Teresa signs her hydraulic maintenance credentials in the office at high reach dam.",
+        "Arthur Finch admits her to the engineering staff without recognizing who she is, handing over access badges and structural bypass keys to the internal tunnels."
+      ],
+      "reader_must_learn": [
+        "unrecognized_identity"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_03_the_scour_calculation",
+      "order": 3,
+      "pov": "char_teresa",
+      "location_id": "loc_dam_gallery",
+      "characters_present": [
+        "char_teresa"
+      ],
+      "dramatic_function": "Reveals the engineering mechanism Teresa can exploit to expose her submerged family home.",
+      "entry_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_control"
+        }
+      },
+      "exit_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_gallery"
+        }
+      },
+      "required_beats": [
+        "Teresa maps the deep low-level sediment scour channels and confirms their outflow bypasses the main structural spillways entirely.",
+        "She calculates that opening the scour valves will drain the shallow northern basin shelf where blackwood farm sits without destroying the dam wall."
+      ],
+      "reader_must_learn": [
+        "bottom_scour_capacity"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_04_the_bargain",
+      "order": 4,
+      "pov": "char_teresa",
+      "location_id": "loc_dam_control",
+      "characters_present": [
+        "char_teresa",
+        "char_kester"
+      ],
+      "dramatic_function": "Secures the inside access Teresa needs by compromising an unauthorized diver on staff.",
+      "entry_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_gallery"
+        },
+        "char_kester": {
+          "goal": "maintain_dam_systems"
+        }
+      },
+      "exit_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_control"
+        },
+        "char_kester": {
+          "goal": "assist_teresa_for_salvage_cover"
+        }
+      },
+      "required_beats": [
+        "Teresa catches Kester Holt falsifying telemetry logs to mask his illicit salvage dives in the reservoir.",
+        "She offers silence in exchange for him bypassing gallery motion alarms and disabling the scour chamber monitoring circuit during off-shift hours."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_05_the_scour_override",
+      "order": 5,
+      "pov": "char_teresa",
+      "location_id": "loc_dam_gallery",
+      "characters_present": [
+        "char_teresa",
+        "char_kester"
+      ],
+      "dramatic_function": "Establishes the physical mechanism Teresa intends to use to sabotage or drain the dam without control-room oversight.",
+      "entry_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_control"
+        },
+        "char_kester": {
+          "location_id": "loc_dam_control"
+        },
+        "obj_sluice_key": {
+          "status": "locked_in_cage"
+        }
+      },
+      "exit_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_gallery"
+        },
+        "char_kester": {
+          "location_id": "loc_dam_gallery"
+        },
+        "obj_sluice_key": {
+          "status": "primed_at_scour_valve"
+        }
+      },
+      "required_beats": [
+        "Teresa unlocks the maintenance tool cage to retrieve the bronze manual spindle key.",
+        "Kester lubricates the mechanical gearing on the manual bypass spindle.",
+        "Teresa tests the override bar, confirming it mechanically locks the sediment scour valve open independently of control-room power."
+      ],
+      "reader_must_learn": [
+        "manual_override_readiness",
+        "bronze_spindle_key"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_06_debts_and_defenses",
+      "order": 6,
+      "pov": "char_teresa",
+      "location_id": "loc_oakhaven_town",
+      "characters_present": [
+        "char_teresa",
+        "char_myra"
+      ],
+      "dramatic_function": "Pressures Teresa by confronting her with the downstream human cost of crippling High Reach Dam.",
+      "entry_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_gallery"
+        }
+      },
+      "exit_state": {
+        "char_teresa": {
+          "location_id": "loc_oakhaven_town"
+        }
+      },
+      "required_beats": [
+        "Myra warns Teresa that the town clinic and hundreds of downstream families depend on High Reach for steady power and flood defense.",
+        "Teresa refuses to back down, insisting the debt owed to Blackwood valley must still be settled."
+      ],
+      "reader_must_learn": [
+        "downstream_grid_dependency"
+      ],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 550,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_07_the_midnight_surge",
+      "order": 7,
+      "pov": "char_teresa",
+      "location_id": "loc_dam_control",
+      "characters_present": [
+        "char_teresa",
+        "char_arthur"
+      ],
+      "dramatic_function": "Complicates Teresa's resolve by showing Arthur's selfless commitment to protecting the valley from disaster.",
+      "entry_state": {
+        "char_teresa": {
+          "location_id": "loc_oakhaven_town"
+        },
+        "char_arthur": {
+          "location_id": "loc_dam_control",
+          "status": "dam_manager"
+        }
+      },
+      "exit_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_control"
+        },
+        "char_arthur": {
+          "location_id": "loc_dam_control",
+          "status": "exhausted_manager"
+        }
+      },
+      "required_beats": [
+        "Flash storm runoff causes a sudden midnight flood surge against the dam crest.",
+        "Arthur remains at the control board through exhaustion, manually working the spillway gates to shield downstream Oakhaven.",
+        "Teresa witnesses Arthur's determination to keep the valley safe."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_08_the_shelf_drained",
+      "order": 8,
+      "pov": "char_teresa",
+      "location_id": "loc_dam_gallery",
+      "characters_present": [
+        "char_teresa",
+        "char_arthur"
+      ],
+      "dramatic_function": "Resolves Teresa's vendetta through a compromise that exposes her submerged past without destroying the downstream town.",
+      "entry_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_control",
+          "goal": "drain_the_reservoir"
+        },
+        "char_arthur": {
+          "location_id": "loc_dam_control"
+        },
+        "obj_sluice_key": {
+          "status": "primed_at_scour_valve"
+        }
+      },
+      "exit_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_gallery",
+          "goal": "witness_drained_farm"
+        },
+        "char_arthur": {
+          "location_id": "loc_dam_gallery"
+        },
+        "obj_sluice_key": {
+          "status": "locked_open"
+        }
+      },
+      "required_beats": [
+        "Arthur catches Teresa in the lower gallery with the bypass key engaged.",
+        "Teresa names herself as the child of Blackwood farm, and Arthur confesses his lifelong regret for the eviction order while pleading for Oakhaven's safety.",
+        "Choosing to spare Oakhaven's power and flood defenses, Teresa turns the manual spindle key on the sediment scour sluice instead of the main spillway.",
+        "The sediment scour channel opens, draining the shelf over Blackwood farm while preserving head pressure for the valley."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 850,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "manual_override_readiness",
+          "plant": "scene_05_the_scour_override"
+        },
+        {
+          "fact_ref": "bottom_scour_capacity",
+          "plant": "scene_03_the_scour_calculation"
+        },
+        {
+          "fact_ref": "downstream_grid_dependency",
+          "plant": "scene_06_debts_and_defenses"
+        },
+        {
+          "fact_ref": "unrecognized_identity",
+          "plant": "scene_02_the_hiring"
+        },
+        {
+          "fact_ref": "bronze_spindle_key",
+          "plant": "scene_05_the_scour_override"
+        }
+      ]
+    },
+    {
+      "id": "scene_09_the_exposed_hearth",
+      "order": 9,
+      "pov": "char_teresa",
+      "location_id": "loc_blackwood_basin",
+      "characters_present": [
+        "char_teresa",
+        "char_arthur"
+      ],
+      "dramatic_function": "To confront Teresa with the sterile ruin of her lost home and confirm that nothing salvageable remains beneath the drained basin.",
+      "entry_state": {
+        "char_teresa": {
+          "location_id": "loc_dam_gallery",
+          "status": "maintenance_engineer",
+          "goal": "witness_drained_farm"
+        },
+        "char_arthur": {
+          "location_id": "loc_dam_gallery"
+        }
+      },
+      "exit_state": {
+        "char_teresa": {
+          "location_id": "loc_blackwood_basin",
+          "status": "reckoned_and_bereft",
+          "goal": "leave_the_valley"
+        },
+        "char_arthur": {
+          "location_id": "loc_blackwood_basin"
+        }
+      },
+      "required_beats": [
+        "Teresa hikes down into the drained northern basin through thick gray mud.",
+        "She reaches the dry stone hearth of the Blackwood farmhouse exposed beneath the open sun, surrounded only by dead silt and silence.",
+        "Arthur stands quietly beside her in the mud as Teresa turns and leaves the dead stones behind."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "invariants": [],
+      "pays_off": [
+        {
+          "fact_ref": "hearth_stones_vow",
+          "plant": "scene_01_the_condemnation"
+        }
+      ]
+    }
+  ],
+  "voice_card": {
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "close third, pressed against the protagonist",
+    "register": "grave, ornate, foreboding; dwells where a plainer voice would move on",
+    "sentence_rhythm": "long accreting sentences broken by a short one that lands like a door",
+    "imagery_palette": [
+      "damp stone and rot",
+      "guttering light",
+      "cold weight and enclosure"
+    ],
+    "dialogue_density": "low; speech arrives rarely and carries weight when it does",
+    "style_exemplar": "",
+    "reader_familiarity": "The first time a deep term appears (domain-specific jargon), let dialogue or narration make its meaning clear within a clause. Never lecture.",
+    "based_on": "gothic_brooding"
+  },
+  "metadata": {
+    "title": "The Silt Gate",
+    "source": "segmented from a Fabula-only package by gemini-3.8-flash",
+    "created_at": "2026-09-29T17:26:46.281Z"
+  },
+  "facts": [
+    {
+      "fact_ref": "valley_flooding_order",
+      "statement": "Arthur Finch authorized and enforced the state eminent domain decree that flooded Blackwood Basin.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "hearth_stones_vow",
+      "statement": "Teresa swore that the reservoir would be forced to return the Blackwood farmstead until its hearth stones stood dry under open sky.",
+      "caused_by": [
+        "valley_flooding_order"
+      ]
+    },
+    {
+      "fact_ref": "bottom_scour_capacity",
+      "statement": "Opening the sediment scour sluices drains the shallow northern shelf over Blackwood farm without breaching the main dam.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "manual_override_readiness",
+      "statement": "The bronze spindle override key enables mechanical locking of the sediment scour gate independent of the electric control room.",
+      "caused_by": [
+        "bottom_scour_capacity"
+      ]
+    },
+    {
+      "fact_ref": "downstream_grid_dependency",
+      "statement": "The downstream town of Oakhaven depends on stable reservoir head pressure for its medical clinic and flood defense levees.",
+      "caused_by": []
+    }
+  ],
+  "_fabula": {
+    "generator": "scripts/review-sample.ts",
+    "model": "gemini-3.7-flash",
+    "generated_at": "2026-09-29T17:26:26.969Z",
+    "brief": {
+      "story_id": "review-toll",
+      "title": "Toll",
+      "premise": {
+        "logline": "A woman whose farm was flooded to build a reservoir takes a job on the dam, to learn how it could be made to fail.",
+        "modules": {
+          "theme": "whether revenge on a thing can ever reach the people behind it",
+          "setting_time": "twenty years after the valley was flooded",
+          "setting_place": "a hydroelectric dam above a drowned village",
+          "protagonist": "a maintenance engineer who grew up in the drowned valley",
+          "protagonist_want": "to make the reservoir give back what it took",
+          "antagonism": "the dam’s manager, who signed the flooding order young",
+          "complication": "the town below the dam now depends on it",
+          "ending_shape": "the vow is kept to the letter and broken in spirit"
+        }
+      },
+      "plot_shape": {
+        "id": "reckoning",
+        "name": "Reckoning",
+        "central_question": "Does the debt get collected, and does collecting it help?",
+        "phases": [
+          {
+            "name": "The injury",
+            "purpose": "The original wrong, shown rather than reported.",
+            "share": 0.15
+          },
+          {
+            "name": "The vow",
+            "purpose": "A commitment made in a state the maker will not always be in.",
+            "share": 0.15
+          },
+          {
+            "name": "Preparation",
+            "purpose": "Means acquired, allies made and used, a self narrowed to a purpose.",
+            "share": 0.3
+          },
+          {
+            "name": "Contact",
+            "purpose": "The wrongdoer, close enough to be seen as a person.",
+            "share": 0.25
+          },
+          {
+            "name": "Aftermath",
+            "purpose": "What is left of the avenger once the purpose is gone.",
+            "share": 0.15
+          }
+        ],
+        "cast_roles": [
+          {
+            "role": "claimant",
+            "purpose": "Holds the debt and is deformed by holding it."
+          },
+          {
+            "role": "debtor",
+            "purpose": "Committed the wrong, and has a life that does not look like a villain's."
+          },
+          {
+            "role": "enabler",
+            "purpose": "Helps the claimant for reasons of their own."
+          },
+          {
+            "role": "the restraint",
+            "purpose": "Argues for the cost, and is not simply right."
+          }
+        ],
+        "obligatory_moves": [
+          "The vow is made with a specific, quotable condition attached.",
+          "The debtor is shown doing something that is not villainous before contact.",
+          "The aftermath addresses the vow's exact wording."
+        ]
+      },
+      "event_count": 12,
+      "cast": {
+        "characters": 4,
+        "locations": 3,
+        "objects": 2
+      },
+      "plant_policy": {
+        "density": "normal",
+        "target_edges": 2,
+        "min_span": 3,
+        "long_range_edges": 1,
+        "long_range_span": 6
+      },
+      "span_guidance": true,
+      "based_on": {
+        "plot_shape_preset": "reckoning",
+        "premise_preset": "Toll"
+      }
+    },
+    "repairs": [],
+    "events": [
+      {
+        "id": "ev_01_the_eviction",
+        "sequence": 1,
+        "summary": "Young engineer Arthur Finch serves the final valley condemnation order to Teresa Vane at her family farmstead before the river gates close.",
+        "pov": "char_teresa",
+        "location_id": "loc_blackwood_basin",
+        "characters_present": [
+          "char_teresa",
+          "char_arthur"
+        ],
+        "dramatic_function": "Establishes the injury of the initial displacement and the debtor enforcing the state mandate.",
+        "beats": [
+          "Arthur presents the state condemnation order to the Blackwood farmhouse doorstep.",
+          "Teresa refuses the resettlement compensation draft.",
+          "Work crews begin sealing the lower valley perimeter."
+        ],
+        "caused_by": [],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "valley_flooding_order",
+            "plant": null
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "status",
+            "value": "dispossessed"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "status",
+            "value": "overseeing_impoundment"
+          }
+        ]
+      },
+      {
+        "id": "ev_02_the_inundation",
+        "sequence": 2,
+        "summary": "The river diversion gates shut and water fills the valley, submerging the Blackwood farmstead.",
+        "pov": "char_teresa",
+        "location_id": "loc_blackwood_basin",
+        "characters_present": [
+          "char_teresa",
+          "char_myra"
+        ],
+        "dramatic_function": "Depicts the irreversible loss of the physical home and family land to the new reservoir.",
+        "beats": [
+          "The diversion gates drop, forcing the river to back up into the basin.",
+          "Myra pulls Teresa away from the rising water entering the family parlor.",
+          "The orchard and farmhouse roof vanish beneath thirty fathoms of water."
+        ],
+        "caused_by": [
+          "ev_01_the_eviction"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "location_id",
+            "value": "loc_oakhaven_town"
+          },
+          {
+            "entity_id": "char_myra",
+            "column": "location_id",
+            "value": "loc_oakhaven_town"
+          },
+          {
+            "entity_id": "obj_eviction_notice",
+            "column": "location_id",
+            "value": null
+          }
+        ]
+      },
+      {
+        "id": "ev_03_the_ridge_vow",
+        "sequence": 3,
+        "summary": "From the ridge above the new reservoir, Teresa swears an oath that the lake will yield back Blackwood farm until its hearth stones stand dry under open sky.",
+        "pov": "char_teresa",
+        "location_id": "loc_oakhaven_town",
+        "characters_present": [
+          "char_teresa",
+          "char_myra"
+        ],
+        "dramatic_function": "The claimant binds herself to a literal and absolute vow of restitution.",
+        "beats": [
+          "Teresa looks across the filled reservoir covering her family's land.",
+          "Myra tries to persuade Teresa to settle into the lower township.",
+          "Teresa vows that the reservoir will be forced to give back the farm until the hearth stones stand dry under open sky."
+        ],
+        "caused_by": [
+          "ev_02_the_inundation"
+        ],
+        "reveals": [
+          "hearth_stones_vow"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "goal",
+            "value": "drain_the_reservoir"
+          }
+        ]
+      },
+      {
+        "id": "ev_04_entering_the_works",
+        "sequence": 4,
+        "summary": "Twenty years later, Teresa takes a maintenance engineering job inside High Reach Dam to study the hydraulic controls from within.",
+        "pov": "char_teresa",
+        "location_id": "loc_dam_control",
+        "characters_present": [
+          "char_teresa",
+          "char_arthur"
+        ],
+        "dramatic_function": "The claimant infiltrates the debtor's workplace to acquire the technical means for her purpose.",
+        "beats": [
+          "Teresa signs her hydraulic maintenance credentials in the dam office.",
+          "Arthur Finch, now the aging dam manager, admits her to the engineering staff without recognizing her.",
+          "Teresa receives structural bypass keys and access badges to the internal tunnels."
+        ],
+        "caused_by": [
+          "ev_03_the_ridge_vow"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "location_id",
+            "value": "loc_dam_control"
+          },
+          {
+            "entity_id": "char_teresa",
+            "column": "status",
+            "value": "maintenance_engineer"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_dam_control"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "status",
+            "value": "dam_manager"
+          }
+        ]
+      },
+      {
+        "id": "ev_05_surveying_the_scour",
+        "sequence": 5,
+        "summary": "Teresa inspects the deep drainage conduits and determines that the sediment scour sluices can drain the northern basin shelf without destroying the dam wall.",
+        "pov": "char_teresa",
+        "location_id": "loc_dam_gallery",
+        "characters_present": [
+          "char_teresa"
+        ],
+        "dramatic_function": "Preparation — identifying the specific hydraulic mechanism capable of exposing the drowned farm.",
+        "beats": [
+          "Teresa maps the conduit routing of the low-level sediment scour channels.",
+          "She calculates that opening the scour valves empties the shallow northern valley shelf where Blackwood farm sits.",
+          "She confirms that the lower scour outflow bypasses the main structural spillways entirely."
+        ],
+        "caused_by": [
+          "ev_04_entering_the_works"
+        ],
+        "reveals": [
+          "bottom_scour_capacity"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "location_id",
+            "value": "loc_dam_gallery"
+          }
+        ]
+      },
+      {
+        "id": "ev_06_recruiting_the_enabler",
+        "sequence": 6,
+        "summary": "Teresa catches technician Kester Holt running unauthorized salvage dives and trades silence for his help bypassing gallery sensors.",
+        "pov": "char_teresa",
+        "location_id": "loc_dam_control",
+        "characters_present": [
+          "char_teresa",
+          "char_kester"
+        ],
+        "dramatic_function": "Preparation — recruiting an enabler whose selfish interests serve the claimant's plan.",
+        "beats": [
+          "Teresa discovers Kester falsifying log telemetry to cover his lake salvage operations.",
+          "She promises not to report his misconduct in return for disabling gallery motion alarms.",
+          "Kester agrees to silence the scour chamber monitoring circuit during off-shift hours."
+        ],
+        "caused_by": [
+          "ev_05_surveying_the_scour"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "location_id",
+            "value": "loc_dam_control"
+          },
+          {
+            "entity_id": "char_kester",
+            "column": "goal",
+            "value": "assist_teresa_for_salvage_cover"
+          }
+        ]
+      },
+      {
+        "id": "ev_07_the_override_key",
+        "sequence": 7,
+        "summary": "Teresa and Kester unlock the bronze manual spindle key and ready the mechanical override on the sediment scour valve.",
+        "pov": "char_teresa",
+        "location_id": "loc_dam_gallery",
+        "characters_present": [
+          "char_teresa",
+          "char_kester"
+        ],
+        "dramatic_function": "Preparation — staging the physical tool needed to force open the sluice gates.",
+        "beats": [
+          "Teresa unlocks the maintenance tool cage and removes the bronze spindle override key.",
+          "Kester oils the mechanical gearing on the manual bypass spindle.",
+          "Teresa tests the override bar, confirming it locks the valve open without control-room power."
+        ],
+        "caused_by": [
+          "ev_06_recruiting_the_enabler"
+        ],
+        "reveals": [
+          "manual_override_readiness"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "location_id",
+            "value": "loc_dam_gallery"
+          },
+          {
+            "entity_id": "char_kester",
+            "column": "location_id",
+            "value": "loc_dam_gallery"
+          },
+          {
+            "entity_id": "obj_sluice_key",
+            "column": "status",
+            "value": "primed_at_scour_valve"
+          }
+        ]
+      },
+      {
+        "id": "ev_08_the_restraint_plea",
+        "sequence": 8,
+        "summary": "Myra confronts Teresa in town, warning that Oakhaven's hospital and flood defenses depend entirely on the dam's steady water levels.",
+        "pov": "char_teresa",
+        "location_id": "loc_oakhaven_town",
+        "characters_present": [
+          "char_teresa",
+          "char_myra"
+        ],
+        "dramatic_function": "The restraint articulates the human cost of vengeance and the town's vulnerability.",
+        "beats": [
+          "Myra warns Teresa that the town clinic depends on steady hydroelectric power from High Reach.",
+          "She explains that hundreds of downstream families depend on the reservoir's flood regulation.",
+          "Teresa insists that the debt owed to Blackwood valley must still be settled."
+        ],
+        "caused_by": [
+          "ev_07_the_override_key"
+        ],
+        "reveals": [
+          "downstream_grid_dependency"
+        ],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "location_id",
+            "value": "loc_oakhaven_town"
+          }
+        ]
+      },
+      {
+        "id": "ev_09_the_debtor_unmasked",
+        "sequence": 9,
+        "summary": "During a sudden midnight surge, Teresa watches Arthur Finch manually regulate the spillway gates to prevent downstream flooding in Oakhaven.",
+        "pov": "char_teresa",
+        "location_id": "loc_dam_control",
+        "characters_present": [
+          "char_teresa",
+          "char_arthur"
+        ],
+        "dramatic_function": "Contact — the debtor is shown acting with genuine diligence and moral duty to protect others.",
+        "beats": [
+          "Flash storm runoff creates an unexpected flood surge against the dam crest.",
+          "Arthur refuses to leave the control board, manually adjusting spillway gates to protect the town.",
+          "Teresa observes Arthur's exhausted dedication to keeping the downstream valley safe."
+        ],
+        "caused_by": [
+          "ev_08_the_restraint_plea"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "location_id",
+            "value": "loc_dam_control"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_dam_control"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "status",
+            "value": "exhausted_manager"
+          }
+        ]
+      },
+      {
+        "id": "ev_10_confrontation_at_the_sluice",
+        "sequence": 10,
+        "summary": "Arthur discovers Teresa in the lower gallery with the bypass key in hand and confronts her over the historic flooding of her home.",
+        "pov": "char_teresa",
+        "location_id": "loc_dam_gallery",
+        "characters_present": [
+          "char_teresa",
+          "char_arthur"
+        ],
+        "dramatic_function": "Contact — direct confrontation between claimant and debtor over guilt and retribution.",
+        "beats": [
+          "Arthur follows Teresa into the scour gallery and finds the manual bypass key engaged.",
+          "Teresa reveals her identity as the child of Blackwood farm.",
+          "Arthur confesses his lifelong regret for the eviction order but begs her not to flood the town below."
+        ],
+        "caused_by": [
+          "ev_09_the_debtor_unmasked"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "manual_override_readiness",
+            "plant": "ev_07_the_override_key"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "location_id",
+            "value": "loc_dam_gallery"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_dam_gallery"
+          }
+        ]
+      },
+      {
+        "id": "ev_11_the_controlled_drain",
+        "sequence": 11,
+        "summary": "Teresa turns the spindle key to open only the sediment scour sluice, selectively draining the shelf over Blackwood farm while preserving head pressure for Oakhaven.",
+        "pov": "char_teresa",
+        "location_id": "loc_dam_gallery",
+        "characters_present": [
+          "char_teresa",
+          "char_arthur"
+        ],
+        "dramatic_function": "Contact / Climax — claimant chooses a controlled release, keeping the vow's letter while avoiding destruction.",
+        "beats": [
+          "Teresa refrains from blowing the main spillway seals to preserve Oakhaven's power and safety.",
+          "She cranks the manual spindle key, locking open the sediment scour channel.",
+          "The water above the northern shelf drains through the scour gate into the river bed."
+        ],
+        "caused_by": [
+          "ev_10_confrontation_at_the_sluice"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "bottom_scour_capacity",
+            "plant": "ev_05_surveying_the_scour"
+          },
+          {
+            "fact_ref": "downstream_grid_dependency",
+            "plant": "ev_08_the_restraint_plea"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "obj_sluice_key",
+            "column": "status",
+            "value": "locked_open"
+          },
+          {
+            "entity_id": "char_teresa",
+            "column": "goal",
+            "value": "witness_drained_farm"
+          }
+        ]
+      },
+      {
+        "id": "ev_12_the_dry_hearth",
+        "sequence": 12,
+        "summary": "Teresa walks out onto the drained basin floor to stand beside the exposed stone hearth of Blackwood farm, finding only dead silt and silence.",
+        "pov": "char_teresa",
+        "location_id": "loc_blackwood_basin",
+        "characters_present": [
+          "char_teresa",
+          "char_arthur"
+        ],
+        "dramatic_function": "Aftermath — the exact wording of the vow is fulfilled, but the vengeance yields nothing living.",
+        "beats": [
+          "Teresa hikes down into the drained northern basin among the thick gray mud.",
+          "The stone hearth of Blackwood farmhouse stands completely dry under the open sun.",
+          "Arthur stands quietly beside her in the mud as Teresa leaves the dead stones behind."
+        ],
+        "caused_by": [
+          "ev_11_the_controlled_drain"
+        ],
+        "reveals": [],
+        "conceals": [],
+        "recounts": [],
+        "pays_off": [
+          {
+            "fact_ref": "hearth_stones_vow",
+            "plant": "ev_03_the_ridge_vow"
+          }
+        ],
+        "state_changes": [
+          {
+            "entity_id": "char_teresa",
+            "column": "location_id",
+            "value": "loc_blackwood_basin"
+          },
+          {
+            "entity_id": "char_arthur",
+            "column": "location_id",
+            "value": "loc_blackwood_basin"
+          },
+          {
+            "entity_id": "char_teresa",
+            "column": "status",
+            "value": "reckoned_and_bereft"
+          },
+          {
+            "entity_id": "char_teresa",
+            "column": "goal",
+            "value": "leave_the_valley"
+          }
+        ]
+      }
+    ],
+    "hidden_account": [],
+    "facts": [
+      {
+        "fact_ref": "valley_flooding_order",
+        "statement": "Arthur Finch authorized and enforced the state eminent domain decree that flooded Blackwood Basin.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "hearth_stones_vow",
+        "statement": "Teresa swore that the reservoir would be forced to return the Blackwood farmstead until its hearth stones stood dry under open sky.",
+        "caused_by": [
+          "valley_flooding_order"
+        ]
+      },
+      {
+        "fact_ref": "bottom_scour_capacity",
+        "statement": "Opening the sediment scour sluices drains the shallow northern shelf over Blackwood farm without breaching the main dam.",
+        "caused_by": []
+      },
+      {
+        "fact_ref": "manual_override_readiness",
+        "statement": "The bronze spindle override key enables mechanical locking of the sediment scour gate independent of the electric control room.",
+        "caused_by": [
+          "bottom_scour_capacity"
+        ]
+      },
+      {
+        "fact_ref": "downstream_grid_dependency",
+        "statement": "The downstream town of Oakhaven depends on stable reservoir head pressure for its medical clinic and flood defense levees.",
+        "caused_by": []
+      }
+    ],
+    "stakes": [
+      {
+        "stake": "Teresa must find a mechanical vulnerability inside the dam to force the reservoir to yield back her drowned family farm.",
+        "introduced_by": "ev_03_the_ridge_vow",
+        "resolved_by": "ev_11_the_controlled_drain"
+      },
+      {
+        "stake": "The downstream town of Oakhaven faces catastrophic power loss and flooding if the dam's main structural reservoir is drained.",
+        "introduced_by": "ev_08_the_restraint_plea",
+        "resolved_by": "ev_11_the_controlled_drain"
+      },
+      {
+        "stake": "Arthur Finch must keep the dam operating safely while facing the moral consequence of the historical valley eviction.",
+        "introduced_by": "ev_04_entering_the_works",
+        "resolved_by": "ev_12_the_dry_hearth"
+      }
+    ]
+  },
+  "_segmentation": {
+    "segmenter": "segmentation pipeline (#118)",
+    "model": "gemini-3.8-flash",
+    "segmented_at": "2026-09-29T17:26:46.281Z",
+    "started_at": "2026-09-29T17:26:26.969Z",
+    "scenes": [
+      {
+        "id": "scene_01_the_condemnation",
+        "order": 1,
+        "event_ids": [
+          "ev_01_the_eviction",
+          "ev_02_the_inundation",
+          "ev_03_the_ridge_vow"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_02_the_hiring",
+        "order": 2,
+        "event_ids": [
+          "ev_04_entering_the_works"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_03_the_scour_calculation",
+        "order": 3,
+        "event_ids": [
+          "ev_05_surveying_the_scour"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_04_the_bargain",
+        "order": 4,
+        "event_ids": [
+          "ev_06_recruiting_the_enabler"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_05_the_scour_override",
+        "order": 5,
+        "event_ids": [
+          "ev_07_the_override_key"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_06_debts_and_defenses",
+        "order": 6,
+        "event_ids": [
+          "ev_08_the_restraint_plea"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_07_the_midnight_surge",
+        "order": 7,
+        "event_ids": [
+          "ev_09_the_debtor_unmasked"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_08_the_shelf_drained",
+        "order": 8,
+        "event_ids": [
+          "ev_10_confrontation_at_the_sluice",
+          "ev_11_the_controlled_drain"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_09_the_exposed_hearth",
+        "order": 9,
+        "event_ids": [
+          "ev_12_the_dry_hearth"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      }
+    ],
+    "vacuous_checks": [
+      "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
+      "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
+    ]
+  }
+}

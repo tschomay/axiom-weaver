@@ -1,0 +1,39 @@
+{
+  "model": "gemini-3.8-flash",
+  "writer_default": "gemini-3.8-flash",
+  "stories": [
+    {
+      "label": "01-review-second-pressing",
+      "title": "Second Pressing",
+      "events": 5,
+      "scenes": 5,
+      "words": 3192
+    },
+    {
+      "label": "02-review-understudy",
+      "title": "Understudy",
+      "events": 8,
+      "scenes": 5,
+      "words": 4092
+    },
+    {
+      "label": "03-review-terms-of-sale",
+      "title": "Terms of Sale",
+      "events": 12,
+      "failed": "lint refused the package: hidden_fact_never_revealed, hidden_fact_never_revealed"
+    },
+    {
+      "label": "04-review-toll",
+      "title": "Toll",
+      "events": 16,
+      "scenes": 13,
+      "words": 9012
+    },
+    {
+      "label": "05-review-salt-road",
+      "title": "Salt Road",
+      "events": 22,
+      "failed": "lint refused the package: hidden_fact_never_revealed, hidden_fact_never_revealed"
+    }
+  ]
+}
