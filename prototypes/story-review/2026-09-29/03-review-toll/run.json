@@ -1,0 +1,187 @@
+{
+  "title": "Toll",
+  "plot_shape_preset": "reckoning",
+  "premise": {
+    "logline": "A woman whose farm was flooded to build a reservoir takes a job on the dam, to learn how it could be made to fail.",
+    "modules": {
+      "theme": "whether revenge on a thing can ever reach the people behind it",
+      "setting_time": "twenty years after the valley was flooded",
+      "setting_place": "a hydroelectric dam above a drowned village",
+      "protagonist": "a maintenance engineer who grew up in the drowned valley",
+      "protagonist_want": "to make the reservoir give back what it took",
+      "antagonism": "the dam’s manager, who signed the flooding order young",
+      "complication": "the town below the dam now depends on it",
+      "ending_shape": "the vow is kept to the letter and broken in spirit"
+    }
+  },
+  "event_count_requested": 12,
+  "arc_events": 12,
+  "scenes": 11,
+  "words": 6616,
+  "run_id": "review-toll-20260929122046-bf204b36",
+  "models": {
+    "arc": "gemini-3.8-flash",
+    "segmentation": [
+      "gemini-3.8-flash"
+    ],
+    "writer": [
+      "gemini-3.8-flash",
+      "gemini-3.5-flash-lite"
+    ]
+  },
+  "cost_usd": 0.2468,
+  "lint_warnings": [
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "fact_without_statement",
+    "unused_seed_entity",
+    "voice_card_untouched"
+  ],
+  "degraded_scenes": [],
+  "diagnostics": [
+    {
+      "scene": "scene_03_the_drowned_hearth",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara",
+      "column": "status",
+      "message": "char_clara.status is committed as \"resigned to eviction\"; the engine proposed \"resigned refugee heading to resettlement camp\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_03_the_drowned_hearth",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hettie",
+      "column": "status",
+      "message": "char_hettie.status is committed as \"displaced and furious\"; the engine proposed \"vowed to deconstruct the dam\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_06_watching_the_crest",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur",
+      "column": "status",
+      "message": "char_arthur.status is committed as \"strained under ministry directives\"; the engine proposed \"strained under solitary spillway maintenance\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_07_the_archive_discovery",
+      "code": "unauthorized_entity_update",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "rel_scene_07_the_archive_discovery_0",
+      "column": "_row",
+      "message": "rel_scene_07_the_archive_discovery_0 is outside the scene's footprint (characters present, its location, and the entities entry_state/exit_state name)"
+    },
+    {
+      "scene": "scene_08_cavitation_inspection",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hettie",
+      "column": "status",
+      "message": "char_hettie.status is committed as \"burdened by the discovery of Vane's coerced signature\"; the engine proposed \"conflicted by Vane's terror of catastrophic dam failure\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_08_cavitation_inspection",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur",
+      "column": "status",
+      "message": "char_arthur.status is committed as \"strained under ministry directives\"; the engine proposed \"haunted by cavitation data and impending structural failure\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_09_the_confrontation",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hettie",
+      "column": "status",
+      "message": "char_hettie.status is committed as \"burdened by the discovery of Vane's coerced signature\"; the engine proposed \"paralyzed by the moral cost of draining the reservoir\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_09_the_confrontation",
+      "code": "dropped_proposal",
+      "severity": "warn",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_clara",
+      "column": "goal",
+      "message": "the card gives no signal either way on char_clara.goal; the proposal \"Prevent Hettie from sabotaging the dam and cutting off downstream water.\" was dropped and the prior value kept"
+    },
+    {
+      "scene": "scene_10_tripping_the_scour",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_hettie",
+      "column": "status",
+      "message": "char_hettie.status is committed as \"burdened by the discovery of Vane's coerced signature\"; the engine proposed \"committed to the draining of the basin alongside Arthur\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_10_tripping_the_scour",
+      "code": "unentailed_reversion",
+      "severity": "error",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "char_arthur",
+      "column": "status",
+      "message": "char_arthur.status is committed as \"strained under ministry directives\"; the engine proposed \"complicit in dampening the scour surge to protect the culverts\", which appears in no entry_state, exit_state, or required beat"
+    },
+    {
+      "scene": "scene_10_tripping_the_scour",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "flooding_order_signed_under_duress",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_10_tripping_the_scour: scene_10_tripping_the_scour reveals \"flooding_order_signed_under_duress\", which the reader first learned in scene 7 and was last shown in scene 7"
+    },
+    {
+      "scene": "scene_10_tripping_the_scour",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "scour_gate_counterbalance_lock",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_10_tripping_the_scour: scene_10_tripping_the_scour reveals \"scour_gate_counterbalance_lock\", which the reader first learned in scene 2 and was last shown in scene 2"
+    },
+    {
+      "scene": "scene_10_tripping_the_scour",
+      "code": "continuity_seam_repaired",
+      "severity": "info",
+      "surfaces": [
+        "run_report"
+      ],
+      "entity_id": "scour_gate_bypass_pin",
+      "column": null,
+      "message": "told_ledger_miscalibration repaired in scene_10_tripping_the_scour: scene_10_tripping_the_scour reveals \"scour_gate_bypass_pin\", which the reader first learned in scene 5 and was last shown in scene 5"
+    }
+  ]
+}
