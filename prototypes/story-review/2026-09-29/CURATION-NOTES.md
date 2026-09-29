@@ -47,3 +47,14 @@
   horsemen+parchment vs telemetry). Pattern across 02 and 03: invented concrete details not carried scene to scene.
 - Dropped threads: turbine failing in 3 weeks, the 5,000 downstream, never returned to.
 - Stone-in-pocket closer at end of scenes 4–9; "tallow" x9.
+
+## MECHANISM: why concrete details drift (02, 03, 01)
+- Writer's view of earlier scenes = digest hierarchy (event_summary, closing_situation, imagery_signature, facts) +
+  verbatim tail (last paragraph of previous scene only; context-assembler.ts renderVerbatimTail).
+- Details the prose itself invents (urn brass, Table 4, braise, Inverness/5 winters, pin brass, stone basalt) are
+  recorded nowhere → next scene re-invents. grounded_claims (ADR 0018) is scoped to tracked World Model columns only.
+- Candidate fix: digest field `established_details` [{entity_id, attribute, value}] (or extend grounded_claims to
+  `bag.<key>`), accumulated into the told-ledger / world-model bag and rendered as "ESTABLISHED DETAILS — do not
+  change" for entities on stage.
+- Verbatim tail also invites echo: 01 Scene 3 opens with Scene 2's last line verbatim ("The great hand had failed.").
+  Contract should say "continue from, do not repeat".
