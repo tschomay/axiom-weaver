@@ -300,6 +300,7 @@ describe('generation (ADR 0022 decision 4)', () => {
       'hidden_account',
       'events',
       'facts',
+      'stakes',
     ]);
   });
 

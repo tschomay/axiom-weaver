@@ -213,6 +213,8 @@ export function renderArcPrompt(brief: ArcBrief): string {
     '',
     ...renderFactsSection(),
     '',
+    ...renderStakesSection(),
+    '',
     'AVOID, because they are what every generated story already does: lighthouses, clockmakers,',
     'librarians, cartographers, and the names Elias, Mara, Elara, Silas, Thorne. Not because they',
     'are bad, because they are the default. Go somewhere else.',
@@ -265,6 +267,19 @@ function renderSettingRulesSection(): string[] {
 }
 
 /** ADR 0022 decision 1: the claim each slug stands for, so a retelling paraphrases a fixed text. */
+function renderStakesSection(): string[] {
+  return [
+    'STAKES — after the facts, every stake the story raises: a deadline, a threat, a debt, a cost,',
+    'a person waiting on the outcome, a clock someone is racing. Anything the reader is told to',
+    'worry about.',
+    '  - stake: one sentence ("the turbine fails within three weeks").',
+    '  - introduced_by: the event id that raises it.',
+    '  - resolved_by: the LATER event id that answers it on the page — resolves it, or has a',
+    '    character explicitly let it go. Every stake needs one. A stake nothing answers is a promise',
+    '    the story breaks; either answer it in an event, or do not raise it.',
+  ];
+}
+
 function renderFactsSection(): string[] {
   return [
     'FACTS — after the events, one entry for every fact_ref used anywhere (reveals, conceals,',
@@ -546,8 +561,25 @@ export function arcResponseJsonSchema(eventCount: number): Record<string, unknow
           propertyOrdering: ['fact_ref', 'statement', 'caused_by'],
         },
       },
+      stakes: {
+        type: 'array',
+        description: 'Every stake the arc raises, and the later event that answers it.',
+        items: {
+          type: 'object',
+          properties: {
+            stake: { type: 'string', description: 'One sentence.' },
+            introduced_by: { type: 'string', description: 'The event id that raises it.' },
+            resolved_by: {
+              type: 'string',
+              description: 'The later event id that resolves it or explicitly abandons it.',
+            },
+          },
+          required: ['stake', 'introduced_by', 'resolved_by'],
+          propertyOrdering: ['stake', 'introduced_by', 'resolved_by'],
+        },
+      },
     },
-    required: ['title', 'world_model_seed', 'hidden_account', 'events', 'facts'],
-    propertyOrdering: ['title', 'world_model_seed', 'hidden_account', 'events', 'facts'],
+    required: ['title', 'world_model_seed', 'hidden_account', 'events', 'facts', 'stakes'],
+    propertyOrdering: ['title', 'world_model_seed', 'hidden_account', 'events', 'facts', 'stakes'],
   };
 }

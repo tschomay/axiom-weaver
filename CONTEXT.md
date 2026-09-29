@@ -124,7 +124,10 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   from the on-page events that uncover it — is folded into those statements at segmentation,
   and each of its facts is withheld (`must_stay_hidden`) on every card until the one card that
   reveals it; a fact is revealed once, and later cards retell it (`recounts`).
-  See [ADR 0022](docs/adr/0022-fact-statements-and-the-hidden-account.md).
+  See [ADR 0022](docs/adr/0022-fact-statements-and-the-hidden-account.md). A generated arc
+  also lists its **stakes** — each deadline, threat or cost it raises, and the later event that
+  resolves or explicitly abandons it; a stake nothing answers is a `stake_unresolved` error and
+  a repair target (ADR 0021's 2026-09-29 amendment).
   Entity introduction ("has the reader met Marcus?") rides the same mechanism via an
   auto-generated `met:<entity_id>` fact, not a parallel structure — and so does vocabulary: a
   glossed specialist term becomes a `term:<slug>` fact, so it is explained once and later scenes

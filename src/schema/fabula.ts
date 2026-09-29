@@ -118,6 +118,17 @@ export const HiddenStepSchema = z.object({
   establishes: z.array(z.string().min(1)).default([]),
 });
 
+/**
+ * A stake the arc raises — a deadline, a threat, a cost — and the event that answers it (#200).
+ * `resolved_by` names a later event that resolves it or explicitly abandons it; '' means nothing
+ * does, which `stake_unresolved` reports. Best-effort like `hidden_account`: generation fills it.
+ */
+export const StakeSchema = z.object({
+  stake: z.string().min(1),
+  introduced_by: z.string().default(''),
+  resolved_by: z.string().default(''),
+});
+
 export const FabulaArcSchema = z.object({
   title: z.string().min(1),
   world_model_seed: WorldModelSeedSchema,
@@ -126,6 +137,8 @@ export const FabulaArcSchema = z.object({
   hidden_account: z.array(HiddenStepSchema).default([]),
   /** Statements for the arc's fact_refs (ADR 0022 decision 1). */
   facts: z.array(FactSchema).default([]),
+  /** #200: every stake the arc raises, and the event that answers it. */
+  stakes: z.array(StakeSchema).default([]),
 });
 
 export type StateChange = z.infer<typeof StateChangeSchema>;
@@ -133,6 +146,7 @@ export type FabulaPayoff = z.infer<typeof FabulaPayoffSchema>;
 export type FabulaEvent = z.infer<typeof FabulaEventSchema>;
 export type FabulaArc = z.infer<typeof FabulaArcSchema>;
 export type HiddenStep = z.infer<typeof HiddenStepSchema>;
+export type Stake = z.infer<typeof StakeSchema>;
 
 /** Where the event list rides in the deliverable. A top-level block the loose schema preserves. */
 export const FABULA_BLOCK = '_fabula';
@@ -162,7 +176,7 @@ export interface FabulaRead {
 export function readFabulaArc(envelope: unknown): FabulaRead {
   const record = (envelope ?? {}) as Record<string, unknown>;
   const block = record[FABULA_BLOCK] as
-    | { events?: unknown; hidden_account?: unknown; facts?: unknown }
+    | { events?: unknown; hidden_account?: unknown; facts?: unknown; stakes?: unknown }
     | undefined;
   const metadata = record['metadata'] as { title?: unknown } | undefined;
   const known = new Set<string>(EVENT_STATE_COLUMNS);
@@ -188,6 +202,7 @@ export function readFabulaArc(envelope: unknown): FabulaRead {
       events,
       hidden_account: Array.isArray(block?.hidden_account) ? block.hidden_account : [],
       facts: Array.isArray(block?.facts) ? block.facts : [],
+      stakes: Array.isArray(block?.stakes) ? block.stakes : [],
     }),
     dropped_state_changes: dropped,
   };
