@@ -42,6 +42,9 @@ env -u BLOB_READ_WRITE_TOKEN npm run review-sample -- --events 6,14      # any m
 env -u BLOB_READ_WRITE_TOKEN npm run review-sample -- --out prototypes/story-review/<name>
 ```
 
+In a Claude Code cloud session, also set `NODE_USE_ENV_PROXY=1`: outbound HTTPS goes through a
+proxy that Node's built-in `fetch` ignores otherwise, and the first Gemini call simply hangs.
+
 `scripts/review-sample.ts` picks distinct premises at random from `RANDOM_PREMISES` (the Generate
 tab's "surprise me" list) and runs each one through the app's own path — `generateArc` →
 `segmentFabulaPackage` → lint/publish → `runTelling` — on `WRITER_MODEL`. It refuses to start if
