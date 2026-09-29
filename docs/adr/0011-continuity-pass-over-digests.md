@@ -150,9 +150,11 @@ that says when it happened anyway.
 
 - **Two cheap detectors, no model call** (`offstageInventions`, `src/continuity/offstage.ts`), run on the scene just
   written — its own prose and digest, the same same-scene scope ADR 0018 established, never earlier prose:
-  1. **An offstage report**: a sentence that names a seed character who is not in the card's `characters_present`,
-     with a past-tense action verb (took, swapped, stole, hid, signed, sold, visited, met, …) that appears in none of
-     the package's cards, in any inflection. The act is attributed to someone off the page and nothing authored it.
+  1. **An offstage report**: a seed character who is not in the card's `characters_present` is the subject of a
+     past-tense action verb ("Clara took", "Fenn had quietly taken" — took, swapped, stole, hid, signed, sold,
+     visited, met, …) that this scene's own card does not use in any inflection. A name token shared with someone on
+     the card (a family surname) does not count, and a participle used as an adjective ("broken crates") is not an
+     act. Over the 72 scenes of the three committed panel batches it fires 7 times, including the baseline swap.
   2. **An invented prop**: an `established_details` entity that is not a World Model row and whose slug's words appear
      on no card — a load-bearing object the prose introduced that the story's authored structure never had.
 - **A diagnostic, not a repair**: `offstage_invention` (`warn`), one per finding, quoting the sentence or naming the

@@ -75,6 +75,11 @@ export const DIAGNOSTIC_CODES = [
    * was brass, now it is tin. The ledger keeps the first value; never retried.
    */
   'detail_drift',
+  /**
+   * The prose reports an event no card authors, by a character off the page, or introduces a prop
+   * no card has (#213, ADR 0011's amendment). A heuristic; never retried or repaired.
+   */
+  'offstage_invention',
 
   // --- Compiler, call-level (ADR 0012 item 7, ADR 0013 item 5) -------------------------------
 
@@ -153,6 +158,7 @@ const SEVERITY_BY_CODE: Record<DiagnosticCode, Severity> = {
   tail_echo: 'warn',
   tense_mismatch: 'warn',
   detail_drift: 'warn',
+  offstage_invention: 'warn',
   // `info`, not `error`: full recovery succeeded and nothing had to be guessed.
   truncated_scene: 'info',
   scene_generation_failed: 'error',
