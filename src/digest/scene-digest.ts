@@ -116,6 +116,21 @@ export const GroundedClaimSchema = z.object({
   asserted_value: z.union([z.string(), z.number(), z.boolean(), z.null()]),
 });
 
+/** ADR 0003's 2026-09-29 amendment: at most this many details per scene. */
+export const ESTABLISHED_DETAILS_CAP = 8;
+
+/**
+ * A concrete specific this scene's prose committed the reader to (#198): a material, a number, a
+ * name, a date, a piece of backstory. `entity_id` is a World Model id where one exists, otherwise
+ * a slug the writer coins and reuses. Kept in the run's details ledger; a later scene that states
+ * a different value for the same attribute has drifted.
+ */
+export const EstablishedDetailSchema = z.object({
+  entity_id: z.string().min(1),
+  attribute: z.string().min(1),
+  value: z.string().min(1),
+});
+
 export const SceneDigestSchema = z.object({
   event_summary: cappedSentences,
   entities_on_stage: z.array(z.string().min(1)).default([]),
@@ -135,11 +150,20 @@ export const SceneDigestSchema = z.object({
    * `entities_on_stage` touches `met:` — so a term is glossed once and later scenes can assume it.
    */
   terms_glossed: z.array(z.string().min(1)).default([]),
+  /**
+   * ADR 0003's 2026-09-29 amendment. Trimmed to the cap rather than rejected — a backstop, like
+   * the other caps: a ninth detail is not worth a failed parse.
+   */
+  established_details: z
+    .array(EstablishedDetailSchema)
+    .default([])
+    .transform((details) => details.slice(0, ESTABLISHED_DETAILS_CAP)),
 });
 
 export type ImagerySignature = z.infer<typeof ImagerySignatureSchema>;
 export type ReanchorUsed = z.infer<typeof ReanchorUsedSchema>;
 export type GroundedClaim = z.infer<typeof GroundedClaimSchema>;
+export type EstablishedDetail = z.infer<typeof EstablishedDetailSchema>;
 export type SceneDigest = z.infer<typeof SceneDigestSchema>;
 
 /**
@@ -223,6 +247,8 @@ export async function rollUp(
       // Same reasoning: a claim is a point-in-time assertion, not a thread a window aggregates.
       grounded_claims: [],
       terms_glossed: union((digest) => digest.terms_glossed),
+      // The run's details ledger holds every one; a window has no single statement to aggregate.
+      established_details: [],
     },
   };
 }

@@ -219,6 +219,35 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
               'lower_snake_case slugs of the specialist terms you explained to the reader in this ' +
               'scene, e.g. "hull_gland". Only terms you actually glossed. Empty if none.',
           },
+          established_details: {
+            type: 'array',
+            maxItems: 8,
+            items: {
+              type: 'object',
+              properties: {
+                entity_id: {
+                  type: 'string',
+                  description:
+                    'The World Model id when the thing has one; otherwise a short slug you coin ' +
+                    '(e.g. "prop_ash_urn") and reuse whenever the same thing recurs.',
+                },
+                attribute: {
+                  type: 'string',
+                  description: 'A short snake_case attribute, e.g. "material", "table_number".',
+                },
+                value: {
+                  type: 'string',
+                  description: 'The value exactly as the prose committed to it, e.g. "brass".',
+                },
+              },
+              required: ['entity_id', 'attribute', 'value'],
+              propertyOrdering: ['entity_id', 'attribute', 'value'],
+            },
+            description:
+              'Up to 8 concrete specifics this scene\'s prose stated for the first time and a ' +
+              'later scene could contradict: a material, a number, an amount, a name, a date, a ' +
+              'duration, a place in someone\'s past. Only what the prose states. Empty if none.',
+          },
         },
         required: [
           'event_summary',
@@ -231,6 +260,7 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
           'reanchor_used',
           'grounded_claims',
           'terms_glossed',
+          'established_details',
         ],
         propertyOrdering: [
           'event_summary',
@@ -243,6 +273,7 @@ export function writerResponseJsonSchema(): Record<string, unknown> {
           'reanchor_used',
           'grounded_claims',
           'terms_glossed',
+          'established_details',
         ],
       },
       stateUpdates: {

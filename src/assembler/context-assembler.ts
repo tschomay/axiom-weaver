@@ -13,6 +13,7 @@
  * The hierarchy and both tails ride the implicit per-request prefix cache instead.
  */
 
+import type { LedgerDetail } from '../digest/details-ledger';
 import type { SceneCard, StoryPackage } from '../schema/story-package';
 import type { WorldModel } from '../world-model/world-model';
 import type { ToldLedger, ToldLedgerRow } from '../digest/told-ledger';
@@ -95,6 +96,8 @@ export interface AssembleInput {
   readonly writerContract: string;
   /** ADR 0008 §6's fixed budget for the volatile tail. */
   readonly volatileTailBudget?: number;
+  /** Details earlier scenes established that bear on this one (#198), from `DetailsLedger`. */
+  readonly establishedDetails?: readonly LedgerDetail[];
 }
 
 /**
@@ -206,6 +209,7 @@ function buildVolatileTail(
   const coreBlocks = [
     renderSceneCard(input.scene, facts, hiddenFactKnowers(input, rows)),
     renderEstablishedAccount(input, facts),
+    renderEstablishedDetails(input.establishedDetails ?? [], input.model),
     renderPlantObligations(input.plantObligations, facts),
     renderPayoffInstructions(input.payoffInstructions, facts),
     renderReanchoring(input.reanchoring),
@@ -401,6 +405,21 @@ function renderLeveledDigest(entry: LeveledDigest): string {
  * seam. A hard length backstop trims only if one paragraph is unreasonably long.
  */
 const VERBATIM_TAIL_MAX_CHARS = 1200;
+
+/**
+ * ADR 0003's 2026-09-29 amendment: what the reader has already been told, specifically. In the
+ * core, so it is never evicted — dropping it is exactly how a brass urn became a tin one.
+ */
+function renderEstablishedDetails(details: readonly LedgerDetail[], model: WorldModel): string {
+  if (details.length === 0) return '';
+  const lines = ['ESTABLISHED DETAILS (the reader has been told these — do not change them):'];
+  for (const detail of details) {
+    const name = model.nameOf(detail.entity_id);
+    const who = name === null || name === undefined ? detail.entity_id : `${name} (${detail.entity_id})`;
+    lines.push(`  - ${who} — ${detail.attribute.replace(/_/g, ' ')}: ${detail.value} (scene ${detail.scene_order})`);
+  }
+  return lines.join('\n');
+}
 
 /**
  * The Voice Card's tense, repeated in the per-scene tail (#201). The header states it once, far

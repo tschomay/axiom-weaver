@@ -90,7 +90,11 @@ stops the engine contradicting itself; the Discourse Record stops it repeating i
   "emotional register" field), and **`reanchor_used`** (the introduce/assume/reanchor/
   reintroduce band the writer self-reports per touched entity, added by ADR 0009), and
   **`terms_glossed`** (slugs of the specialist terms the scene explained to the reader, per the
-  Voice Card's reader familiarity; added by ADR 0007's 2026-09-28 amendment). Target
+  Voice Card's reader familiarity; added by ADR 0007's 2026-09-28 amendment), and
+  **`established_details`** (up to 8 `{entity_id, attribute, value}` specifics the prose
+  committed to — a material, a number, a name, a backstory — kept in the run's **details
+  ledger**, first value wins, shown to later scenes as "do not change", and a later
+  contradiction logged as `detail_drift`; ADR 0003's 2026-09-29 amendment). Target
   ~150–220 tokens. A **rollup** (Chapter/Part Digest)
   shares this schema but aggregates over its window rather than concatenating: event
   summary is freshly synthesized, list fields union, imagery signature re-caps to 3 by

@@ -12,6 +12,7 @@
  */
 
 import { tailEcho, tenseMismatch } from './prose-checks';
+import type { DetailsLedger } from '../digest/details-ledger';
 import type { SceneCard, StoryPackage } from '../schema/story-package';
 import type { WorldModel } from '../world-model/world-model';
 import type { DigestHierarchy } from '../digest/hierarchy';
@@ -137,6 +138,8 @@ export interface CompileSceneInput {
   /** Imagery recorded by earlier scenes, for the ledger block. */
   readonly imageryHistory: readonly RecordedImagery[];
   readonly previousParagraph: string | null;
+  /** The run's details ledger (#198): rendered into the prompt and checked for drift. */
+  readonly details?: DetailsLedger;
   readonly occasion: 'author_time' | 'read_time';
   /**
    * Which model writes the scene. Defaults to `WRITER_MODEL`; overridden only deliberately, to
@@ -247,6 +250,8 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
     payoffInstructions: payoffInstructionsFor(scene),
     previousParagraph: input.previousParagraph,
     writerContract: writerContract(),
+    establishedDetails:
+      input.details?.forScene(new Set(onStage), (id) => input.model.has(id)) ?? [],
   });
 
   // A character with an on-page beat but no row in context is the same hole `missing_fact` would
@@ -453,6 +458,16 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
     note(finding.code, finding.detail);
   }
 
+  for (const drift of input.details?.driftIn(response.scene_digest.established_details) ?? []) {
+    note(
+      'detail_drift',
+      `${scene.id} gives ${drift.reported.entity_id}'s ${drift.reported.attribute} as ` +
+        `"${drift.reported.value}"; scene ${drift.established.scene_order} established ` +
+        `"${drift.established.value}"`,
+      drift.reported.entity_id,
+    );
+  }
+
   const echo = tailEcho(input.previousParagraph, response.prose);
   if (echo !== null) {
     note(
@@ -581,5 +596,6 @@ function conservativeDigest(input: CompileSceneInput): SceneDigest {
     reanchor_used: [],
     grounded_claims: [],
     terms_glossed: [],
+    established_details: [],
   };
 }

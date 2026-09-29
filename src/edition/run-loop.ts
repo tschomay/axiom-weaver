@@ -415,6 +415,7 @@ async function compileStep(input: CompileStepInput): Promise<SceneOutcome> {
     client: input.client,
     imageryHistory: state.imageryHistory,
     previousParagraph: state.previousParagraph,
+    details: state.details,
     occasion: input.occasion,
     writerModel: input.writerModel,
   });

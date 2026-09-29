@@ -70,6 +70,11 @@ export const DIAGNOSTIC_CODES = [
   'tail_echo',
   /** The narration is mostly in the other tense from the Voice Card's (#201). A heuristic. */
   'tense_mismatch',
+  /**
+   * A detail this scene reported contradicts one an earlier scene established (#198) — the urn
+   * was brass, now it is tin. The ledger keeps the first value; never retried.
+   */
+  'detail_drift',
 
   // --- Compiler, call-level (ADR 0012 item 7, ADR 0013 item 5) -------------------------------
 
@@ -147,6 +152,7 @@ const SEVERITY_BY_CODE: Record<DiagnosticCode, Severity> = {
   must_stay_hidden_violation: 'error',
   tail_echo: 'warn',
   tense_mismatch: 'warn',
+  detail_drift: 'warn',
   // `info`, not `error`: full recovery succeeded and nothing had to be guessed.
   truncated_scene: 'info',
   scene_generation_failed: 'error',

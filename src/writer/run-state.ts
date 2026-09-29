@@ -29,6 +29,7 @@ import {
 import { DigestHierarchy, type Summarizer } from '../digest/hierarchy';
 import { joinSceneRows, presentEntityIds } from '../assembler/join';
 import { ToldLedger, metFact } from '../digest/told-ledger';
+import { DetailsLedger } from '../digest/details-ledger';
 import type { SceneDigest } from '../digest/scene-digest';
 import type { RecordedImagery } from '../voice/imagery-ledger';
 import type { WriterStateUpdates } from './response-schema';
@@ -41,6 +42,8 @@ export class RunState {
   readonly hierarchy: DigestHierarchy;
   readonly ledger: ToldLedger;
   readonly imageryHistory: RecordedImagery[] = [];
+  /** Concrete specifics the prose has committed to (#198, ADR 0003's 2026-09-29 amendment). */
+  readonly details = new DetailsLedger();
   previousParagraph: string | null = null;
 
   constructor(
@@ -73,6 +76,7 @@ export class RunState {
    */
   async advance(scene: SceneCard, digest: SceneDigest, prose: string | null): Promise<void> {
     this.ledger.applyDigest(digest, scene.order);
+    this.details.record(digest.established_details, scene.order);
     for (const entityId of presentEntityIds(joinSceneRows(scene, this.model))) {
       this.ledger.touch(metFact(entityId), scene.order);
     }
