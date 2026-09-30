@@ -43,9 +43,11 @@ import {
 } from '../writer/compile-scene';
 import {
   WRITER_MODEL,
+  WRITER_THINKING_LEVEL,
   dailyQuotaFailure,
   isDailyQuotaExhausted,
   type ModelClient,
+  type ThinkingLevel,
 } from '../writer/model-client';
 import { checkGroundedClaims, type Occasion } from '../validator/state-update-authority';
 import type { Diagnostic } from '../validator/diagnostics';
@@ -148,6 +150,8 @@ export interface RunTellingInput {
   readonly occasion?: Occasion;
   /** Overrides the writer model for every scene of the run — see `TESTING_WRITER_MODEL`. */
   readonly writerModel?: string;
+  /** The writer call's thinking level for every scene. Defaults to `WRITER_THINKING_LEVEL`. */
+  readonly writerThinkingLevel?: ThinkingLevel;
   readonly window?: number;
   readonly onProgress?: ProgressListener;
   readonly step?: StepRunner;
@@ -169,6 +173,7 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
   const step = input.step ?? inlineStepRunner;
   const occasion: Occasion = input.occasion ?? 'read_time';
   const runId = input.runId ?? mintRunId(pkg.story_id, now());
+  const thinkingLevel = input.writerThinkingLevel ?? WRITER_THINKING_LEVEL;
   const emit = (event: ProgressEvent) => input.onProgress?.(event);
 
   // ADR 0004 §4: the plant walk is a hard failure *before* generation, never silently patched.
@@ -221,7 +226,8 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
     degraded: false,
     degraded_scene_count: 0,
     scene_count: scenes.length,
-    budget: sumBudget([], expectedOutputTokens(scenes)),
+    budget: sumBudget([], expectedOutputTokens(scenes, thinkingLevel)),
+    writer_thinking_level: thinkingLevel,
     started_at: startedAt.toISOString(),
     completed_at: null,
     duration_ms: 0,
@@ -267,6 +273,7 @@ export async function runTelling(input: RunTellingInput): Promise<RunTellingResu
               client: input.client,
               occasion,
               writerModel: input.writerModel,
+              writerThinkingLevel: thinkingLevel,
               previous,
               runId,
               repository,
@@ -378,6 +385,7 @@ interface CompileStepInput {
   readonly client: ModelClient;
   readonly occasion: Occasion;
   readonly writerModel: string | undefined;
+  readonly writerThinkingLevel: ThinkingLevel;
   readonly previous: { scene_id: string; digest: SceneDigest } | null;
   readonly runId: string;
   readonly repository: StoryRepository;
@@ -419,6 +427,7 @@ async function compileStep(input: CompileStepInput): Promise<SceneOutcome> {
     phraseHistory: state.phraseHistory,
     occasion: input.occasion,
     writerModel: input.writerModel,
+    writerThinkingLevel: input.writerThinkingLevel,
   });
 
   // 2a. Prose grounding (ADR 0018) — read against the World Model as it stands at scene entry,
@@ -555,8 +564,11 @@ function reportScene(input: {
   };
 }
 
-function expectedOutputTokens(scenes: readonly SceneCard[]): number {
-  return scenes.reduce((total, scene) => total + maxOutputTokensFor(scene), 0);
+function expectedOutputTokens(
+  scenes: readonly SceneCard[],
+  thinkingLevel: ThinkingLevel,
+): number {
+  return scenes.reduce((total, scene) => total + maxOutputTokensFor(scene, thinkingLevel), 0);
 }
 
 async function withOutageRetry<T>(

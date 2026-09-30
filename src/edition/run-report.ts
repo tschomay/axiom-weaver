@@ -26,7 +26,7 @@ import {
 import { TAIL_EVICTION_MARKER } from '../assembler/context-assembler';
 import { FINDING_MODES } from '../continuity/continuity-pass';
 import type { Occasion } from '../validator/state-update-authority';
-import { FINISH_REASONS, MODEL_PRICING } from '../writer/model-client';
+import { FINISH_REASONS, MODEL_PRICING, THINKING_LEVELS } from '../writer/model-client';
 
 export const RUN_REPORT_SCHEMA_VERSION = '1.0';
 
@@ -114,6 +114,12 @@ export const RunReportSchema = z.object({
   degraded_scene_count: z.number().int().nonnegative().default(0),
   scene_count: z.number().int().nonnegative(),
   budget: RunBudgetSchema,
+  /**
+   * The prose writer's `thinkingLevel` for the run, so runs at different levels can be compared
+   * on cost and prose. Absent on reports written before the level was selectable — every one of
+   * those ran at `MEDIUM`.
+   */
+  writer_thinking_level: z.enum(THINKING_LEVELS).nullish(),
   started_at: z.string(),
   completed_at: z.string().nullable().default(null),
   duration_ms: z.number().int().nonnegative().default(0),

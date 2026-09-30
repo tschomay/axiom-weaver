@@ -2,7 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { TellingsView } from '@/edition/tellings-view';
-import type { QuotaOffer } from '@/writer/model-client';
+import {
+  THINKING_LEVELS,
+  WRITER_THINKING_LEVEL,
+  type QuotaOffer,
+  type ThinkingLevel,
+} from '@/writer/model-client';
 import { QuotaPrompt } from '../../../quota-prompt';
 import { AuthorTokenField, useAuthorSession } from '../../../author-token';
 
@@ -47,6 +52,7 @@ const MAX_CONSECUTIVE_POLL_FAILURES = 5;
 export function ReadView({ storyId, initial }: { storyId: string; initial: TellingsView }) {
   const [view, setView] = useState<TellingsView>(initial);
   const [standIn, setStandIn] = useState(false);
+  const [thinking, setThinking] = useState<ThinkingLevel>(WRITER_THINKING_LEVEL);
   const [running, setRunning] = useState<Progress | null>(null);
   const [reading, setReading] = useState<{
     run_id: string;
@@ -264,6 +270,7 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           writer: standIn ? 'stand_in' : 'live',
+          thinking,
           ...(model === undefined ? {} : { model }),
         }),
       });
@@ -295,7 +302,7 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
       setBusy(false);
     }
     },
-    [refresh, standIn, storyId, view.scene_count],
+    [refresh, standIn, storyId, thinking, view.scene_count],
   );
 
   // Newest saved first: the library is a shortlist, and the thing most recently thought worth
@@ -326,6 +333,27 @@ export function ReadView({ storyId, initial }: { storyId: string; initial: Telli
           A whole telling is one writer request per scene. On a rate-limited key that is the day&apos;s
           allowance for a long story — so use the stand-in to prove the loop runs, and a live run to
           judge the prose.
+        </span>
+      </label>
+
+      <label className="writer-toggle meta">
+        writer thinking{' '}
+        <select
+          value={thinking}
+          disabled={standIn}
+          onChange={(event) => setThinking(event.target.value as ThinkingLevel)}
+        >
+          {THINKING_LEVELS.map((level) => (
+            <option key={level} value={level}>
+              {level.toLowerCase()}
+              {level === WRITER_THINKING_LEVEL ? ' (default)' : ''}
+            </option>
+          ))}
+        </select>
+        <span className="meta why">
+          How much the writer reasons before each scene. Thinking tokens bill as output, so compare
+          a run&apos;s cost and prose against a default run on the Runs page. It cannot be turned
+          fully off on this model — low is the least.
         </span>
       </label>
 

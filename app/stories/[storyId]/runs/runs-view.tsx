@@ -175,6 +175,9 @@ function RunRow({
           {run.budget.over_budget ? ' (over budget — logged, never enforced)' : ''} ·{' '}
           {usd(run.cost.total_usd)}
           {run.cost.complete ? '' : ' (partial)'}
+          {run.writer_thinking_level === null
+            ? ''
+            : ` · ${run.writer_thinking_level.toLowerCase()} thinking`}
         </span>
         <br />
         <a className="meta" href={`/api/tellings/${run.run_id}/report`}>

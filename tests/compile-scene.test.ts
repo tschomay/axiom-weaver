@@ -13,6 +13,7 @@ import { renderCompiledSceneReport } from '@/writer/debug-view';
 import {
   FALLBACK_MODEL,
   WRITER_MODEL,
+  WRITER_THINKING_LEVEL,
   type FinishReason,
   type ModelClient,
   type ModelRequest,
@@ -401,5 +402,41 @@ describe('the output-token budget (issue #49)', () => {
     const huge = maxOutputTokensFor(sceneCard({ length_budget: 5_000 }));
     const proseAndTail = Math.ceil(5_000 * 2 * 1.4);
     expect(huge - proseAndTail).toBeGreaterThan(MIN_THINKING_RESERVE_TOKENS);
+  });
+});
+
+describe('the writer thinking level', () => {
+  function recordingClient(inner: ModelClient) {
+    const requests: ModelRequest[] = [];
+    const client: ModelClient = {
+      generate: (request) => {
+        requests.push(request);
+        return inner.generate(request);
+      },
+    };
+    return { client, requests };
+  }
+
+  it('defaults to MEDIUM and sends the level a caller asks for', async () => {
+    const { recording, base } = await setUp('cinderella', 'cinderella-scene-13');
+
+    const byDefault = recordingClient(clientFor(recording));
+    await compileScene({ ...base, client: byDefault.client });
+    expect(byDefault.requests[0]?.thinkingLevel).toBe(WRITER_THINKING_LEVEL);
+    expect(WRITER_THINKING_LEVEL).toBe('MEDIUM');
+
+    const high = recordingClient(clientFor(recording));
+    await compileScene({ ...base, client: high.client, writerThinkingLevel: 'HIGH' });
+    expect(high.requests[0]?.thinkingLevel).toBe('HIGH');
+    expect(high.requests[0]?.maxOutputTokens).toBeGreaterThan(
+      byDefault.requests[0]?.maxOutputTokens ?? Infinity,
+    );
+  });
+
+  it('gives HIGH a bigger thinking reserve and leaves LOW and MEDIUM alike', () => {
+    const card = sceneCard({ length_budget: 300 });
+    expect(maxOutputTokensFor(card, 'LOW')).toBe(maxOutputTokensFor(card));
+    expect(maxOutputTokensFor(card, 'MEDIUM')).toBe(maxOutputTokensFor(card));
+    expect(maxOutputTokensFor(card, 'HIGH')).toBeGreaterThan(maxOutputTokensFor(card));
   });
 });

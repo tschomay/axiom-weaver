@@ -57,9 +57,11 @@ import {
 import {
   FALLBACK_MODEL,
   WRITER_MODEL,
+  WRITER_THINKING_LEVEL,
   type FinishReason,
   type ModelClient,
   type ModelResponse,
+  type ThinkingLevel,
 } from './model-client';
 import { finalParagraph, lengthVerdict, normalizeProse, salvageProse } from './salvage';
 
@@ -118,13 +120,26 @@ const OUTPUT_TOKEN_HEADROOM_MULTIPLIER = 1.5;
  */
 export const UNBUDGETED_SCENE_WORDS = 800;
 
-export function maxOutputTokensFor(scene: SceneCard): number {
+/**
+ * `HIGH` thinking gets twice the reserve. The reserve above was measured at `MEDIUM`; a deeper
+ * level spends more before the first prose token, and running out of room there turns a paid-for
+ * experiment into a `MAX_TOKENS` retry. Unused headroom costs nothing.
+ */
+const HIGH_THINKING_RESERVE_MULTIPLIER = 2;
+
+export function maxOutputTokensFor(
+  scene: SceneCard,
+  thinkingLevel: ThinkingLevel = WRITER_THINKING_LEVEL,
+): number {
   const words = scene.length_budget ?? UNBUDGETED_SCENE_WORDS;
   const proseAndTail = Math.ceil(words * 2 * 1.4);
   const proportional = Math.ceil(
     proseAndTail * (THINKING_RESERVE_FRACTION / (1 - THINKING_RESERVE_FRACTION)),
   );
-  const budget = proseAndTail + Math.max(proportional, MIN_THINKING_RESERVE_TOKENS);
+  const reserve =
+    Math.max(proportional, MIN_THINKING_RESERVE_TOKENS) *
+    (thinkingLevel === 'HIGH' ? HIGH_THINKING_RESERVE_MULTIPLIER : 1);
+  const budget = proseAndTail + reserve;
   return Math.ceil(budget * OUTPUT_TOKEN_HEADROOM_MULTIPLIER);
 }
 
@@ -150,6 +165,8 @@ export interface CompileSceneInput {
    * trade prose quality for request headroom on a rate-limited key (see `TESTING_WRITER_MODEL`).
    */
   readonly writerModel?: string;
+  /** The writer call's thinking level. Defaults to `WRITER_THINKING_LEVEL`. */
+  readonly writerThinkingLevel?: ThinkingLevel;
 }
 
 export interface CompiledScene {
@@ -277,13 +294,14 @@ export async function compileScene(input: CompileSceneInput): Promise<CompiledSc
 
   // --- The call, and its one bounded retry ------------------------------------------------
   const writerModel = input.writerModel ?? WRITER_MODEL;
+  const thinkingLevel = input.writerThinkingLevel ?? WRITER_THINKING_LEVEL;
   const request = {
     model: writerModel,
     systemInstruction: assembled.header.text,
     contents: bodyOf(assembled),
     responseJsonSchema: writerResponseJsonSchema(),
-    maxOutputTokens: maxOutputTokensFor(scene),
-    thinkingLevel: 'MEDIUM' as const,
+    maxOutputTokens: maxOutputTokensFor(scene, thinkingLevel),
+    thinkingLevel,
   };
 
   let attempt = await input.client.generate(request);

@@ -6,7 +6,9 @@ import { estimateCompile } from '@/edition/run-report';
 import { buildTellingsView } from '@/edition/tellings-view';
 import {
   GeminiClient,
+  WRITER_THINKING_LEVEL,
   isSelectableWriterModel,
+  isThinkingLevel,
   writerModelFromEnv,
 } from '@/writer/model-client';
 import { SyntheticWriterClient } from '@/writer/synthetic-client';
@@ -67,7 +69,7 @@ export async function POST(
   // judging what it wrote (AGENTS.md, The Gemini API key). Never chosen silently — the run report
   // records the model every call used either way.
   const body = (await request.json().catch(() => null)) as
-    | { writer?: unknown; model?: unknown }
+    | { writer?: unknown; model?: unknown; thinking?: unknown }
     | null;
   if (body?.writer !== undefined && body.writer !== 'live' && body.writer !== 'stand_in') {
     return NextResponse.json({ error: 'writer must be "live" or "stand_in"' }, { status: 400 });
@@ -86,6 +88,18 @@ export async function POST(
   }
   const writerModel = typeof body?.model === 'string' ? body.model : writerModelFromEnv();
 
+  // How hard the writer thinks before each scene — an author comparing prose against what the
+  // extra thinking tokens cost. The run report records the level either way.
+  if (body?.thinking !== undefined && !isThinkingLevel(body.thinking)) {
+    return NextResponse.json(
+      { error: 'thinking must be "LOW", "MEDIUM" or "HIGH"' },
+      { status: 400 },
+    );
+  }
+  const writerThinkingLevel = isThinkingLevel(body?.thinking)
+    ? body.thinking
+    : WRITER_THINKING_LEVEL;
+
   const live = requestedWriter === 'live' ? GeminiClient.fromEnv() : null;
   const client = live ?? new SyntheticWriterClient(pkg);
   const runId = mintRunId(storyId);
@@ -97,6 +111,7 @@ export async function POST(
     repository,
     runId,
     writerModel,
+    writerThinkingLevel,
   }).catch((error: unknown) => {
     // The run's own failure path has already marked the manifest `failed` and flushed it; this is
     // only so a crash is not silent in the server log.
@@ -111,6 +126,7 @@ export async function POST(
       writer: {
         live: live !== null,
         requested: requestedWriter,
+        thinking: writerThinkingLevel,
         model:
           live !== null
             ? writerModel

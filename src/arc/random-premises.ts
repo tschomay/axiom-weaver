@@ -1,9 +1,9 @@
 /**
- * Ready-made premises for the Generate tab's "surprise me" button.
+ * Ready-made premises: the Generate tab's "Surprise me" fallback, and `review-sample`'s batch.
  *
- * A fixed list rather than a model call: picking one is free and instant, which matters on a
- * paid key reached from a phone — only the generation the author then confirms spends anything.
- * Each entry is a complete typed premise (the MoPS-style module form `./brief.ts` describes), so
+ * "Surprise me" now asks the model for a new premise on every press (`./surprise-premise.ts`).
+ * This list is what the button falls back to when there is no key, no author token, or the call
+ * fails. It is also a fixed, known set for the review panel to sample from. Each entry is a complete typed premise (the MoPS-style module form `./brief.ts` describes), so
  * the author sees every field filled and can edit any of them before generating.
  *
  * Two per plot shape, and deliberately clear of the defaults `./prompt.ts` tells the generator to
