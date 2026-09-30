@@ -56,7 +56,26 @@ export interface ModelRequest {
   readonly contents: string;
   readonly responseJsonSchema: Record<string, unknown>;
   readonly maxOutputTokens: number;
-  readonly thinkingLevel: 'LOW' | 'MEDIUM' | 'HIGH';
+  readonly thinkingLevel: ThinkingLevel;
+}
+
+/**
+ * The `thinkingConfig.thinkingLevel` values the Flash writer models accept. `MINIMAL` exists only
+ * on Flash-Lite (`docs/research/gemini-capabilities.md` §6), so it is not offered: thinking cannot
+ * be switched fully off on the writer model, only turned down to `LOW`.
+ */
+export const THINKING_LEVELS = ['LOW', 'MEDIUM', 'HIGH'] as const;
+export type ThinkingLevel = (typeof THINKING_LEVELS)[number];
+
+/**
+ * The prose writer's thinking level unless a caller asks for another. `MEDIUM` is the model's own
+ * default and research §7's recommendation; `LOW` and `HIGH` are there to be compared against it
+ * — thinking tokens bill as output, so the run report's cost line is where the answer shows.
+ */
+export const WRITER_THINKING_LEVEL: ThinkingLevel = 'MEDIUM';
+
+export function isThinkingLevel(value: unknown): value is ThinkingLevel {
+  return typeof value === 'string' && (THINKING_LEVELS as readonly string[]).includes(value);
 }
 
 export interface ModelResponse {

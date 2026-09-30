@@ -24,6 +24,7 @@ import {
 import type { StoryPackage } from '../schema/story-package';
 import type { StoryRepository } from '../persistence/story-repository';
 import type { BakedPointer } from './edition';
+import type { ThinkingLevel } from '../writer/model-client';
 
 const RULE = '='.repeat(78);
 
@@ -53,6 +54,7 @@ export function renderRunReport(report: RunReport, options: { verbose?: boolean 
       `against an expected ${report.budget.expected_output_tokens}` +
       (report.budget.over_budget ? '  ** OVER BUDGET (logged, never enforced) **' : ''),
     `  prompt tokens    ${report.budget.prompt_tokens} (${report.budget.cached_tokens} cached)`,
+    `  writer thinking  ${report.writer_thinking_level ?? 'MEDIUM (before the level was recorded)'}`,
     `  cost             ${formatUsd(cost.total_usd)}` +
       (cost.complete ? '' : '  (partial — some calls used a model with no listed price)'),
     '',
@@ -153,6 +155,8 @@ export interface RunSummaryView {
   readonly started_at: string;
   readonly completed_at: string | null;
   readonly budget: RunReport['budget'];
+  /** `null` for a run from before the level was recorded (it ran at `MEDIUM`). */
+  readonly writer_thinking_level: ThinkingLevel | null;
   /** What the run's calls actually cost, from today's `MODEL_PRICING` — never a stored figure. */
   readonly cost: RunCost;
   /** ADR 0014 §9: only a completed, non-degraded run may ever be promoted to Baked. */
@@ -193,6 +197,7 @@ export async function buildRunReportView(
       started_at: report.started_at,
       completed_at: report.completed_at,
       budget: report.budget,
+      writer_thinking_level: report.writer_thinking_level ?? null,
       cost: costForScenes(report.scenes),
       promotable: isPromotable(report),
       is_baked: baked?.run_id === report.run_id,
