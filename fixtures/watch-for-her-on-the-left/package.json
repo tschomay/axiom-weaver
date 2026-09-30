@@ -1,0 +1,533 @@
+{
+  "schema_version": "1.0",
+  "package_version": 1,
+  "story_id": "watch-for-her-on-the-left",
+  "_authoring_conventions": {
+    "note": "Same conventions as fixtures/cinderella — see fixtures/authoring-notes.md. Original, written for this repository. The places are real; every person, family and event in it is invented.",
+    "entry_state_and_exit_state": "{ <entity_id>: { <column>: <value>, ... }, ... } — one object per touched entity, naming only the core columns this scene asserts.",
+    "why_this_fixture_exists": "The first road-trip package: a story meant to be heard in a car driving Durham to Pilot Mountain, NC, with each scene set on the stretch of road the listener is on when it plays. It is a hand-made experiment to find out whether the engine's prose works heard aloud and tied to real places — before anything is built for route ingestion, timing or text to speech.",
+    "one_location_per_road_segment": "Each Location is a stretch of the route, not a room. The characters are in the car the whole time until scene 6; the car's location_id is what moves.",
+    "characters_present_includes_the_absent": "char_hal and char_june are dead before the story opens. They are listed in characters_present where a beat names them, as fixtures/the-lamp-at-cairn-head does for Innes, so the name reaches the writer with a World Model row behind it.",
+    "length_budget_is_audio_time": "Budgets are words, sized to about 150 spoken words a minute so each scene finishes before the next landmark. See _route_anchoring for the minutes each one has to fill.",
+    "route_facts_to_verify": "Drive times, the side of the road the mountain appears on, and the US-52 exit number were written from general knowledge, not from a routing API. Check them against Google Maps before judging the timing. The one that matters most is scene 3's plant: the mountain has to appear on the LEFT driving north on US-52, or the title's promise is false."
+  },
+  "_route_anchoring": {
+    "note": "Not read by the engine. The trigger data a road-trip player would need — kept here so the experiment records what the scenes were timed against.",
+    "route": "Durham → I-85 S (joined by I-40 near Hillsborough) → I-40 W at the Greensboro split → Winston-Salem → US-52 N → Pilot Mountain State Park → summit road",
+    "approximate_total_drive_minutes": 110,
+    "words_per_audio_minute": 150,
+    "scenes": [
+      { "scene": "scene_01_the_buick", "start_when": "departure from Durham", "approx_minute": 0, "must_finish_before_minute": 15 },
+      { "scene": "scene_02_the_haw", "start_when": "about 5 minutes before the I-40/85 bridge over the Haw River", "approx_minute": 30, "must_finish_before_minute": 45 },
+      { "scene": "scene_03_where_the_roads_part", "start_when": "approaching the point in Greensboro where I-40 and I-85 separate", "approx_minute": 52, "must_finish_before_minute": 65 },
+      { "scene": "scene_04_turn_north", "start_when": "the Winston-Salem skyline comes into view, before the US-52 North interchange", "approx_minute": 75, "must_finish_before_minute": 85 },
+      { "scene": "scene_05_her", "start_when": "on US-52 North past Rural Hall, before the first clear view of the knob", "approx_minute": 86, "must_finish_before_minute": 95 },
+      { "scene": "scene_06_shotgun", "start_when": "one mile before the US-52 exit for Pilot Mountain State Park (believed to be exit 131 — verify)", "approx_minute": 96, "must_finish_before_minute": 102 },
+      { "scene": "scene_07_the_last_note", "start_when": "at the foot of the summit road", "approx_minute": 102, "must_finish_before_minute": 110 }
+    ]
+  },
+  "world_model_seed": {
+    "characters": [
+      {
+        "id": "char_jess",
+        "name": "Jessica Whitlock",
+        "location_id": "loc_durham",
+        "status": "alive",
+        "goal": "drive her grandfather's car to the mountain because his letter asked, then sell it and be done",
+        "bag": {
+          "age": 34,
+          "goes_by": "Jess",
+          "note": "lives in Durham; cleared out Hal's house alone over the summer and has not cried about any of it yet"
+        }
+      },
+      {
+        "id": "char_theo",
+        "name": "Theo Whitlock",
+        "location_id": "loc_durham",
+        "status": "alive",
+        "goal": "get through the day without being treated like a child",
+        "bag": {
+          "age": 15,
+          "relation": "Jess's nephew, her brother's son",
+          "note": "was sent along by his father, not asked; headphones on, one ear out"
+        }
+      },
+      {
+        "id": "char_hal",
+        "name": "Harold Whitlock",
+        "location_id": null,
+        "status": "dead",
+        "goal": null,
+        "bag": {
+          "goes_by": "Hal",
+          "died": "last spring, at eighty-six",
+          "note": "drove this road for forty years; wrote in pencil in the margins of everything"
+        }
+      },
+      {
+        "id": "char_june",
+        "name": "June Whitlock",
+        "location_id": null,
+        "status": "dead",
+        "goal": null,
+        "bag": {
+          "note": "Hal's wife; died when Jess was twelve. Jess remembers her laugh and not much else."
+        }
+      }
+    ],
+    "locations": [
+      {
+        "id": "loc_durham",
+        "name": "leaving Durham on I-85 South",
+        "bag": {
+          "description": "the interstate heading west out of Durham, then past Hillsborough, where I-40 comes in and the two roads run as one",
+          "time_of_day": "a clear Saturday morning in mid-October"
+        }
+      },
+      {
+        "id": "loc_haw_river",
+        "name": "the I-40/85 bridge over the Haw River",
+        "bag": {
+          "description": "a short bridge over a brown, rocky river, trees thick on both banks; the town of Haw River, with its old brick textile mills, sits just off the highway, mostly hidden from the road now"
+        }
+      },
+      {
+        "id": "loc_greensboro_split",
+        "name": "the Greensboro split",
+        "bag": {
+          "description": "where I-40 and I-85, joined since Hillsborough, separate at Greensboro — 85 bending southwest, 40 carrying on west toward Winston-Salem"
+        }
+      },
+      {
+        "id": "loc_winston_salem",
+        "name": "Winston-Salem and the turn onto US-52 North",
+        "bag": {
+          "description": "the downtown skyline to the side of the highway, the old Reynolds Building among the newer towers; an old tobacco city; the interchange where US-52 turns north toward the mountains"
+        }
+      },
+      {
+        "id": "loc_us52_north",
+        "name": "US-52 North past Rural Hall and King",
+        "bag": {
+          "description": "four lanes through rolling farmland and low ridges, the land lifting toward the Blue Ridge; ahead, Pilot Mountain's knob — a bare rock pinnacle with a rounded top of trees, standing alone above everything around it"
+        }
+      },
+      {
+        "id": "loc_park_entrance",
+        "name": "the entrance to Pilot Mountain State Park",
+        "bag": {
+          "description": "the exit off US-52 and a short road to the park gate and the lot at the foot of the summit road; the knob is close enough now to fill the windshield"
+        }
+      },
+      {
+        "id": "loc_summit",
+        "name": "the summit road and the Little Pinnacle overlook",
+        "bag": {
+          "description": "a narrow road that switchbacks up through oak and laurel to the summit parking lot; a short walk to the Little Pinnacle overlook, which looks straight across at the Big Pinnacle, the bare rock knob that no one is allowed to climb, and out over the whole Piedmont they drove across"
+        }
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj_buick",
+        "name": "Hal's Buick",
+        "location_id": "loc_durham",
+        "status": "Jess is driving",
+        "bag": {
+          "description": "a 1998 Buick LeSabre, green, 212,000 miles, bench seat, smells of pipe tobacco and peppermints",
+          "note": "Jess has a buyer coming to look at it next Saturday"
+        }
+      },
+      {
+        "id": "obj_atlas",
+        "name": "Hal's road atlas",
+        "location_id": "loc_durham",
+        "status": "on the passenger seat",
+        "bag": {
+          "description": "a 1987 Rand McNally road atlas, spine taped, the North Carolina pages soft as cloth; pencil marks and short notes in Hal's hand along one route"
+        }
+      },
+      {
+        "id": "obj_envelope",
+        "name": "the envelope in the glovebox",
+        "location_id": "loc_durham",
+        "status": "sealed",
+        "bag": {
+          "description": "a plain business envelope, sealed, written on in pencil in Hal's hand: 'Shotgun — open when you're parked under her.'"
+        }
+      },
+      {
+        "id": "obj_photograph",
+        "name": "a photograph tucked in the atlas",
+        "location_id": "loc_durham",
+        "status": "hidden between the last two pages of the North Carolina map",
+        "bag": {
+          "description": "a small square snapshot, 1962: a young Hal and a young June at a stone overlook wall, the bare rock of the Big Pinnacle behind them, June holding her left hand up to the camera"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "id": "rel_001",
+        "from_id": "char_jess",
+        "to_id": "char_hal",
+        "kind": "granddaughter_of",
+        "sentiment": "loved him; kept meaning to visit more",
+        "bag": {}
+      },
+      {
+        "id": "rel_002",
+        "from_id": "char_theo",
+        "to_id": "char_hal",
+        "kind": "great_grandson_of",
+        "sentiment": "fond, from a distance; Hal was the one adult who let him sit in the driver's seat of a parked car",
+        "bag": {}
+      },
+      {
+        "id": "rel_003",
+        "from_id": "char_jess",
+        "to_id": "char_theo",
+        "kind": "aunt_of",
+        "sentiment": "affectionate, a little awkward; they have not been alone together since he was nine",
+        "bag": {}
+      },
+      {
+        "id": "rel_004",
+        "from_id": "char_hal",
+        "to_id": "char_june",
+        "kind": "married_to",
+        "sentiment": "devoted",
+        "bag": {}
+      }
+    ],
+    "character_knowledge": [
+      {
+        "id": "ck_001",
+        "character_id": "char_jess",
+        "fact_ref": "hal_asked_for_this_drive_in_his_letter",
+        "learned_at_scene": null,
+        "bag": {
+          "source": "the letter the lawyer gave her with the will"
+        }
+      }
+    ]
+  },
+  "facts": [
+    {
+      "fact_ref": "hal_asked_for_this_drive_in_his_letter",
+      "statement": "Hal's letter, left with his will, asked Jess to drive the Buick to Pilot Mountain once before she sold it, to follow the marks in his atlas, and to take someone with her in the passenger seat.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "jess_plans_to_sell_the_car",
+      "statement": "Jess means to sell the Buick right after this trip; she has already written the listing and a buyer is coming to see it next Saturday.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "theo_has_a_learners_permit",
+      "statement": "Theo got his learner's permit last month, but his father won't let him practice anywhere busier than a church parking lot.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "the_envelope_is_for_whoever_rides_shotgun",
+      "statement": "The sealed envelope in the glovebox is addressed, in Hal's pencil, not to Jess but to 'Shotgun' — whoever rides in the passenger seat — and is to be opened only when they are parked under 'her'.",
+      "caused_by": ["hal_asked_for_this_drive_in_his_letter"]
+    },
+    {
+      "fact_ref": "hal_wrote_the_margin_notes_to_the_passenger",
+      "statement": "Every note Hal pencilled along the route in the atlas is written to the passenger, not the driver — 'Shotgun, count the mill windows; driver keeps her eyes on the road.'",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "hals_note_says_watch_for_her_on_the_left",
+      "statement": "At Greensboro, Hal's note says to stay with 40 through Winston and then turn north, and to 'watch for her on the left.' Theo assumes 'her' means June.",
+      "caused_by": ["hal_wrote_the_margin_notes_to_the_passenger"]
+    },
+    {
+      "fact_ref": "the_pilot_was_a_guide_for_travelers",
+      "statement": "Hal's note at Winston-Salem says the mountain was a landmark travelers steered by, and that the name the Saura people gave it, Jomeokee, is usually translated as 'great guide' or 'pilot' — which is why it is called Pilot Mountain.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "jess_has_never_been_to_the_pilot",
+      "statement": "Hal asked Jess to come to Pilot Mountain with him every fall for twenty years, and she never once went; she always had something.",
+      "caused_by": []
+    },
+    {
+      "fact_ref": "the_car_is_left_to_theo",
+      "statement": "The letter inside the envelope says the Buick is not Jess's to sell: Hal has left it to whoever rode shotgun on this drive, and he knew Jess would bring Theo, because there was nobody else she could ask.",
+      "caused_by": ["the_envelope_is_for_whoever_rides_shotgun", "hal_asked_for_this_drive_in_his_letter"]
+    },
+    {
+      "fact_ref": "hal_proposed_to_june_on_the_pilot",
+      "statement": "Hal proposed to June at the Little Pinnacle overlook in October 1962, after driving her there in his first car; the photograph in the atlas was taken a minute afterward, and the hand June is holding up to the camera is the one with the ring.",
+      "caused_by": []
+    }
+  ],
+  "scene_cards": [
+    {
+      "id": "scene_01_the_buick",
+      "order": 1,
+      "pov": "char_jess",
+      "location_id": "loc_durham",
+      "characters_present": ["char_jess", "char_theo", "char_hal"],
+      "dramatic_function": "Put two reluctant people in a dead man's car on a road he asked them to drive, and hand the listener a sealed envelope and a question: who is it for?",
+      "story_time": "a Saturday in mid-October, a little after nine in the morning",
+      "entry_state": {
+        "obj_buick": { "location_id": "loc_durham", "status": "Jess is driving" },
+        "obj_envelope": { "status": "sealed" }
+      },
+      "exit_state": {
+        "obj_buick": { "location_id": "loc_durham" }
+      },
+      "required_beats": [
+        "Jess merges the green Buick onto the interstate heading west out of Durham with Theo slouched in the passenger seat, headphones on, one ear out",
+        "Jess tells Theo why they are doing this: Hal's letter asked her to drive the car to Pilot Mountain once before she sold it, following the marks in his atlas, and to bring someone to ride along",
+        "Theo asks, not kindly, why he is the someone, and Jess doesn't give him the true answer, which is that there was no one else to ask",
+        "Jess mentions that the listing is written and a buyer is coming to see the car next Saturday, and Theo goes quiet at that",
+        "Theo lets slip that he got his learner's permit last month and that his father won't let him drive anywhere busier than a church parking lot",
+        "Jess tells him to open the glovebox for the atlas, and he finds a sealed envelope on top of it, with Hal's pencil on the front: 'Shotgun — open when you're parked under her'",
+        "past Hillsborough, where I-40 comes in from the east and the two roads run as one, Theo puts the envelope back unopened, because Hal said to wait"
+      ],
+      "reader_must_learn": [
+        "hal_asked_for_this_drive_in_his_letter",
+        "jess_plans_to_sell_the_car",
+        "theo_has_a_learners_permit",
+        "the_envelope_is_for_whoever_rides_shotgun"
+      ],
+      "must_stay_hidden": ["the_car_is_left_to_theo"],
+      "tone": "dry, a little funny, the grief kept out of sight under logistics",
+      "length_budget": 650,
+      "invariants": [
+        "Jess never takes her eyes off the road to read anything; only the passenger reads",
+        "no one guesses what is in the envelope",
+        "the story never speaks to the listener or tells them what to do on the road"
+      ]
+    },
+    {
+      "id": "scene_02_the_haw",
+      "order": 2,
+      "pov": "char_jess",
+      "location_id": "loc_haw_river",
+      "characters_present": ["char_jess", "char_theo", "char_hal", "char_june"],
+      "dramatic_function": "Let Hal speak for the first time, through the atlas, and let the listener notice who he is speaking to.",
+      "story_time": "the same morning, about half an hour out of Durham",
+      "entry_state": {
+        "obj_buick": { "location_id": "loc_durham" },
+        "obj_atlas": { "status": "on the passenger seat" }
+      },
+      "exit_state": {
+        "obj_buick": { "location_id": "loc_haw_river" },
+        "obj_atlas": { "status": "open on Theo's knees" }
+      },
+      "required_beats": [
+        "Theo opens the atlas to the North Carolina pages and finds the route drawn in soft pencil, with small notes along it in Hal's cramped hand",
+        "the first note is at the Haw River, and Theo reads it aloud: 'Shotgun — count the mill windows. Driver keeps her eyes on the road.'",
+        "Theo looks for the mill and can't see it from the bridge; the trees have taken the view, and Jess says the town is just off the highway, the mills still standing in it",
+        "the note goes on: June counted the windows every time they drove this way, and never got the same number twice",
+        "Jess realizes, and says aloud, that every note she can see on the page is written to the passenger, not the driver",
+        "Theo, despite himself, turns the page to see what the next note says"
+      ],
+      "reader_must_learn": ["hal_wrote_the_margin_notes_to_the_passenger"],
+      "must_stay_hidden": ["the_car_is_left_to_theo"],
+      "tone": "warmer; the first real laugh between them, on June's account",
+      "length_budget": 550,
+      "invariants": [
+        "Hal's notes are quoted exactly as short pencil notes, never as long letters",
+        "the mill is not visible from the bridge"
+      ]
+    },
+    {
+      "id": "scene_03_where_the_roads_part",
+      "order": 3,
+      "pov": "char_jess",
+      "location_id": "loc_greensboro_split",
+      "characters_present": ["char_jess", "char_theo", "char_hal", "char_june"],
+      "dramatic_function": "Give the listener the promise the whole drive now leans toward — 'watch for her on the left' — and let a character guess wrong about it.",
+      "story_time": "the same morning, nearing Greensboro",
+      "entry_state": {
+        "obj_buick": { "location_id": "loc_haw_river" }
+      },
+      "exit_state": {
+        "obj_buick": { "location_id": "loc_greensboro_split" }
+      },
+      "required_beats": [
+        "as they come into Greensboro, Theo reads the next note, pencilled where I-40 and I-85 separate: 'Here the roads part. Stay with 40. Through Winston, then turn north. Watch for her on the left.'",
+        "Jess keeps the car on 40 as 85 peels away to the southwest",
+        "Theo decides 'her' means June — that Hal meant them to watch for something of hers, a house or a church or a grave — and Jess, not sure, doesn't correct him",
+        "Theo asks what June was like, and Jess finds she has only small things to offer: a laugh, a green coat, the smell of Juicy Fruit",
+        "Theo admits the envelope is bothering him, because it says Shotgun and not Jess, and Hal knew who'd be driving"
+      ],
+      "reader_must_learn": ["hals_note_says_watch_for_her_on_the_left"],
+      "must_stay_hidden": ["the_car_is_left_to_theo", "hal_proposed_to_june_on_the_pilot"],
+      "tone": "thoughtful, the two of them talking more easily now, a small ache under it",
+      "length_budget": 600,
+      "invariants": [
+        "nobody says out loud that 'her' might be the mountain",
+        "the conversation never turns into a eulogy"
+      ]
+    },
+    {
+      "id": "scene_04_turn_north",
+      "order": 4,
+      "pov": "char_jess",
+      "location_id": "loc_winston_salem",
+      "characters_present": ["char_jess", "char_theo", "char_hal"],
+      "dramatic_function": "Turn the car toward the mountain and plant, lightly, what the mountain is for.",
+      "story_time": "late morning",
+      "entry_state": {
+        "obj_buick": { "location_id": "loc_greensboro_split" }
+      },
+      "exit_state": {
+        "obj_buick": { "location_id": "loc_winston_salem" }
+      },
+      "required_beats": [
+        "the Winston-Salem skyline comes up beside the highway, and Theo reads Hal's note there: that the city used to smell of tobacco when the wind was right, and that he hauled it here in his twenties",
+        "the next note sits beside the US-52 North interchange, and Theo reads it as Jess makes the turn: the mountain they are headed to was the landmark travelers steered by, and the Saura people's name for it, Jomeokee, is usually translated 'great guide', which is why it is called the Pilot",
+        "Jess says she's heard Hal tell that a hundred times and never listened to it once",
+        "Jess mentions the buyer again, a little too firmly, and Theo asks whether she even wants to sell it; she says it isn't about wanting"
+      ],
+      "reader_must_learn": ["the_pilot_was_a_guide_for_travelers"],
+      "must_stay_hidden": ["the_car_is_left_to_theo", "hal_proposed_to_june_on_the_pilot"],
+      "tone": "brighter, the road opening up; the question of the car sitting in the middle of it",
+      "length_budget": 550,
+      "invariants": [
+        "the Jomeokee translation is given as Hal's note, and as 'usually translated', never as certain fact",
+        "Theo reads the notes; Jess drives"
+      ]
+    },
+    {
+      "id": "scene_05_her",
+      "order": 5,
+      "pov": "char_jess",
+      "location_id": "loc_us52_north",
+      "characters_present": ["char_jess", "char_theo", "char_hal"],
+      "dramatic_function": "Pay off the title in the landscape itself, at the moment the listener can see it too, and let Jess say the thing she's been driving around.",
+      "story_time": "late morning",
+      "entry_state": {
+        "obj_buick": { "location_id": "loc_winston_salem" }
+      },
+      "exit_state": {
+        "obj_buick": { "location_id": "loc_us52_north" }
+      },
+      "required_beats": [
+        "past Rural Hall the land starts lifting, and Theo is still watching the roadside for a house or a church that might be June's",
+        "the knob comes up ahead and to the left, alone above the farmland, a bare rock pinnacle with a cap of trees, and Theo says 'oh' — it's her; Hal meant the mountain",
+        "Jess admits that Hal asked her to come up here with him every October for twenty years and she never once came; there was always something",
+        "Theo doesn't say anything for a while, then says that 'parked under her' must mean the park, and takes the envelope out of the glovebox and holds it on his knee"
+      ],
+      "reader_must_learn": ["jess_has_never_been_to_the_pilot"],
+      "must_stay_hidden": ["the_car_is_left_to_theo", "hal_proposed_to_june_on_the_pilot"],
+      "pays_off": [
+        { "fact_ref": "hals_note_says_watch_for_her_on_the_left", "plant": "scene_03_where_the_roads_part" }
+      ],
+      "tone": "a held breath; the one moment of real awe in the story, kept plain",
+      "length_budget": 500,
+      "invariants": [
+        "the mountain is described as it is — a bare rock knob topped with trees — and never made mystical",
+        "Theo does not open the envelope yet"
+      ]
+    },
+    {
+      "id": "scene_06_shotgun",
+      "order": 6,
+      "pov": "char_jess",
+      "location_id": "loc_park_entrance",
+      "characters_present": ["char_jess", "char_theo", "char_hal"],
+      "dramatic_function": "Open the envelope, and turn the whole drive over: it was never a trip to get rid of the car. It was a handover.",
+      "story_time": "just before noon",
+      "entry_state": {
+        "obj_buick": { "location_id": "loc_us52_north" },
+        "obj_envelope": { "status": "sealed" }
+      },
+      "exit_state": {
+        "obj_buick": { "location_id": "loc_park_entrance", "status": "parked at the foot of the summit road" },
+        "obj_envelope": { "status": "open" }
+      },
+      "required_beats": [
+        "Jess takes the exit for Pilot Mountain State Park and follows the road to the lot at the foot of the summit road, and parks, the mountain right above them",
+        "Theo opens the envelope and reads Hal's letter aloud: it is written to whoever rode shotgun, exactly as the notes in the atlas were",
+        "the letter says the Buick is not Jess's to sell — Hal has left it to whoever sat in that seat today, and he knew it would be Theo, because Jess wouldn't have asked anyone else",
+        "Jess understands that the listing and the buyer were never going to happen, and that Hal planned this drive so she'd have company on it whether she wanted it or not",
+        "Theo says he can't drive it, he's fifteen; Jess reminds him he has a permit, and she is sitting right here"
+      ],
+      "reader_must_learn": ["the_car_is_left_to_theo"],
+      "must_stay_hidden": ["hal_proposed_to_june_on_the_pilot"],
+      "pays_off": [
+        { "fact_ref": "hal_asked_for_this_drive_in_his_letter", "plant": "scene_01_the_buick" },
+        { "fact_ref": "jess_plans_to_sell_the_car", "plant": "scene_01_the_buick" },
+        { "fact_ref": "the_envelope_is_for_whoever_rides_shotgun", "plant": "scene_01_the_buick" },
+        { "fact_ref": "hal_wrote_the_margin_notes_to_the_passenger", "plant": "scene_02_the_haw" }
+      ],
+      "tone": "quiet, then funny, then very nearly tears — Jess's, not Theo's",
+      "length_budget": 650,
+      "invariants": [
+        "Hal's letter is short and plain, in his voice, and never sentimental about itself",
+        "Jess does not argue with the letter"
+      ]
+    },
+    {
+      "id": "scene_07_the_last_note",
+      "order": 7,
+      "pov": "char_jess",
+      "location_id": "loc_summit",
+      "characters_present": ["char_jess", "char_theo", "char_hal", "char_june"],
+      "dramatic_function": "Swap the seats, so the last note in the atlas finds its reader: Jess, riding shotgun for the first time, finally at the place she never came.",
+      "story_time": "noon",
+      "entry_state": {
+        "obj_buick": { "location_id": "loc_park_entrance" },
+        "obj_photograph": { "status": "hidden between the last two pages of the North Carolina map" }
+      },
+      "exit_state": {
+        "obj_buick": { "location_id": "loc_summit", "status": "parked at the summit, Theo's" },
+        "obj_photograph": { "status": "in Jess's hand" },
+        "char_jess": { "location_id": "loc_summit" },
+        "char_theo": { "location_id": "loc_summit" }
+      },
+      "required_beats": [
+        "Theo calls his father on speaker and asks if he can drive the summit road with Jess beside him, and his father, after a long pause, says yes",
+        "they change seats; Theo drives the switchbacks slowly and exactly, both hands on the wheel, and Jess, riding shotgun now, opens the atlas on her knees",
+        "on the last page of the route, where the pencil line ends at the mountain, there is one more note for the passenger, and a small photograph tucked beside it",
+        "the photograph is Hal and June at a stone wall with the bare rock of the Big Pinnacle behind them, June holding her left hand up to the camera; the note says he asked her here, in October 1962, and she said yes before he'd finished asking",
+        "they walk out to the Little Pinnacle overlook together, the Big Pinnacle straight across from them and the whole Piedmont they drove across laid out below, and Theo says it makes sense now why they called it the Pilot",
+        "Jess stands where the photograph was taken, for the first time, and lets herself cry, and Theo has the decency to look at the view"
+      ],
+      "reader_must_learn": ["hal_proposed_to_june_on_the_pilot"],
+      "pays_off": [
+        { "fact_ref": "theo_has_a_learners_permit", "plant": "scene_01_the_buick" },
+        { "fact_ref": "the_pilot_was_a_guide_for_travelers", "plant": "scene_04_turn_north" },
+        { "fact_ref": "jess_has_never_been_to_the_pilot", "plant": "scene_05_her" }
+      ],
+      "tone": "open, bright, earned; end on the view, not on a speech",
+      "length_budget": 650,
+      "invariants": [
+        "Theo drives carefully and legally, with Jess beside him, and the story never makes a joke of unsafe driving",
+        "no one climbs the Big Pinnacle; they look at it from the overlook",
+        "the story ends at the overlook, with nothing explained that the listener has already understood"
+      ]
+    }
+  ],
+  "voice_card": {
+    "based_on": "lyrical_literary",
+    "person": "third",
+    "tense": "past",
+    "narrative_distance": "close third on Jess, who notices more than she says",
+    "register": "plain, warm and precise; written to be heard aloud in a moving car, so every sentence must make sense on one hearing",
+    "sentence_rhythm": "mostly short and medium sentences a narrator can say in one breath; no parentheses, no nested clauses, no lists a listener has to hold in their head",
+    "imagery_palette": [
+      "October light on the Piedmont",
+      "the inside of an old car: bench seat, dash, glovebox",
+      "pencil on soft paper",
+      "ridges turning blue in the distance"
+    ],
+    "dialogue_density": "moderate to high; the story is mostly two people talking in a car. Attribute every line so a listener always knows who is speaking — prefer 'Theo said' before or right after the line",
+    "style_exemplar": "Theo read the note twice before he read it out loud. \"Shotgun,\" he said. \"Count the mill windows. Driver keeps her eyes on the road.\" Jess kept her eyes on the road.",
+    "reader_familiarity": "The listener is in a car on this same road, hearing this, not reading it. Name real places plainly, the way a local would. Never describe the page, the text, or anything the listener would have to see."
+  },
+  "metadata": {
+    "title": "Watch for Her on the Left",
+    "source": "Original, written for this repository. Real places along the route; invented people and events.",
+    "created_at": "2026-09-30T00:00:00Z",
+    "period": "the present day, a clear Saturday in mid-October in North Carolina"
+  }
+}
