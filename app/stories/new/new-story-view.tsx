@@ -20,7 +20,7 @@ import {
   type PlantPolicy,
   type PremiseModules,
 } from '@/arc/brief';
-import { pickRandomPremise } from '@/arc/random-premises';
+import { pickRandomPremise, type RandomPremise } from '@/arc/random-premises';
 import { PASTED_SOURCE_MAX_WORDS, PASTED_SOURCE_MIN_WORDS, countWords } from '@/extraction/limits';
 
 /** The Generate tab's 8 optional structured-premise fields (ADR 0021, #172). */
@@ -126,14 +126,52 @@ export function NewStoryView({
   // author typed themselves is never overwritten.
   const [randomTitle, setRandomTitle] = useState<string | null>(null);
 
-  const fillRandomPremise = (): void => {
-    const picked = pickRandomPremise(randomTitle);
+  // Every logline "Surprise me" has shown this session, so the model is told to move away from
+  // them and the next press lands somewhere new.
+  const [shownLoglines, setShownLoglines] = useState<string[]>([]);
+  const [surprising, setSurprising] = useState(false);
+  const [surpriseNote, setSurpriseNote] = useState<string | null>(null);
+
+  const applyPremise = (picked: RandomPremise): void => {
     setLogline(picked.premise.logline);
     setModules({ ...picked.premise.modules });
     setUseModules(true);
     setPlotShapePreset(picked.plot_shape_preset);
     if (title === '' || title === randomTitle) setTitle(picked.title);
     setRandomTitle(picked.title);
+    setShownLoglines((shown) => [...shown, picked.premise.logline]);
+  };
+
+  const fillRandomPremise = async (): Promise<void> => {
+    setSurprising(true);
+    setSurpriseNote(null);
+    try {
+      const response = await fetch('/api/authoring/surprise', {
+        method: 'POST',
+        headers: session.headers(),
+        body: JSON.stringify({ avoid: shownLoglines }),
+      });
+      const body = (await response.json().catch(() => ({}))) as Partial<RandomPremise> & {
+        model?: string;
+        error?: string;
+      };
+      if (response.ok && body.premise !== undefined && body.title !== undefined) {
+        applyPremise(body as RandomPremise);
+        setSurpriseNote(`Invented by ${body.model ?? 'the model'}.`);
+        return;
+      }
+      applyPremise(pickRandomPremise(randomTitle));
+      const why =
+        response.status === 401
+          ? 'enter the author token to have the model invent one'
+          : (body.error ?? `the model call failed (${response.status})`);
+      setSurpriseNote(`Used a ready-made premise instead — ${why}.`);
+    } catch {
+      applyPremise(pickRandomPremise(randomTitle));
+      setSurpriseNote('Used a ready-made premise instead — offline.');
+    } finally {
+      setSurprising(false);
+    }
   };
 
   // --- Extract (ADR 0021, #173) ---------------------------------------------------------------
@@ -559,13 +597,25 @@ export function NewStoryView({
 
           <div className="field">
             <div className="row-actions">
-              <button type="button" className="action" onClick={fillRandomPremise}>
-                Surprise me
+              <button
+                type="button"
+                className="action"
+                disabled={surprising}
+                onClick={() => void fillRandomPremise()}
+              >
+                {surprising ? 'Inventing…' : 'Surprise me'}
               </button>
             </div>
             <span className="hint">
-              Fills in a ready-made premise and plot shape to edit or generate as-is. Free — no
-              model call until you press Generate.
+              Asks the model to invent a new premise and plot shape, to edit or generate as-is. One
+              small call, a fraction of a cent. Falls back to a ready-made premise when the model
+              can&apos;t be reached.
+              {surpriseNote === null ? null : (
+                <>
+                  <br />
+                  {surpriseNote}
+                </>
+              )}
             </span>
           </div>
 
