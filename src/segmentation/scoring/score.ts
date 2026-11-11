@@ -163,6 +163,24 @@ export interface RevealOrderScore {
   readonly hidden_recall: number | null;
 }
 
+export interface PlantPairOutcome {
+  readonly fact_ref: string;
+  readonly plant: string | null;
+  readonly payoff: string;
+  readonly declared: boolean;
+  readonly span: number;
+  /**
+   * - `matched` — same fact, same payoff scene, same plant scene.
+   * - `misattributed` — same fact and payoff scene, different plant.
+   * - `missed` — the fact and the payoff scene both aligned, and no candidate pair joins them.
+   * - `fact_unaligned` / `payoff_scene_unaligned` — never compared. See `PlantScore.unalignable`.
+   */
+  readonly outcome: 'matched' | 'misattributed' | 'missed' | 'fact_unaligned' | 'payoff_scene_unaligned';
+  readonly candidate_fact: string | null;
+  readonly expected_plant: string | null;
+  readonly expected_payoff: string | null;
+}
+
 export interface PlantScore {
   readonly pair_bar: '≥ 0.70 recall (§3.7)';
   readonly long_range_bar: '≥ 0.60 recall (§3.7)';
@@ -186,6 +204,23 @@ export interface PlantScore {
   readonly long_range_matched: number;
   readonly long_range_recall: number | null;
   readonly misattributed: number;
+  /**
+   * Fixture pairs the scorer had no way to look for (#162): the alignment judge gave the pair's
+   * `fact_ref` no candidate fact, or its payoff scene has no candidate scene. They are counted as
+   * misses in `recall`, because there is nothing else to do with them, but a pair in this state
+   * was never compared with anything — so a nonzero value means `recall` is a floor.
+   */
+  readonly unalignable: number;
+  /** What happened to each fixture pair, and every pair the candidate declared. */
+  readonly pairs: readonly PlantPairOutcome[];
+  readonly candidate_pair_list: ReadonlyArray<{
+    readonly fact_ref: string;
+    readonly plant: string | null;
+    readonly payoff: string;
+    readonly span: number;
+    /** Whether any fixture pair was matched to it. An unmatched pair is not thereby wrong. */
+    readonly matched: boolean;
+  }>;
   /** §1: the graph's own validity, which G0 already guarantees — restated because #118 built it. */
   readonly orphans: readonly string[];
   readonly plant_walk_errors: readonly string[];
@@ -499,7 +534,7 @@ function povLocationScore(
 
 // --- §3.7 plant/payoff --------------------------------------------------------------------
 
-function plantScore(
+export function plantScore(
   candidate: StoryPackage,
   truth: GroundTruth,
   sceneMap: ReadonlyMap<string, string>,
@@ -560,6 +595,8 @@ function plantScore(
   let longRangeMatched = 0;
   let misattributed = 0;
   let longRangeFixture = 0;
+  const outcomes: PlantPairOutcome[] = [];
+  const matchedCandidates = new Set<(typeof candidatePairs)[number]>();
 
   for (const pair of fixturePairs) {
     const isLongRange = pair.span >= LONG_RANGE_SCENES;
@@ -567,14 +604,39 @@ function plantScore(
     const expectedFact = factMap.get(pair.fact);
     const expectedPayoff = sceneMap.get(pair.payoff);
     const expectedPlant = pair.plant === null ? null : (sceneMap.get(pair.plant) ?? undefined);
-    if (expectedFact === undefined || expectedPayoff === undefined) continue;
+    const record = (outcome: PlantPairOutcome['outcome']): void => {
+      outcomes.push({
+        fact_ref: pair.fact,
+        plant: pair.plant,
+        payoff: pair.payoff,
+        declared: pair.declared,
+        span: pair.span,
+        outcome,
+        candidate_fact: expectedFact ?? null,
+        expected_plant: expectedPlant ?? null,
+        expected_payoff: expectedPayoff ?? null,
+      });
+    };
+    if (expectedFact === undefined) {
+      record('fact_unaligned');
+      continue;
+    }
+    if (expectedPayoff === undefined) {
+      record('payoff_scene_unaligned');
+      continue;
+    }
 
     const samePayoff = candidatePairs.filter(
       (entry) => entry.fact === expectedFact && entry.payoff === expectedPayoff,
     );
-    if (samePayoff.length === 0) continue;
-    const exact = samePayoff.some((entry) => entry.plant === (expectedPlant ?? null));
-    if (exact) {
+    if (samePayoff.length === 0) {
+      record('missed');
+      continue;
+    }
+    const exact = samePayoff.find((entry) => entry.plant === (expectedPlant ?? null));
+    record(exact === undefined ? 'misattributed' : 'matched');
+    if (exact !== undefined) {
+      matchedCandidates.add(exact);
       matched += 1;
       if (pair.declared) matchedDeclared += 1;
       else matchedAnnotated += 1;
@@ -610,6 +672,17 @@ function plantScore(
     long_range_matched: longRangeMatched,
     long_range_recall: longRangeFixture === 0 ? null : longRangeMatched / longRangeFixture,
     misattributed,
+    unalignable: outcomes.filter(
+      (entry) => entry.outcome === 'fact_unaligned' || entry.outcome === 'payoff_scene_unaligned',
+    ).length,
+    pairs: outcomes,
+    candidate_pair_list: candidatePairs.map((entry) => ({
+      fact_ref: entry.fact,
+      plant: entry.plant,
+      payoff: entry.payoff,
+      span: entry.span,
+      matched: matchedCandidates.has(entry),
+    })),
     orphans,
     plant_walk_errors: walk.errors.map((error) => `[${error.code}] ${error.message}`),
     span_histogram: histogram,

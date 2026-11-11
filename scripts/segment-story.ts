@@ -224,7 +224,10 @@ async function main(): Promise<void> {
     console.log(
       `  §3.7 plants: recall ${fmt(score.plants.recall)} (${score.plants.matched}/${score.plants.fixture_pairs}), ` +
         `long-range ${fmt(score.plants.long_range_recall)}, misattributed ${score.plants.misattributed}, ` +
-        `orphans ${score.plants.orphans.length}, walk errors ${score.plants.plant_walk_errors.length}`,
+        `orphans ${score.plants.orphans.length}, walk errors ${score.plants.plant_walk_errors.length}` +
+        (score.plants.unalignable > 0
+          ? `  !! ${score.plants.unalignable} fixture pairs were never compared (fact or scene unaligned) — recall is a floor`
+          : ''),
     );
     console.log(`  judge cost $${score.judge_cost_usd.toFixed(4)} on ${score.judge_model}`);
     if (report !== null && report.lint.publishable === false) {

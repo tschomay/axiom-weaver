@@ -140,6 +140,17 @@ export interface SegmentationReport {
     readonly rejected_malformed: number;
     readonly verified: number;
     readonly rejected_by_verifier: number;
+    /**
+     * The proposals the verifier turned down, with its verdict and reason (#162). A count alone
+     * cannot say whether the verifier is discarding real pairs whose plant the beats do not carry.
+     */
+    readonly rejected: ReadonlyArray<{
+      readonly fact_ref: string;
+      readonly plant: string | null;
+      readonly payoff: string;
+      readonly verdict: string;
+      readonly why: string;
+    }>;
     readonly unverified_dropped: number;
     readonly seed_grounded_unrepresentable: number;
     readonly failed_batches: number;
@@ -612,6 +623,7 @@ export async function segmentFabulaPackage(
   let proposed = 0;
   let malformed = 0;
   let rejectedByVerifier = 0;
+  let rejectedPairs: SegmentationReport['plants']['rejected'] = [];
   let unverifiedDropped = 0;
   let plantFailedBatches = 0;
   let verifiedPairs: PlantPair[] = [];
@@ -637,6 +649,13 @@ export async function segmentFabulaPackage(
     const verified = await verifyPairs(model, fresh, sketches, { onProgress: progress });
     plantFailedBatches += verified.failed_batches;
     rejectedByVerifier = verified.rejected.length;
+    rejectedPairs = verified.rejected.map((entry) => ({
+      fact_ref: entry.pair.fact_ref,
+      plant: entry.pair.plant,
+      payoff: entry.pair.payoff,
+      verdict: entry.verdict,
+      why: entry.why,
+    }));
     // An unverified pair is dropped, not kept: §4.6's pipeline is identify-verify-filter, and a
     // proposal nobody checked is the stage before evidence.
     unverifiedDropped = verified.unverified.length;
@@ -763,6 +782,7 @@ export async function segmentFabulaPackage(
         rejected_malformed: malformed,
         verified: verifiedPairs.length,
         rejected_by_verifier: rejectedByVerifier,
+        rejected: rejectedPairs,
         unverified_dropped: unverifiedDropped,
         seed_grounded_unrepresentable: unrepresentable.length,
         failed_batches: plantFailedBatches,

@@ -17,6 +17,7 @@ import { describe, expect, it } from 'vitest';
 import { ExtractionModel } from '@/extraction/call';
 import { lintPackage } from '@/authoring/lint';
 import { loadGroundTruth } from '@/extraction/scoring/ground-truth';
+import { plantScore } from '@/segmentation/scoring/score';
 import {
   FABULA_PROJECTION_NOTE,
   lintFabulaArc,
@@ -910,5 +911,33 @@ describe('plant/payoff ground-truth sidecar (#153)', () => {
     // from. If a later ticket annotates it, that ticket owes an explicit note that the held-out
     // property was spent.
     expect(existsSync('fixtures/the-machine-stops/plants.annotation.json')).toBe(false);
+  });
+});
+
+// #162: a fixture pair whose fact the alignment judge could not place was dropped by a bare
+// `continue`, so "never compared" and "compared and absent" were the same zero.
+describe('plant score: an unalignable pair is reported, not silently missed (#162)', () => {
+  it('separates never-compared pairs from missed ones, and lists every pair', async () => {
+    const truth = await loadGroundTruth('cinderella');
+    const scenes = new Map(truth.package.scene_cards.map((scene) => [scene.id, scene.id]));
+    const declared = truth.package.scene_cards.flatMap((scene) => scene.pays_off.map((p) => p.fact_ref));
+    // The fixture scored against itself, with only its declared facts aligned: the annotated
+    // pairs are exactly the ones the judge "could not place".
+    const facts = new Map(declared.map((fact) => [fact, fact]));
+
+    const score = plantScore(truth.package, truth, scenes, facts);
+    expect(score.matched).toBe(declared.length);
+    expect(score.unalignable).toBe(truth.plant_annotation!.implicit.length);
+    expect(score.pairs).toHaveLength(score.fixture_pairs);
+    expect(score.pairs.filter((pair) => pair.outcome === 'missed')).toHaveLength(0);
+    expect(score.pairs.filter((pair) => pair.outcome === 'fact_unaligned')).toHaveLength(score.unalignable);
+    expect(score.candidate_pair_list.every((pair) => pair.matched)).toBe(true);
+
+    // Aligned to a fact the candidate never pays off, the same pair is a real miss.
+    const implicit = truth.plant_annotation!.implicit[0]!;
+    const missed = plantScore(truth.package, truth, scenes, new Map([...facts, [implicit.fact_ref, 'no_such_fact']]));
+    expect(missed.pairs.find((pair) => pair.fact_ref === implicit.fact_ref)!.outcome).toBe('missed');
+    expect(missed.unalignable).toBe(score.unalignable - 1);
+    expect(missed.recall).toBe(score.recall);
   });
 });
