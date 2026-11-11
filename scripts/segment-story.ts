@@ -101,6 +101,7 @@ function summarize(report: SegmentationReport): string[] {
     `  boundaries: ${report.boundaries.decisions.filter((d) => d.decision === 'new_scene').length} judged new_scene, ` +
       `${report.boundaries.fell_back_to_signals} fell back to signals, ` +
       `self-consistency ${report.boundaries.self_consistency === null ? 'n/a' : report.boundaries.self_consistency.toFixed(2)}`,
+    `  fragments: ${report.grouping.absorbed_fragments} judged boundaries removed around groups too small to be scenes`,
     `  forced splits: ${report.grouping.forced_by_plant_span} by a plant span, ${report.grouping.forced_by_size} by the size guardrail`,
     `  substitutions: pov ${report.substitutions.pov_from_candidates}+${report.substitutions.pov_from_seed}, ` +
       `location ${report.substitutions.location_from_candidates}+${report.substitutions.location_from_seed}, ` +

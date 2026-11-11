@@ -352,6 +352,40 @@ describe('grouping', () => {
     expect(report.forced_by_size).toBe(0);
   });
 
+  it('absorbs a one-event fragment among long scenes into a neighbour', () => {
+    // #146: a line of travel between two visions is a real change of place and not a scene.
+    const rows = linearEvents(21).map((row, index) => ({
+      ...row,
+      location_id: index < 10 ? 'loc_house' : index === 10 ? 'loc_road' : 'loc_ball',
+    }));
+    const events = arcOf(rows).events;
+    // Groups of 10, 1 and 10: the mean is 7, so anything under 1.75 events is a fragment.
+    const report = group(events, adjacencies(events), new Set([9, 10]));
+    expect(report.absorbed_fragments).toBe(1);
+    expect(report.groups.map((scene) => scene.event_indices.length).sort()).toEqual([10, 11]);
+  });
+
+  it('folds an interruption back into the scene that resumes around it', () => {
+    const rows = linearEvents(21).map((row, index) => ({
+      ...row,
+      location_id: index === 10 ? 'loc_elsewhere' : 'loc_house',
+    }));
+    const events = arcOf(rows).events;
+    const report = group(events, adjacencies(events), new Set([9, 10]));
+    // Both boundaries go: the aside belongs to the scene on either side of it.
+    expect(report.absorbed_fragments).toBe(2);
+    expect(report.groups).toHaveLength(1);
+  });
+
+  it('leaves short scenes alone when short is the story\'s own grain', () => {
+    // Cinderella's scenes average a handful of events and a generated arc's about two; neither
+    // has fragments, only small scenes.
+    const events = arcOf(linearEvents(9)).events;
+    const report = group(events, adjacencies(events), new Set([0, 2, 4, 6]));
+    expect(report.absorbed_fragments).toBe(0);
+    expect(report.groups).toHaveLength(5);
+  });
+
   it('the mechanical baseline is a threshold over the signal score', () => {
     const events = arcOf(linearEvents(6)).events;
     expect(mechanicalBoundaries(adjacencies(events), 0.0).size).toBe(5);

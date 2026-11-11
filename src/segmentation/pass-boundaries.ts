@@ -84,6 +84,11 @@ Judge like an editor cutting a film, not like a tagger:
 - A montage of glimpses that belong to one sweep of narration is ONE scene, even across places.
 - Entering or leaving a flashback, a vision or a dream STARTS a new scene; staying inside one does
   not.
+- When one character TELLS another a story, the telling is not a string of flashbacks. The
+  listener's interruptions (a sigh, a question, a pause) do not start a scene, and neither does
+  each return to the tale. Cut where the tale itself changes scene, and nowhere else.
+- A brief aside inside an ongoing scene (a line of back-story, a remark recalled, a glance at
+  someone elsewhere) belongs to that scene. It is not a scene of its own.
 
 You are shown the mechanical evidence for each gap. Use it. Disagree with it when the prose-level
 sense of the events says otherwise; that is why you are being asked.

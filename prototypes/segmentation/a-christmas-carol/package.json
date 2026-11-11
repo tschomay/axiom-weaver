@@ -2941,7 +2941,7 @@
   },
   "scene_cards": [
     {
-      "id": "scene_01_marleys_death",
+      "id": "scene_01_marleys_burial",
       "order": 1,
       "pov": "char_scrooge",
       "location_id": "loc_change",
@@ -2952,7 +2952,7 @@
         "char_scrooge",
         "char_undertaker"
       ],
-      "dramatic_function": "Establishes Marley's definitive death and Scrooge's unrelenting commitment to business above all else.",
+      "dramatic_function": "Establishes Marley's death and Scrooge's absolute detachment and business-as-usual demeanor in the face of loss.",
       "entry_state": {
         "char_marley": {
           "status": "dead"
@@ -2964,17 +2964,19 @@
         }
       },
       "required_beats": [
-        "Marley dies and his burial register is signed.",
-        "Scrooge conducts business even on the day of Marley's funeral."
+        "Marley dies, and the clergyman, clerk, undertaker, and Scrooge sign the register of burial.",
+        "Scrooge conducts business on the day of Marley's funeral."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 550,
+      "story_time": "past",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_02_christmas_eve_visitors",
+      "id": "scene_02_refusing_christmas",
       "order": 2,
       "pov": "char_scrooge",
       "location_id": "loc_counting_house",
@@ -2985,7 +2987,7 @@
         "char_two_portly_gentlemen",
         "char_marley"
       ],
-      "dramatic_function": "Establishes Scrooge's cold misanthropy through his rejection of holiday goodwill, family connection, and charity.",
+      "dramatic_function": "Establishes Scrooge's bitter hostility to family, charity, and the spirit of Christmas Eve.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_counting_house"
@@ -3021,27 +3023,28 @@
         }
       },
       "required_beats": [
-        "Scrooge works in his counting-house while keeping his clerk in the cold.",
-        "Scrooge's nephew arrives with Christmas cheer and a dinner invitation, which Scrooge harshly rejects.",
-        "Scrooge threatens to dismiss his clerk for applauding the nephew's sentiments.",
-        "Two portly gentlemen request charitable donations for the poor.",
-        "Scrooge refuses to give anything, dismisses the gentlemen, and returns to his work."
+        "Scrooge sits working in his counting house while the clerk puts on his white comforter.",
+        "Scrooge's nephew arrives with cheerful greetings, but Scrooge dismisses him with 'Bah! Humbug!' and threatens to dismiss the clerk when he applauds the nephew's speech.",
+        "Scrooge vehemently refuses his nephew's invitation to dine tomorrow, and the nephew departs.",
+        "Two portly gentlemen arrive seeking donations for the poor on the seventh anniversary of Marley's death.",
+        "Scrooge refuses to donate anything, demands to be left alone, and dismisses the gentlemen before resuming work in a facetious temper."
       ],
       "reader_must_learn": [
-        "harsh_treatment_of_clerk",
-        "portly_gentlemans_charity_appeal",
-        "nephews_christmas_dinner_invitation"
+        "freds_annual_invitation",
+        "charity_collectors_plea"
       ],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 1000,
+      "story_time": "past → present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_03_city_christmas_preparations",
+      "id": "scene_03_christmas_eve_preparations",
       "order": 3,
-      "pov": "char_labourers",
-      "location_id": "loc_the_main_street",
+      "pov": "char_lord_mayor",
+      "location_id": "loc_mansion_house",
       "characters_present": [
         "char_labourers",
         "char_lord_mayor",
@@ -3050,115 +3053,73 @@
         "char_the_little_tailor_s_wife",
         "char_the_little_tailor_s_baby"
       ],
-      "dramatic_function": "Establishes the wider city's festive preparations and contrasts the holiday spirit across different social strata.",
+      "dramatic_function": "Contrasts the city's shared celebration and preparation for Christmas across social classes against Scrooge's isolated misanthropy.",
       "entry_state": {},
       "exit_state": {},
       "required_beats": [
-        "Labourers warm themselves around a brazier in the main street.",
-        "The Lord Mayor directs grand feast preparations at Mansion House.",
-        "The poor tailor's family prepares their modest holiday dinner."
+        "Labourers light a fire in a brazier in the main street.",
+        "The Lord Mayor gives orders to his fifty cooks and butlers in Mansion House.",
+        "The little tailor, whom the Lord Mayor fined on Monday, watches his wife and baby go out to buy beef."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "past → present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_04_the_fleeing_caroler",
+      "id": "scene_04_closing_the_office",
       "order": 4,
       "pov": "char_scrooge",
       "location_id": "loc_counting_house",
       "characters_present": [
         "char_the_singer",
-        "char_scrooge"
-      ],
-      "dramatic_function": "Pays off Scrooge's utter hostility toward Christmas celebrations by showing his aggression toward a caroler.",
-      "entry_state": {},
-      "exit_state": {},
-      "required_beats": [
-        "A boy sings a Christmas carol through the keyhole of the counting-house.",
-        "Scrooge grabs his ruler, terrifying the singer into fleeing."
-      ],
-      "reader_must_learn": [
-        "dismissed_caroler_boy"
-      ],
-      "must_stay_hidden": [],
-      "force_reintroduce": [],
-      "invariants": [],
-      "pays_off": []
-    },
-    {
-      "id": "scene_05_closing_the_office",
-      "order": 5,
-      "pov": "char_scrooge",
-      "location_id": "loc_counting_house",
-      "characters_present": [
         "char_scrooge",
         "char_the_clerk"
       ],
-      "dramatic_function": "Establishes Scrooge's begrudging concession to Christmas and his harsh treatment of his employee.",
+      "dramatic_function": "Shows Scrooge begrudgingly releasing his clerk for Christmas before retreating into his solitary routine.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_counting_house"
-        }
-      },
-      "exit_state": {
-        "char_scrooge": {
-          "location_id": null
-        }
-      },
-      "required_beats": [
-        "Scrooge and the clerk prepare to close up the office.",
-        "Scrooge grudgingly allows the clerk Christmas Day off on the condition that he arrive earlier the next morning.",
-        "The clerk agrees, and Scrooge departs."
-      ],
-      "reader_must_learn": [
-        "cratchits_tardy_arrival_and_compensation"
-      ],
-      "must_stay_hidden": [],
-      "force_reintroduce": [],
-      "invariants": [],
-      "pays_off": []
-    },
-    {
-      "id": "scene_06_the_clerk_s_holiday",
-      "order": 6,
-      "pov": "char_the_clerk",
-      "location_id": "loc_cornhill",
-      "characters_present": [
-        "char_the_clerk"
-      ],
-      "dramatic_function": "Shows the clerk's youthful joy and contrast to Scrooge's bleak demeanor upon being released from work.",
-      "entry_state": {
+        },
         "char_the_clerk": {
           "location_id": null
         }
       },
       "exit_state": {
+        "char_scrooge": {
+          "location_id": null
+        },
         "char_the_clerk": {
           "location_id": "loc_camden_town"
         }
       },
       "required_beats": [
-        "The clerk slides repeatedly down Cornhill in celebration.",
-        "The clerk hurries home toward Camden Town."
+        "Scrooge seizes a ruler, scaring away a boy singing a Christmas carol through the keyhole.",
+        "Scrooge gets down from his stool and begrudgingly grants the clerk Christmas Day off on the condition that he arrive earlier the next morning.",
+        "Scrooge leaves the office, after which the clerk slides down Cornhill twenty times and runs home to Camden Town."
       ],
-      "reader_must_learn": [],
+      "reader_must_learn": [
+        "carol_singing_boy"
+      ],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_07_a_solitary_dinner",
-      "order": 7,
+      "id": "scene_05_the_melancholy_tavern",
+      "order": 5,
       "pov": "char_scrooge",
       "location_id": "loc_melancholy_tavern",
       "characters_present": [
         "char_scrooge"
       ],
-      "dramatic_function": "Illustrates Scrooge's joyless, habitual evening routine of total isolation.",
+      "dramatic_function": "Establishes Scrooge's solitary, cheerless evening routine after dismissing Christmas Eve.",
       "entry_state": {
         "char_scrooge": {
           "location_id": null
@@ -3170,24 +3131,26 @@
         }
       },
       "required_beats": [
-        "Scrooge eats his solitary dinner at his usual tavern, passing the time reading newspapers and checking his accounts.",
-        "Scrooge heads home toward his chambers."
+        "Scrooge dines alone at his usual melancholy tavern, reads the newspapers, and reviews his banker's-book.",
+        "Scrooge departs for his gloomy chambers."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 550,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_08_the_door_knocker",
-      "order": 8,
+      "id": "scene_06_the_door_knocker",
+      "order": 6,
       "pov": "char_scrooge",
-      "location_id": "loc_scrooge_s_chambers",
+      "location_id": "loc_sitting_room",
       "characters_present": [
         "char_scrooge"
       ],
-      "dramatic_function": "Initiates the supernatural intrusion into Scrooge's tightly controlled, solitary existence.",
+      "dramatic_function": "Breaches Scrooge's fortress of mundane denial with supernatural omens heralding a visitation.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_melancholy_tavern"
@@ -3217,28 +3180,32 @@
         }
       },
       "required_beats": [
-        "Scrooge sees Marley's face in the door knocker before it reverts to normal.",
-        "Scrooge enters, thoroughly searches his rooms to quell his apprehension, and double-locks himself inside.",
-        "Scrooge settles by the fire and tries to brush off his unease.",
-        "A disused room bell and then every bell in the house begin ringing uncontrollably before abruptly stopping.",
-        "A booming sound announces the opening of the cellar door."
+        "Scrooge attempts to unlock his door and sees Marley's face in the knocker before it turns back into metal.",
+        "Scrooge enters, checks behind the door, bangs it shut, and double-locks himself inside.",
+        "Scrooge searches his sitting room, bedroom, and lumber-room before donning his dressing-gown and sitting by the fire to mutter humbug.",
+        "A disused room bell starts swinging and rings loudly, followed in turn by every bell in the house.",
+        "All the bells stop at once, and the cellar door flies open with a booming sound."
       ],
-      "reader_must_learn": [],
+      "reader_must_learn": [
+        "door_knocker_omen"
+      ],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 1000,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_09_marleys_warning",
-      "order": 9,
+      "id": "scene_07_marleys_ghost",
+      "order": 7,
       "pov": "char_scrooge",
       "location_id": "loc_sitting_room",
       "characters_present": [
         "char_scrooge",
         "char_marley"
       ],
-      "dramatic_function": "To shatter Scrooge's denial and warn him of eternal damnation unless he submits to the visits of three spirits.",
+      "dramatic_function": "Confronts Scrooge with the eternal torment awaiting his avarice and announces his chance at redemption through Three Spirits.",
       "entry_state": {
         "char_marley": {
           "location_id": null
@@ -3266,22 +3233,26 @@
         }
       },
       "required_beats": [
-        "Marley's ghost enters Scrooge's room, identifies himself, and forces Scrooge onto his knees in terror.",
-        "Marley explains the agonizing burden of his chains and warns Scrooge of the worse fate awaiting him.",
-        "Marley foretells the coming of Three Spirits as Scrooge's only chance of redemption.",
-        "Marley departs through the window, leaving Scrooge to observe wandering phantoms before falling asleep in bed."
+        "Marley's Ghost passes through the heavy door and sits opposite Scrooge at the fireplace.",
+        "When Scrooge challenges the apparition's reality with a toothpick, the Ghost raises a frightful cry, shakes its chain, and removes its head bandage so its jaw drops.",
+        "Scrooge falls to his knees begging for mercy as Marley describes forging his captive chain in life and warns Scrooge of the ponderous invisible chain he bears.",
+        "Marley refuses to offer comfort and warns Scrooge to expect Three Spirits beginning tomorrow when the bell tolls one.",
+        "Marley rebinds his jaw, warns Scrooge back, and floats out into the open night among wandering phantoms.",
+        "Scrooge shuts the window, verifies the double-locked door, goes straight to bed, and falls immediately asleep."
       ],
       "reader_must_learn": [
         "three_spirits_warning"
       ],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 1150,
+      "story_time": "past → present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_10_the_first_spirit",
-      "order": 10,
+      "id": "scene_08_christmas_past",
+      "order": 8,
       "pov": "char_scrooge",
       "location_id": "loc_bedroom",
       "characters_present": [
@@ -3289,7 +3260,7 @@
         "char_marley",
         "char_ghost_of_christmas_past"
       ],
-      "dramatic_function": "To initiate the supernatural journey by introducing the Ghost of Christmas Past at the appointed hour.",
+      "dramatic_function": "Launches Scrooge's supernatural journey of reckoning as the first promised spirit arrives to reveal his past.",
       "entry_state": {
         "char_scrooge": {
           "status": "asleep",
@@ -3317,24 +3288,29 @@
         }
       },
       "required_beats": [
-        "Scrooge awakens and waits anxiously in bed for the clock to strike one.",
-        "The Ghost of Christmas Past appears and reveals its identity and purpose.",
-        "Scrooge objects to the spirit's light but submits as the Ghost takes hold of him to depart."
+        "Scrooge wakes in his dark chamber as the church clock strikes twelve, verified by his repeater clock.",
+        "Perplexed by Marley's warning, Scrooge watches from bed as the clock chimes the quarters until the hour bell strikes one.",
+        "Light flashes and the Ghost of Christmas Past draws Scrooge's bed curtains aside.",
+        "Scrooge asks if this is the foretold spirit and demands who it is, learning it is the Ghost of his own Christmas Past.",
+        "After begging the Spirit to put on its cap and extinguish its light, Scrooge learns the Spirit comes for his welfare.",
+        "Scrooge rises and clasps the spirit's robe, reassured by a hand placed upon his heart that he will be upheld."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 1150,
+      "story_time": "past → present",
       "invariants": [],
       "pays_off": [
         {
           "fact_ref": "three_spirits_warning",
-          "plant": "scene_09_marleys_warning"
+          "plant": "scene_07_marleys_ghost"
         }
       ]
     },
     {
-      "id": "scene_11_boyhood_schoolroom",
-      "order": 11,
+      "id": "scene_09_the_schoolroom",
+      "order": 9,
       "pov": "char_scrooge",
       "location_id": "loc_the_schoolroom",
       "characters_present": [
@@ -3345,7 +3321,7 @@
         "char_shaggy_ponies",
         "char_ghost"
       ],
-      "dramatic_function": "To awaken Scrooge's dormant empathy and regret by confronting him with his lonely childhood.",
+      "dramatic_function": "To awaken Scrooge's buried empathy and regret through the vision of his lonely childhood.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_bedroom"
@@ -3363,26 +3339,29 @@
         }
       },
       "required_beats": [
-        "The Ghost brings Scrooge to the country road of his youth, where cheerful boys depart for the holidays.",
-        "They enter the schoolroom and find young Scrooge reading alone in neglect.",
-        "Scrooge weeps for his younger self and expresses regret over dismissing the boy who sang a carol the night before."
+        "Scrooge and the Ghost arrive on a country road from his boyhood, where boys on ponies and carts wish each other Merry Christmas as they head home.",
+        "Entering the schoolhouse, Scrooge finds his younger self sitting reading alone near the fire and weeps upon a form.",
+        "Scrooge excitedly recognizes the storybook figures outside the window before weeping again in pity for his solitary past self.",
+        "Moved by pity for his younger self, Scrooge confesses he wishes he had given something to the carol-singing boy last night, prompting the Ghost to summon another Christmas."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 850,
+      "story_time": "past → present",
       "invariants": [],
       "pays_off": [
         {
-          "fact_ref": "dismissed_caroler_boy",
-          "plant": "scene_04_the_fleeing_caroler"
+          "fact_ref": "carol_singing_boy",
+          "plant": "scene_04_closing_the_office"
         }
       ]
     },
     {
-      "id": "scene_12_fans_rescue",
-      "order": 12,
+      "id": "scene_10_fans_arrival",
+      "order": 10,
       "pov": "char_scrooge",
-      "location_id": "loc_school",
+      "location_id": "loc_the_schoolroom",
       "characters_present": [
         "char_fan",
         "char_scrooge",
@@ -3391,7 +3370,7 @@
         "char_meagre_servant",
         "char_postboy"
       ],
-      "dramatic_function": "To reveal the warmth and family affection Scrooge once possessed through the memory of his sister Fan.",
+      "dramatic_function": "To reveal the warmth and rescue brought by Scrooge's sister Fan when their father allowed him to return home.",
       "entry_state": {
         "char_fan": {
           "location_id": null
@@ -3415,19 +3394,21 @@
         }
       },
       "required_beats": [
-        "Fan bursts into the schoolroom to bring young Scrooge home with their father's blessing.",
-        "The schoolmaster receives the children in the parlour and provides refreshments.",
-        "Young Scrooge and Fan depart from the school in the chaise."
+        "Little Fan rushes into the room to embrace Master Scrooge, announcing that their father has softened and sent her to bring him home for good.",
+        "The schoolmaster orders Master Scrooge's luggage brought down and shakes hands with him in the hall before offering refreshments in the best-parlour.",
+        "The children say goodbye to the schoolmaster, enter the chaise after the postboy declines a drink, and drive away from the school."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "past",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_13_fezziwigs_ball",
-      "order": 13,
+      "id": "scene_11_fezziwigs_ball",
+      "order": 11,
       "pov": "char_scrooge",
       "location_id": "loc_warehouse",
       "characters_present": [
@@ -3449,7 +3430,7 @@
         "char_the_boy_from_over_the_way",
         "char_the_girl_from_next_door_but_one"
       ],
-      "dramatic_function": "To remind Scrooge of the benevolence he once experienced from a master, awakening his conscience regarding his own treatment of Bob Cratchit.",
+      "dramatic_function": "To show the joyful, generous atmosphere of Scrooge's youth under the benevolent mentorship of Fezziwig.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "obj_chaise"
@@ -3503,25 +3484,48 @@
         }
       },
       "required_beats": [
-        "The Ghost brings Scrooge to Fezziwig's warehouse, which he recognizes with joy.",
-        "Fezziwig stops work and orders the warehouse cleared for a lively Christmas Eve dance.",
-        "The party unfolds with music, dancing, and warm hospitality from the Fezziwigs.",
-        "Scrooge passionately defends Fezziwig's generosity to the Ghost and realizes he wishes to speak with his own clerk."
+        "Scrooge recognizes his former master's warehouse, where old Fezziwig orders young Ebenezer and Dick Wilkins to shut up shop for Christmas Eve.",
+        "Young Scrooge and Dick clear the floor and trim the lamps to turn the warehouse into a ballroom.",
+        "A fiddler arrives and plays as Mrs. Fezziwig, their daughters, employees, and neighbors pour in to dance.",
+        "Fezziwig and Mrs. Fezziwig lead the company in Sir Roger de Coverley, then shake hands and bid everyone goodnight as the party ends."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 850,
+      "story_time": "past → present",
       "invariants": [],
-      "pays_off": [
-        {
-          "fact_ref": "harsh_treatment_of_clerk",
-          "plant": "scene_02_christmas_eve_visitors"
-        }
-      ]
+      "pays_off": []
     },
     {
-      "id": "scene_14_the_broken_engagement",
-      "order": 14,
+      "id": "scene_12_fezziwigs_praise",
+      "order": 12,
+      "pov": "char_scrooge",
+      "location_id": "loc_warehouse",
+      "characters_present": [
+        "char_scrooge",
+        "char_ghost_of_christmas_past",
+        "char_his_former_self"
+      ],
+      "dramatic_function": "To force Scrooge to recognize the master's moral responsibility to make service light, sparking guilt over his treatment of Bob Cratchit.",
+      "entry_state": {},
+      "exit_state": {},
+      "required_beats": [
+        "The Ghost minimizes Fezziwig's generosity and asks why he deserves praise for spending only a few pounds.",
+        "Scrooge passionately defends Fezziwig, arguing that an employer holds the immense power to make service a pleasure or a toil.",
+        "Prompted by his own defense, Scrooge realizes he would like to say a word or two to his clerk just as the Ghost warns that time grows short."
+      ],
+      "reader_must_learn": [],
+      "must_stay_hidden": [],
+      "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "past → present",
+      "invariants": [],
+      "pays_off": []
+    },
+    {
+      "id": "scene_13_the_broken_contract",
+      "order": 13,
       "pov": "char_scrooge",
       "location_id": "loc_warehouse",
       "characters_present": [
@@ -3530,24 +3534,25 @@
         "char_his_former_self",
         "char_ghost_of_christmas_past"
       ],
-      "dramatic_function": "To show the moment Scrooge chose wealth over love, sealing his path toward emotional isolation.",
+      "dramatic_function": "To reveal the moment Scrooge surrendered love for wealth, establishing the personal cost that forged his isolation.",
       "entry_state": {},
       "exit_state": {},
       "required_beats": [
-        "Belle confronts young Scrooge with how greed has displaced his love for her.",
-        "Young Scrooge protests, but Belle releases him from their contract due to his changed nature.",
-        "Belle walks away, leaving young Scrooge alone.",
-        "An agonized Scrooge begs the Ghost to stop, but the Spirit forces him to watch one more shadow."
+        "Belle confronts young Scrooge, saying a golden idol has displaced her and gain has become his master-passion.",
+        "When Belle offers to release him, young Scrooge asks if he ever sought release, but she parts from him and walks away.",
+        "Overwhelmed with grief, Scrooge begs the Ghost of Christmas Past to take him home, but the spirit pinions him and forces him to watch on."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "past → present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_15_belles_family",
-      "order": 15,
+      "id": "scene_14_belles_household",
+      "order": 14,
       "pov": "char_scrooge",
       "location_id": "loc_parlour",
       "characters_present": [
@@ -3560,7 +3565,7 @@
         "char_daughter",
         "char_belle"
       ],
-      "dramatic_function": "To confront Scrooge with the warm domestic life he sacrificed and his wretched isolation on the day Marley lay dying.",
+      "dramatic_function": "To confront Scrooge with the warm family life he forfeited and break his endurance before the first spirit.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_warehouse"
@@ -3608,86 +3613,59 @@
         }
       },
       "required_beats": [
-        "The Ghost brings Scrooge into Belle's bustling, joyful home as the father returns with Christmas gifts.",
-        "After the children go to bed, Belle's husband mentions seeing a lonely Scrooge sitting solitary in his office while Marley lay dying.",
-        "Unable to bear the remorse and grief, Scrooge begs to leave and wrestles with the Ghost.",
-        "Scrooge extinguishes the Ghost's light by forcing the extinguisher cap down over its head."
+        "The father arrives home with a porter laden with Christmas toys and presents, and the children gleefully swarm them in the parlour.",
+        "By the fireside, the husband tells Belle that he saw Scrooge sitting alone in his office while Marley lay dying.",
+        "Scrooge demands to be removed, wrestles with the Ghost, and presses the extinguisher-cap down over its head."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "past → present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_16_return_to_bed",
-      "order": 16,
-      "pov": "char_scrooge",
-      "location_id": "loc_bedroom",
-      "characters_present": [
-        "char_scrooge"
-      ],
-      "dramatic_function": "To close the first Spirit's visitation and return Scrooge to the waking world.",
-      "entry_state": {
-        "char_scrooge": {
-          "location_id": "loc_parlour",
-          "status": "awake"
-        }
-      },
-      "exit_state": {
-        "char_scrooge": {
-          "location_id": "loc_bedroom",
-          "status": "asleep"
-        }
-      },
-      "required_beats": [
-        "Scrooge finds himself back in his own bedroom and collapses into an exhausted sleep."
-      ],
-      "reader_must_learn": [],
-      "must_stay_hidden": [],
-      "force_reintroduce": [],
-      "invariants": [],
-      "pays_off": []
-    },
-    {
-      "id": "scene_17_the_second_spirit",
-      "order": 17,
+      "id": "scene_15_the_second_spirit",
+      "order": 15,
       "pov": "char_scrooge",
       "location_id": "loc_the_adjoining_room",
       "characters_present": [
         "char_scrooge",
         "char_ghost_of_christmas_present"
       ],
-      "dramatic_function": "To introduce the Ghost of Christmas Present and mark Scrooge's growing willingness to be taught.",
+      "dramatic_function": "To introduce the Ghost of Christmas Present and secure Scrooge's humble submission to the next stage of his transformation.",
       "entry_state": {
         "char_scrooge": {
-          "status": "asleep",
-          "goal": "lie awake until the hour was passed",
-          "location_id": "loc_bedroom"
+          "location_id": "loc_parlour",
+          "status": "awake",
+          "goal": "lie awake until the hour was passed"
         }
       },
       "exit_state": {
         "char_scrooge": {
+          "location_id": "loc_the_adjoining_room",
           "status": "awake",
-          "goal": "challenge the Spirit on the moment of its appearance",
-          "location_id": "loc_the_adjoining_room"
+          "goal": "challenge the Spirit on the moment of its appearance"
         }
       },
       "required_beats": [
-        "The clock strikes one and Scrooge awakens to a ruddy light in his room.",
-        "Scrooge enters the adjoining transformed room and meets the Ghost of Christmas Present.",
-        "The Ghost reveals his identity and family of brothers to Scrooge.",
-        "Scrooge submits himself to be led and takes hold of the Spirit's robe."
+        "Scrooge parts his bed curtains to watch for the next visitor, and as the clock strikes one, a ruddy light fills the room.",
+        "Following a booming summons, Scrooge enters the adjoining room and timidly faces the Ghost of Christmas Present.",
+        "The Spirit asks if Scrooge has walked with his elder brothers and reveals there are more than eighteen hundred of them.",
+        "Scrooge submissively resolves to profit by any lesson and takes hold of the Ghost's robe."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 850,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_18_christmas_morning_streets",
-      "order": 18,
+      "id": "scene_16_the_blessed_dinners",
+      "order": 16,
       "pov": "char_scrooge",
       "location_id": "loc_the_city_streets",
       "characters_present": [
@@ -3695,7 +3673,7 @@
         "char_ghost_of_christmas_present",
         "char_poor_revellers"
       ],
-      "dramatic_function": "To reveal the benevolent nature of the Spirit's influence and challenge Scrooge's assumptions about holiday benevolence and piety.",
+      "dramatic_function": "To demonstrate the spirit's active blessing upon the poor and recalibrate Scrooge's perspective on human charity.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_the_adjoining_room"
@@ -3709,65 +3687,32 @@
       },
       "exit_state": {
         "char_scrooge": {
-          "location_id": "loc_a_bakers_doorway"
+          "location_id": "loc_suburbs_of_the_town"
         },
         "char_ghost_of_christmas_present": {
-          "location_id": "loc_a_bakers_doorway"
+          "location_id": "loc_suburbs_of_the_town"
         },
         "char_poor_revellers": {
           "location_id": "loc_bakers_shops"
         }
       },
       "required_beats": [
-        "Scrooge and the Spirit appear in the busy city streets on Christmas morning.",
-        "The Spirit blesses the meals of the poor and calms quarreling dinner-carriers with his torch.",
-        "The Spirit explains the meaning of his blessing to Scrooge and clarifies that it applies most to the poor.",
-        "Scrooge questions the Spirit about sabbath restrictions, and the Ghost rejects responsibility for hypocritical mortals."
+        "Scrooge and the Spirit appear in the snowy city streets on Christmas morning as townsfolk carry dinners to the bakers' shops.",
+        "From a baker's doorway, the Ghost sprinkles torch-drops over dinners and restores good humor to quarreling dinner-carriers.",
+        "Scrooge asks if the blessing applies to any kind of dinner, and the Spirit explains it belongs most to a poor dinner because it needs it most.",
+        "After Scrooge asks about Sunday closures, the Spirit denounces hypocritical restrictions, and they move on toward the suburbs."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 850,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_19_to_the_suburbs",
-      "order": 19,
-      "pov": "char_scrooge",
-      "location_id": "loc_suburbs_of_the_town",
-      "characters_present": [
-        "char_ghost_of_christmas_present",
-        "char_scrooge"
-      ],
-      "dramatic_function": "To transition the journey from the bustling city center out to the humble dwellings of the suburbs.",
-      "entry_state": {
-        "char_ghost_of_christmas_present": {
-          "location_id": "loc_a_bakers_doorway"
-        },
-        "char_scrooge": {
-          "location_id": "loc_a_bakers_doorway"
-        }
-      },
-      "exit_state": {
-        "char_ghost_of_christmas_present": {
-          "location_id": "loc_suburbs_of_the_town"
-        },
-        "char_scrooge": {
-          "location_id": "loc_suburbs_of_the_town"
-        }
-      },
-      "required_beats": [
-        "The Ghost and Scrooge travel onward into the town's suburbs."
-      ],
-      "reader_must_learn": [],
-      "must_stay_hidden": [],
-      "force_reintroduce": [],
-      "invariants": [],
-      "pays_off": []
-    },
-    {
-      "id": "scene_20_the_cratchit_gathering",
-      "order": 20,
+      "id": "scene_17_the_cratchits_assemble",
+      "order": 17,
       "pov": "char_scrooge",
       "location_id": "loc_bob_cratchits_dwelling",
       "characters_present": [
@@ -3781,7 +3726,7 @@
         "char_the_clerk",
         "char_tiny_tim"
       ],
-      "dramatic_function": "To show Scrooge the warmth, unity, and humble joy of Bob Cratchit's family preparing their Christmas feast.",
+      "dramatic_function": "To introduce Scrooge to the loving warmth and hardship of Bob Cratchit's household on Christmas Day.",
       "entry_state": {
         "char_ghost_of_christmas_present": {
           "location_id": "loc_suburbs_of_the_town"
@@ -3823,42 +3768,22 @@
         }
       },
       "required_beats": [
-        "The Ghost brings Scrooge to Bob Cratchit's house and blesses the threshold.",
-        "Mrs. Cratchit and her children busy themselves preparing the holiday dinner.",
-        "Martha arrives home and plays a hiding trick on her father.",
-        "Bob Cratchit arrives with Tiny Tim, mourns Martha's supposed absence, and joyfully embraces her when she reveals herself.",
-        "The younger children take Tiny Tim to see the wash-house pudding preparations."
+        "The Ghost of Christmas Present brings Scrooge to Bob Cratchit's dwelling and blesses it with his torch.",
+        "Mrs. Cratchit and the children hurry through dinner preparations until Martha arrives home.",
+        "Bob Cratchit enters carrying Tiny Tim on his shoulder, and after a playful tease that Martha is absent, Martha reveals herself and embraces him.",
+        "The two young Cratchits carry Tiny Tim off into the wash house while Bob recounts Tim's hope that churchgoers saw him because he is a cripple."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 850,
+      "story_time": "past → present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_21_tiny_tims_wish",
-      "order": 21,
-      "pov": "char_the_clerk",
-      "location_id": "loc_wash_house",
-      "characters_present": [
-        "char_tiny_tim",
-        "char_the_clerk"
-      ],
-      "dramatic_function": "To reveal Tiny Tim's gentle spirit and Bob's tender devotion to his son.",
-      "entry_state": {},
-      "exit_state": {},
-      "required_beats": [
-        "Bob recounts Tiny Tim's wish that people in church saw his lameness to remember who made lame beggars walk."
-      ],
-      "reader_must_learn": [],
-      "must_stay_hidden": [],
-      "force_reintroduce": [],
-      "invariants": [],
-      "pays_off": []
-    },
-    {
-      "id": "scene_22_the_cratchit_dinner",
-      "order": 22,
+      "id": "scene_18_the_cratchit_dinner",
+      "order": 18,
       "pov": "char_scrooge",
       "location_id": "loc_bob_cratchits_dwelling",
       "characters_present": [
@@ -3872,7 +3797,7 @@
         "char_scrooge",
         "char_ghost_of_christmas_present"
       ],
-      "dramatic_function": "To awaken Scrooge's sympathy for Tiny Tim and confront him with the human cost of his callous worldview.",
+      "dramatic_function": "To confront Scrooge with the human cost of his avarice through Tiny Tim's precarious life and the family's fraught toast.",
       "entry_state": {
         "char_tiny_tim": {
           "location_id": "loc_wash_house"
@@ -3908,56 +3833,23 @@
         }
       },
       "required_beats": [
-        "The Cratchit family serves their Christmas dinner and enjoys the goose and flaming pudding together.",
-        "Bob proposes a Christmas blessing and Tiny Tim blesses everyone.",
-        "Scrooge asks if Tiny Tim will live, and the Ghost rebukes him using Scrooge's own words about the surplus population.",
-        "Bob toasts Scrooge, prompting fierce reluctance from Mrs. Cratchit before the family drinks in silence.",
-        "The family converses about their modest prospects and Tiny Tim sings, after which the Spirit blesses them and the vision departs."
+        "The family serves the feast, dining eagerly on the fetched goose and Mrs. Cratchit's prize flaming pudding before gathering at the hearth.",
+        "Tiny Tim blesses everyone as Bob leads a Christmas blessing, prompting Scrooge to ask whether the boy will live.",
+        "The Ghost warns that Tiny Tim will die if the shadows remain unaltered, rebuking Scrooge with his own words about decreasing the surplus population.",
+        "Bob proposes a toast to Scrooge as the Founder of the Feast, drawing sharp protest from Mrs. Cratchit before she and the children reluctantly drink to his health.",
+        "The family shares stories of work and Tiny Tim sings of a child lost in the snow before the Ghost sprinkles them with torchlight and the vision fades."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 1000,
+      "story_time": "past → present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_23_streets_of_london",
-      "order": 23,
-      "pov": "char_scrooge",
-      "location_id": "loc_the_city_streets",
-      "characters_present": [
-        "char_scrooge",
-        "char_ghost_of_christmas_present"
-      ],
-      "dramatic_function": "To transition Scrooge from the warmth of the Cratchit hearth into the wider world on Christmas Day.",
-      "entry_state": {
-        "char_scrooge": {
-          "location_id": "loc_bob_cratchits_dwelling"
-        },
-        "char_ghost_of_christmas_present": {
-          "location_id": "loc_bob_cratchits_dwelling"
-        }
-      },
-      "exit_state": {
-        "char_scrooge": {
-          "location_id": "loc_the_city_streets"
-        },
-        "char_ghost_of_christmas_present": {
-          "location_id": "loc_the_city_streets"
-        }
-      },
-      "required_beats": [
-        "Scrooge and the Ghost of Christmas Present walk through the city streets."
-      ],
-      "reader_must_learn": [],
-      "must_stay_hidden": [],
-      "force_reintroduce": [],
-      "invariants": [],
-      "pays_off": []
-    },
-    {
-      "id": "scene_24_the_miners_hut",
-      "order": 24,
+      "id": "scene_19_the_miners_hut",
+      "order": 19,
       "pov": "char_scrooge",
       "location_id": "loc_a_hut",
       "characters_present": [
@@ -3965,13 +3857,13 @@
         "char_ghost_of_christmas_present",
         "char_an_old_old_man_and_woman_with_their_children_and"
       ],
-      "dramatic_function": "To demonstrate that Christmas joy and fellowship endure even in the most desolate and impoverished conditions.",
+      "dramatic_function": "To show Scrooge that Christmas fellowship thrives even in the bleakest, most remote human labor.",
       "entry_state": {
         "char_scrooge": {
-          "location_id": "loc_the_city_streets"
+          "location_id": "loc_bob_cratchits_dwelling"
         },
         "char_ghost_of_christmas_present": {
-          "location_id": "loc_the_city_streets"
+          "location_id": "loc_bob_cratchits_dwelling"
         }
       },
       "exit_state": {
@@ -3983,26 +3875,28 @@
         }
       },
       "required_beats": [
-        "The Ghost brings Scrooge across a bleak moor inhabited by miners.",
-        "They enter a miner's hut where a multigenerational family gathers to sing a Christmas song together."
+        "Leaving the city streets, the Ghost leads Scrooge across a bleak moor where miners live.",
+        "The Ghost and Scrooge pass through the wall of a hut to watch an old miner sing a Christmas song as generations of his family join the chorus."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 550,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_25_out_at_sea",
-      "order": 25,
+      "id": "scene_20_sea_and_lighthouse",
+      "order": 20,
       "pov": "char_scrooge",
-      "location_id": "loc_sea",
+      "location_id": "loc_solitary_lighthouse",
       "characters_present": [
         "char_ghost_of_christmas_present",
         "char_scrooge",
         "char_two_men_who_watched_the_light"
       ],
-      "dramatic_function": "To demonstrate that the spirit of Christmas reaches even the most isolated and remote outposts on earth.",
+      "dramatic_function": "To demonstrate that the Christmas spirit persists across the most isolated and perilous outposts of mankind.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_a_hut"
@@ -4020,19 +3914,21 @@
         }
       },
       "required_beats": [
-        "The Ghost takes Scrooge out across the sea.",
-        "Two solitary lighthouse keepers celebrate Christmas together with song and drink.",
-        "The Spirit and Scrooge visit a vessel far out over the water."
+        "Scrooge holds the Spirit's robe as they fly far out to sea to visit a solitary lighthouse.",
+        "Two lighthouse keepers share a can of grog and wish each other a Merry Christmas while the elder strikes up a sturdy song.",
+        "The Ghost and Scrooge leave the light and alight upon a ship far out at sea."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_26_freds_gathering",
-      "order": 26,
+      "id": "scene_21_nephews_party",
+      "order": 21,
       "pov": "char_scrooge",
       "location_id": "loc_bright_dry_gleaming_room",
       "characters_present": [
@@ -4044,7 +3940,7 @@
         "char_scrooge_s_niece_s_sisters",
         "char_topper"
       ],
-      "dramatic_function": "To show Scrooge how his family and peers view his isolation with amusement and pity rather than malice.",
+      "dramatic_function": "To confront Scrooge with the joyful warmth of the family he shunned and reveal how his isolation earns pity rather than malice.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_a_ship"
@@ -4062,19 +3958,21 @@
         }
       },
       "required_beats": [
-        "The Spirit brings Scrooge to Fred's bright home, where the gathered company laughs warmly.",
-        "Fred recounts Scrooge's scorn for Christmas, defending him against the ladies' indignation by noting Scrooge only harms himself.",
-        "Fred resolves to continue extending his holiday invitation to Scrooge every year."
+        "Scrooge and the Ghost arrive to find Fred, his niece, and friends laughing heartily over Scrooge's claim that Christmas is a humbug.",
+        "While his niece and the ladies express indignance and impatience with Scrooge's wealth, Fred maintains that it is of no use to him or anyone else.",
+        "Fred pities Scrooge for missing out on a good dinner and resolves to pass the bottle and offer him the same chance each year."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_27_toasting_the_uncle",
-      "order": 27,
+      "id": "scene_22_toasting_the_uncle",
+      "order": 22,
       "pov": "char_scrooge",
       "location_id": "loc_bright_dry_gleaming_room",
       "characters_present": [
@@ -4086,23 +3984,25 @@
         "char_ghost_of_christmas_present",
         "char_fred"
       ],
-      "dramatic_function": "To awaken Scrooge's longing for connection and familial warmth as he witnesses his nephew's affection.",
+      "dramatic_function": "To demonstrate Scrooge's growing longing for human connection as he watches his nephew warmly toast him in absentia.",
       "entry_state": {},
       "exit_state": {},
       "required_beats": [
-        "The party engages in music and parlor games while Scrooge eagerly watches.",
-        "Scrooge pleads with the Ghost to let him linger as the fun continues.",
-        "Fred leads the company in a Christmas toast to Uncle Scrooge."
+        "After harp music and games of blind-man's buff, Scrooge begs the Ghost to let him stay for one half-hour more, but the Spirit refuses.",
+        "The plump sister guesses that the subject of Fred's parlor game is Uncle Scrooge.",
+        "Fred leads the company in raising glasses of mulled wine in a cheerful Christmas toast to Scrooge."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_28_ignorance_and_want",
-      "order": 28,
+      "id": "scene_23_ignorance_and_want",
+      "order": 23,
       "pov": "char_scrooge",
       "location_id": "loc_bright_dry_gleaming_room",
       "characters_present": [
@@ -4111,48 +4011,50 @@
         "char_ignorance",
         "char_want"
       ],
-      "dramatic_function": "To confront Scrooge with the societal ruin caused by neglect and turn his own callous rhetoric back upon him.",
+      "dramatic_function": "To shatter Scrooge's complacency with the monstrous cost of societal neglect and turn his own callous rhetoric back on him.",
       "entry_state": {},
       "exit_state": {},
       "required_beats": [
-        "Scrooge notices the Spirit visibly aging as their travels draw to a close.",
-        "The Ghost reveals two wretched children, Ignorance and Want, hiding beneath its robes.",
-        "When Scrooge asks about their care, the Spirit turns Scrooge's own words about prisons and workhouses against him.",
-        "Midnight strikes and the Spirit vanishes."
+        "Noticing the Spirit's gray hair during their continued journeys, Scrooge learns that the Ghost's life ends at midnight.",
+        "The Ghost unveils two wretched, clinging children named Ignorance and Want, warning Scrooge to beware them.",
+        "Scrooge asks if the children have any refuge or resource, only to be mocked by the Ghost with his own words about prisons and workhouses before it vanishes at the stroke of twelve."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_29_the_final_spirit",
-      "order": 29,
+      "id": "scene_24_the_silent_phantom",
+      "order": 24,
       "pov": "char_scrooge",
       "location_id": "loc_bright_dry_gleaming_room",
       "characters_present": [
         "char_scrooge",
         "char_ghost_of_christmas_yet_to_come"
       ],
-      "dramatic_function": "Establishes Scrooge's terror and submission before the final, silent spirit of his visions.",
+      "dramatic_function": "To introduce the ominous final guide and submit Scrooge to the terror of his unresolved future.",
       "entry_state": {},
       "exit_state": {},
       "required_beats": [
-        "The Ghost of Christmas Yet to Come approaches Scrooge like a mist.",
-        "Scrooge kneels and asks if the Spirit will reveal what lies ahead.",
-        "The Spirit silently confirms by gesture.",
-        "Scrooge admits his deep fear but urges the Spirit to guide him forward."
+        "The Ghost of Christmas Yet to Come approaches Scrooge through the mist.",
+        "Scrooge kneels and asks if this is the Spirit meant to show him the future, receiving only silent gestures in assent.",
+        "Terrified by the Phantom's silence, Scrooge asks it to speak but resolves to follow and bids it lead on."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_30_on_the_change",
-      "order": 30,
+      "id": "scene_25_on_the_change",
+      "order": 25,
       "pov": "char_scrooge",
       "location_id": "loc_change",
       "characters_present": [
@@ -4164,7 +4066,7 @@
         "char_red_faced_gentleman",
         "char_two_persons_meeting"
       ],
-      "dramatic_function": "Reveals the callous indifference of Scrooge's peers toward the unlamented death of an unnamed acquaintance.",
+      "dramatic_function": "To demonstrate that the business community greets the wealthy man's death with total callousness, amusement, and indifference.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_bright_dry_gleaming_room"
@@ -4182,20 +4084,21 @@
         }
       },
       "required_beats": [
-        "The Spirit brings Scrooge to 'Change and gestures toward a group of businessmen.",
-        "The merchants casually discuss an acquaintance's recent death and joke about attending his funeral only for the food.",
-        "Scrooge overhears another pair of acquaintances briskly remark that Old Scratch has claimed him.",
-        "Scrooge seeks himself in his customary corner and finds someone else in his place."
+        "The Spirit leads Scrooge to 'Change and directs his attention to a knot of business men casually discussing the death of an acquaintance last night, wondering what he did with his money and mocking his unattended funeral unless a lunch is provided.",
+        "Scrooge watches the men disperse, seeks an explanation from the silent Spirit, and overhears two passing acquaintances in the street coldly affirm that Old Scratch has claimed him at last.",
+        "Scrooge looks for his own reflection in his accustomed corner of the Porch and finds another man standing in his place."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "present → future",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_31_old_joes_shop",
-      "order": 31,
+      "id": "scene_26_old_joes_shop",
+      "order": 26,
       "pov": "char_scrooge",
       "location_id": "loc_beetling_shop",
       "characters_present": [
@@ -4206,7 +4109,7 @@
         "char_the_undertaker_s_man",
         "char_old_joe"
       ],
-      "dramatic_function": "Exposes the grotesque violation of the dead man's possessions by predatory scavengers, striking dread into Scrooge.",
+      "dramatic_function": "To expose how the dead man's servants and associates strip him of dignity and plunder his deathbed for petty cash.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_change"
@@ -4260,27 +4163,31 @@
         }
       },
       "required_beats": [
-        "The Spirit takes Scrooge into a squalid rag-shop where three thieves gather with stolen bundles.",
-        "Old Joe leads them behind the screen and values the plunder brought by the undertaker's man and Mrs. Dilber.",
-        "The charwoman exhibits bed-curtains and the very shroud taken from the corpse.",
-        "Old Joe pays out their earnings while Scrooge recoils in horror, recognizing the lesson for his own life."
+        "The Spirit brings Scrooge to a beetling shop in an obscure part of town, where a charwoman, Mrs. Dilber, and the undertaker's man meet in old Joe's parlour behind the screen to fence stolen goods.",
+        "Old Joe chalks up values on the wall for the plunder offered by the undertaker's man and Mrs. Dilber.",
+        "Old Joe unties the charwoman's bundle to reveal bed curtains ripped down while the corpse lay there, along with the very shirt taken off the dead man's body.",
+        "As Joe pays out their money, Scrooge recoils in horror, recognizing that his own life points toward this wretched fate."
       ],
-      "reader_must_learn": [],
+      "reader_must_learn": [
+        "plundered_bed_curtains"
+      ],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 850,
+      "story_time": "present → future",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_32_room_of_death",
-      "order": 32,
+      "id": "scene_27_room_of_death",
+      "order": 27,
       "pov": "char_scrooge",
       "location_id": "loc_room_of_death",
       "characters_present": [
         "char_scrooge",
         "char_ghost_of_christmas_yet_to_come"
       ],
-      "dramatic_function": "Pushes Scrooge to the verge of confronting the identity of the corpse, though his terror prevents him from looking.",
+      "dramatic_function": "To confront Scrooge with the abandoned corpse of the unloved dead man and force him to plead for proof of any grief.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_beetling_shop"
@@ -4298,20 +4205,20 @@
         }
       },
       "required_beats": [
-        "The Spirit brings Scrooge before an uncurtained bed holding a sheeted corpse.",
-        "The Spirit points relentlessly toward the covered head of the body.",
-        "Paralyzed by fear, Scrooge declares he cannot bring himself to uncover the face.",
-        "Scrooge implores the Spirit to show him anyone who feels any sorrow over this death."
+        "In a dark room of death, the Phantom points steadily toward the head of a covered corpse lying on a bare, uncurtained bed.",
+        "Scrooge confesses he lacks the power to unveil the face and desperately begs the Spirit to show him anyone who feels emotion over this man's death."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 550,
+      "story_time": "future",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_33_a_creditors_death",
-      "order": 33,
+      "id": "scene_28_carolines_relief",
+      "order": 28,
       "pov": "char_scrooge",
       "location_id": "loc_caroline_s_house",
       "characters_present": [
@@ -4321,7 +4228,7 @@
         "char_caroline_s_husband",
         "char_scrooge"
       ],
-      "dramatic_function": "To demonstrate that the dead man's passing brings relief rather than sorrow to those who owed him.",
+      "dramatic_function": "To reveal to Scrooge that the only emotion aroused by the man's death is uncontainable relief from his ruined debtors.",
       "entry_state": {
         "char_caroline_s_husband": {
           "location_id": null
@@ -4333,20 +4240,21 @@
         }
       },
       "required_beats": [
-        "The Ghost reveals Caroline waiting anxiously with her children.",
-        "Caroline's husband returns and announces that their relentless creditor has died.",
-        "The couple feels relief and hopes for better terms under a new creditor.",
-        "Scrooge begs the Spirit to show him an example of tenderness connected with death."
+        "The Spirit reveals Caroline and her children waiting anxiously at home when her husband returns with news.",
+        "Her husband announces that their merciless creditor is dead, bringing thankful relief to Caroline before she catches herself and prays for forgiveness.",
+        "Witnessing that the only feeling caused by the man's death is joy, Scrooge pleads with the Spirit to show him tenderness connected with a death."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "future",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_34_the_quiet_cratchits",
-      "order": 34,
+      "id": "scene_29_tiny_tim_mourned",
+      "order": 29,
       "pov": "char_scrooge",
       "location_id": "loc_bob_cratchits_dwelling",
       "characters_present": [
@@ -4357,9 +4265,10 @@
         "char_the_clerk",
         "char_two_smaller_cratchits",
         "char_cratchit_s_daughters",
-        "char_tiny_tim"
+        "char_tiny_tim",
+        "char_fred"
       ],
-      "dramatic_function": "To show the profound, loving grief in Bob Cratchit's household following the death of Tiny Tim.",
+      "dramatic_function": "Confronts Scrooge with the heartbreaking domestic cost of his neglected clerk's grief and prompts him to demand the identity of the unmourned dead man.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_room_of_death"
@@ -4383,77 +4292,30 @@
         }
       },
       "required_beats": [
-        "The Ghost brings Scrooge into the Cratchits' quiet and sorrowful home.",
-        "Bob Cratchit returns home and is comforted by his grieving family.",
-        "Bob breaks down over the loss of Tiny Tim and retreats upstairs to kiss his dead son.",
-        "Bob composes himself and rejoins the family downstairs."
+        "The Ghost leads Scrooge into Bob Cratchit's silent home, where Peter reads aloud and Mrs. Cratchit weeps over her sewing.",
+        "Bob returns home, comforted by the younger children, and breaks down weeping over the loss of Tiny Tim.",
+        "Bob goes upstairs to kiss Tiny Tim's face beside his bed before rejoining the family below.",
+        "Bob recounts meeting Scrooge's nephew Fred in the street, who offered kind words and assistance to the family.",
+        "The Cratchit family pledges never to forget Tiny Tim, after which Scrooge begs the Spirit to reveal who the dead man was."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 1000,
+      "story_time": "future",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_35_freds_sympathy",
-      "order": 35,
-      "pov": "char_the_clerk",
-      "location_id": "loc_bob_cratchits_dwelling",
-      "characters_present": [
-        "char_fred",
-        "char_the_clerk"
-      ],
-      "dramatic_function": "To establish Fred's heartfelt kindness toward Bob Cratchit in a time of bereavement.",
-      "entry_state": {},
-      "exit_state": {},
-      "required_beats": [
-        "Bob recounts meeting Scrooge's nephew Fred in the street.",
-        "Fred offers Bob heartfelt condolences and his business card for future assistance."
-      ],
-      "reader_must_learn": [],
-      "must_stay_hidden": [],
-      "force_reintroduce": [],
-      "invariants": [],
-      "pays_off": []
-    },
-    {
-      "id": "scene_36_remembering_tim",
-      "order": 36,
-      "pov": "char_scrooge",
-      "location_id": "loc_bob_cratchits_dwelling",
-      "characters_present": [
-        "char_the_clerk",
-        "char_mrs_cratchit",
-        "char_master_peter_cratchit",
-        "char_cratchit_s_daughters",
-        "char_two_smaller_cratchits",
-        "char_scrooge",
-        "char_ghost_of_christmas_yet_to_come"
-      ],
-      "dramatic_function": "To conclude the Cratchits' tribute to Tiny Tim and prompt Scrooge to demand the identity of the unmourned dead man.",
-      "entry_state": {},
-      "exit_state": {},
-      "required_beats": [
-        "The Cratchit family pledges never to forget Tiny Tim or his gentle spirit.",
-        "The family embraces Bob in shared love and reconciliation.",
-        "Scrooge asks the Spirit to reveal the identity of the dead man."
-      ],
-      "reader_must_learn": [],
-      "must_stay_hidden": [],
-      "force_reintroduce": [],
-      "invariants": [],
-      "pays_off": []
-    },
-    {
-      "id": "scene_37_the_office_window",
-      "order": 37,
+      "id": "scene_30_the_altered_office",
+      "order": 30,
       "pov": "char_scrooge",
       "location_id": "loc_court",
       "characters_present": [
         "char_ghost_of_christmas_yet_to_come",
         "char_scrooge"
       ],
-      "dramatic_function": "To build dread as Scrooge is denied sight of himself in his familiar surroundings, signaling his absence from the future.",
+      "dramatic_function": "Heightens Scrooge's dread as he is drawn to see what has become of his familiar place of business.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_bob_cratchits_dwelling"
@@ -4471,25 +4333,28 @@
         }
       },
       "required_beats": [
-        "Scrooge is brought by the Ghost to the business district and asks to see his future self in his office.",
-        "The Ghost points elsewhere as Scrooge looks inside the office window."
+        "The Ghost conveys Scrooge into the bustling haunts of businessmen in The Court.",
+        "Scrooge asks the Spirit to pause so he may see his future self in his office, but the Ghost points elsewhere.",
+        "Scrooge runs to the window of his office and looks inside."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 700,
+      "story_time": "future",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_38_the_churchyard",
-      "order": 38,
+      "id": "scene_31_the_neglected_grave",
+      "order": 31,
       "pov": "char_scrooge",
       "location_id": "loc_churchyard",
       "characters_present": [
         "char_scrooge",
         "char_ghost_of_christmas_yet_to_come"
       ],
-      "dramatic_function": "To force Scrooge to confront his own impending doom and extract his final, desperate vow of transformation.",
+      "dramatic_function": "Forces Scrooge to confront his own neglected death, driving him to complete repentance and a vow of total transformation.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_court"
@@ -4507,20 +4372,22 @@
         }
       },
       "required_beats": [
-        "The Ghost leads Scrooge to a neglected grave in a churchyard.",
-        "Scrooge reads his own name on the gravestone and realizes he is the unmourned dead man.",
-        "Scrooge desperately begs the Spirit for mercy and vows to honor Christmas and change his life.",
-        "Scrooge reaches for the Spirit's hand as the phantom pushes him away."
+        "The Ghost leads Scrooge through the iron gate into a churchyard and points downward toward a single grave.",
+        "Scrooge approaches the stone and reads his own name carved upon it.",
+        "Scrooge falls to his knees and asks if he was the dead man lying on the bed while the Spirit points between the grave and him.",
+        "Scrooge clutches the Spirit's robe, begging for assurance that he may yet change these shadows by living in the Past, Present, and Future before the repulsing hand casts him down."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 850,
+      "story_time": "future",
       "invariants": [],
       "pays_off": []
     },
     {
-      "id": "scene_39_christmas_morning",
-      "order": 39,
+      "id": "scene_32_christmas_day_awake",
+      "order": 32,
       "pov": "char_scrooge",
       "location_id": "loc_scrooge_s_chambers",
       "characters_present": [
@@ -4529,7 +4396,7 @@
         "char_turkey_boy",
         "char_the_poulterer_s_man"
       ],
-      "dramatic_function": "To show Scrooge waking restored to life and immediately channeling his joy into generous, frantic action.",
+      "dramatic_function": "Marks Scrooge's joyful return to life and the immediate enactment of his redemption on Christmas Day.",
       "entry_state": {
         "obj_bedpost": {
           "location_id": null
@@ -4555,27 +4422,39 @@
         }
       },
       "required_beats": [
-        "The phantom dissolves into a bedpost, leaving Scrooge overjoyed to find himself alive in his own chambers.",
-        "Scrooge learns from a passing boy that it is Christmas Day.",
-        "Scrooge hires the boy to purchase the prize turkey to send anonymously to Bob Cratchit.",
-        "Scrooge pays the poulterer's man and the boy, overwhelmed by sheer delight."
+        "The Phantom shrinks into a bedpost, and Scrooge scrambles awake, weeping and rejoicing to find his bed-curtains and his life intact.",
+        "Scrooge hurries into his clothes and calls out the sitting-room window to a boy, discovering that today is Christmas Day.",
+        "Scrooge learns the prize turkey still hangs at the poulterer's and sends the boy to buy it so he can send it anonymously to Bob Cratchit.",
+        "Scrooge greets the street door knocker with love and waits at the door until the poulterer's man arrives with the turkey.",
+        "Scrooge pays for the turkey, orders and pays for a cab to deliver it, rewards the boy, and collapses into his chair in tears of joy."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 1000,
+      "story_time": "present",
       "invariants": [],
-      "pays_off": []
+      "pays_off": [
+        {
+          "fact_ref": "door_knocker_omen",
+          "plant": "scene_06_the_door_knocker"
+        },
+        {
+          "fact_ref": "plundered_bed_curtains",
+          "plant": "scene_26_old_joes_shop"
+        }
+      ]
     },
     {
-      "id": "scene_40_walking_the_streets",
-      "order": 40,
+      "id": "scene_33_in_the_streets",
+      "order": 33,
       "pov": "char_scrooge",
       "location_id": "loc_the_city_streets",
       "characters_present": [
         "char_scrooge",
         "char_two_portly_gentlemen"
       ],
-      "dramatic_function": "To demonstrate Scrooge actively righting his past wrongs in the community and embracing the spirit of fellowship.",
+      "dramatic_function": "To demonstrate Scrooge's genuine transformation as he reconnects with his community through goodwill and unexpected generosity.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_sitting_room"
@@ -4587,24 +4466,27 @@
         }
       },
       "required_beats": [
-        "Scrooge ventures into the streets in his finest clothes and receives warm greetings from passers-by.",
-        "Scrooge encounters the portly gentleman, begs his forgiveness, and pledges an astonishing donation.",
-        "Scrooge attends church and wanders the city taking joyful pleasure in all he sees."
+        "Scrooge dresses in his finest clothes and walks the streets, receiving and enjoying Christmas greetings from passers-by.",
+        "Scrooge approaches the portly gentleman warmly, asks his pardon, and whispers a large donation into his ear.",
+        "The astonished gentleman asks if Scrooge is serious, and promises to visit him after Scrooge requests his company.",
+        "Scrooge attends church and walks through the city streets, taking pleasure in everything he sees."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 850,
+      "story_time": "present",
       "invariants": [],
       "pays_off": [
         {
-          "fact_ref": "portly_gentlemans_charity_appeal",
-          "plant": "scene_02_christmas_eve_visitors"
+          "fact_ref": "charity_collectors_plea",
+          "plant": "scene_02_refusing_christmas"
         }
       ]
     },
     {
-      "id": "scene_41_freds_dinner",
-      "order": 41,
+      "id": "scene_34_freds_dinner",
+      "order": 34,
       "pov": "char_scrooge",
       "location_id": "loc_nephew_s_house",
       "characters_present": [
@@ -4615,7 +4497,7 @@
         "char_the_plump_sister",
         "char_assembled_friends"
       ],
-      "dramatic_function": "To reconcile Scrooge with his estranged nephew and rejoin the family circle he had previously scorned.",
+      "dramatic_function": "To reconcile Scrooge with his family by fulfilling his unspoken longing to join Fred's Christmas celebration.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_the_city_streets"
@@ -4639,31 +4521,35 @@
         }
       },
       "required_beats": [
-        "Scrooge arrives at Fred's house and asks the maid if his nephew is at home.",
-        "Scrooge enters the dining room and asks Fred if he will let him join for dinner.",
-        "Fred joyfully welcomes his uncle into the celebration as the other guests arrive."
+        "Scrooge arrives at his nephew's house in the afternoon and is told by the maid that Fred is in the dining room.",
+        "Scrooge turns the dining-room door lock, peers inside, and asks Fred if he will let him in for dinner.",
+        "Fred welcomes Scrooge warmly with a handshake.",
+        "Topper, the plump sister, and the other guests arrive to join the party."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 850,
+      "story_time": "present",
       "invariants": [],
       "pays_off": [
         {
-          "fact_ref": "nephews_christmas_dinner_invitation",
-          "plant": "scene_02_christmas_eve_visitors"
+          "fact_ref": "freds_annual_invitation",
+          "plant": "scene_02_refusing_christmas"
         }
       ]
     },
     {
-      "id": "scene_42_the_salary_raise",
-      "order": 42,
+      "id": "scene_35_bobs_raise",
+      "order": 35,
       "pov": "char_scrooge",
       "location_id": "loc_counting_house",
       "characters_present": [
         "char_scrooge",
-        "char_the_clerk"
+        "char_the_clerk",
+        "char_tiny_tim"
       ],
-      "dramatic_function": "To demonstrate the practical application of Scrooge's transformation through benevolence toward Bob Cratchit.",
+      "dramatic_function": "To complete Scrooge's redemption by transforming his relationship with Bob Cratchit and securing Tiny Tim's future.",
       "entry_state": {
         "char_scrooge": {
           "location_id": "loc_nephew_s_house"
@@ -4672,6 +4558,9 @@
           "location_id": "loc_bob_cratchits_dwelling"
         },
         "obj_clerk_s_white_comforter": {
+          "status": null
+        },
+        "char_tiny_tim": {
           "status": null
         }
       },
@@ -4684,51 +4573,23 @@
         },
         "obj_clerk_s_white_comforter": {
           "status": "off"
-        }
-      },
-      "required_beats": [
-        "Scrooge arrives early at the counting-house to wait for Bob Cratchit.",
-        "Bob hurries into the office late and tries to make up for lost time.",
-        "Scrooge feigns severity, calling Bob in to account for his tardiness.",
-        "Scrooge delights Bob by raising his salary and pledging support to his struggling family."
-      ],
-      "reader_must_learn": [],
-      "must_stay_hidden": [],
-      "force_reintroduce": [],
-      "invariants": [],
-      "pays_off": [
-        {
-          "fact_ref": "cratchits_tardy_arrival_and_compensation",
-          "plant": "scene_05_closing_the_office"
-        }
-      ]
-    },
-    {
-      "id": "scene_43_a_changed_man",
-      "order": 43,
-      "pov": "char_scrooge",
-      "location_id": "loc_counting_house",
-      "characters_present": [
-        "char_scrooge",
-        "char_tiny_tim"
-      ],
-      "dramatic_function": "To resolve the story by confirming Scrooge's enduring transformation and Tiny Tim's survival.",
-      "entry_state": {
-        "char_tiny_tim": {
-          "status": null
-        }
-      },
-      "exit_state": {
+        },
         "char_tiny_tim": {
           "status": "alive"
         }
       },
       "required_beats": [
-        "Scrooge becomes a second father to Tiny Tim and a genuinely benevolent presence to all."
+        "Scrooge arrives early at the counting-house the next morning and waits as Bob Cratchit hurries into the Tank late.",
+        "Scrooge feigns anger and summons Bob out of the Tank to hear his apologies.",
+        "Scrooge leaps from his stool, digs Bob in the waistcoat, and announces he is raising his salary.",
+        "Scrooge wishes Bob a merry Christmas, promises to assist his family, and instructs him to buy another coal-scuttle.",
+        "Scrooge becomes a second father to Tiny Tim and a good friend and master to all."
       ],
       "reader_must_learn": [],
       "must_stay_hidden": [],
       "force_reintroduce": [],
+      "length_budget": 1000,
+      "story_time": "present",
       "invariants": [],
       "pays_off": []
     }
@@ -4737,7 +4598,7 @@
   "metadata": {
     "title": "A Christmas Carol, in Prose: Being a Ghost Story of Christmas",
     "source": "segmented from a Fabula-only package by gemini-3.8-flash",
-    "created_at": "2026-09-18T14:13:15.232Z"
+    "created_at": "2026-11-11T12:59:28.210Z"
   },
   "_fabula": {
     "generator": "extraction pipeline (#117)",
@@ -15837,11 +15698,11 @@
   "_segmentation": {
     "segmenter": "segmentation pipeline (#118)",
     "model": "gemini-3.8-flash",
-    "segmented_at": "2026-09-18T14:13:15.232Z",
-    "started_at": "2026-09-18T14:10:15.110Z",
+    "segmented_at": "2026-11-11T12:59:28.210Z",
+    "started_at": "2026-11-11T12:53:57.424Z",
     "scenes": [
       {
-        "id": "scene_01_marleys_death",
+        "id": "scene_01_marleys_burial",
         "order": 1,
         "event_ids": [
           "ev_0001",
@@ -15852,7 +15713,7 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_02_christmas_eve_visitors",
+        "id": "scene_02_refusing_christmas",
         "order": 2,
         "event_ids": [
           "ev_0004",
@@ -15881,7 +15742,7 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_03_city_christmas_preparations",
+        "id": "scene_03_christmas_eve_preparations",
         "order": 3,
         "event_ids": [
           "ev_0025",
@@ -15893,33 +15754,17 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_04_the_fleeing_caroler",
+        "id": "scene_04_closing_the_office",
         "order": 4,
         "event_ids": [
           "ev_0029",
           "ev_0030",
-          "ev_0031"
-        ],
-        "forced_by_plant_span": false,
-        "forced_by_size": false
-      },
-      {
-        "id": "scene_05_closing_the_office",
-        "order": 5,
-        "event_ids": [
+          "ev_0031",
           "ev_0032",
           "ev_0033",
           "ev_0034",
           "ev_0035",
-          "ev_0036"
-        ],
-        "forced_by_plant_span": false,
-        "forced_by_size": false
-      },
-      {
-        "id": "scene_06_the_clerk_s_holiday",
-        "order": 6,
-        "event_ids": [
+          "ev_0036",
           "ev_0037",
           "ev_0038"
         ],
@@ -15927,8 +15772,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_07_a_solitary_dinner",
-        "order": 7,
+        "id": "scene_05_the_melancholy_tavern",
+        "order": 5,
         "event_ids": [
           "ev_0039",
           "ev_0040",
@@ -15938,8 +15783,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_08_the_door_knocker",
-        "order": 8,
+        "id": "scene_06_the_door_knocker",
+        "order": 6,
         "event_ids": [
           "ev_0043",
           "ev_0044",
@@ -15959,8 +15804,8 @@
         "forced_by_size": true
       },
       {
-        "id": "scene_09_marleys_warning",
-        "order": 9,
+        "id": "scene_07_marleys_ghost",
+        "order": 7,
         "event_ids": [
           "ev_0056",
           "ev_0057",
@@ -16003,8 +15848,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_10_the_first_spirit",
-        "order": 10,
+        "id": "scene_08_christmas_past",
+        "order": 8,
         "event_ids": [
           "ev_0092",
           "ev_0093",
@@ -16039,8 +15884,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_11_boyhood_schoolroom",
-        "order": 11,
+        "id": "scene_09_the_schoolroom",
+        "order": 9,
         "event_ids": [
           "ev_0123",
           "ev_0124",
@@ -16063,8 +15908,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_12_fans_rescue",
-        "order": 12,
+        "id": "scene_10_fans_arrival",
+        "order": 10,
         "event_ids": [
           "ev_0141",
           "ev_0142",
@@ -16078,8 +15923,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_13_fezziwigs_ball",
-        "order": 13,
+        "id": "scene_11_fezziwigs_ball",
+        "order": 11,
         "event_ids": [
           "ev_0148",
           "ev_0149",
@@ -16099,7 +15944,15 @@
           "ev_0163",
           "ev_0164",
           "ev_0165",
-          "ev_0166",
+          "ev_0166"
+        ],
+        "forced_by_plant_span": false,
+        "forced_by_size": false
+      },
+      {
+        "id": "scene_12_fezziwigs_praise",
+        "order": 12,
+        "event_ids": [
           "ev_0167",
           "ev_0168",
           "ev_0169",
@@ -16114,8 +15967,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_14_the_broken_engagement",
-        "order": 14,
+        "id": "scene_13_the_broken_contract",
+        "order": 13,
         "event_ids": [
           "ev_0176",
           "ev_0177",
@@ -16137,8 +15990,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_15_belles_family",
-        "order": 15,
+        "id": "scene_14_belles_household",
+        "order": 14,
         "event_ids": [
           "ev_0191",
           "ev_0192",
@@ -16159,18 +16012,10 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_16_return_to_bed",
-        "order": 16,
+        "id": "scene_15_the_second_spirit",
+        "order": 15,
         "event_ids": [
-          "ev_0206"
-        ],
-        "forced_by_plant_span": false,
-        "forced_by_size": false
-      },
-      {
-        "id": "scene_17_the_second_spirit",
-        "order": 17,
-        "event_ids": [
+          "ev_0206",
           "ev_0207",
           "ev_0208",
           "ev_0209",
@@ -16193,8 +16038,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_18_christmas_morning_streets",
-        "order": 18,
+        "id": "scene_16_the_blessed_dinners",
+        "order": 16,
         "event_ids": [
           "ev_0224",
           "ev_0225",
@@ -16207,23 +16052,15 @@
           "ev_0232",
           "ev_0233",
           "ev_0234",
-          "ev_0235"
-        ],
-        "forced_by_plant_span": false,
-        "forced_by_size": false
-      },
-      {
-        "id": "scene_19_to_the_suburbs",
-        "order": 19,
-        "event_ids": [
+          "ev_0235",
           "ev_0236"
         ],
         "forced_by_plant_span": false,
         "forced_by_size": false
       },
       {
-        "id": "scene_20_the_cratchit_gathering",
-        "order": 20,
+        "id": "scene_17_the_cratchits_assemble",
+        "order": 17,
         "event_ids": [
           "ev_0237",
           "ev_0238",
@@ -16237,23 +16074,15 @@
           "ev_0246",
           "ev_0247",
           "ev_0248",
-          "ev_0249"
-        ],
-        "forced_by_plant_span": false,
-        "forced_by_size": false
-      },
-      {
-        "id": "scene_21_tiny_tims_wish",
-        "order": 21,
-        "event_ids": [
+          "ev_0249",
           "ev_0250"
         ],
         "forced_by_plant_span": false,
         "forced_by_size": false
       },
       {
-        "id": "scene_22_the_cratchit_dinner",
-        "order": 22,
+        "id": "scene_18_the_cratchit_dinner",
+        "order": 18,
         "event_ids": [
           "ev_0251",
           "ev_0252",
@@ -16291,18 +16120,10 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_23_streets_of_london",
-        "order": 23,
+        "id": "scene_19_the_miners_hut",
+        "order": 19,
         "event_ids": [
-          "ev_0283"
-        ],
-        "forced_by_plant_span": false,
-        "forced_by_size": false
-      },
-      {
-        "id": "scene_24_the_miners_hut",
-        "order": 24,
-        "event_ids": [
+          "ev_0283",
           "ev_0284",
           "ev_0285",
           "ev_0286",
@@ -16313,8 +16134,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_25_out_at_sea",
-        "order": 25,
+        "id": "scene_20_sea_and_lighthouse",
+        "order": 20,
         "event_ids": [
           "ev_0289",
           "ev_0290",
@@ -16326,8 +16147,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_26_freds_gathering",
-        "order": 26,
+        "id": "scene_21_nephews_party",
+        "order": 21,
         "event_ids": [
           "ev_0294",
           "ev_0295",
@@ -16349,8 +16170,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_27_toasting_the_uncle",
-        "order": 27,
+        "id": "scene_22_toasting_the_uncle",
+        "order": 22,
         "event_ids": [
           "ev_0309",
           "ev_0310",
@@ -16370,8 +16191,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_28_ignorance_and_want",
-        "order": 28,
+        "id": "scene_23_ignorance_and_want",
+        "order": 23,
         "event_ids": [
           "ev_0322",
           "ev_0323",
@@ -16390,8 +16211,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_29_the_final_spirit",
-        "order": 29,
+        "id": "scene_24_the_silent_phantom",
+        "order": 24,
         "event_ids": [
           "ev_0334",
           "ev_0335",
@@ -16407,8 +16228,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_30_on_the_change",
-        "order": 30,
+        "id": "scene_25_on_the_change",
+        "order": 25,
         "event_ids": [
           "ev_0343",
           "ev_0344",
@@ -16431,8 +16252,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_31_old_joes_shop",
-        "order": 31,
+        "id": "scene_26_old_joes_shop",
+        "order": 26,
         "event_ids": [
           "ev_0359",
           "ev_0360",
@@ -16458,8 +16279,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_32_room_of_death",
-        "order": 32,
+        "id": "scene_27_room_of_death",
+        "order": 27,
         "event_ids": [
           "ev_0379",
           "ev_0380",
@@ -16472,8 +16293,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_33_a_creditors_death",
-        "order": 33,
+        "id": "scene_28_carolines_relief",
+        "order": 28,
         "event_ids": [
           "ev_0385",
           "ev_0386",
@@ -16488,8 +16309,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_34_the_quiet_cratchits",
-        "order": 34,
+        "id": "scene_29_tiny_tim_mourned",
+        "order": 29,
         "event_ids": [
           "ev_0393",
           "ev_0394",
@@ -16501,25 +16322,9 @@
           "ev_0400",
           "ev_0401",
           "ev_0402",
-          "ev_0403"
-        ],
-        "forced_by_plant_span": false,
-        "forced_by_size": false
-      },
-      {
-        "id": "scene_35_freds_sympathy",
-        "order": 35,
-        "event_ids": [
+          "ev_0403",
           "ev_0404",
-          "ev_0405"
-        ],
-        "forced_by_plant_span": false,
-        "forced_by_size": false
-      },
-      {
-        "id": "scene_36_remembering_tim",
-        "order": 36,
-        "event_ids": [
+          "ev_0405",
           "ev_0406",
           "ev_0407",
           "ev_0408"
@@ -16528,8 +16333,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_37_the_office_window",
-        "order": 37,
+        "id": "scene_30_the_altered_office",
+        "order": 30,
         "event_ids": [
           "ev_0409",
           "ev_0410",
@@ -16540,8 +16345,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_38_the_churchyard",
-        "order": 38,
+        "id": "scene_31_the_neglected_grave",
+        "order": 31,
         "event_ids": [
           "ev_0413",
           "ev_0414",
@@ -16558,8 +16363,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_39_christmas_morning",
-        "order": 39,
+        "id": "scene_32_christmas_day_awake",
+        "order": 32,
         "event_ids": [
           "ev_0423",
           "ev_0424",
@@ -16586,8 +16391,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_40_walking_the_streets",
-        "order": 40,
+        "id": "scene_33_in_the_streets",
+        "order": 33,
         "event_ids": [
           "ev_0443",
           "ev_0444",
@@ -16602,8 +16407,8 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_41_freds_dinner",
-        "order": 41,
+        "id": "scene_34_freds_dinner",
+        "order": 34,
         "event_ids": [
           "ev_0451",
           "ev_0452",
@@ -16618,23 +16423,15 @@
         "forced_by_size": false
       },
       {
-        "id": "scene_42_the_salary_raise",
-        "order": 42,
+        "id": "scene_35_bobs_raise",
+        "order": 35,
         "event_ids": [
           "ev_0460",
           "ev_0461",
           "ev_0462",
           "ev_0463",
           "ev_0464",
-          "ev_0465"
-        ],
-        "forced_by_plant_span": false,
-        "forced_by_size": false
-      },
-      {
-        "id": "scene_43_a_changed_man",
-        "order": 43,
-        "event_ids": [
+          "ev_0465",
           "ev_0466"
         ],
         "forced_by_plant_span": false,
@@ -16644,7 +16441,7 @@
     "vacuous_checks": [
       "entry_exit_contradiction — entry_state is derived from the same replay that produces exit_state (src/segmentation/state.ts), so consecutive scenes agree by construction",
       "plant_not_declared — every accepted plant/payoff pair writes its fact into the plant scene's own reader_must_learn as it is applied",
-      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off"
+      "unpaid_fact — reader_must_learn is populated only from facts that some scene pays off, plus concealed facts given a reveal scene, which the rule exempts (#180)"
     ]
   }
 }

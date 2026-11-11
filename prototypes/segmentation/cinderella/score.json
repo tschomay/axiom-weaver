@@ -1,122 +1,124 @@
 {
   "story_id": "cinderella",
-  "scored_at": "2026-09-17T23:21:18.736Z",
+  "scored_at": "2026-11-11T12:58:49.746Z",
   "fixture_package_version": 1,
   "segmenter_models": [
     "gemini-3.8-flash"
   ],
   "judge_model": "gemini-3.8-flash",
-  "judge_cost_usd": 0.0653115,
+  "judge_cost_usd": 0.12990975000000002,
   "g0": {
     "bar": "publishable === true (§1)",
     "publishable": true,
     "errors": [],
     "warning_counts": {
-      "unused_seed_entity": 20
+      "unused_seed_entity": 13,
+      "decision_party_absent": 2,
+      "voice_card_untouched": 1
     }
   },
   "scene_count": {
     "fixture": 14,
-    "candidate": 12,
-    "ratio": 0.8571428571428571,
+    "candidate": 11,
+    "ratio": 0.7857142857142857,
     "trustworthy_band": true
   },
   "scene_alignment": [
     {
       "fixture_scene": "scene_01_remarriage",
-      "candidate_scene": "scene_01_the_second_marriage",
-      "aligned_beats": 1,
-      "fixture_beats": 3,
-      "how": "majority_of_aligned_beats"
-    },
-    {
-      "fixture_scene": "scene_02_the_ball_proclaimed",
-      "candidate_scene": "scene_02_the_royal_invitation",
-      "aligned_beats": 1,
-      "fixture_beats": 3,
-      "how": "majority_of_aligned_beats"
-    },
-    {
-      "fixture_scene": "scene_03_dressing_the_sisters",
       "candidate_scene": null,
       "aligned_beats": 0,
       "fixture_beats": 3,
       "how": "unaligned"
     },
     {
+      "fixture_scene": "scene_02_the_ball_proclaimed",
+      "candidate_scene": null,
+      "aligned_beats": 0,
+      "fixture_beats": 3,
+      "how": "unaligned"
+    },
+    {
+      "fixture_scene": "scene_03_dressing_the_sisters",
+      "candidate_scene": "scene_01_dressing_the_sisters",
+      "aligned_beats": 2,
+      "fixture_beats": 3,
+      "how": "majority_of_aligned_beats"
+    },
+    {
       "fixture_scene": "scene_04_sisters_depart",
-      "candidate_scene": "scene_03_departure_for_court",
-      "aligned_beats": 1,
+      "candidate_scene": "scene_02_the_transformation",
+      "aligned_beats": 2,
       "fixture_beats": 2,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_05_godmother",
-      "candidate_scene": "scene_04_the_godmothers_magic",
+      "candidate_scene": "scene_02_the_transformation",
       "aligned_beats": 4,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_06_first_ball_arrival",
-      "candidate_scene": "scene_05_the_first_ball",
+      "candidate_scene": "scene_03_the_royal_ball",
       "aligned_beats": 2,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_07_first_ball_departure",
-      "candidate_scene": "scene_05_the_first_ball",
-      "aligned_beats": 2,
+      "candidate_scene": "scene_03_the_royal_ball",
+      "aligned_beats": 1,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_08_home_and_thanks",
-      "candidate_scene": "scene_06_return_and_refusal",
+      "candidate_scene": "scene_04_return_and_report",
       "aligned_beats": 1,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_09_the_sisters_recount",
-      "candidate_scene": "scene_06_return_and_refusal",
-      "aligned_beats": 1,
+      "candidate_scene": null,
+      "aligned_beats": 0,
       "fixture_beats": 4,
-      "how": "majority_of_aligned_beats"
+      "how": "unaligned"
     },
     {
       "fixture_scene": "scene_10_second_ball_the_flight",
-      "candidate_scene": "scene_07_the_second_ball",
-      "aligned_beats": 3,
+      "candidate_scene": "scene_05_the_midnight_flight",
+      "aligned_beats": 4,
       "fixture_beats": 6,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_11_the_kept_slipper",
-      "candidate_scene": "scene_08_home_in_rags",
+      "candidate_scene": "scene_05_the_midnight_flight",
       "aligned_beats": 1,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_12_the_proclamation",
-      "candidate_scene": "scene_09_the_royal_proclamation",
+      "candidate_scene": "scene_08_the_royal_proclamation",
       "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_13_the_fitting",
-      "candidate_scene": "scene_10_the_slipper_fits",
-      "aligned_beats": 4,
+      "candidate_scene": "scene_09_the_slipper_fits",
+      "aligned_beats": 6,
       "fixture_beats": 6,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_14_forgiveness_and_marriage",
-      "candidate_scene": "scene_12_a_royal_wedding",
-      "aligned_beats": 2,
+      "candidate_scene": "scene_10_the_royal_wedding",
+      "aligned_beats": 1,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
     }
@@ -124,85 +126,53 @@
   "boundaries": {
     "bar": "≥ 0.70 precision and recall (§3.5)",
     "window_chars": 269,
-    "fixture_boundaries": 12,
-    "candidate_boundaries": 11,
-    "matched": 9,
-    "precision": 0.8181818181818182,
-    "recall": 0.75,
+    "fixture_boundaries": 11,
+    "candidate_boundaries": 10,
+    "matched": 7,
+    "precision": 0.7,
+    "recall": 0.6363636363636364,
     "note": "fixture boundaries are located at the earliest source offset among the candidate events #117's alignment assigned to that fixture scene; the fixtures carry no offsets of their own"
   },
   "beats": {
     "coverage_bar": "≥ 0.80 mean, no aligned scene below 0.5 (§3.5)",
     "invention_bar": "≤ 0.10 (§3.5)",
-    "scored_scenes": 13,
-    "mean_coverage": 0.4730769230769231,
+    "scored_scenes": 11,
+    "mean_coverage": 0.5439393939393941,
     "worst_scene": {
       "scene": "scene_06_first_ball_arrival",
       "coverage": 0.25
     },
     "scenes_below_half": [
-      "scene_01_remarriage",
-      "scene_02_the_ball_proclaimed",
       "scene_06_first_ball_arrival",
       "scene_08_home_and_thanks",
       "scene_11_the_kept_slipper",
       "scene_14_forgiveness_and_marriage"
     ],
-    "sampled_beats": 28,
-    "supported": 27,
+    "sampled_beats": 30,
+    "supported": 29,
     "insufficient": 1,
     "contradicted": 0,
-    "invention_rate": 0.03571428571428571
+    "invention_rate": 0.03333333333333333
   },
   "pov_location": {
     "bar": "≥ 0.95, read as agreement with the fixture rather than against the source (§3.5)",
-    "scored": 13,
-    "pov_agreements": 9,
+    "scored": 11,
+    "pov_agreements": 10,
     "location_agreements": 5,
-    "pov_accuracy": 0.6923076923076923,
-    "location_accuracy": 0.38461538461538464,
+    "pov_accuracy": 0.9090909090909091,
+    "location_accuracy": 0.45454545454545453,
     "disagreements": [
       {
-        "fixture_scene": "scene_01_remarriage",
-        "field": "pov",
-        "fixture": "char_cinderella → char_cinderella",
-        "candidate": "char_gentleman"
-      },
-      {
-        "fixture_scene": "scene_01_remarriage",
-        "field": "location_id",
-        "fixture": "loc_house → loc_home",
-        "candidate": "loc_sorry_garret"
-      },
-      {
-        "fixture_scene": "scene_02_the_ball_proclaimed",
-        "field": "pov",
-        "fixture": "char_cinderella → char_cinderella",
-        "candidate": "char_eldest_daughter"
-      },
-      {
-        "fixture_scene": "scene_02_the_ball_proclaimed",
-        "field": "location_id",
-        "fixture": "loc_house → loc_home",
-        "candidate": "loc_sorry_garret"
-      },
-      {
-        "fixture_scene": "scene_04_sisters_depart",
-        "field": "pov",
-        "fixture": "char_cinderella → char_cinderella",
-        "candidate": "char_eldest_daughter"
-      },
-      {
-        "fixture_scene": "scene_04_sisters_depart",
+        "fixture_scene": "scene_03_dressing_the_sisters",
         "field": "location_id",
         "fixture": "loc_house → loc_home",
         "candidate": "loc_court"
       },
       {
-        "fixture_scene": "scene_05_godmother",
+        "fixture_scene": "scene_04_sisters_depart",
         "field": "location_id",
-        "fixture": "loc_garden → loc_garden",
-        "candidate": "loc_cinderellas_chamber"
+        "fixture": "loc_house → loc_home",
+        "candidate": "loc_garden"
       },
       {
         "fixture_scene": "scene_08_home_and_thanks",
@@ -213,13 +183,13 @@
       {
         "fixture_scene": "scene_11_the_kept_slipper",
         "field": "location_id",
-        "fixture": "loc_chimney_corner → loc_chimney_corner",
-        "candidate": "loc_home"
+        "fixture": "loc_chimney_corner (unaligned)",
+        "candidate": "loc_ball"
       },
       {
         "fixture_scene": "scene_12_the_proclamation",
         "field": "pov",
-        "fixture": "char_gentleman_usher → char_gentleman_official",
+        "fixture": "char_gentleman_usher → char_gentleman_sent_to_try_slipper",
         "candidate": "char_kings_son"
       },
       {
@@ -239,38 +209,38 @@
   "source_coverage": {
     "bar": "≥ 0.95 (§3.5)",
     "source_chars": 13444,
-    "covered_chars": 8753,
-    "coverage": 0.6510711097887534,
+    "covered_chars": 12380,
+    "coverage": 0.9208568878310027,
     "gaps": [
       {
-        "start": 1767,
-        "end": 3535,
-        "chars": 1768
+        "start": 11271,
+        "end": 11559,
+        "chars": 288
       },
       {
-        "start": 158,
-        "end": 1646,
-        "chars": 1488
+        "start": 3296,
+        "end": 3535,
+        "chars": 239
+      },
+      {
+        "start": 9798,
+        "end": 9979,
+        "chars": 181
       },
       {
         "start": 10646,
-        "end": 11559,
-        "chars": 913
+        "end": 10750,
+        "chars": 104
       },
       {
-        "start": 9797,
-        "end": 9979,
-        "chars": 182
+        "start": 10909,
+        "end": 10981,
+        "chars": 72
       },
       {
-        "start": 6752,
-        "end": 6873,
-        "chars": 121
-      },
-      {
-        "start": 3581,
-        "end": 3648,
-        "chars": 67
+        "start": 13276,
+        "end": 13326,
+        "chars": 50
       },
       {
         "start": 0,
@@ -278,9 +248,9 @@
         "chars": 42
       },
       {
-        "start": 13200,
-        "end": 13241,
-        "chars": 41
+        "start": 6752,
+        "end": 6794,
+        "chars": 42
       },
       {
         "start": 13102,
@@ -288,13 +258,13 @@
         "chars": 40
       },
       {
-        "start": 8360,
-        "end": 8384,
-        "chars": 24
+        "start": 13441,
+        "end": 13444,
+        "chars": 3
       }
     ],
-    "events_supplied": 44,
-    "events_assigned": 44,
+    "events_supplied": 74,
+    "events_assigned": 74,
     "assignment_rate": 1
   },
   "reveal_order": {
@@ -307,7 +277,13 @@
     "pairwise_total": 0,
     "pairwise_correct": 0,
     "pairwise_accuracy": null,
-    "premature": [],
+    "premature": [
+      {
+        "fact": "midnight_condition",
+        "fixture_scene": 5,
+        "candidate_scene": 2
+      }
+    ],
     "fixture_hidden_facts": 0,
     "hidden_recovered": 0,
     "hidden_recall": null
@@ -328,6 +304,182 @@
     "long_range_matched": 1,
     "long_range_recall": 0.16666666666666666,
     "misattributed": 0,
+    "unalignable": 11,
+    "pairs": [
+      {
+        "fact_ref": "midnight_condition",
+        "plant": "scene_05_godmother",
+        "payoff": "scene_10_second_ball_the_flight",
+        "declared": true,
+        "span": 5,
+        "outcome": "matched",
+        "candidate_fact": "midnight_curfew",
+        "expected_plant": "scene_02_the_transformation",
+        "expected_payoff": "scene_05_the_midnight_flight"
+      },
+      {
+        "fact_ref": "cinderella_kept_second_slipper",
+        "plant": "scene_11_the_kept_slipper",
+        "payoff": "scene_13_the_fitting",
+        "declared": true,
+        "span": 2,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_05_the_midnight_flight",
+        "expected_payoff": "scene_09_the_slipper_fits"
+      },
+      {
+        "fact_ref": "godmother_gave_glass_slippers",
+        "plant": "scene_05_godmother",
+        "payoff": "scene_12_the_proclamation",
+        "declared": false,
+        "span": 7,
+        "outcome": "missed",
+        "candidate_fact": "pair_of_glass_slippers",
+        "expected_plant": "scene_02_the_transformation",
+        "expected_payoff": "scene_08_the_royal_proclamation"
+      },
+      {
+        "fact_ref": "cinderella_has_excellent_taste",
+        "plant": "scene_03_dressing_the_sisters",
+        "payoff": "scene_06_first_ball_arrival",
+        "declared": false,
+        "span": 3,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_01_dressing_the_sisters",
+        "expected_payoff": "scene_03_the_royal_ball"
+      },
+      {
+        "fact_ref": "sisters_ill_usage_of_cinderella",
+        "plant": "scene_01_remarriage",
+        "payoff": "scene_14_forgiveness_and_marriage",
+        "declared": false,
+        "span": 13,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": null,
+        "expected_payoff": "scene_10_the_royal_wedding"
+      },
+      {
+        "fact_ref": "oranges_and_citrons_shared_with_sisters",
+        "plant": "scene_07_first_ball_departure",
+        "payoff": "scene_09_the_sisters_recount",
+        "declared": false,
+        "span": 2,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_03_the_royal_ball",
+        "expected_payoff": null
+      },
+      {
+        "fact_ref": "charlotte_refused_the_yellow_suit",
+        "plant": "scene_09_the_sisters_recount",
+        "payoff": "scene_10_second_ball_the_flight",
+        "declared": false,
+        "span": 1,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": null,
+        "expected_payoff": "scene_05_the_midnight_flight"
+      },
+      {
+        "fact_ref": "godmother_will_come_when_needed",
+        "plant": "scene_05_godmother",
+        "payoff": "scene_13_the_fitting",
+        "declared": false,
+        "span": 8,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_02_the_transformation",
+        "expected_payoff": "scene_09_the_slipper_fits"
+      },
+      {
+        "fact_ref": "guards_saw_only_a_poor_country_wench",
+        "plant": "scene_11_the_kept_slipper",
+        "payoff": "scene_13_the_fitting",
+        "declared": false,
+        "span": 2,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_05_the_midnight_flight",
+        "expected_payoff": "scene_09_the_slipper_fits"
+      },
+      {
+        "fact_ref": "prince_in_love_with_the_slippers_owner",
+        "plant": "scene_11_the_kept_slipper",
+        "payoff": "scene_12_the_proclamation",
+        "declared": false,
+        "span": 1,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_05_the_midnight_flight",
+        "expected_payoff": "scene_08_the_royal_proclamation"
+      },
+      {
+        "fact_ref": "sisters_do_not_recognise_the_lady",
+        "plant": "scene_07_first_ball_departure",
+        "payoff": "scene_14_forgiveness_and_marriage",
+        "declared": false,
+        "span": 7,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_03_the_royal_ball",
+        "expected_payoff": "scene_10_the_royal_wedding"
+      },
+      {
+        "fact_ref": "cinderella_bore_it_patiently",
+        "plant": "scene_01_remarriage",
+        "payoff": "scene_14_forgiveness_and_marriage",
+        "declared": false,
+        "span": 13,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": null,
+        "expected_payoff": "scene_10_the_royal_wedding"
+      },
+      {
+        "fact_ref": "ball_open_to_all_persons_of_fashion",
+        "plant": "scene_02_the_ball_proclaimed",
+        "payoff": "scene_06_first_ball_arrival",
+        "declared": false,
+        "span": 4,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": null,
+        "expected_payoff": "scene_03_the_royal_ball"
+      }
+    ],
+    "candidate_pair_list": [
+      {
+        "fact_ref": "midnight_curfew",
+        "plant": "scene_02_the_transformation",
+        "payoff": "scene_05_the_midnight_flight",
+        "span": 3,
+        "matched": true
+      },
+      {
+        "fact_ref": "lost_glass_slipper",
+        "plant": "scene_05_the_midnight_flight",
+        "payoff": "scene_08_the_royal_proclamation",
+        "span": 3,
+        "matched": false
+      },
+      {
+        "fact_ref": "pair_of_glass_slippers",
+        "plant": "scene_02_the_transformation",
+        "payoff": "scene_09_the_slipper_fits",
+        "span": 7,
+        "matched": false
+      },
+      {
+        "fact_ref": "princes_marriage_proclamation",
+        "plant": "scene_08_the_royal_proclamation",
+        "payoff": "scene_10_the_royal_wedding",
+        "span": 2,
+        "matched": false
+      }
+    ],
     "orphans": [],
     "plant_walk_errors": [],
     "span_histogram": {
@@ -336,19 +488,87 @@
       "5+": 1
     }
   },
+  "fact_alignment": [
+    {
+      "fixture_fact": "midnight_condition",
+      "candidate_fact": "midnight_curfew",
+      "why": "Both represent the godmother's midnight deadline rule and its payoff during the flight from the ball."
+    },
+    {
+      "fixture_fact": "cinderella_is_the_ball_girl",
+      "candidate_fact": null,
+      "why": "No candidate row tracks the dramatic irony of Cinderella's identity at the ball."
+    },
+    {
+      "fixture_fact": "sisters_unaware_cinderella_attended",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks the sisters' ignorance of her attendance."
+    },
+    {
+      "fixture_fact": "cinderella_kept_second_slipper",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks Cinderella keeping the other slipper to produce at the fitting."
+    },
+    {
+      "fixture_fact": "godmother_gave_glass_slippers",
+      "candidate_fact": "pair_of_glass_slippers",
+      "why": "Both track the godmother providing the pair of glass slippers during Cinderella's transformation."
+    },
+    {
+      "fixture_fact": "cinderella_has_excellent_taste",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks Cinderella's fashion taste."
+    },
+    {
+      "fixture_fact": "sisters_ill_usage_of_cinderella",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks the sisters' mistreatment of Cinderella."
+    },
+    {
+      "fixture_fact": "oranges_and_citrons_shared_with_sisters",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks the gift of oranges and citrons."
+    },
+    {
+      "fixture_fact": "charlotte_refused_the_yellow_suit",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks the refusal of the yellow suit."
+    },
+    {
+      "fixture_fact": "godmother_will_come_when_needed",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks the godmother's reappearance at the fitting."
+    },
+    {
+      "fixture_fact": "guards_saw_only_a_poor_country_wench",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks the guards' testimony."
+    },
+    {
+      "fixture_fact": "prince_in_love_with_the_slippers_owner",
+      "candidate_fact": null,
+      "why": "No candidate row tracks the prince's love for the owner leading to the proclamation."
+    },
+    {
+      "fixture_fact": "sisters_do_not_recognise_the_lady",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks the sisters failing to recognize Cinderella."
+    },
+    {
+      "fixture_fact": "cinderella_bore_it_patiently",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks Cinderella's patience and eventual forgiveness."
+    },
+    {
+      "fixture_fact": "ball_open_to_all_persons_of_fashion",
+      "candidate_fact": null,
+      "why": "No matching candidate row tracks the open invitation to the ball."
+    }
+  ],
   "caveats": [
     "§2: the fixtures are one valid authoring, not the unique correct one — a deviation is not automatically an error, and both fixtures sit at the easy end of the difficulty range.",
     "The scene alignment is derived from #117's frozen event alignment; a fixture scene whose beats went unaligned there is unscoreable here and is listed with candidate_scene: null.",
     "§3.5 POV/location is agreement with the fixture, not a judgment against the source.",
     "Beat invention is judged against the source window the scene's own spans cover, so a beat supported elsewhere in the story reads as \"insufficient\" rather than \"contradicts\" — the two are reported separately for that reason."
-  ],
-  "stale": {
-    "since": "wave 2 of #142 (#144, #145, #154)",
-    "why": "This score was computed over the extraction run that fixtures/extraction/runs/cinderella/package.json held BEFORE wave 2 changed pass-events.ts. Segmentation reads that file as its input, so every number here describes a different input than the one now committed. #146 owns the re-measure and the approach doc puts it in wave 3 precisely so it happens after this.",
-    "notably_affected": [
-      "plants.* — #153's annotation is unchanged, but the candidate pairs came from the old events",
-      "scene_count / boundaries — the event list grew and its story_time buckets changed",
-      "pov_location — POV is substituted from participants, and participants changed"
-    ]
-  }
+  ]
 }

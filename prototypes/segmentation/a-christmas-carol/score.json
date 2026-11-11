@@ -1,165 +1,167 @@
 {
   "story_id": "a-christmas-carol",
-  "scored_at": "2026-09-18T14:20:52.918Z",
+  "scored_at": "2026-11-11T13:06:25.343Z",
   "fixture_package_version": 1,
   "segmenter_models": [
     "gemini-3.8-flash"
   ],
   "judge_model": "gemini-3.8-flash",
-  "judge_cost_usd": 0.05365500000000001,
+  "judge_cost_usd": 0.22385775,
   "g0": {
     "bar": "publishable === true (§1)",
     "publishable": true,
     "errors": [],
     "warning_counts": {
-      "unused_seed_entity": 147,
-      "short_range_payoff": 1
+      "unused_seed_entity": 151,
+      "short_range_payoff": 1,
+      "decision_party_absent": 3,
+      "voice_card_untouched": 1
     }
   },
   "scene_count": {
     "fixture": 20,
-    "candidate": 43,
-    "ratio": 2.15,
-    "trustworthy_band": false
+    "candidate": 35,
+    "ratio": 1.75,
+    "trustworthy_band": true
   },
   "scene_alignment": [
     {
       "fixture_scene": "scene_01_counting_house",
-      "candidate_scene": "scene_02_christmas_eve_visitors",
+      "candidate_scene": "scene_02_refusing_christmas",
       "aligned_beats": 2,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_02_the_haunting_begins",
-      "candidate_scene": "scene_09_marleys_warning",
+      "candidate_scene": "scene_07_marleys_ghost",
       "aligned_beats": 4,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_03_the_first_spirit",
-      "candidate_scene": "scene_10_the_first_spirit",
+      "candidate_scene": "scene_08_christmas_past",
       "aligned_beats": 1,
       "fixture_beats": 2,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_04_the_lonely_school",
-      "candidate_scene": "scene_11_boyhood_schoolroom",
+      "candidate_scene": "scene_09_the_schoolroom",
       "aligned_beats": 1,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_05_fezziwigs_ball",
-      "candidate_scene": "scene_13_fezziwigs_ball",
-      "aligned_beats": 3,
+      "candidate_scene": "scene_12_fezziwigs_praise",
+      "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_06_belle_then_and_now",
-      "candidate_scene": "scene_15_belles_family",
+      "candidate_scene": "scene_14_belles_household",
       "aligned_beats": 3,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_07_the_second_spirit",
-      "candidate_scene": "scene_17_the_second_spirit",
+      "candidate_scene": "scene_15_the_second_spirit",
       "aligned_beats": 1,
       "fixture_beats": 2,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_08_the_cratchits",
-      "candidate_scene": "scene_22_the_cratchit_dinner",
+      "candidate_scene": "scene_18_the_cratchit_dinner",
       "aligned_beats": 3,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_09_the_spirits_tour",
-      "candidate_scene": "scene_25_out_at_sea",
+      "candidate_scene": "scene_20_sea_and_lighthouse",
       "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_10_freds_party",
-      "candidate_scene": "scene_27_toasting_the_uncle",
+      "candidate_scene": "scene_22_toasting_the_uncle",
       "aligned_beats": 3,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_11_ignorance_and_want",
-      "candidate_scene": "scene_28_ignorance_and_want",
+      "candidate_scene": "scene_23_ignorance_and_want",
       "aligned_beats": 4,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_12_the_exchange",
-      "candidate_scene": "scene_30_on_the_change",
+      "candidate_scene": "scene_25_on_the_change",
       "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_13_old_joes_shop",
-      "candidate_scene": "scene_31_old_joes_shop",
+      "candidate_scene": "scene_26_old_joes_shop",
       "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_14_the_unwatched_corpse",
-      "candidate_scene": "scene_32_room_of_death",
+      "candidate_scene": "scene_27_room_of_death",
       "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_15_the_relieved_debtors",
-      "candidate_scene": "scene_33_a_creditors_death",
+      "candidate_scene": "scene_28_carolines_relief",
       "aligned_beats": 2,
       "fixture_beats": 3,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_16_the_cratchits_after_tim",
-      "candidate_scene": "scene_34_the_quiet_cratchits",
-      "aligned_beats": 1,
+      "candidate_scene": "scene_29_tiny_tim_mourned",
+      "aligned_beats": 2,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_17_the_name_on_the_stone",
-      "candidate_scene": "scene_38_the_churchyard",
+      "candidate_scene": "scene_31_the_neglected_grave",
       "aligned_beats": 4,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_18_the_waking",
-      "candidate_scene": "scene_39_christmas_morning",
+      "candidate_scene": "scene_32_christmas_day_awake",
       "aligned_beats": 2,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_19_the_street_and_freds_dinner",
-      "candidate_scene": "scene_40_walking_the_streets",
+      "candidate_scene": "scene_33_in_the_streets",
       "aligned_beats": 2,
       "fixture_beats": 4,
       "how": "majority_of_aligned_beats"
     },
     {
       "fixture_scene": "scene_20_the_office_next_morning",
-      "candidate_scene": "scene_42_the_salary_raise",
-      "aligned_beats": 2,
+      "candidate_scene": "scene_35_bobs_raise",
+      "aligned_beats": 3,
       "fixture_beats": 5,
       "how": "majority_of_aligned_beats"
     }
@@ -168,9 +170,9 @@
     "bar": "≥ 0.70 precision and recall (§3.5)",
     "window_chars": 3155,
     "fixture_boundaries": 18,
-    "candidate_boundaries": 42,
+    "candidate_boundaries": 34,
     "matched": 15,
-    "precision": 0.35714285714285715,
+    "precision": 0.4411764705882353,
     "recall": 0.8333333333333334,
     "note": "fixture boundaries are located at the earliest source offset among the candidate events #117's alignment assigned to that fixture scene; the fixtures carry no offsets of their own"
   },
@@ -178,32 +180,21 @@
     "coverage_bar": "≥ 0.80 mean, no aligned scene below 0.5 (§3.5)",
     "invention_bar": "≤ 0.10 (§3.5)",
     "scored_scenes": 20,
-    "mean_coverage": 0.2575,
+    "mean_coverage": 0.6375,
     "worst_scene": {
-      "scene": "scene_08_the_cratchits",
-      "coverage": 0
+      "scene": "scene_04_the_lonely_school",
+      "coverage": 0.3333333333333333
     },
     "scenes_below_half": [
+      "scene_01_counting_house",
       "scene_04_the_lonely_school",
-      "scene_08_the_cratchits",
-      "scene_09_the_spirits_tour",
-      "scene_10_freds_party",
-      "scene_11_ignorance_and_want",
-      "scene_12_the_exchange",
-      "scene_13_old_joes_shop",
-      "scene_14_the_unwatched_corpse",
-      "scene_15_the_relieved_debtors",
-      "scene_16_the_cratchits_after_tim",
-      "scene_17_the_name_on_the_stone",
-      "scene_18_the_waking",
-      "scene_19_the_street_and_freds_dinner",
-      "scene_20_the_office_next_morning"
+      "scene_12_the_exchange"
     ],
-    "sampled_beats": 0,
-    "supported": 0,
+    "sampled_beats": 30,
+    "supported": 30,
     "insufficient": 0,
     "contradicted": 0,
-    "invention_rate": null
+    "invention_rate": 0
   },
   "pov_location": {
     "bar": "≥ 0.95, read as agreement with the fixture rather than against the source (§3.5)",
@@ -247,7 +238,7 @@
         "fixture_scene": "scene_09_the_spirits_tour",
         "field": "location_id",
         "fixture": "loc_world_tour (unaligned)",
-        "candidate": "loc_sea"
+        "candidate": "loc_solitary_lighthouse"
       },
       {
         "fixture_scene": "scene_10_freds_party",
@@ -266,8 +257,8 @@
   "source_coverage": {
     "bar": "≥ 0.95 (§3.5)",
     "source_chars": 157754,
-    "covered_chars": 138441,
-    "coverage": 0.8775752120389975,
+    "covered_chars": 142338,
+    "coverage": 0.9022782306629309,
     "gaps": [
       {
         "start": 1238,
@@ -275,19 +266,9 @@
         "chars": 2864
       },
       {
-        "start": 96599,
-        "end": 98167,
-        "chars": 1568
-      },
-      {
         "start": 112117,
         "end": 113655,
         "chars": 1538
-      },
-      {
-        "start": 139571,
-        "end": 141052,
-        "chars": 1481
       },
       {
         "start": 16901,
@@ -318,6 +299,16 @@
         "start": 122475,
         "end": 123099,
         "chars": 624
+      },
+      {
+        "start": 52502,
+        "end": 53078,
+        "chars": 576
+      },
+      {
+        "start": 13163,
+        "end": 13710,
+        "chars": 547
       }
     ],
     "events_supplied": 426,
@@ -347,14 +338,259 @@
     "fixture_pairs_declared": 3,
     "fixture_pairs_annotated": 15,
     "matched_declared": 0,
-    "matched_annotated": 0,
+    "matched_annotated": 2,
     "candidate_pairs": 6,
-    "matched": 0,
-    "recall": 0,
+    "matched": 2,
+    "recall": 0.1111111111111111,
     "long_range_fixture_pairs": 14,
-    "long_range_matched": 0,
-    "long_range_recall": 0,
+    "long_range_matched": 1,
+    "long_range_recall": 0.07142857142857142,
     "misattributed": 0,
+    "unalignable": 13,
+    "pairs": [
+      {
+        "fact_ref": "surplus_population_remark",
+        "plant": "scene_01_counting_house",
+        "payoff": "scene_08_the_cratchits",
+        "declared": true,
+        "span": 7,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_02_refusing_christmas",
+        "expected_payoff": "scene_18_the_cratchit_dinner"
+      },
+      {
+        "fact_ref": "tiny_tims_fate_uncertain",
+        "plant": "scene_08_the_cratchits",
+        "payoff": "scene_16_the_cratchits_after_tim",
+        "declared": true,
+        "span": 8,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_18_the_cratchit_dinner",
+        "expected_payoff": "scene_29_tiny_tim_mourned"
+      },
+      {
+        "fact_ref": "corpse_is_scrooge",
+        "plant": null,
+        "payoff": "scene_17_the_name_on_the_stone",
+        "declared": true,
+        "span": 0,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": null,
+        "expected_payoff": "scene_31_the_neglected_grave"
+      },
+      {
+        "fact_ref": "are_there_no_prisons",
+        "plant": "scene_01_counting_house",
+        "payoff": "scene_11_ignorance_and_want",
+        "declared": false,
+        "span": 10,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_02_refusing_christmas",
+        "expected_payoff": "scene_23_ignorance_and_want"
+      },
+      {
+        "fact_ref": "marley_foretells_three_spirits",
+        "plant": "scene_02_the_haunting_begins",
+        "payoff": "scene_03_the_first_spirit",
+        "declared": false,
+        "span": 1,
+        "outcome": "matched",
+        "candidate_fact": "three_spirits_warning",
+        "expected_plant": "scene_07_marleys_ghost",
+        "expected_payoff": "scene_08_christmas_past"
+      },
+      {
+        "fact_ref": "marley_foretells_three_spirits",
+        "plant": "scene_02_the_haunting_begins",
+        "payoff": "scene_12_the_exchange",
+        "declared": false,
+        "span": 10,
+        "outcome": "missed",
+        "candidate_fact": "three_spirits_warning",
+        "expected_plant": "scene_07_marleys_ghost",
+        "expected_payoff": "scene_25_on_the_change"
+      },
+      {
+        "fact_ref": "marleys_chain_forged_in_life",
+        "plant": "scene_02_the_haunting_begins",
+        "payoff": "scene_17_the_name_on_the_stone",
+        "declared": false,
+        "span": 15,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_07_marleys_ghost",
+        "expected_payoff": "scene_31_the_neglected_grave"
+      },
+      {
+        "fact_ref": "fred_invites_scrooge_to_dinner",
+        "plant": "scene_01_counting_house",
+        "payoff": "scene_19_the_street_and_freds_dinner",
+        "declared": false,
+        "span": 18,
+        "outcome": "missed",
+        "candidate_fact": "freds_annual_invitation",
+        "expected_plant": "scene_02_refusing_christmas",
+        "expected_payoff": "scene_33_in_the_streets"
+      },
+      {
+        "fact_ref": "portly_gentlemen_solicit_subscription",
+        "plant": "scene_01_counting_house",
+        "payoff": "scene_19_the_street_and_freds_dinner",
+        "declared": false,
+        "span": 18,
+        "outcome": "matched",
+        "candidate_fact": "charity_collectors_plea",
+        "expected_plant": "scene_02_refusing_christmas",
+        "expected_payoff": "scene_33_in_the_streets"
+      },
+      {
+        "fact_ref": "bob_cratchit_underpaid_and_grudged_his_day",
+        "plant": "scene_01_counting_house",
+        "payoff": "scene_20_the_office_next_morning",
+        "declared": false,
+        "span": 19,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_02_refusing_christmas",
+        "expected_payoff": "scene_35_bobs_raise"
+      },
+      {
+        "fact_ref": "crutch_without_an_owner",
+        "plant": "scene_08_the_cratchits",
+        "payoff": "scene_16_the_cratchits_after_tim",
+        "declared": false,
+        "span": 8,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_18_the_cratchit_dinner",
+        "expected_payoff": "scene_29_tiny_tim_mourned"
+      },
+      {
+        "fact_ref": "fezziwig_made_them_happy_at_little_cost",
+        "plant": "scene_05_fezziwigs_ball",
+        "payoff": "scene_20_the_office_next_morning",
+        "declared": false,
+        "span": 15,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_12_fezziwigs_praise",
+        "expected_payoff": "scene_35_bobs_raise"
+      },
+      {
+        "fact_ref": "scrooge_wishes_he_could_speak_to_his_clerk",
+        "plant": "scene_05_fezziwigs_ball",
+        "payoff": "scene_20_the_office_next_morning",
+        "declared": false,
+        "span": 15,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_12_fezziwigs_praise",
+        "expected_payoff": "scene_35_bobs_raise"
+      },
+      {
+        "fact_ref": "another_idol_has_displaced_me",
+        "plant": "scene_06_belle_then_and_now",
+        "payoff": "scene_17_the_name_on_the_stone",
+        "declared": false,
+        "span": 11,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_14_belles_household",
+        "expected_payoff": "scene_31_the_neglected_grave"
+      },
+      {
+        "fact_ref": "yes_and_no_names_uncle_scrooge",
+        "plant": "scene_10_freds_party",
+        "payoff": "scene_19_the_street_and_freds_dinner",
+        "declared": false,
+        "span": 9,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_22_toasting_the_uncle",
+        "expected_payoff": "scene_33_in_the_streets"
+      },
+      {
+        "fact_ref": "the_dead_mans_goods_are_plundered",
+        "plant": "scene_13_old_joes_shop",
+        "payoff": "scene_14_the_unwatched_corpse",
+        "declared": false,
+        "span": 1,
+        "outcome": "missed",
+        "candidate_fact": "plundered_bed_curtains",
+        "expected_plant": "scene_26_old_joes_shop",
+        "expected_payoff": "scene_27_room_of_death"
+      },
+      {
+        "fact_ref": "his_death_relieves_his_debtors",
+        "plant": "scene_15_the_relieved_debtors",
+        "payoff": "scene_17_the_name_on_the_stone",
+        "declared": false,
+        "span": 2,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_28_carolines_relief",
+        "expected_payoff": "scene_31_the_neglected_grave"
+      },
+      {
+        "fact_ref": "doom_is_written_on_the_brow",
+        "plant": "scene_11_ignorance_and_want",
+        "payoff": "scene_17_the_name_on_the_stone",
+        "declared": false,
+        "span": 6,
+        "outcome": "fact_unaligned",
+        "candidate_fact": null,
+        "expected_plant": "scene_23_ignorance_and_want",
+        "expected_payoff": "scene_31_the_neglected_grave"
+      }
+    ],
+    "candidate_pair_list": [
+      {
+        "fact_ref": "three_spirits_warning",
+        "plant": "scene_07_marleys_ghost",
+        "payoff": "scene_08_christmas_past",
+        "span": 1,
+        "matched": true
+      },
+      {
+        "fact_ref": "carol_singing_boy",
+        "plant": "scene_04_closing_the_office",
+        "payoff": "scene_09_the_schoolroom",
+        "span": 5,
+        "matched": false
+      },
+      {
+        "fact_ref": "door_knocker_omen",
+        "plant": "scene_06_the_door_knocker",
+        "payoff": "scene_32_christmas_day_awake",
+        "span": 26,
+        "matched": false
+      },
+      {
+        "fact_ref": "plundered_bed_curtains",
+        "plant": "scene_26_old_joes_shop",
+        "payoff": "scene_32_christmas_day_awake",
+        "span": 6,
+        "matched": false
+      },
+      {
+        "fact_ref": "charity_collectors_plea",
+        "plant": "scene_02_refusing_christmas",
+        "payoff": "scene_33_in_the_streets",
+        "span": 31,
+        "matched": true
+      },
+      {
+        "fact_ref": "freds_annual_invitation",
+        "plant": "scene_02_refusing_christmas",
+        "payoff": "scene_34_freds_dinner",
+        "span": 32,
+        "matched": false
+      }
+    ],
     "orphans": [],
     "plant_walk_errors": [],
     "span_histogram": {
@@ -362,8 +598,94 @@
       "5+": 5
     }
   },
+  "fact_alignment": [
+    {
+      "fixture_fact": "surplus_population_remark",
+      "candidate_fact": null,
+      "why": "No candidate corresponds to the surplus population plant and payoff."
+    },
+    {
+      "fixture_fact": "tiny_tims_fate_uncertain",
+      "candidate_fact": null,
+      "why": "No candidate tracks Tiny Tim's uncertain fate."
+    },
+    {
+      "fixture_fact": "corpse_is_scrooge",
+      "candidate_fact": null,
+      "why": "No candidate models the corpse identity plant/payoff."
+    },
+    {
+      "fixture_fact": "are_there_no_prisons",
+      "candidate_fact": null,
+      "why": "No candidate matches the prisons remark callback."
+    },
+    {
+      "fixture_fact": "marley_foretells_three_spirits",
+      "candidate_fact": "three_spirits_warning",
+      "why": "Both represent Marley's foretelling of the three spirits visiting Scrooge."
+    },
+    {
+      "fixture_fact": "marleys_chain_forged_in_life",
+      "candidate_fact": null,
+      "why": "No candidate models Marley's chain payoff."
+    },
+    {
+      "fixture_fact": "fred_invites_scrooge_to_dinner",
+      "candidate_fact": "freds_annual_invitation",
+      "why": "Both track Fred inviting Scrooge to Christmas dinner and Scrooge attending."
+    },
+    {
+      "fixture_fact": "portly_gentlemen_solicit_subscription",
+      "candidate_fact": "charity_collectors_plea",
+      "why": "Both model the charity gentlemen's plea in the counting house and Scrooge's donation payoff."
+    },
+    {
+      "fixture_fact": "bob_cratchit_underpaid_and_grudged_his_day",
+      "candidate_fact": null,
+      "why": "No candidate models Bob Cratchit's salary setup and raise payoff."
+    },
+    {
+      "fixture_fact": "crutch_without_an_owner",
+      "candidate_fact": null,
+      "why": "No candidate tracks the vacant crutch motif."
+    },
+    {
+      "fixture_fact": "fezziwig_made_them_happy_at_little_cost",
+      "candidate_fact": null,
+      "why": "No candidate tracks the Fezziwig happiness plant."
+    },
+    {
+      "fixture_fact": "scrooge_wishes_he_could_speak_to_his_clerk",
+      "candidate_fact": null,
+      "why": "No candidate tracks Scrooge wishing to speak to Bob."
+    },
+    {
+      "fixture_fact": "another_idol_has_displaced_me",
+      "candidate_fact": null,
+      "why": "No candidate tracks Belle's displacement by wealth."
+    },
+    {
+      "fixture_fact": "yes_and_no_names_uncle_scrooge",
+      "candidate_fact": null,
+      "why": "No candidate tracks the Yes and No game."
+    },
+    {
+      "fixture_fact": "the_dead_mans_goods_are_plundered",
+      "candidate_fact": "plundered_bed_curtains",
+      "why": "Both track the plundering of the dead man's bed-curtains and goods at Old Joe's."
+    },
+    {
+      "fixture_fact": "his_death_relieves_his_debtors",
+      "candidate_fact": null,
+      "why": "No candidate tracks the relieved debtors sequence."
+    },
+    {
+      "fixture_fact": "doom_is_written_on_the_brow",
+      "candidate_fact": null,
+      "why": "No candidate tracks the Ignorance and Want doom warning."
+    }
+  ],
   "caveats": [
-    "#167: 49 fixture beat(s) could not be scored by the entailment judge even one at a time. They count against beats coverage because there is nothing else to do with them, so that number is a floor rather than a measurement.",
     "§2: the fixtures are one valid authoring, not the unique correct one — a deviation is not automatically an error, and both fixtures sit at the easy end of the difficulty range.",
     "The scene alignment is derived from #117's frozen event alignment; a fixture scene whose beats went unaligned there is unscoreable here and is listed with candidate_scene: null.",
     "§3.5 POV/location is agreement with the fixture, not a judgment against the source.",

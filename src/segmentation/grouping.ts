@@ -30,6 +30,19 @@
  * wants to know how many scenes the fixtures chose, because #120 runs the same code on generated
  * input where no fixture exists. Splits it forces are counted separately (`forced_by_size`) so a
  * run that hit the cap often is visibly a run whose boundary pass was not deciding anything.
+ *
+ * ## Before either: a fragment is not a scene (#146)
+ *
+ * On a long text the boundary pass cuts correctly and too often. Read against the fixtures, the
+ * surplus on *A Christmas Carol* and *The Machine Stops* is mostly groups of one or two events
+ * among groups of ten: a line of travel between two visions, a remark recounted inside a dinner,
+ * a one-line epilogue. Each is a real change of place or time, so the judgment is defensible, and
+ * each would reach the writer as a Scene Card with nothing in it to stage.
+ *
+ * So a group much smaller than the run's own average is absorbed into a neighbour before the two
+ * constraints run. "Much smaller" is relative on purpose. Cinderella's scenes average under four
+ * events and are right at that size, and a generated arc's average two, so no absolute floor
+ * serves every input; a fraction of the run's own mean leaves both untouched.
  */
 
 import type { FabulaEvent } from '../schema/fabula';
@@ -47,6 +60,15 @@ export const MAX_EVENTS_PER_SCENE = 40;
 /** How strong a mechanical signal has to be to count as a boundary with no model in the loop. */
 export const DEFAULT_BOUNDARY_THRESHOLD = 0.45;
 
+/**
+ * A group smaller than this fraction of the run's mean group size is a fragment.
+ *
+ * A quarter means one or two events on the two long fixtures (mean about ten) and nothing at all
+ * on Cinderella or a generated arc. The measurements behind it are in
+ * `docs/research/segmentation-fragments.md`.
+ */
+export const FRAGMENT_FRACTION = 0.25;
+
 export interface SceneGroup {
   /** Indices into the ordered event list, contiguous and ascending. */
   readonly event_indices: readonly number[];
@@ -57,6 +79,8 @@ export interface SceneGroup {
 export interface GroupingReport {
   readonly groups: readonly SceneGroup[];
   readonly judged_boundaries: number;
+  /** Judged boundaries removed because one side of them was a fragment. */
+  readonly absorbed_fragments: number;
   readonly forced_by_plant_span: number;
   readonly forced_by_size: number;
   /** Plant/payoff pairs that could not be separated because they sit on adjacent events. */
@@ -114,16 +138,78 @@ function strongestInterior(
 }
 
 /**
- * Apply the boundary decisions, then the two constraints, and report what each one cost.
+ * Remove the boundary on one side of every fragment, smallest fragment first.
+ *
+ * A fragment that interrupts a scene which then resumes in the same place loses both boundaries:
+ * the remark recounted mid-dinner belongs to the dinner. Otherwise it joins the neighbour the
+ * mechanical evidence separates it from least. The threshold is fixed from the judged grouping,
+ * so absorbing one fragment cannot make its neighbours into fragments.
+ */
+export function absorbFragments(
+  events: readonly FabulaEvent[],
+  adjacencies: readonly Adjacency[],
+  judged: ReadonlySet<number>,
+  fraction = FRAGMENT_FRACTION,
+): { boundaries: Set<number>; absorbed: number } {
+  const boundaries = new Set(judged);
+  const threshold = (events.length / (judged.size + 1)) * fraction;
+  let absorbed = 0;
+
+  for (let guard = 0; guard < events.length; guard += 1) {
+    const groups = groupsFrom(events.length, boundaries);
+    if (groups.length < 2) break;
+    let fragment: number[] | null = null;
+    for (const members of groups) {
+      if (members.length >= threshold) continue;
+      if (fragment === null || members.length < fragment.length) fragment = members;
+    }
+    if (fragment === null) break;
+
+    const first = fragment[0]!;
+    const last = fragment[fragment.length - 1]!;
+    const before = first > 0 ? first - 1 : null;
+    const after = last < events.length - 1 ? last : null;
+
+    const resumes =
+      before !== null &&
+      after !== null &&
+      events[before]!.location_id !== null &&
+      events[before]!.location_id === events[after + 1]!.location_id;
+    if (resumes) {
+      boundaries.delete(before);
+      boundaries.delete(after);
+      absorbed += 2;
+      continue;
+    }
+
+    const scoreAt = (index: number | null): number =>
+      index === null ? Number.POSITIVE_INFINITY : (adjacencies[index]?.score ?? 0);
+    const drop = scoreAt(before) <= scoreAt(after) ? before : after;
+    if (drop === null) break;
+    boundaries.delete(drop);
+    absorbed += 1;
+  }
+
+  return { boundaries, absorbed };
+}
+
+/**
+ * Absorb fragments, apply the boundary decisions, then the two constraints, and report what each
+ * one cost.
  */
 export function group(
   events: readonly FabulaEvent[],
   adjacencies: readonly Adjacency[],
   judged: ReadonlySet<number>,
-  options: { maxEventsPerScene?: number } = {},
+  options: { maxEventsPerScene?: number; fragmentFraction?: number } = {},
 ): GroupingReport {
   const cap = options.maxEventsPerScene ?? MAX_EVENTS_PER_SCENE;
-  const boundaries = new Set(judged);
+  const { boundaries, absorbed } = absorbFragments(
+    events,
+    adjacencies,
+    judged,
+    options.fragmentFraction,
+  );
   const plantSpanForced = new Set<number>();
   const sizeForced = new Set<number>();
   const unseparable: Array<{ fact_ref: string; plant: string; payoff: string }> = [];
@@ -198,6 +284,7 @@ export function group(
   return {
     groups: finalGroups,
     judged_boundaries: judged.size,
+    absorbed_fragments: absorbed,
     forced_by_plant_span: plantSpanForced.size,
     forced_by_size: sizeForced.size,
     unseparable_plant_spans: unseparable,

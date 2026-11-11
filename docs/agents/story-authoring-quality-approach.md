@@ -325,6 +325,12 @@ tune to three decimal places against a single text.
 
 ### 4.6 #146 — segmentation
 
+> **Outcome, 2026-11-11.** The residue was segmentation's own and had two causes: one- and
+> two-event fragments, and a told story cut at every interruption. Scene ratio went 2.30 → 1.75 on
+> the *Carol* and 2.81 → 1.38 on *The Machine Stops*, with boundary recall unchanged; precision
+> rose to 0.44 and 0.43 and is still under the bar. Cinderella lost one boundary. See
+> `docs/research/segmentation-fragments.md`.
+
 **The ticket's instruction is right: re-measure before touching anything.** What it does not have
 is the mechanism, and the mechanism is worth stating because it predicts how much of the
 over-segmentation is inherited.

@@ -254,6 +254,18 @@ export interface SegmentationScore {
   readonly source_coverage: CoverageScore;
   readonly reveal_order: RevealOrderScore;
   readonly plants: PlantScore;
+  /**
+   * What the alignment judge decided for every fixture `fact_ref`, with its reason (#162).
+   *
+   * §3.6 and §3.7 both stand on this and neither could be checked without it: a fact given no
+   * candidate is never compared, and a failed alignment call unaligns every fact at once, which
+   * until this was saved read the same as a segmenter that found nothing.
+   */
+  readonly fact_alignment: ReadonlyArray<{
+    readonly fixture_fact: string;
+    readonly candidate_fact: string | null;
+    readonly why: string;
+  }>;
   readonly caveats: readonly string[];
 }
 
@@ -891,17 +903,53 @@ export async function scoreSegmentation(
     for (const payoff of scene.pays_off) candidateFacts.add(payoff.fact_ref);
   }
 
+  // A fact_ref is a slug two authors chose independently, and a slug alone is thin evidence that
+  // two of them name the same setup: on the Carol the judge aligned none of 18. So each side says
+  // where the fact is planted and paid off, and the fixture side adds the annotation's reason.
+  const where = (plant: string | null, payoff: string): string =>
+    `set up in ${plant ?? 'the story\'s opening state'}, paid off in ${payoff}`;
+  const fixtureNotes = new Map<string, string>();
+  for (const scene of inputs.truth.package.scene_cards) {
+    for (const payoff of scene.pays_off) {
+      fixtureNotes.set(payoff.fact_ref, where(payoff.plant, scene.id));
+    }
+  }
+  for (const pair of [
+    ...(inputs.truth.plant_annotation?.declared ?? []),
+    ...(inputs.truth.plant_annotation?.implicit ?? []),
+  ]) {
+    fixtureNotes.set(pair.fact_ref, `${where(pair.plant, pair.payoff)}. ${pair.why}`);
+  }
+  const candidateNotes = new Map<string, string>();
+  for (const scene of scenes) {
+    for (const payoff of scene.pays_off) {
+      candidateNotes.set(payoff.fact_ref, where(payoff.plant, scene.id));
+    }
+  }
+  const alignRow = (notes: ReadonlyMap<string, string>) => (fact: string) => ({
+    id: fact,
+    name: fact.replace(/_/g, ' '),
+    note: notes.get(fact) ?? '',
+  });
+
   const factMap = new Map<string, string>();
+  let factAlignment: SegmentationScore['fact_alignment'] = [];
   if (fixtureFacts.size > 0 && candidateFacts.size > 0) {
     const judged = await judgeAlignment(
       judge,
-      'fact_ref',
-      [...fixtureFacts].map((fact) => ({ id: fact, name: fact.replace(/_/g, ' '), note: '' })),
-      [...candidateFacts].map((fact) => ({ id: fact, name: fact.replace(/_/g, ' '), note: '' })),
+      'fact_ref (facts a story sets up and later pays off; the two lists name scenes differently, ' +
+        'so align two rows when they are the same setup and payoff)',
+      [...fixtureFacts].map(alignRow(fixtureNotes)),
+      [...candidateFacts].map(alignRow(candidateNotes)),
     );
     for (const row of judged) {
       if (row.candidate_id !== null) factMap.set(row.fixture_id, row.candidate_id);
     }
+    factAlignment = judged.map((row) => ({
+      fixture_fact: row.fixture_id,
+      candidate_fact: row.candidate_id,
+      why: row.why,
+    }));
   }
 
   const lint = lintPackage(inputs.candidate);
@@ -959,6 +1007,7 @@ export async function scoreSegmentation(
     source_coverage: coverage,
     reveal_order: revealOrderScore(inputs.candidate, inputs.truth, factMap),
     plants: plantScore(inputs.candidate, inputs.truth, sceneMap, factMap),
+    fact_alignment: factAlignment,
     caveats: [
       ...(unscoredBeats > 0
         ? [

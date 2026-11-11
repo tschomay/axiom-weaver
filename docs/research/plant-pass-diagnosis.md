@@ -152,3 +152,13 @@ treatment of his clerk → Fezziwig).
 
 Neither changes a number. The recorded score files were not regenerated, since that needs the
 alignment judge.
+
+## Re-measured after #146 (2026-11-11)
+
+Item 1 above is done in part: the alignment judge now gets each fact's setup and payoff scenes and
+the annotation's reason, and `score.json` saves its decisions as `fact_alignment`. The scene map is
+still single-valued. Item 2 landed as a prompt rule and fragment absorption.
+
+Recall did not move (1/13, 2/18 and 0/5 on one run each), and the runs point further upstream than
+item 3 does: the plant end of the *Carol*'s two best-known callbacks is not an event in the
+extraction at all. Numbers and reasoning are in `segmentation-fragments.md`.
