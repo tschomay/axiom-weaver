@@ -42,12 +42,14 @@ import {
 } from '../src/arc/rubric';
 import {
   blindArcView,
+  judgePackage,
   judgeResponseJsonSchema,
   summarize,
   STOCK_SHAPES,
   type JudgeResponse,
 } from '../src/arc/judge';
 import { briefsFor } from '../src/arc/premises';
+import type { ModelClient } from '../src/writer/model-client';
 import { renderArcPrompt, arcResponseJsonSchema, phaseEventCounts } from '../src/arc/prompt';
 import { RANDOM_PREMISES, pickRandomPremise } from '../src/arc/random-premises';
 import cinderella from '../fixtures/cinderella/package.json';
@@ -624,8 +626,8 @@ describe('the two rebuilt §4.2 criteria (#147)', () => {
     engagement: 4,
     notes: '',
   };
-  const judge = (over: Partial<JudgeResponse>) =>
-    summarize({ ...base, ...over } as JudgeResponse, 'test', 'gemini-3.8-flash');
+  const judge = (over: Partial<Parameters<typeof summarize>[0]>) =>
+    summarize({ ...base, ...over } as Parameters<typeof summarize>[0], 'test', 'gemini-3.8-flash');
 
   it('keeps a causal verdict on a seam that also jumps story time', () => {
     // The finding that produced this design. A first attempt made `discontinuity` a fourth
@@ -645,6 +647,65 @@ describe('the two rebuilt §4.2 criteria (#147)', () => {
     // The bar reads the continuous pairs only: one pair, one `causes`.
     expect(score.causal.continuous).toEqual({ pairs: 1, causes: 1, share: 1 });
     expect(score.causal.passed).toBe(true);
+  });
+
+  it('leaves a guided-tour seam out of the bar but keeps its verdict on the record', () => {
+    // #159: the Carol's `merely_follows` verdicts sit on the seams between the Ghosts' vignettes.
+    const score = judge({
+      causal_pairs: [
+        { pair: 'E01→E02', verdict: 'causes', story_time_jump: false, why: '' },
+        { pair: 'E02→E03', verdict: 'merely_follows', story_time_jump: false, guided_sequence: true, why: '' },
+        { pair: 'E03→E04', verdict: 'causes', story_time_jump: false, guided_sequence: true, why: '' },
+        { pair: 'E04→E05', verdict: 'merely_follows', story_time_jump: true, guided_sequence: true, why: '' },
+      ],
+    });
+    expect(score.causal.continuous).toEqual({ pairs: 3, causes: 2, share: 2 / 3 });
+    expect(score.causal.guided).toEqual({ pairs: 3, causes: 1 });
+    expect(score.causal.unguided).toEqual({ pairs: 1, causes: 1, share: 1 });
+    expect(score.causal.passed).toBe(true);
+  });
+
+  it('still fails on a contradiction that sits on a guided seam', () => {
+    const score = judge({
+      causal_pairs: [
+        { pair: 'E01→E02', verdict: 'causes', story_time_jump: false, why: '' },
+        { pair: 'E02→E03', verdict: 'contradicts', story_time_jump: false, guided_sequence: true, why: '' },
+      ],
+    });
+    expect(score.causal.passed).toBe(false);
+  });
+
+  it('asks the guided-tour question in its own call and merges the answer by seam', async () => {
+    // Asked inside the main prompt, the flag moved Cinderella's story_time_jump flags and verdicts.
+    const prompts: string[] = [];
+    const client = {
+      generate: (request: { contents: string }) => {
+        prompts.push(request.contents);
+        const guidedCall = request.contents.includes('GUIDED TOURS');
+        return Promise.resolve({
+          text: JSON.stringify(
+            guidedCall
+              ? { guided_pairs: [{ pair: 'E2 -> E3', why: 'next stop' }] }
+              : {
+                  ...base,
+                  causal_pairs: [
+                    { pair: 'E01→E02', verdict: 'causes', story_time_jump: false, why: '' },
+                    { pair: 'E02→E03', verdict: 'merely_follows', story_time_jump: false, why: '' },
+                  ],
+                },
+          ),
+          finish_reason: 'STOP',
+          model: 'gemini-3.8-flash',
+          usage: { prompt_tokens: 0, output_tokens: 0, cached_tokens: 0, thoughts_tokens: 0 },
+        });
+      },
+    } as unknown as ModelClient;
+    const pkg = parseStoryPackage(cinderella);
+    const score = await judgePackage(pkg, 'test', { client, model: 'gemini-3.8-flash' });
+    expect(prompts).toHaveLength(2);
+    expect(prompts.filter((prompt) => prompt.includes('GUIDED TOURS'))).toHaveLength(1);
+    expect(score.raw.causal_pairs.map((row) => row.guided_sequence)).toEqual([false, true]);
+    expect(score.causal.unguided).toEqual({ pairs: 1, causes: 1, share: 1 });
   });
 
   it('still fails on a contradiction that sits on a jump seam', () => {

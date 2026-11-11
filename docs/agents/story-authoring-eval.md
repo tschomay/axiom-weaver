@@ -498,7 +498,7 @@ These cannot be mechanized and should not be faked with a proxy metric:
 
 | Criterion | What's asked | How scored |
 | --- | --- | --- |
-| **Causal follow-through** | Does each scene's outcome actually cause what follows, or merely precede it? | Per consecutive pair: `causes` / `merely follows` / `contradicts`, **plus a separate `story_time_jump` flag**. Bar: ≥ 0.70 `causes` over the pairs that are *not* jumps, and **0** `contradicts` over **all** pairs. |
+| **Causal follow-through** | Does each scene's outcome actually cause what follows, or merely precede it? | Per consecutive pair: `causes` / `merely follows` / `contradicts`, **plus a separate `story_time_jump` flag, and a `guided_sequence` flag asked in a call of its own**. Bar: ≥ 0.70 `causes` over the pairs that are neither a jump nor a guided seam, and **0** `contradicts` over **all** pairs. |
 | **Non-genericity** | Does the arc reduce to a stock shape with names substituted? | Judge picks a shape from a **fixed inventory** (`STOCK_SHAPES`), rates adherence 1–5, **and lists the particulars the label does not predict**, marking which are load-bearing. Passes on adherence ≤ 3 **or** ≥ 2 load-bearing particulars. Deliberately not "is it original" — every arc resembles something; the failure is when nothing but the labels differ. |
 
 **Why both were rebuilt (#147), because the old forms failed §4.3 on material that works.**
@@ -528,6 +528,35 @@ to 0.85, both clearing the bar.
 > Scrooge from the pawnshop to the deathbed"). What depresses this number is *montage* — juxtaposed
 > vignettes — not non-chronological telling. Whether a montage seam should count as a causal
 > failure is a live question this file does not yet answer; see #159.
+
+> **#159's answer, measured 2026-11-11** (`gemini-3.8-flash`, eight runs per fixture per arm;
+> per-seam counts in `prototypes/arc-generation/guided-sequence-repeats.json`).
+>
+> **The judge is not stable on the tour seams, and that is the larger finding.** With the prompt
+> unchanged, 16 runs of the *Carol* split in two: 7 rate every pair `causes` (continuous share
+> 1.00) and 9 rate the tour seams `merely_follows` (0.33–0.75). The fixture passes the bar in 8
+> of the 16. The ±0.08 run-to-run figure above no longer describes this criterion. Off the tour
+> seams the *Carol*'s verdicts barely move.
+>
+> **A `guided_sequence` flag marks those seams and nothing else.** Asked in its own call it named
+> the same ten *Carol* seams in 8 of 8 runs (`E04→E06`, `E08→E11`, `E12→E17`), and none on
+> Cinderella (8 runs), *The Machine Stops* (8 runs) or nine generated arcs (one run each).
+>
+> **Asked inside the main prompt it moved other answers,** which is the failure #147 warned
+> about. Cinderella has no tour and the flag never fired on it, yet its `story_time_jump` flags
+> on three seams fell from 7, 7 and 8 runs of 8 to 2, 4 and 3, and its all-pairs `causes` share
+> fell 0.87 → 0.77. Hence the separate call: the main prompt is byte-identical to before.
+>
+> | continuous → unguided share, 8 runs | mean | runs that pass |
+> | --- | --- | --- |
+> | Cinderella | 0.96 → 0.96 | 8 → 8 |
+> | *A Christmas Carol* | 0.88 → 0.97 | 6 → 8 |
+> | *The Machine Stops* | 0.69 → 0.69 | 3 → 3 |
+>
+> Two things this does **not** settle. The *Carol*'s bar is now read over 4 or 5 of its 19 pairs,
+> so one verdict moves it by 0.2. And *The Machine Stops* straddles the bar on its own account,
+> with no tour and no flag involved: 0.64 in most runs, passing 7 of 16 with the prompt
+> unchanged, against the 0.85 recorded in September. That is a separate calibration problem.
 | **Payoff earned-ness** | Is each payoff *set up*, versus merely *linked*? | Per pair: `earned` / `linked only`. ≥ 0.70 `earned`. This is the one that separates a valid `pays_off` graph from a good one, and §4.1 cannot see it. |
 | **Thematic coherence** | Does the arc hold one recognizable concern end to end? | 1–5, ≥ 3. |
 | **Engagement** | Would a reader keep going? | 1–5, ≥ 3. The softest number here; weight it last. |

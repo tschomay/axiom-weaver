@@ -91,6 +91,7 @@ export const JudgeResponseSchema = z.object({
         verdict: z.enum(CAUSAL_VERDICTS),
         /** Whether the telling jumps story time across this seam. Crossed with, not instead of, the verdict. */
         story_time_jump: z.boolean().default(false),
+        guided_sequence: z.boolean().default(false),
         why: z.string().default(''),
       }),
     )
@@ -178,6 +179,15 @@ export interface JudgeScore {
      * genuinely thin or merely interrupted.
      */
     continuous: { pairs: number; causes: number; share: number | null };
+    /** Seams between two stops of one guided tour (#159), jump or not. Judged and reported. */
+    guided: { pairs: number; causes: number };
+    /**
+     * `continuous` with the guided seams also left out, and what the bar reads since #159.
+     *
+     * On the *Carol* this is 4 or 5 of 19 pairs, so one verdict moves it by 0.2. `pairs` is
+     * reported so a thin denominator is visible beside the share.
+     */
+    unguided: { pairs: number; causes: number; share: number | null };
     passed: boolean;
   };
   readonly payoff_earned: {
@@ -518,32 +528,124 @@ export function judgeResponseJsonSchema(): Record<string, unknown> {
 
 export const JUDGE_MAX_OUTPUT_TOKENS = 16_000;
 
+/**
+ * #159's question, asked in a call of its own.
+ *
+ * A guided tour is a run of sights a guide chose to make a case to someone watching: the Ghosts'
+ * vignettes in *A Christmas Carol*. Its seams are where that fixture's `merely_follows` verdicts
+ * sit, and "the spirit takes him to the next thing" is how a tour is meant to read.
+ *
+ * It is a separate call because asking it inside the main prompt moved other answers. Over eight
+ * runs per fixture, Cinderella (which has no tour, and on which the flag never fired) had its
+ * `story_time_jump` flags on three seams fall from 7, 7 and 8 runs of 8 to 2, 4 and 3, and its
+ * all-pairs `causes` share fall 0.87 to 0.77. Asked here, the main prompt is unchanged and so are
+ * its verdicts.
+ */
+function guidedSequencePrompt(view: string): string {
+  return [
+    view,
+    '',
+    '---',
+    '',
+    'GUIDED TOURS. Name every consecutive pair of events (E01→E02, E02→E03, and so on) where the',
+    'later event is the next stop on a tour: someone is being led or shown from one sight to the',
+    'next by a guide, and the sights were chosen by the guide to make a case to the person watching',
+    'rather than arising from each other. Both events must be stops on the same tour.',
+    'Do not name the seam where a tour begins or ends, a character who moves on of their own',
+    'accord, or a pair you merely find weakly connected. Most stories have no tour: return an',
+    'empty list for those.',
+  ].join('\n');
+}
+
+function guidedSequenceJsonSchema(): Record<string, unknown> {
+  return {
+    type: 'object',
+    properties: {
+      guided_pairs: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            pair: { type: 'string', description: 'e.g. "E03→E04"' },
+            why: { type: 'string' },
+          },
+          required: ['pair', 'why'],
+          propertyOrdering: ['pair', 'why'],
+        },
+      },
+    },
+    required: ['guided_pairs'],
+  };
+}
+
+const GuidedSequenceResponseSchema = z.object({
+  guided_pairs: z.array(z.object({ pair: z.string(), why: z.string().default('') })).default([]),
+});
+
+/** "E03→E04", "E3 -> E4" and "E03-E04" all name the same seam. */
+function seamKey(pair: string): string {
+  return (pair.match(/\d+/g) ?? []).map(Number).join('>');
+}
+
+function parseJudgeJson(text: string): unknown {
+  const fenced = /^\s*```(?:json)?\s*([\s\S]*?)\s*```\s*$/.exec(text);
+  return JSON.parse(fenced?.[1] ?? text);
+}
+
 export async function judgePackage(
   pkg: StoryPackage,
   label: string,
   options: { client: ModelClient; model: string },
 ): Promise<JudgeScore> {
-  const response = await options.client.generate({
+  const view = blindArcView(pkg);
+  const shared = {
     model: options.model,
     systemInstruction: JUDGE_SYSTEM_INSTRUCTION,
-    contents: judgePrompt(blindArcView(pkg)),
-    responseJsonSchema: judgeResponseJsonSchema(),
     maxOutputTokens: JUDGE_MAX_OUTPUT_TOKENS,
     thinkingLevel: 'MEDIUM',
-  });
+  } as const;
+  const [response, guidedResponse] = await Promise.all([
+    options.client.generate({
+      ...shared,
+      contents: judgePrompt(view),
+      responseJsonSchema: judgeResponseJsonSchema(),
+    }),
+    options.client.generate({
+      ...shared,
+      contents: guidedSequencePrompt(view),
+      responseJsonSchema: guidedSequenceJsonSchema(),
+    }),
+  ]);
 
-  if (response.finish_reason !== 'STOP') {
-    throw new Error(`judge finished ${response.finish_reason} for "${label}"`);
+  for (const each of [response, guidedResponse]) {
+    if (each.finish_reason !== 'STOP') {
+      throw new Error(`judge finished ${each.finish_reason} for "${label}"`);
+    }
   }
 
-  const fenced = /^\s*```(?:json)?\s*([\s\S]*?)\s*```\s*$/.exec(response.text);
-  const raw = JudgeResponseSchema.parse(JSON.parse(fenced?.[1] ?? response.text));
+  const verdicts = JudgeResponseSchema.parse(parseJudgeJson(response.text));
+  const guided = new Set(
+    GuidedSequenceResponseSchema.parse(parseJudgeJson(guidedResponse.text)).guided_pairs.map(
+      (row) => seamKey(row.pair),
+    ),
+  );
+  const raw: JudgeResponse = {
+    ...verdicts,
+    causal_pairs: verdicts.causal_pairs.map((row) => ({
+      ...row,
+      guided_sequence: guided.has(seamKey(row.pair)),
+    })),
+  };
   return summarize(raw, label, response.model);
 }
 
 /** Turn a judge's raw verdicts into the per-criterion result, with each bar applied separately. */
 export function summarize(
-  input: Omit<JudgeResponse, 'setting_rules' | 'unmotivated_actions'> & {
+  input: Omit<JudgeResponse, 'setting_rules' | 'unmotivated_actions' | 'causal_pairs'> & {
+    // A response recorded before #159 has no guided_sequence on its pairs.
+    causal_pairs: (Omit<JudgeResponse['causal_pairs'][number], 'guided_sequence'> & {
+      guided_sequence?: boolean;
+    })[];
     setting_rules?: JudgeResponse['setting_rules'];
     unmotivated_actions?: JudgeResponse['unmotivated_actions'];
   },
@@ -553,6 +655,10 @@ export function summarize(
   // A response recorded before #181 asked the question has no setting rules to read.
   const raw: JudgeResponse = {
     ...input,
+    causal_pairs: input.causal_pairs.map((row) => ({
+      ...row,
+      guided_sequence: row.guided_sequence ?? false,
+    })),
     setting_rules: input.setting_rules ?? [],
     unmotivated_actions: input.unmotivated_actions ?? [],
   };
@@ -567,6 +673,11 @@ export function summarize(
   const continuousCauses = continuousPairs.filter((row) => row.verdict === 'causes').length;
   const continuousShare =
     continuousPairs.length === 0 ? null : continuousCauses / continuousPairs.length;
+
+  const guidedPairs = raw.causal_pairs.filter((row) => row.guided_sequence);
+  const unguidedPairs = continuousPairs.filter((row) => !row.guided_sequence);
+  const unguidedCauses = unguidedPairs.filter((row) => row.verdict === 'causes').length;
+  const unguidedShare = unguidedPairs.length === 0 ? null : unguidedCauses / unguidedPairs.length;
 
   const loadBearing = raw.particulars.filter((row) => row.load_bearing).length;
 
@@ -590,11 +701,21 @@ export function summarize(
         causes: continuousCauses,
         share: continuousShare,
       },
-      // The bar reads the continuous share; `contradicts` is scored over EVERY pair, jumps
-      // included. A contradiction across a flashback seam is still a contradiction — the reader
-      // meets those two scenes back to back whatever the chronology — so the zero-tolerance half
-      // of this row must never be excludable.
-      passed: continuousShare !== null && continuousShare >= 0.7 && contradicts === 0,
+      guided: {
+        pairs: guidedPairs.length,
+        causes: guidedPairs.filter((row) => row.verdict === 'causes').length,
+      },
+      unguided: {
+        pairs: unguidedPairs.length,
+        causes: unguidedCauses,
+        share: unguidedShare,
+      },
+      // The bar reads the share over pairs that are neither a jump nor a guided seam;
+      // `contradicts` is scored over EVERY pair, jumps and guided seams included. A contradiction
+      // across a flashback seam is still a contradiction — the reader meets those two scenes back
+      // to back whatever the chronology — so the zero-tolerance half of this row must never be
+      // excludable.
+      passed: unguidedShare !== null && unguidedShare >= 0.7 && contradicts === 0,
     },
     payoff_earned: {
       pairs: payoffPairs,

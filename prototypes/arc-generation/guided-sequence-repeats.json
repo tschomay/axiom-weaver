@@ -1,0 +1,124 @@
+{
+ "judge_model": "gemini-3.8-flash",
+ "judged_on": "2026-11-11",
+ "runs_per_fixture_per_arm": 8,
+ "note": "Per seam, how many of 8 runs gave causes / story_time_jump / guided_sequence. baseline and flag_in_own_call share one main prompt.",
+ "arms": {
+  "baseline": {
+   "cinderella": {
+    "causes": [1, 8, 8, 8, 8, 8, 8, 4, 8, 8, 5, 8, 8],
+    "story_time_jump": [7, 0, 0, 0, 0, 0, 0, 0, 7, 0, 8, 0, 2],
+    "guided_sequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "continuous_share_per_run": [1, 0.9, 1, 0.9, 1, 0.9, 0.92, 0.9],
+    "unguided_share_per_run": [null, null, null, null, null, null, null, null],
+    "unguided_pairs_per_run": [null, null, null, null, null, null, null, null]
+   },
+   "a-christmas-carol": {
+    "causes": [5, 8, 8, 2, 2, 8, 8, 2, 2, 4, 8, 2, 2, 8, 3, 5, 8, 7, 7],
+    "story_time_jump": [0, 0, 8, 8, 8, 8, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 8, 0, 6],
+    "guided_sequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "continuous_share_per_run": [0.42, 0.33, 1, 0.42, 1, 0.5, 0.62, 0.46],
+    "unguided_share_per_run": [null, null, null, null, null, null, null, null],
+    "unguided_pairs_per_run": [null, null, null, null, null, null, null, null]
+   },
+   "the-machine-stops": {
+    "causes": [0, 2, 8, 8, 8, 8, 8, 8, 1, 0, 0, 3, 8, 8, 8],
+    "story_time_jump": [0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 1, 0, 0, 0],
+    "guided_sequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "continuous_share_per_run": [0.71, 0.64, 0.64, 0.77, 0.71, 0.64, 0.79, 0.64],
+    "unguided_share_per_run": [null, null, null, null, null, null, null, null],
+    "unguided_pairs_per_run": [null, null, null, null, null, null, null, null]
+   }
+  },
+  "flag_in_main_prompt": {
+   "cinderella": {
+    "causes": [0, 8, 8, 8, 8, 8, 8, 2, 4, 8, 2, 8, 8],
+    "story_time_jump": [2, 1, 0, 0, 0, 0, 0, 0, 4, 0, 3, 0, 1],
+    "guided_sequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "continuous_share_per_run": [0.75, 0.77, 0.89, 0.82, 0.75, 0.9, 0.92, 0.92],
+    "unguided_share_per_run": [0.75, 0.77, 0.89, 0.82, 0.75, 0.9, 0.92, 0.92],
+    "unguided_pairs_per_run": [12, 13, 9, 11, 12, 10, 13, 13]
+   },
+   "a-christmas-carol": {
+    "causes": [4, 8, 8, 1, 1, 8, 8, 1, 1, 5, 8, 1, 1, 8, 1, 2, 8, 8, 8],
+    "story_time_jump": [0, 1, 8, 8, 8, 7, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 8, 0, 3],
+    "guided_sequence": [0, 0, 2, 8, 8, 0, 2, 8, 8, 8, 0, 8, 8, 8, 8, 8, 0, 0, 0],
+    "continuous_share_per_run": [0.33, 0.54, 0.46, 0.5, 0.92, 0.43, 0.54, 0.58],
+    "unguided_share_per_run": [0.75, 1, 1, 0.83, 0.75, 0.83, 1, 1],
+    "unguided_pairs_per_run": [4, 5, 5, 6, 4, 6, 4, 3]
+   },
+   "the-machine-stops": {
+    "causes": [0, 1, 8, 8, 8, 8, 8, 8, 0, 0, 0, 7, 8, 8, 8],
+    "story_time_jump": [0, 0, 0, 0, 0, 0, 0, 1, 8, 1, 0, 2, 0, 0, 0],
+    "guided_sequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "continuous_share_per_run": [0.71, 0.71, 0.71, 0.71, 0.69, 0.71, 0.77, 0.75],
+    "unguided_share_per_run": [0.71, 0.71, 0.71, 0.71, 0.69, 0.71, 0.77, 0.75],
+    "unguided_pairs_per_run": [14, 14, 14, 14, 13, 14, 13, 12]
+   }
+  },
+  "flag_in_own_call": {
+   "cinderella": {
+    "causes": [0, 8, 8, 8, 8, 8, 8, 5, 8, 8, 6, 8, 8],
+    "story_time_jump": [8, 1, 0, 0, 0, 0, 0, 0, 7, 0, 7, 0, 4],
+    "guided_sequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "continuous_share_per_run": [1, 0.9, 1, 0.9, 1, 0.89, 1, 1],
+    "unguided_share_per_run": [1, 0.9, 1, 0.9, 1, 0.89, 1, 1],
+    "unguided_pairs_per_run": [9, 10, 9, 10, 8, 9, 10, 12]
+   },
+   "a-christmas-carol": {
+    "causes": [7, 8, 8, 5, 5, 8, 8, 5, 5, 8, 8, 6, 6, 8, 7, 8, 8, 8, 8],
+    "story_time_jump": [0, 0, 8, 8, 8, 8, 0, 0, 0, 0, 7, 1, 0, 0, 0, 0, 8, 0, 3],
+    "guided_sequence": [0, 0, 0, 8, 8, 0, 0, 8, 8, 8, 0, 8, 8, 8, 8, 8, 0, 0, 0],
+    "continuous_share_per_run": [0.75, 1, 1, 1, 1, 1, 0.69, 0.58],
+    "unguided_share_per_run": [1, 1, 1, 1, 1, 1, 1, 0.75],
+    "unguided_pairs_per_run": [5, 5, 5, 5, 4, 5, 5, 4]
+   },
+   "the-machine-stops": {
+    "causes": [0, 2, 8, 8, 8, 8, 8, 8, 2, 1, 0, 2, 8, 8, 8],
+    "story_time_jump": [0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 1, 1, 0, 0, 0],
+    "guided_sequence": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "continuous_share_per_run": [0.71, 0.64, 0.64, 0.79, 0.64, 0.64, 0.83, 0.64],
+    "unguided_share_per_run": [0.71, 0.64, 0.64, 0.79, 0.64, 0.64, 0.83, 0.64],
+    "unguided_pairs_per_run": [14, 14, 14, 14, 14, 14, 12, 14]
+   }
+  }
+ },
+ "generated_arcs_flag_in_own_call": {
+  "arc_free_text_1": {
+   "continuous_share": 0.89,
+   "guided_pairs": 0
+  },
+  "arc_free_text_2": {
+   "continuous_share": 0.63,
+   "guided_pairs": 0
+  },
+  "arc_free_text_3": {
+   "continuous_share": 0.79,
+   "guided_pairs": 0
+  },
+  "arc_no_span_guidance_ferry": {
+   "continuous_share": 0.84,
+   "guided_pairs": 0
+  },
+  "arc_no_span_guidance_kiln": {
+   "continuous_share": 0.95,
+   "guided_pairs": 0
+  },
+  "arc_no_span_guidance_orchard": {
+   "continuous_share": 0.95,
+   "guided_pairs": 0
+  },
+  "arc_structured_ferry": {
+   "continuous_share": 0.95,
+   "guided_pairs": 0
+  },
+  "arc_structured_kiln": {
+   "continuous_share": 0.79,
+   "guided_pairs": 0
+  },
+  "arc_structured_orchard": {
+   "continuous_share": 0.95,
+   "guided_pairs": 0
+  }
+ }
+}

@@ -49,8 +49,10 @@ function line(score: JudgeScore): string {
   const pct = (value: number | null) => (value === null ? ' n/a ' : `${(value * 100).toFixed(0)}%`);
   return (
     `${score.label.padEnd(28)} ` +
-    `causes ${pct(score.causal.continuous.share)} of ${score.causal.continuous.pairs} cont ` +
-    `(all ${pct(score.causal.causes_share)}, ${score.causal.story_time_jumps} jumps, ` +
+    `causes ${pct(score.causal.unguided.share)} of ${score.causal.unguided.pairs} unguided ` +
+    `(cont ${pct(score.causal.continuous.share)} of ${score.causal.continuous.pairs}, ` +
+    `all ${pct(score.causal.causes_share)}, ${score.causal.story_time_jumps} jumps, ` +
+    `${score.causal.guided.pairs} guided, ` +
     `contradicts ${score.causal.contradicts}) | ` +
     `earned ${pct(score.payoff_earned.earned_share)} of ${score.payoff_earned.pairs} | ` +
     `stock ${score.non_genericity.adherence}/5 +${score.non_genericity.load_bearing_particulars}lb ` +
