@@ -281,6 +281,67 @@
     "candidate_events": 75,
     "matched": 29,
     "recall": 0.5471698113207547,
+    "recall_eventful": 0.6444444444444445,
+    "eventful_events": 45,
+    "matched_eventful": 29,
+    "non_eventful_beats": [
+      {
+        "beat_id": "scene_01_remarriage#0",
+        "text": "the father has remarried a proud and haughty woman",
+        "kind": "standing_fact",
+        "confidence": "low",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_01_remarriage#1",
+        "text": "her two daughters prove as haughty as their mother",
+        "kind": "characterisation",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_02_the_ball_proclaimed#1",
+        "text": "the two sisters are overjoyed and think of nothing but what to wear",
+        "kind": "mood",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_02_the_ball_proclaimed#2",
+        "text": "Cinderella is expected to help them dress but is not imagined as a guest herself",
+        "kind": "expectation",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_03_dressing_the_sisters#2",
+        "text": "Cinderella does not ask to go",
+        "kind": "non_action",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_06_first_ball_arrival#3",
+        "text": "no one — including her own stepmother and sisters — recognizes her",
+        "kind": "negative_state",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_07_first_ball_departure#1",
+        "text": "the sisters do not know her",
+        "kind": "negative_state",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_11_the_kept_slipper#2",
+        "text": "she says nothing of the ball to anyone in the household",
+        "kind": "non_action",
+        "confidence": "high",
+        "matched": false
+      }
+    ],
     "missed": [
       "the father has remarried a proud and haughty woman",
       "her two daughters prove as haughty as their mother",

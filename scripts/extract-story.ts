@@ -242,12 +242,22 @@ function printScore(report: Awaited<ReturnType<typeof scoreExtraction>>): void {
   lines.push('');
   lines.push('  §3.3 Event list and chronology');
   lines.push(
-    `      event recall ${pct(events.recall)} (${events.matched}/${events.ground_truth_events}), ` +
-      `${events.candidate_events} candidate events` +
+    `      event recall ${pct(events.recall_eventful)} (${events.matched_eventful}/${events.eventful_events}) ` +
+      `over eventful beats, bar 0.85; ${pct(events.recall)} (${events.matched}/${events.ground_truth_events}) ` +
+      `over all beats, ${events.candidate_events} candidate events` +
       (events.entailment_unresolved > 0
         ? `  !! ${events.entailment_unresolved} beats UNSCORED (judge failed) — recall is a floor`
         : ''),
   );
+  if (events.non_eventful_beats.length > 0) {
+    lines.push(
+      `      ${events.non_eventful_beats.length} beats are not events by pass-events.ts's own definition ` +
+        'and are out of the denominator (fixtures/<story>/beats.annotation.json):',
+    );
+    for (const beat of events.non_eventful_beats) {
+      lines.push(`        - [${beat.kind}${beat.confidence === 'low' ? ', low confidence' : ''}] ${beat.text.length > 96 ? `${beat.text.slice(0, 95)}…` : beat.text}`);
+    }
+  }
   lines.push(
     `      pairwise chronology ${pct(events.pairwise_accuracy)} over ${events.pairwise_total} pairs; ` +
       `high-confidence ${pct(events.high_confidence_accuracy)} over ${events.high_confidence_total}`,

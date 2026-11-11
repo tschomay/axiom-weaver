@@ -307,6 +307,31 @@ exactly the thing that matters.
 
 - **Event recall** against a hand-built event list for the source: ≥ 0.85 of events the fixture's
   Scene Cards' `required_beats` collectively entail.
+  **The bar reads `recall_eventful`, not `recall` (#165).** The extractor's definition of an event
+  is "one thing that HAPPENS or CHANGES… Not a description, not a mood, not a standing fact", and
+  some `required_beats` are exactly those things — "Cinderella does not ask to go", "the sisters do
+  not know her". Counting them put items in the denominator that the pipeline is forbidden to
+  produce: a perfect Cinderella extraction scored 45/53 = 0.849 against 0.85. This is #151's error
+  again, in the event list. Each fixture's `beats.annotation.json` names the beats taken out, with
+  a kind and a reason for each, and the scorer reports both figures and the excluded list:
+
+  | fixture | `recall` (all beats) | excluded | `recall_eventful` | ceiling of `recall` |
+  | --- | --- | --- | --- | --- |
+  | Cinderella | 0.547 (29/53) | 8 | **0.644** (29/45) | 0.849 |
+  | *A Christmas Carol* | 0.836 (61/73) | 4 | **0.884** (61/69) | 0.945 |
+  | *The Machine Stops* | 0.565 (35/62) | 6 | **0.625** (35/56) | 0.903 |
+
+  These are the recorded runs in `fixtures/extraction/runs/`, re-read rather than re-judged: the
+  matches are the ones those runs recorded, and only the denominator changed. No excluded beat had
+  been matched, so `matched` is the same in both columns. **The bar did not move.** The *Carol*
+  now clears it and the other two still do not, by a margin that is now all pipeline.
+  The sidecar is a manual read, made from the beat and the definition before looking at what the
+  runs matched, and it excludes a beat only when it holds no happening at all; the borderline
+  beats it kept are listed in the file too. Five exclusions across the three fixtures are marked
+  low-confidence. Putting all five back gives 0.630 / 0.871 / 0.603, so no fixture's verdict
+  depends on them. `recall` is still reported, unchanged, so earlier numbers stay comparable.
+  What this does **not** settle is whether the pipeline's definition is the right one — whether a
+  Fabula should be able to hold a pointed absence. That touches ADR 0019 and is out of scope here.
 - **Chronological ordering accuracy** — over all pairs of aligned events, the fraction ordered
   correctly relative to each other (pairwise, not sequence-identity, so one misplaced event costs
   one event's worth and not the whole tail). Bar: ≥ 0.95, and **≥ 0.90 restricted to pairs the

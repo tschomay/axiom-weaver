@@ -8,6 +8,10 @@
  * ticket's report, not here; what these assert is that the machinery around them is correct.
  */
 
+import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
 import { ExtractionModel } from '@/extraction/call';
@@ -25,7 +29,7 @@ import type { CanonicalEntity } from '@/extraction/pass-reconcile';
 import { foldProposals, isSuspiciousMerge, reconcile } from '@/extraction/pass-reconcile';
 import { gateG0 } from '@/extraction/scoring/gates';
 import { judgeEventEntailment } from '@/extraction/scoring/judge';
-import { eventReferencedIds, invention } from '@/extraction/scoring/score';
+import { eventRecall, eventReferencedIds, invention } from '@/extraction/scoring/score';
 import { FABULA_BLOCK } from '@/schema/fabula';
 import { importSummary } from '@/authoring/transfer';
 import { loadGroundTruth, narratedOutOfOrder } from '@/extraction/scoring/ground-truth';
@@ -336,6 +340,43 @@ describe('ground truth', () => {
       const scenes = new Set(truth.events.map((event) => event.scene_id));
       expect(scenes.size).toBe(truth.package.scene_cards.length);
     }
+  });
+
+  // #165: a perfect extraction of Cinderella scored 45/53 = 0.849 against a 0.85 bar, because
+  // eight beats are things the extractor's own prompt forbids it to emit.
+  it('takes the beats that are not events out of the recall denominator, and only those', async () => {
+    const truth = await loadGroundTruth('cinderella');
+    const excluded = truth.events.filter((event) => !event.eventful);
+    expect(excluded.map((event) => event.text)).toContain('Cinderella does not ask to go');
+    expect(excluded).toHaveLength(8);
+
+    const perfect = eventRecall(truth, (event) => event.eventful);
+    expect(perfect.recall).toBeCloseTo(45 / 53, 5);
+    expect(perfect.recall).toBeLessThan(0.85);
+    expect(perfect.recall_eventful).toBe(1);
+
+    // A match on an excluded beat counts toward the old figure and not the new one.
+    const everything = eventRecall(truth, () => true);
+    expect(everything.recall).toBe(1);
+    expect(everything.matched_eventful).toBe(45);
+    expect(everything.non_eventful_beats.every((beat) => beat.matched && beat.kind !== '')).toBe(true);
+  });
+
+  it('refuses a beat annotation that has drifted from the fixture', async () => {
+    const root = await mkdtemp(path.join(tmpdir(), 'beats-'));
+    await cp(path.join(process.cwd(), 'fixtures', 'cinderella'), path.join(root, 'fixtures', 'cinderella'), { recursive: true });
+    await cp(path.join(process.cwd(), 'fixtures', 'extraction', 'chronology.json'), path.join(root, 'fixtures', 'extraction', 'chronology.json'));
+    const file = path.join(root, 'fixtures', 'cinderella', 'beats.annotation.json');
+    const annotation = JSON.parse(await readFile(file, 'utf8')) as { non_eventful: Array<{ text: string }> };
+    annotation.non_eventful[0]!.text = 'a beat the fixture has since reworded';
+    await writeFile(file, JSON.stringify(annotation));
+    await expect(loadGroundTruth('cinderella', root)).rejects.toThrow(/no longer matches/);
+
+    await rm(file);
+    const bare = await loadGroundTruth('cinderella', root);
+    expect(bare.events.every((event) => event.eventful)).toBe(true);
+    const score = eventRecall(bare, () => true);
+    expect(score.recall_eventful).toBe(score.recall);
   });
 });
 

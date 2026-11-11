@@ -30,6 +30,59 @@ export interface GroundTruthEvent {
   /** Position on the story's own timeline. */
   readonly chronological_key: number;
   readonly confidence: Confidence;
+  /**
+   * Whether the beat is something the extractor is *allowed* to produce (#165). False for a beat
+   * `fixtures/<story>/beats.annotation.json` records as a standing fact, a description, a mood or
+   * a non-action. True for every other beat, including every beat of a fixture with no sidecar.
+   */
+  readonly eventful: boolean;
+}
+
+export type NonEventKind =
+  | 'standing_fact'
+  | 'characterisation'
+  | 'description'
+  | 'mood'
+  | 'expectation'
+  | 'non_action'
+  | 'negative_state';
+
+const NON_EVENT_KINDS: readonly NonEventKind[] = [
+  'standing_fact',
+  'characterisation',
+  'description',
+  'mood',
+  'expectation',
+  'non_action',
+  'negative_state',
+];
+
+/**
+ * A `required_beat` that is not an event by the extractor's own definition (#165).
+ *
+ * §3.4 scores event recall against the flattened `required_beats`, and `pass-events.ts` defines an
+ * event as "one thing that HAPPENS or CHANGES… Not a description, not a mood, not a standing
+ * fact." Some beats are exactly those things, so the denominator held items the pipeline is
+ * forbidden to produce: on Cinderella a perfect extraction scored 45/53 = 0.849 against a 0.85
+ * bar. This is the same error #151 fixed for the world-model tables.
+ *
+ * The classification is a sidecar for the reason `PlantAnnotation` is one: the rubric has no
+ * authority to change the package. It lists only the beats taken *out*, each with its reason, so
+ * the exclusion can be argued with line by line; a beat it does not name is eventful.
+ */
+export interface NonEventfulBeat {
+  /** `<scene_id>#<index into required_beats>` — the same id `GroundTruthEvent` carries. */
+  readonly beat_id: string;
+  /** The beat's text, copied. Checked against the package so an edited beat cannot stay excluded. */
+  readonly text: string;
+  readonly kind: NonEventKind;
+  readonly confidence: Confidence;
+  readonly why: string;
+}
+
+export interface BeatAnnotation {
+  readonly story_id: string;
+  readonly non_eventful: readonly NonEventfulBeat[];
 }
 
 /**
@@ -71,6 +124,8 @@ export interface GroundTruth {
   readonly notes: readonly string[];
   /** Present when `fixtures/<story>/plants.annotation.json` exists. See `PlantAnnotation`. */
   readonly plant_annotation: PlantAnnotation | null;
+  /** Present when `fixtures/<story>/beats.annotation.json` exists. See `NonEventfulBeat`. */
+  readonly beat_annotation: BeatAnnotation | null;
 }
 
 interface ChronologyFile {
@@ -106,6 +161,9 @@ export async function loadGroundTruth(storyId: string, repoRoot = process.cwd())
     // No sidecar for this fixture. §3.7 then scores the declared graph alone and says so.
   }
 
+  const beatAnnotation = await loadBeatAnnotation(storyId, repoRoot);
+  const nonEventful = new Map((beatAnnotation?.non_eventful ?? []).map((beat) => [beat.beat_id, beat]));
+
   const chronologyPath = path.join(repoRoot, 'fixtures', 'extraction', 'chronology.json');
   const chronology = JSON.parse(await readFile(chronologyPath, 'utf8')) as ChronologyFile;
   const entry = chronology[storyId] as
@@ -135,8 +193,25 @@ export async function loadGroundTruth(storyId: string, repoRoot = process.cwd())
         narrated_key: scene.order * 1000 + index,
         chronological_key: rank.rank * 1000 + index,
         confidence: rank.confidence,
+        eventful: !nonEventful.has(`${scene.id}#${index}`),
       });
     });
+  }
+
+  // A sidecar entry that no longer names a real beat, or names one whose text has since been
+  // edited, would silently shrink the denominator by something nobody classified.
+  const byId = new Map(events.map((event) => [event.id, event]));
+  for (const beat of nonEventful.values()) {
+    const event = byId.get(beat.beat_id);
+    if (event === undefined || event.text !== beat.text) {
+      throw new Error(
+        `fixtures/${storyId}/beats.annotation.json excludes "${beat.beat_id}" as a non-event, but ` +
+          (event === undefined
+            ? 'the fixture has no such beat'
+            : 'the beat\'s text no longer matches the fixture\'s') +
+          ' — reclassify it rather than leaving a stale exclusion in the recall denominator.',
+      );
+    }
   }
 
   return {
@@ -146,7 +221,43 @@ export async function loadGroundTruth(storyId: string, repoRoot = process.cwd())
     events,
     notes: entry.notes ?? [],
     plant_annotation: plantAnnotation,
+    beat_annotation: beatAnnotation,
   };
+}
+
+async function loadBeatAnnotation(storyId: string, repoRoot: string): Promise<BeatAnnotation | null> {
+  let text: string;
+  try {
+    text = await readFile(path.join(repoRoot, 'fixtures', storyId, 'beats.annotation.json'), 'utf8');
+  } catch {
+    // No sidecar for this fixture: every beat counts, and `recall_eventful` equals `recall`.
+    return null;
+  }
+  const raw = JSON.parse(text) as Record<string, unknown>;
+  const rows = Array.isArray(raw['non_eventful']) ? (raw['non_eventful'] as unknown[]) : [];
+  const nonEventful = rows.map((row) => {
+    const entry = row as Record<string, unknown>;
+    const kind = String(entry['kind'] ?? '') as NonEventKind;
+    if (!NON_EVENT_KINDS.includes(kind)) {
+      throw new Error(
+        `fixtures/${storyId}/beats.annotation.json: "${String(entry['beat_id'])}" has kind ` +
+          `"${kind}", which is not one of ${NON_EVENT_KINDS.join(', ')}.`,
+      );
+    }
+    return {
+      beat_id: String(entry['beat_id'] ?? ''),
+      text: String(entry['text'] ?? ''),
+      kind,
+      confidence: (entry['confidence'] === 'low' ? 'low' : 'high') as Confidence,
+      why: String(entry['why'] ?? ''),
+    };
+  });
+  const ids = nonEventful.map((beat) => beat.beat_id);
+  const repeated = ids.find((id, index) => ids.indexOf(id) !== index);
+  if (repeated !== undefined) {
+    throw new Error(`fixtures/${storyId}/beats.annotation.json lists "${repeated}" twice.`);
+  }
+  return { story_id: storyId, non_eventful: nonEventful };
 }
 
 /** Pairs the source narrates in an order other than the one they happen in — §3.3's real test. */

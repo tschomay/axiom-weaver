@@ -1,0 +1,90 @@
+{
+  "schema": "beats.annotation/1",
+  "story_id": "cinderella",
+  "fixture_package_version": 1,
+  "built_for": "https://github.com/tschomay/axiom-weaver/issues/165",
+  "provenance": {
+    "built_from": "the fixture's required_beats, read against the source text (Lang, The Blue Fairy Book (PG #503)) and the event definition in src/extraction/pass-events.ts",
+    "blind_to": "whether a candidate matched the beat. The classification was made from the beat and the definition; the recorded runs were consulted only afterwards, to compute the numbers.",
+    "author": "hand-annotated (a manual read, not a judge pass — a judge pass can replace it and be compared against it)"
+  },
+  "inclusion_rule": {
+    "definition": "pass-events.ts: \"An event is one thing that HAPPENS or CHANGES: an action, an arrival, a decision made aloud, a death, a transformation, a promise. Not a description, not a mood, not a standing fact.\"",
+    "non_eventful_when": "the beat, as the fixture words it, contains no action, speech act, arrival or change of state or knowledge at all",
+    "eventful_when": [
+      "the beat contains any happening, even alongside a mood or a description",
+      "in doubt — a beat is excluded only when it is clearly not an event, so the list errs toward a larger denominator and a lower recall_eventful"
+    ],
+    "note": "Classified by the beat as written, not by what the source narrates nearby. This says nothing about whether the beat matters to the story — \"Cinderella does not ask to go\" matters a great deal — only about whether an extractor obeying its own prompt can emit it."
+  },
+  "non_eventful": [
+    {
+      "beat_id": "scene_01_remarriage#0",
+      "text": "the father has remarried a proud and haughty woman",
+      "kind": "standing_fact",
+      "confidence": "low",
+      "why": "The situation the story opens on, given in the pluperfect. The source does narrate the marriage in its first sentence, which is why this one is marked low: an extractor reading it as a \"past\" event would not be wrong."
+    },
+    {
+      "beat_id": "scene_01_remarriage#1",
+      "text": "her two daughters prove as haughty as their mother",
+      "kind": "characterisation",
+      "confidence": "high",
+      "why": "What the daughters are like. Nothing happens."
+    },
+    {
+      "beat_id": "scene_02_the_ball_proclaimed#1",
+      "text": "the two sisters are overjoyed and think of nothing but what to wear",
+      "kind": "mood",
+      "confidence": "high",
+      "why": "How the sisters feel and what occupies them."
+    },
+    {
+      "beat_id": "scene_02_the_ball_proclaimed#2",
+      "text": "Cinderella is expected to help them dress but is not imagined as a guest herself",
+      "kind": "expectation",
+      "confidence": "high",
+      "why": "What the household assumes, and what it fails to imagine. Not a happening."
+    },
+    {
+      "beat_id": "scene_03_dressing_the_sisters#2",
+      "text": "Cinderella does not ask to go",
+      "kind": "non_action",
+      "confidence": "high",
+      "why": "Something Cinderella does not do."
+    },
+    {
+      "beat_id": "scene_06_first_ball_arrival#3",
+      "text": "no one — including her own stepmother and sisters — recognizes her",
+      "kind": "negative_state",
+      "confidence": "high",
+      "why": "A recognition that does not occur."
+    },
+    {
+      "beat_id": "scene_07_first_ball_departure#1",
+      "text": "the sisters do not know her",
+      "kind": "negative_state",
+      "confidence": "high",
+      "why": "The same absence of recognition as scene_06#3, restated for the sisters."
+    },
+    {
+      "beat_id": "scene_11_the_kept_slipper#2",
+      "text": "she says nothing of the ball to anyone in the household",
+      "kind": "non_action",
+      "confidence": "high",
+      "why": "Something Cinderella does not say."
+    }
+  ],
+  "borderline_kept_eventful": [
+    {
+      "beat_id": "scene_10_second_ball_the_flight#1",
+      "text": "she is so happy she loses all track of time",
+      "why": "A feeling, but its content is a change with consequences: she stops tracking the hour. Kept."
+    },
+    {
+      "beat_id": "scene_11_the_kept_slipper#1",
+      "text": "of all her finery, only the fellow glass slipper remains, kept in her pocket",
+      "why": "Reads as a state (\"remains\"), but it is the outcome of the reversion one beat earlier and of her keeping the slipper. Kept, since excluding it is the generous reading."
+    }
+  ]
+}

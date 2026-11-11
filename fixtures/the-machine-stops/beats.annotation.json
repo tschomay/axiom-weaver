@@ -1,0 +1,91 @@
+{
+  "schema": "beats.annotation/1",
+  "story_id": "the-machine-stops",
+  "fixture_package_version": 1,
+  "built_for": "https://github.com/tschomay/axiom-weaver/issues/165",
+  "provenance": {
+    "built_from": "the fixture's required_beats, read against the source text (Forster, The Machine Stops) and the event definition in src/extraction/pass-events.ts",
+    "blind_to": "whether a candidate matched the beat. The classification was made from the beat and the definition; the recorded runs were consulted only afterwards, to compute the numbers.",
+    "author": "hand-annotated (a manual read, not a judge pass — a judge pass can replace it and be compared against it)"
+  },
+  "inclusion_rule": {
+    "definition": "pass-events.ts: \"An event is one thing that HAPPENS or CHANGES: an action, an arrival, a decision made aloud, a death, a transformation, a promise. Not a description, not a mood, not a standing fact.\"",
+    "non_eventful_when": "the beat, as the fixture words it, contains no action, speech act, arrival or change of state or knowledge at all",
+    "eventful_when": [
+      "the beat contains any happening, even alongside a mood or a description",
+      "in doubt — a beat is excluded only when it is clearly not an event, so the list errs toward a larger denominator and a lower recall_eventful"
+    ],
+    "note": "Classified by the beat as written, not by what the source narrates nearby. This says nothing about whether the beat matters to the story — \"Cinderella does not ask to go\" matters a great deal — only about whether an extractor obeying its own prompt can emit it."
+  },
+  "non_eventful": [
+    {
+      "beat_id": "scene_02_the_book_of_the_machine#0",
+      "text": "Vashti's room is cataloged: buttons for food, music, clothing, hot and cold baths, literature, correspondence — the room, though it holds nothing, is in touch with everything she cares for",
+      "kind": "description",
+      "confidence": "high",
+      "why": "An inventory of the room."
+    },
+    {
+      "beat_id": "scene_04_the_air_ship_journey#0",
+      "text": "the air-ship service is described as a relic kept running past its usefulness, since travel itself has become nearly pointless — the earth is exactly alike everywhere now",
+      "kind": "standing_fact",
+      "confidence": "high",
+      "why": "How the air-ship service stands, and why."
+    },
+    {
+      "beat_id": "scene_05_threatened_with_homelessness#1",
+      "text": "the narrator states plainly what Vashti and the reader now both learn: Homelessness means death — the victim is exposed to the outer air, which kills them",
+      "kind": "standing_fact",
+      "confidence": "high",
+      "why": "The narrator defining a term. Nothing happens in the story when the reader learns it."
+    },
+    {
+      "beat_id": "scene_05_threatened_with_homelessness#2",
+      "text": "Kuno explains that any infant who promises undue physical strength is destroyed at birth as a demerit; he alone was let live, and it is exactly that strength that let him do what follows",
+      "kind": "standing_fact",
+      "confidence": "low",
+      "why": "Kuno describing how things generally are, which the extractor's prompt rules out by name (\"a character describing … how things generally are is not an event\"). Low because it is also the first time Vashti hears it."
+    },
+    {
+      "beat_id": "scene_10_two_developments#3",
+      "text": "the narrator is explicit that no one on the Central Committee understands the Machine as a whole any longer — each person masters only a fragment of it, and calls that progress",
+      "kind": "standing_fact",
+      "confidence": "high",
+      "why": "The narrator on the state of knowledge in the Committee."
+    },
+    {
+      "beat_id": "scene_11_vashtis_years#0",
+      "text": "her days settle back into their old rhythm: dark to sleep, light to wake, lectures given and attended, ideas exchanged with innumerable friends",
+      "kind": "description",
+      "confidence": "low",
+      "why": "A habitual routine. \"Settle back\" is a change only in the weakest sense."
+    }
+  ],
+  "borderline_kept_eventful": [
+    {
+      "beat_id": "scene_02_the_book_of_the_machine#3",
+      "text": "she recalls the Book's own line: 'Parents, duties of, cease at the moment of birth' — and reflects that there was always something special about Kuno, and about all her children",
+      "why": "A recollection and a reflection, but she does something: she recalls a line. Kept."
+    },
+    {
+      "beat_id": "scene_07_the_hills_of_wessex#3",
+      "text": "he tells Vashti directly that it is humanity, not the surface, that is dying — that the Machine 'develops, but not on our lines' and has narrowed love itself to a carnal act",
+      "why": "An assertion about how things are, but made as an accusation to her face. Kept."
+    },
+    {
+      "beat_id": "scene_11_vashtis_years#1",
+      "text": "from time to time a friend is granted Euthanasia and leaves their room for good; after a poorly received lecture, Vashti sometimes asks for it herself, and is refused, since the death-rate may never exceed the birth-rate",
+      "why": "Iterative rather than a single occurrence, but made of requests and refusals. Kept."
+    },
+    {
+      "beat_id": "scene_13_the_mending_apparatus_in_need_of_repair#1",
+      "text": "the mouldy fruit, the stinking bath water, the jarring noises are all bitterly complained of at first, then quietly accepted as part of how things are — humanity proving endlessly adaptable to the Machine's decline",
+      "why": "A slow change, but a change. Kept."
+    },
+    {
+      "beat_id": "scene_14_twilight#1",
+      "text": "rumors of hope and collapse alternate — the Mending Apparatus almost mended, new 'nerve-centres' evolving — while people spend their strength praying to their Books",
+      "why": "Ambient and repeated, but rumours spread and people pray. Kept."
+    }
+  ]
+}

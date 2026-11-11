@@ -1220,6 +1220,39 @@
     "candidate_events": 456,
     "matched": 61,
     "recall": 0.8356164383561644,
+    "recall_eventful": 0.8840579710144928,
+    "eventful_events": 69,
+    "matched_eventful": 61,
+    "non_eventful_beats": [
+      {
+        "beat_id": "scene_12_the_exchange#2",
+        "text": "Scrooge does not recognize anyone they describe, and does not think to ask whose death it is",
+        "kind": "non_action",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_13_old_joes_shop#2",
+        "text": "Scrooge is horrified by the scene but still does not connect it to himself",
+        "kind": "negative_state",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_16_the_cratchits_after_tim#1",
+        "text": "Tiny Tim's little crutch is kept, without its owner, in a corner",
+        "kind": "description",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_20_the_office_next_morning#1",
+        "text": "Bob, terrified for a moment, is then astonished into delight",
+        "kind": "mood",
+        "confidence": "low",
+        "matched": false
+      }
+    ],
     "missed": [
       "told that many would rather die than go there, Scrooge answers that they had better do it, and decrease the surplus population",
       "present-day Scrooge is moved almost to tears, and the Spirit reminds him Fan died young, but left a son — Fred",

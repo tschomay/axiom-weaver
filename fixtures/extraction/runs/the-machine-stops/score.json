@@ -823,6 +823,53 @@
     "candidate_events": 184,
     "matched": 35,
     "recall": 0.5645161290322581,
+    "recall_eventful": 0.625,
+    "eventful_events": 56,
+    "matched_eventful": 35,
+    "non_eventful_beats": [
+      {
+        "beat_id": "scene_02_the_book_of_the_machine#0",
+        "text": "Vashti's room is cataloged: buttons for food, music, clothing, hot and cold baths, literature, correspondence — the room, though it holds nothing, is in touch with everything she cares for",
+        "kind": "description",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_04_the_air_ship_journey#0",
+        "text": "the air-ship service is described as a relic kept running past its usefulness, since travel itself has become nearly pointless — the earth is exactly alike everywhere now",
+        "kind": "standing_fact",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_05_threatened_with_homelessness#1",
+        "text": "the narrator states plainly what Vashti and the reader now both learn: Homelessness means death — the victim is exposed to the outer air, which kills them",
+        "kind": "standing_fact",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_05_threatened_with_homelessness#2",
+        "text": "Kuno explains that any infant who promises undue physical strength is destroyed at birth as a demerit; he alone was let live, and it is exactly that strength that let him do what follows",
+        "kind": "standing_fact",
+        "confidence": "low",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_10_two_developments#3",
+        "text": "the narrator is explicit that no one on the Central Committee understands the Machine as a whole any longer — each person masters only a fragment of it, and calls that progress",
+        "kind": "standing_fact",
+        "confidence": "high",
+        "matched": false
+      },
+      {
+        "beat_id": "scene_11_vashtis_years#0",
+        "text": "her days settle back into their old rhythm: dark to sleep, light to wake, lectures given and attended, ideas exchanged with innumerable friends",
+        "kind": "description",
+        "confidence": "low",
+        "matched": false
+      }
+    ],
     "missed": [
       "Vashti's room is cataloged: buttons for food, music, clothing, hot and cold baths, literature, correspondence — the room, though it holds nothing, is in touch with everything she cares for",
       "she fields a burst of correspondence and delivers her lecture on 'Music during the Australian Period' to an audience that never leaves its own armchairs",

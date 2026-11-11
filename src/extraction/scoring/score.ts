@@ -24,7 +24,7 @@ import type { ExtractionModel } from '../call';
 import type { ExtractionResult } from '../pipeline';
 import type { LoadedSource } from '../sources';
 import { gateG0, type G0Report } from './gates';
-import { loadGroundTruth, narratedOutOfOrder, type GroundTruth } from './ground-truth';
+import { loadGroundTruth, narratedOutOfOrder, type GroundTruth, type GroundTruthEvent } from './ground-truth';
 import {
   contextAround,
   judgeAlignment,
@@ -160,7 +160,25 @@ export interface EventScore {
   readonly ground_truth_events: number;
   readonly candidate_events: number;
   readonly matched: number;
+  /** Over every beat. Kept exactly as it was, so numbers from before #165 stay comparable. */
   readonly recall: number;
+  /**
+   * Over the beats that are events by the extractor's own definition — **the number §3.4's 0.85
+   * bar reads** (#165). `recall` divides by beats the pipeline is forbidden to produce; this does
+   * not. Equal to `recall` for a fixture with no `beats.annotation.json`.
+   */
+  readonly recall_eventful: number;
+  readonly eventful_events: number;
+  readonly matched_eventful: number;
+  /** The excluded beats, published in full rather than as a count, each with why it is no event. */
+  readonly non_eventful_beats: ReadonlyArray<{
+    readonly beat_id: string;
+    readonly text: string;
+    readonly kind: string;
+    readonly confidence: string;
+    /** True when a candidate event was matched to it anyway. It still does not count either way. */
+    readonly matched: boolean;
+  }>;
   readonly missed: readonly string[];
   readonly pairwise_total: number;
   readonly pairwise_correct: number;
@@ -605,6 +623,42 @@ export function invention(
   return { fabricated: eventIds(contradicted), ungroundable: eventIds(ungroundedSubjects) };
 }
 
+/**
+ * §3.4's two recall figures from one set of matches (#165).
+ *
+ * Pure, and takes the matched ids rather than the judge's output, so a run scored before #165 can
+ * be given its `recall_eventful` from the matches it already recorded without judging it again.
+ */
+export function eventRecall(
+  truth: GroundTruth,
+  isMatched: (event: GroundTruthEvent) => boolean,
+): Pick<
+  EventScore,
+  'ground_truth_events' | 'matched' | 'recall' | 'recall_eventful' | 'eventful_events' | 'matched_eventful' | 'non_eventful_beats'
+> {
+  const eventful = truth.events.filter((event) => event.eventful);
+  const matched = truth.events.filter(isMatched).length;
+  const matchedEventful = eventful.filter(isMatched).length;
+  const annotated = new Map((truth.beat_annotation?.non_eventful ?? []).map((beat) => [beat.beat_id, beat]));
+  return {
+    ground_truth_events: truth.events.length,
+    matched,
+    recall: truth.events.length === 0 ? 0 : matched / truth.events.length,
+    recall_eventful: eventful.length === 0 ? 0 : matchedEventful / eventful.length,
+    eventful_events: eventful.length,
+    matched_eventful: matchedEventful,
+    non_eventful_beats: truth.events
+      .filter((event) => !event.eventful)
+      .map((event) => ({
+        beat_id: event.id,
+        text: event.text,
+        kind: annotated.get(event.id)?.kind ?? '',
+        confidence: annotated.get(event.id)?.confidence ?? '',
+        matched: isMatched(event),
+      })),
+  };
+}
+
 async function scoreEvents(
   result: ExtractionResult,
   truth: GroundTruth,
@@ -618,8 +672,6 @@ async function scoreEvents(
   const chronologicalIndex = new Map(
     result.sidecar.events.map((event) => [event.id, event.chronological_index]),
   );
-
-  const matched = [...matches.values()].filter((id) => id !== null).length;
 
   // Pairwise ordering, per §3.3: over all pairs of aligned events, the fraction ordered
   // correctly relative to each other. Pairwise, never sequence-identity — one misplaced event
@@ -668,10 +720,8 @@ async function scoreEvents(
   return {
     matches,
     score: {
-      ground_truth_events: truth.events.length,
+      ...eventRecall(truth, (event) => matches.get(event.id) != null),
       candidate_events: candidates.length,
-      matched,
-      recall: truth.events.length === 0 ? 0 : matched / truth.events.length,
       missed: truth.events.filter((event) => matches.get(event.id) == null).map((event) => event.text),
       pairwise_total: pairwiseTotal,
       pairwise_correct: pairwiseCorrect,

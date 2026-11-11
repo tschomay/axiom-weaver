@@ -1,0 +1,72 @@
+{
+  "schema": "beats.annotation/1",
+  "story_id": "a-christmas-carol",
+  "fixture_package_version": 1,
+  "built_for": "https://github.com/tschomay/axiom-weaver/issues/165",
+  "provenance": {
+    "built_from": "the fixture's required_beats, read against the source text (Dickens, A Christmas Carol (PG #46)) and the event definition in src/extraction/pass-events.ts",
+    "blind_to": "whether a candidate matched the beat. The classification was made from the beat and the definition; the recorded runs were consulted only afterwards, to compute the numbers.",
+    "author": "hand-annotated (a manual read, not a judge pass — a judge pass can replace it and be compared against it)"
+  },
+  "inclusion_rule": {
+    "definition": "pass-events.ts: \"An event is one thing that HAPPENS or CHANGES: an action, an arrival, a decision made aloud, a death, a transformation, a promise. Not a description, not a mood, not a standing fact.\"",
+    "non_eventful_when": "the beat, as the fixture words it, contains no action, speech act, arrival or change of state or knowledge at all",
+    "eventful_when": [
+      "the beat contains any happening, even alongside a mood or a description",
+      "in doubt — a beat is excluded only when it is clearly not an event, so the list errs toward a larger denominator and a lower recall_eventful"
+    ],
+    "note": "Classified by the beat as written, not by what the source narrates nearby. This says nothing about whether the beat matters to the story — \"Cinderella does not ask to go\" matters a great deal — only about whether an extractor obeying its own prompt can emit it."
+  },
+  "non_eventful": [
+    {
+      "beat_id": "scene_12_the_exchange#2",
+      "text": "Scrooge does not recognize anyone they describe, and does not think to ask whose death it is",
+      "kind": "non_action",
+      "confidence": "high",
+      "why": "A recognition that does not occur and a question Scrooge does not ask."
+    },
+    {
+      "beat_id": "scene_13_old_joes_shop#2",
+      "text": "Scrooge is horrified by the scene but still does not connect it to himself",
+      "kind": "negative_state",
+      "confidence": "high",
+      "why": "A feeling, plus a connection Scrooge does not make."
+    },
+    {
+      "beat_id": "scene_16_the_cratchits_after_tim#1",
+      "text": "Tiny Tim's little crutch is kept, without its owner, in a corner",
+      "kind": "description",
+      "confidence": "high",
+      "why": "An object standing in a corner."
+    },
+    {
+      "beat_id": "scene_20_the_office_next_morning#1",
+      "text": "Bob, terrified for a moment, is then astonished into delight",
+      "kind": "mood",
+      "confidence": "low",
+      "why": "Two feelings in sequence, as the beat is written. The source gives Bob a physical reaction (he trembles and edges toward the ruler), so a beat worded around that would be an event; this one is not."
+    }
+  ],
+  "borderline_kept_eventful": [
+    {
+      "beat_id": "scene_08_the_cratchits#4",
+      "text": "Scrooge is overcome with penitence and grief and casts his eyes down, ashamed",
+      "why": "Mostly feeling, but the beat names a gesture (he casts his eyes down). Kept."
+    },
+    {
+      "beat_id": "scene_15_the_relieved_debtors#2",
+      "text": "Scrooge understands, without being told, that no one anywhere has shed one genuine tear for this man",
+      "why": "An inference of the fixture author's, but a change in what Scrooge knows. Kept."
+    },
+    {
+      "beat_id": "scene_16_the_cratchits_after_tim#0",
+      "text": "the Cratchit household is quiet and subdued; Tiny Tim has died",
+      "why": "Half atmosphere, but it asserts a death. Kept."
+    },
+    {
+      "beat_id": "scene_20_the_office_next_morning#4",
+      "text": "the narrator closes: Scrooge became as good a friend, as good a master, and as good a man as the good old city knew; and it was always said of him that he knew how to keep Christmas well, if any man alive possessed the knowledge",
+      "why": "The narrator's closing summary; \"became\" is a transformation. Kept."
+    }
+  ]
+}
